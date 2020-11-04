@@ -1,0 +1,14 @@
+.contact-container > .scroll {
+  height: 100%;
+}
+.contact-span {
+  width: 100%;
+  text-align: right;
+  /* padding-right: 20px; */
+}
+.contact-detail p {
+  width: 40%;
+}
+.contact-detail-label {
+  padding: 10px 15px;
+}

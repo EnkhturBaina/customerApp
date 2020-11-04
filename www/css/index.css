@@ -1,0 +1,128 @@
+body {
+  font-family: "Helvetica Neue";
+  font-weight: lighter;
+  color: #2a2a2a;
+  background-color: #f0f0ff;
+  padding: 0 20px !important;
+  -webkit-appearance: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+.ionic-body {
+  padding: 0 20px !important;
+}
+h1 {
+  text-align: center;
+}
+
+button {
+  margin: 15px;
+  -webkit-appearance: none;
+  font-size: 1.2em;
+}
+
+#mainPage {
+  text-align: center;
+}
+
+#detailPage {
+  text-align: center;
+  font-size: 2em;
+}
+
+#detailPage div {
+  margin: 20px;
+}
+
+#detailPage button {
+  margin-top: 40px;
+  font-size: 0.6em; /* undo 2em from parent */
+}
+
+ul {
+  list-style: none;
+  border-bottom: 1px solid #d3d3d3;
+  text-align: left;
+}
+
+li {
+  margin-left: -40px;
+  padding: 5px;
+  padding-top: 10px;
+  min-height: 50px;
+  border-top: 1px solid #d3d3d3;
+  font-size: 0.9em;
+}
+
+button {
+  -webkit-appearance: none;
+  font-size: 1.5em;
+  border-radius: 0;
+}
+/*================= alerts ================*/
+.OutbuttonSize {
+  min-height: 25px !important;
+  max-height: 30px !important;
+}
+
+.popup-buttons {
+  min-height: initial;
+}
+
+.popup-body {
+  padding-top: 0;
+}
+
+.popup-title {
+  text-align: right !important;
+  padding-top: 0 !important;
+}
+.myAlertButton {
+  max-width: 40% !important;
+  min-height: 34px !important;
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  line-height: initial !important;
+  border-radius: 5px !important;
+}
+
+.confirmPopup .popup {
+  border-radius: 13px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 8px 0px;
+}
+
+  .confirmPopup .popup .popup-head {
+      display: none;
+  }
+
+  .confirmPopup .popup .popup-body {
+      padding-top: 20px;
+      padding-bottom: 16px;
+      font-size: 16px;
+      padding-left: 16px;
+      padding-right: 16px;
+  }
+
+  .confirmPopup .popup .popup-buttons {
+      padding: 0;
+      border-top: 1px solid #e0e0e0;
+  }
+
+      .confirmPopup .popup .popup-buttons .button {
+          margin: 0;
+          border: 0;
+          border-right: 1px solid #e0e0e0;
+          background-color: transparent !important;
+          color: var(--text-color);
+          font-size: 17px;
+          min-height: 44px !important;
+      }
+
+          .confirmPopup .popup .popup-buttons .button.button-positive {
+              font-weight: 700 !important;
+          }

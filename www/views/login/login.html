@@ -1,0 +1,47 @@
+<ion-view ng-app="login.Ctrl" class="is-container-login" hide-nav-bar="true">
+  <link href="views/login/login.css" rel="stylesheet" />
+  <ion-content scroll="true" class="login-content">
+    <ion-header-bar align-title="left" class="navbar" style="background: none">
+      <div class="title ion-color-big-text navbar-back-button" style="background: none">
+        <button ng-click="$ionicGoBack();hideShowFooter()" class="nav-back-button button buttons button-clear header-item car-back-nav" style="left: 10px">
+          <i class="ion-chevron-left ion-color-header" style="color: #fff !important"></i>
+          <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);color: #fff !important"><span>Буцах</span></span>
+        </button>
+      </div>
+      <div class="navbar-right-icon">
+        <!-- <button class="button button-clear icon ion-search cus-header-icon ion-float-right ion-color-brand-green" ui-sref="search"></button> -->
+      </div>
+    </ion-header-bar>
+    <div ng-controller="loginCtrl" class="login-container">
+      <div class="box">
+        <img class="login-favicon" src="img/dlogo-white.png" />
+        <input type="number" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="login-mobile" ng-model="user.username" />
+        <div class="login-password-container">
+          <input type="{{inputType}}" class="login-password" placeholder="Нууц үг" name="password" id="myInput" ng-model="user.password" />
+          <button class="button button-icon show-pass-btn" style="zoom: 1" ng-click="hideShowPassword()">
+            <i class="ion-eye" id="eye-icon"></i>
+          </button>
+        </div>
+        <a ui-sref="reset_password" class="login-forgot">Нууц үг мартсан?</a>
+        <div class="login-radio">
+          <ul class="unstyled centered">
+            <li>
+              <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1" checked />
+              <label for="styled-checkbox-1">Нэвтрэх нэр сануулах</label>
+            </li>
+            <li>
+              <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox" value="value2" checked />
+              <label for="styled-checkbox-2">Цаашид хурууны хээгээр нэвтрэх</label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sign-class-login">
+          <!-- ui-sref="profile" -->
+          <button class="button login-button" ng-click="Login(user.username,user.password);">Нэвтрэх</button>
+          <div class="login-to-register" ui-sref="register">Бүртгүүлэх</div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

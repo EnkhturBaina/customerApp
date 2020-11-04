@@ -1,0 +1,21 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+  <link href="views/car/car.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Брэндийн жагсаалт'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content class="ion-modified-content margin-top-50 car-brandlist-content">
+    <div class="big-container">
+      <div class="magic-container margin-lr-20">
+        <p class="ion-color-text">Та хайх гэж буй загвараа сонгох эсвэл бичнэ үү</p>
+        <div class="search-input">
+          <span class="icon ion-search"></span>
+          <input type="text" placeholder="Хайх" name="" ng-model="searchBrand[searchByBrand]" />
+        </div>
+        <div class="brand-tags">
+          <ul>
+            <!-- <li class="series" ui-sref="carlist">Land 200</li> -->
+            <li class="series" ng-repeat="cat in $root.categoryData|filter:searchBrand" ng-click="selectCategoryBig(cat)">{{cat.factoryname}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

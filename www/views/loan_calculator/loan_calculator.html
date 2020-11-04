@@ -1,0 +1,85 @@
+<ion-view hide-nav-bar="true">
+  <link href="views/loan_calculator/loan_calculator.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Зээл хайх'}]" ng-include src="'views/navbar.html'"></div>
+  <div ng-controller="loan_calculatorCtrl" class="loan_calculator-container">
+    <span class="loan-type-span-title">Автомашин худалдан авах зээлийн хүсэлт илгээх боломжтой</span>
+    <label class="loan-type-label">
+      <p class="loan-type-title">Зээлийн төрлөөр</p>
+
+      <select class="loan-type-select" ng-model="">
+        <option value="1">1</option>
+        <option value="2">2</option>
+      </select>
+    </label>
+    <ion-tabs class="tabs-icon-top loan-calc-tabs tabs-top loan-calc-tab" delegate-handle="my-handle">
+      <!-- Tab 1 -->
+      <ion-tab class="loan-calc-tab-title" icon="loan-calc-tab-icon fa fa-university" title="Банкаар">
+        <ion-nav-view class="ghostwhite">
+          <ion-content scroll="true" class="loan-calc-tab-content" style="margin: 0 10px">
+            <ion-checkbox class="loan-calc-tab1-checkbox loan-calc-tab1-checkbox-first">
+              <!-- <ion-checkbox class="custom-checkbox"> -->
+              <span>Банк</span>
+            </ion-checkbox>
+            <ion-checkbox class="loan-calc-tab1-checkbox">
+              <span>Банк бус</span>
+            </ion-checkbox>
+            <ion-checkbox class="loan-calc-tab1-checkbox">
+              <span>Бага хүүтэй</span>
+            </ion-checkbox>
+            <ion-checkbox class="loan-calc-tab1-checkbox">
+              <span>Амралтын өдөр ажилладаг</span>
+            </ion-checkbox>
+            <ion-checkbox class="loan-calc-tab1-checkbox">
+              <span>Надтай ойр</span>
+            </ion-checkbox>
+            <ion-checkbox class="loan-calc-tab1-checkbox">
+              <span>Үнэлгээ өндөр</span>
+            </ion-checkbox>
+          </ion-content>
+        </ion-nav-view>
+      </ion-tab>
+
+      <!-- Tab 2 -->
+      <ion-tab class="loan-calc-tab-title" icon="loan-calc-tab-icon fa fa-area-chart" title="Нөхцлөөр">
+        <ion-nav-view class="ghostwhite">
+          <ion-content scroll="true" class="loan-calc-tab-content" style="margin: 0 10px">
+            <label class="loan-type-label">
+              <p class="loan-type-title">Зээлийн хугацаа</p>
+              <select class="loan-type-select" ng-model="">
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </label>
+            <label class="loan-type-label">
+              <p class="loan-type-title">Сарын хүүгээр</p>
+              <input type="text" class="loan-type-input" name="loanCalcFee" placeholder="Сарын хүү" />
+            </label>
+            <label class="loan-type-label">
+              <p class="loan-type-title">Зээлийн хэмжээ</p>
+              <input type="text" class="loan-type-input" name="loanCalcAmount" placeholder="Зээлийн хэмжээ" />
+            </label>
+          </ion-content>
+        </ion-nav-view>
+      </ion-tab>
+      <!-- Tab 3 -->
+      <ion-tab class="loan-calc-tab-title" icon="loan-calc-tab-icon fa fa-shopping-bag" title="Барьцаагаар">
+        <ion-nav-view class="ghostwhite">
+          <ion-content scroll="true" class="loan-calc-tab-content" style="margin: 0 10px">
+            <p class="loan-tab-title ion-color-text">Барьцаагаар.</p>
+          </ion-content>
+        </ion-nav-view>
+      </ion-tab>
+      <!-- Tab 4 -->
+      <ion-tab class="loan-calc-tab-title" icon="loan-calc-tab-icon fa fa-credit-card" title="Орлогоор">
+        <ion-nav-view class="ghostwhite">
+          <ion-content scroll="true" class="loan-calc-tab-content" style="margin: 0 10px">
+            <p class="loan-tab-title ion-color-text">Орлогоор.</p>
+          </ion-content>
+        </ion-nav-view>
+      </ion-tab>
+    </ion-tabs>
+    <ion-checkbox class="loan-calc-confirm-checkbox">
+      <span>Мэдээллийг баталгаажуулах</span>
+    </ion-checkbox>
+  </div>
+</ion-view>

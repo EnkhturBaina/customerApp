@@ -1,0 +1,51 @@
+<ion-view ng-app="car_collateral.Ctrl" hide-nav-bar="true">
+  <link href="views/loan/car_collateral/car_collateral.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Банк сонгох'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content scroll="true" class="car-col-content step3-container  margin-top-50">
+    <div class="list car-collateral-list">
+      <div class="card car-step3-card">
+        <span class="step2-card-span no-border">Анхан шатны шалгуур хангасан банк</span>
+        <ion-checkbox class="step3-checkbox-container no-border">
+          <div class="bank-logo-container">
+            <img class="logo-size" src="/www/img/khanbank-mn.png" />
+          </div>
+          <div class="ml-42 step3-bank-dtl-container">
+            <span class="bank-middle-title no-border">Хаан банк</span>
+            </br>
+            <p class="bank-desc-green no-border" style="color: #badf63 !important">Тэнцсэн банк</p>
+          </div>
+        </ion-checkbox>
+        <span class="step2-card-span">Банкны дэлгэрэнгүй мэдээлэл</span>
+        <label class="item item-input car-col-step3-label">
+          <p>Сарын хүү</p>
+          <input type="text" placeholder="-" name="monthFee" />
+        </label>
+        <label class="item item-input car-col-step3-label">
+          <p>Зээл олгосон шимтгэл</p>
+          <input type="text" placeholder="-" name="loanfee" />
+        </label>
+        <label class="item item-input car-col-step3-label">
+          <p>Нотариатын төлбөр</p>
+          <input type="text" placeholder="-" name="notaryFee" />
+        </label>
+        <label class="item item-input car-col-step3-label">
+          <p>Нэр шилжүүлэхэд гарах зардал</p>
+          <input type="text" placeholder="-" name="renamingCost" />
+        </label>
+        <label class="item item-input car-col-step3-label">
+          <p>Өргөдлийн хураамж</p>
+          <input type="text" placeholder="-" name="applicationFee" />
+        </label>
+        <label class="item item-input car-col-step3-label">
+          <p>ЖХАЖДаатгалын төлбөр</p>
+          <input type="text" placeholder="-" name="insurPayment" />
+        </label>
+      </div>
+      <div class="step3-btn-container">
+        <button class="button btn single-button step3-next-btn" id="Next" ui-sref="autoleasing-3">
+          Үргэлжлүүлэх
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

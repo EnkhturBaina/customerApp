@@ -1,0 +1,75 @@
+.bank-card {
+  padding: 0px 5px !important;
+}
+.loan-card-badge {
+  /* position: fixed !important;
+  right: 0px !important;
+  top: 50px !important; */
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  margin: 11px;
+  z-index: 99;
+}
+.loan-card-wrap-badge {
+  position: absolute;
+  top: -10px !important;
+  left: 25px !important;
+  margin: 11px;
+  font-size: 11px !important;
+  padding: 0px 5px !important;
+  right: unset !important;
+}
+.grow .row {
+  padding: 2px 0px 0px 0px !important;
+}
+.grow .col {
+  padding: 0px !important;
+}
+.grow p {
+  font-weight: bold;
+  font-size: 12px !important;
+}
+.grow img {
+  width: 35px !important;
+  height: 35px !important;
+}
+.grow {
+  -moz-transition: height 0.5s !important;
+  -ms-transition: height 0.5s !important;
+  -o-transition: height 0.5s !important;
+  -webkit-transition: height 0.5s !important;
+  transition: height 0.5s !important;
+  height: 0px;
+  overflow: hidden;
+}
+.fix-list {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  margin-bottom: 0px;
+}
+.item-thumbnail-left {
+  padding-left: 60px !important;
+  min-height: 0px !important;
+}
+.item.activated {
+  background-color: #fff;
+}
+#emptyRequestList > .scroll {
+  height: 100%;
+}
+.empty-icon-container {
+  height: 100%;
+  display: grid;
+  justify-content: center;
+}
+.empty-icon-container img {
+  margin: auto auto 20px auto;
+}
+.req-list-product-type {
+  font-size: 90%;
+}
+.request-list-content {
+  height: 88%;
+}

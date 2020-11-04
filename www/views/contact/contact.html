@@ -1,0 +1,27 @@
+<ion-view hide-nav-bar="true">
+  <link href="views/contact/contact.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Холбоо барих'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content ng-controller="contactCtrl" class="contact-container margin-top-50">
+    <div class="contact-detail">
+      <label class="item item-input contact-detail-label">
+        <p>Утас</p>
+        <span class="contact-span">7011-8095</span>
+      </label>
+      <label class="item item-input contact-detail-label">
+        <p>Facebook</p>
+        <span class="contact-span">Digital Credit</span>
+      </label>
+      <label class="item item-input contact-detail-label">
+        <p>И-мэйл</p>
+        <span class="contact-span">info@digitalcredit.mn</span>
+      </label>
+      <label class="item item-input contact-detail-label">
+        <p>Вэб хаяг</p>
+        <span class="contact-span">digitalcredit.mn</span>
+      </label>
+      <label class="item item-input contact-detail-label">
+        <p>Хаяг</p>
+        <span class="contact-span">Digital Credit</span>
+      </label>
+  </ion-content>
+</ion-view>

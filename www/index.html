@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+  <!-- <meta http-equiv="Content-Security-Policy" content="img-src 'self' data:;default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'" /> -->
+  <meta http-equiv="Content-Security-Policy" content="default-src *; img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *;   style-src  'self' 'unsafe-inline' *" />
+  <title>VeritechERP</title>
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+  <title>Veritech App</title>
+  <!-- <link rel="stylesheet" href="assets/css/main.css" /> -->
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <!-- <link href="/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" /> -->
+
+  <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+  <script src="cordova.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular-filter.min.js"></script>
+  <!-- <script src="assets/js/jquery.min.js"></script> -->
+  <!-- <script src="assets/js/bootstrap.bundle.min.js"></script> -->
+  <!-- <script src="assets/js/feather.min.js"></script> -->
+  <!-- <script src="assets/js/perfect-scrollbar.min.js"></script> -->
+  <!-- <script src="assets/js/main.js"></script> -->
+  <script src="lib/jquery/jquery-2.1.1.min.js"></script>
+  <script src="lib/jquery/jquery-ui.js"></script>
+  <script src="lib/signature_pad.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+  <script src="lib/rmbase.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/helper.js"></script>
+  <script src="js/service.js"></script>
+  <script src="js/gzip.js"></script>
+  <!--views-->
+  <script src="views/home/home.js"></script>
+  <script src="views/profile/profile.js"></script>
+  <script src="views/intro/intro.js"></script>
+  <script src="views/search/search.js"></script>
+  <script src="views/request-list/request_list.js"></script>
+  <script src="views/register/register.js"></script>
+  <script src="views/login/login.js"></script>
+  <script src="views/sign/sign.js"></script>
+  <script src="views/loan/autoleasing/autoleasing.js"></script>
+  <script src="views/loan/property_collateral/collateral.js"></script>
+  <script src="views/loan/consumer_loan/consumer.js"></script>
+  <script src="views/loan/business_loan/business_loan.js"></script>
+  <script src="views/loan/car_collateral/car_collateral.js"></script>
+  <script src="views/basket/basket.js"></script>
+  <script src="views/loan_success/loan_success.js"></script>
+  <script src="views/request-list/request-detail/request_detail.js"></script>
+  <script src="views/car/car.js"></script>
+  <script src="views/car/car-info.js"></script>
+  <script src="views/carlist/carlist.js"></script>
+  <script src="views/qr/qr.js"></script>
+  <script src="views/trend/trend.js"></script>
+  <script src="views/sale/sale.js"></script>
+  <script src="views/other_goods/other_goods.js"></script>
+  <script src="views/other_goods/add_other_goods.js"></script>
+  <script src="views/settings/settings.js"></script>
+  <script src="views/reset_password/reset_password.js"></script>
+  <script src="views/contact/contact.js"></script>
+  <script src="views/loan_calculator/loan_calculator.js"></script>
+
+  <link rel="stylesheet" href="css/ionicons.css" />
+</head>
+
+<body ng-app="index" animation="" ng-controller="indexCtrl">
+  <ion-side-menus class="AppBody demo1 non-navigation" id="mobile">
+    <!-- <span class="side-menu-off-icon" style="color: #fff !important" ng-click="toggleSideMenu()">&#10006;</span> -->
+    <span class="side-menu-off-icon" style="color: #fff !important" ng-click="toggleSideMenu()"><img style="width: 20px" src="img/x_mark.png" /></span>
+    <div id="nav">
+      <div class="side-menu-items side-menu-img-container">
+        <img class="side-menu-picture" src="img/favicon.png" width="70px" height="70px" />
+      </div>
+      <div class="side-menu-items side-menu-user-name">Digital Credit</div>
+      <div class="side-menu-items" ng-click="toggleSideMenu();hideShowFooter()" ng-if="!$root.loginUserInfo|isEmpty" ui-sref="profile"><i class="icon fa fa-user-o"></i>Миний мэдээлэл</div>
+      <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="loan_calculator"><i class="icon fa fa-calculator"></i>Зээлийн тооцоолуур</div>
+      <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="intro"><i class="icon fa fa-sticky-note-o"></i>Хэрэглэх заавар</div>
+      <div class="side-menu-items"><i class="icon fa fa-question-circle-o"></i>Үйлчилгээний нөхцөл</div>
+      <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="contact"><i class="icon fa fa-phone"></i>Холбоо барих</div>
+      <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="reset_password" ng-if="!$root.loginUserInfo|isEmpty"><i class="icon fa fa-key"></i>Нууц үг солих</div>
+
+      <div class="side-menu-items" ng-click="toggleSideMenu()"><i class="icon fa fa-cog" aria-hidden="true"></i>Тохиргоо</div>
+
+      <div class="side-menu-logout side-menu-items" ng-click="toggleSideMenu()" ui-sref="login" ng-if="!$root.loginUserInfo|isEmpty"><i class="icon fa fa-sign-out"></i>Гарах</div>
+      <div class="side-menu-logout side-menu-items" ng-click="toggleSideMenu()" ui-sref="login" ng-if="$root.loginUserInfo|isEmpty"><i class="icon fa fa-sign-out"></i>Нэвтрэх</div>
+    </div>
+    <ion-side-menu-content drag-content="false" id="mobileBodyContent" class="">
+      <ion-nav-bar class="bar bar-stable app-header-custom" align-title="left" style="padding: 10px 15px" on-swipe-left="toggleSideMenu()" on-swipe-right="toggleSideMenu()">
+        <!-- <ion-nav-back-button> </ion-nav-back-button> -->
+        <ion-nav-buttons side="left" style="position: absolute; top: 10px; left: 15px" id="burgerBtn">
+          <button class="button button-icon header-icon" style="position: fixed" ng-click="toggleSideMenu()"></button>
+          <i class="icon custom-menu"></i>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right" style="right: 10px; position: fixed">
+          <button ng-if="!$root.loginUserInfo|isEmpty" class="button button-clear ion-float-right ion-color-brand-green" style="margin-right: 10px">
+            <i class="icon custom-bell-green">
+              <span class="notify-badge"></span>
+            </i>
+          </button>
+          <button class="button button-clear ion-float-right ion-color-brand-green" ui-sref="search" style="margin-right: 5px">
+            <i class="icon custom-search-green"></i>
+          </button>
+        </ion-nav-buttons>
+      </ion-nav-bar>
+      <ion-nav-view animation="slide-left-right"> </ion-nav-view>
+      <ion-footer-bar ng-if="!$root.showBanner" align-title="center" class="bar-custom" style="width: 100%" ng-hide="hideFooter" id="ion-footer-tabs">
+        <div class="home-tab" ng-include src="'views/nav/footer.html'"></div>
+      </ion-footer-bar>
+    </ion-side-menu-content>
+    <div id="secondScreen" on-touch="toggleSideMenu()"></div>
+    <!-- <div ng-include src="'views/sideMenu/menu.html'"></div> -->
+  </ion-side-menus>
+</body>
+
+</html>

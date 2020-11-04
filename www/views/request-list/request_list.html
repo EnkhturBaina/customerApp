@@ -1,0 +1,60 @@
+<ion-view id="request_listPage" title="Хүсэлтийн жагсаалт">
+  <ion-pane>
+    <link href="views/request-list/request_list.css" rel="stylesheet" />
+    <!-- <div ng-repeat="data in [{'title':'Хүсэлтийн жагсаалт'}]" ng-include src="'views/navbar-simple.html'"></div> -->
+    <ion-content class="ion-modified-content request-list-content" ng-show="!isEmpty">
+      <div class="card" ng-repeat="banks in requetData|groupBy:'leasingid'">
+        <div class="item bank-card card-body item-text-wrap">
+          <div class="expandcollapse-item" ng-click="{{'growDiv('+$index+')'}}">
+            <div class="row">
+              <div class="col">
+                <span class="ion-float-left ion-color-text">{{banks[0].modelname}}</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <span class="ion-color-big-text"><span class="ion-text-bold">{{banks[0].price|formatNumber}}</span>.00 ₮</span>
+              </div>
+              <div class="col">
+                <span class="ion-float-right ion-color-text req-list-product-type">{{banks[0].producttypename}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="list fix-list grow" ng-hide="active" id="{{'grow'+$index}}">
+            <div class="{{'measuringWrapper'+$index}}">
+              <a class="item item-thumbnail-left" ng-repeat="bank in banks" ng-click="selectbank(bank);">
+                <!-- <img src="img/khanbank-mn.png" /> -->
+                <img src="{{$root.imagePath}}{{bank.banklogo}}" />
+                <!-- <span class="badge badge-assertive loan-card-wrap-badge">1</span> -->
+                <div class="row">
+                  <div class="col">
+                    <p class="ion-color-big-text">{{bank.departmentname}}</p>
+                  </div>
+                  <div class="col">
+                    <p class="ion-float-right">Хүү: {{bank.loanfeetext}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <p class="ion-color-brand-green">{{bank.statusname}}</p>
+                  </div>
+                  <div class="col">
+                    <p class="ion-float-right">Хугацаа: {{bank.loanmonth}}</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- <span class="badge badge-assertive loan-card-badge">1</span> -->
+      </div>
+    </ion-content>
+    <ion-content ng-show="isEmpty" id="emptyRequestList">
+      <div class="empty-icon-container">
+        <img src="img/icons8-inbox-100.png" />
+        <span ng-if="!$root.loginUserInfo|isEmpty">Танд зээлийн хүсэлт байхгүй байна.</span>
+        <button ng-if="$root.loginUserInfo|isEmpty" class="button single-button" ui-sref="login" style="height: 35px;">Нэвтрэх</button>
+      </div>
+    </ion-content>
+  </ion-pane>
+</ion-view>

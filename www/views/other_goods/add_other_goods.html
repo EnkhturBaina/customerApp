@@ -1,0 +1,44 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+    <link href="views/other_goods/other_goods.css" rel="stylesheet" />
+    <link href="views/loan/business_loan/business_loan.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Бараа нэмэх'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content class="ion-modified-content margin-top-50 autoleasing-step1-content">
+        <div class="big-container ghostwhite-noscroll-container">
+            <div class="magic-container">
+                <div class="margin-lr-20">
+                    <div class="margin-tb-20-40">
+                        <span class="ion-color-text">Та барааны шинж чанарыг харуулахуйц бүтэн зургийг оруулна уу</span>
+                    </div>
+                    <div class="">
+                        <div class="img-input-area" ng-click="takePhoto()">
+                            <span class="add-ico" ng-if="($root.newCarReq.image|isEmpty)">+</span>
+                        </div>
+                        <div class="selector-container">
+                            <span class="title">Нийлүүлэгч</span>
+                            <select class="consumer-loan-suppp-select" ng-model="$root.newCarReq.shopIdObj" ng-change="changeShop($root.newCarReq.shopIdObj)">
+                                <option ng-repeat="supp in allSupplierList | filter:{id:'!!'}" value="{{supp}}">{{supp.suppliername}}</option>
+                            </select>
+                        </div>
+                        <div class="selector-container">
+                            <span class="title">Үнэ</span>
+                            <div class="search-input-container">
+                                <span class="search-input-icon">₮</span>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.newCarReq.amount" name="" class="search-input-type ng-pristine ng-untouched ng-valid ng-valid-pattern" format-input />
+                                <input type="hidden" ng-model="$root.newCarReq.itemid" />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ion-footer class="bottom-footer">
+                <div class="attention-text">
+                    <span>Анхааруулга</span>
+                    <span>Үнийн дүнгээс гарсан зөрүүг та нэмж төлж болзошгүй тул та үнийн дүнгээ зөв оруулна уу</span>
+                </div>
+                <!-- ui-sref="otherGoods" -->
+                <button class="button btn single-button" id="Next" ng-click="savebtn(higherCost)">Хадгалах</button>
+            </ion-footer>
+        </div>
+    </ion-content>
+</ion-view>

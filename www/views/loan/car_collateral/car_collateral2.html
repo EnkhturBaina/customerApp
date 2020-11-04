@@ -1,0 +1,58 @@
+<ion-view ng-app="car_collateral.Ctrl" hide-nav-bar="true">
+  <link href="views/loan/car_collateral/car_collateral.css" rel="stylesheet" />
+  <ion-content id="car-collateral2" scroll="true" class="car-col-content">
+    <!-- <ion-content id="car-collateral2" scroll="true" class="car-col-content margin-top-50"> -->
+    <div class="car-col-step2-back" ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div>
+    <div class="list car-collateral-list" ng-controller="car_collateralCtrl">
+      <div class="card car-step2-card">
+        <span class="step2-card-span">Зээлийн хүсэлтийн мэдээлэл</span>
+        <p class="step2-card-p">Зээлийн хэмжээ</p>
+        <div class="step2-input-container">
+          <span class="step2-input-icon">₮</span>
+          <input type="text" ng-model="requestAmount" pattern="\d*" placeholder="Зээлийн хэмжээ" name="requestAmount" class="car-step2-input" format-input />
+        </div>
+        <label class="item item-input step2-loam-month">
+          <p>Хугацаа сараар</p>
+          <select class="car-col-step2-select" ng-model="loanMonth">
+            <option ng-repeat="month in $root.monthData" value="{{month.data}}">{{month.name}}</option>
+          </select>
+        </label>
+        <label class="item item-input profile-label">
+          <p>Зээлийн хүү (сараар)</p>
+          <input inputmode="numeric" pattern="[0-9]*" class="loanFee-car-col" type="text" placeholder="-" name="loanFee" format-input />
+        </label>
+        <label class="item item-input step2-description-field">
+          <p>Тайлбар</p>
+          <textarea type="text" placeholder="..." name="description"></textarea>
+        </label>
+      </div>
+      <span class="step2-bank-span"> Боломжит банк санхүү</span>
+      <div class="step2-bank-container">
+        <div class="col" ng-repeat="bank in defualtbank" ng-if="bank.banklogo|isEmpty">
+          <img src="{{bank.banklogo|guessImageMime}}" width="25px" height="25px" />
+          <p>{{bank.departmentname}}</p>
+        </div>
+      </div>
+      <!-- <span class="bank-title-red step2-bank-span"> Боломжгүй банк санхүү</span>
+      <div class="step2-bank-container">
+        <div class="col">
+          <img src="img/khanbank-mn.png" width="25px" height="25px" />
+          <p>Хаан банк</p>
+        </div>
+        <div class="col">
+          <img src="img/khanbank-mn.png" width="25px" height="25px" />
+          <p>Хаан банк</p>
+        </div>
+        <div class="col">
+          <img src="img/khanbank-mn.png" width="25px" height="25px" />
+          <p>Хаан банк</p>
+        </div>
+        <div class="col">
+          <img src="img/khanbank-mn.png" width="25px" height="25px" />
+          <p>Хаан банк</p>
+        </div>
+      </div> -->
+      <button class="button btn single-button" id="Next" ui-sref="autoleasing-3">Үргэлжлүүлэх</button>
+    </div>
+  </ion-content>
+</ion-view>

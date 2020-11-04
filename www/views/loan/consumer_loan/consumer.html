@@ -1,0 +1,40 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+  <link href="views/loan/consumer_loan/consumer.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Хэрэглээний лизинг'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content class="ion-modified-content has-header consumer-loan-content">
+    <div class="big-container ghostwhite-noscroll-container">
+      <div class="magic-container">
+        <div class="margin-lr-20 margin-tb-20-40">
+          <span class="ion-color-text">Танилцуулга</span>
+        </div>
+        <div class="margin-lr-20 margin-top-50">
+          <select class="selection">
+            <option selected>Зориулалт</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+          <select class="selection">
+            <option selected>Орлого баталгаажуулах баримт</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+          <select class="selection">
+            <option selected>Барьцаа хөрөнгө</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+        </div>
+      </div>
+      <ion-footer class="bottom-footer">
+        <div class="bank-container">
+          <p>Банк болон ББСБ -ын зээлээр захиалан авах боломжтой</p>
+          <img src="img/golomt.png" />
+          <img src="img/khanbank-mn.png" />
+          <img src="img/golomt.png" />
+          <img src="img/golomt.png" />
+        </div>
+        <button class="button btn single-button" id="Next" ui-sref="">Үргэлжлүүлэх</button>
+      </ion-footer>
+    </div>
+  </ion-content>
+</ion-view>

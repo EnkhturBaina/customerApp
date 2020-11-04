@@ -1,0 +1,88 @@
+.horilist {
+  margin-bottom: 20px;
+}
+
+.title-class {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.left-0 {
+  margin-left: auto;
+}
+
+.middle-title {
+  color: #4b5180;
+  font-weight: 600;
+}
+
+.horizontal-scroller {
+  height: 100px;
+  -webkit-overflow-scrolling: touch;
+  padding: 15px 15px 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  list-style: none;
+}
+
+.uppercase-m-title {
+  color: #4b5180;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.horizontal-item {
+  display: inline-block;
+  vertical-align: top;
+  height: 130px;
+  width: 100px;
+  white-space: normal;
+  margin: 0 10px;
+}
+
+.horizontal-item .h-item {
+}
+
+.h-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.h-item p {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  color: #a2a7b5;
+}
+
+.wide-as-needed {
+  overflow: scroll;
+  white-space: nowrap;
+}
+
+.scroll {
+  min-width: 100%;
+}
+
+.trend-content {
+  height: 100%;
+}
+.wide-as-needed > .scroll::-webkit-scrollbar {
+  display: none;
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+*::-webkit-scrollbar {
+  display: none !important;
+}
+.wide-as-needed > .scroll {
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}

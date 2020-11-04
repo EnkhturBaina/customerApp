@@ -1,0 +1,67 @@
+<ion-view hide-nav-bar="true">
+  <link href="views/register/register.css" rel="stylesheet" />
+  <ion-content scroll="true" ng-controller="registerCtrl" class="gray-background register-content">
+    <ion-header-bar align-title="left" class="navbar" style="background: none">
+      <div class="title ion-color-big-text navbar-back-button" style="background: none">
+        <button ng-click="$ionicGoBack()" class="nav-back-button button buttons button-clear header-item car-back-nav" style="left: 10px" ng-click="hideShowFooter()">
+          <i class="ion-chevron-left ion-color-header"></i>
+          <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Буцах</span></span>
+        </button>
+      </div>
+      <div class="navbar-right-icon">
+        <!-- <button class="button button-clear icon ion-search cus-header-icon ion-float-right ion-color-brand-green" ui-sref="search"></button> -->
+      </div>
+    </ion-header-bar>
+    <!-- <div class="container">
+      <div class="row">
+        <div class="col">
+          <ul id="progress-bar" class="progressbar">
+            <li class="active step-li-1"></li>
+            <li class="active step-li-2"></li>
+            <li class="step-li-3"></li>
+          </ul>
+        </div>
+      </div>
+    </div> -->
+    <div id="register-step-1" class="register-step-1">
+      <div class="step-1-text">
+        <!-- <p class="ion-color-big-text">Та утасны дугаараа оруулна уу</p> -->
+        <!-- <p class="ion-color-text">Таны утсанд баталгаажуулах код илгээх болно.</p> -->
+      </div>
+      <div class="step-1-text">
+        <input type="text" pattern="\d*" num-only maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="register-mobile" ng-model="$root.crmUserData.userName" />
+      </div>
+      <div class="step-1-text">
+        <p class="ion-color-text">Утасны дугаар нь таны нэвтрэх нэр болно.</p>
+      </div>
+      <div class="step-1-text">
+        <input type="{{inputType}}" pattern="\d*" placeholder="Нууц үг" name="password" class="register-password" ng-model="$root.customerPassword.passwordHash" />
+        <button class="button button-icon reg-show-pass-btn" style="zoom: 1" ng-click="hideShowPassword()">
+          <i class="ion-eye" id="eye-icon"></i>
+        </button>
+      </div>
+    </div>
+    <!-- <div id="register-step-2" class="register-step-2 remove-step">
+      <div class="step-1-text">
+        <p class="ion-color-text">Таны 886677** дугаарт илгээсэн 6 оронтой кодыг оруулж баталгаажуулна уу.</p>
+      </div>
+      <div class="step-1-text">
+        <input type="number" pattern="\d*" placeholder="000000" name="confirmCode" class="register-confirm" />
+      </div>
+      <div class="step-1-text">
+        <p class="ion-color-text">Дахин код илгээх</p>
+      </div>
+    </div> -->
+    <!-- <ion-tabs class="tabs-striped tabs-top profile-card-tabs">
+      <ion-tab title="Хувь1"> </ion-tab>
+      <ion-tab title="Хувь2"> </ion-tab>
+    </ion-tabs> -->
+    <div class="btn-container">
+      <!-- <button class="button btn single-button" id="Next">Үргэлжлүүлэх</button> -->
+      <button class="button btn single-button" ng-disabled="disabledBtn" ng-click="registerCustomer()">Бүртгүүлэх</button>
+      <div class="register-if-account" ui-sref="login">Нэвтрэх</div>
+      <!-- <button class="btn" id="Back">Back</button> -->
+      <!-- <button class="btn" id="Reset">Reset</button> -->
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,181 @@
+<ion-view id="loanPages" hide-footer-bar="true" hide-nav-bar="true">
+  <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content class="ion-modified-content has-header autoleasing-step2-content">
+    <div class="big-container">
+      <div class="magic-container">
+        <div class="bg-container">
+          <div style="margin-top: 10px; margin-bottom: 55px">
+            <ul id="progress-bar" class="progressbar">
+              <li class="active step-li-1"></li>
+              <li class="active step-li-2"></li>
+              <li class="step-li-33"></li>
+              <li class="step-li-4"></li>
+            </ul>
+          </div>
+          <div class="money-input">
+            <p class="middle-title ion-color-big-text">Зээлийн хүсэлтийн мэдээлэл</p>
+            <div class="tugrug-input">
+              <span class="title">Зээлийн хэмжээ</span>
+              <div class="tugrug-input-container">
+                <span class="input-tugrug-icon">₮</span>
+                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="getLoanAmount" format-input disabled />
+                <!-- <i class=" icon ion-stop" style="color:red" ng-if="$root.newReqiust.loanAmount==true"> -->
+              </div>
+            </div>
+            <div class="tugrug-input">
+              <span class="title">Урьдчилгаа</span>
+              <div class="tugrug-input-container">
+                <span class="input-tugrug-icon">₮</span>
+                <input inputmode="numeric" pattern="[0-9]*" type="text" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount()" format-input />
+              </div>
+            </div>
+
+            <label class="item item-input step2-loan-month">
+              <p>Хугацаа (сараар)</p>
+              <select class="autoleasing-month-select" ng-model="$root.newReqiust.loanMonth">
+                <option ng-repeat="month in $root.monthData | filter:{id:'!!'}" value="{{month.id}}">
+                  {{month.name}}</option>
+              </select>
+            </label>
+            <div class="switch-input-container">
+              <ul class="switch-list">
+                <li>
+                  ҮХХ барьцаалах эсэх
+                  <span>
+                    <label class="step2-switch" id="step2HypothicLoan" ng-click="toggleHypothicLoan()">
+                      <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.hypothecLoan" ng-change="changeEvent($root.newReqiust.hypothecLoan)" />
+                      <div class="step2-slider step2-round">
+                        <span id="step2-toggle-on" class="step2-on">Тийм</span>
+                        <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
+                      </div>
+                    </label>
+                  </span>
+                </li>
+                <li>
+                  Монгол банкны лавлагаа <br />авахыг зөвшөөрөх эсэх
+                  <span>
+                    <label class="step2-switch" id="step2isRealState" ng-click="toggleRealState()">
+                      <input type="checkbox" id="step2-togBtn" ng-true-value="1" ng-false-value="0" ng-model="$root.newReqiust.isRealState" ng-change="changeEvent($root.newReqiust.isRealState)" />
+                      <div class="step2-slider step2-round">
+                        <span id="step2-toggle-on" class="step2-on">Тийм</span>
+                        <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
+                      </div>
+                    </label>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="items">
+            <p class="middle-title ion-color-big-text">Барааны мэдээлэл</p>
+            <ul>
+              <li>
+                <div class="item-detail" ng-click="growDiv()">
+                  <div class="item-img"><img width="100px" src="{{$root.imagePath}}{{$root.selectedCarData.itempic}}" /></div>
+
+                  <div class="desc">
+                    <p class="item-title ion-color-big-text">{{$root.selectedCarData.modelname}} - {{$root.selectedCarData.price|formatNumber}}₮
+                    </p>
+                    <span>{{$root.selectedCarData.factoryname}}</span>
+                    <!-- <p class="item-price ion-color-big-text">{{$root.selectedCarData.price|formatNumber}}₮</p> -->
+                    <!-- <span style="text-align: center">{{$root.selectedCarData.industrycountry}}</span> -->
+                    <span>{{$root.selectedCarData.suppliername}}</span>
+                  </div>
+                </div>
+                <div class="list fix-list car-grow" ng-hide="active" id="car-grow">
+                  <div class="car-measuringWrapper">
+                    <div class="item-info">
+                      <ul>
+                        <li>Моторын багтаамж <span>{{$root.selectedCarData.engine|formatNumber}}</span></li>
+                        <li>Явсан км <span> {{$root.selectedCarData.mile|formatNumber}} </span></li>
+                        <li>Өнгө <span>{{$root.selectedCarData.color}}</span></li>
+                        <li>Орж ирсэн он <span>{{$root.selectedCarData.entryyear}}</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="container-padding">
+          <p class="middle-title">Боломжит банк санхүү</p>
+          <div class="bank-grid">
+            <div class="bank" ng-repeat="bank in bankList.correct">
+              <!-- <div class="bank" ng-repeat="bank in bankList"> -->
+              <img src="{{$root.imagePath}}{{bank.BANK_LOGO}}" />
+              <!-- <img src="{{$root.imagePath}}{{bank.banklogo}}" /> -->
+              <p>{{bank.DEPARTMENT_NAME}}</p>
+            </div>
+          </div>
+          <!-- <p class="middle-title red">Боломжгүй банк санхүү</p>
+          <div class="bank-grid">
+            <div class="bank">
+              <img src="img/khanbank-mn.png" />
+              <p>Хаан банк</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <ion-footer class="bottom-footer">
+        <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button>
+      </ion-footer>
+    </div>
+  </ion-content>
+</ion-view>
+<style>
+  .bank-card {
+    padding: 0px 5px !important;
+  }
+
+  .loan-card-badge {
+    /* position: fixed !important;
+  right: 0px !important;
+  top: 50px !important; */
+  }
+
+  #grow .row {
+    padding: 2px 0px 0px 0px !important;
+  }
+
+  #grow .col {
+    padding: 0px !important;
+  }
+
+  #grow p {
+    font-weight: bold;
+    font-size: 12px !important;
+  }
+
+  #grow img {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  #grow {
+    -moz-transition: height 0.5s;
+    -ms-transition: height 0.5s;
+    -o-transition: height 0.5s;
+    -webkit-transition: height 0.5s;
+    transition: height 0.5s;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .fix-list {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    margin-bottom: 0px;
+  }
+
+  .item-thumbnail-left {
+    padding-left: 60px !important;
+    min-height: 0px !important;
+  }
+
+  .item.activated {
+    background-color: #fff;
+  }
+</style>

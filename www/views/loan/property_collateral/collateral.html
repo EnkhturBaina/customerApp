@@ -1,0 +1,40 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+  <link href="views/loan/property_collateral/collateral.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Үл хөдлөх барьцаат зээл'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content class="ion-modified-content has-header property-col-content">
+    <div class="big-container ghostwhite-noscroll-container">
+      <div class="magic-container">
+        <div class="margin-lr-20">
+          <h4>Үл хөдлөх хөрөнгө барьцаалсан зээл</h4>
+          <div class="card blue-card">
+            <span class="ion-float-right title">Барьцаат зээл</span>
+            <span class="ion-float-right desc">Бүх төрлийн цахилгаан бараа, тавилга гар утас худалдан авах зах зээлийн хүсэлт илгээх боломжтой</span>
+          </div>
+          <select class="selection">
+            <option selected>Хөрөнгийн төрөл</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+          <div class="bottom-line-input">
+            <input type="text" placeholder="Үнэлгээ" name="" />
+            <input type="text" placeholder="Хэмжээ" name="" />
+          </div>
+        </div>
+
+        <div class="bottom-btn-container">
+          <div class="blue-btn-container">
+            <button class="open-image" ng-click="showPopup()">Зураг оруулах</button>
+          </div>
+          <div class="bank-container">
+            <p>Банк болон ББСБ -ын зээлээр захиалан авах боломжтой</p>
+            <img src="img/khanbank-mn.png" />
+            <img src="img/golomt.png" />
+            <img src="img/khanbank-mn.png" />
+            <img src="img/khanbank-mn.png" />
+          </div>
+          <button class="button btn single-button" id="back" ng-click="$ionicGoBack()">Буцах</button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,41 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+    <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Банк сонгох'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content class="ion-modified-content has-header">
+        <div class="big-container">
+            <div class="magic-container">
+                <div class="bg-container">
+                    <div class="bank-list">
+                        <p class="middle-title ion-color-big-text">Анхан шатны шалгуур хангасан банкууд</p>
+                        <ul class="switch-list">
+                            <li>
+                                <ion-checkbox ng-model="selectedBank.checked">
+                                    <div class="bank-list-container">
+                                        <img src="{{$root.imagePath}}{{selectedBank.BANK_LOGO}}" />
+                                    </div>
+                                    <span class="bank-middle-title">{{selectedBank.DEPARTMENT_NAME}}</span>
+                                    <p class="bank-desc-green">Тэнцсэн банк</p>
+                                </ion-checkbox>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="item-info">
+                        <p class="middle-title ion-color-big-text">Банкны дэлгэрэнгүй мэдээлэл</p>
+                        <ul>
+                            <li>Сарын хүү <span>{{selectedBank.MONTH_FEE}}%</span></li>
+                            <li>Зээл олгосон шимтгэл <span>{{selectedBank.LOAN_FEE_TEXT}}%</span></li>
+                            <li>Загвар <span>{{$root.selectedCarData.modelname}}</span></li>
+                            <li>Нотариатын төлбөр <span>300,000₮</span></li>
+                            <li>Нэр шилжүүлэхэд гарах зардал<span>20,000,000</span></li>
+                            <li>Өргөдлийн хураамж<span>15,000,000</span></li>
+                            <li>ЖХАЖДаатгалын төлбөр<span>15,000,000</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ion-footer class="bottom-footer">
+                <button class="button btn single-button" id="Next" ui-sref="autoleasing-3">Буцах</button>
+            </ion-footer>
+        </div>
+    </ion-content>
+</ion-view>

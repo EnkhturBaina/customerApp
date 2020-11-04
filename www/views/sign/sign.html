@@ -1,0 +1,27 @@
+<ion-view hide-nav-bar="true">
+  <link href="views/sign/sign.css" rel="stylesheet" />
+  <ion-content scroll="false">
+    <ion-header-bar align-title="left" class="navbar" style="background: none">
+      <div class="title ion-color-big-text navbar-back-button" style="background: none">
+        <button ng-click="$ionicGoBack()" class="nav-back-button button buttons button-clear header-item car-back-nav" style="left: 10px" ng-click="hideShowFooter()">
+          <i class="ion-chevron-left ion-color-header"></i>
+          <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Буцах</span></span>
+        </button>
+      </div>
+      <div class="navbar-right-icon">
+        <!-- <button class="button button-clear icon ion-search cus-header-icon ion-float-right ion-color-brand-green" ui-sref="search"></button> -->
+      </div>
+    </ion-header-bar>
+    <div ng-controller="introCtrl as vm" class="intro-slider-container sign-container gray-background">
+      <div class="box">
+        <img class="slider-img" src="img/sign-ico.png" />
+        <!-- <h2 class="sign-text">Та өөрийн мэдээллээ үнэн зөв, бүрэн бөглөнө үү</h2> -->
+        <div class="sign-class">
+          <!-- ui-sref="login" -->
+          <button class="button sign-login-button" ng-click="loginbtn()">Нэвтрэх</button>
+          <button class="button sign-reg-button" ui-sref="register">Бүртгүүлэх</button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

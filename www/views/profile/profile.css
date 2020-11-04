@@ -1,0 +1,286 @@
+.profile-card-tabs > .tabs {
+  width: 100% !important;
+  left: 0px !important;
+}
+.profile-card-tabs > .tabs {
+  top: 25% !important;
+  padding: 0 20px !important;
+  border-bottom: none !important;
+  position: inherit;
+}
+.profile-content {
+  top: 0px !important;
+  overflow: hidden !important;
+  height: 65vh !important;
+  background-color: #fff;
+}
+.profile-content > .scroll {
+  min-height: 0px !important;
+}
+.profile-avatar {
+  background: -moz-linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
+  background: -webkit-linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
+  background: linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
+  height: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.profile-avatar img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+.avatar-base {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  padding: 5px;
+  border-radius: 50%;
+  background: -moz-linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
+  background: -webkit-linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
+  background: linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
+  box-shadow: -1px 2px 7px rgba(0, 0, 0, 0.3);
+}
+.profile-picture-edit {
+  width: 30px !important;
+  height: 30px !important;
+  right: 0px;
+  bottom: 0px;
+  position: absolute;
+}
+.profile-picture-edit > i::before {
+  display: block !important;
+}
+input[type="text"] {
+  text-align: right;
+  color: #4b5180;
+  font-weight: bold;
+}
+input[type="number"] {
+  text-align: right;
+  font-weight: bold;
+  color: #4b5180;
+}
+.profilePhoneNumber::-webkit-outer-spin-button,
+.profilePhoneNumber::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.profilePhoneNumber {
+  -moz-appearance: textfield; /* Firefox */
+}
+.profile-camera-icon {
+  right: 10px;
+  position: absolute;
+  zoom: 2;
+}
+.profile-card-front {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+}
+.profile-card-front i {
+  right: 50%;
+  position: absolute;
+  zoom: 2;
+}
+.profile-card-back {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+}
+.profile-card-back i {
+  right: 10px;
+  position: absolute;
+  zoom: 2;
+}
+.profile-bank-list {
+  display: grid;
+  border-top: 0px !important;
+  grid-template-columns: 33% 33% 33%;
+}
+.profile-bank-list img {
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.profile-bank-list p {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  white-space: normal !important;
+  text-align: center;
+}
+.profile-qr {
+  width: 300px;
+  height: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.profile-label {
+  width: auto !important;
+}
+.profile-label p {
+  color: #a2a7b5 !important;
+}
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 2;
+  cursor: pointer;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+}
+
+#text {
+  padding: 25px;
+  border-radius: 10px;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  display: grid;
+  width: 60%;
+  color: white;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  border-top: 1px solid #a9d229;
+  border-bottom: 1px solid #3ec1f4;
+  background-image: linear-gradient(#a9d229, #3ec1f4), linear-gradient(#a9d229, #3ec1f4);
+  background-size: 1px 100%;
+  background-position: 0 0, 100% 0;
+  background-repeat: no-repeat;
+}
+#text span {
+  text-align: center;
+  font-size: 12px !important;
+}
+.overlay-title-text {
+  padding-bottom: 20px;
+}
+.overlay-btn-container {
+  position: relative;
+  top: 85%;
+}
+.overlay-btn-container button {
+  line-height: 20px !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  background: rgb(162, 209, 52);
+  background: -moz-linear-gradient(45deg, rgba(162, 209, 52, 1) 30%, rgba(59, 193, 249, 1) 77%);
+  background: -webkit-linear-gradient(45deg, rgba(162, 209, 52, 1) 30%, rgba(59, 193, 249, 1) 77%);
+  background: linear-gradient(45deg, rgba(162, 209, 52, 1) 30%, rgba(59, 193, 249, 1) 77%);
+  font-size: 12px !important;
+  width: 65%;
+  padding: 5px 40px;
+  margin: auto;
+  display: block;
+}
+.profile-tab .tab-nav.tabs {
+  margin-top: -40px;
+}
+.profile-tab .tab-title {
+  color: #fff !important;
+}
+.profile-tab .tab-item-active > .tab-title {
+  color: #fff !important;
+}
+.profile-tabs-tab .tab-item.tab-item-active {
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+#profile-tabs-striped .tab-item.activated {
+  border-color: #fff !important;
+  color: #fff !important;
+}
+.overlay-off-text {
+  color: #fff;
+  font-size: 20px;
+  right: 20%;
+  position: absolute;
+  top: 20%;
+}
+.profile-select {
+  width: 35%;
+  margin: 0 24px 0 auto;
+  float: right;
+  border: none;
+  border-color: #d5d5d5;
+  border-radius: 5px;
+  padding: 7px 15px 7px 10px;
+  color: #a2a7b5;
+  background: #fff;
+  background-color: #fff;
+}
+#userID {
+  text-transform: uppercase;
+}
+.profile-input-name-error {
+  position: absolute;
+  font-size: 10px;
+  color: red;
+  bottom: 0;
+  display: none;
+  right: 25px;
+}
+.profile-input-userid-error {
+  position: absolute;
+  font-size: 10px;
+  color: red;
+  bottom: 0;
+  display: none;
+  right: 25px;
+}
+.profile-tab1-save-btn {
+  margin: 10px 0 20px 0;
+}
+.profile-select-deal-banks {
+  position: relative;
+  border-radius: 10px;
+  border: 1px dashed #ccc;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  background: url(../../lib/icon/add-fill.svg) no-repeat right #fff;
+  -webkit-appearance: none;
+  background-position-x: 50%;
+  /*text-align: center;
+  font-size: 46px;
+  color: #ccc;
+  width: 50px; */
+}
+.deal-bank-remove {
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 4px;
+  position: absolute;
+  top: 0;
+  right: 15%;
+  background: #acd321;
+  color: #fff;
+  padding: 5%;
+  font-size: 28px;
+}
+.added-deal-bank {
+  position: relative;
+}

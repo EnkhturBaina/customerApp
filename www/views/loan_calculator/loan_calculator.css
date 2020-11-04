@@ -1,0 +1,159 @@
+.loan_calculator-container {
+  height: 100%;
+  margin-top: 44px;
+}
+.loan_calculator-container > .tabs-top > .tabs,
+.tabs.tabs-top {
+  top: 170px !important;
+}
+.loan_calculator-container > .tabs-top > .tabs {
+  width: 90% !important;
+  height: 45px !important;
+  border: 0px !important;
+}
+.loan-calc-tab-title > .tab-title {
+  font-size: 12px;
+}
+.loan-type-label {
+  display: block;
+  background-color: #f8f8fe !important;
+  margin: 10px auto;
+}
+.loan-type-select {
+  width: 80%;
+  margin: 0 30px 0px 35px;
+  border: 1px solid #d5d5d5;
+  border-color: #d5d5d5;
+  border-radius: 5px;
+  padding: 7px 15px 7px 10px;
+  color: #a2a7b5;
+}
+.loan-type-span-title {
+  width: 80%;
+  padding-left: 8%;
+  color: #a2a7b5 !important;
+  display: flex;
+}
+.loan-type-title {
+  width: 80%;
+  padding-left: 10%;
+  color: #a2a7b5 !important;
+  display: flex;
+}
+.loan-calc-tab-content {
+  top: 55px !important;
+}
+.loan-calc-tab-icon {
+  background-color: #a2a7b5 !important;
+  border-radius: 20px;
+  display: grid;
+  align-content: center;
+  height: 30px !important;
+  width: 30px !important;
+  font-size: 15px !important;
+  display: grid !important;
+  align-content: center;
+  color: #fff;
+}
+.loan-calc-tab-title {
+  border-bottom: 0px !important;
+}
+.loan-calc-tab-title.tab-item-active > .loan-calc-tab-icon {
+  background-color: #acd322 !important;
+}
+/*new checkbox*/
+.loan-calc-tab1-checkbox {
+  padding-left: 15px !important;
+  background-color: #f8f8fe !important;
+  color: #a2a7b5 !important;
+  font-size: 14px !important;
+}
+.loan-calc-tab1-checkbox > .checkbox {
+  left: unset !important;
+  right: 15px !important;
+  padding: 10px 7px !important;
+}
+.loan-calc-tab1-checkbox > .checkbox > .checkbox-icon {
+  width: 25px !important;
+  height: 25px !important;
+}
+.loan-calc-tab1-checkbox > .checkbox > .checkbox input:after,
+.checkbox-icon:after {
+  color: #fff !important;
+}
+.loan-calc-tab1-checkbox > .checkbox > .checkbox input:checked:before,
+.checkbox input:checked + .checkbox-icon:before {
+  background-color: #acd322 !important;
+  border-color: #acd322 !important;
+}
+.loan-calc-tab1-checkbox > .checkbox > .checkbox-icon::before {
+  border-radius: 5px !important;
+}
+/*new checkbox*/
+.loan-calc-tab1-checkbox-first {
+  border-top: 0px !important;
+}
+.loan-type-input {
+  width: 80%;
+  margin: 0 30px 0px 35px;
+  border: 1px solid #d5d5d5 !important;
+  border-color: #d5d5d5;
+  border-radius: 5px;
+  padding: 7px 15px 7px 10px;
+  color: #a2a7b5;
+  padding-top: 7px !important;
+  padding-left: 10px !important;
+}
+
+.loan-calc-confirm-checkbox {
+  padding-left: 120px !important;
+  background-color: #f8f8fe !important;
+  color: #a2a7b5 !important;
+  font-size: 14px !important;
+  bottom: 40px;
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  border: none;
+}
+.loan-calc-confirm-checkbox {
+  padding-left: 25px !important;
+  background-color: #f8f8fe !important;
+  color: #a2a7b5 !important;
+  font-size: 14px !important;
+}
+.loan-calc-confirm-checkbox > .checkbox {
+  left: unset !important;
+  right: 25px !important;
+  padding: 10px 7px !important;
+}
+.loan-calc-confirm-checkbox > .checkbox > .checkbox-icon {
+  width: 25px !important;
+  height: 25px !important;
+}
+.loan-calc-confirm-checkbox > .checkbox > .checkbox input:checked:before,
+.checkbox input:checked + .checkbox-icon:before {
+  background-color: #acd322 !important;
+  border-color: #acd322 !important;
+}
+.loan-calc-confirm-checkbox > .checkbox > .checkbox-icon::before {
+  border-radius: 5px !important;
+}
+.loan-calc-tab1-checkbox-first {
+  border-top: 0px !important;
+}
+.custom-checkbox input {
+  display: none;
+}
+
+.custom-checkbox i {
+  border: 3px solid #7e8a94;
+  float: right;
+  height: 20px;
+  width: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

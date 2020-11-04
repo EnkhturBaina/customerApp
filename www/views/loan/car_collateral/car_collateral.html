@@ -1,0 +1,112 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+    <!-- <link href="views/loan/business_loan/business_loan.css" rel="stylesheet" /> -->
+    <link href="views/loan/car_collateral/car_collateral.css" rel="stylesheet" />
+    <div id="nationalNumberModal" style="display: none">
+        <span class="national-number-overlay-off-text" ng-click="closeModal()">&#10006;</span>
+        <div class="national-number-overlay-container">
+            <input type="number" maxlength="1" class="national-number-input nationalNumber1" />
+            <input type="number" class="national-number-input nationalNumber2" />
+            <input type="number" class="national-number-input nationalNumber3" />
+            <input type="number" class="national-number-input nationalNumber4" />
+            <input type="text" maxlength="1" class="national-number-input nationalNumberText1" />
+            <input type="text" maxlength="1" class="national-number-input nationalNumberText2" />
+            <input type="text" maxlength="1" class="national-number-input nationalNumberText3" />
+        </div>
+    </div>
+    <div ng-repeat="data in [{'title':'Автомашин барьцаалсан зээл'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content class="ion-modified-content has-header car-collateral-content business-loan-content">
+        <div class="big-container ghostwhite-noscroll-container">
+            <div class="magic-container">
+                <div class="margin-lr-20">
+                    <div class="list car-collateral-list">
+                        <label class="item item-input car-collateral-label">
+                            <p>Улсын дугаар</p>
+                            <input type="text" id="nationalNumber" placeholder="0000 УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" />
+                            <!-- <input type="text" id="nationalNumber" placeholder="0000 УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" ng-click="callModal()" /> -->
+                        </label>
+                        <label class="item item-input item-select car-collateral-label">
+                            <p class="input-label">Үйлдвэр</p>
+                            <select ng-model="$root.newCarReq.factoryId" style="background-color: transparent" ng-change="getCarmarkData(newCarReq.factoryId)">
+                                <option ng-repeat="com in companyData | filter:{factoryid:'!!'}" value="{{com.factoryid}}">
+                                    {{com.factoryname}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-select car-collateral-label">
+                            <p class="input-label">Загвар</p>
+                            <select ng-model="$root.newCarReq.modelId" style="background-color: transparent">
+                                <option ng-repeat="model in carmerkData | filter:{modelid:'!!'}" value="{{model.modelid}}">
+                                    {{model.modelname}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input car-collateral-label">
+                            <p>Үйлдвэрлэсэн он</p>
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="productYear" placeholder="Үйлдвэрлэсэн он" name="productYear" ng-model="$root.newCarReq.productYear" />
+                        </label>
+                        <label class="item item-input car-collateral-label">
+                            <p>Орж ирсэн он</p>
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="entryYear" maxlength="4" placeholder="Орж ирсэн он" name="entryYear" ng-model="$root.newCarReq.entryYear" />
+                        </label>
+                        <label class="item item-input car-collateral-label">
+                            <p>Явсан км</p>
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="Явсан км" name="odo" ng-model="$root.newCarReq.mile" format-input />
+                        </label>
+                    </div>
+                    <label class="item car-collateral-label" style="border: none">
+                        <p style="color: #a2a7b5">Зураг</p>
+                    </label>
+                    <div class="item car-collateral-img-list">
+                        <div class="row">
+                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic')">
+                                <div ng-if="!$root.newCarReq.itemPic" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                                    +
+                                </div>
+                                <img ng-if="$root.newCarReq.itemPic" src="{{$root.newCarReq.itemPic|guessImageMime}}" width="100px" height="75px" />
+                            </div>
+                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic2')">
+                                <div ng-if="!$root.newCarReq.itemPic2" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                                    +
+                                </div>
+                                <img ng-if="$root.newCarReq.itemPic2" src="{{$root.newCarReq.itemPic2|guessImageMime}}" width="100px" height="75px" />
+                            </div>
+                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic3')">
+                                <div ng-if="!$root.newCarReq.itemPic3" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                                    +
+                                </div>
+                                <img ng-if="$root.newCarReq.itemPic3" src="{{$root.newCarReq.itemPic3|guessImageMime}}" width="100px" height="75px" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic4')">
+                                <div ng-if="!$root.newCarReq.itemPic4" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                                    +
+                                </div>
+                                <img ng-if="$root.newCarReq.itemPic4" src="{{$root.newCarReq.itemPic4|guessImageMime}}" width="100px" height="75px" />
+                            </div>
+                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic5')">
+                                <div ng-if="!$root.newCarReq.itemPic5" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                                    +
+                                </div>
+                                <img ng-if="$root.newCarReq.itemPic5" src="{{$root.newCarReq.itemPic5|guessImageMime}}" width="100px" height="75px" />
+                            </div>
+                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic6')">
+                                <div ng-if="!$root.newCarReq.itemPic6" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                                    +
+                                </div>
+                                <img ng-if="$root.newCarReq.itemPic6" src="{{$root.newCarReq.itemPic6|guessImageMime}}" width="100px" height="75px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ion-footer class="bottom-footer">
+                <div class="bank-container">
+                    <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
+                    <img ng-repeat=" bank in allBankList | filter:{id:'!!'}" src="{{$root.imagePath}}{{bank.banklogo}}" />
+
+                </div>
+                <button class="button btn single-button" id="Next" ng-click="saveCarCol()">Үргэлжлүүлэх</button>
+                <!-- <button class="button btn single-button" id="Next" ui-sref="car_coll2">Үргэлжлүүлэх</button> -->
+            </ion-footer>
+        </div>
+    </ion-content>
+</ion-view>

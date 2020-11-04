@@ -1,0 +1,117 @@
+<ion-view ng-app="request_detail.Ctrl" class="request-detail-view" hide-nav-bar="true">
+  <link href="views/request-list/request-detail/request_detail.css" rel="stylesheet" />
+  <!-- start popup -->
+  <div id="cancelRequestPopup" style="display: none">
+    <span class="bank-overlay-off-text" ng-click="closeOverlay()">&#10006;</span>
+    <div class="confirm-overlay-container">
+      <span class="confirm-title">Хүсэлт цуцлах</span>
+      <span class="confirm-overlay-body-text">Та {{$root.selectbank.departmentname}} руу илгээсэн хүсэлтээ цуцлахад итгэлтэй байна уу</span>
+      <span class="confirm-overlay-body-text">Та хүсэлтээ цуцалснаар банкинд зээл авахгүй гэсэн мэдэгдэл очихыг анхаарна уу</span>
+      <buttond class="button btn confirm-btn single-button" ng-click="responseCancelRequestPopupOn()">Хүсэлт цуцлах</button>
+    </div>
+  </div>
+  <div id="responeCancelRequestPopup" style="display: none">
+    <div class="confirm-overlay-container">
+      <span class="confirm-title">Хүсэлт цуцлах</span>
+      <span class="confirm-overlay-body-text">Таны {{$root.selectbank.departmentname}} руу илгээсэн хүсэлт цуцлагдлаа </span>
+      <buttond class="button btn confirm-btn single-button" ng-click="responseCancelRequestPopupOff()">Хаах</button>
+    </div>
+  </div>
+  <!-- end popup -->
+  <!-- start popup -->
+  <div id="successRequestPopup" style="display: none">
+    <span class="bank-overlay-off-text" ng-click="closeOverlay()">&#10006;</span>
+    <div class="confirm-overlay-container">
+      <span class="confirm-title">Зөвшөөрөл илгээх</span>
+      <span class="confirm-overlay-body-text">Та {{$root.selectbank.departmentname}} руу зөвшөөрөл илгээхдээ итгэлтэй байна уу</span>
+      <button class="button btn confirm-btn single-button" ng-click="responseSuccessRequestPopupOn()">Зөвшөөрөх</button>
+    </div>
+  </div>
+  <div id="responseSuccessRequestPopup" style="display: none">
+    <div class="confirm-overlay-container">
+      <span class="confirm-title">Зөвшөөрөл илгээх </span>
+      <span class="confirm-overlay-body-text">{{$root.selectbank.departmentname}} руу амжилттай илгээгдлээ</span>
+      <button class="button btn confirm-btn single-button" ng-click="responseSuccessRequestPopupOff()">Хаах</button>
+    </div>
+  </div>
+  <!-- end popup -->
+  <div ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content scroll="true" class="request-detail-content margin-top-50">
+    <div class="list" ng-controller="request_detailCtrl">
+      <div class="request-detail-container">
+        <div class="request-car-detail">
+          <img src="{{$root.imagePath}}{{$root.selectbank.itempic}}" />
+          <p>{{$root.selectbank.modelname}}</p>
+          <span>{{$root.selectbank.suppliername}}</span><br />
+          <span>{{$root.selectbank.productyear}} - {{$root.selectbank.entryyear}}</span>
+        </div>
+        <div class="bank-detail">
+          <span class="bant-detail-title"> Банкны санал</span>
+          <label class="item item-input bank-detail-label">
+            <p>Банк</p>
+            <input type="text" placeholder="Банк" name="bank" ng-model="$root.selectbank.departmentname" disabled />
+          </label>
+          <label class="item item-input bank-detail-label">
+            <p>Хүү</p>
+            <input type="text" placeholder="Хүү" name="fee" ng-model="$root.selectbank.loanfeetext" disabled />
+          </label>
+          <label class="item item-input bank-detail-label">
+            <p>Хугацаа</p>
+            <input type="text" placeholder="Хугацаа" name="month" ng-model="$root.selectbank.loanmonth" disabled />
+          </label>
+          <label class="item item-input bank-detail-label">
+            <p>Үнэ</p>
+            <input type="text" placeholder="Үнэ" name="price" ng-model="$root.selectbank.price" disabled format-input />
+          </label>
+          <ion-checkbox class="detail-checkbox" data-ng-click="isConfirm = !isConfirm" ng-disabled="isConfirmCheck">
+            <span>Батлагдсан зээлийг зөвшөөрөх эсэх</span>
+          </ion-checkbox>
+          <span class="bank-chat-title"> Зурвас</span>
+          <div class="bank-chat-container" ng-click="modal.show();getChatHistory()">
+            <div class="bank-chat-income">
+              <span class="income-chat-body">{{bankFirstChat}}</span>
+              <!-- <span class="income-chat-time">12:45 pm</span> -->
+            </div>
+            <!-- <div class="bank-chat-send">
+              <span class="send-chat-body">Таны мэдээлэл дутуу байна.</span>
+              <span class="send-chat-time">12 : 48 pm</span>
+            </div> -->
+          </div>
+          <div class="detail-btn-container">
+            <button class="button bottom-first-button" ng-click="cancelRequestPopupOn()" ng-disabled="isCanceled">ЦУЦЛАХ</button>
+            <button class="button bottom-second-button" ng-click="successRequestPopupOn()" ng-disabled="isConfirm">ЗӨВШӨӨРӨХ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+<script id="templates/modal.html" type="text/ng-template">
+  <ion-modal-view class="bank-chat-modal">
+    <ion-header-bar class="bar bar-header">
+      <h1 class="title">Зурвас</h1>
+      <button class="button button-clear bank-chat-hide-btn" ng-click="modal.hide()"><i class="ion-close-round"></i></button>
+    </ion-header-bar>
+    <ion-content class="padding bank-chat-content">
+      <div class="list modal-chat-body">
+        <div class="bank-chat-income" ng-repeat="chatBank in chatHistory | filter:{dim2:'2'}">
+          <div class="bank-chat-body">
+            <img width="20px" src="{{$root.imagePath}}{{$root.selectbank.banklogo}}" />
+            <span class="income-chat-body">{{chatBank.text1}}</span>
+          </div>
+          <span class="income-chat-time">{{chatBank.createddate}}</span>
+        </div>
+        <div class="bank-chat-send" ng-repeat="chat in chatHistory | filter:{dim2:'1'}">
+          <span class="send-chat-body">{{chat.text1}}</span>
+          <span class="send-chat-time">{{chat.createddate}}</span>
+        </div>
+      </div>
+    </ion-content>
+    <ion-footer class="bank-chat-footer">
+      <form class="msger-inputarea">
+        <textarea type="text" ng-model="$root.sendChatData.text1" class="msger-input" placeholder="Банкинд зурвас илгээх..."></textarea>
+        <button type="submit" class="msger-send-btn" ng-click="sendChat()"><i class="ion-paper-airplane"></i></button>
+      </form>
+    </ion-footer>
+  </ion-modal-view>
+</script>

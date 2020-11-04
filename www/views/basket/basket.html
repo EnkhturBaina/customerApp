@@ -1,0 +1,51 @@
+<ion-view fullscreen="true" title="Сагс">
+  <link href="views/basket/basket.css" rel="stylesheet" />
+  <ion-content scroll="true" class="basket-content gray-background" ng-controller="basketCtrl">
+    <div class="basket-content-in">
+      <!-- <div class="basket-add-item">
+        <button class="button button-icon header-icon ion-float-right ion-color-brand-green" style="zoom: 1" ui-sref="car">
+          <i class="ion-plus"></i>
+        </button>
+      </div> -->
+      <ion-list show-delete="false" can-swipe="true">
+        <div class="card-list-swiper" ng-repeat="basket in $root.basketData track by basket.id">
+          <ion-item>
+            <ion-checkbox ng-model="isChecked" ng-change="selectCarBasket(basket, isChecked, basket.id)" ng-init='isChecked=false' class="basket-check">
+            </ion-checkbox>
+            <div class="item-avatar basket-detail-container">
+              <div class="basket-item-left-text">
+                <img style="width: 40px; height:40px; margin-right: 10px" src="{{$root.imagePath}}{{basket.itempic}}" />
+              </div>
+              <div class="basket-item-left-text">
+                <h2>{{basket.modelname}}</h2>
+                <p>Toyota Tavan Bogd</p>
+                <ion-icon name="paper-plane-outline"></ion-icon>
+              </div>
+              <p class="basket-item-count">x{{basket.itemquantity}}</p>
+              <!-- <i class="icon ion-chevron-right icon-accessory"></i> -->
+              <div class="basket-item-right-text">
+                <h2>₮ {{basket.price|formatNumber}}</h2>
+                <p>{{basket.itemcode}}</p>
+              </div>
+            </div>
+            <ion-option-button class="button-light icon ion-ios7-trash-outline" ng-click="basketDelete(basket.id)">
+            </ion-option-button>
+            <ion-option-button class="button-light icon ion-minus-round" ng-click="decreaseQuantity(basket.id)">
+            </ion-option-button>
+            <ion-option-button class="button-light icon ion-plus-round" ng-click="increaseQuantity(basket.id)">
+            </ion-option-button>
+          </ion-item>
+        </div>
+      </ion-list>
+      <div class="basket-total-price">
+        <span class="total-price-title">Нийт үнэ</span>
+        <!-- <span class="total-price-amount">{{$root.basketData|totalQty:'price'|formatNumber}} ₮</span> -->
+        <span class="total-price-amount">{{sumPrice|formatNumber}} ₮</span>
+      </div>
+      <div class="basket-btn-container">
+        <button class="button bottom-first-button" ng-click="basketGoLeasing()">Зээлээр авах</button>
+        <button class="button bottom-second-button" ui-sref="car-info">Бэлнээр авах</button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

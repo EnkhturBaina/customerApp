@@ -1,0 +1,170 @@
+.settings-wrap {
+  padding: 50px 10px;
+}
+#nlVal {
+  display: inline-block;
+}
+#settings-slider {
+  width: 90%;
+  height: 10px;
+  background: lightgrey;
+  border-radius: 50px;
+}
+
+#settings-slider label {
+  position: absolute;
+  width: 20px;
+  margin-top: 20px;
+  margin-left: -10px;
+  text-align: left;
+  font-size: 13px;
+}
+
+#settings-slider label:last-of-type::after {
+  content: "+";
+}
+
+.ui-slider-handle.ui-state-default.ui-corner-all {
+  border-radius: 100%;
+  background: black;
+  border: 6px solid red;
+  width: 20px;
+  height: 20px;
+  top: -5px;
+  cursor: grab;
+}
+
+.ui-slider-handle.ui-state-active,
+.ui-slider-handle.ui-state-hover,
+.ui-slider-handle.ui-state-focus {
+  border: none;
+  outline: 0;
+}
+
+.ui-slider-handle.ui-state-active:after {
+  content: "miles";
+  position: absolute;
+  top: -40px;
+  left: -19px;
+  background: red;
+  color: white;
+  font-size: 0.7em;
+  padding: 5px 8px;
+}
+
+.ui-slider-handle.ui-state-active:before {
+  content: "";
+  background: red;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -20px;
+  transform: rotate(45deg);
+}
+.side-menu-switch {
+  float: right;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 26px;
+}
+
+.side-menu-switch input {
+  display: none;
+}
+
+.side-menu-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.side-menu-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 2px;
+  background-color: #acd322;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.side-menu-switch input:checked + .side-menu-slider {
+  background-color: #fff;
+}
+
+.side-menu-switch input:focus + .side-menu-slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+.side-menu-switch input:checked + .side-menu-slider:before {
+  -webkit-transform: translateX(33px);
+  -ms-transform: translateX(33px);
+  transform: translateX(33px);
+}
+
+/*------ ADDED CSS ---------*/
+.side-menu-on {
+  display: none;
+}
+
+.side-menu-on,
+.side-menu-off {
+  color: #000;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  font-size: 10px;
+  font-family: Verdana, sans-serif;
+  color: #acd322 !important;
+}
+.side-menu-off {
+  left: 70%;
+}
+.side-menu-on {
+  left: 30%;
+}
+.side-menu-switch input:checked + .side-menu-slider .side-menu-on {
+  display: block;
+}
+
+.side-menu-switch input:checked + .side-menu-slider .side-menu-off {
+  display: none;
+}
+
+/*--------- END --------*/
+
+/* Rounded sliders */
+.side-menu-slider.side-menu-round {
+  border-radius: 34px;
+  border: 1px solid #cccccc;
+}
+
+.side-menu-slider.side-menu-round:before {
+  border-radius: 50%;
+}
+.settings-content > .scroll {
+  height: 100%;
+}
+.settings-language-container {
+  padding: 20px 15px;
+}
+.settings-language-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.settings-range-container {
+  border: 0px !important;
+  background-color: transparent;
+}
+.settings-font-size-title {
+  font-weight: bold;
+}

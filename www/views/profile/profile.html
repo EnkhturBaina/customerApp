@@ -1,0 +1,202 @@
+<ion-view hide-nav-bar="true">
+    <link href="views/profile/profile.css" rel="stylesheet" />
+    <div id="overlay">
+        <!-- <span class="overlay-off-text" ui-sref="autoleasing-2">&#10006;</span> -->
+        <span class="overlay-off-text" ng-click="overlayOff()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <div class="overlay-content" id="text">
+            <span class="overlay-title-text"> АНХААРУУЛГА!!! </span>
+            <span class="overlay-body-text"> Таны хувийн мэдээлэл дутуу байгаа тул хүсэлт илгээх боломжгүй байна.</span>
+        </div>
+        <div class="overlay-btn-container">
+            <button class="button overlay-btn-1" ng-click="overlayOff()">Хувийн мэдээллээ оруулах бол ЭНД дарна уу.</button>
+        </div>
+    </div>
+    <ion-pane class="profile-info-container has-header">
+        <div class="profile-avatar">
+            <ion-header-bar align-title="left" class="navbar" style="background: none">
+                <div class="title ion-color-big-text navbar-back-button" style="background: none">
+                    <button ui-sref="home" class="nav-back-button button buttons button-clear header-item car-back-nav" style="left: 10px" ng-click="hideShowFooter()">
+                        <i class="ion-chevron-left ion-color-header" style="color: #fff !important"></i>
+                        <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px); color: #fff !important"><span>Хувийн мэдээлэл</span></span>
+                    </button>
+                </div>
+                <div class="navbar-right-icon">
+                    <!-- <button class="button button-clear icon ion-search cus-header-icon ion-float-right ion-color-brand-green" ui-sref="search"></button> -->
+                </div>
+            </ion-header-bar>
+
+            <div class="avatar-base">
+                <!-- <img src="img/favicon.png" width="100px" height="100px" /> -->
+                <div class="profile-picture-edit" ng-click="takePhoto(3)" style="border-radius: 10px;border: 1px solid #ccfffc;text-align: center;font-size: 20px;color: #eaf6e2;line-height: 86px;background: #65c8ae;padding: 4px;">
+                    <i class="icon ion-edit"></i>
+                </div>
+                <img ng-if="!$root.customerProfilePicture.profilepicture|isEmpty" src="{{$root.customerProfilePicture.profilepicture|guessImageMime}}" height="75px" width="120px" style="border-radius: 50px;" />
+            </div>
+        </div>
+        <ion-tabs id="profile-tabs-striped" class="tabs-striped tabs-top profile-card-tabs profile-tab profile-tabs-tab">
+            <!-- Tab 1 -->
+            <ion-tab title="Хувь">
+                <ion-nav-view class="gray-background">
+                    <ion-content scroll="true" class="profile-content">
+                        <div class="list profile-list">
+                            <label class="item item-input profile-label" id="lastNameLabel">
+                                <p>Овог</p>
+                                <input type="text" id="customerLastName" placeholder="Овог" name="lastName" ng-model="$root.customerProfileData.lastname" ng-change="replaceCyr($root.customerProfileData.lastname)" />
+                                <span id="lastNameError" class="profile-input-name-error">Та овогоо крилл үсгээр оруулна уу</span>
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p>Нэр</p>
+                                <input type="text" id="customerFirstName" placeholder="Нэр" name="firstName" ng-model="$root.customerProfileData.firstname" ng-change="replaceCyr2($root.customerProfileData.firstname)" />
+                                <span id="firstNameError" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</span>
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p>Регситр</p>
+                                <input type="text" id="userID" placeholder="АА00000000" name="uniqueIdentifier" ng-model="$root.customerProfileData.uniqueidentifier" />
+                                <!-- <span id="userIDError" class="profile-input-userid-error">Та регситэрээ зөв оруулна уу</span> -->
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p>Хаяг</p>
+                                <input type="text" placeholder="Хаяг" name="address" ng-model="$root.customerProfileData.address" />
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p>Утасны дугаар</p>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" />
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p>Гэрлэсэн эсэх</p>
+
+                                <select class="profile-select" ng-model="$root.customerProfileData.ismarried" selected="!$root.customerProfileData.ismarried">
+                                    <option ng-repeat="data in familtStatData | filter:{id:'!!'}" value="{{data.id}}" ng-selected="{{$root.customerProfileData.ismarried==data.id}}">{{data.name}}</option>
+                                </select>
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p>Ажилласан жил</p>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="workYear" ng-model="$root.customerProfileData.stayedtimebyyear" />
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p style="padding: 6px 0px">Иргэний үнэмлэхний зураг</p>
+                                <!-- <i class="icon ion-camera profile-camera-icon"></i> -->
+                            </label>
+                            <div class="item item-input profile-label" style="border: 0; margin-top: 1px">
+                                <div class="profile-card-front col-50">
+                                    <p style="padding: 6px 0px">Урд тал</p>
+                                    <div ng-click="takePhoto(1)" ng-if="$root.customerProfileData.identfrontpic|isEmpty" style="width: 80%; border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                                        +
+                                    </div>
+                                    <img ng-if="!$root.customerProfileData.identfrontpic|isEmpty" src="{{$root.customerProfileData.identfrontpic|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
+
+                                    <!-- <i class="icon ion-camera ion-float-left profile-card-icon"></i> -->
+                                </div>
+                                <div class="profile-card-back col-50" ng-model="identbackpic">
+                                    <p style="padding: 6px 0px">Ард тал</p>
+                                    <div ng-click="takePhoto(2)" ng-if="$root.customerProfileData.identbackpic|isEmpty" style="width: 80%; border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                                        +
+                                    </div>
+                                    <img ng-if="!$root.customerProfileData.identbackpic|isEmpty" src="{{$root.customerProfileData.identbackpic|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
+                                </div>
+                            </div>
+                            <div class="profile-tab1-save-btn">
+                                <button class="button btn single-button" ng-click="saveProfileData()">
+                                    <span ng-if="nextPath|isEmpty">ХАДГАЛАХ</span>
+                                    <span ng-if="!nextPath|isEmpty">Үргэлжлүүлэх</span>
+                                </button>
+                            </div>
+                        </div>
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+            <!-- Tab 2 -->
+            <ion-tab title="Орлого">
+                <ion-nav-view class="gray-background">
+                    <ion-content scroll="true" class="profile-content">
+                        <div class="list profile-list">
+                            <label class="item item-input profile-label">
+                                <p>Орлогын эх үүсвэр</p>
+                                <select class="profile-select" ng-model="$root.customerIncomeProfileData.incometypeid">
+                                    <option ng-repeat="income in incomeType | filter:{id:'!!'}" value="{{income.id}}" ng-selected="{{$root.customerIncomeProfileData.incometypeid==income.id}}">{{income.name}}</option>
+                                </select>
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p>Сарын орлого</p>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlyincome" placeholder="Сарын орлого" name="monthlyincome" format-input />
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p>Өрхийн нийт орлого</p>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.totalincomehousehold" placeholder="Өрхийн нийт орлого" name="totalincome" format-input />
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p>Төлж буй зээл</p>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlypayment" placeholder="Төлж буй зээл" name="payloan" format-input />
+                            </label>
+                            <label class="item profile-label">
+                                <p>Харьцдаг банк</p>
+                            </label>
+                            <div id="dealBankContainer" class="item profile-bank-list">
+                                <div class="col  added-deal-bank" ng-repeat="dealbank in customerDealBanks | filter:{id:'!!'}">
+                                    <div class="deal-bank-remove">-</div>
+                                    <img src="{{$root.imagePath}}{{dealbank.banklogo}}" />
+                                    <p>{{dealbank.departmentname}}</p>
+                                </div>
+                                <select class="profile-select-deal-banks col" ng-model="$root.customerDealBank.dim2" ng-change="addDealBank()">
+                                    <span style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">+</span>
+                                    <option ng-repeat="bank in allBankList | filter:{id:'!!'}" value="{{bank.id}}">{{bank.departmentname}}</option>
+                                </select>
+                            </div>
+                            <div class="profile-tab1-save-btn">
+                                <button class="button btn single-button" ng-click="saveIncomeProfileData()">ХАДГАЛАХ</button>
+                            </div>
+                        </div>
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+            <!-- Tab 3 -->
+            <ion-tab title="Хөрөнгө">
+                <ion-nav-view>
+                    <ion-content scroll="true" class="profile-content">
+                        <div class="list profile-list">
+                            <label class="item item-input profile-label">
+                                <p>Автомашин</p>
+                                <input type="text" placeholder="Автомашин" name="car" />
+                            </label>
+                            <label class="item item-input profile-label">
+                                <p>Орон сууц</p>
+                                <input type="text" placeholder="Орон сууц" name="apartment" />
+                            </label>
+                            <label class="item item-input profile-label" style="padding: 10px 15px;">
+                                <p>Хашаа байшин</p>
+                                <select name="incomeType" class="ion-select-gen profile-select">
+                                    <option value="1">Байгаа</option>
+                                    <option value="2">Байхгүй</option>
+                                </select>
+                            </label>
+                            <label class="item item-input profile-label" style="padding: 10px 15px;">
+                                <p>Цахилгаан бараа</p>
+                                <select name="incomeType" class="ion-select-gen profile-select">
+                                    <option value="1">Байгаа</option>
+                                    <option value="2">Байхгүй</option>
+                                </select>
+                            </label>
+                            <label class="item item-input profile-label" style="padding: 10px 15px;">
+                                <p>Тавилга</p>
+                                <select name="incomeType" class="ion-select-gen profile-select">
+                                    <option value="1">Байгаа</option>
+                                    <option value="2">Байхгүй</option>
+                                </select>
+                            </label>
+                        </div>
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+            <!-- Tab 4 -->
+            <ion-tab title="QR">
+                <ion-nav-view>
+                    <ion-content scroll="true" class="profile-content">
+                        <div>
+                            <img src="img/qr.png" class="profile-qr" />
+                        </div>
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+        </ion-tabs>
+    </ion-pane>
+</ion-view>

@@ -1,0 +1,52 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+  <link href="views/search/search.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Хайлт'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content class="ion-modified-content has-header search-content">
+    <div class="big-container">
+      <div class="magic-container margin-lr-20">
+        <p class="ion-color-header">Та хайх гэж буй үйлдэрээ сонгох эсвэл бичиж оруулна уу</p>
+        <div class="selector-container">
+          <span class="title">Үйлдвэр</span>
+          <select class="search-selection" ng-model="searchVal.factoryid" ng-change="getCarDatas(searchVal.factoryid)">
+            <option ng-repeat="cat in $root.categoryData | filter:{factoryid:'!!'}" value="{{cat.factoryid}}">{{cat.factoryname}}</option>
+          </select>
+        </div>
+        <div class="selector-container">
+          <span class="title">Загвар</span>
+          <select class="search-selection" ng-model="searchVal.modelId" ng-disabled="(searchVal.factoryid|isEmptyCust)">
+            <option ng-repeat="car in carData | filter:{modelid:'!!'}" value="{{car.modelid}}">{{car.modelname}}</option>
+          </select>
+        </div>
+        <div class="selector-container">
+          <span class="title">Үйлдвэрлэсэн он</span>
+          <div class="search-input-container">
+            <input type="number" id="productYear" ng-model="searchVal.productyear" placeholder="Үйлдвэрлэсэн он" name="" class="search-year-input ng-pristine ng-untouched ng-valid ng-valid-pattern" />
+          </div>
+        </div>
+        <div class="selector-container">
+          <span class="title">Орж ирсэн он</span>
+          <div class="search-input-container">
+            <input type="number" id="entryYear" ng-model="searchVal.entryYear" placeholder="Орж ирсэн он" name="" class="search-year-input ng-pristine ng-untouched ng-valid ng-valid-pattern" />
+          </div>
+        </div>
+        <div class="selector-container">
+          <span class="title">Дээд үнэ</span>
+          <div class="search-input-container">
+            <span class="search-input-icon">₮</span>
+            <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="searchValPrice.max" placeholder="Дээд үнэ" name="" class="search-input-type ng-pristine ng-untouched ng-valid ng-valid-pattern" format-input />
+          </div>
+        </div>
+        <div class="selector-container">
+          <span class="title">Доод үнэ</span>
+          <div class="search-input-container">
+            <span class="search-input-icon">₮</span>
+            <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="searchValPrice.min" placeholder="Доод үнэ" name="" class="search-input-type ng-pristine ng-untouched ng-valid ng-valid-pattern" format-input />
+          </div>
+        </div>
+      </div>
+      <ion-footer class="bottom-footer">
+        <button class="button btn single-button" id="Next" ng-click="searchBtn()">Хайх</button>
+      </ion-footer>
+    </div>
+  </ion-content>
+</ion-view>

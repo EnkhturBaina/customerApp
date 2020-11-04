@@ -1,0 +1,99 @@
+.qr-tab .tabs-top > .tabs {
+  height: 40px !important;
+  width: 230px !important;
+  top: 0;
+  left: 20px;
+  background: none;
+}
+.qr-tab .tab-view {
+  /* margin-top: 50px; */
+  padding: 20px 0px;
+}
+.qr-tab .tab-content {
+  background-color: #f8f8fe;
+}
+.qr-image {
+  width: 100%;
+  background: #cdcd;
+  border-radius: 18px;
+}
+.qr-image img {
+  width: 100%;
+}
+.qr-tab-menu-container .tab-btn {
+  border: none;
+  background: none;
+  padding: 5px;
+}
+.qr-tab-menu-container .active {
+  border-bottom: 2px #fff solid;
+}
+.margin-l-5 {
+  margin-left: 5px;
+}
+.qr-cars {
+  margin: 20px 0 20px 0;
+}
+.qr-cars .car-detail {
+  display: flex;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  height: auto;
+  margin-bottom: 10px;
+}
+.qr .desc {
+  width: 100%;
+  display: block;
+  grid-template-columns: repeat(2, 1fr);
+}
+.qr-cars .car-img {
+  display: flex;
+  position: relative;
+  float: left;
+  width: 150px;
+}
+.qr-cars img {
+  max-height: 60px;
+  border-radius: 3px;
+}
+.qr-cars .desc span {
+  font-size: 12px;
+  color: #a2a7b5;
+}
+.qr-cars .car-title {
+  font-size: 70%;
+  font-weight: 500;
+  margin: 0;
+}
+.qr-cars .car-price {
+  margin: 0;
+}
+
+#car-dtl p {
+  color: #4b5180;
+  font-weight: bold;
+}
+.qr-content {
+  height: 100% !important;
+  position: relative !important;
+}
+.qr-content > .scroll {
+  height: 25vh;
+  background: rgb(134, 205, 109);
+  background: url(/www/img/lines/home-small-line.png), -moz-linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
+  background: url(/www/img/lines/home-small-line.png), -webkit-linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
+  background: url(/www/img/lines/home-small-line.png), linear-gradient(90deg, rgba(171, 211, 36, 1) 10%, rgba(64, 191, 248, 1) 97%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#86cd6d",endColorstr="#3fc1f3",GradientType=1);
+  background-repeat: no-repeat;
+  background-position: 80% 0%;
+  background-size: contain;
+}
+.qr-tab-title {
+  color: #fff !important;
+}
+.qr-tab {
+  margin-top: 20px;
+  padding: 0 10px;
+}

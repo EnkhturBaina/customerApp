@@ -1,0 +1,31 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+  <link href="views/sale/sale.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Зарлах'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content class="ion-modified-content margin-top-50 sale-content">
+    <div class="big-container">
+      <div class="magic-container" style="margin: 0 10px">
+        <p class="loan-tab-title ion-color-text">Та өөрт хэрэгцээтэй байгаа барааны зурагыг оруулах боломжтой.</p>
+        <div class="card" ui-sref="sale-auto">
+          <div class="item sale-loan-card-1 card-body item-text-wrap">
+            <div class="loan-card-first-row">
+              <span class="ion-text-bold ion-float-right">Бараа</span>
+            </div>
+            <div class="loan-card-2-first-row">
+              <span class="ion-float-right loan-card-text">Бүх төрлийн автомашин худалдан авах зээлийн хүсэлт илгээх боломжтой</span>
+            </div>
+          </div>
+        </div>
+        <div class="card" ui-sref="sale-goods">
+          <div class="item sale-loan-card-2 card-body item-text-wrap">
+            <div class="loan-card-first-row">
+              <span class="ion-text-bold ion-float-right">Автомашин</span>
+            </div>
+            <div class="loan-card-2-first-row">
+              <span class="ion-float-right loan-card-text">Бүх төрлийн автомашин худалдан авах зээлийн хүсэлт илгээх боломжтой</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,48 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+  <link href="views/car/car.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Автомашин'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content scroll="true" class="ion-modified-content margin-top-50 car-loan-content">
+    <div class="big-container">
+      <div class="magic-container margin-lr-20 margin-top-20">
+        <p class="ion-color-text">Та хайх гэж буй машины брэндийг сонгох эсвэл бичнэ үү</p>
+        <div class="search-input">
+          <span class="icon ion-search"></span>
+          <input type="text" placeholder="Хайх" ng-model="search[searchBy]" />
+        </div>
+        <div ng-show="!selectedSubCat|isEmptyCust" style="margin-bottom: 2%" ng-click="clearSelectedSubCat()">
+          <span style="font-size: 12px; background-color: #cacddc; padding: 1% 3% 1% 3%; border-radius: 15px; font-weight: bold; color: #1f3062">
+            {{selectedSubCat.factoryname}}
+            <i class="icon ion-close-round" style="padding-left: 1%; font-size: 11px"></i>
+          </span>
+        </div>
+        <div class="brand-tags">
+          <ul>
+            <li class="tags" ng-repeat="cat in $root.categoryData | filter:{factoryid:'!!'}" ng-if="$index<=categoryShowLimit" ng-click="selectCategory(cat)">{{cat.factoryname}}</li>
+            <!-- <li class="tags">Lamborghini</li>
+            <li class="tags">Mercedes</li>
+            <li class="tags">Tesla</li>
+            <li class="tags">Bugatti</li>
+            <li class="tags">Lexus</li>
+            <li class="tags">BMW</li>
+            <li class="tags">Hyundai</li> -->
+            <li class="tags ion-color-text" ui-sref="car-brandlist" ng-click="showFullCategory()">Бүгд</li>
+          </ul>
+        </div>
+        <div class="cars">
+          <ul>
+            <li class="car-detail" ng-repeat="car in carDatas|filter:search" ng-click="selectCar(car)">
+              <div class="car-img"><img src="{{$root.imagePath}}{{car.itempic}}" /></div>
+              <div id="car-dtl" class="desc">
+                <p class="car-title">{{car.modelname}}</p>
+                <span>{{car.productyear}}/{{car.entryyear}}</span>
+                <span>Да хүрээ</span>
+                <p class="car-price">{{car.price|formatNumber}}₮</p>
+                <span>{{car.itemcode}}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

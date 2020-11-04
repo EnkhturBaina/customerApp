@@ -1,0 +1,139 @@
+<ion-view id="loanPages" ng-controller="request_detailCtrl" hide-nav-bar="true">
+  <link href="views/request-list/request-detail/request_detail.css" rel="stylesheet" />
+  <div id="confirm-overlay">
+    <button class="button button-icon header-icon ion-float-right confirm-close-btn" ng-click="overlayOffConfirm()">
+      <i class="ion-close-round"></i>
+    </button>
+    <div class="confirm-overlay-container">
+      <span class="confirm-title">Банкинд илгээх</span>
+      <span class="confirm-overlay-body-text"> Таны мэдээлэл банкинд амжилттай илгээгдлээ.</span>
+      <span class="confirm-overlay-body-text"> Та өөрт ойрхон байрлах салбараа сонгон гэрээгээ байгуулна уу.</span>
+      <select name="repeatSelect" id="repeatSelect" ng-model="data.model">
+        <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+      </select>
+      <button class="button btn confirm-btn single-button" ui-sref="request_detail">Салбар сонгох.</button>
+      <!-- <button class="button btnconfirm-btn" ng-click="overlayOffConfirm()">Салбар сонгох.</button> -->
+    </div>
+  </div>
+  <ion-content class="ion-modified-content">
+    <div class="big-container">
+      <div class="magic-container margin-lr-20">
+        <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item car-back-nav">
+          <i class="ion-chevron-left"></i>
+          <span class="back-text" style="transform: translate3d(0px, 0px, 0px)"><span class="default-title hide">Back</span><span class="previous-title">Буц</span></span>
+        </button>
+        <div class="item-info">
+          <ion-slide-box>
+            <ion-slide>
+              <div class="box1">
+                <img src="img/car.jpg" class="car-img" />
+              </div>
+            </ion-slide>
+            <ion-slide>
+              <div class="box2">
+                <img src="img/car.jpg" class="car-img" />
+              </div>
+            </ion-slide>
+          </ion-slide-box>
+          <p class="middle-title">BMW X6</p>
+          <ul>
+            <li>Үйлдвэрлэсэн он <span> - </span></li>
+            <li>Орж ирсэн он <span> - </span></li>
+            <li>Барааны код <span> - </span></li>
+            <li>Борлуулагч <span> - </span></li>
+            <li>Үнэ <span>245,000,000</span></li>
+            <li>Бүтээгдэхүүний QR <span> - </span></li>
+          </ul>
+        </div>
+        <div class="custom-buttons">
+          <button class="ibutton"><img class="icon" src="img/favicon.png" /> Сагслах</button>
+          <button class="ibutton"><img class="icon" src="img/favicon.png" /> Бэлнээр авах</button>
+          <button class="ibutton"><img class="icon" src="img/favicon.png" /> Зээлэх</button>
+        </div>
+      </div>
+      <div class="bank-container">
+        <p>Банк болон ББСБ -ын зээлээр захиалан авах боломжтой</p>
+        <img src="img/golomt.png" />
+        <img src="img/khanbank-mn.png" />
+        <img src="img/golomt.png" />
+        <img src="img/golomt.png" />
+      </div>
+      <ion-footer class="bottom-footer"></ion-footer>
+    </div>
+  </ion-content>
+</ion-view>
+<style>
+  .custom-buttons {
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .custom-buttons .ibutton {
+    background: none;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 10px;
+    box-shadow: 0px 0px 5px -2px grey;
+    color: gray;
+    font-size: 10px;
+    width: 90px;
+  }
+
+  .custom-buttons .ibutton .icon {
+    max-width: 30px;
+    display: block;
+    margin: auto;
+    margin-bottom: 5px;
+  }
+
+  .item-info {
+    margin-top: 25px;
+  }
+
+  .item-info li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: grey;
+    border-bottom: 1px solid #cccbcb78;
+    margin: 8px 0 8px 0 !important;
+  }
+
+  .item-info li span {
+    background-color: transparent;
+    color: #000658cf;
+    z-index: 1;
+    display: inline-block;
+    padding: 3px 8px;
+    min-width: 10px;
+    border-radius: 10px;
+    vertical-align: baseline;
+    text-align: center;
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .car-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .bank-container {
+    margin-top: 20px;
+    background-color: #fff;
+    width: 100%;
+    padding: 5px 40px 0px 40px;
+    box-shadow: 0 2px 5px -2px gray;
+  }
+
+  .bank-container img {
+    margin: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10%;
+  }
+</style>

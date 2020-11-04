@@ -1,0 +1,75 @@
+.intro-slider-container {
+  height: 100%;
+  padding-bottom: 100px;
+}
+.slider {
+  height: 100%;
+}
+.box {
+  height: 100%;
+  padding: 40% 10% 20% 10%;
+}
+.sign-login-button {
+  border: 1px solid;
+  width: 100%;
+  font-size: 14px;
+  border-radius: 10px;
+  min-height: 35px;
+  line-height: 35px;
+  color: #acd322;
+  border-color: #acd322;
+}
+.sign-reg-button {
+  min-height: 35px;
+  font-size: 14px;
+  line-height: 35px;
+  border-color: antiquewhite;
+  width: 100%;
+  color: #fff;
+  margin-top: 10px;
+  background: rgb(162, 209, 52);
+  background: -moz-linear-gradient(45deg, rgba(162, 209, 52, 1) 30%, rgba(59, 193, 249, 1) 77%);
+  background: -webkit-linear-gradient(45deg, rgba(162, 209, 52, 1) 30%, rgba(59, 193, 249, 1) 77%);
+  background: linear-gradient(45deg, rgba(162, 209, 52, 1) 30%, rgba(59, 193, 249, 1) 77%);
+  border-radius: 10px;
+}
+.slider-pager {
+  padding-bottom: 60px;
+}
+.slider-img {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+.sign-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: #5c5f6a;
+  padding: 20px 20px;
+}
+.sign-login-button.activated {
+  width: 100%;
+  font-size: 14px;
+  border-radius: 10px;
+  min-height: 35px;
+  line-height: 35px;
+  color: #acd322;
+  border-color: #acd322;
+  background-color: #fff;
+}
+.sign-login-button:hover {
+  color: #acd322;
+}
+.sign-reg-button.activated {
+  color: #fff;
+  border-color: antiquewhite;
+}
+.sign-reg-button:hover {
+  color: #fff;
+}
+.sign-class {
+  /* bottom: 10%;
+  position: absolute;
+  width: 80%; */
+  padding: 0px 5px;
+}

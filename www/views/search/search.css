@@ -1,0 +1,52 @@
+.search-input-icon {
+  padding: 7px 0px 7px 0px;
+  font-weight: bold;
+  min-width: 30px;
+  position: absolute;
+  text-align: center;
+  font-size: 16px;
+  color: #a2a7b5;
+  border-right: 1px solid #dcdcdc;
+}
+.search-input-type {
+  background: none;
+  text-align: left !important;
+  border: 1px solid #d5d5d5 !important;
+  border-radius: 5px;
+  margin: 0 0;
+  width: 100%;
+  padding: 0 0px 0 35px !important;
+  font-weight: bold;
+  color: #4b5180 !important;
+}
+.search-selection {
+  width: 100%;
+  background: none;
+  border: 1px solid;
+  border-color: #d5d5d5;
+  border-radius: 5px;
+  padding: 7px 15px 7px 10px;
+  color: #a2a7b5;
+}
+.selector-container {
+  margin: 14px 0;
+}
+.selector-container .title {
+  margin: 0 10px;
+  color: #a2a7b5;
+}
+.search-content {
+  height: 100% !important;
+  position: relative !important;
+}
+.search-year-input {
+  background: none;
+  text-align: left !important;
+  border: 1px solid #d5d5d5 !important;
+  border-radius: 5px;
+  margin: 0 0;
+  width: 100%;
+  padding: 0 0px 0 15px !important;
+  font-weight: bold;
+  color: #4b5180 !important;
+}

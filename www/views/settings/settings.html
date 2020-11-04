@@ -1,0 +1,27 @@
+<ion-view id="settingsPages" hide-nav-bar="true">
+  <link href="views/settings/settings.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Тохиргоо'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content class="ion-modified-content margin-top-50 settings-content" ng-controller="settingsCtrl">
+    <div class="settings-content-in">
+      <div class="settings-language-container">
+        <span class="settings-language-title">Хэл</span>
+        <label class="side-menu-switch" ng-click="toggleLanguage()">
+          <input type="checkbox" id="side-menu-togBtn" />
+          <div class="side-menu-slider side-menu-round">
+            <span id="side-menu-toggle-on" class="side-menu-on">MN</span>
+            <span id="side-menu-toggle-off" class="side-menu-off active">EN</span>
+          </div>
+        </label>
+      </div>
+      <div class="settings-font-size-container">
+        <div class="list">
+          <div class="item range settings-range-container">
+            <span class="settings-font-size-title">Хэмжээ</span>
+            <input type="range" name="minutes" min="12" max="20" step="2" ng-model="data.pickupAfter" value="{{data.pickupAfter}}" />
+          </div>
+        </div>
+      </div>
+      <div class="settings-dark-mode-container"></div>
+    </div>
+  </ion-content>
+</ion-view>
