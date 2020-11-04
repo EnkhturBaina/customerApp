@@ -50,7 +50,7 @@
     $rootScope.hideFooter = false;
   };
 
-  $scope.isChecked = { checked: true };
+  $scope.isChecked = { checked: false };
   $scope.isNotShow = function () {
     if ($scope.isChecked.checked == true) {
       localStorage.setItem("bannerNotShow", JSON.stringify($scope.isChecked.checked));
