@@ -25,6 +25,7 @@
   padding: 10px;
   background-color: #f8f8fe;
   margin: 5px;
+  font-weight: bold;
   text-align: center;
   border-radius: 3px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
@@ -376,4 +377,25 @@
 }
 .bustom-icons {
   width: 30px;
+}
+.car-detail-container > .leasing-badge {
+  padding-bottom: 20px !important;
+}
+.car-detail-container > .leasing-badge > .slider-pager {
+  bottom: 5px;
+}
+.brand-list-tags-span {
+  font-size: 12px;
+  background-color: #cacddc;
+  padding: 1% 3% 1% 3%;
+  border-radius: 15px;
+  font-weight: bold;
+  color: #1f3062;
+  margin: 10px 5px;
+  float: left;
+  display: inline-flex;
+}
+.brand-tags {
+  display: inline-grid;
+  width: 100%;
 }

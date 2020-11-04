@@ -22,6 +22,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $w
       {
         quality: 50,
         destinationType: Camera.DestinationType.DATA_URL,
+        correctOrientation: true,
       }
     );
   };

@@ -3,18 +3,30 @@ angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $
   $scope.searchBy = "$";
   $scope.searchBrand = {};
   $scope.searchByBrand = "$";
+  $scope.selectedSubCat = [];
+  var brandAr = [];
   // ====== cars ========
-  $scope.getCarDatas = function (id) {
+  $scope.getCarDatas = function (brandAr) {
     $rootScope.carDatas = [];
-
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597646717653727", factoryid: id }).then(function (response) {
-      angular.forEach(response, function (item) {
-        if (!isEmpty(item)) {
-          $rootScope.carDatas.push(item);
-        }
+    if (!isEmpty(brandAr)) {
+      for (i = 0; i < brandAr.length; i++) {
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597646717653727", factoryid: brandAr[i].factoryid }).then(function (response) {
+          angular.forEach(response, function (item) {
+            if (!isEmpty(item)) {
+              $rootScope.carDatas.push(item);
+            }
+          });
+        });
+      }
+    } else {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597646717653727" }).then(function (response) {
+        angular.forEach(response, function (item) {
+          if (!isEmpty(item)) {
+            $rootScope.carDatas.push(item);
+          }
+        });
       });
-      // $rootScope.carDatas = response;
-    });
+    }
   };
   $scope.selectCar = function (item) {
     $rootScope.selectedCarData = item;
@@ -33,16 +45,27 @@ angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $
     // $scope.categoryShowLimit = 100;
   };
   $scope.selectCategory = function (item) {
-    $scope.selectedSubCat = item;
-    $scope.getCarDatas(item.factoryid);
+    var index = brandAr.findIndex((x) => x.factoryname == item.factoryname);
+    if (index === -1) {
+      brandAr.push(item);
+    }
+
+    $scope.selectedSubCat = brandAr;
+    $scope.getCarDatas(brandAr);
   };
+
   $scope.selectCategoryBig = function (item) {
     $rootScope.selectedCategoryId = item.factoryid;
     $state.go("carlist");
   };
-  $scope.clearSelectedSubCat = function () {
-    $scope.selectedSubCat = "";
-    $scope.getCarDatas();
+
+  $scope.clearSelectedSubCat = function (id) {
+    for (var i = 0; i < $scope.selectedSubCat.length; i++) {
+      if ($scope.selectedSubCat[i].factoryid === id) {
+        $scope.selectedSubCat.splice(i, 1);
+      }
+    }
+    $scope.getCarDatas($scope.selectedSubCat);
   };
   // ====== First Runs ========
   $scope.getCategory();

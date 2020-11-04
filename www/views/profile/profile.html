@@ -192,7 +192,10 @@
                 <ion-nav-view>
                     <ion-content scroll="true" class="profile-content">
                         <div>
-                            <img src="img/qr.png" class="profile-qr" />
+                            <!-- <img src="img/qr.png" class="profile-qr" /> -->
+                            <div ng-click="generateQR()" ng-if="$root.customerProfileData.customerqr|isEmpty" style="width: 30%;border-radius: 10px;border: 1px dashed #ccc;height: 88px;text-align: center;font-size: 20px;color: #ccc;margin: 60px auto;line-height: 35px;display: grid;"><span>QR үүсгэх</span><span style="font-size: 49px;">+</span></div>
+                            <img ng-if="!$root.customerProfileData.customerqr|isEmpty" src="{{$root.imagePath}}{{$root.customerProfileData.customerqr}}" height="250px" width="250px" style="margin: 0 auto;display: flex;" />
+
                         </div>
                     </ion-content>
                 </ion-nav-view>

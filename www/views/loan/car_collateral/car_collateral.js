@@ -71,23 +71,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       }
     }
   };
-  $scope.takePhoto = function (path) {
-    navigator.camera.getPicture(
-      function (imageData) {
-        if (isEmpty($rootScope.newCarReq)) {
-          $rootScope.newCarReq = {};
-        }
-        $rootScope.newCarReq[path] = "jpeg♠" + imageData;
-      },
-      function onFail(message) {
-        alert("Failed because: " + message);
-      },
-      {
-        quality: 50,
-        destinationType: Camera.DestinationType.DATA_URL,
-      }
-    );
-  };
 
   $("#productYear").mask("0000");
   $("#entryYear").mask("0000");
@@ -115,4 +98,47 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
       },
     });
+  $scope.sourceSelectOn = function (path) {
+    document.getElementById("overlay").style.display = "block";
+    $scope.takePhoto = function () {
+      navigator.camera.getPicture(
+        function (imageData) {
+          if (isEmpty($rootScope.newCarReq)) {
+            $rootScope.newCarReq = {};
+          }
+          $rootScope.newCarReq[path] = "jpeg♠" + imageData;
+          $scope.sourceSelectOff();
+        },
+        function onFail(message) {
+          alert("Failed because: " + message);
+        },
+        {
+          quality: 50,
+          destinationType: Camera.DestinationType.DATA_URL,
+          correctOrientation: true,
+        }
+      );
+    };
+    $scope.getPhoto = function () {
+      navigator.camera.getPicture(
+        function (imageData) {
+          if (isEmpty($rootScope.newCarReq)) {
+            $rootScope.newCarReq = {};
+          }
+          $rootScope.newCarReq[path] = "jpeg♠" + imageData;
+          $scope.sourceSelectOff();
+        },
+        function onFail(message) {
+          alert("Failed because: " + message);
+        },
+        {
+          destinationType: Camera.DestinationType.FILE_URI,
+          sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+        }
+      );
+    };
+  };
+  $scope.sourceSelectOff = function () {
+    document.getElementById("overlay").style.display = "none";
+  };
 });

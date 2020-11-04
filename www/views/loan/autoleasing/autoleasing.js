@@ -7,7 +7,7 @@
           $rootScope.selectedCarData = response[0];
 
           $scope.getLoanAmount = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
-          $state.go("autoleasing-2");
+          $state.go("car-info");
         } else {
           $rootScope.alert("Код буруу байна");
         }

@@ -153,6 +153,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
           serverDeferred.requestFull("dcApp_profile_pricture_dv_002", $scope.customerProfilePicture).then(function (response) {
             console.log("save profilepicture response", response);
+            console.log("imageData", imageData);
           });
         }
         $scope.$apply();
@@ -218,5 +219,27 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       });
     });
     $scope.customerDealBank.dim2 = null;
+  };
+
+  $scope.generateQR = function () {
+    $rootScope.customeridforQR = {};
+    $scope.showCreateQr = true;
+    $rootScope.customeridforQR.text = $scope.loginUserInfo.customerid;
+
+    if (!isEmpty($rootScope.loginUserInfo)) {
+      console.log($scope.showCreateQr);
+      serverDeferred.requestFull("dcApp_qr_generator", $rootScope.customeridforQR).then(function (response) {
+        console.log("generateQR response", response);
+
+        $rootScope.customerQrData = {};
+        $rootScope.customerQrData.id = $scope.loginUserInfo.customerid;
+        $rootScope.customerQrData.customerqr = "jpg♠" + response[1].value;
+
+        serverDeferred.requestFull("dcApp_customer_qr_dv_002", $rootScope.customerQrData).then(function (response) {
+          console.log("customerQrData response", response);
+          $scope.getProfileData();
+        });
+      });
+    }
   };
 });

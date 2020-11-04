@@ -1,6 +1,15 @@
 <ion-view id="loanPages" hide-nav-bar="true">
     <!-- <link href="views/loan/business_loan/business_loan.css" rel="stylesheet" /> -->
     <link href="views/loan/car_collateral/car_collateral.css" rel="stylesheet" />
+    <div id="overlay">
+        <div class="overlay-content" id="text">
+            <div class="get-photo-choose">
+                <div class="get-camera" ng-click="takePhoto()"><i class="icon ion-camera photo-choose-icon"></i><span class="photo-choose-span">Камер нээх</span></div>
+                <div class="get-gallery" ng-click="getPhoto()"><i class="icon ion-images photo-choose-icon"></i><span class="photo-choose-span">Зурагнаас сонгох</span></div>
+            </div>
+            <button class="single-button" ng-click="sourceSelectOff()">Хаах</button>
+        </div>
+    </div>
     <div id="nationalNumberModal" style="display: none">
         <span class="national-number-overlay-off-text" ng-click="closeModal()">&#10006;</span>
         <div class="national-number-overlay-container">
@@ -56,19 +65,19 @@
                     </label>
                     <div class="item car-collateral-img-list">
                         <div class="row">
-                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic')">
+                            <div class="col col-33 car-img" ng-click="sourceSelectOn('itemPic')">
                                 <div ng-if="!$root.newCarReq.itemPic" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                                     +
                                 </div>
                                 <img ng-if="$root.newCarReq.itemPic" src="{{$root.newCarReq.itemPic|guessImageMime}}" width="100px" height="75px" />
                             </div>
-                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic2')">
+                            <div class="col col-33 car-img" ng-click="sourceSelectOn('itemPic2')">
                                 <div ng-if="!$root.newCarReq.itemPic2" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                                     +
                                 </div>
                                 <img ng-if="$root.newCarReq.itemPic2" src="{{$root.newCarReq.itemPic2|guessImageMime}}" width="100px" height="75px" />
                             </div>
-                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic3')">
+                            <div class="col col-33 car-img" ng-click="sourceSelectOn('itemPic3')">
                                 <div ng-if="!$root.newCarReq.itemPic3" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                                     +
                                 </div>
@@ -76,19 +85,19 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic4')">
+                            <div class="col col-33 car-img" ng-click="sourceSelectOn('itemPic4')">
                                 <div ng-if="!$root.newCarReq.itemPic4" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                                     +
                                 </div>
                                 <img ng-if="$root.newCarReq.itemPic4" src="{{$root.newCarReq.itemPic4|guessImageMime}}" width="100px" height="75px" />
                             </div>
-                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic5')">
+                            <div class="col col-33 car-img" ng-click="sourceSelectOn('itemPic5')">
                                 <div ng-if="!$root.newCarReq.itemPic5" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                                     +
                                 </div>
                                 <img ng-if="$root.newCarReq.itemPic5" src="{{$root.newCarReq.itemPic5|guessImageMime}}" width="100px" height="75px" />
                             </div>
-                            <div class="col col-33 car-img" ng-click="takePhoto('itemPic6')">
+                            <div class="col col-33 car-img" ng-click="sourceSelectOn('itemPic6')">
                                 <div ng-if="!$root.newCarReq.itemPic6" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                                     +
                                 </div>
