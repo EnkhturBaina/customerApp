@@ -412,29 +412,3 @@
   width: 100%;
   text-align: center;
 }
-.get-camera {
-  line-height: 20px;
-  display: grid;
-  width: 50%;
-}
-.get-gallery {
-  display: grid;
-  margin: 0 auto;
-  width: 50%;
-}
-.get-photo-choose {
-  display: flex;
-  margin: 0 auto;
-}
-.photo-choose-icon {
-  background: #acd322;
-  padding: 5px 10px;
-  font-size: 40px;
-  border-radius: 19px;
-  color: #fff;
-  width: 50px;
-  margin: 0 auto;
-}
-.photo-choose-span {
-  color: #a2a7b5;
-}

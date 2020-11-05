@@ -1,5 +1,15 @@
 <ion-view hide-nav-bar="true">
     <link href="views/profile/profile.css" rel="stylesheet" />
+
+    <div id="overlayProfilePicute">
+        <div class="overlay-profile-content">
+            <div class="get-photo-choose">
+                <div class="get-camera" ng-click="takePhoto()"><i class="icon ion-camera photo-choose-icon"></i><span class="photo-choose-span">Камер нээх</span></div>
+                <div class="get-gallery" ng-click="takePhoto('1')"><i class="icon ion-images photo-choose-icon"></i><span class="photo-choose-span">Зурагнаас сонгох</span></div>
+            </div>
+            <button class="single-button" ng-click="ppSourceSelectOff()">Хаах</button>
+        </div>
+    </div>
     <div id="overlay">
         <!-- <span class="overlay-off-text" ui-sref="autoleasing-2">&#10006;</span> -->
         <span class="overlay-off-text" ng-click="overlayOff()"><img style="width: 20px" src="img/x_mark.png" /></span>
@@ -27,7 +37,7 @@
 
             <div class="avatar-base">
                 <!-- <img src="img/favicon.png" width="100px" height="100px" /> -->
-                <div class="profile-picture-edit" ng-click="takePhoto(3)" style="border-radius: 10px;border: 1px solid #ccfffc;text-align: center;font-size: 20px;color: #eaf6e2;line-height: 86px;background: #65c8ae;padding: 4px;">
+                <div class="profile-picture-edit" ng-click="ppSourceSelectOn(3)" style="border-radius: 10px;border: 1px solid #ccfffc;text-align: center;font-size: 20px;color: #eaf6e2;line-height: 86px;background: #65c8ae;padding: 4px;">
                     <i class="icon ion-edit"></i>
                 </div>
                 <img ng-if="!$root.customerProfilePicture.profilepicture|isEmpty" src="{{$root.customerProfilePicture.profilepicture|guessImageMime}}" height="75px" width="120px" style="border-radius: 50px;" />
@@ -80,19 +90,20 @@
                             <div class="item item-input profile-label" style="border: 0; margin-top: 1px">
                                 <div class="profile-card-front col-50">
                                     <p style="padding: 6px 0px">Урд тал</p>
-                                    <div ng-click="takePhoto(1)" ng-if="$root.customerProfileData.identfrontpic|isEmpty" style="width: 80%; border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
-                                        +
+                                    <div ng-if="$root.customerProfileData.identfrontpic|isEmpty" style="width: 120px; border-radius: 10px; border: 1px dashed #ccc; height: 75px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                                     </div>
                                     <img ng-if="!$root.customerProfileData.identfrontpic|isEmpty" src="{{$root.customerProfileData.identfrontpic|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
+                                    <i class="icon ion-edit ident-icon" ng-click="ppSourceSelectOn(1)"></i>
 
                                     <!-- <i class="icon ion-camera ion-float-left profile-card-icon"></i> -->
                                 </div>
                                 <div class="profile-card-back col-50" ng-model="identbackpic">
                                     <p style="padding: 6px 0px">Ард тал</p>
-                                    <div ng-click="takePhoto(2)" ng-if="$root.customerProfileData.identbackpic|isEmpty" style="width: 80%; border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
-                                        +
+                                    <div ng-if="$root.customerProfileData.identbackpic|isEmpty" style="width: 120px; border-radius: 10px; border: 1px dashed #ccc; height: 75px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                                     </div>
                                     <img ng-if="!$root.customerProfileData.identbackpic|isEmpty" src="{{$root.customerProfileData.identbackpic|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
+                                    <i class="icon ion-edit ident-icon" ng-click="ppSourceSelectOn(2)"></i>
+
                                 </div>
                             </div>
                             <div class="profile-tab1-save-btn">

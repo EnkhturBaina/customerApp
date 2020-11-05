@@ -137,14 +137,21 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       });
     }
   };
+
   $scope.takePhoto = function (type) {
+    console.log("type", type);
+    $scope.ppSourceSelectOff();
+    var srcType = Camera.PictureSourceType.CAMERA;
+    if (type == "1") {
+      srcType = Camera.PictureSourceType.PHOTOLIBRARY;
+    }
     navigator.camera.getPicture(
       function (imageData) {
-        if (type == 1) {
+        if ($scope.selectedImagePath == 1) {
           $scope.customerProfileData.identfrontpic = "jpg♠" + imageData;
-        } else if (type == 2) {
+        } else if ($scope.selectedImagePath == 2) {
           $scope.customerProfileData.identbackpic = "jpg♠" + imageData;
-        } else if (type == 3) {
+        } else if ($scope.selectedImagePath == 3) {
           $scope.customerProfilePicture.profilepicture = "jpg♠" + imageData;
 
           $scope.customerProfilePicture.id = $scope.loginUserInfo.customerid;
@@ -158,13 +165,13 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         }
         $scope.$apply();
       },
-      function onFail(message) {
-        alert("Failed because: " + message);
-      },
+      function onFail(message) {},
       {
         quality: 50,
         destinationType: Camera.DestinationType.DATA_URL,
         correctOrientation: true,
+        sourceType: srcType,
+        encodingType: Camera.EncodingType.JPEG,
       }
     );
   };
@@ -241,5 +248,13 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         });
       });
     }
+  };
+  $scope.ppSourceSelectOn = function (path) {
+    $scope.selectedImagePath = path;
+    console.log("$scope.selectedImagePath", $scope.selectedImagePath);
+    document.getElementById("overlayProfilePicute").style.display = "block";
+  };
+  $scope.ppSourceSelectOff = function () {
+    document.getElementById("overlayProfilePicute").style.display = "none";
   };
 });

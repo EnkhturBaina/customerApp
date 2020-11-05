@@ -12,26 +12,25 @@
                     <input type="tel" ng-model="$root.newCarReq.requestAmount" placeholder="Зээлийн хэмжээ" name="requestAmount" class="car-step2-input" format-input />
                 </div>
                 <label class="item item-input step2-loam-month">
-          <p>Хугацаа сараар</p>
-          <select class="car-col-step2-select" ng-model="$root.newCarReq.loanMonth">
-            <option ng-repeat="month in $root.monthData" value="{{month.data}}">{{month.name}}</option>
-          </select>
-        </label>
+                    <p>Хугацаа сараар</p>
+                    <select class="car-col-step2-select" ng-model="$root.newCarReq.loanMonth">
+                        <option ng-repeat="month in $root.monthData" value="{{month.data}}">{{month.name}}</option>
+                    </select>
+                </label>
                 <label class="item item-input profile-label">
-          <p>Зээлийн хүү (сараар)</p>
-          <input class="loanFee-car-col" type="tel" placeholder="-" name="loanFee" ng-model="$root.newCarReq.loanFee"
-            format-input />
-        </label>
+                    <p>Зээлийн хүү (сараар)</p>
+                    <input class="loanFee-car-col" type="tel" placeholder="-" name="loanFee" ng-model="$root.newCarReq.loanFee" format-input />
+                </label>
                 <label class="item item-input step2-description-field">
-          <p>Тайлбар</p>
-          <textarea type="text" placeholder="..." name="description" ng-model="$root.newCarReq.description"></textarea>
-        </label>
+                    <p>Тайлбар</p>
+                    <textarea type="text" placeholder="..." name="description" ng-model="$root.newCarReq.description"></textarea>
+                </label>
             </div>
             <span class="step2-bank-span"> Боломжит банк санхүү</span>
             <div class="step2-bank-container">
-                <div class="col" ng-repeat="bank in defualtbank" ng-if="bank.banklogo|isEmpty">
-                    <img src="{{bank.banklogo|guessImageMime}}" width="25px" height="25px" />
-                    <p>{{bank.departmentname}}</p>
+                <div class="col" ng-repeat="bank in defualtbank | filter:{id:'!!'}">
+                    <img src="{{$root.imagePath}}{{bank.banklogo}}" width="25px" height="25px" />
+                    <p style="text-align: center;">{{bank.departmentname}}</p>
                 </div>
             </div>
             <button class="button btn single-button" id="Next" ui-sref="autoleasing-3">Үргэлжлүүлэх</button>

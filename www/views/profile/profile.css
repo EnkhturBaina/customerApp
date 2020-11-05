@@ -83,9 +83,10 @@ input[type="number"] {
   -webkit-align-items: center;
   -moz-align-items: center;
   align-items: center;
+  position: relative;
+  display: grid;
 }
 .profile-card-front i {
-  right: 50%;
   position: absolute;
   zoom: 2;
 }
@@ -95,9 +96,10 @@ input[type="number"] {
   -webkit-align-items: center;
   -moz-align-items: center;
   align-items: center;
+  position: relative;
+  display: grid;
 }
 .profile-card-back i {
-  right: 10px;
   position: absolute;
   zoom: 2;
 }
@@ -283,4 +285,43 @@ input[type="number"] {
 }
 .added-deal-bank {
   position: relative;
+}
+.overlay-profile-content {
+  color: #000;
+  font-size: 12px;
+  position: absolute;
+  top: 10%;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+#overlayProfilePicute {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 30vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 2;
+  cursor: pointer;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+  margin: 0 auto;
+  border: 1px solid #acd322;
+}
+.ident-icon {
+  border-radius: 5px;
+  border: 1px solid #ccfffc;
+  text-align: center;
+  font-size: 10px;
+  color: #eaf6e2;
+  line-height: 10px;
+  background: #65c8ae;
+  padding: 3px;
+  width: 18px !important;
+  height: 18px !important;
+  bottom: -3px;
+  margin-left: 50px;
 }

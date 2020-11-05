@@ -17,7 +17,7 @@
                         <p class="middle-title ion-color-big-text">Анхан шатны шалгуур хангасан банкууд</p>
                         <ul class="switch-list">
                             <!-- <li ng-repeat="bank in bankList.lists"> -->
-                            <li ng-repeat="bank in bankList.correct">
+                            <li ng-repeat="bank in bankList.correct | filter:{id:'!!'}">
                                 <ion-checkbox ng-model="bank.checked" class="step3-bankList-checkbox-container">
                                     <div class="bank-list-container">
                                         <img ng-src="{{bank.BANK_LOGO|guessImageMime}}" />
