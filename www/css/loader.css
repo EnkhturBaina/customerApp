@@ -1,0 +1,106 @@
+﻿
+@keyframes ldio-agte97219x {
+    0%
+
+{
+    opacity: 1
+}
+
+100% {
+    opacity: 0
+}
+
+}
+
+.ldio-agte97219x div {
+    left: 48px;
+    top: 27.5px;
+    position: absolute;
+    animation: ldio-agte97219x linear 1.1235955056179776s infinite;
+    background: #527895;
+    width: 4px;
+    height: 13px;
+    border-radius: 2px / 2.99px;
+    transform-origin: 2px 22.5px;
+}
+
+    .ldio-agte97219x div:nth-child(1) {
+        transform: rotate(0deg);
+        animation-delay: -1.0112359550561798s;
+        background: #527895;
+    }
+
+    .ldio-agte97219x div:nth-child(2) {
+        transform: rotate(36deg);
+        animation-delay: -0.898876404494382s;
+        background: #527895;
+    }
+
+    .ldio-agte97219x div:nth-child(3) {
+        transform: rotate(72deg);
+        animation-delay: -0.7865168539325842s;
+        background: #527895;
+    }
+
+    .ldio-agte97219x div:nth-child(4) {
+        transform: rotate(108deg);
+        animation-delay: -0.6741573033707865s;
+        background: #527895;
+    }
+
+    .ldio-agte97219x div:nth-child(5) {
+        transform: rotate(144deg);
+        animation-delay: -0.5617977528089887s;
+        background: #527895;
+    }
+
+    .ldio-agte97219x div:nth-child(6) {
+        transform: rotate(180deg);
+        animation-delay: -0.449438202247191s;
+        background: #527895;
+    }
+
+    .ldio-agte97219x div:nth-child(7) {
+        transform: rotate(216deg);
+        animation-delay: -0.33707865168539325s;
+        background: #527895;
+    }
+
+    .ldio-agte97219x div:nth-child(8) {
+        transform: rotate(252deg);
+        animation-delay: -0.2247191011235955s;
+        background: #527895;
+    }
+
+    .ldio-agte97219x div:nth-child(9) {
+        transform: rotate(288deg);
+        animation-delay: -0.11235955056179775s;
+        background: #527895;
+    }
+
+    .ldio-agte97219x div:nth-child(10) {
+        transform: rotate(324deg);
+        animation-delay: 0s;
+        background: #527895;
+    }
+
+.loadingio-spinner-spinner-v5m2iut1fj {
+    width: 94px;
+    height: 94px;
+    display: inline-block;
+    overflow: hidden;
+    background: none;
+}
+
+.ldio-agte97219x {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(0.94);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+}
+
+    .ldio-agte97219x div {
+        box-sizing: content-box;
+    }

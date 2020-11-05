@@ -65,7 +65,7 @@
                     <ion-slide-box class="leasing-badge">
                         <ion-slide ng-repeat="imgs in carData.images">
                             <div class="box1">
-                                <img class="car-img" style="width: 100%; height: 200px" src="{{$root.imagePath}}{{imgs}}" />
+                                <img class="car-img" style="width: 100%; height: 200px" ng-src="{{imgs|guessImageMime}}" />
                             </div>
                         </ion-slide>
                     </ion-slide-box>
@@ -99,7 +99,7 @@
                     <ion-slide-box class="leasing-badge">
                         <ion-slide ng-repeat="imgs in carData.images">
                             <div class="box1">
-                                <img class="car-img" style="width: 100%; height: 200px" src="{{$root.imagePath}}{{imgs}}" />
+                                <img class="car-img" style="width: 100%; height: 200px" ng-src="{{imgs|guessImageMime}}" />
                             </div>
                         </ion-slide>
                     </ion-slide-box>
@@ -124,7 +124,7 @@
             <div class="bank-container">
                 <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
                 <!-- <img ng-repeat="bank in $root.bankList.correct" ng-src="{{$root.imagePath}}{{bank.BANK_LOGO}}" /> -->
-                <img ng-repeat="bank in allBankList | filter:{id:'!!'}" src="{{$root.imagePath}}{{bank.banklogo}}" />
+                <img ng-repeat="bank in allBankList | filter:{id:'!!'}" src="{{bank.banklogo|guessImageMime}}" />
 
             </div>
             <div class="suggest-slider-container">
@@ -132,17 +132,17 @@
                 <ion-slide-box on-slide-changed="slideChanged(index)" class="suggest-slider-content" does-continue="true">
                     <ion-slide class="suggest-slider" style="background: none" ng-repeat="car in $root.carDatas" ng-if="$index % 3 == 0">
                         <div class="suggest-card">
-                            <img src="{{$root.imagePath}}{{$root.carDatas[$index].itempic}}" class="car-img-suggest" />
+                            <img src="{{$root.carDatas[$index].itempic|guessImageMime}}" class="car-img-suggest" />
                             <span class="car-name">{{$root.carDatas[$index].modelname}}</span>
                             <span class="date">{{$root.carDatas[$index].productyear}}-{{$root.carDatas[$index].entryyear}}</span>
                         </div>
                         <div class="suggest-card">
-                            <img src="{{$root.imagePath}}{{$root.carDatas[$index+1].itempic}}" class="car-img-suggest" />
+                            <img src="{{$root.carDatas[$index+1].itempic|guessImageMime}}" class="car-img-suggest" />
                             <span class="car-name">{{$root.carDatas[$index+1].modelname}}</span>
                             <span class="date">{{$root.carDatas[$index+1].productyear}}-{{$root.carDatas[$index+1].entryyear}}</span>
                         </div>
                         <div class="suggest-card">
-                            <img src="{{$root.imagePath}}{{$root.carDatas[$index+2].itempic}}" class="car-img-suggest" />
+                            <img src="{{$root.carDatas[$index+2].itempic|guessImageMime}}" class="car-img-suggest" />
                             <span class="car-name">{{$root.carDatas[$index+2].modelname}}</span>
                             <span class="date">{{$root.carDatas[$index+2].productyear}}-{{$root.carDatas[$index+2].entryyear}}</span>
                         </div>
