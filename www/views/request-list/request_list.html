@@ -2,7 +2,7 @@
     <ion-pane>
         <link href="views/request-list/request_list.css" rel="stylesheet" />
         <!-- <div ng-repeat="data in [{'title':'Хүсэлтийн жагсаалт'}]" ng-include src="'views/navbar-simple.html'"></div> -->
-        <ion-content class="ion-modified-content request-list-content" ng-show="!isEmpty">
+        <ion-content overflow-scroll="true" class="ion-modified-content request-list-content" ng-show="!isEmpty">
             <div class="card" ng-repeat="banks in requetData|groupBy:'leasingid'" ng-if="!(banks[0].modelname|isEmpty)">
                 <div class="item bank-card card-body item-text-wrap">
                     <div class="expandcollapse-item" ng-click="{{'growDiv('+$index+')'}}">

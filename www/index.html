@@ -71,7 +71,7 @@
   <link rel="stylesheet" href="css/ionicons.css" />
 </head>
 
-<body ng-app="index" animation="" ng-controller="indexCtrl">
+<body ng-app="index" animation="none" ng-controller="indexCtrl">
   <ion-side-menus class="AppBody demo1 non-navigation" id="mobile">
     <!-- <span class="side-menu-off-icon" style="color: #fff !important" ng-click="toggleSideMenu()">&#10006;</span> -->
     <span class="side-menu-off-icon" style="color: #fff !important" ng-click="toggleSideMenu()"><img style="width: 20px" src="img/x_mark.png" /></span>
@@ -110,7 +110,7 @@
           </button>
         </ion-nav-buttons>
       </ion-nav-bar>
-      <ion-nav-view animation="slide-left-right" class="index-ion-nav" id="ionNavViewMobile" ng-click="toggleSideMenu1()"> </ion-nav-view>
+      <ion-nav-view animation="none" class="index-ion-nav" id="ionNavViewMobile" ng-click="toggleSideMenu1()"> </ion-nav-view>
       <ion-footer-bar ng-if="!$root.showBanner" align-title="center" class="bar-custom" style="width: 100%" ng-hide="hideFooter" id="ion-footer-tabs">
         <div class="home-tab" ng-include src="'views/nav/footer.html'"></div>
       </ion-footer-bar>
