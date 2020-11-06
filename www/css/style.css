@@ -841,7 +841,7 @@ h4 {
 }
 .get-photo-choose {
   display: flex;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 .photo-choose-icon {
   background: #acd322;

@@ -124,8 +124,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   };
 
   $scope.takePhoto = function (type) {
-    // console.log("type", type);
-    $scope.ppSourceSelectOff();
     var srcType = Camera.PictureSourceType.CAMERA;
     if (type == "1") {
       srcType = Camera.PictureSourceType.PHOTOLIBRARY;

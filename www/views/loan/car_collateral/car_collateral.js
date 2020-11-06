@@ -75,7 +75,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     }
   };
   $scope.takePhoto = function (type) {
-    $scope.sourceSelectOff();
     var srcType = Camera.PictureSourceType.CAMERA;
     if (type == "1") {
       srcType = Camera.PictureSourceType.PHOTOLIBRARY;
