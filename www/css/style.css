@@ -667,14 +667,8 @@ h4 {
   margin: 15px 0;
   margin-left: 0;
   color: #fff;
-  -webkit-transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  -khtml-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 200ms ease-in-out;
   align-items: center;
 }
-
 .side-menu-items i {
   margin: 0px 10px 0px 5px;
 }
@@ -705,7 +699,7 @@ h4 {
   margin-left: 240px;
   border-radius: 20px;
   box-shadow: none;
-  transition: all 400ms ease;
+  transition: all 300ms ease;
 }
 
 .demo1.non-navigation #mobileBodyContent {
@@ -719,7 +713,7 @@ h4 {
   box-shadow: none;
   left: 0px;
   top: 0px;
-  transition: all 400ms ease;
+  transition: all 300ms ease;
 }
 
 .side-menu-picture {
@@ -744,7 +738,7 @@ h4 {
   -moz-transition: all 0.3s ease-in;
   -khtml-transition: all 0.3s ease-in;
   -o-transition: all 0.3s ease-in;
-  transition: all 0.4s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .demo1.navigation #secondScreen {
@@ -771,11 +765,11 @@ h4 {
 }
 
 .wraps {
-  -moz-transition: height 0.5s ease !important;
-  -ms-transition: height 0.5s ease !important;
-  -o-transition: height 0.5s ease !important;
-  -webkit-transition: height 0.5s ease !important;
-  transition: height 0.5s ease !important;
+  -moz-transition: height 0.3s ease !important;
+  -ms-transition: height 0.3s ease !important;
+  -o-transition: height 0.3s ease !important;
+  -webkit-transition: height 0.3s ease !important;
+  transition: height 0.3s ease !important;
   overflow: hidden !important;
 }
 
