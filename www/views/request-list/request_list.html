@@ -1,7 +1,6 @@
 <ion-view id="request_listPage" title="Хүсэлтийн жагсаалт">
     <ion-pane>
         <link href="views/request-list/request_list.css" rel="stylesheet" />
-        <!-- <div ng-repeat="data in [{'title':'Хүсэлтийн жагсаалт'}]" ng-include src="'views/navbar-simple.html'"></div> -->
         <ion-content overflow-scroll="true" class="ion-modified-content request-list-content" ng-show="!isEmpty">
             <div class="card" ng-repeat="banks in requetData|groupBy:'leasingid'" ng-if="!(banks[0].modelname|isEmpty)">
                 <div class="item bank-card card-body item-text-wrap">
@@ -23,9 +22,7 @@
                     <div class="list fix-list grow" ng-hide="active" id="{{'grow'+$index}}">
                         <div class="{{'measuringWrapper'+$index}}">
                             <a class="item item-thumbnail-left" ng-repeat="bank in banks" ng-click="selectbank(bank);">
-                                <!-- <img src="img/khanbank-mn.png" /> -->
                                 <img src="{{$root.imagePath}}{{bank.banklogo}}" />
-                                <!-- <span class="badge badge-assertive loan-card-wrap-badge">1</span> -->
                                 <div class="row">
                                     <div class="col">
                                         <p class="ion-color-big-text">{{bank.departmentname}}</p>
@@ -46,7 +43,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <span class="badge badge-assertive loan-card-badge">1</span> -->
             </div>
         </ion-content>
         <ion-content ng-show="isEmpty" id="emptyRequestList">

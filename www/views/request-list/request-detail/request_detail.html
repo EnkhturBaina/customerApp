@@ -70,12 +70,8 @@
           <div class="bank-chat-container" ng-click="modal.show();getChatHistory()">
             <div class="bank-chat-income">
               <span class="income-chat-body">{{bankFirstChat}}</span>
-              <!-- <span class="income-chat-time">12:45 pm</span> -->
+              <span class="income-chat-time">{{bankFirstChatDate}}</span>
             </div>
-            <!-- <div class="bank-chat-send">
-              <span class="send-chat-body">Таны мэдээлэл дутуу байна.</span>
-              <span class="send-chat-time">12 : 48 pm</span>
-            </div> -->
           </div>
           <div class="detail-btn-container">
             <button class="button bottom-first-button" ng-click="cancelRequestPopupOn()" ng-disabled="isCanceled">ЦУЦЛАХ</button>

@@ -1,6 +1,5 @@
 <ion-view id="loanPages" hide-footer-bar="true" hide-nav-bar="true">
   <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
-  <!-- <div ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div> -->
   <ion-header-bar align-title="left" class="navbar" style="background: none">
     <div class="title ion-color-big-text navbar-back-button" style="background: none">
       <button ui-sref="car-info" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
@@ -30,7 +29,6 @@
               <div class="tugrug-input-container">
                 <span class="input-tugrug-icon">₮</span>
                 <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="getLoanAmount" format-input disabled />
-                <!-- <i class=" icon ion-stop" style="color:red" ng-if="$root.newReqiust.loanAmount==true"> -->
               </div>
             </div>
             <div class="tugrug-input">
@@ -88,8 +86,6 @@
                     <p class="item-title ion-color-big-text">{{$root.selectedCarData.modelname}} - {{$root.selectedCarData.price|formatNumber}}₮
                     </p>
                     <span>{{$root.selectedCarData.factoryname}}</span>
-                    <!-- <p class="item-price ion-color-big-text">{{$root.selectedCarData.price|formatNumber}}₮</p> -->
-                    <!-- <span style="text-align: center">{{$root.selectedCarData.industrycountry}}</span> -->
                     <span>{{$root.selectedCarData.suppliername}}</span>
                   </div>
                 </div>
@@ -113,19 +109,10 @@
           <p class="middle-title">Боломжит банк санхүү</p>
           <div class="bank-grid">
             <div class="bank" ng-repeat="bank in bankList.correct">
-              <!-- <div class="bank" ng-repeat="bank in bankList"> -->
               <img src="{{$root.imagePath}}{{bank.BANK_LOGO}}" />
-              <!-- <img src="{{$root.imagePath}}{{bank.banklogo}}" /> -->
               <p>{{bank.DEPARTMENT_NAME}}</p>
             </div>
           </div>
-          <!-- <p class="middle-title red">Боломжгүй банк санхүү</p>
-          <div class="bank-grid">
-            <div class="bank">
-              <img src="img/khanbank-mn.png" />
-              <p>Хаан банк</p>
-            </div>
-          </div> -->
         </div>
       </div>
       <ion-footer class="bottom-footer">
@@ -139,11 +126,6 @@
     padding: 0px 5px !important;
   }
 
-  .loan-card-badge {
-    /* position: fixed !important;
-  right: 0px !important;
-  top: 50px !important; */
-  }
 
   #grow .row {
     padding: 2px 0px 0px 0px !important;

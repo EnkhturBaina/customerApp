@@ -104,10 +104,6 @@ body {
   color: #b1bfda !important;
 }
 
-/* .tab-item-active > .tab-title {
-  filter: invert() !important;
-} */
-
 .tabs-top.tabs-striped .tab-item:active {
   border-color: #acd322;
   color: #acd322 !important;
@@ -120,8 +116,6 @@ body {
 
 .tab-item.tab-item-active {
   border-bottom: 1px solid;
-  /* fill: #acd322 !important;
-  filter: invert(66%) sepia(91%) saturate(387%) hue-rotate(27deg) brightness(100%) contrast(94%); */
   color: #acd322 !important;
 }
 

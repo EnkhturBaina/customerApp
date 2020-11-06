@@ -264,10 +264,6 @@ input[type="number"] {
   background: url(../../lib/icon/add-fill.svg) no-repeat right #fff;
   -webkit-appearance: none;
   background-position-x: 50%;
-  /*text-align: center;
-  font-size: 46px;
-  color: #ccc;
-  width: 50px; */
 }
 .deal-bank-remove {
   border-radius: 10px;

@@ -45,10 +45,6 @@
                                     <img src="img/khanbank-mn.png" />
                                     <p>Хаан банк</p>
                                 </div>
-                                <div class="qr-bank">
-                                    <img src="img/golomt.png" />
-                                    <p>Голомт банк</p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,7 +52,6 @@
             </ion-tabs>
         </div>
     </div>
-    <!-- ng-controller="carinfoCtrl" -->
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50">
         <div class="big-container">
             <div class="magic-container">
@@ -123,7 +118,6 @@
 
             <div class="bank-container">
                 <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
-                <!-- <img ng-repeat="bank in $root.bankList.correct" ng-src="{{$root.imagePath}}{{bank.BANK_LOGO}}" /> -->
                 <img ng-repeat="bank in allBankList | filter:{id:'!!'}" src="{{bank.banklogo|guessImageMime}}" />
 
             </div>

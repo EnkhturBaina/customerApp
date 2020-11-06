@@ -48,7 +48,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     if ($scope.checkReqiured("step1")) {
       $rootScope.ShowLoader();
       serverDeferred.requestFull("dcApp_car_collateral_loan_001", $rootScope.newCarReq).then(function (response) {
-        console.log(response);
+        // console.log(response);
         $rootScope.selectedCarData = response[1];
         $state.go("car_coll2");
         $ionicLoading.hide();

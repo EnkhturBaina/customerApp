@@ -4,7 +4,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   var otherGoodsData = [];
   $rootScope.getLocalGoodsData = function () {
     otherGoodsData = JSON.parse(localStorage.getItem("otherGoods"));
-    console.log("otherGoodsData", otherGoodsData);
+    // console.log("otherGoodsData", otherGoodsData);
   };
   $rootScope.getLocalGoodsData();
   $rootScope.calcTotalPrice = function () {
@@ -19,7 +19,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   };
   $rootScope.calcTotalPrice();
   $scope.selectCarBasket = function (item) {
-    console.log(item);
+    // console.log(item);
   };
   $scope.nexClivk = function () {
     $state.go("autoleasing-2");

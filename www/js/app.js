@@ -20,7 +20,6 @@ var app = angular
     "business_loan.Ctrl",
     "car_collateral.Ctrl",
     "property_collateral.Ctrl",
-    "consumer_loan.Ctrl",
     "car.Ctrl",
     "carinfo.Ctrl",
     "carlist.Ctrl",
@@ -183,11 +182,6 @@ var app = angular
       templateUrl: "views/request-list/request-detail/request_detail.html",
       controller: "request_detailCtrl",
     });
-    $stateProvider.state("consumer_loan", {
-      url: "/views/loan/consumer_loan",
-      templateUrl: "views/loan/consumer_loan/consumer.html",
-      controller: "consumer_loanCtrl",
-    });
     $stateProvider.state("car", {
       url: "/views/loan/car",
       templateUrl: "views/car/car.html",
@@ -202,10 +196,6 @@ var app = angular
       url: "/views/loan/car/info",
       templateUrl: "views/car/car-info.html",
       controller: "carinfoCtrl",
-    });
-    $stateProvider.state("request_car_detail", {
-      url: "/views/request-detail/request_detail/car-detail",
-      templateUrl: "views/request-list/request-detail/request_car_detail.html",
     });
     $stateProvider.state("carlist", {
       url: "/views/carlist",
@@ -270,10 +260,6 @@ var app = angular
     $urlRouterProvider.otherwise("/views/home");
   })
   .controller("index", function ($scope, $ionicPlatform, $state) {
-    console.log("INDE");
-    console.log($scope);
-    console.log($state);
-    console.log($state.current.name);
     $scope.shouldHide = function () {
       switch ($state.current.name) {
         case "statename1":
@@ -291,7 +277,7 @@ var app = angular
       $("#mobile").toggleClass("navigation");
     };
     $(function () {
-      $("#ionNavViewMobile").click(function () {
+      $("#ionNavViewMobile,#ionNavViewMobileFooter").click(function () {
         if ($("#mobile").hasClass("navigation")) {
           $scope.toggleSideMenu();
         } else if ($("#mobile").hasClass("non-navigation")) {
@@ -315,11 +301,10 @@ var app = angular
     $scope.rangeData = { volume: "14" };
 
     $scope.$watch("data.volume", function () {
-      console.log("Has changed");
+      // console.log("Has changed");
     });
     $rootScope.hideShowFooter = function () {
       $rootScope.hideFooter = !$rootScope.hideFooter;
-      console.log("ASD");
     };
   })
 
@@ -368,25 +353,8 @@ function numOnly() {
   }
 }
 
-// app.controller("index", function ($scope, $ionicPlatform, $state) {
-//   console.log("INDE");
-//   console.log($scope);
-//   console.log($state);
-//   console.log($state.current.name);
-//   $scope.shouldHide = function () {
-//     switch ($state.current.name) {
-//       case "statename1":
-//         return true;
-//       case "statename2":
-//         return true;
-//       default:
-//         return false;
-//     }
-//   };
-// });
-// app.controller("basketCtrl", function ($scope, $ionicPlatform) {});
 app.controller("loan_successCtrl", function ($scope, $ionicPlatform, $rootScope, serverDeferred) {
-  console.log("$rootScope.selectedBankSuccess", $rootScope.selectedBankSuccess);
+  // console.log("$rootScope.selectedBankSuccess", $rootScope.selectedBankSuccess);
   $rootScope.sentBank = [];
 
   angular.forEach($rootScope.selectedBankSuccess, function (item) {
@@ -395,6 +363,5 @@ app.controller("loan_successCtrl", function ($scope, $ionicPlatform, $rootScope,
       $rootScope.sentBank.push(response[0]);
     });
   });
-  console.log("$rootScope.sentBank 11 1 1 1 1 ", $rootScope.sentBank);
 });
 app.controller("contactCtrl", function ($scope, $rootScope, $ionicPlatform, $state) {});

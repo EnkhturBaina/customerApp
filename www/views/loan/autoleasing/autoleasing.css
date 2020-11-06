@@ -456,13 +456,10 @@
 }
 .step-4-container > .bottom-footer {
   padding: 0px !important;
-  /* margin-bottom: 35% !important; */
 }
 #keypad {
   margin: auto;
   width: 100%;
-  /* height: 100%;
-  margin-bottom: 4vh; */
   height: 95%;
   margin-bottom: 1vh;
   border-radius: 10px 10px 0px 0px;
@@ -637,17 +634,6 @@
   border-radius: 12px;
   background-color: #fff;
 }
-input:checked + .checkbox-icon:after {
-  /* content: "\2713";
-  transform: rotate(0);
-  top: -5% !important;
-  left: 30% !important;
-  border: none !important;
-  display: flex;
-  text-align: center;
-  color: #acd322;
-  opacity: 1; */
-}
 .car-grow {
   -moz-transition: height 0.5s !important;
   -ms-transition: height 0.5s !important;
@@ -780,11 +766,6 @@ input:checked + .checkbox-icon:after {
   background-color: #fff !important;
   color: #a2a7b5 !important;
   font-size: 14px !important;
-}
-.step3-bankList-checkbox-container > .checkbox {
-  /* left: unset !important;
-  right: 15px !important;
-  padding: 10px 7px !important; */
 }
 .step3-bankList-checkbox-container > .checkbox > .checkbox-icon {
   width: 25px !important;

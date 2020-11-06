@@ -49,7 +49,6 @@
   <script src="views/sign/sign.js"></script>
   <script src="views/loan/autoleasing/autoleasing.js"></script>
   <script src="views/loan/property_collateral/collateral.js"></script>
-  <script src="views/loan/consumer_loan/consumer.js"></script>
   <script src="views/loan/business_loan/business_loan.js"></script>
   <script src="views/loan/car_collateral/car_collateral.js"></script>
   <script src="views/basket/basket.js"></script>
@@ -111,7 +110,7 @@
         </ion-nav-buttons>
       </ion-nav-bar>
       <ion-nav-view animation="none" class="index-ion-nav" id="ionNavViewMobile" ng-click="toggleSideMenu1()"> </ion-nav-view>
-      <ion-footer-bar ng-if="!$root.showBanner" align-title="center" class="bar-custom" style="width: 100%" ng-hide="hideFooter" id="ion-footer-tabs">
+      <ion-footer-bar ng-if="!$root.showBanner" align-title="center" class="bar-custom" style="width: 100%" ng-hide="hideFooter" id="ionNavViewMobileFooter">
         <div class="home-tab" ng-include src="'views/nav/footer.html'"></div>
       </ion-footer-bar>
     </ion-side-menu-content>

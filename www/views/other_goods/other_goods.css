@@ -414,17 +414,6 @@
 }
 
 .img-input-area {
-  /* border-radius: 10px;
-    border: 1px dashed #ccc;
-    text-align: center;
-    font-size: 46px;
-    color: #ccc;
-    line-height: 86px;
-    width: 220px;
-    height: 220px;
-    margin: auto;
-    margin-bottom: 40px;
-    display: flex; */
   background-image: url(../../img/note-20.png);
   opacity: 0.5;
   background-repeat: no-repeat;

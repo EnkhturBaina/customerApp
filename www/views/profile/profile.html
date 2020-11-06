@@ -11,7 +11,6 @@
         </div>
     </div>
     <div id="overlay">
-        <!-- <span class="overlay-off-text" ui-sref="autoleasing-2">&#10006;</span> -->
         <span class="overlay-off-text" ng-click="overlayOff()"><img style="width: 20px" src="img/x_mark.png" /></span>
         <div class="overlay-content" id="text">
             <span class="overlay-title-text"> АНХААРУУЛГА!!! </span>
@@ -31,12 +30,10 @@
                     </button>
                 </div>
                 <div class="navbar-right-icon">
-                    <!-- <button class="button button-clear icon ion-search cus-header-icon ion-float-right ion-color-brand-green" ui-sref="search"></button> -->
                 </div>
             </ion-header-bar>
 
             <div class="avatar-base">
-                <!-- <img src="img/favicon.png" width="100px" height="100px" /> -->
                 <div class="profile-picture-edit" ng-click="ppSourceSelectOn(3)" style="border-radius: 10px;border: 1px solid #ccfffc;text-align: center;font-size: 20px;color: #eaf6e2;line-height: 86px;background: #65c8ae;padding: 4px;">
                     <i class="icon ion-edit"></i>
                 </div>
@@ -62,7 +59,6 @@
                             <label class="item item-input profile-label">
                                 <p>Регситр</p>
                                 <input type="text" id="userID" placeholder="АА00000000" name="uniqueIdentifier" ng-model="$root.customerProfileData.uniqueidentifier" />
-                                <!-- <span id="userIDError" class="profile-input-userid-error">Та регситэрээ зөв оруулна уу</span> -->
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Хаяг</p>
@@ -85,7 +81,6 @@
                             </label>
                             <label class="item item-input profile-label">
                                 <p style="padding: 6px 0px">Иргэний үнэмлэхний зураг</p>
-                                <!-- <i class="icon ion-camera profile-camera-icon"></i> -->
                             </label>
                             <div class="item item-input profile-label" style="border: 0; margin-top: 1px">
                                 <div class="profile-card-front col-50">
@@ -95,7 +90,6 @@
                                     <img ng-if="!$root.customerProfileData.identfrontpic|isEmpty" src="{{$root.customerProfileData.identfrontpic|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
                                     <i class="icon ion-edit ident-icon" ng-click="ppSourceSelectOn(1)"></i>
 
-                                    <!-- <i class="icon ion-camera ion-float-left profile-card-icon"></i> -->
                                 </div>
                                 <div class="profile-card-back col-50" ng-model="identbackpic">
                                     <p style="padding: 6px 0px">Ард тал</p>
@@ -203,7 +197,6 @@
                 <ion-nav-view>
                     <ion-content overflow-scroll="true" class="profile-content">
                         <div>
-                            <!-- <img src="img/qr.png" class="profile-qr" /> -->
                             <div ng-click="generateQR()" ng-if="$root.customerProfileData.customerqr|isEmpty" style="width: 30%;border-radius: 10px;border: 1px dashed #ccc;height: 88px;text-align: center;font-size: 20px;color: #ccc;margin: 60px auto;line-height: 35px;display: grid;"><span>QR үүсгэх</span><span style="font-size: 49px;">+</span></div>
                             <img ng-if="!$root.customerProfileData.customerqr|isEmpty" src="{{$root.imagePath}}{{$root.customerProfileData.customerqr}}" height="250px" width="250px" style="margin: 0 auto;display: flex;" />
 

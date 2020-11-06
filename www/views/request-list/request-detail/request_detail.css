@@ -240,7 +240,7 @@
   width: fit-content;
   border-radius: 5px;
   padding: 5px;
-  margin: 10px 0px 0px 10px;
+  margin: 10px 0px 10px 10px;
   max-width: 60vw;
 }
 .send-chat-body {
