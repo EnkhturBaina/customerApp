@@ -231,4 +231,60 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.ppSourceSelectOff = function () {
     document.getElementById("overlayProfilePicute").style.display = "none";
   };
+  $scope.growDivTab3 = function (id) {
+    var grow = document.getElementById("grow" + id);
+    $("#grow" + id).toggleClass("expand");
+    $("#grow" + id).toggleClass("expanded");
+
+    if ($("#grow" + id).hasClass("expanded")) {
+      grow.style.height = 0;
+      document.getElementById("propertySaveButton").style.display = "none";
+    } else {
+      var wrapper = document.querySelector(".measuringWrapper" + id);
+      grow.style.height = wrapper.clientHeight + "px";
+      document.getElementById("propertySaveButton").style.display = "block";
+    }
+  };
+  $("#productYear").mask("0000");
+  $("#entryYear").mask("0000");
+  $("#odo").mask("000000000");
+  $("#nationalNumber").mask("0000 AAA", {
+    translation: {
+      A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
+    },
+  });
+  $rootScope.customerCar = [];
+  $scope.companyData = [];
+  $scope.carmerkData = [];
+  $scope.getCompanyData = function () {
+    if (isEmpty($scope.companyData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1544591440502" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        $scope.companyData = datas;
+      });
+    }
+    if (isEmpty($scope.defualtbank)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1603952821400122" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        angular.forEach(datas, function (item) {
+          item.BANK_LOGO = item.banklogo;
+          item.DEPARTMENT_NAME = item.departmentname;
+          item.PARENT_ID = item.id;
+        });
+        $rootScope.bankList = { correct: datas };
+        $scope.defualtbank = datas;
+      });
+    }
+  };
+  $scope.getCarmarkData = function (val) {
+    var json = { systemmetagroupid: "1544591440537", factoryid: val };
+    serverDeferred.request("PL_MDVIEW_004", json).then(function (datas) {
+      delete datas.aggregatecolumns;
+      $scope.carmerkData = datas;
+    });
+  };
+  $scope.getCompanyData();
+  $scope.saveCustomerCar = function () {
+    console.log("1");
+  };
 });

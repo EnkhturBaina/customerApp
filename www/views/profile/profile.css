@@ -251,7 +251,7 @@ input[type="number"] {
   right: 25px;
 }
 .profile-tab1-save-btn {
-  margin: 10px 0 20px 0;
+  margin: 10px 0 60px 0;
 }
 .profile-select-deal-banks {
   position: relative;
@@ -319,4 +319,62 @@ input[type="number"] {
   height: 18px !important;
   bottom: -3px;
   margin-left: 50px;
+}
+.grow .row {
+  padding: 2px 0px 0px 0px !important;
+}
+.grow .col {
+  padding: 0px !important;
+}
+.grow span {
+  color: #a2a7b5 !important;
+  font-size: 16px !important;
+}
+.grow img {
+  width: 35px !important;
+  height: 35px !important;
+}
+.grow {
+  -moz-transition: height 0.5s !important;
+  -ms-transition: height 0.5s !important;
+  -o-transition: height 0.5s !important;
+  -webkit-transition: height 0.5s !important;
+  transition: height 0.5s !important;
+  height: 0px;
+  overflow: hidden;
+}
+.property-card-body {
+  overflow: hidden;
+  box-shadow: -1px 2px 7px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  margin: 15px;
+  display: grid;
+}
+.property-expanded {
+  border: 0 !important;
+}
+.customer-car-collateral-label {
+  padding: 6px 0 5px 5px !important;
+}
+.property-save-btn {
+  text-align: center;
+  background: rgb(162, 209, 54);
+  background: -moz-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%);
+  background: -webkit-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%);
+  background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%);
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#a2d136", endColorstr="#3cc1f9", GradientType=1);
+  color: white;
+  width: 25vw;
+  border-radius: 10px;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1px !important;
+  min-height: 35px;
+  line-height: 35px;
+  margin: 0px !important;
+  /* display: block !important; */
+  border: 0px !important;
+  float: right;
+  right: 0;
 }
