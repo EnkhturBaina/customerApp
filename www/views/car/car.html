@@ -1,7 +1,7 @@
 <ion-view id="loanPages" hide-nav-bar="true">
     <link href="views/car/car.css" rel="stylesheet" />
     <div ng-repeat="data in [{'title':'Автомашин'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content scroll="true" class="ion-modified-content margin-top-50 car-loan-content">
+    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 car-loan-content">
         <div class="big-container">
             <div class="magic-container margin-lr-20 margin-top-20">
                 <p class="ion-color-text">Та хайх гэж буй автомашины брэндийг сонгох эсвэл кодыг бичнэ үү</p>
@@ -11,9 +11,9 @@
                 </div>
                 <div ng-show="!selectedSubCat|isEmptyCust" style="margin-bottom: 2%">
                     <span class="brand-list-tags-span" ng-repeat="cat in selectedSubCat | filter:{factoryid:'!!'}" ng-click="clearSelectedSubCat(cat.factoryid)">
-            {{cat.factoryname}}
-            <i class="icon ion-close-round" style="padding-left: 10%; font-size: 12px"></i>
-          </span>
+                        {{cat.factoryname}}
+                        <i class="icon ion-close-round" style="padding-left: 10%; font-size: 12px"></i>
+                    </span>
                 </div>
                 <div class="brand-tags">
                     <ul>

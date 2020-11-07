@@ -1,7 +1,7 @@
 <ion-view id="loanPages" hide-nav-bar="true">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
     <div ng-repeat="data in [{'title':'Банк сонгох'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content class="ion-modified-content has-header autoleas-step3-content">
+    <ion-content overflow-scroll="true" class="ion-modified-content has-header autoleas-step3-content">
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
@@ -16,17 +16,14 @@
                     <div class="bank-list">
                         <p class="middle-title ion-color-big-text">Анхан шатны шалгуур хангасан банкууд</p>
                         <ul class="switch-list">
-                            <!-- <li ng-repeat="bank in bankList.lists"> -->
-                            <li ng-repeat="bank in bankList.correct">
+                            <li ng-repeat="bank in bankList.correct | filter:{id:'!!'}">
                                 <ion-checkbox ng-model="bank.checked" class="step3-bankList-checkbox-container">
                                     <div class="bank-list-container">
                                         <img ng-src="{{bank.BANK_LOGO|guessImageMime}}" />
-                                        <!-- <img src="{{$root.imagePath}}{{bank.banklogo}}" /> -->
                                     </div>
                                     <span class="bank-middle-title">{{bank.DEPARTMENT_NAME}}</span>
                                     <p class="bank-desc-green">Тэнцсэн банк</p>
                                 </ion-checkbox>
-                                <!-- ui-sref="autoleasing-bank-info" -->
                                 <button class="right-btn" ng-click="selectBankInfo(bank)">Дэлгэрэнгүй</button>
                             </li>
                         </ul>

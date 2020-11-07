@@ -55,7 +55,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $w
         document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(../../img/note-20.png)";
         document.getElementsByClassName("img-input-area")[0].style.opacity = "0.5";
 
-        console.log("response", response);
+        // console.log("response", response);
       });
     }
     $rootScope.calcTotalPrice();

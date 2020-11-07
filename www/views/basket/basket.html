@@ -1,12 +1,7 @@
 <ion-view fullscreen="true" title="Сагс">
   <link href="views/basket/basket.css" rel="stylesheet" />
-  <ion-content scroll="true" class="basket-content gray-background" ng-controller="basketCtrl">
+  <ion-content overflow-scroll="true" class="basket-content gray-background" ng-controller="basketCtrl">
     <div class="basket-content-in">
-      <!-- <div class="basket-add-item">
-        <button class="button button-icon header-icon ion-float-right ion-color-brand-green" style="zoom: 1" ui-sref="car">
-          <i class="ion-plus"></i>
-        </button>
-      </div> -->
       <ion-list show-delete="false" can-swipe="true">
         <div class="card-list-swiper" ng-repeat="basket in $root.basketData track by basket.id">
           <ion-item>
@@ -22,7 +17,6 @@
                 <ion-icon name="paper-plane-outline"></ion-icon>
               </div>
               <p class="basket-item-count">x{{basket.itemquantity}}</p>
-              <!-- <i class="icon ion-chevron-right icon-accessory"></i> -->
               <div class="basket-item-right-text">
                 <h2>₮ {{basket.price|formatNumber}}</h2>
                 <p>{{basket.itemcode}}</p>
@@ -39,7 +33,6 @@
       </ion-list>
       <div class="basket-total-price">
         <span class="total-price-title">Нийт үнэ</span>
-        <!-- <span class="total-price-amount">{{$root.basketData|totalQty:'price'|formatNumber}} ₮</span> -->
         <span class="total-price-amount">{{sumPrice|formatNumber}} ₮</span>
       </div>
       <div class="basket-btn-container">

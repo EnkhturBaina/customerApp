@@ -11,7 +11,6 @@
         </div>
         <div class="brand-tags">
           <ul>
-            <!-- <li class="series" ui-sref="carlist">Land 200</li> -->
             <li class="series" ng-repeat="cat in $root.categoryData|filter:searchBrand" ng-click="selectCategoryBig(cat)">{{cat.factoryname}}</li>
           </ul>
         </div>

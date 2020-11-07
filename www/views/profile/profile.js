@@ -19,17 +19,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       document.getElementById("firstNameError").style.display = "none";
     }
   };
-  // $scope.replaceCyr3 = function (userId) {
-  //   var rex = /.*[А-ЯӨҮа-яөү]{2}\d{8}/;
-  //   var inputUserId = document.getElementById("userID");
-  //   if (rex.test(userId) == false) {
-  //     document.getElementById("userIDError").style.display = "block";
-  //     inputUserId.value = inputUserId.value.replace(inputUserId.value, "");
-  //   } else {
-  //     document.getElementById("userIDError").style.display = "none";
-  //   }
-  // };
-
   $scope.getProData = function () {
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1601286700017285", crmuserid: $rootScope.loginUserInfo.id }).then(function (response) {
       $rootScope.loginUserInfo = mergeJsonObjs(response, $rootScope.loginUserInfo);
@@ -49,14 +38,10 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.getAllBankList = function () {
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1603958798356" }).then(function (response) {
       $rootScope.allBankList = response;
-      console.log("$rootScope.allBankList", $rootScope.allBankList);
+      // console.log("$rootScope.allBankList", $rootScope.allBankList);
     });
   };
-  //   $scope.getCustomerDealBankList = function () {
-  //     console.log($rootScope.loginUserInfo);
-  //   };
 
-  //   $scope.getCustomerDealBankList();
   $scope.getAllBankList();
   $scope.getFamiltyStat();
   $scope.getIncomeType();
@@ -81,7 +66,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         // console.log("getProfileData", response);
         $rootScope.hideFooter = true;
         if (response != "") {
-          console.log($rootScope.loginUserInfo);
+          // console.log($rootScope.loginUserInfo);
           // console.log(mergeJsonObjs(response[0], $rootScope.loginUserInfo));
           // console.log(response[0])
           $rootScope.customerProfileData = response[0];
@@ -103,7 +88,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         }
         serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1604389075984789", dim1: $rootScope.loginUserInfo.customerid }).then(function (response) {
           $rootScope.customerDealBanks = response;
-          console.log("customerDealBanks", $rootScope.customerDealBanks);
+          // console.log("customerDealBanks", $rootScope.customerDealBanks);
         });
       });
     }
@@ -126,7 +111,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerProfileData.stayedtimebyyear)) {
       $rootScope.alert("Ажилласан жилээ оруулна уу");
     } else {
-      console.log($scope.customerProfileData);
+      // console.log($scope.customerProfileData);
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
         // console.log("customerProfileData", response);
         $rootScope.loginUserInfo = mergeJsonObjs($scope.customerProfileData, $rootScope.loginUserInfo);
@@ -137,34 +122,34 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       });
     }
   };
+
   $scope.takePhoto = function (type) {
+    var srcType = Camera.PictureSourceType.CAMERA;
+    if (type == "1") {
+      srcType = Camera.PictureSourceType.PHOTOLIBRARY;
+    }
     navigator.camera.getPicture(
       function (imageData) {
-        if (type == 1) {
+        if ($scope.selectedImagePath == 1) {
           $scope.customerProfileData.identfrontpic = "jpg♠" + imageData;
-        } else if (type == 2) {
+        } else if ($scope.selectedImagePath == 2) {
           $scope.customerProfileData.identbackpic = "jpg♠" + imageData;
-        } else if (type == 3) {
+        } else if ($scope.selectedImagePath == 3) {
           $scope.customerProfilePicture.profilepicture = "jpg♠" + imageData;
 
           $scope.customerProfilePicture.id = $scope.loginUserInfo.customerid;
 
-          console.log("$scope.customerProfilePicture", $scope.customerProfilePicture);
-
-          serverDeferred.requestFull("dcApp_profile_pricture_dv_002", $scope.customerProfilePicture).then(function (response) {
-            console.log("save profilepicture response", response);
-            console.log("imageData", imageData);
-          });
+          serverDeferred.requestFull("dcApp_profile_pricture_dv_002", $scope.customerProfilePicture).then(function (response) {});
         }
         $scope.$apply();
       },
-      function onFail(message) {
-        alert("Failed because: " + message);
-      },
+      function onFail(message) {},
       {
         quality: 50,
         destinationType: Camera.DestinationType.DATA_URL,
         correctOrientation: true,
+        sourceType: srcType,
+        encodingType: Camera.EncodingType.JPEG,
       }
     );
   };
@@ -211,9 +196,9 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.addDealBank = function () {
     $scope.customerDealBank.dim1 = $scope.loginUserInfo.customerid;
     serverDeferred.requestFull("dcApp_deal_bank_customer_001", $scope.customerDealBank).then(function (response) {
-      console.log("customerDealBank", response);
+      // console.log("customerDealBank", response);
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1604389075984789", id: response[1].id }).then(function (response) {
-        console.log("response", response);
+        // console.log("response", response);
         var appendEl = '<div class="col added-deal-bank">' + '<div class="deal-bank-remove">-</div>' + "<img src=" + $rootScope.imagePath + response[0].banklogo + " />" + "<p>" + response[0].departmentname + "</p>" + "</div>";
         $(appendEl).insertBefore(".profile-bank-list select:last");
       });
@@ -227,19 +212,79 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     $rootScope.customeridforQR.text = $scope.loginUserInfo.customerid;
 
     if (!isEmpty($rootScope.loginUserInfo)) {
-      console.log($scope.showCreateQr);
       serverDeferred.requestFull("dcApp_qr_generator", $rootScope.customeridforQR).then(function (response) {
-        console.log("generateQR response", response);
-
         $rootScope.customerQrData = {};
         $rootScope.customerQrData.id = $scope.loginUserInfo.customerid;
         $rootScope.customerQrData.customerqr = "jpg♠" + response[1].value;
 
         serverDeferred.requestFull("dcApp_customer_qr_dv_002", $rootScope.customerQrData).then(function (response) {
-          console.log("customerQrData response", response);
+          // console.log("customerQrData response", response);
           $scope.getProfileData();
         });
       });
     }
+  };
+  $scope.ppSourceSelectOn = function (path) {
+    $scope.selectedImagePath = path;
+    document.getElementById("overlayProfilePicute").style.display = "block";
+  };
+  $scope.ppSourceSelectOff = function () {
+    document.getElementById("overlayProfilePicute").style.display = "none";
+  };
+  $scope.growDivTab3 = function (id) {
+    var grow = document.getElementById("grow" + id);
+    $("#grow" + id).toggleClass("expand");
+    $("#grow" + id).toggleClass("expanded");
+
+    if ($("#grow" + id).hasClass("expanded")) {
+      grow.style.height = 0;
+      document.getElementById("propertySaveButton").style.display = "none";
+    } else {
+      var wrapper = document.querySelector(".measuringWrapper" + id);
+      grow.style.height = wrapper.clientHeight + "px";
+      document.getElementById("propertySaveButton").style.display = "block";
+    }
+  };
+  $("#productYear").mask("0000");
+  $("#entryYear").mask("0000");
+  $("#odo").mask("000000000");
+  $("#nationalNumber").mask("0000 AAA", {
+    translation: {
+      A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
+    },
+  });
+  $rootScope.customerCar = [];
+  $scope.companyData = [];
+  $scope.carmerkData = [];
+  $scope.getCompanyData = function () {
+    if (isEmpty($scope.companyData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1544591440502" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        $scope.companyData = datas;
+      });
+    }
+    if (isEmpty($scope.defualtbank)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1603952821400122" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        angular.forEach(datas, function (item) {
+          item.BANK_LOGO = item.banklogo;
+          item.DEPARTMENT_NAME = item.departmentname;
+          item.PARENT_ID = item.id;
+        });
+        $rootScope.bankList = { correct: datas };
+        $scope.defualtbank = datas;
+      });
+    }
+  };
+  $scope.getCarmarkData = function (val) {
+    var json = { systemmetagroupid: "1544591440537", factoryid: val };
+    serverDeferred.request("PL_MDVIEW_004", json).then(function (datas) {
+      delete datas.aggregatecolumns;
+      $scope.carmerkData = datas;
+    });
+  };
+  $scope.getCompanyData();
+  $scope.saveCustomerCar = function () {
+    console.log("1");
   };
 });

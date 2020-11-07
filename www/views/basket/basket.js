@@ -1,7 +1,6 @@
 var basket = angular.module("basket.Ctrl", []);
 basket.controller("basketCtrl", function ($scope, $rootScope, $ionicPlatform, $state) {
   var basketData = $scope.basketData;
-  // console.log("basketData", basketData);
 
   $scope.basketGoLeasing = function () {
     if (!isEmpty($rootScope.selectedCarData)) {
@@ -10,21 +9,12 @@ basket.controller("basketCtrl", function ($scope, $rootScope, $ionicPlatform, $s
     }
   };
   $scope.isChecked = false;
-  // $scope.selected = [];
   $scope.selectCarBasket = function (item, isChecked, index) {
     if (isChecked) {
-      // $scope.selected.push(item);
-
       $rootScope.selectedCarData = item;
     } else {
-      // var _index = $scope.selected.indexOf(item);
-      // $scope.selected.splice(_index, 1);
-
       $rootScope.selectedCarData = null;
     }
-    // $rootScope.selectedCarData = $scope.selected;
-    // console.log("$rootScope.selectedCarData", $rootScope.selectedCarData);
-    // console.log("basketData", basketData);
   };
 
   $scope.sumPrice = 0;

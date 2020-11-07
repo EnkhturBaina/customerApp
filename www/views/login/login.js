@@ -126,6 +126,5 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   };
   $scope.backShowFooter = function () {
     $rootScope.hideFooter = true;
-    console.log("ASD");
   };
 });

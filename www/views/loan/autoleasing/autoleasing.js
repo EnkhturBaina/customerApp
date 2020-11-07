@@ -77,14 +77,14 @@
     if ($scope.checkReqiured("step4")) {
       var selectedbanks = [];
       serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
-        console.log("send req response", response);
+        // console.log("send req response", response);
 
         // $rootScope.sendSmsUser = {};
         // $rootScope.sendSmsBank = {};
         // $scope.msg1 = "";
         // $scope.msg2 = "";
 
-        console.log("$rootScope.bankList", $rootScope.bankList);
+        // console.log("$rootScope.bankList", $rootScope.bankList);
         angular.forEach($rootScope.bankList.correct, function (item) {
           // angular.forEach($rootScope.bankList, function (item) {
           if (item.checked) {
@@ -99,7 +99,7 @@
               dim2: item.ID,
               wfmStatusId: 1585206036474051,
             };
-            console.log("jsonDtl", jsonDtl);
+            // console.log("jsonDtl", jsonDtl);
             selectedbanks.push(jsonDtl);
 
             // $scope.msg1 =

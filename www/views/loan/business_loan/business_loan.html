@@ -1,7 +1,7 @@
 <ion-view id="loanPages" hide-nav-bar="true">
   <link href="views/loan/business_loan/business_loan.css" rel="stylesheet" />
   <div ng-repeat="data in [{'title':'Бизнесийн зээл'}]" ng-include src="'views/navbar.html'"></div>
-  <ion-content class="ion-modified-content has-header business-loan-content">
+  <ion-content overflow-scroll="true" class="ion-modified-content has-header business-loan-content">
     <div class="big-container ghostwhite-noscroll-container">
       <div class="magic-container">
         <div class="margin-lr-20">
@@ -30,10 +30,7 @@
       <ion-footer class="bottom-footer">
         <div class="bank-container">
           <p>Банк болон ББСБ -ын зээлээр захиалан авах боломжтой</p>
-          <img src="img/golomt.png" />
           <img src="img/khanbank-mn.png" />
-          <img src="img/golomt.png" />
-          <img src="img/golomt.png" />
         </div>
         <button class="button btn single-button" id="Next" ui-sref="">Үргэлжлүүлэх</button>
       </ion-footer>

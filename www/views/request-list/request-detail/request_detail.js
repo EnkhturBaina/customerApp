@@ -5,20 +5,19 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
     $scope.userChat = [];
     $scope.bankChat = [];
     $scope.bankFirstChat = "";
+    $scope.bankFirstChatDate = "";
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602494134391582", dim1: $rootScope.selectbank.mapid }).then(function (response) {
-      console.log("response", response);
+      console.log("respo", response);
       $rootScope.chatHistory = [];
       angular.forEach(response, function (item) {
         $rootScope.chatHistory.push(item);
       });
       if (response != "") {
         $scope.bankFirstChat = response[0].text1;
-        console.log("1");
+        $scope.bankFirstChatDate = response[0].createddate;
       } else {
         $scope.bankFirstChat = "Банктай холбогдох";
-        console.log("2");
       }
-      console.log("$rootScope.chatHistory", $rootScope.chatHistory);
     });
   };
 
