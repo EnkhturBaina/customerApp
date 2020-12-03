@@ -7,7 +7,7 @@
   top: 170px !important;
 }
 .loan_calculator-container > .tabs-top > .tabs {
-  width: 90% !important;
+  width: 100% !important;
   height: 45px !important;
   border: 0px !important;
 }
@@ -42,6 +42,9 @@
 }
 .loan-calc-tab-content {
   top: 55px !important;
+}
+.loan-calc-tab-content > .scroll {
+  height: 100%;
 }
 .loan-calc-tab-icon {
   background-color: #a2a7b5 !important;
@@ -156,4 +159,37 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.loan-calc-bank-container1 {
+  padding: 15px;
+}
+.loan-calc-bank-container1 p {
+  font-size: 12px;
+}
+.loan-calc-bank-container2 {
+  padding: 15px;
+}
+.loan-calc-bank-container2 p {
+  font-size: 12px;
+}
+.loan-calc-banks {
+  display: grid;
+}
+.loan-calc-banks img {
+  width: 30px;
+  height: 30px;
+  margin: 0 auto;
+}
+.loan-calc-banks span {
+  text-align: center;
+  font-size: 12px;
+  color: #a2a7b5;
+}
+.loan-calc-btm-container {
+  bottom: 0px;
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  margin-bottom: 50px;
+  background-color: #f8f8fd;
 }

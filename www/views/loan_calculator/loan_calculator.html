@@ -6,7 +6,7 @@
     <label class="loan-type-label">
       <p class="loan-type-title">Зээлийн төрлөөр</p>
 
-      <select class="loan-type-select" ng-model="">
+      <select class="loan-type-select">
         <option value="1">1</option>
         <option value="2">2</option>
       </select>
@@ -15,7 +15,7 @@
       <!-- Tab 1 -->
       <ion-tab class="loan-calc-tab-title" icon="loan-calc-tab-icon fa fa-university" title="Банкаар">
         <ion-nav-view class="ghostwhite">
-          <ion-content overflow-scroll="true" class="loan-calc-tab-content" style="margin: 0 10px">
+          <ion-content overflow-scroll="true" class="loan-calc-tab-content" style="margin: 0 10px;height: 40vh;">
             <ion-checkbox class="loan-calc-tab1-checkbox loan-calc-tab1-checkbox-first">
               <!-- <ion-checkbox class="custom-checkbox"> -->
               <span>Банк</span>
@@ -45,7 +45,7 @@
           <ion-content overflow-scroll="true" class="loan-calc-tab-content" style="margin: 0 10px">
             <label class="loan-type-label">
               <p class="loan-type-title">Зээлийн хугацаа</p>
-              <select class="loan-type-select" ng-model="">
+              <select class="loan-type-select">
                 <option value="1">1</option>
                 <option value="2">2</option>
               </select>
@@ -78,8 +78,32 @@
         </ion-nav-view>
       </ion-tab>
     </ion-tabs>
-    <ion-checkbox class="loan-calc-confirm-checkbox">
+    <!-- <ion-checkbox class="loan-calc-confirm-checkbox">
       <span>Мэдээллийг баталгаажуулах</span>
-    </ion-checkbox>
+    </ion-checkbox> -->
+    <div class="loan-calc-btm-container">
+      <div class="loan-calc-bank-container1">
+        <p class="ion-color-big-text ion-font-weight-bold">ҮЛ ХӨДЛӨХ БАРЬЦААЛСАН ЗЭЭЛ</p>
+        <div style="display: grid;grid-template-columns: auto auto auto auto;">
+          <div class="loan-calc-banks">
+            <img src="img/khanbank-mn.png" />
+            <span>Хаан банк</span>
+          </div>
+        </div>
+      </div>
+      <div class="loan-calc-bank-container2">
+        <p class="ion-color-big-text ion-font-weight-bold">БИЗНЕСИЙН ЗЭЭЛ</p>
+        <div style="display: grid;grid-template-columns: auto auto auto auto;">
+          <div class="loan-calc-banks">
+            <img src="img/khanbank-mn.png" />
+            <span>Хаан банк</span>
+          </div>
+          <div class="loan-calc-banks">
+            <img src="img/khanbank-mn.png" />
+            <span>Хаан банк</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-view>

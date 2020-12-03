@@ -1,34 +1,34 @@
 angular.module("property_collateral.Ctrl", []).controller("property_collateralCtrl", function ($scope, $ionicPlatform, $ionicPopup) {
   // When button is clicked, the popup will be shown...
-  $scope.showPopup = function () {
-    $scope.data = {};
-
-    // Custom popup
-    var myPopup = $ionicPopup.show({
-      template: '<input type = "text" ng-model = "data.model">',
-      title: "Title",
-      subTitle: "Subtitle",
-      scope: $scope,
-
-      buttons: [
-        { text: "Cancel" },
-        {
-          text: "<b>Save</b>",
-          type: "button-positive",
-          onTap: function (e) {
-            if (!$scope.data.model) {
-              //don't allow the user to close unless he enters model...
-              e.preventDefault();
-            } else {
-              return $scope.data.model;
-            }
-          },
-        },
-      ],
-    });
-
-    myPopup.then(function (res) {
-      // console.log("Tapped!", res);
-    });
+  $scope.pCSourceSelectOn = function (path) {
+    $scope.selectedImagePath = path;
+    document.getElementById("overlayCollateralLoan").style.display = "block";
+  };
+  $scope.pCSourceSelectOff = function () {
+    document.getElementById("overlayCollateralLoan").style.display = "none";
+  };
+  $scope.takePhoto = function (type) {
+    var srcType = Camera.PictureSourceType.CAMERA;
+    if (type == "1") {
+      srcType = Camera.PictureSourceType.PHOTOLIBRARY;
+    }
+    navigator.camera.getPicture(
+      function (imageData) {
+        if ($scope.selectedImagePath == 1) {
+          $scope.collateralLoanData.picture1 = "jpg♠" + imageData;
+        } else if ($scope.selectedImagePath == 2) {
+          $scope.collateralLoanData.picture2 = "jpg♠" + imageData;
+        }
+        $scope.$apply();
+      },
+      function onFail(message) {},
+      {
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL,
+        correctOrientation: true,
+        sourceType: srcType,
+        encodingType: Camera.EncodingType.JPEG,
+      }
+    );
   };
 });

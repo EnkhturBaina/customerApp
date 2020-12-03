@@ -238,11 +238,11 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
     if ($("#grow" + id).hasClass("expanded")) {
       grow.style.height = 0;
-      document.getElementById("propertySaveButton").style.display = "none";
+      document.getElementById("propertySaveButton" + id).style.display = "none";
     } else {
       var wrapper = document.querySelector(".measuringWrapper" + id);
       grow.style.height = wrapper.clientHeight + "px";
-      document.getElementById("propertySaveButton").style.display = "block";
+      document.getElementById("propertySaveButton" + id).style.display = "block";
     }
   };
   $("#productYear").mask("0000");

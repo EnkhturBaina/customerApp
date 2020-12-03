@@ -36,20 +36,22 @@
 .horizontal-item {
   display: inline-block;
   vertical-align: top;
-  height: 130px;
-  width: 100px;
+  width: 120px;
   white-space: normal;
-  margin: 0 10px;
+  margin: 0px 5px;
+  text-align: center;
 }
 
 .horizontal-item .h-item {
 }
 
 .h-item img {
-  width: 100px;
+  width: auto;
   height: 100px;
-  border-radius: 10px;
-  object-fit: cover;
+  object-fit: contain;
+  margin: 0 auto;
+  max-width: 90%;
+  margin-top: 5px;
 }
 
 .h-item p {
@@ -85,4 +87,14 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   scroll-behavior: smooth;
+}
+.trend-card-container {
+  min-height: 165px;
+  background: none;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  height: 100%;
+  border: 1px solid #e4e4e4;
+}
+.trend-scroll > .scroll {
+  padding: 20px 0;
 }

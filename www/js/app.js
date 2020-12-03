@@ -31,6 +31,8 @@ var app = angular
     "reset_password.Ctrl",
     "settings.Ctrl",
     "loan_calculator.Ctrl",
+    "notif.Ctrl",
+    "notif_detail.Ctrl",
   ])
   .run(function ($ionicPlatform, $state, $cordovaSplashscreen) {
     $ionicPlatform.ready(function () {
@@ -256,6 +258,16 @@ var app = angular
       url: "/views/contact",
       templateUrl: "views/contact/contact.html",
       controller: "contactCtrl",
+    });
+    $stateProvider.state("notif", {
+      url: "/views/notif",
+      templateUrl: "views/notif/notif.html",
+      controller: "notifCtrl",
+    });
+    $stateProvider.state("notif_detail", {
+      url: "/views/notif/notif_detail",
+      templateUrl: "views/notif/notif_detail/notif_detail.html",
+      controller: "notif_detailCtrl",
     });
     $urlRouterProvider.otherwise("/views/home");
   })

@@ -58,11 +58,13 @@
   display: flex;
   position: relative;
   float: left;
-  width: 170px;
+  width: 220px;
 }
 .cars img {
   height: 100px;
-  width: 130px;
+  margin: 0 auto;
+  width: auto;
+  max-width: 130px;
 }
 .cars .desc span {
   font-size: 12px;
@@ -214,13 +216,17 @@
   line-height: 16px;
 }
 .car-img {
-  width: 100%;
+  width: auto;
   height: auto;
+  margin: 0 auto;
+  display: block;
+  height: 200px;
 }
 .car-img-suggest {
-  width: 100%;
-  height: auto;
+  width: auto;
   height: 8vh;
+  margin: 0 auto;
+  max-width: 20vw;
 }
 .leasing-badge:before {
   content: "";

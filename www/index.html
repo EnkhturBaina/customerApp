@@ -66,13 +66,14 @@
   <script src="views/reset_password/reset_password.js"></script>
   <script src="views/contact/contact.js"></script>
   <script src="views/loan_calculator/loan_calculator.js"></script>
+  <script src="views/notif/notif.js"></script>
+  <script src="views/notif/notif_detail/notif_detail.js"></script>
 
   <link rel="stylesheet" href="css/ionicons.css" />
 </head>
 
 <body ng-app="index" animation="none" ng-controller="indexCtrl">
   <ion-side-menus class="AppBody demo1 non-navigation" id="mobile">
-    <!-- <span class="side-menu-off-icon" style="color: #fff !important" ng-click="toggleSideMenu()">&#10006;</span> -->
     <span class="side-menu-off-icon" style="color: #fff !important" ng-click="toggleSideMenu()"><img style="width: 20px" src="img/x_mark.png" /></span>
     <div id="nav" on-swipe-left="toggleSideMenu()">
       <div class="side-menu-items side-menu-img-container">
@@ -99,7 +100,7 @@
           <i class="icon custom-menu"></i>
         </ion-nav-buttons>
         <ion-nav-buttons side="right" style="right: 10px; position: fixed">
-          <button ng-if="!$root.loginUserInfo|isEmpty" class="button button-clear ion-float-right ion-color-brand-green" style="margin-right: 10px">
+          <button ng-if="!$root.loginUserInfo|isEmpty" ui-sref="notif" class="button button-clear ion-float-right ion-color-brand-green" style="margin-right: 10px">
             <i class="icon custom-bell-green">
               <span class="notify-badge"></span>
             </i>
@@ -115,7 +116,6 @@
       </ion-footer-bar>
     </ion-side-menu-content>
     <div id="secondScreen" on-touch="toggleSideMenu()"></div>
-    <!-- <div ng-include src="'views/sideMenu/menu.html'"></div> -->
   </ion-side-menus>
 </body>
 

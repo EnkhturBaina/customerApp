@@ -1,0 +1,33 @@
+<ion-view ng-app="notif.Ctrl" hide-nav-bar="true">
+    <link href="views/notif/notif.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Буцах'}]" ng-include src="'views/navbar.html'"></div>
+
+    <ion-tabs class="tabs-striped tabs-top notif-tabs" delegate-handle="notifTabsHandler">
+        <ion-tab title="Мэдэгдэл">
+            <ion-nav-view>
+                <ion-content overflow-scroll="true" class="notif-content" on-swipe-left="goFor()">
+                    <div class="list" ui-sref="requestList">
+                        <a class="item item-avatar notif-list-item" href="#">
+                            <img src="img/note-20.png" />
+                            <h2 class="ion-font-weight-bold">Зээлийн хүсэлт</h2>
+                            <p>Хас банкинд илгээсэн таны зээлийн хүсэлт батлагдлаа. Энд дарж хүсэлтээ харна уу</p>
+                        </a>
+                    </div>
+                </ion-content>
+            </ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Мэдээ">
+            <ion-nav-view>
+                <ion-content overflow-scroll="true" class="notif-content" on-swipe-right="goBack()">
+                    <div class="list" ui-sref="notif_detail">
+                        <a class="item item-thumbnail-right  notif-list-item" href="#">
+                            <img src="img/note-20.png" />
+                            <h2 class="ion-font-weight-bold notif-tab2-h2">Харилцагчийн кредит скоринг гэж юу вэ?</h2>
+                            <p>2020-11-20</p>
+                        </a>
+                    </div>
+                </ion-content>
+            </ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

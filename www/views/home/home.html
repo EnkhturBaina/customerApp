@@ -1,13 +1,11 @@
 ﻿<link href="views/home/home.css" rel="stylesheet" />
 <ion-view ng-if="!$root.showBanner" view-title="Зээлийн маркет">
     <ion-pane>
-        <ion-tabs class="home-tabs tabs-top home-card-tab" delegate-handle="myHeaderTabHandle">
+        <ion-tabs class="home-tabs tabs-top home-card-tab" id="homeTabsId" delegate-handle="myHeaderTabHandle">
             <!-- Tab 1 -->
             <ion-tab title="Бараа">
-                <!-- <ion-tab title="Бараа" ng-click="callComingSoon()"> -->
                 <ion-nav-view class="ghostwhite">
                     <ion-content overflow-scroll="true" style="margin: 0 10px">
-                        <!-- <div class="card home-card-1-line" ng-click="callComingSoon()"> -->
                         <div class="card home-card-1-line" ui-sref="loan_calculator">
                             <div class="item home-card-1 card-body item-text-wrap">
                                 <div class="home-card-1-first-row">
@@ -29,7 +27,6 @@
                                 </div>
                             </div>
                             <div class="card home-card home-card-3" ui-sref="trend">
-                                <!-- <div class="card home-card home-card-3" ng-click="callComingSoon()"> -->
                                 <div class="item card-body item-text-wrap small-box">
                                     <div class="ion-text-bold"><span>Тренд</span></div>
                                     <div class="home-card-small-text">
@@ -40,7 +37,6 @@
                         </div>
                         <div class="home-card-container">
                             <div class="card home-card home-card-4" ui-sref="otherGoods">
-                                <!-- <div class="card home-card home-card-4" ng-click="callComingSoon()"> -->
                                 <div class="item card-body item-text-wrap small-box">
                                     <div class="ion-text-bold"><span>Бараа</span></div>
                                     <div class="home-card-small-text">
@@ -100,8 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="card" ui-sref="property_collateral"> -->
-                        <div class="card" ng-click="callComingSoon()">
+                        <div class="card" ui-sref="property_collateral">
                             <div class="item loan-card-4 card-body item-text-wrap">
                                 <div class="loan-card-first-row">
                                     <span class="ion-text-bold ion-float-right">Үл хөдлөх барьцаат зээл</span>
@@ -111,8 +106,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="card" ui-sref="business_loan"> -->
-                        <div class="card" ng-click="callComingSoon()">
+                        <div class="card" ui-sref="business_loan">
+                            <!-- <div class="card" ng-click="callComingSoon()"> -->
                             <div class="item loan-card-5 card-body item-text-wrap">
                                 <div class="loan-card-first-row">
                                     <span class="ion-text-bold ion-float-right">Бизнесийн зээл</span>

@@ -77,7 +77,7 @@ body {
   float: right;
 }
 
-.tabs-top > .tabs {
+.home-card-tab > .tabs {
   height: 40px !important;
   width: 130px !important;
   left: 17px;
@@ -98,6 +98,7 @@ body {
 
 .tab-item-active > .tab-title {
   color: #acd322 !important;
+  font-weight: bold !important;
 }
 
 .tab-button-color-gray {
@@ -856,5 +857,8 @@ h4 {
   color: #a2a7b5;
 }
 .ion-font-weight-bold {
-  font-weight: bold;
+  font-weight: bold !important;
+}
+.content-margin-bottom {
+  margin-bottom: 50px;
 }
