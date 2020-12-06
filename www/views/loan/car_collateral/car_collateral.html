@@ -9,18 +9,6 @@
             <button class="single-button">Хаах</button>
         </div>
     </div>
-    <div id="nationalNumberModal" style="display: none">
-        <span class="national-number-overlay-off-text" ng-click="closeModal()">&#10006;</span>
-        <div class="national-number-overlay-container">
-            <input type="number" maxlength="1" class="national-number-input nationalNumber1" />
-            <input type="number" class="national-number-input nationalNumber2" />
-            <input type="number" class="national-number-input nationalNumber3" />
-            <input type="number" class="national-number-input nationalNumber4" />
-            <input type="text" maxlength="1" class="national-number-input nationalNumberText1" />
-            <input type="text" maxlength="1" class="national-number-input nationalNumberText2" />
-            <input type="text" maxlength="1" class="national-number-input nationalNumberText3" />
-        </div>
-    </div>
     <div ng-repeat="data in [{'title':'Автомашин барьцаалсан зээл'}]" ng-include src="'views/navbar.html'"></div>
     <ion-content overflow-scroll="true" class="ion-modified-content has-header car-collateral-content business-loan-content">
         <div class="big-container ghostwhite-noscroll-container">
@@ -29,18 +17,18 @@
                     <div class="list car-collateral-list">
                         <label class="item item-input car-collateral-label">
                             <p>Улсын дугаар</p>
-                            <input type="text" id="nationalNumber" placeholder="0000 УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" />
+                            <input type="text" id="nationalNumber" class="nationalNumberPicker" placeholder="0000УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" readonly />
                             <!-- <input type="text" id="nationalNumber" placeholder="0000 УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" ng-click="callModal()" /> -->
                         </label>
                         <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label">Үйлдвэр</p>
+                            <p class="input-label" style="margin: 0;">Үйлдвэр</p>
                             <select ng-model="$root.newCarReq.factoryId" style="background-color: transparent" ng-change="getCarmarkData(newCarReq.factoryId)">
                                 <option ng-repeat="com in companyData | filter:{factoryid:'!!'}" value="{{com.factoryid}}">
                                     {{com.factoryname}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label">Загвар</p>
+                            <p class="input-label" style="margin: 0;">Загвар</p>
                             <select ng-model="$root.newCarReq.modelId" style="background-color: transparent">
                                 <option ng-repeat="model in carmerkData | filter:{modelid:'!!'}" value="{{model.modelid}}">
                                     {{model.modelname}}</option>
@@ -52,7 +40,7 @@
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Орж ирсэн он</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="entryYear" maxlength="4" placeholder="Орж ирсэн он" name="entryYear" ng-model="$root.newCarReq.entryYear" />
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="Орж ирсэн он" name="entryYear" ng-model="$root.newCarReq.entryYear" />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Явсан км</p>

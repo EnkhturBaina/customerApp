@@ -13,12 +13,6 @@ body {
 * {
   font-family: "Roboto", sans-serif;
 }
-
-.big-container {
-  height: 100vh !important;
-  margin-bottom: 44px !important;
-}
-
 .cus-header-icon {
   color: #000 !important;
   padding: 0 5px !important;
@@ -201,7 +195,8 @@ h4 {
 .big-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100% !important;
+  margin-bottom: 44px !important;
 }
 
 .magic-container {

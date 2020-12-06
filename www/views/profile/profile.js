@@ -285,6 +285,99 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   };
   $scope.getCompanyData();
   $scope.saveCustomerCar = function () {
-    console.log("1");
+    //console.log("saveCustomerCar");
   };
+
+  var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "Ф", "Х", "У", "Ч"];
+  new MobileSelect({
+    trigger: "#trigger",
+    wheels: [{ data: regChars }, { data: regChars }],
+    position: [0, 0],
+    ensureBtnText: "Болсон",
+    cancelBtnText: "Хаах",
+    transitionEnd: function (indexArr, data) {
+      //scroll xiij bhd ajillah func
+      // console.log(data);
+    },
+    callback: function (indexArr, data) {
+      //console.log("asdasd", data);
+    },
+  });
+
+  // $("body").append(
+  //   "<div class='mobileSelect'>" +
+  //     "<div class='grayLayer'></div>" +
+  //     "<div class='content'>" +
+  //     "<div class='btnBar'>" +
+  //     "<div class='fixWidth marginWidth'>" +
+  //     "<div class='cancel'>Хаах</div>" +
+  //     "<div class='title'></div>" +
+  //     "<div class='ensure'>Болсон</div>" +
+  //     "</div>" +
+  //     "</div>" +
+  //     "<div class='panel'>" +
+  //     "<div class='fixWidth'>" +
+  //     "<div class='wheels'>" +
+  //     "<div class='wheel' style='width: 50%;'>" +
+  //     "<ul class='selectContainer' style='transform: translate3d(0px, 80px, 0px);'>" +
+  //     "<li>А</li>" +
+  //     "<li>Б</li>" +
+  //     "<li>В</li>" +
+  //     "<li>Г</li>" +
+  //     "<li>Д</li>" +
+  //     "<li>Е</li>" +
+  //     "<li>Ж</li>" +
+  //     "<li>З</li>" +
+  //     "<li>И</li>" +
+  //     "<li>Й</li>" +
+  //     "<li>К</li>" +
+  //     "<li>Л</li>" +
+  //     "<li>М</li>" +
+  //     "<li>Н</li>" +
+  //     "<li>О</li>" +
+  //     "<li>П</li>" +
+  //     "<li>Р</li>" +
+  //     "<li>С</li>" +
+  //     "<li>Т</li>" +
+  //     "<li>Ф</li>" +
+  //     "<li>Х</li>" +
+  //     "<li>У</li>" +
+  //     "<li>Ч</li>" +
+  //     "</ul>" +
+  //     "</div>" +
+  //     "<div class='wheel' style='width: 50%;'>" +
+  //     "<ul class='selectContainer' style='transform: translate3d(0px, 80px, 0px);'>" +
+  //     "<li>А</li>" +
+  //     "<li>Б</li>" +
+  //     "<li>В</li>" +
+  //     "<li>Г</li>" +
+  //     "<li>Д</li>" +
+  //     "<li>Е</li>" +
+  //     "<li>Ж</li>" +
+  //     "<li>З</li>" +
+  //     "<li>И</li>" +
+  //     "<li>Й</li>" +
+  //     "<li>К</li>" +
+  //     "<li>Л</li>" +
+  //     "<li>М</li>" +
+  //     "<li>Н</li>" +
+  //     "<li>О</li>" +
+  //     "<li>П</li>" +
+  //     "<li>Р</li>" +
+  //     "<li>С</li>" +
+  //     "<li>Т</li>" +
+  //     "<li>Ф</li>" +
+  //     "<li>Х</li>" +
+  //     "<li>У</li>" +
+  //     "<li>Ч</li>" +
+  //     "</ul>" +
+  //     "</div>" +
+  //     "</div>" +
+  //     "<div class='selectLine'></div>" +
+  //     "<div class='shadowMask'></div>" +
+  //     "</div>" +
+  //     "</div>" +
+  //     "</div>" +
+  //     "</div>"
+  // );
 });

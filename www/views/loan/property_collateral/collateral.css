@@ -24,9 +24,11 @@
   border-top-width: 0px;
 }
 .collateral-loan-label input {
-  color: #a2a7b5;
   text-align: right;
-  padding-right: 0px !important;
+  color: #4b5180 !important;
+  font-weight: bold;
+  padding-right: 0px;
+  background-color: transparent !important;
 }
 .collateral-loan-label p {
   color: #a2a7b5;
@@ -97,4 +99,11 @@
 .pc-card-back i {
   position: absolute;
   zoom: 2;
+}
+.property-coll-label p {
+  padding: 6px 0px;
+  width: 80%;
+  text-align: center;
+  white-space: pre-line !important;
+  color: #a2a7b5;
 }

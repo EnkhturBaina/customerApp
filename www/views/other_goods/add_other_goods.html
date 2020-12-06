@@ -1,6 +1,15 @@
 <ion-view id="loanPages" hide-nav-bar="true">
     <link href="views/other_goods/other_goods.css" rel="stylesheet" />
     <link href="views/loan/business_loan/business_loan.css" rel="stylesheet" />
+    <div id="overlayItemPicGoods" ng-click="goodsSourceSelectOff()">
+        <div class="overlay-goods-content">
+            <div class="get-photo-choose">
+                <div class="get-camera" ng-click="takePhoto()"><i class="icon ion-camera photo-choose-icon"></i><span class="photo-choose-span">Камер нээх</span></div>
+                <div class="get-gallery" ng-click="takePhoto('1')"><i class="icon ion-images photo-choose-icon"></i><span class="photo-choose-span">Зурагнаас сонгох</span></div>
+            </div>
+            <button class="single-button">Хаах</button>
+        </div>
+    </div>
     <div ng-repeat="data in [{'title':'Бараа нэмэх'}]" ng-include src="'views/navbar.html'"></div>
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 autoleasing-step1-content">
         <div class="big-container ghostwhite-noscroll-container">
@@ -10,7 +19,7 @@
                         <span class="ion-color-text">Та барааны шинж чанарыг харуулахуйц бүтэн зургийг оруулна уу</span>
                     </div>
                     <div class="">
-                        <div class="img-input-area" ng-click="takePhoto()">
+                        <div class="img-input-area" ng-click="goodsSourceSelectOn()">
                             <span class="add-ico" ng-if="($root.newCarReq.image|isEmpty)">+</span>
                         </div>
                         <div class="selector-container">

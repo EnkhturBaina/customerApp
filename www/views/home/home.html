@@ -200,8 +200,8 @@
                 </ion-slide>
             </ion-slide-box>
             <div class="slider-button-container" ng-if="((bannerData|objLength)!=activeSlideIndex+1)">
-                <button class="bottom-first-button" ng-click="nextSlideChanged()">ДАРААХ</button>
-                <button class="bottom-second-button" ng-click="endSlideChanged()">АЛГАСАХ</button>
+                <button class="bottom-first-button" ng-click="endSlideChanged()">АЛГАСАХ</button>
+                <button class="bottom-second-button" ng-click="nextSlideChanged()">ДАРААХ</button>
             </div>
             <div ng-if="((bannerData|objLength)==activeSlideIndex+1)">
                 <ion-checkbox class="intro-not-show" ng-model="isChecked.checked" ng-change="isNotShow()">

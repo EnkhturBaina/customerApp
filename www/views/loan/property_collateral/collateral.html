@@ -46,21 +46,21 @@
           </label>
           <label class="item item-input collateral-loan-label">
             <p>Давхарын байршил</p>
-            <input type="text" />
+            <input inputmode="numeric" pattern="[0-9]*" type="text" />
           </label>
           <label class="item item-input collateral-loan-label">
             <p>Өрөөний тоо</p>
-            <input type="text" />
+            <input inputmode="numeric" pattern="[0-9]*" type="text" />
           </label>
           <label class="item item-input collateral-loan-label">
             <p>Талбайн хэмжээ /м.кв/</p>
-            <input type="text" />
+            <input inputmode="numeric" pattern="[0-9]*" type="text" />
           </label>
           <label class="item item-input collateral-loan-label">
             <p>Зах зээлийн үнэлгээ</p>
-            <input type="text" />
+            <input inputmode="numeric" pattern="[0-9]*" type="text" />
           </label>
-          <div class="item item-input profile-label" style="border: 0; margin-top: 1px">
+          <div class="item item-input property-coll-label" style="border: 0;margin-top: 1px;background: transparent;">
             <div class="pc-card-front col-50">
               <p style="padding: 6px 0px">Барилгын гаднах зураг</p>
               <div ng-if="$root.collateralLoanData.picture1|isEmpty" style="width: 120px; border-radius: 10px; border: 1px dashed #ccc; height: 75px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">

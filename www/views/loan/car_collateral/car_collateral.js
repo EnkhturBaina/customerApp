@@ -56,11 +56,12 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     }
   };
   $scope.checkReqiured = function (param) {
+    //console.log("$rootScope.newCarReq", $rootScope.newCarReq);
     if (param == "step1") {
       if (isEmpty($rootScope.newCarReq.nationalNumber) || isEmpty($rootScope.newCarReq.factoryId) || isEmpty($rootScope.newCarReq.modelId) || isEmpty($rootScope.newCarReq.productYear) || isEmpty($rootScope.newCarReq.entryYear) || isEmpty($rootScope.newCarReq.mile)) {
         $rootScope.alert("Мэдээллээ бүрэн оруулна уу");
         return false;
-      } else if ($rootScope.newCarReq.nationalNumber.length < 8) {
+      } else if ($rootScope.newCarReq.nationalNumber.length < 7) {
         $rootScope.alert("Улсын дугаар дутуу");
         return false;
       } else if ($rootScope.newCarReq.productYear.length < 4) {
@@ -102,22 +103,12 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $("#productYear").mask("0000");
   $("#entryYear").mask("0000");
   $("#odo").mask("000000000");
-  $("#nationalNumber").mask("0000 AAA", {
-    translation: {
-      A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
-    },
-  });
-  $scope.callModal = function () {
-    if (document.getElementById("nationalNumberModal")) {
-      document.getElementById("nationalNumberModal").style.display = "block";
-    }
-  };
-  $scope.closeModal = function () {
-    if (document.getElementById("nationalNumberModal")) {
-      document.getElementById("nationalNumberModal").style.display = "none";
-    }
-  };
-  $("#nationalNumberModal").find("input[type=number]").mask("0");
+  // $("#nationalNumber").mask("0000 AAA", {
+  //   translation: {
+  //     A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
+  //   },
+  // });
+  // $("#nationalNumberModal").find("input[type=number]").mask("0");
   $("#nationalNumberModal")
     .find("input[type=text]")
     .mask("A", {
@@ -131,5 +122,30 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
   $scope.sourceSelectOff = function () {
     document.getElementById("overlay").style.display = "none";
+  };
+  var chars = ["А", "Б", "В", "Г", "Д", "Е", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "Х", "У", "Ү", "Ц", "Ч", "Э", "Я"];
+  var nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  new MobileSelect({
+    trigger: ".nationalNumberPicker",
+    wheels: [{ data: nums }, { data: nums }, { data: nums }, { data: nums }, { data: chars }, { data: chars }, { data: chars }],
+    position: [0, 0],
+    ensureBtnText: "Болсон",
+    maskOpacity: 0.5,
+    cancelBtnText: "Хаах",
+    transitionEnd: function (indexArr, data) {
+      //scrolldood duusahad ajillah func
+    },
+    callback: function (indexArr, data) {
+      var a = data.join("");
+      $scope.setNumber(a);
+      $rootScope.newCarReq.nationalNumber = a;
+    },
+  });
+
+  $scope.setNumber = function (data) {
+    //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
+    $(function () {
+      $("#nationalNumber").val(data).trigger("input");
+    });
   };
 });

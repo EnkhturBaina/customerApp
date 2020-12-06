@@ -1,6 +1,5 @@
 <ion-view hide-nav-bar="true">
     <link href="views/profile/profile.css" rel="stylesheet" />
-
     <div id="overlayProfilePicute" ng-click="ppSourceSelectOff()">
         <div class="overlay-profile-content">
             <div class="get-photo-choose">
@@ -57,7 +56,8 @@
                                 <span id="firstNameError" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</span>
                             </label>
                             <label class="item item-input profile-label">
-                                <p>Регситр</p>
+                                <p style="overflow: unset;">Регситр</p>
+                                <!-- <div id="trigger" class="select-reg-chars"><span>А</span><span>А</span></div> -->
                                 <input type="text" id="userID" placeholder="АА00000000" name="uniqueIdentifier" ng-model="$root.customerProfileData.uniqueidentifier" />
                             </label>
                             <label class="item item-input profile-label">

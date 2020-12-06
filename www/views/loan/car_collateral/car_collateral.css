@@ -3,6 +3,10 @@
   color: #4b5180 !important;
   font-weight: bold;
   padding-right: 0px;
+  background-color: transparent !important;
+  position: absolute !important;
+  width: auto !important;
+  right: 5px !important;
 }
 .car-col-content {
   margin-bottom: 50px;
@@ -15,16 +19,20 @@
 
 .car-collateral-list p {
   color: #a2a7b5 !important;
+  margin: 5px 0;
 }
 .car-collateral-label {
   width: 100%;
   border-left: none;
   border-right: none;
   background: none;
-  padding: 5px 0;
+  padding: 5px;
   border-bottom-width: 1px;
   border-color: #ccc;
   border-top-width: 0px;
+}
+.item-select:after {
+  right: 5px !important;
 }
 .car-img img {
   width: 90px;
@@ -273,7 +281,7 @@
   right: 0;
 }
 .car-collateral-content {
-  height: 100%;
+  height: 88%;
 }
 .car-col-step2-select {
   width: 25%;
@@ -319,68 +327,6 @@
 }
 .step3-bank-dtl-container {
   padding-top: 2px;
-}
-#nationalNumberModal {
-  margin: 0 auto;
-  z-index: 99 !important;
-  position: relative;
-  display: none;
-  width: 81%;
-  height: 15%;
-  top: 15vh;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #fff;
-  z-index: 2;
-  cursor: pointer;
-  border-radius: 10px;
-  border-top: 2px solid #a9d229;
-  border-bottom: 2px solid #3ec1f4;
-  background-image: linear-gradient(#a9d229, #3ec1f4), linear-gradient(#a9d229, #3ec1f4);
-  background-size: 2px 100%;
-  background-position: 0 0, 100% 0;
-  background-repeat: no-repeat;
-}
-.national-number-overlay-off-text {
-  color: #000;
-  position: absolute;
-  left: 88%;
-  padding: 5px;
-  top: 2%;
-  font-size: 25px;
-}
-.national-number-overlay-container {
-  animation: popup 0.2s;
-  position: absolute;
-  left: 0;
-  top: 40%;
-  width: auto;
-  color: #4b5180;
-  border-radius: 10px;
-  display: flex;
-  margin: 0 auto;
-}
-@keyframes popup {
-  0% {
-    transform: scale(0.8);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-.national-number-input {
-  width: 30px;
-  margin: 0 5px;
-  background: red;
-  /* margin: 0 auto; */
-  border-radius: 7px;
-  text-align: center;
-  font-size: 26px !important;
-  font-weight: bold;
-}
-.nationalNumberText1 {
-  margin-left: 30px;
 }
 #overlay {
   position: fixed;

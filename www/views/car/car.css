@@ -331,6 +331,7 @@
   display: flex;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
+  margin-bottom: 20px;
 }
 .suggest-slider-container {
   position: relative;
@@ -353,7 +354,7 @@
 .next {
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 45%;
   width: auto;
   padding: 16px;
   /* margin-top: -22px; */
@@ -404,4 +405,7 @@
 .brand-tags {
   display: inline-grid;
   width: 100%;
+}
+.car-info-content {
+  height: 90%;
 }

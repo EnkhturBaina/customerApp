@@ -209,7 +209,9 @@ input[type="number"] {
   color: #fff !important;
   border-color: #fff !important;
 }
-
+#profile-tabs-striped {
+  display: block;
+}
 #profile-tabs-striped .tab-item.activated {
   border-color: #fff !important;
   color: #fff !important;
@@ -379,4 +381,14 @@ input[type="number"] {
   border: 0px !important;
   float: right;
   right: 0;
+}
+.select-reg-chars {
+}
+.select-reg-chars span {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0 5px;
 }

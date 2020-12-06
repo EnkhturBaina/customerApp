@@ -1,31 +1,10 @@
 otherGoods = angular.module("otherGoods.Ctrl", []);
-otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $window, $scope) {
+otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $scope) {
   $scope.asdasdasd = function () {
     localStorage.removeItem("otherGoods");
     localStorage.removeItem("otherGoodsMaxId");
   };
-  //   $scope.asdasdasd();
-  $scope.takePhoto = function (path) {
-    navigator.camera.getPicture(
-      function (imageData) {
-        if (isEmpty($rootScope.newCarReq)) {
-          $rootScope.newCarReq = {};
-        }
-        $rootScope.newCarReq.image = "data:image/jpeg;base64," + imageData;
-        document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(" + $rootScope.newCarReq.image + ")";
-        document.getElementsByClassName("img-input-area")[0].style.opacity = "1";
-        $scope.$apply();
-      },
-      function onFail(message) {
-        alert("Failed because: " + message);
-      },
-      {
-        quality: 50,
-        destinationType: Camera.DestinationType.DATA_URL,
-        correctOrientation: true,
-      }
-    );
-  };
+  // $scope.asdasdasd();
   $scope.savebtn = function () {
     if (isEmpty($rootScope.newCarReq.amount)) {
       $rootScope.alert("Та барааны үнийг оруулна уу");
@@ -76,4 +55,57 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $w
   };
 
   $scope.getAllSupplier();
+  $scope.goodsSourceSelectOn = function (path) {
+    $scope.selectedImagePath = path;
+    document.getElementById("overlayItemPicGoods").style.display = "block";
+  };
+  $scope.goodsSourceSelectOff = function () {
+    document.getElementById("overlayItemPicGoods").style.display = "none";
+  };
+  $scope.takePhoto = function (type) {
+    var srcType = Camera.PictureSourceType.CAMERA;
+    if (type == "1") {
+      srcType = Camera.PictureSourceType.PHOTOLIBRARY;
+    }
+    navigator.camera.getPicture(
+      function (imageData) {
+        if (isEmpty($rootScope.newCarReq)) {
+          $rootScope.newCarReq = {};
+        }
+        $rootScope.newCarReq.image = "data:image/jpeg;base64," + imageData;
+        document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(" + $rootScope.newCarReq.image + ")";
+        document.getElementsByClassName("img-input-area")[0].style.opacity = "1";
+        $scope.$apply();
+      },
+      function onFail(message) {},
+      {
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL,
+        correctOrientation: true,
+        sourceType: srcType,
+        encodingType: Camera.EncodingType.JPEG,
+      }
+    );
+  };
+  // $scope.takePhoto = function (path) {
+  //   navigator.camera.getPicture(
+  //     function (imageData) {
+  //       if (isEmpty($rootScope.newCarReq)) {
+  //         $rootScope.newCarReq = {};
+  //       }
+  //       $rootScope.newCarReq.image = "data:image/jpeg;base64," + imageData;
+  //       document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(" + $rootScope.newCarReq.image + ")";
+  //       document.getElementsByClassName("img-input-area")[0].style.opacity = "1";
+  //       $scope.$apply();
+  //     },
+  //     function onFail(message) {
+  //       alert("Failed because: " + message);
+  //     },
+  //     {
+  //       quality: 50,
+  //       destinationType: Camera.DestinationType.DATA_URL,
+  //       correctOrientation: true,
+  //     }
+  //   );
+  // };
 });
