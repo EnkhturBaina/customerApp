@@ -1,4 +1,4 @@
-angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $state, $stateParams, $rootScope, serverDeferred) {
+angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal) {
   $scope.replaceCyr = function (lastName) {
     var rex = /^[А-ЯӨҮа-яөү\-\s]+$/;
     var inputLastName = document.getElementById("customerLastName");
@@ -96,6 +96,8 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.getProfileData();
 
   $scope.saveProfileData = function () {
+    $scope.customerProfileData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+
     if (isEmpty($scope.customerProfileData.lastname)) {
       $rootScope.alert("Та овогоо оруулна уу");
     } else if (isEmpty($scope.customerProfileData.firstname)) {
@@ -111,7 +113,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerProfileData.stayedtimebyyear)) {
       $rootScope.alert("Ажилласан жилээ оруулна уу");
     } else {
-      // console.log($scope.customerProfileData);
+      console.log($scope.customerProfileData);
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
         // console.log("customerProfileData", response);
         $rootScope.loginUserInfo = mergeJsonObjs($scope.customerProfileData, $rootScope.loginUserInfo);
@@ -187,11 +189,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   if (!isEmpty($scope.nextPath)) {
     $scope.overlayOn();
   }
-  $("#userID").mask("AA00000000", {
-    translation: {
-      A: { pattern: /^[А-ЯӨҮа-яөү]+$/ },
-    },
-  });
 
   $scope.addDealBank = function () {
     $scope.customerDealBank.dim1 = $scope.loginUserInfo.customerid;
@@ -287,97 +284,66 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.saveCustomerCar = function () {
     //console.log("saveCustomerCar");
   };
+  $scope.clickReg = function () {};
+  var keyInput;
+  $ionicPlatform.ready(function () {
+    setTimeout(function () {
+      var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "Ф", "Х", "У", "Ч"];
+      new MobileSelect({
+        trigger: ".profileRegSelector",
+        wheels: [{ data: regChars }, { data: regChars }],
+        position: [0, 0],
+        ensureBtnText: "Болсон",
+        cancelBtnText: "Хаах",
+        transitionEnd: function (indexArr, data) {
+          //scroll xiij bhd ajillah func
+          // console.log(data);
+        },
+        callback: function (indexArr, data) {
+          $("#regCharA").text(data[0]);
 
-  var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "Ф", "Х", "У", "Ч"];
-  new MobileSelect({
-    trigger: "#trigger",
-    wheels: [{ data: regChars }, { data: regChars }],
-    position: [0, 0],
-    ensureBtnText: "Болсон",
-    cancelBtnText: "Хаах",
-    transitionEnd: function (indexArr, data) {
-      //scroll xiij bhd ajillah func
-      // console.log(data);
-    },
-    callback: function (indexArr, data) {
-      //console.log("asdasd", data);
-    },
+          $("#regCharB").text(data[1]);
+          $scope.overlayKeyOn();
+
+          keyInput = document.getElementById("regNums");
+          if (keyInput) {
+            $scope.clearD = function () {
+              keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
+            };
+
+            $scope.addCode = function (key) {
+              keyInput.value = keyInput.value + key;
+            };
+
+            $scope.emptyCode = function () {
+              keyInput.value = "";
+            };
+
+            $scope.emptyCode();
+          }
+        },
+      });
+      console.log("MobileSelect");
+      $("#regNums").mask("00000000");
+    }, 1000);
   });
+  $scope.overlayKeyOn = function () {
+    $scope.modal.show();
+  };
 
-  // $("body").append(
-  //   "<div class='mobileSelect'>" +
-  //     "<div class='grayLayer'></div>" +
-  //     "<div class='content'>" +
-  //     "<div class='btnBar'>" +
-  //     "<div class='fixWidth marginWidth'>" +
-  //     "<div class='cancel'>Хаах</div>" +
-  //     "<div class='title'></div>" +
-  //     "<div class='ensure'>Болсон</div>" +
-  //     "</div>" +
-  //     "</div>" +
-  //     "<div class='panel'>" +
-  //     "<div class='fixWidth'>" +
-  //     "<div class='wheels'>" +
-  //     "<div class='wheel' style='width: 50%;'>" +
-  //     "<ul class='selectContainer' style='transform: translate3d(0px, 80px, 0px);'>" +
-  //     "<li>А</li>" +
-  //     "<li>Б</li>" +
-  //     "<li>В</li>" +
-  //     "<li>Г</li>" +
-  //     "<li>Д</li>" +
-  //     "<li>Е</li>" +
-  //     "<li>Ж</li>" +
-  //     "<li>З</li>" +
-  //     "<li>И</li>" +
-  //     "<li>Й</li>" +
-  //     "<li>К</li>" +
-  //     "<li>Л</li>" +
-  //     "<li>М</li>" +
-  //     "<li>Н</li>" +
-  //     "<li>О</li>" +
-  //     "<li>П</li>" +
-  //     "<li>Р</li>" +
-  //     "<li>С</li>" +
-  //     "<li>Т</li>" +
-  //     "<li>Ф</li>" +
-  //     "<li>Х</li>" +
-  //     "<li>У</li>" +
-  //     "<li>Ч</li>" +
-  //     "</ul>" +
-  //     "</div>" +
-  //     "<div class='wheel' style='width: 50%;'>" +
-  //     "<ul class='selectContainer' style='transform: translate3d(0px, 80px, 0px);'>" +
-  //     "<li>А</li>" +
-  //     "<li>Б</li>" +
-  //     "<li>В</li>" +
-  //     "<li>Г</li>" +
-  //     "<li>Д</li>" +
-  //     "<li>Е</li>" +
-  //     "<li>Ж</li>" +
-  //     "<li>З</li>" +
-  //     "<li>И</li>" +
-  //     "<li>Й</li>" +
-  //     "<li>К</li>" +
-  //     "<li>Л</li>" +
-  //     "<li>М</li>" +
-  //     "<li>Н</li>" +
-  //     "<li>О</li>" +
-  //     "<li>П</li>" +
-  //     "<li>Р</li>" +
-  //     "<li>С</li>" +
-  //     "<li>Т</li>" +
-  //     "<li>Ф</li>" +
-  //     "<li>Х</li>" +
-  //     "<li>У</li>" +
-  //     "<li>Ч</li>" +
-  //     "</ul>" +
-  //     "</div>" +
-  //     "</div>" +
-  //     "<div class='selectLine'></div>" +
-  //     "<div class='shadowMask'></div>" +
-  //     "</div>" +
-  //     "</div>" +
-  //     "</div>" +
-  //     "</div>"
-  // );
+  $scope.saveRegNums = function () {
+    if (keyInput.value.length < 8) {
+      $rootScope.alert("Регистер ээ бүрэн оруулна уу.");
+    } else {
+      $scope.modal.hide();
+    }
+  };
+  $ionicModal
+    .fromTemplateUrl("templates/modal.html", {
+      scope: $scope,
+      backdropClickToClose: false,
+    })
+    .then(function (modal) {
+      $scope.modal = modal;
+    });
 });

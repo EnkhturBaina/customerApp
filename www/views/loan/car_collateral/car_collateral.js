@@ -123,11 +123,12 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.sourceSelectOff = function () {
     document.getElementById("overlay").style.display = "none";
   };
+  var charA = ["А", "Б", "Г", "Д", "З", "Н", "О", "Ө", "С", "Т", "Х", "У", "Ц", "Ч"];
   var chars = ["А", "Б", "В", "Г", "Д", "Е", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "Х", "У", "Ү", "Ц", "Ч", "Э", "Я"];
   var nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   new MobileSelect({
     trigger: ".nationalNumberPicker",
-    wheels: [{ data: nums }, { data: nums }, { data: nums }, { data: nums }, { data: chars }, { data: chars }, { data: chars }],
+    wheels: [{ data: nums }, { data: nums }, { data: nums }, { data: nums }, { data: charA }, { data: chars }, { data: chars }],
     position: [0, 0],
     ensureBtnText: "Болсон",
     maskOpacity: 0.5,
