@@ -13,12 +13,6 @@ body {
 * {
   font-family: "Roboto", sans-serif;
 }
-
-.big-container {
-  height: 100vh !important;
-  margin-bottom: 44px !important;
-}
-
 .cus-header-icon {
   color: #000 !important;
   padding: 0 5px !important;
@@ -77,7 +71,7 @@ body {
   float: right;
 }
 
-.tabs-top > .tabs {
+.home-card-tab > .tabs {
   height: 40px !important;
   width: 130px !important;
   left: 17px;
@@ -98,6 +92,7 @@ body {
 
 .tab-item-active > .tab-title {
   color: #acd322 !important;
+  font-weight: bold !important;
 }
 
 .tab-button-color-gray {
@@ -200,7 +195,8 @@ h4 {
 .big-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100% !important;
+  margin-bottom: 44px !important;
 }
 
 .magic-container {
@@ -856,5 +852,8 @@ h4 {
   color: #a2a7b5;
 }
 .ion-font-weight-bold {
-  font-weight: bold;
+  font-weight: bold !important;
+}
+.content-margin-bottom {
+  margin-bottom: 50px;
 }

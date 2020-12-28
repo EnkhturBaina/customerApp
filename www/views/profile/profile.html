@@ -1,6 +1,5 @@
 <ion-view hide-nav-bar="true">
     <link href="views/profile/profile.css" rel="stylesheet" />
-
     <div id="overlayProfilePicute" ng-click="ppSourceSelectOff()">
         <div class="overlay-profile-content">
             <div class="get-photo-choose">
@@ -57,8 +56,12 @@
                                 <span id="firstNameError" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</span>
                             </label>
                             <label class="item item-input profile-label">
-                                <p>Регситр</p>
-                                <input type="text" id="userID" placeholder="АА00000000" name="uniqueIdentifier" ng-model="$root.customerProfileData.uniqueidentifier" />
+                                <p style="overflow: unset;">Регситр</p>
+                                <div class="select-reg-chars">
+                                    <span id="regCharA" type="text">A</span>
+                                    <span id="regCharB" type="text">A</span>
+                                </div>
+                                <input type="text" inputmode="numeric" pattern="[0-9]*" id="regNums" class="profileRegSelector" placeholder="00000000" name="uniqueIdentifier" readonly />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Хаяг</p>
@@ -66,7 +69,7 @@
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Утасны дугаар</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" />
+                                <input type="text" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Гэрлэсэн эсэх</p>
@@ -123,15 +126,15 @@
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Сарын орлого</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlyincome" placeholder="Сарын орлого" name="monthlyincome" format-input />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlyincome" placeholder="-" name="monthlyincome" format-input />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Өрхийн нийт орлого</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.totalincomehousehold" placeholder="Өрхийн нийт орлого" name="totalincome" format-input />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.totalincomehousehold" placeholder="-" name="totalincome" format-input />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Төлж буй зээл</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlypayment" placeholder="Төлж буй зээл" name="payloan" format-input />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlypayment" placeholder="-" name="payloan" format-input />
                             </label>
                             <label class="item profile-label">
                                 <p>Харьцдаг банк</p>
@@ -163,7 +166,7 @@
                                 <div class="expandcollapse-item" ng-click="growDivTab3(1)">
                                     <div class="row" style="display: block;">
                                         <span class="ion-float-left ion-color-text ion-font-weight-bold">Автомашин</span>
-                                        <div class="property-save-btn" id="propertySaveButton" style="display: none;" ng-click="saveCustomerCar()">Хадгалах</div>
+                                        <div class="property-save-btn" id="propertySaveButton1" style="display: none;" ng-click="saveCustomerCar(1)">Хадгалах</div>
                                     </div>
                                 </div>
                                 <div class="list fix-list grow expanded" id="grow1">
@@ -189,15 +192,15 @@
                                             </label>
                                             <label class="item item-input customer-car-collateral-label">
                                                 <span>Үйлдвэрлэсэн он</span>
-                                                <input inputmode="numeric" pattern="[0-9]*" type="text" id="productYear" placeholder="Үйлдвэрлэсэн он" name="productYear" ng-model="$root.customerCar.productYear" />
+                                                <input inputmode="numeric" pattern="[0-9]*" type="text" id="productYear" placeholder="-" name="productYear" ng-model="$root.customerCar.productYear" />
                                             </label>
                                             <label class="item item-input customer-car-collateral-label">
                                                 <span>Орж ирсэн он</span>
-                                                <input inputmode="numeric" pattern="[0-9]*" type="text" id="entryYear" maxlength="4" placeholder="Орж ирсэн он" name="entryYear" ng-model="$root.customerCar.entryYear" />
+                                                <input inputmode="numeric" pattern="[0-9]*" type="text" id="entryYear" maxlength="4" placeholder="-" name="entryYear" ng-model="$root.customerCar.entryYear" />
                                             </label>
                                             <label class="item item-input customer-car-collateral-label">
                                                 <span>Явсан км</span>
-                                                <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="Явсан км" name="odo" ng-model="$root.customerCar.mile" format-input />
+                                                <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="-" name="odo" ng-model="$root.customerCar.mile" format-input />
                                             </label>
                                         </div>
                                     </div>
@@ -206,8 +209,9 @@
 
                             <div class="item property-card-body">
                                 <div class="expandcollapse-item" ng-click="growDivTab3(2)">
-                                    <div class="row">
+                                    <div class="row" style="display: block;">
                                         <span class="ion-float-left ion-color-text ion-font-weight-bold">Хашаа байшин</span>
+                                        <div class="property-save-btn" id="propertySaveButton2" style="display: none;" ng-click="saveCustomerCar(2)">Хадгалах</div>
                                     </div>
                                 </div>
                                 <div class="list fix-list grow expanded" id="grow2">
@@ -223,8 +227,9 @@
                             </div>
                             <div class="item property-card-body">
                                 <div class="expandcollapse-item" ng-click="growDivTab3(3)">
-                                    <div class="row">
+                                    <div class="row" style="display: block;">
                                         <span class="ion-float-left ion-color-text ion-font-weight-bold">Цахилгаан бараа</span>
+                                        <div class="property-save-btn" id="propertySaveButton3" style="display: none;" ng-click="saveCustomerCar(3)">Хадгалах</div>
                                     </div>
                                 </div>
                                 <div class="list fix-list grow expanded" id="grow3">
@@ -240,8 +245,9 @@
                             </div>
                             <div class="item property-card-body">
                                 <div class="expandcollapse-item" ng-click="growDivTab3(4)">
-                                    <div class="row">
+                                    <div class="row" style="display: block;">
                                         <span class="ion-float-left ion-color-text ion-font-weight-bold">Тавилга</span>
+                                        <div class="property-save-btn" id="propertySaveButton4" style="display: none;" ng-click="saveCustomerCar(4)">Хадгалах</div>
                                     </div>
                                 </div>
                                 <div class="list fix-list grow expanded" id="grow4">
@@ -274,3 +280,34 @@
         </ion-tabs>
     </ion-pane>
 </ion-view>
+<script id="templates/modal.html" type="text/ng-template">
+  <ion-modal-view class="reg-num-modal">
+    <ion-content scroll="false" class="padding bank-chat-content">
+        <div id="keypadReg" cellpadding="5" cellspacing="3">
+            <div class="row">
+                <div class="col keyboard-title" ng-click="saveRegNums()">Хадгалах</div>
+            </div>
+            <div class="row keypad-row">
+                <div class="col keypad-col" ng-click="addCode('1')">1</div>
+                <div class="col keypad-col" ng-click="addCode('2')">2</div>
+                <div class="col keypad-col" ng-click="addCode('3')">3</div>
+            </div>
+            <div class="row keypad-row">
+                <div class="col keypad-col" ng-click="addCode('4')">4</div>
+                <div class="col keypad-col" ng-click="addCode('5')">5</div>
+                <div class="col keypad-col" ng-click="addCode('6')">6</div>
+            </div>
+            <div class="row keypad-row">
+                <div class="col keypad-col" ng-click="addCode('7')">7</div>
+                <div class="col keypad-col" ng-click="addCode('8')">8</div>
+                <div class="col keypad-col" ng-click="addCode('9')">9</div>
+            </div>
+            <div class="row keypad-row">
+                <div class="col keypad-col" ng-click="emptyCode()">C</div>
+                <div class="col keypad-col" ng-click="addCode('0')">0</div>
+                <div class="col keypad-col" ng-click="clearD()"><i class="ion-arrow-left-c"></i></div>
+            </div>
+        </div>
+    </ion-content>
+  </ion-modal-view>
+</script>

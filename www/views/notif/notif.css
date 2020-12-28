@@ -1,0 +1,19 @@
+.notif-tabs > .tabs > .tab-item {
+  max-width: none;
+}
+.notif-tabs > .tabs {
+  background-color: #f8f8fd !important;
+}
+.notif-list-item {
+  background-color: #f8f8fd !important;
+}
+
+.notif-tab2-h2 {
+  white-space: normal !important;
+}
+.fade-in-out.ng-enter,
+.fade-in-out .ng-enter {
+  -webkit-animation: slideInUp 0.3s;
+  -moz-animation: slideInUp 0.3s;
+  animation: slideInUp 0.3s;
+}

@@ -52,7 +52,7 @@
             </ion-tabs>
         </div>
     </div>
-    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50">
+    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 car-info-content">
         <div class="big-container">
             <div class="magic-container">
                 <!-- Car -->
@@ -60,7 +60,7 @@
                     <ion-slide-box class="leasing-badge">
                         <ion-slide ng-repeat="imgs in carData.images">
                             <div class="box1">
-                                <img class="car-img" style="width: 100%; height: 200px" ng-src="{{imgs|guessImageMime}}" />
+                                <img class="car-img" style="" ng-src="{{imgs|guessImageMime}}" />
                             </div>
                         </ion-slide>
                     </ion-slide-box>

@@ -58,11 +58,13 @@
   display: flex;
   position: relative;
   float: left;
-  width: 170px;
+  width: 220px;
 }
 .cars img {
   height: 100px;
-  width: 130px;
+  margin: 0 auto;
+  width: auto;
+  max-width: 130px;
 }
 .cars .desc span {
   font-size: 12px;
@@ -214,13 +216,17 @@
   line-height: 16px;
 }
 .car-img {
-  width: 100%;
+  width: auto;
   height: auto;
+  margin: 0 auto;
+  display: block;
+  height: 200px;
 }
 .car-img-suggest {
-  width: 100%;
-  height: auto;
+  width: auto;
   height: 8vh;
+  margin: 0 auto;
+  max-width: 20vw;
 }
 .leasing-badge:before {
   content: "";
@@ -325,6 +331,7 @@
   display: flex;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
+  margin-bottom: 20px;
 }
 .suggest-slider-container {
   position: relative;
@@ -347,7 +354,7 @@
 .next {
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 45%;
   width: auto;
   padding: 16px;
   /* margin-top: -22px; */
@@ -398,4 +405,7 @@
 .brand-tags {
   display: inline-grid;
   width: 100%;
+}
+.car-info-content {
+  height: 90%;
 }
