@@ -1,41 +1,41 @@
 <ion-view id="loanPages" hide-nav-bar="true">
-  <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
-  <div ng-repeat="data in [{'title':'Автомашины лизинг'}]" ng-include src="'views/navbar.html'"></div>
-  <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 autoleasing-step1-content">
-    <div class="big-container ghostwhite-noscroll-container">
-      <div class="magic-container">
-        <div class="progressbar-container">
-          <ul id="progress-bar" class="progressbar">
-            <li class="active step-li-1"></li>
-            <li class="step-li-22"></li>
-            <li class="step-li-3"></li>
-            <li class="step-li-4"></li>
-          </ul>
-        </div>
-        <div class="bottom-border-input-text margin-lr-20">
-          <p class="ion-color-big-text">Код оруулна уу</p>
-          <input type="text" placeholder="DCC0001" name="carCode" class="step1-car-code" ng-model="$root.newReqiust.itemcode" />
-        </div>
-        <div style="display: flex; height: 40%; flex-direction: column; align-items: center; justify-content: flex-end">
-          <div class="qr-btn-container">
-            <button class="button qr-button" id="qr" ng-click="showQRreader()">
+    <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Автомашины лизинг'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 autoleasing-step1-content">
+        <div class="big-container ghostwhite-noscroll-container">
+            <div class="magic-container">
+                <div class="progressbar-container">
+                    <ul id="progress-bar" class="progressbar">
+                        <li class="active step-li-1"></li>
+                        <li class="step-li-22"></li>
+                        <li class="step-li-3"></li>
+                        <li class="step-li-4"></li>
+                    </ul>
+                </div>
+                <div class="bottom-border-input-text margin-lr-20">
+                    <p class="ion-color-big-text">Код оруулна уу</p>
+                    <input type="text" placeholder="DCC0001" name="carCode" class="step1-car-code" ng-model="$root.newReqiust.itemcode" ng-keyup="getCarDatasIdEnterkey($event,$root.newReqiust.itemcode)" />
+                </div>
+                <div style="display: flex; height: 40%; flex-direction: column; align-items: center; justify-content: flex-end">
+                    <div class="qr-btn-container">
+                        <button class="button qr-button" id="qr" ng-click="showQRreader()">
               <span class="filter">
                 <i class="ion-qr-scanner qr-ico"></i>
                 QR уншуулах
               </span>
             </button>
-          </div>
-        </div>
-      </div>
-      <ion-footer class="bottom-footer">
-        <div class="bank-container">
-          <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
+                    </div>
+                </div>
+            </div>
+            <ion-footer class="bottom-footer">
+                <div class="bank-container">
+                    <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
 
-          <img ng-repeat="bank in allBankList | filter:{id:'!!'}" src="{{$root.imagePath}}{{bank.banklogo}}" />
+                    <img ng-repeat="bank in allBankList | filter:{id:'!!'}" src="{{$root.imagePath}}{{bank.banklogo}}" />
 
+                </div>
+                <button class="button btn single-button" id="Next" ng-click="getCarDatasId($root.newReqiust.itemcode)">Үргэлжлүүлэх</button>
+            </ion-footer>
         </div>
-        <button class="button btn single-button" id="Next" ng-click="getCarDatasId($root.newReqiust.itemcode)">Үргэлжлүүлэх</button>
-      </ion-footer>
-    </div>
-  </ion-content>
+    </ion-content>
 </ion-view>
