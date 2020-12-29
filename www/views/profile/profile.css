@@ -286,18 +286,6 @@ input[type="number"] {
 .added-deal-bank {
   position: relative;
 }
-.overlay-profile-content {
-  color: #000;
-  font-size: 12px;
-  position: absolute;
-  margin: 0 auto;
-  width: 100%;
-  text-align: center;
-  bottom: 0;
-  padding-bottom: 50px;
-  background: #fff;
-  border: 1px solid #acd322;
-}
 #overlayProfilePicute {
   position: fixed;
   display: none;
@@ -397,13 +385,11 @@ input[type="number"] {
 }
 
 #keypadReg {
-  z-index: 99;
   margin: auto;
   width: 100%;
-  height: 45%;
-  bottom: 0;
-  margin-bottom: 1vh;
+  height: 95%;
   border-radius: 10px 10px 0px 0px;
+  margin-top: 20px;
   background: rgb(159, 209, 58);
   background: -moz-linear-gradient(24deg, rgba(159, 209, 58, 1) 7%, rgba(63, 194, 243, 1) 100%);
   background: -webkit-linear-gradient(24deg, rgba(159, 209, 58, 1) 7%, rgba(63, 194, 243, 1) 100%);
@@ -451,14 +437,36 @@ input[type="number"] {
   color: #fff;
 }
 .reg-num-modal {
-  position: absolute !important;
-  top: 62% !important;
+  /* position: absolute !important; */
+  /* top: 62% !important; */
   background: transparent !important;
-  zoom: 0.9;
+  /* zoom: 0.9; */
 }
 #regNums {
   cursor: pointer;
   position: absolute;
   right: 0;
   width: 95px;
+}
+#profileKeyContainer {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 70vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 99;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.overlay-profile-reg-select-content {
+  color: #000;
+  font-size: 12px;
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+  bottom: 0;
+  top: auto !important;
 }
