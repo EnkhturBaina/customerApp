@@ -127,8 +127,8 @@
 
         $http({
           method: "POST",
-          // url: "http://vr.digitalcredit.mn/service/v2",
-          url: "http://digitalcredit.mn/service/v2",
+          url: "http://vr.digitalcredit.mn/service/v2",
+          // url: "http://digitalcredit.mn/service/v2",
           data: json,
           timeout: 10000,
           headers: $rootScope.serverHeader,

@@ -694,5 +694,4 @@
   } else {
     window.MobileSelect = MobileSelect;
   }
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 })();

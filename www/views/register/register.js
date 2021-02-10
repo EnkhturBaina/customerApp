@@ -71,13 +71,12 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($ionicS
             //Password Hash
             $rootScope.passwordHashResult = response;
             serverDeferred.requestFull("dcApp_crmCustomer_001", $scope.crmUserData).then(function (response) {
-              //crm_customer
+              //crm_user
               $rootScope.crmUserData.customerId = response[1].id;
               $rootScope.crmUserData.password = $scope.customerPassword.passwordHash;
               $rootScope.crmUserData.passwordHash = $scope.passwordHashResult[1].result;
               $rootScope.crmUserData.userId = 1;
               serverDeferred.requestFull("dcApp_login_register_dv_001", $scope.crmUserData).then(function (response) {
-                //crm_user
                 // console.log("respone", response);
                 $state.go("login");
               });

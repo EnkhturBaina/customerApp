@@ -5,7 +5,7 @@
             <!-- Tab 1 -->
             <ion-tab title="Бараа">
                 <ion-nav-view class="ghostwhite">
-                    <ion-content overflow-scroll="true" style="margin: 0 10px">
+                    <ion-content overflow-scroll="false" style="margin: 0 10px" class="">
                         <div class="card home-card-1-line" ui-sref="loan_calculator">
                             <div class="item home-card-1 card-body item-text-wrap">
                                 <div class="home-card-1-first-row">
@@ -44,7 +44,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="card home-card home-card-5" ui-sref="sale"> -->
                             <div class="card home-card home-card-5" ng-click="callComingSoon()">
                                 <div class="item card-body item-text-wrap small-box">
                                     <div class="ion-text-bold"><span>Зарлах</span></div>
@@ -63,7 +62,7 @@
             <!-- Tab 2 -->
             <ion-tab title="Зээл">
                 <ion-nav-view class="ghostwhite">
-                    <ion-content overflow-scroll="true" class="home-tab-2-content" style="margin: 0 10px 44px 10px;">
+                    <ion-content overflow-scroll="true" class="padding scroll-content ionic-scroll has-header home-tab-2-content">
                         <p class="loan-tab-title ion-color-text">Та хайж буй зээлийн төрлөө сонгоно уу.</p>
                         <div class="card" ui-sref="autoleasing-1">
                             <div class="item loan-card-1 card-body item-text-wrap">
@@ -107,7 +106,6 @@
                             </div>
                         </div>
                         <div class="card" ui-sref="business_loan">
-                            <!-- <div class="card" ng-click="callComingSoon()"> -->
                             <div class="item loan-card-5 card-body item-text-wrap">
                                 <div class="loan-card-first-row">
                                     <span class="ion-text-bold ion-float-right">Бизнесийн зээл</span>

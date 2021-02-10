@@ -14,16 +14,16 @@
                 </div>
                 <div class="bottom-border-input-text margin-lr-20">
                     <p class="ion-color-big-text">Код оруулна уу</p>
-                    <input type="text" placeholder="DCC0001" name="carCode" class="step1-car-code" ng-model="$root.newReqiust.itemcode" ng-keyup="getCarDatasIdEnterkey($event,$root.newReqiust.itemcode)" />
+                    <input type="text" placeholder="DCC0001" name="carCode" class="step1-car-code ion-text-upper" ng-model="$root.newReqiust.itemcode" ng-keyup="getCarDatasIdEnterkey($event,$root.newReqiust.itemcode)" />
                 </div>
                 <div style="display: flex; height: 40%; flex-direction: column; align-items: center; justify-content: flex-end">
                     <div class="qr-btn-container">
                         <button class="button qr-button" id="qr" ng-click="showQRreader()">
-              <span class="filter">
-                <i class="ion-qr-scanner qr-ico"></i>
-                QR уншуулах
-              </span>
-            </button>
+                            <span class="filter">
+                                <i class="ion-qr-scanner qr-ico"></i>
+                                QR уншуулах
+                            </span>
+                        </button>
                     </div>
                 </div>
             </div>

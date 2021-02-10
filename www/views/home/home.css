@@ -116,12 +116,6 @@
   background-position: 0 0;
   background-size: cover;
 }
-.loan-card-first-row {
-  /* margin-bottom: 25px; */
-}
-.loan-card-2-first-row {
-  /* padding-bottom: 25px; */
-}
 .loan-card-icon-container {
   position: absolute;
   left: 5px;
@@ -151,6 +145,8 @@
 }
 .home-tab-2-content > .scroll {
   min-height: 0px !important;
+  margin: 0 20px;
+  display: inline-block !important;
 }
 .small-box {
   background: none;
@@ -164,9 +160,6 @@
 }
 .loan-tab-title {
   padding: 10px 13px;
-  /* width: 45vw; */
-  /* background-color: #acd322; */
-  margin-bottom: 20px;
 }
 .fleft {
   float: left;

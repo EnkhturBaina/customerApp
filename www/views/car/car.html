@@ -18,13 +18,6 @@
                 <div class="brand-tags">
                     <ul>
                         <li class="tags" ng-repeat="cat in $root.categoryData | filter:{factoryid:'!!'}" ng-if="$index<=categoryShowLimit" ng-click="selectCategory(cat)">{{cat.factoryname}}</li>
-                        <!-- <li class="tags">Lamborghini</li>
-            <li class="tags">Mercedes</li>
-            <li class="tags">Tesla</li>
-            <li class="tags">Bugatti</li>
-            <li class="tags">Lexus</li>
-            <li class="tags">BMW</li>
-            <li class="tags">Hyundai</li> -->
                         <li class="tags ion-color-text" ui-sref="car-brandlist" ng-click="showFullCategory()">Бүгд</li>
                     </ul>
                 </div>
