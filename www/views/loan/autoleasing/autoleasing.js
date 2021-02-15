@@ -13,17 +13,23 @@
         }
       });
     }
-    //
   };
+
   $scope.getCarDatasIdEnterkey = function (event, itemCode) {
     if (event.keyCode === 13) {
       $scope.getCarDatasId(itemCode);
     }
   };
-  $scope.getMonthData = function () {
+
+  $scope.getLookupData = function () {
     if (isEmpty($rootScope.monthData)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1579493650561919" }).then(function (response) {
         $rootScope.monthData = response;
+      });
+    }
+    if (isEmpty($rootScope.locationData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613011719373208" }).then(function (response) {
+        $rootScope.locationData = response;
       });
     }
   };
@@ -32,7 +38,8 @@
     $scope.getLoanAmount = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
   }
 
-  $scope.getMonthData();
+  $scope.getLookupData();
+
   $scope.getbankData = function (type) {
     // console.log("selectedCarData", $rootScope.selectedCarData);
     $rootScope.bankList = [];
@@ -42,7 +49,6 @@
         json.customerTypeId = 1;
         json.loanMonth = $rootScope.newReqiust.loanMonth;
         json.advancePayment = $rootScope.newReqiust.advancePayment.replace(/'/g, "");
-        json.isRealState = $rootScope.newReqiust.hypothecLoan;
       }
       serverDeferred.carCalculation(json).then(function (response) {
         $rootScope.bankList = response.result;
@@ -78,22 +84,13 @@
     );
   };
   $rootScope.selectedBankSuccess = "";
-  $scope.saveButton = function () {
+  $scope.sendRequest = function () {
     if ($scope.checkReqiured("step4")) {
+      //Сонгосон банк
       var selectedbanks = [];
       serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
-        // console.log("send req response", response);
-
-        // $rootScope.sendSmsUser = {};
-        // $rootScope.sendSmsBank = {};
-        // $scope.msg1 = "";
-        // $scope.msg2 = "";
-
-        // console.log("$rootScope.bankList", $rootScope.bankList);
         angular.forEach($rootScope.bankList.correct, function (item) {
-          // angular.forEach($rootScope.bankList, function (item) {
           if (item.checked) {
-            // console.log("item", item);
             var jsonDtl = {
               loanId: response[1].id,
               bankId: item.PARENT_ID,
@@ -101,34 +98,7 @@
               //   productId: '',
               wfmStatusId: 1585206036474051,
             };
-            // console.log("jsonDtl", jsonDtl);
             selectedbanks.push(jsonDtl);
-
-            // $scope.msg1 =
-            //   "Tanii zeeliin huseltiig " +
-            //   item.departmentcode +
-            //   "-ni " +
-            //   item.contractusername +
-            //   " huleen avlaa. Ta " +
-            //   item.contactnumber +
-            //   " dugaariin utsaar todruulah bolomjtoi. Bayarlalaa. Digital Credit";
-
-            // $scope.msg2 = "Tand Digital Credit-n hariltsagchaas zeeliin huselt irlee. Hariltsagchtai " + $rootScope.loginUserInfo.mobilenumber + " utsaar holbogdono uu. Bayarlalaa. Digital Credit";
-
-            // $rootScope.sendSmsUser.msg = $scope.msg1;
-            // $rootScope.sendSmsUser.phoneNumber = $rootScope.loginUserInfo.mobilenumber;
-
-            // $rootScope.sendSmsBank.msg = $scope.msg2;
-            // $rootScope.sendSmsBank.phoneNumber = item.contactnumber;
-
-            // console.log("$rootScope.sendSmsUser", $rootScope.sendSmsUser);
-            // console.log("$rootScope.sendSmsBank", $rootScope.sendSmsBank);
-            // serverDeferred.requestFull("send_sms", $rootScope.sendSmsUser).then(function (response) {
-            //   console.log("sendSMS", response);
-            // });
-            // serverDeferred.requestFull("send_sms", $rootScope.sendSmsBank).then(function (response) {
-            //   console.log("sendSmsBank", response);
-            // });
           }
         });
         var json = {
@@ -137,8 +107,8 @@
           shopId: $rootScope.selectedCarData.supplierid,
           dcApp_request_map_bank_for_detail: selectedbanks,
         };
-        // console.log("json", json);
         serverDeferred.requestFull("dcApp_request_product_dv_with_detail_001", json);
+
         $state.go("loan_success");
       });
       $rootScope.selectedBankSuccess = selectedbanks;
@@ -146,18 +116,20 @@
   };
   $scope.goStep3 = function (param) {
     if ($scope.checkReqiured("step2")) {
-      if (isEmpty($rootScope.newReqiust.hypothecLoan)) {
-        $rootScope.newReqiust.hypothecLoan = "1554263832151";
+      if (isEmpty($rootScope.newReqiust.serviceAgreementId)) {
+        $rootScope.newReqiust.serviceAgreementId = "1554263832132";
       }
       $scope.getbankData("dtl");
       $state.go("autoleasing-3");
     }
     $scope.getCustomerId();
   };
+
   $scope.selectBankInfo = function (bank) {
     $rootScope.selectedBank = bank;
     $state.go("autoleasing-bank-info");
   };
+
   //other
   $scope.checkReqiured = function (param) {
     if (isEmpty($rootScope.newReqiust)) {
@@ -172,7 +144,6 @@
         return true;
       }
     } else if (param == "step2") {
-      // if (isEmpty($rootScope.newReqiust.loanAmount)) {
       if (isEmpty($scope.getLoanAmount)) {
         $rootScope.newReqiust.loanAmountReq = true;
         $rootScope.alert("Зээлийн хэмжээгээ оруулна уу");
@@ -182,6 +153,9 @@
         return false;
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
         $rootScope.alert("Хугацаагаа сонгоно уу");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.locationId)) {
+        $rootScope.alert("Байршил сонгоно уу");
         return false;
       } else {
         return true;
@@ -196,6 +170,7 @@
       }
     }
   };
+
   $scope.getCustomerId = function () {
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmCustomerId: $rootScope.loginUserInfo.id }).then(function (response) {
       if (!isEmpty(response) && !isEmpty(response[0])) {
@@ -203,16 +178,12 @@
       }
     });
   };
+
   $scope.toggleRealState = function () {
     $("#step2-toggle-on").toggleClass("active");
     $("#step2-toggle-off").toggleClass("active");
-    $("#step2isRealState").toggleClass("activeSwitch");
   };
-  $scope.toggleHypothicLoan = function () {
-    $("#step2-toggle-on").toggleClass("active");
-    $("#step2-toggle-off").toggleClass("active");
-    $("#step2HypothicLoan").toggleClass("activeSwitch");
-  };
+
   $scope.growDiv = function () {
     var growDiv = document.getElementById("car-grow");
     if (growDiv.clientHeight) {
@@ -254,8 +225,5 @@
     } else {
       input.value = input.value.slice(0, input.value.length - 1);
     }
-    // console.log("getLoanAmount", $scope.getLoanAmount);
-    // console.log("advancePayment", $rootScope.newReqiust.advancePayment);
-    // console.log("loanAmount", $rootScope.newReqiust.loanAmount);
   };
 });

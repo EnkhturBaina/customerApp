@@ -11,7 +11,7 @@
         </div>
     </div>
     <div ng-repeat="data in [{'title':'Бараа нэмэх'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 autoleasing-step1-content">
+    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 add-goods-content">
         <div class="big-container ghostwhite-noscroll-container">
             <div class="magic-container">
                 <div class="margin-lr-20">
@@ -25,7 +25,7 @@
                         <div class="selector-container">
                             <span class="title">Нийлүүлэгч</span>
                             <select class="consumer-loan-suppp-select" ng-model="$root.newCarReq.shopIdObj" ng-change="changeShop($root.newCarReq.shopIdObj)">
-                                <option ng-repeat="supp in allSupplierList | filter:{id:'!!'}" value="{{supp}}">{{supp.suppliername}}</option>
+                                <option ng-repeat="supp in allSupplierList | filter:{id:'!!'}" ng-if="supp.suppliername" value="{{supp}}">{{supp.suppliername}}</option>
                             </select>
                         </div>
                         <div class="selector-container">

@@ -695,7 +695,7 @@ h4 {
   margin-left: 240px;
   border-radius: 20px;
   box-shadow: none;
-  transition: all 300ms ease;
+  transition: all 400ms ease;
 }
 
 .demo1.non-navigation #mobileBodyContent {
@@ -709,7 +709,7 @@ h4 {
   box-shadow: none;
   left: 0px;
   top: 0px;
-  transition: all 300ms ease;
+  transition: all 400ms ease;
 }
 
 .side-menu-picture {
@@ -730,11 +730,11 @@ h4 {
   height: 100%;
   overflow: hidden;
   visibility: visible;
-  -webkit-transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  -khtml-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.4s ease-in;
+  -moz-transition: all 0.4s ease-in;
+  -khtml-transition: all 0.4s ease-in;
+  -o-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-out;
 }
 
 .demo1.navigation #secondScreen {

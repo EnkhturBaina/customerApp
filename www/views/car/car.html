@@ -17,13 +17,13 @@
                 </div>
                 <div class="brand-tags">
                     <ul>
-                        <li class="tags" ng-repeat="cat in $root.categoryData | filter:{factoryid:'!!'}" ng-if="$index<=categoryShowLimit" ng-click="selectCategory(cat)">{{cat.factoryname}}</li>
+                        <li class="tags" ng-repeat="cat in $root.categoryData | filter:{factoryid:'!!'}" ng-if="$index<=categoryShowLimit && cat.factoryname" ng-click="selectCategory(cat)">{{cat.factoryname}}</li>
                         <li class="tags ion-color-text" ui-sref="car-brandlist" ng-click="showFullCategory()">Бүгд</li>
                     </ul>
                 </div>
                 <div class="cars">
                     <ul>
-                        <li class="car-detail" ng-repeat="car in carDatas|filter:search" ng-click="selectCar(car)">
+                        <li class="car-detail" ng-repeat="car in carDatas|filter:search" ng-if="car.modelname" ng-click="selectCar(car)">
                             <div class="car-img"><img src="{{car.itempic|guessImageMime}}" /></div>
                             <div id="car-dtl" class="desc">
                                 <p class="car-title">{{car.modelname}}</p>

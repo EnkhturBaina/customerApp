@@ -1,6 +1,4 @@
 ﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $timeout) {
-  // console.log("request list");
-
   $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
   $rootScope.imagePath = "https://dev.veritech.mn/";
   // $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
@@ -10,11 +8,6 @@
   $cordovaNetwork.isOnline = function () {
     return true;
   };
-
-  // $ionicTabsDelegate.select(1);
-  // console.log("XAXAX", $ionicTabsDelegate.$getByHandle("myHeaderTabHandle").selectedIndex(1));
-  // $ionicTabsDelegate.$getByHandle("myHeaderTabHandle").select(1);
-
   $rootScope.newCarReq = {};
   $rootScope.hideFooter = true;
   // ========= Slide =============
@@ -51,10 +44,10 @@
     $rootScope.hideFooter = false;
   };
 
-  $scope.isChecked = { checked: false };
+  $scope.isBanneNotShowChecked = { checked: false };
   $scope.isNotShow = function () {
-    if ($scope.isChecked.checked == true) {
-      localStorage.setItem("bannerNotShow", JSON.stringify($scope.isChecked.checked));
+    if ($scope.isBanneNotShowChecked.checked == true) {
+      localStorage.setItem("bannerNotShow", JSON.stringify($scope.isBanneNotShowChecked.checked));
     } else {
       localStorage.removeItem("bannerNotShow");
     }

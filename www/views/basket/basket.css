@@ -108,8 +108,9 @@
   position: absolute;
   border: none;
   width: 36px;
-  height: 100%;
-  padding: 10px 0 !important;
+  /* height: 100%; */
+  /* padding: 10px 0 !important; */
+  margin: auto;
 }
 .card-list-swiper .item .item-content.activated {
   background: #fff;
@@ -175,4 +176,18 @@
 }
 .basket-detail-container {
   display: flex !important;
+}
+.basket-img {
+  image-rendering: pixelated;
+  width: 40px;
+  height: 40px;
+  margin: 0px 10px;
+}
+.basket-right-border {
+  width: 5px;
+  background: #acd322;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
 }

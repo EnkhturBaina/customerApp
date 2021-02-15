@@ -569,3 +569,6 @@
   background: #fff;
   border: 1px solid #acd322;
 }
+.add-goods-content .scroll {
+  height: auto !important;
+}

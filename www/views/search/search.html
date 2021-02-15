@@ -8,13 +8,13 @@
         <div class="selector-container">
           <span class="title">Үйлдвэр</span>
           <select class="search-selection" ng-model="searchVal.factoryid" ng-change="getCarDatas(searchVal.factoryid)">
-            <option ng-repeat="cat in $root.categoryData | filter:{factoryid:'!!'}" value="{{cat.factoryid}}">{{cat.factoryname}}</option>
+            <option ng-repeat="cat in $root.categoryData | filter:{factoryid:'!!'}" ng-if="cat.factoryname" value="{{cat.factoryid}}">{{cat.factoryname}}</option>
           </select>
         </div>
         <div class="selector-container">
           <span class="title">Загвар</span>
           <select class="search-selection" ng-model="searchVal.modelId" ng-disabled="(searchVal.factoryid|isEmptyCust)">
-            <option ng-repeat="car in carData | filter:{modelid:'!!'}" value="{{car.modelid}}">{{car.modelname}}</option>
+            <option ng-repeat="car in carData | filter:{modelid:'!!'}" ng-if="car.modelname" value="{{car.modelid}}">{{car.modelname}}</option>
           </select>
         </div>
         <div class="selector-container">

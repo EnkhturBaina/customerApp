@@ -64,6 +64,10 @@
                                 <input type="text" inputmode="numeric" pattern="[0-9]*" id="regNums" class="profileRegSelector" placeholder="00000000" name="uniqueIdentifier" readonly />
                             </label>
                             <label class="item item-input profile-label">
+                                <p>И-мэйл хаяг</p>
+                                <input type="text" placeholder="И-мэйл хаяг" name="email" ng-model="$root.customerProfileData.email" />
+                            </label>
+                            <label class="item item-input profile-label">
                                 <p>Хаяг</p>
                                 <input type="text" placeholder="Хаяг" name="address" ng-model="$root.customerProfileData.address" />
                             </label>
@@ -73,14 +77,19 @@
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Гэрлэсэн эсэх</p>
-
                                 <select class="profile-select" ng-model="$root.customerProfileData.ismarried" selected="!$root.customerProfileData.ismarried">
                                     <option ng-repeat="data in familtStatData | filter:{id:'!!'}" value="{{data.id}}" ng-selected="{{$root.customerProfileData.ismarried==data.id}}">{{data.name}}</option>
                                 </select>
                             </label>
                             <label class="item item-input profile-label">
+                                <p>МИК-ийн зээлтэй эсэх</p>
+                                <select class="profile-select" ng-model="$root.customerProfileData.mikMortgageCondition" selected="!$root.customerProfileData.mikMortgageCondition">
+                                    <option ng-repeat="md in mortgageData | filter:{id:'!!'}" value="{{md.id}}" ng-selected="{{$root.customerProfileData.mikMortgageCondition==md.id}}">{{md.name}}</option>
+                                </select>
+                            </label>
+                            <label class="item item-input profile-label">
                                 <p>Ажилласан жил</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="workYear" ng-model="$root.customerProfileData.stayedtimebyyear" />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="experiencePeriodId" ng-model="$root.customerProfileData.experiencePeriodId" />
                             </label>
                             <label class="item item-input profile-label">
                                 <p style="padding: 6px 0px">Иргэний үнэмлэхний зураг</p>

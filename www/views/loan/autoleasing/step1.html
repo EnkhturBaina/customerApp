@@ -31,7 +31,7 @@
                 <div class="bank-container">
                     <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
 
-                    <img ng-repeat="bank in allBankList | filter:{id:'!!'}" src="{{$root.imagePath}}{{bank.banklogo}}" />
+                    <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.banklogo" src="{{$root.imagePath}}{{bank.banklogo}}" />
 
                 </div>
                 <button class="button btn single-button" id="Next" ng-click="getCarDatasId($root.newReqiust.itemcode)">Үргэлжлүүлэх</button>

@@ -63,8 +63,8 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($ionicS
       $rootScope.alert("Нууц үгээ оруулна уу");
     } else {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $scope.crmUserData.userName }).then(function (response) {
-        // console.log("isRegistered", response);
-        if (response.length > 1) {
+        console.log("isRegistered", response);
+        if (response.length[0] > 1) {
           $rootScope.alert("<p class=" + "customer_registerd_number" + ">" + $scope.crmUserData.userName + "</p>" + " Утасны дугаараар бүртгэл үүссэн байна");
         } else {
           serverDeferred.requestFull("getPasswordHash1", $scope.customerPassword).then(function (response) {

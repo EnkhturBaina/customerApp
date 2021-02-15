@@ -30,6 +30,11 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $rootScope.familtStatData = response;
     });
   };
+  $scope.mikMortgageCondition = function () {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
+      $rootScope.mortgageData = response;
+    });
+  };
   $scope.getIncomeType = function () {
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
       $rootScope.incomeType = response;
@@ -41,9 +46,10 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       // console.log("$rootScope.allBankList", $rootScope.allBankList);
     });
   };
-
+  // $scope.getProData();
   $scope.getAllBankList();
   $scope.getFamiltyStat();
+  $scope.mikMortgageCondition();
   $scope.getIncomeType();
   $scope.nextPath = $stateParams.path;
   // console.log("stateParams", $stateParams);
@@ -53,7 +59,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $rootScope.customerIncomeProfileData = {};
   $scope.customerProfileData.mobilenumber = "";
   $scope.customerProfileData.customerTypeId = 1;
-  $scope.customerProfileData.stayedtimebyyear = "";
+  $scope.customerProfileData.experiencePeriodId = "";
 
   if (!isEmpty($rootScope.loginUserInfo)) {
     $rootScope.customerProfileData.crmCustomerId = $rootScope.loginUserInfo.id;
@@ -62,8 +68,9 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
   $scope.getProfileData = function () {
     if (!isEmpty($rootScope.loginUserInfo)) {
+      console.log("$rootScope.loginUserInfo.id", $rootScope.loginUserInfo.id);
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: $rootScope.loginUserInfo.id }).then(function (response) {
-        // console.log("getProfileData", response);
+        console.log("getProfileData", response);
         $rootScope.hideFooter = true;
         if (response != "") {
           // console.log($rootScope.loginUserInfo);
@@ -73,6 +80,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           $scope.customerProfilePicture.profilepicture = response[0].profilepicture;
           $rootScope.customerIncomeProfileData.customerid = response[0].id;
           $rootScope.customerProfileData.ismarried = parseInt(response[0].ismarried);
+          $rootScope.customerProfileData.mikMortgageCondition = parseInt(response[0].mikmortgagecondition);
 
           serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: response[0].id }).then(function (response) {
             if (response != "") {
@@ -98,6 +106,8 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.saveProfileData = function () {
     $scope.customerProfileData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
 
+    $rootScope.customerProfileData.crmCustomerId = $rootScope.loginUserInfo.id;
+    $rootScope.customerProfileData.mobilenumber = $rootScope.loginUserInfo.customercode;
     if (isEmpty($scope.customerProfileData.lastname)) {
       $rootScope.alert("Та овогоо оруулна уу");
     } else if (isEmpty($scope.customerProfileData.firstname)) {
@@ -106,16 +116,18 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $rootScope.alert("Регситрын дугаараа оруулна уу");
     } else if (isEmpty($scope.customerProfileData.address)) {
       $rootScope.alert("Хаягаа оруулна уу");
+    } else if (isEmpty($scope.customerProfileData.email)) {
+      $rootScope.alert("И-мэйл хаяг оруулна уу");
     } else if (isEmpty($scope.customerProfileData.mobilenumber)) {
       $rootScope.alert("Утасны дугаараа оруулна уу");
     } else if (isEmpty($scope.customerProfileData.ismarried)) {
       $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу");
-    } else if (isEmpty($scope.customerProfileData.stayedtimebyyear)) {
+    } else if (isEmpty($scope.customerProfileData.experiencePeriodId)) {
       $rootScope.alert("Ажилласан жилээ оруулна уу");
     } else {
       console.log($scope.customerProfileData);
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
-        // console.log("customerProfileData", response);
+        console.log("customerProfileData", response);
         $rootScope.loginUserInfo = mergeJsonObjs($scope.customerProfileData, $rootScope.loginUserInfo);
         $rootScope.alert("Амжилттай");
         if (!isEmpty($scope.nextPath)) {

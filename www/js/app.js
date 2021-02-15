@@ -42,6 +42,13 @@ var app = angular
         StatusBar.backgroundColorByHexString("#f8f8fe");
       }
     });
+
+    // BACK button idevxgv bolgox
+    // $ionicPlatform.registerBackButtonAction(function (e) {
+    //   //do your stuff
+    //   e.preventDefault();
+    //   return false;
+    // }, 101);
   })
   .config(function ($stateProvider, $urlRouterProvider, $compileProvider, $cordovaInAppBrowserProvider, $sceDelegateProvider) {
     if (!window.cordova) {

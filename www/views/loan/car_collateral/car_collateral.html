@@ -15,36 +15,85 @@
             <div class="magic-container">
                 <div class="margin-lr-20">
                     <div class="list car-collateral-list">
-                        <label class="item item-input car-collateral-label">
-                            <p>Улсын дугаар</p>
-                            <input type="text" id="nationalNumber" class="nationalNumberPicker" placeholder="0000УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" readonly />
-                            <!-- <input type="text" id="nationalNumber" placeholder="0000 УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" ng-click="callModal()" /> -->
+                        <label class="item item-input item-select car-collateral-label">
+                            <p class="input-label" style="margin: 0;">Төрөл</p>
+                            <select ng-model="$root.newCarReq.carCategoryId" style="background-color: transparent" ng-change="getCarFactoryCategory(newCarReq.carCategoryId)">
+                                <option ng-repeat="com in carCategory" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
+                            </select>
                         </label>
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Үйлдвэр</p>
-                            <select ng-model="$root.newCarReq.factoryId" style="background-color: transparent" ng-change="getCarmarkData(newCarReq.factoryId)">
-                                <option ng-repeat="com in companyData | filter:{factoryid:'!!'}" value="{{com.factoryid}}">
-                                    {{com.factoryname}}</option>
+                            <select id="brandSelect" ng-model="$root.newCarReq.brandId" style="background-color: transparent" disabled ng-change="getCarModelData(newCarReq.brandId)">
+                                <option ng-repeat="com in factoryData" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Загвар</p>
-                            <select ng-model="$root.newCarReq.modelId" style="background-color: transparent">
-                                <option ng-repeat="model in carmerkData | filter:{modelid:'!!'}" value="{{model.modelid}}">
-                                    {{model.modelname}}</option>
+                            <select id="modelSelect" ng-model="$root.newCarReq.markId" style="background-color: transparent" disabled>
+                                <option ng-repeat="model in modelData" ng-if="model.name" value="{{model.id}}">
+                                    {{model.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input car-collateral-label">
+                            <p>Явсан км</p>
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.mile" format-input next-focus-elem />
+                        </label>
+                        <label class="item item-input item-select car-collateral-label">
+                            <p class="input-label" style="margin: 0;">Хөдөлгүүрийн төрөл</p>
+                            <select ng-model="$root.newCarReq.engineId" style="background-color: transparent">
+                                <option ng-repeat="com in engineTypeData" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input car-collateral-label">
+                            <p>Хөдөлгүүрийн багтаамж</p>
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.engineCapacity" format-input next-focus-elem />
+                        </label>
+                        <label class="item item-input item-select car-collateral-label">
+                            <p class="input-label" style="margin: 0;">Хурдны хайрцаг</p>
+                            <select ng-model="$root.newCarReq.transmissionId" style="background-color: transparent">
+                                <option ng-repeat="com in transmissionData" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-select car-collateral-label">
+                            <p class="input-label" style="margin: 0;">Хөтлөгч</p>
+                            <select ng-model="$root.newCarReq.driveTypeId" style="background-color: transparent">
+                                <option ng-repeat="com in driveTypeData" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-select car-collateral-label">
+                            <p class="input-label" style="margin: 0;">Жолооны хүрд</p>
+                            <select ng-model="$root.newCarReq.steeringWheelId" style="background-color: transparent">
+                                <option ng-repeat="com in steeringWheelData" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input car-collateral-label">
+                            <p>Хаалганы тоо</p>
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.carDoorCount" format-input next-focus-elem />
+                        </label>
+                        <label class="item item-input car-collateral-label">
                             <p>Үйлдвэрлэсэн он</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="productYear" placeholder="Үйлдвэрлэсэн он" name="productYear" ng-model="$root.newCarReq.productYear" next-focus-elem/>
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.newCarReq.manufacturedYearId" next-focus-elem />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Орж ирсэн он</p>
-                            <input inputmode="numeric" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="Орж ирсэн он" name="entryYear" ng-model="$root.newCarReq.entryYear" next-focus-elem/>
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.newCarReq.cameYearId" next-focus-elem />
                         </label>
                         <label class="item item-input car-collateral-label">
-                            <p>Явсан км</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="Явсан км" name="odo" ng-model="$root.newCarReq.mile" format-input next-focus-elem/>
+                            <p>Улсын дугаар</p>
+                            <input type="text" id="nationalNumber" class="nationalNumberPicker" placeholder="0000УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" readonly />
+                        </label>
+                        <label class="item item-input item-select car-collateral-label">
+                            <p class="input-label" style="margin: 0;">Өнгө</p>
+                            <select ng-model="$root.newCarReq.carColorId" style="background-color: transparent">
+                                <option ng-repeat="com in carColorData" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
+                            </select>
                         </label>
                     </div>
                     <label class="item car-collateral-label" style="border: none">
@@ -97,7 +146,7 @@
             <ion-footer class="bottom-footer">
                 <div class="bank-container">
                     <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
-                    <img ng-repeat=" bank in allBankList | filter:{id:'!!'}" src="{{$root.imagePath}}{{bank.banklogo}}" />
+                    <img ng-repeat=" bank in allBankList" src="{{$root.imagePath}}{{bank.banklogo}}" />
 
                 </div>
                 <button class="button btn single-button" id="Next" ng-click="saveCarCol()">Үргэлжлүүлэх</button>

@@ -8,15 +8,60 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
   $scope.getMonthData();
 
-  // $scope.newCarReq = {};
-  $scope.companyData = [];
-  $scope.carmerkData = [];
+  //Төрөл
+  $scope.carCategory = [];
+  //Үйлдвэр
+  $scope.factoryData = [];
+  //Загвар
+  $scope.modelData = [];
+  //Хөдөлгүүрийн төрөл
+  $scope.engineTypeData = [];
+  //Хурдны хайрцаг
+  $scope.transmissionData = [];
+  //Хөтлөгч
+  $scope.driveTypeData = [];
+  //Жолооны хүрд
+  $scope.steeringWheelData = [];
+  //Машины өнгө
+  $scope.carColorData = [];
+
   $scope.defualtbank = [];
-  $scope.getCompanyData = function () {
-    if (isEmpty($scope.companyData)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1544591440502" }).then(function (datas) {
+
+  $scope.getCarCollateralLookupData = function () {
+    if (isEmpty($scope.carCategory)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363794516634" }).then(function (datas) {
         delete datas.aggregatecolumns;
-        $scope.companyData = datas;
+        $scope.carCategory = datas;
+      });
+    }
+    if (isEmpty($scope.engineTypeData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363836067418" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        $scope.engineTypeData = datas;
+      });
+    }
+    if (isEmpty($scope.transmissionData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363933194927" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        $scope.transmissionData = datas;
+      });
+    }
+    if (isEmpty($scope.driveTypeData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363974428880" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        $scope.driveTypeData = datas;
+      });
+    }
+    if (isEmpty($scope.steeringWheelData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613364026973240" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        $scope.steeringWheelData = datas;
+      });
+    }
+    if (isEmpty($scope.carColorData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613364064613427" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        $scope.carColorData = datas;
       });
     }
     if (isEmpty($scope.defualtbank)) {
@@ -32,14 +77,23 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       });
     }
   };
-  $scope.getCarmarkData = function (val) {
-    var json = { systemmetagroupid: "1544591440537", factoryid: val };
+  $scope.getCarFactoryCategory = function (val) {
+    var json = { systemmetagroupid: "1613364305380357", number1: val };
     serverDeferred.request("PL_MDVIEW_004", json).then(function (datas) {
       delete datas.aggregatecolumns;
-      $scope.carmerkData = datas;
+      $scope.factoryData = datas;
     });
+    val != "" ? (document.getElementById("brandSelect").disabled = false) : (document.getElementById("brandSelect").disabled = true);
   };
-  $scope.getCompanyData();
+  $scope.getCarModelData = function (val) {
+    var json = { systemmetagroupid: "1613364325545258", parentId: val };
+    serverDeferred.request("PL_MDVIEW_004", json).then(function (datas) {
+      delete datas.aggregatecolumns;
+      $scope.modelData = datas;
+    });
+    val != "" ? (document.getElementById("modelSelect").disabled = false) : (document.getElementById("modelSelect").disabled = true);
+  };
+  $scope.getCarCollateralLookupData();
 
   $scope.saveCarCol = function () {
     if (isEmpty($rootScope.newCarReq)) {
@@ -48,27 +102,17 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     if ($scope.checkReqiured("step1")) {
       $rootScope.ShowLoader();
       serverDeferred.requestFull("dcApp_car_collateral_loan_001", $rootScope.newCarReq).then(function (response) {
-        // console.log(response);
         $rootScope.selectedCarData = response[1];
         $state.go("car_coll2");
         $ionicLoading.hide();
       });
     }
   };
+
   $scope.checkReqiured = function (param) {
-    //console.log("$rootScope.newCarReq", $rootScope.newCarReq);
     if (param == "step1") {
-      if (isEmpty($rootScope.newCarReq.nationalNumber) || isEmpty($rootScope.newCarReq.factoryId) || isEmpty($rootScope.newCarReq.modelId) || isEmpty($rootScope.newCarReq.productYear) || isEmpty($rootScope.newCarReq.entryYear) || isEmpty($rootScope.newCarReq.mile)) {
+      if (isEmpty($rootScope.newCarReq.carCategoryId) || isEmpty($rootScope.newCarReq.brandId) || isEmpty($rootScope.newCarReq.markId) || isEmpty($rootScope.newCarReq.mile) || isEmpty($rootScope.newCarReq.engineId) || isEmpty($rootScope.newCarReq.engineCapacity) || isEmpty($rootScope.newCarReq.transmissionId) || isEmpty($rootScope.newCarReq.driveTypeId) || isEmpty($rootScope.newCarReq.steeringWheelId) || isEmpty($rootScope.newCarReq.carDoorCount) || isEmpty($rootScope.newCarReq.manufacturedYearId) || isEmpty($rootScope.newCarReq.cameYearId) || isEmpty($rootScope.newCarReq.nationalNumber) || isEmpty($rootScope.newCarReq.carColorId)) {
         $rootScope.alert("Мэдээллээ бүрэн оруулна уу");
-        return false;
-      } else if ($rootScope.newCarReq.nationalNumber.length < 7) {
-        $rootScope.alert("Улсын дугаар дутуу");
-        return false;
-      } else if ($rootScope.newCarReq.productYear.length < 4) {
-        $rootScope.alert("Үйлдвэрлэсэн он буруу");
-        return false;
-      } else if ($rootScope.newCarReq.entryYear.length < 4) {
-        $rootScope.alert("Орж ирсэн он буруу");
         return false;
       } else {
         return true;
@@ -103,12 +147,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $("#productYear").mask("0000");
   $("#entryYear").mask("0000");
   $("#odo").mask("000000000");
-  // $("#nationalNumber").mask("0000 AAA", {
-  //   translation: {
-  //     A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
-  //   },
-  // });
-  // $("#nationalNumberModal").find("input[type=number]").mask("0");
+
   $("#nationalNumberModal")
     .find("input[type=text]")
     .mask("A", {
@@ -126,6 +165,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   var charA = ["А", "Б", "Г", "Д", "З", "Н", "О", "Ө", "С", "Т", "Х", "У", "Ц", "Ч"];
   var chars = ["А", "Б", "В", "Г", "Д", "Е", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "Х", "У", "Ү", "Ц", "Ч", "Э", "Я"];
   var nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
   new MobileSelect({
     trigger: ".nationalNumberPicker",
     wheels: [{ data: nums }, { data: nums }, { data: nums }, { data: nums }, { data: charA }, { data: chars }, { data: chars }],
