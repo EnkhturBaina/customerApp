@@ -1,24 +1,25 @@
 <ion-view hide-nav-bar="true">
-  <link href="views/sign/sign.css" rel="stylesheet" />
-  <ion-content scroll="false">
+    <link href="views/sign/sign.css" rel="stylesheet" />
     <ion-header-bar align-title="left" class="navbar" style="background: none">
-      <div class="title ion-color-big-text navbar-back-button" style="background: none">
-        <button ng-click="$ionicGoBack()" class="nav-back-button button buttons button-clear header-item car-back-nav" style="left: 10px" ng-click="hideShowFooter()">
-          <i class="ion-chevron-left ion-color-header"></i>
-          <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Буцах</span></span>
-        </button>
-      </div>
-      <div class="navbar-right-icon">
-      </div>
-    </ion-header-bar>
-    <div ng-controller="introCtrl as vm" class="intro-slider-container sign-container gray-background">
-      <div class="box">
-        <img class="slider-img" src="img/sign-ico.png" />
-        <div class="sign-class">
-          <button class="button sign-login-button" ng-click="loginbtn()">Нэвтрэх</button>
-          <button class="button sign-reg-button" ui-sref="register">Бүртгүүлэх</button>
+        <div class="title ion-color-big-text navbar-back-button" style="background: none">
+            <button ng-click="$ionicGoBack()" class="nav-back-button button buttons button-clear header-item car-back-nav" style="left: 10px" ng-click="hideShowFooter()">
+        <i class="ion-chevron-left ion-color-header"></i>
+        <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Буцах</span></span>
+      </button>
         </div>
-      </div>
-    </div>
-  </ion-content>
+        <div class="navbar-right-icon">
+        </div>
+    </ion-header-bar>
+    <ion-content scroll="false">
+
+        <div ng-controller="introCtrl as vm" class="intro-slider-container sign-container gray-background">
+            <div class="box">
+                <img class="slider-img" src="img/sign-ico.png" />
+                <div class="sign-class">
+                    <button class="button sign-login-button" ng-click="loginbtn()">Нэвтрэх</button>
+                    <button class="button sign-reg-button" ui-sref="register">Бүртгүүлэх</button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
