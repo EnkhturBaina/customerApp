@@ -7,24 +7,30 @@
             <div class="card car-step2-card">
                 <span class="step2-card-span">Зээлийн хүсэлтийн мэдээлэл</span>
                 <p class="step2-card-p">Зээлийн хэмжээ</p>
-                <div class="step2-input-container">
+                <label class="item item-input step2-input-container">
                     <span class="step2-input-icon">₮</span>
                     <input type="tel" ng-model="$root.newCarReq.requestAmount" placeholder="Зээлийн хэмжээ" name="requestAmount" class="car-step2-input" format-input />
-                </div>
+                </label>
                 <label class="item item-input step2-loam-month">
                     <p>Хугацаа сараар</p>
                     <select class="car-col-step2-select" ng-model="$root.newCarReq.loanMonth">
-                        <option ng-repeat="month in $root.monthData" value="{{month.data}}">{{month.name}}</option>
+                        <option ng-repeat="month in $root.monthData" ng-if="month.name" value="{{month.data}}">{{month.name}}</option>
+                    </select>
+                </label>
+                <label class="item item-input step2-loam-month">
+                    <p>Зээл авах байршил</p>
+                    <select class="car-col-step2-select" ng-model="$root.newCarReq.loanMonth">
+                        <option ng-repeat="loc in $root.locationData" ng-if="loc.name" value="{{loc.data}}">{{loc.name}}</option>
                     </select>
                 </label>
                 <label class="item item-input profile-label">
                     <p>Зээлийн хүү (сараар)</p>
                     <input class="loanFee-car-col" type="tel" placeholder="-" name="loanFee" ng-model="$root.newCarReq.loanFee" format-input />
                 </label>
-                <label class="item item-input step2-description-field">
+                <!-- <label class="item item-input step2-description-field">
                     <p>Тайлбар</p>
                     <textarea type="text" placeholder="..." name="description" ng-model="$root.newCarReq.description"></textarea>
-                </label>
+                </label> -->
             </div>
             <span class="step2-bank-span"> Боломжит банк санхүү</span>
             <div class="step2-bank-container">

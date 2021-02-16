@@ -40,6 +40,7 @@
   <script src="js/service.js"></script>
   <script src="js/gzip.js"></script>
   <!--views-->
+  <!-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyC1YUxiIqDux6b1FAA-U9_WnCitAdzJZKQ&sensor=true"></script> -->
   <script src="views/home/home.js"></script>
   <script src="views/profile/profile.js"></script>
   <script src="views/intro/intro.js"></script>
@@ -74,14 +75,15 @@
   <link rel="stylesheet" href="css/ionicons.css" />
 </head>
 
-<body ng-app="index" animation="none" ng-controller="indexCtrl">
+<body ng-app="index" animation="no-animation" ng-controller="indexCtrl">
   <ion-side-menus class="AppBody demo1 non-navigation" id="mobile">
     <span class="side-menu-off-icon" style="color: #fff !important" ng-click="toggleSideMenu()"><img style="width: 20px" src="img/x_mark.png" /></span>
     <div id="nav" on-swipe-left="toggleSideMenu()">
       <div class="side-menu-items side-menu-img-container">
         <img class="side-menu-picture" src="img/logo.png" width="70px" height="70px" />
       </div>
-      <div class="side-menu-items side-menu-user-name">Digital Credit</div>
+      <!-- <div class="side-menu-items side-menu-user-name" ng-if="$root.loginUserInfo|isEmpty">Digital Credit</div> -->
+      <div class="side-menu-items side-menu-user-name" ng-if="!$root.loginUserInfo|isEmpty">{{sidebarUserName}}</div>
       <div class="side-menu-items" ng-click="toggleSideMenu();hideShowFooter()" ng-if="!$root.loginUserInfo|isEmpty" ui-sref="profile"><i class="icon fa fa-user-o"></i>Миний мэдээлэл</div>
       <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="loan_calculator"><i class="icon fa fa-calculator"></i>Зээлийн тооцоолуур</div>
       <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="intro"><i class="icon fa fa-sticky-note-o"></i>Хэрэглэх заавар</div>
@@ -91,7 +93,7 @@
 
       <div class="side-menu-items" ng-click="toggleSideMenu()"><i class="icon fa fa-cog" aria-hidden="true"></i>Тохиргоо</div>
 
-      <div class="side-menu-logout side-menu-items" ng-click="toggleSideMenu()" ui-sref="login" ng-if="!$root.loginUserInfo|isEmpty"><i class="icon fa fa-sign-out"></i>Гарах</div>
+      <div class="side-menu-logout side-menu-items" ng-click="toggleSideMenu();logOut()" ng-if="!$root.loginUserInfo|isEmpty"><i class="icon fa fa-sign-out"></i>Гарах</div>
       <div class="side-menu-logout side-menu-items" ng-click="toggleSideMenu()" ui-sref="login" ng-if="$root.loginUserInfo|isEmpty"><i class="icon fa fa-sign-out"></i>Нэвтрэх</div>
     </div>
     <ion-side-menu-content drag-content="false" id="mobileBodyContent" class="">
@@ -112,7 +114,7 @@
           </button>
         </ion-nav-buttons>
       </ion-nav-bar>
-      <ion-nav-view animation="none" class="index-ion-nav" id="ionNavViewMobile" ng-click="toggleSideMenu1()"> </ion-nav-view>
+      <ion-nav-view animation="no-animation" class="index-ion-nav" id="ionNavViewMobile" ng-click="toggleSideMenu1()"> </ion-nav-view>
       <ion-footer-bar ng-if="!$root.showBanner" align-title="center" class="bar-custom" style="width: 100%;height: 50px;" ng-hide="hideFooter" id="ionNavViewMobileFooter">
         <div class="home-tab" ng-include src="'views/nav/footer.html'"></div>
       </ion-footer-bar>

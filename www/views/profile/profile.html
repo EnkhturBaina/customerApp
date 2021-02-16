@@ -78,18 +78,18 @@
                             <label class="item item-input profile-label">
                                 <p>Гэрлэсэн эсэх</p>
                                 <select class="profile-select" ng-model="$root.customerProfileData.ismarried" selected="!$root.customerProfileData.ismarried">
-                                    <option ng-repeat="data in familtStatData | filter:{id:'!!'}" value="{{data.id}}" ng-selected="{{$root.customerProfileData.ismarried==data.id}}">{{data.name}}</option>
+                                    <option ng-repeat="data in familtStatData | filter:{id:'!!'}" ng-if="data.name" value="{{data.id}}" ng-selected="{{$root.customerProfileData.ismarried==data.id}}">{{data.name}}</option>
                                 </select>
                             </label>
                             <label class="item item-input profile-label">
                                 <p>МИК-ийн зээлтэй эсэх</p>
-                                <select class="profile-select" ng-model="$root.customerProfileData.mikMortgageCondition" selected="!$root.customerProfileData.mikMortgageCondition">
-                                    <option ng-repeat="md in mortgageData | filter:{id:'!!'}" value="{{md.id}}" ng-selected="{{$root.customerProfileData.mikMortgageCondition==md.id}}">{{md.name}}</option>
+                                <select class="profile-select" ng-model="$root.customerProfileData.mikmortgagecondition" selected="!$root.customerProfileData.mikmortgagecondition">
+                                    <option ng-repeat="md in mortgageData | filter:{id:'!!'}" ng-if="md.name" value="{{md.id}}" ng-selected="{{$root.customerProfileData.mikmortgagecondition==md.id}}">{{md.name}}</option>
                                 </select>
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Ажилласан жил</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="experiencePeriodId" ng-model="$root.customerProfileData.experiencePeriodId" />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="experienceperiodid" ng-model="$root.customerProfileData.experienceperiodid" />
                             </label>
                             <label class="item item-input profile-label">
                                 <p style="padding: 6px 0px">Иргэний үнэмлэхний зураг</p>
@@ -130,7 +130,7 @@
                             <label class="item item-input profile-label">
                                 <p>Орлогын эх үүсвэр</p>
                                 <select class="profile-select" ng-model="$root.customerIncomeProfileData.incometypeid">
-                                    <option ng-repeat="income in incomeType | filter:{id:'!!'}" value="{{income.id}}" ng-selected="{{$root.customerIncomeProfileData.incometypeid==income.id}}">{{income.name}}</option>
+                                    <option ng-repeat="income in incomeType | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.customerIncomeProfileData.incometypeid==income.id}}">{{income.name}}</option>
                                 </select>
                             </label>
                             <label class="item item-input profile-label">
@@ -148,7 +148,7 @@
                             <label class="item profile-label">
                                 <p>Харьцдаг банк</p>
                             </label>
-                            <div id="dealBankContainer" class="item profile-bank-list">
+                            <!-- <div id="dealBankContainer" class="item profile-bank-list">
                                 <div class="col  added-deal-bank" ng-repeat="dealbank in customerDealBanks | filter:{id:'!!'}">
                                     <div class="deal-bank-remove">-</div>
                                     <img src="{{$root.imagePath}}{{dealbank.banklogo}}" />
@@ -156,9 +156,9 @@
                                 </div>
                                 <select class="profile-select-deal-banks col" ng-model="$root.customerDealBank.dim2" ng-change="addDealBank()">
                                     <span style="margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">+</span>
-                                    <option ng-repeat="bank in allBankList | filter:{id:'!!'}" value="{{bank.id}}">{{bank.departmentname}}</option>
+                                    <option ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.departmentname" value="{{bank.id}}">{{bank.departmentname}}</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="profile-tab1-save-btn">
                                 <button class="button btn single-button" ng-click="saveIncomeProfileData()">ХАДГАЛАХ</button>
                             </div>

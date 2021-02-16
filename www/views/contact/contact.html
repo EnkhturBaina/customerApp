@@ -1,22 +1,33 @@
 <ion-view hide-nav-bar="true">
   <link href="views/contact/contact.css" rel="stylesheet" />
   <div ng-repeat="data in [{'title':'Холбоо барих'}]" ng-include src="'views/navbar.html'"></div>
-  <ion-content ng-controller="contactCtrl" class="contact-container margin-top-50">
+  <ion-content overflow-scroll="false" ng-controller="contactCtrl" class="contact-container margin-top-50">
     <div class="contact-detail">
-      <div class="item item-icon-left">
-        <i class="icon fa fa-phone fa-2x"></i>7011-8095
+      <div class="contact-card">
+        <div class="contact-list">
+          <i class="icon fa fa-map-marker fa-2x"></i>
+          <span>Улаанбаатар хот, Сүхбаатар дүүрэг, 8-р хороо, Амарын гудамж, Лагшан төв, 7 давхар</span>
+        </div>
+        <div class="contact-list">
+          <i class="icon fa fa-phone fa-2x"></i>
+          <span>7011-8095</span>
+        </div>
+        <div class="contact-list">
+          <i class="icon fa fa-facebook-square fa-2x"></i>
+          <span>Digital Credit</span>
+        </div>
+        <div class="contact-list">
+          <i class="icon fa fa-envelope-open fa-2x"></i>
+          <span>info@digitalcredit.mn</span>
+        </div>
+        <div class="contact-list">
+          <i class="icon fa fa-edge fa-2x"></i>
+          <span>www.digitalcredit.mn</span>
+        </div>
       </div>
-      <div class="item item-icon-left">
-        <i class="icon fa fa-facebook-square fa-2x"></i>Digital Credit
-      </div>
-      <div class="item item-icon-left">
-        <i class="icon fa fa-envelope-open fa-2x"></i>info@digitalcredit.mn
-      </div>
-      <div class="item item-icon-left">
-        <i class="icon fa fa-edge fa-2x"></i>www.digitalcredit.mn
-      </div>
-      <div class="item item-icon-left">
-        <i class="icon fa fa-map-marker fa-2x"></i>Улаанбаатар хот, Сүхбаатар дүүрэг, 8-р хороо, Амарын гудамж, Лагшан төв, 7 давхар
-      </div>
+      <!-- <div class="contact-card" style="height: 400px;">
+        <div id="map" data-tap-disabled="true"></div>
+      </div> -->
+    </div>
   </ion-content>
 </ion-view>

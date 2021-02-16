@@ -55,13 +55,18 @@
   $scope.getBanner();
 
   // ============= glob ========================
-  $rootScope.alert = function (messege) {
+  $rootScope.alert = function (messege, checkmark) {
     if (!isEmpty($scope.alertPopup)) {
       $scope.alertPopup.close();
     }
+    if (!checkmark) {
+      template = "<style>.popup { text-align:center;}</style>" + messege + "";
+    } else {
+      template = '<svg class="checkmark_alert" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">' + '<circle class="checkmark_alert__circle" cx="26" cy="26" r="25" fill="none" />' + '<path class="checkmark_alert__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>' + "<style>.popup { text-align:center;}</style>" + messege + "";
+    }
     $scope.alertPopup = $ionicPopup.alert({
       title: "",
-      template: "<style>.popup { text-align:center;}</style>" + messege + "",
+      template: template,
       cssClass: "confirmPopup",
       buttons: [
         {
@@ -88,15 +93,19 @@
     }
   };
   $rootScope.checkLoginUserDatas = function (correntPath, next) {
+    console.log("A");
     if (!isEmpty($rootScope.loginUserInfo)) {
       if ($rootScope.checkLoginUserReq()) {
+        console.log("a");
         return { now: next, nextpath: next };
       } else {
+        console.log("b");
         return { now: "profile", nextpath: next };
       }
     } else {
+      console.log("c");
       $rootScope.hideFooter = true;
-      return { now: "sign", nextpath: next };
+      return { now: "login", nextpath: next };
     }
   };
   $rootScope.ShowLoader = function () {

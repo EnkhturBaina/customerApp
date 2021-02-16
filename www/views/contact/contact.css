@@ -1,14 +1,38 @@
 .contact-container > .scroll {
-  height: 100%;
+  height: auto;
 }
 .contact-span {
   width: 100%;
   text-align: right;
   /* padding-right: 20px; */
 }
+.contact-detail {
+  margin: 20px 20px;
+}
 .contact-detail p {
   width: 40%;
 }
 .contact-detail-label {
   padding: 10px 15px;
+}
+.contact-card {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin-bottom: 10px;
+}
+.contact-list {
+  border: 0 !important;
+  margin: 10px;
+}
+.contact-list i {
+  color: #acd322;
+}
+.contact-list span {
+  margin-left: 20px;
+}
+#map {
+  width: 100%;
+  height: 100%;
 }

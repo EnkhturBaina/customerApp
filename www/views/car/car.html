@@ -28,9 +28,11 @@
                             <div id="car-dtl" class="desc">
                                 <p class="car-title">{{car.modelname}}</p>
                                 <span>{{car.productyear}}/{{car.entryyear}}</span>
-                                <span>Да хүрээ</span>
+                                <!-- <span>Да хүрээ</span> -->
                                 <p class="car-price">{{car.price|formatNumber}}₮</p>
-                                <span>{{car.itemcode}}</span>
+                                <div class="car-list-display-flex">
+                                    <span class="car-code">{{car.itemcode}}</span><i class="fa fa-ellipsis-h"></i>
+                                </div>
                             </div>
                         </li>
                     </ul>
