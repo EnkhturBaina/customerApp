@@ -1,8 +1,8 @@
 ﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $timeout) {
-  $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
-  $rootScope.imagePath = "https://dev.veritech.mn/";
-  // $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
-  // $rootScope.imagePath = "http://leasing.digitalcredit.mn/";
+  // $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
+  // $rootScope.imagePath = "https://dev.veritech.mn/";
+  $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
+  $rootScope.imagePath = "http://leasing.digitalcredit.mn/";
   $rootScope.serverHeader = { "content-type": "application/json;charset=UTF-8" };
   $rootScope.sessionid = "65178215-7896-4513-8e26-896df9cb36ad";
   $cordovaNetwork.isOnline = function () {
@@ -129,7 +129,7 @@
     });
   };
 
-  $scope.getAllBankList();
+  //$scope.getAllBankList();
 
   var bannerNotShow = localStorage.getItem("bannerNotShow");
   if (bannerNotShow == "true") {
