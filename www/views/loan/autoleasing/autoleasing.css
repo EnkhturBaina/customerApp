@@ -326,15 +326,6 @@
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
-.money-input input {
-  border: 1px solid;
-  color: #4b5180;
-  background: none;
-  border-radius: 5px;
-  border-color: #cdcdcd;
-  padding: 0 15px 0 20px;
-  text-align: right !important;
-}
 .middle-title {
   font-size: 12px;
   color: #c6c8d4;
@@ -551,35 +542,6 @@
 }
 .keypad-row {
   padding: 10px 15px !important;
-}
-.tugrug-input {
-  margin: 14px 0;
-  position: relative;
-}
-.tugrug-input .title {
-  margin: 0 10px;
-  position: absolute;
-  top: 20%;
-  margin-left: 30px;
-  color: #606060;
-}
-.input-tugrug-icon {
-  padding: 7px 0px 7px 0px;
-  font-weight: bold;
-  min-width: 30px;
-  position: absolute;
-  text-align: center;
-  font-size: 16px;
-  color: #b2b2b2;
-}
-.input-tugrug-type {
-  background: none;
-  text-align: left !important;
-  border: 1px solid #d5d5d5 !important;
-  border-radius: 5px;
-  margin: 0 0;
-  width: 100%;
-  padding: 0 15px 0 0px !important;
 }
 .items {
   margin: 20px 0 20px 0;

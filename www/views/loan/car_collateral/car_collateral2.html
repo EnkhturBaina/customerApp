@@ -4,29 +4,35 @@
         <!-- <ion-content id="car-collateral2" scroll="true" class="car-col-content margin-top-50"> -->
         <div class="car-col-step2-back" ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div>
         <div class="list car-collateral-list" ng-controller="car_collateralCtrl">
-            <div class="card car-step2-card">
+            <div class="card car-step2-card money-input">
                 <span class="step2-card-span">Зээлийн хүсэлтийн мэдээлэл</span>
-                <p class="step2-card-p">Зээлийн хэмжээ</p>
-                <label class="item item-input step2-input-container">
-                    <span class="step2-input-icon">₮</span>
+                <!-- <label class="item item-input step2-input-container">
+                    <p class="step2-card-p">Зээлийн хэмжээ</p>
                     <input type="tel" ng-model="$root.newCarReq.requestAmount" placeholder="Зээлийн хэмжээ" name="requestAmount" class="car-step2-input" format-input />
-                </label>
+                </label> -->
+                <div class="tugrug-input car-coll-step2-loan-amount">
+                    <span class="title car-coll-step2-title">Зээлийн хэмжээ</span>
+                    <div class="tugrug-input-container">
+                        <span class="input-tugrug-icon">₮</span>
+                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newCarReq.requestAmount" format-input />
+                    </div>
+                </div>
                 <label class="item item-input step2-loam-month">
                     <p>Хугацаа сараар</p>
                     <select class="car-col-step2-select" ng-model="$root.newCarReq.loanMonth">
-                        <option ng-repeat="month in $root.monthData" ng-if="month.name" value="{{month.data}}">{{month.name}}</option>
+                        <option ng-repeat="month in $root.monthData | filter:{id:'!!'}" ng-if="month.name" value="{{month.number1}}">{{month.name}}</option>
                     </select>
                 </label>
                 <label class="item item-input step2-loam-month">
                     <p>Зээл авах байршил</p>
-                    <select class="car-col-step2-select" ng-model="$root.newCarReq.loanMonth">
-                        <option ng-repeat="loc in $root.locationData" ng-if="loc.name" value="{{loc.data}}">{{loc.name}}</option>
+                    <select class="car-col-step2-select" ng-model="$root.newCarReq.locationId">
+                        <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.data}}">{{loc.name}}</option>
                     </select>
                 </label>
-                <label class="item item-input profile-label">
+                <!-- <label class="item item-input profile-label">
                     <p>Зээлийн хүү (сараар)</p>
                     <input class="loanFee-car-col" type="tel" placeholder="-" name="loanFee" ng-model="$root.newCarReq.loanFee" format-input />
-                </label>
+                </label> -->
                 <!-- <label class="item item-input step2-description-field">
                     <p>Тайлбар</p>
                     <textarea type="text" placeholder="..." name="description" ng-model="$root.newCarReq.description"></textarea>

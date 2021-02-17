@@ -1,8 +1,8 @@
 ﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $timeout) {
-  // $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
-  // $rootScope.imagePath = "https://dev.veritech.mn/";
-  $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
-  $rootScope.imagePath = "http://leasing.digitalcredit.mn/";
+  $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
+  $rootScope.imagePath = "https://dev.veritech.mn/";
+  // $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
+  // $rootScope.imagePath = "http://leasing.digitalcredit.mn/";
   $rootScope.serverHeader = { "content-type": "application/json;charset=UTF-8" };
   $rootScope.sessionid = "65178215-7896-4513-8e26-896df9cb36ad";
   $cordovaNetwork.isOnline = function () {
@@ -93,7 +93,6 @@
     }
   };
   $rootScope.checkLoginUserDatas = function (correntPath, next) {
-    console.log("A");
     if (!isEmpty($rootScope.loginUserInfo)) {
       if ($rootScope.checkLoginUserReq()) {
         console.log("a");
@@ -125,11 +124,11 @@
   $scope.getAllBankList = function () {
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1603958798356" }).then(function (response) {
       $rootScope.allBankList = response;
-      // console.log("$rootScope.allBankList", $rootScope.allBankList);
+      console.log("$rootScope.allBankList", $rootScope.allBankList);
     });
   };
 
-  //$scope.getAllBankList();
+  $scope.getAllBankList();
 
   var bannerNotShow = localStorage.getItem("bannerNotShow");
   if (bannerNotShow == "true") {

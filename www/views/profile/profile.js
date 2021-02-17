@@ -1,4 +1,4 @@
-angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal) {
+angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal, $timeout) {
   $scope.replaceCyr = function (lastName) {
     var rex = /^[А-ЯӨҮа-яөү\-\s]+$/;
     var inputLastName = document.getElementById("customerLastName");
@@ -38,7 +38,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1603958798356" }).then(function (response) {
       $rootScope.allBankList = response;
-      // console.log("$rootScope.allBankList", $rootScope.allBankList);
     });
   };
   // $scope.getProData();
@@ -52,7 +51,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.customerProfileData.customerTypeId = 1;
 
   $rootScope.customerIncomeProfileData = {};
-  $scope.customerId = "";
+  $scope.customerId;
 
   if (!isEmpty($rootScope.loginUserInfo)) {
     $rootScope.customerProfileData.crmCustomerId = $rootScope.loginUserInfo.id;
@@ -61,15 +60,14 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
   $scope.getProfileData = function () {
     if (!isEmpty($rootScope.loginUserInfo)) {
-      console.log("$rootScope.loginUserInfo.id", $rootScope.loginUserInfo.id);
+      // console.log("$rootScope.loginUserInfo.id", $rootScope.loginUserInfo.id);
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: $rootScope.loginUserInfo.id }).then(function (response) {
         console.log("getProfileData", response);
         $rootScope.hideFooter = true;
-        if (response != "") {
+        if (response[0] != "") {
           $rootScope.customerProfileData = response[0];
           $scope.customerProfilePicture.profilepicture = response[0].profilepicture;
           $scope.customerId = response[0].id;
-
           if (response[0].uniqueidentifier) {
             $("#regCharA").text(response[0].uniqueidentifier.substr(0, 1));
             $("#regCharB").text(response[0].uniqueidentifier.substr(1, 1));
@@ -78,9 +76,9 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
           serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: response[0].id }).then(function (response) {
             console.log("get income data", response);
-            if (response != "") {
+            if (response[0] != "") {
               $rootScope.customerIncomeProfileData = response[0];
-              $scope.asdasd = response[0].incometypeid;
+              // console.log("old user income");
             } else {
               // console.log("shine user income");
             }
@@ -119,6 +117,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
       $rootScope.alert("Ажилласан жилээ оруулна уу");
     } else {
+      $scope.customerProfileData.id = null;
       console.log($scope.customerProfileData);
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
         console.log("customerProfileData", response);
@@ -174,18 +173,21 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $rootScope.alert("Та төлж буй зээлийн дүнгээ оруулна уу");
     } else {
       $scope.getProfileData();
-      $rootScope.customerIncomeProfileData.customerid = $scope.customerId;
-      if ($scope.customerIncomeProfileData != "") {
-        console.log("$scope.customerIncomeProfileData", $scope.customerIncomeProfileData);
-        serverDeferred.requestFull("dcApp_profile_income_dv_002", $scope.customerIncomeProfileData).then(function (response) {
-          console.log("save income response", response);
-          $rootScope.alert("Амжилттай", true);
-        });
-      } else {
-        serverDeferred.requestFull("dcApp_profile_income_dv_002", $scope.customerIncomeProfileData).then(function (response) {
-          // console.log("save income response", response);
-        });
-      }
+
+      $timeout(function () {
+        if ($scope.customerIncomeProfileData != "") {
+          $rootScope.customerIncomeProfileData.customerid = $scope.customerId;
+          console.log("$rootScope.customerIncomeProfileData", $rootScope.customerIncomeProfileData);
+          serverDeferred.requestFull("dcApp_profile_income_dv_002", $rootScope.customerIncomeProfileData).then(function (response) {
+            console.log("save income response", response);
+            $rootScope.alert("Амжилттай", true);
+          });
+        } else {
+          serverDeferred.requestFull("dcApp_profile_income_dv_002", $rootScope.customerIncomeProfileData).then(function (response) {
+            // console.log("save income response", response);
+          });
+        }
+      }, 1000);
     }
   };
   $scope.overlayOn = function () {

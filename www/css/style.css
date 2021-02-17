@@ -910,3 +910,43 @@ h4 {
     box-shadow: inset 0px 0px 0px 30px #fff;
   }
 }
+
+.money-input input {
+  border: 1px solid;
+  color: #4b5180;
+  background: none;
+  border-radius: 5px;
+  border-color: #cdcdcd;
+  padding: 0 15px 0 20px;
+  text-align: right !important;
+  font-weight: bold;
+}
+.tugrug-input {
+  margin: 14px 0;
+  position: relative;
+}
+.tugrug-input .title {
+  margin: 0 10px;
+  position: absolute;
+  top: 20%;
+  margin-left: 30px;
+  color: #606060;
+}
+.input-tugrug-icon {
+  padding: 7px 0px 7px 0px;
+  font-weight: bold;
+  min-width: 30px;
+  position: absolute;
+  text-align: center;
+  font-size: 16px;
+  color: #b2b2b2;
+}
+.input-tugrug-type {
+  background: none;
+  text-align: left !important;
+  border: 1px solid #d5d5d5 !important;
+  border-radius: 5px;
+  margin: 0 0;
+  width: 100%;
+  padding: 0 15px 0 0px !important;
+}

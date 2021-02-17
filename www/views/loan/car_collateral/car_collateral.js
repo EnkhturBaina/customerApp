@@ -1,14 +1,16 @@
 angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $ionicLoading, $rootScope, $state) {
-  $scope.goCarCollLeasing = function () {
-    var next = $rootScope.checkLoginUserDatas("car_coll", "car_coll2");
-    $state.go(next.now, { path: next.nextpath });
-  };
+  // $scope.goCarCollLeasing = function () {
+  //   var next = $rootScope.checkLoginUserDatas("home", "car_coll");
+  //   $state.go(next.now, { path: next.nextpath });
+  // };
 
-  $scope.goCarCollLeasing();
+  // $scope.goCarCollLeasing();
 
-  console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+  // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+  $rootScope.monthData = [];
+  $scope.locationData = [];
   $scope.getMonthData = function () {
-    if (isEmpty($rootScope.categoryData)) {
+    if (isEmpty($rootScope.monthData)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1579493650561919" }).then(function (response) {
         $rootScope.monthData = response;
       });
@@ -119,6 +121,12 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       //   $state.go("car_coll2");
       //   $ionicLoading.hide();
       // });
+      localStorage.removeItem("carColl");
+      console.log("CAR COLL", localStorage.getItem("carColl"));
+      localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
+
+      console.log("CAR COLL", localStorage.getItem("carColl"));
+      console.log("local", localStorage);
       $state.go("car_coll2");
     }
   };

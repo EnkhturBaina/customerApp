@@ -1,13 +1,3 @@
-.car-collateral-list input {
-  text-align: right;
-  color: #4b5180 !important;
-  font-weight: bold;
-  padding-right: 0px;
-  background-color: transparent !important;
-  position: absolute !important;
-  width: auto !important;
-  right: 5px !important;
-}
 .car-col-content {
   margin-bottom: 50px;
   background: #f8f8fe;
@@ -30,6 +20,15 @@
   border-bottom-width: 1px;
   border-color: #ccc;
   border-top-width: 0px;
+}
+.car-collateral-label input {
+  text-align: right;
+  padding-right: 0px !important;
+  color: #4b5180 !important;
+  font-weight: bold;
+  width: 30%;
+  position: absolute;
+  right: 0;
 }
 .item-select:after {
   right: 5px !important;
@@ -79,19 +78,28 @@
   padding-left: 10px;
 }
 .car-step2-card {
+  padding: 10px;
+  margin: 20px 15px 0px 15px;
   height: 300px;
   background-color: #fff !important;
   margin: 70px 20px 10px 20px !important;
 }
-.car-step2-card label {
-  border: 0px !important;
-  padding-left: 20px !important;
-  height: 40px;
+.car-coll-step2-loan-amount {
+  margin: 15px !important;
 }
 .car-step2-card select {
-  margin-right: 20px !important;
-  right: 0;
+  width: auto;
+  margin: 0 12px 0 auto;
+  float: right;
+  border: none;
+  border-color: #d5d5d5;
+  border-radius: 5px;
+  padding: 7px 0px 7px 30px;
+  color: #a2a7b5;
+  text-align-last: right;
+  background-color: #fff;
   position: absolute;
+  right: 0;
 }
 .car-step2-input {
   text-align: left !important;
@@ -103,14 +111,21 @@
 }
 .step2-card-span {
   color: #4b5180;
-  padding: 10px 0px 0px 15px;
+  font-size: 12px;
+  text-transform: uppercase;
   display: flex;
+  font-weight: bold;
+  padding: 10px 0px 0px 15px;
 }
 .step2-card-p {
   margin: 10px 0px 0px 20px !important;
 }
 .step2-loam-month {
-  margin-top: 5px !important;
+  margin: 10px 0;
+  border: 0 !important;
+  border-radius: 5px;
+  margin-top: 15px;
+  padding: 0px 0px 0px 16px !important;
 }
 .step2-bank-container {
   padding: 0 10px;
@@ -143,14 +158,8 @@
 .step2-description-field textarea {
   min-height: 100px;
 }
-.step2-input-icon {
-  padding: 8px 8px 8px 30px;
-  font-weight: bold;
-  min-width: 50px;
-  position: absolute;
-  text-align: center;
-  font-size: 18px;
-  color: #a2a7b5;
+.car-coll-step2-title {
+  color: #a2a7b5 !important;
 }
 .bank-logo-container {
   display: flex;
@@ -283,16 +292,6 @@
 .car-collateral-content {
   height: 88%;
 }
-.car-col-step2-select {
-  width: 25%;
-  background: none;
-  border: 1px solid;
-  border-color: #d5d5d5;
-  border-radius: 5px;
-  height: 30px;
-  padding: 0px 15px 0px 10px;
-  color: #a2a7b5;
-}
 .car-col-step2-back ion-header-bar {
   background: transparent !important;
 }
@@ -352,4 +351,9 @@
   padding-bottom: 50px;
   background: #fff;
   border: 1px solid #acd322;
+}
+.car-coll-img-p {
+  color: #a2a7b5;
+  text-align: center;
+  padding-top: 2px;
 }
