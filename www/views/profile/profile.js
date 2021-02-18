@@ -53,6 +53,12 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $rootScope.customerIncomeProfileData = {};
   $scope.customerId;
 
+  $scope.customerEmail;
+
+  $rootScope.basePersonData = {};
+  $rootScope.umSystemUser = {};
+  $rootScope.umUser = {};
+
   if (!isEmpty($rootScope.loginUserInfo)) {
     $rootScope.customerProfileData.crmCustomerId = $rootScope.loginUserInfo.id;
     $rootScope.customerProfileData.mobilenumber = $rootScope.loginUserInfo.customercode;
@@ -117,12 +123,57 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
       $rootScope.alert("Ажилласан жилээ оруулна уу");
     } else {
-      $scope.customerProfileData.id = null;
-      console.log($scope.customerProfileData);
+      $scope.customerProfileData.id = $rootScope.loginUserInfo.customerid;
+      $scope.customerEmail = $scope.customerProfileData.email;
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
         console.log("customerProfileData", response);
         $rootScope.loginUserInfo = mergeJsonObjs($scope.customerProfileData, $rootScope.loginUserInfo);
         $rootScope.alert("Амжилттай", true);
+
+        $rootScope.basePersonData = {
+          firstName: response[1].firstname,
+          lastName: response[1].lastname,
+          stateRegNumber: response[1].uniqueidentifier,
+          parentId: response[1].id,
+        };
+
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613634433158205", parentId: response[1].id }).then(function (response) {
+          console.log("parentId response", response);
+          if (response[0] == "") {
+            //BasePerson
+            serverDeferred.requestFull("dcApp_basePerson_002", $scope.basePersonData).then(function (response) {
+              // console.log("basePersonData", response);
+              $rootScope.umSystemUser = {
+                username: response[1].stateregnumber,
+                email: $scope.customerEmail,
+                personId: response[1].id,
+              };
+              //umSystemUser
+              serverDeferred.requestFull("dcApp_umSystemUser_001", $scope.umSystemUser).then(function (response) {
+                // console.log("umSystemUser", response);
+                $rootScope.umUser = {
+                  systemUserId: response[1].id,
+                };
+                //umUser
+                serverDeferred.requestFull("dcApp_umUser_001", $scope.umUser).then(function (response) {
+                  // console.log("umUser", response);
+                });
+              });
+            });
+          } else {
+            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613634471804840", personId: response[0].id }).then(function (response) {
+              $rootScope.umSystemUser = {
+                id: response[0].id,
+                email: $scope.customerEmail,
+              };
+
+              serverDeferred.requestFull("dcApp_umSystemUserEmailChange_002", $scope.umSystemUser).then(function (response) {
+                // console.log("umSystemUser  response", response);
+              });
+            });
+          }
+        });
+
         if (!isEmpty($scope.nextPath)) {
           $state.go($scope.nextPath);
         }
