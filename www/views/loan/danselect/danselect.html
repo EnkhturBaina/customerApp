@@ -1,0 +1,28 @@
+<ion-view hide-nav-bar="true">
+    <link href="views/loan/danselect/danselect.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Автомашины лизинг'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 danselect-content">
+        <div ng-controller="danselectCtrl" class="danselect-container">
+            <div class="">
+                <div class="item danselect-card card-body item-text-wrap">
+                    <div class="danselect-card-row1">
+                        <img class="danselect-img" src="img/dan-logo60.png" />
+                    </div>
+                    <div class="danselect-card-row2">
+                        <span class="danselect-card-text">Та ДАН мэдээллийн системээр дамжуулан зээл авах гэж буй санхүүгийн байгууллагад өөрийн мэдээллийг баталгаажуулан илгээснээр зээлээ хурдан авах боломж бүрдэнэ.</span>
+                    </div>
+                    <button class="button btn single-button" ui-sref="#">ДАН-с татах</button>
+                </div>
+                <div class="item danselect-card card-body item-text-wrap">
+                    <div class="danselect-card-row1">
+                        <img class="danselect-img" src="img/info60.png" />
+                    </div>
+                    <div class="danselect-card-row2">
+                        <span class="danselect-card-text">Та ХУР, ДАН мэдээллийн системд хандах боломжгүй байгаа бол өөрийн мэдээллийг бөглөж зээлийн хүсэлтээ илгээгээрэй.</span>
+                    </div>
+                    <button class="button btn single-button" ui-sref="car_coll">Мэдээлэл бөглөх</button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

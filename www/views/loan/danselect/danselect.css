@@ -1,0 +1,22 @@
+.danselect-card {
+  display: inline-block;
+  background-color: #fff;
+  padding: 25px 10px 20px 10px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  height: auto;
+  margin: 10px 25px;
+}
+.danselect-img {
+  margin: auto;
+}
+.danselect-card-row1 {
+  display: flex;
+  height: 40px;
+}
+.danselect-card-row2 {
+  text-align: center;
+  padding: 20px;
+}
+.danselect-card-text {
+}

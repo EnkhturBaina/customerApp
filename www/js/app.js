@@ -276,6 +276,11 @@ var app = angular
       templateUrl: "views/notif/notif_detail/notif_detail.html",
       controller: "notif_detailCtrl",
     });
+    $stateProvider.state("danselect", {
+      url: "/views/loan/danselect/danselect",
+      templateUrl: "views/loan/danselect/danselect.html",
+      controller: "danselectCtrl",
+    });
     $urlRouterProvider.otherwise("/views/home");
   })
   .controller("index", function ($scope, $ionicPlatform, $state) {
