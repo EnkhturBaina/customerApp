@@ -12,7 +12,7 @@
   height: 100%;
   position: absolute;
 }
-.checkmark {
+.checkmark_success {
   width: 80px;
   height: 80px;
   border-radius: 50%;

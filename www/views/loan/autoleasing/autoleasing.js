@@ -147,6 +147,8 @@
     } else {
       if ($scope.checkReqiured("step4")) {
         //Сонгосон банк
+        $scope.newReqiust.customerId = $rootScope.loginUserInfo.customerid;
+        console.log("$rootScope.newReqiust", $rootScope.newReqiust);
         serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
           angular.forEach($rootScope.bankListFilter.Agree, function (item) {
             if (item.checked) {
@@ -164,6 +166,7 @@
             shopId: $rootScope.selectedCarData.supplierid,
             dcApp_request_map_bank_for_detail: selectedbanks,
           };
+          console.log("json", json);
           serverDeferred.requestFull("dcApp_request_product_dv_with_detail_001", json);
 
           $state.go("loan_success");
