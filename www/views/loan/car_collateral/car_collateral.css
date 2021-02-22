@@ -8,7 +8,7 @@
 }
 
 .car-collateral-list p {
-  color: #a2a7b5 !important;
+  color: #606060 !important;
   margin: 5px 0;
 }
 .car-collateral-label {
@@ -95,7 +95,7 @@
   border-color: #d5d5d5;
   border-radius: 5px;
   padding: 7px 0px 7px 30px;
-  color: #a2a7b5;
+  color: #606060;
   text-align-last: right;
   background-color: #fff;
   position: absolute;
@@ -159,7 +159,7 @@
   min-height: 100px;
 }
 .car-coll-step2-title {
-  color: #a2a7b5 !important;
+  color: #606060 !important;
 }
 .bank-logo-container {
   display: flex;
@@ -169,12 +169,6 @@
 .ml-42 {
   margin-left: 42px;
   margin-top: -5px;
-}
-.bank-middle-title {
-  margin-top: -5px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #4b5180;
 }
 .checkbox-square {
   position: absolute;
@@ -290,7 +284,7 @@
   right: 0;
 }
 .car-collateral-content {
-  height: 88%;
+  height: 100%;
 }
 .car-col-step2-back ion-header-bar {
   background: transparent !important;
@@ -356,4 +350,7 @@
   color: #a2a7b5;
   text-align: center;
   padding-top: 2px;
+}
+.car-coll-switch {
+  margin-left: 15px;
 }

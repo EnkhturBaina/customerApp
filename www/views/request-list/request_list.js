@@ -13,7 +13,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
   // ====== Get Data  ========
   $scope.getRequetData = function () {
     $scope.requetData = [];
-    // console.log("$rootScope.loginUserInfo.id", $rootScope.loginUserInfo);
+    console.log("$rootScope.loginUserInfo.id", $rootScope.loginUserInfo);
     if ($rootScope.loginUserInfo !== undefined) {
       $rootScope.ShowLoader();
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597814217394980", crmCustomerId: $rootScope.loginUserInfo.id }).then(function (response) {

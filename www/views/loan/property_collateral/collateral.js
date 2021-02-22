@@ -31,4 +31,8 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       }
     );
   };
+  $scope.saveProperty = function () {
+    localStorage.setItem("requestType", "estate");
+    console.log("local", localStorage);
+  };
 });

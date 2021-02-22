@@ -89,13 +89,6 @@
   margin-top: -5px;
 }
 
-.bank-middle-title {
-  margin-top: -5px;
-  font-size: 14px;
-  font-weight: 900;
-  color: #4b5180;
-}
-
 .bank-desc-green {
   margin-left: 42px;
   color: #acd322 !important;
@@ -269,35 +262,6 @@
 
 .keypad-row {
   padding: 10px 15px !important;
-}
-
-.tugrug-input {
-  margin: 14px 0;
-}
-
-.tugrug-input .title {
-  margin: 0 10px;
-  color: #7d7d7d;
-}
-
-.input-tugrug-icon {
-  padding: 7px 0px 7px 0px;
-  font-weight: bold;
-  min-width: 30px;
-  position: absolute;
-  text-align: center;
-  font-size: 16px;
-  color: #b2b2b2;
-}
-
-.input-tugrug-type {
-  background: none;
-  text-align: left !important;
-  border: 1px solid #d5d5d5 !important;
-  border-radius: 5px;
-  margin: 0 0;
-  width: 100%;
-  padding: 0 0px 0 35px !important;
 }
 
 .items li {

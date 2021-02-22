@@ -23,7 +23,7 @@
             </ul>
           </div>
           <div class="money-input">
-            <p class="middle-title ion-color-big-text">Зээлийн хүсэлтийн мэдээлэл</p>
+            <p class="request-middle-title ion-color-big-text">Зээлийн хүсэлтийн мэдээлэл</p>
             <div class="tugrug-input">
               <span class="title">Зээлийн хэмжээ</span>
               <div class="tugrug-input-container">
@@ -58,7 +58,7 @@
                 <li>
                   Үйлчилгээний нөхцлийг зөвшөөрөх
                   <span>
-                    <label class="step2-switch" id="step2isAgree" ng-click="step2isAgree()">
+                    <label class="step2-switch" id="step2isAgree">
                       <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" ng-change="changeEvent($root.newReqiust.serviceAgreementId)" />
                       <div class="step2-slider step2-round">
                         <span id="step2-toggle-on" class="step2-on">Тийм</span>
@@ -70,7 +70,7 @@
               </ul>
             </div>
           </div>
-          <div class="items">
+          <div class="items" ng-if="$root.requestType == 'autoColl'">
             <p class="middle-title ion-color-big-text">Барааны мэдээлэл</p>
             <ul>
               <li>
@@ -109,9 +109,9 @@
             </div>
           </div>
         </div>
+        <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button>
       </div>
       <ion-footer class="bottom-footer">
-        <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button>
       </ion-footer>
     </div>
   </ion-content>

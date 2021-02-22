@@ -292,29 +292,6 @@
   border-top: 1px solid #cccbcb;
   margin: 5px 0 5px 0;
 }
-.switch-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px 0 10px 0;
-  color: #606060;
-  padding: 5px 0px !important;
-}
-.switch-list li span {
-  font-weight: bold;
-  background-color: transparent;
-  color: #4b5180;
-  z-index: 1;
-  display: inline-block;
-  padding: 3px 8px;
-  min-width: 10px;
-  border-radius: 10px;
-  vertical-align: baseline;
-  text-align: center;
-  white-space: nowrap;
-  font-size: 14px;
-  line-height: 16px;
-}
 .container-padding {
   margin: 20px 15px 0px 15px;
   padding: 20px;
@@ -613,102 +590,6 @@
   position: relative !important;
 }
 .autoleasing-step2-content {
-  height: 90%;
-}
-.step2-switch {
-  float: right;
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 25px;
-}
-
-.step2-switch input {
-  display: none;
-}
-
-.step2-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #fff;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-.step2-slider:before {
-  position: absolute;
-  content: "";
-  height: 17px;
-  width: 17px;
-  left: 4px;
-  bottom: 3px;
-  background-color: #acd322;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-}
-
-.step2-switch input:checked + .step2-slider {
-  background-color: #fff;
-}
-
-.step2-switch input:focus + .step2-slider {
-  box-shadow: 0 0 1px #2196f3;
-}
-
-.step2-switch input:checked + .step2-slider:before {
-  -webkit-transform: translateX(33px);
-  -ms-transform: translateX(33px);
-  transform: translateX(33px);
-}
-
-/*------ ADDED CSS ---------*/
-.step2-on {
-  display: none !important;
-}
-
-.step2-on,
-.step2-off {
-  color: #000;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  font-size: 10px;
-  font-family: "Roboto", sans-serif;
-  color: #acd322 !important;
-  font-size: 12px !important;
-  font-weight: normal !important;
-}
-.step2-off {
-  left: 37px;
-}
-.step2-on {
-  left: 20px;
-}
-.step2-switch input:checked + .step2-slider .step2-on {
-  display: block !important;
-}
-
-.step2-switch input:checked + .step2-slider .step2-off {
-  display: none;
-}
-
-/*--------- END --------*/
-
-/* Rounded sliders */
-.step2-slider.step2-round {
-  border-radius: 34px;
-  border: 1px solid #cccccc;
-}
-
-.step2-slider.step2-round:before {
-  border-radius: 50%;
-}
-.activeSwitch > .step2-slider.step2-round {
-  border: 1px solid #acd322;
 }
 .autoleasing-month-select {
   width: 35%;
@@ -777,4 +658,14 @@
   padding-bottom: 50px;
   background: #fff;
   border: 1px solid #acd322;
+}
+.overlay-step4-content {
+  color: #000;
+  font-size: 12px;
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+  bottom: 0;
+  text-align: center;
+  padding-bottom: 50px;
 }

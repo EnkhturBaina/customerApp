@@ -22,6 +22,9 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     // console.log(item);
   };
   $scope.nexClivk = function () {
+    localStorage.setItem("requestType", "consumer");
+    console.log("local", localStorage);
+
     $state.go("autoleasing-2");
   };
   $scope.otherGoodsDelete = function (id) {

@@ -24,7 +24,7 @@
         <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
         <img ng-repeat="bank in allBankList | filter:{id:'!!'}" src="{{bank.banklogo|guessImageMime}}" />
       </div>
-      <button class="button btn single-button">Үргэлжлүүлэх</button>
+      <button class="button btn single-button" ng-click="saveBusinessLoan()">Үргэлжлүүлэх</button>
     </div>
   </ion-content>
 </ion-view>

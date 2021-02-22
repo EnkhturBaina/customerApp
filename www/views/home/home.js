@@ -59,10 +59,14 @@
     if (!isEmpty($scope.alertPopup)) {
       $scope.alertPopup.close();
     }
-    if (!checkmark) {
-      template = "<style>.popup { text-align:center;}</style>" + messege + "";
+    if (checkmark == "success") {
+      template = '<div class="svg-box"><svg class="circular green-stroke"><circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="4" stroke-miterlimit="10"/></svg>' + '<svg class="checkmark green-stroke"><g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-489.57,-205.679)"><path class="checkmark__check" fill="none" d="M616.306,283.025L634.087,300.805L673.361,261.53"/></g></svg></div>' + "<style>.popup { text-align:center;}</style>" + messege + "";
+    } else if (checkmark == "danger") {
+      template = '<div class="svg-box"><svg class="circular red-stroke"><circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="4" stroke-miterlimit="10"/></svg>' + '<svg class="cross red-stroke"><g transform="matrix(0.79961,8.65821e-32,8.39584e-32,0.79961,-502.652,-204.518)"><path class="first-line" d="M634.087,300.805L673.361,261.53" fill="none"/></g>' + '<g transform="matrix(-1.28587e-16,-0.79961,0.79961,-1.28587e-16,-204.752,543.031)"><path class="second-line" d="M634.087,300.805L673.361,261.53"/></g></svg></div>' + "<style>.popup { text-align:center;}</style>" + messege + "";
+    } else if (checkmark == "warning") {
+      template = '<div class="svg-box"><svg class="circular yellow-stroke">' + '<circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="4" stroke-miterlimit="10"/></svg>' + '<svg class="alert-sign yellow-stroke">' + '<g transform="matrix(1,0,0,1,-615.516,-257.346)">' + '<g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">' + '<path class="line" d="M634.087,300.805L673.361,261.53" fill="none"/>' + "</g>" + '<g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">' + '<circle class="dot" cx="621.52" cy="316.126" r="1.318" />' + "</g>" + "</g>" + "</svg></div>" + "<style>.popup { text-align:center;}</style>" + messege + "";
     } else {
-      template = '<svg class="checkmark_alert" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">' + '<circle class="checkmark_alert__circle" cx="26" cy="26" r="25" fill="none" />' + '<path class="checkmark_alert__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>' + "<style>.popup { text-align:center;}</style>" + messege + "";
+      template = "<style>.popup { text-align:center;}</style>" + messege + "";
     }
     $scope.alertPopup = $ionicPopup.alert({
       title: "",
@@ -136,6 +140,9 @@
   }
 
   $scope.callComingSoon = function () {
-    $rootScope.alert("Тун удахгүй");
+    $rootScope.alert("Тун удахгүй", "warning");
   };
+
+  localStorage.removeItem("requestType");
+  console.log("localStorage", localStorage);
 });
