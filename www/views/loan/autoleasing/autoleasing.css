@@ -133,8 +133,8 @@
 .qr-btn-container {
   display: flex;
   justify-content: center;
-  width: 100%;
-  padding: 20px 0px 20px 0px;
+  padding: 10px 0px 10px 0px;
+  width: 55vw;
 }
 .ghostwhite-noscroll-container {
   background-color: ghostwhite;
@@ -163,17 +163,15 @@
   border-radius: 10px;
   border-color: #acd322;
   width: 220px;
+  min-height: 37px;
+  line-height: 34px !important;
 }
 .qr-btn-container .filter {
   /* background: #f8f8fe; */
   z-index: 0;
   border-radius: 28px;
-  height: 51px;
-  top: -3px;
-  left: -5px;
   width: 229px;
   font-size: 14px;
-  position: absolute;
   padding: 5px;
 }
 .qr-ico {
@@ -682,5 +680,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  margin: 20% 0;
+  margin: 15% 0;
+}
+.step1-code-input-container {
+  width: 55vw;
+  margin: 0 auto;
 }

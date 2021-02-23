@@ -584,16 +584,6 @@ h4 {
   padding-top: 0 !important;
 }
 
-.myAlertButton {
-  max-width: 40% !important;
-  min-height: 34px !important;
-  display: block !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  line-height: initial !important;
-  border-radius: 5px !important;
-}
-
 .loading-container .loading {
   background-color: transparent;
 }

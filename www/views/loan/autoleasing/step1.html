@@ -12,11 +12,12 @@
                         <li class="step-li-4"></li>
                     </ul>
                 </div>
-                <div class="bottom-border-input-text margin-lr-20">
+                <div class="bottom-border-input-text step1-code-input-container">
                     <p class="big-middle-title">Код оруулна уу</p>
                     <input type="text" placeholder="DCC0001" name="carCode" class="step1-car-code ion-text-upper" ng-model="$root.newReqiust.itemcode" ng-keyup="getCarDatasIdEnterkey($event,$root.newReqiust.itemcode)" />
                 </div>
                 <div class="step1-scan-qr-container">
+                    <button class="button btn single-button" id="Next" ng-click="getCarDatasId($root.newReqiust.itemcode)">Үргэлжлүүлэх</button>
                     <div class="qr-btn-container">
                         <button class="button qr-button" id="qr" ng-click="showQRreader()">
                             <span class="filter">
@@ -34,7 +35,6 @@
                     <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.banklogo" src="{{$root.imagePath}}{{bank.banklogo}}" />
 
                 </div>
-                <button class="button btn single-button" id="Next" ng-click="getCarDatasId($root.newReqiust.itemcode)">Үргэлжлүүлэх</button>
             </ion-footer>
         </div>
     </ion-content>
