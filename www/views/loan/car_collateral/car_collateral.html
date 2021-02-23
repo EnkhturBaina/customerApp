@@ -12,7 +12,7 @@
     <div ng-repeat="data in [{'title':'Автомашин барьцаалсан зээл'}]" ng-include src="'views/navbar.html'"></div>
     <ion-content overflow-scroll="true" class="ion-modified-content has-header car-collateral-content">
         <div class="big-container ghostwhite-noscroll-container">
-            <div class="magic-container">
+            <div class="magic-container car-collateral-contant-card">
                 <div class="margin-lr-20">
                     <div class="list car-collateral-list">
                         <label class="item item-input item-select car-collateral-label">
@@ -148,14 +148,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="bank-container">
-                    <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
-                    <img ng-repeat=" bank in allBankList" src="{{$root.imagePath}}{{bank.banklogo}}" />
+            </div>
+            <div class="bank-container">
+                <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
+                <img ng-repeat=" bank in allBankList" src="{{$root.imagePath}}{{bank.banklogo}}" />
 
-                </div>
-                <button class="button btn single-button" id="Next" ng-click="saveCarCol()">Үргэлжлүүлэх</button>
             </div>
             <ion-footer class="bottom-footer">
+                <button class="button btn single-button" id="Next" ng-click="saveCarCol()">Үргэлжлүүлэх</button>
             </ion-footer>
         </div>
     </ion-content>

@@ -86,9 +86,9 @@
 .trend-card-container {
   min-height: 165px;
   background: none;
-  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  /* box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%); */
   height: 100%;
-  border: 1px solid #e4e4e4;
+  /* border: 1px solid #e4e4e4; */
 }
 .trend-scroll > .scroll {
   padding: 20px 0;

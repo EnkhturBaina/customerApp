@@ -54,7 +54,7 @@
     </div>
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 car-info-content">
         <div class="big-container">
-            <div class="magic-container">
+            <div class="magic-container car-info-contant-card">
                 <!-- Car -->
                 <div class="item-info car-detail-container" ng-show="isCarDetail">
                     <ion-slide-box class="leasing-badge">
@@ -64,21 +64,20 @@
                             </div>
                         </ion-slide>
                     </ion-slide-box>
-                    <p class="middle-title">{{carData.modelname}}</p>
                     <ul>
                         <li>Үйлдвэрлэсэн он <span> {{carData.productyear}} </span></li>
                         <li>Орж ирсэн он <span> {{carData.entryyear}} </span></li>
-                        <li>Барааны код <span> {{carData.modelname}} </span></li>
+                        <li>Код <span> {{carData.itemcode}} </span></li>
                         <li>Борлуулагч <span> {{carData.suppliername}} </span></li>
                         <li>Үнэ <span>{{carData.price|formatNumber}} ₮</span></li>
-                        <li>Бүтээгдэхүүний QR <span> {{carData.itemcode}} </span></li>
                         <div id="addition-info" style="display: none">
+                            <li>Үйлдвэр <span> {{carData.factoryname}} </span></li>
+                            <li>Загвар <span> {{carData.modelname}} </span></li>
                             <li>Өнгө <span> {{carData.color}} </span></li>
-                            <li>Явсан км<span> {{carData.mile}} </span></li>
-                            <li>Моторын багтаамж <span> {{carData.engine}} </span></li>
+                            <li>Явсан км<span> {{carData.mile|formatNumber}} </span></li>
+                            <li>Моторын багтаамж <span> {{carData.engine|formatNumber}} </span></li>
                             <li>Арлын дугаар <span>{{carData.vinnumber}}</span></li>
                             <li>Хөдөлгүүр <span>{{carData.fueltype}} </span></li>
-                            <li>Үйлдвэр <span> {{carData.factoryname}} </span></li>
                             <li>Хурдны хайрцаг<span> {{carData.transmission}} </span></li>
                             <li>Жолооны хүрд <span> {{carData.steering}} </span></li>
                             <li>Үйлдвэрлэсэн улс <span>{{carData.industrycountry}}</span></li>
@@ -128,16 +127,19 @@
                         <div class="suggest-card">
                             <img src="{{$root.carDatas[$index].itempic|guessImageMime}}" class="car-img-suggest" />
                             <span class="car-name">{{$root.carDatas[$index].modelname}}</span>
+                            <span>{{$root.carDatas[$index].itemcode}}</span>
                             <span class="date">{{$root.carDatas[$index].productyear}}-{{$root.carDatas[$index].entryyear}}</span>
                         </div>
                         <div class="suggest-card">
                             <img src="{{$root.carDatas[$index+1].itempic|guessImageMime}}" class="car-img-suggest" />
                             <span class="car-name">{{$root.carDatas[$index+1].modelname}}</span>
+                            <span>{{$root.carDatas[$index].itemcode}}</span>
                             <span class="date">{{$root.carDatas[$index+1].productyear}}-{{$root.carDatas[$index+1].entryyear}}</span>
                         </div>
                         <div class="suggest-card">
                             <img src="{{$root.carDatas[$index+2].itempic|guessImageMime}}" class="car-img-suggest" />
                             <span class="car-name">{{$root.carDatas[$index+2].modelname}}</span>
+                            <span>{{$root.carDatas[$index].itemcode}}</span>
                             <span class="date">{{$root.carDatas[$index+2].productyear}}-{{$root.carDatas[$index+2].entryyear}}</span>
                         </div>
                     </ion-slide>

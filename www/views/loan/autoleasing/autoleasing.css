@@ -165,7 +165,7 @@
   width: 220px;
 }
 .qr-btn-container .filter {
-  background: #f8f8fe;
+  /* background: #f8f8fe; */
   z-index: 0;
   border-radius: 28px;
   height: 51px;
@@ -668,4 +668,19 @@
   bottom: 0;
   text-align: center;
   padding-bottom: 50px;
+}
+.step1-card-content {
+  background-color: #fff;
+  padding: 15px 0px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 10px;
+}
+.step1-scan-qr-container {
+  display: flex;
+  height: 40%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 20% 0;
 }

@@ -3,7 +3,7 @@
     <div ng-repeat="data in [{'title':'Автомашины лизинг'}]" ng-include src="'views/navbar.html'"></div>
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 autoleasing-step1-content">
         <div class="big-container ghostwhite-noscroll-container">
-            <div class="magic-container">
+            <div class="magic-container step1-card-content">
                 <div class="progressbar-container">
                     <ul id="progress-bar" class="progressbar">
                         <li class="active step-li-1"></li>
@@ -13,10 +13,10 @@
                     </ul>
                 </div>
                 <div class="bottom-border-input-text margin-lr-20">
-                    <p class="ion-color-big-text">Код оруулна уу</p>
+                    <p class="big-middle-title">Код оруулна уу</p>
                     <input type="text" placeholder="DCC0001" name="carCode" class="step1-car-code ion-text-upper" ng-model="$root.newReqiust.itemcode" ng-keyup="getCarDatasIdEnterkey($event,$root.newReqiust.itemcode)" />
                 </div>
-                <div style="display: flex; height: 40%; flex-direction: column; align-items: center; justify-content: flex-end">
+                <div class="step1-scan-qr-container">
                     <div class="qr-btn-container">
                         <button class="button qr-button" id="qr" ng-click="showQRreader()">
                             <span class="filter">

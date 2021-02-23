@@ -1,10 +1,6 @@
 .addBtnContainer {
   margin: 20px 0px;
 }
-
-.item_lists {
-}
-
 .item_lists .items {
   display: flex;
 }
@@ -535,4 +531,11 @@
 }
 .add-goods-content .scroll {
   height: auto !important;
+}
+.add-goods-content-card {
+  background-color: #fff;
+  padding: 15px 0px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 10px;
 }

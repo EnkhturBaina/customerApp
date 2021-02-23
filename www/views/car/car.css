@@ -215,7 +215,7 @@
   line-height: 16px;
 }
 .car-img {
-  width: auto;
+  width: 100%;
   height: auto;
   margin: 0 auto;
   display: block;
@@ -278,12 +278,10 @@
   font-weight: bold;
 }
 .suggest-title {
-  margin: 0px 30px !important;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 30px !important;
   color: #4b5180;
-}
-.suggest-slider {
-  display: flex !important;
-  /* width: -webkit-fill-available !important; */
 }
 .suggest-card {
   width: 25vw !important;
@@ -317,7 +315,6 @@
   display: flex !important;
 } */
 .suggest-slider {
-  /* padding: 0 7vw; */
   padding: 0 30px;
   color: #000;
   background-color: #fff;
@@ -325,6 +322,7 @@
   display: flex;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
+  width: 100vw !important;
   margin-bottom: 20px;
 }
 .suggest-slider-container {
@@ -421,4 +419,11 @@
   margin: 0 10px 0 auto;
   font-size: 20px;
   color: #4b5180;
+}
+.car-info-contant-card {
+  background-color: #fff;
+  padding: 15px 0px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 10px;
 }

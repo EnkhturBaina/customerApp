@@ -199,7 +199,7 @@
     }
     if (param == "step1") {
       if (isEmpty($rootScope.newReqiust.itemcode)) {
-        $rootScope.alert("Барааны код оо оруулна уу");
+        $rootScope.alert("Код оо оруулна уу", "warning");
         return false;
       } else {
         return true;
