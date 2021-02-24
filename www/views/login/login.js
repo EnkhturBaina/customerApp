@@ -87,7 +87,12 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
             }
           });
           if (isEmpty($stateParams.path)) {
-            $state.go("profile");
+            if ($rootScope.isLoginFromRequestList) {
+              $state.go("requestList");
+              $scope.getRequetData();
+            } else {
+              $state.go("profile");
+            }
           } else {
             $state.go($stateParams.path);
           }

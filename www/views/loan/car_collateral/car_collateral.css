@@ -46,13 +46,6 @@
   padding-right: 0px;
   background: none;
 }
-.bottom-bank-container {
-  background: #fff;
-  box-shadow: 1px 0px 7px -1px grey;
-  padding: 0 10px;
-  left: 0;
-  /* position: absolute; */
-}
 .bottom-bank-container img {
   height: 30px;
   width: 30px;
@@ -60,23 +53,6 @@
 }
 .bottom-bank-container span {
   letter-spacing: -0.5px;
-}
-.car-collateral-bank-div {
-  padding: 10px 0px;
-}
-.car-next-button {
-  display: block;
-  margin: 20px auto;
-  line-height: 36px !important;
-  width: 65%;
-  min-height: 36px !important;
-}
-.car-back-nav {
-  width: 100%;
-  text-align: left;
-}
-.previous-title {
-  padding-left: 10px;
 }
 .car-step2-card {
   padding: 10px;
@@ -146,9 +122,6 @@
   align-items: center;
   font-size: 12px;
 }
-.bank-title-red {
-  color: red !important;
-}
 .step2-bank-span {
   color: #4b5180;
   padding-left: 20px !important;
@@ -171,33 +144,13 @@
   margin-left: 42px;
   margin-top: -5px;
 }
-.checkbox-square {
-  position: absolute;
-  top: 50%;
-  right: 8px;
-  left: 8px;
-  z-index: 3;
-  margin-top: -21px;
-}
 .logo-size {
   width: 35px;
   height: 35px;
 }
-.checkbox-icon {
-  position: relative;
-  width: 25px;
-  height: 25px;
-  display: block;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
 .car-step3-card {
   background-color: #fff !important;
   margin: 10px 20px 10px 20px !important;
-}
-.car-step3-card.step3-checkbox-container {
-  /* padding-left: 45px !important; */
 }
 .car-step3-card label {
   padding-bottom: 10px !important;
@@ -212,9 +165,6 @@
 .step3-container .scroll {
   height: 100% !important;
 }
-.item-checkbox {
-  padding-left: 50px !important;
-}
 .bank-desc-green {
   color: #acd322 !important;
 }
@@ -223,24 +173,6 @@
 }
 .checkbox input:checked + .checkbox-icon::after {
   border-radius: 5px !important;
-}
-.checkbox .checkbox-icon:before {
-  border-radius: 5px !important;
-  border-color: #acd322;
-}
-.checkbox-icon {
-  width: 20px !important;
-  height: 20px !important;
-}
-.checkbox-icon::after {
-  width: 20px !important;
-  height: 20px !important;
-}
-.checkbox-icon::before {
-  width: 20px !important;
-  height: 20px !important;
-  margin-top: 0px !important;
-  margin-left: 0px !important;
 }
 .checkbox input[type="checkbox"]:checked + i:after {
   content: "\2713";
@@ -251,10 +183,6 @@
   display: flex;
   text-align: center;
   color: #acd322;
-}
-.detail-btn-container {
-  display: inline-flex;
-  padding-top: 50px;
 }
 #car-collateral2 > .scroll {
   height: 170px;

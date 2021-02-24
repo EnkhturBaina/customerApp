@@ -115,7 +115,8 @@
     $ionicLoading.show({
       showBackdrop: true,
       showDelay: 0,
-      template: '<div class="loadingio-spinner-spinner-v5m2iut1fj" > <div class="ldio-agte97219x" ><div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div ></div > </div >',
+      // template: '<div class="loadingio-spinner-spinner-v5m2iut1fj" > <div class="ldio-agte97219x" ><div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div ></div > </div >',
+      template: '<div class="custom-spinner"><div></div><div class="custom-dot"></div><div></div><div class="custom-dot"></div></div>',
     });
   };
   //========= first run ==========================

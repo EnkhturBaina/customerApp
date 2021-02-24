@@ -1,5 +1,5 @@
 var expandCollapseApp = angular.module("request_list.Ctrl", ["ngAnimate"]);
-expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicLoading) {
+expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicLoading, $ionicPlatform) {
   $scope.growDiv = function (id) {
     var grow = document.getElementById("grow" + id);
     if (grow.clientHeight) {
@@ -11,7 +11,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
   };
   $scope.isEmpty = true;
   // ====== Get Data  ========
-  $scope.getRequetData = function () {
+  $rootScope.getRequetData = function () {
     $scope.requetData = [];
     console.log("$rootScope.loginUserInfo.id", $rootScope.loginUserInfo);
     if ($rootScope.loginUserInfo !== undefined) {
@@ -39,5 +39,11 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
     // console.log(bank);
     $rootScope.selectbank = bank;
     $state.go("request_detail");
+  };
+
+  //Банк цэснээс нэвтрэх
+  $rootScope.isLoginFromRequestList = false;
+  $scope.loginFromRequestList = function () {
+    $rootScope.isLoginFromRequestList = true;
   };
 });

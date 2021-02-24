@@ -121,7 +121,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       // serverDeferred.requestFull("dcApp_car_collateral_loan_001", $rootScope.newCarReq).then(function (response) {
       //   $rootScope.selectedCarData = response[1];
       //   $state.go("car_coll2");
-      //   $ionicLoading.hide();63
+      //   $ionicLoading.hide();
       // });
 
       localStorage.setItem("requestType", "autoColl");

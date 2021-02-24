@@ -1,12 +1,6 @@
 ﻿.progressbar-container {
   margin: 15% 0 30% 0;
 }
-.progressbar-wrapper {
-  background: #c6c8d4;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 5px;
-}
 .progressbar li {
   list-style-type: none;
   width: 25%;
@@ -146,15 +140,6 @@
 .margin-lr-20 {
   margin-left: 20px;
   margin-right: 20px;
-}
-.bottom-btn-container {
-  bottom: 10%;
-  position: absolute;
-  width: 80%;
-  /* padding: 0px 25px; */
-}
-.input-text {
-  padding: 20px 40px 0px 40px;
 }
 .qr-btn-container .qr-button {
   background: none;
@@ -338,22 +323,6 @@
   display: block;
   margin: -1px;
   font-size: 16px;
-}
-.item-checkbox .checkbox {
-  position: absolute;
-  top: 50%;
-  right: 0px;
-  left: 0px;
-  z-index: 3;
-  margin-top: -21px;
-}
-.logo-size {
-  width: 35px;
-  height: 35px;
-}
-.ml-42 {
-  margin-left: 42px;
-  margin-top: -5px;
 }
 .bank-middle-title {
   margin-top: -5px;
@@ -644,18 +613,6 @@
   z-index: 99;
   cursor: pointer;
   margin: 0 auto;
-}
-.overlay-profile-content {
-  color: #000;
-  font-size: 12px;
-  position: absolute;
-  margin: 0 auto;
-  width: 100%;
-  bottom: 0;
-  text-align: center;
-  padding-bottom: 50px;
-  background: #fff;
-  border: 1px solid #acd322;
 }
 .overlay-step4-content {
   color: #000;

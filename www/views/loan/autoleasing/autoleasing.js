@@ -1,4 +1,4 @@
-﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state) {
+﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $window, $ionicPlatform) {
   $scope.getCarDatasId = function (itemCode) {
     $scope.carData = [];
     if ($scope.checkReqiured("step1")) {
@@ -286,6 +286,14 @@
       $rootScope.newReqiust.loanAmount = $scope.getLoanAmount;
     } else {
       input.value = input.value.slice(0, input.value.length - 1);
+    }
+  };
+
+  $scope.backFromStep2 = function () {
+    if ($ionicHistory.viewHistory().backView.stateName == "login" && !isEmpty($rootScope.loginUserInfo)) {
+      $state.go("car-info");
+    } else {
+      $ionicHistory.goBack();
     }
   };
 });
