@@ -573,6 +573,7 @@ h4 {
 
 .popup-buttons {
   min-height: initial;
+  padding: 0 20px !important;
 }
 
 .popup-body {
@@ -604,6 +605,7 @@ h4 {
   font-size: 16px;
   padding-left: 16px;
   padding-right: 16px;
+  text-align: center;
 }
 
 .confirmPopup .popup .popup-buttons {
@@ -789,27 +791,6 @@ h4 {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 50px !important;
-}
-
-.confirmPopup button {
-  background: rgb(162, 209, 54) !important;
-  background: -moz-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
-  background: -webkit-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
-  background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
-  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#a2d136", endColorstr="#3cc1f9", GradientType=1) !important;
-  color: white !important;
-  width: 55vw !important;
-  border-radius: 10px !important;
-  font-weight: normal !important;
-  text-transform: uppercase !important;
-  font-size: 10px !important;
-  letter-spacing: 1px !important;
-  min-height: 35px !important;
-  margin: 10px auto !important;
-  border: 0px !important;
-  width: 60% !important;
-  min-height: 35px !important;
-  flex: none !important;
 }
 
 .confirmPopup .popup .popup-buttons {
@@ -1252,4 +1233,47 @@ h4 {
   100% {
     transform: translate(24px, 0);
   }
+}
+.confirmPopup .button-confirm {
+  background: rgb(162, 209, 54) !important;
+  background: -moz-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  background: -webkit-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#a2d136", endColorstr="#3cc1f9", GradientType=1) !important;
+  color: white !important;
+  border-radius: 10px !important;
+  font-weight: normal !important;
+  text-transform: uppercase !important;
+  font-size: 10px !important;
+  letter-spacing: 1px !important;
+  min-height: 35px !important;
+  margin: 10px auto !important;
+  border: 0px !important;
+  width: 50% !important;
+  min-height: 35px !important;
+  flex: none !important;
+}
+.confirmPopup .button-decline {
+  background: transparent !important;
+}
+
+.confirmPopup .button-dc-default {
+  background: rgb(162, 209, 54) !important;
+  background: -moz-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  background: -webkit-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#a2d136", endColorstr="#3cc1f9", GradientType=1) !important;
+  color: white !important;
+  width: 55vw !important;
+  border-radius: 10px !important;
+  font-weight: normal !important;
+  text-transform: uppercase !important;
+  font-size: 10px !important;
+  letter-spacing: 1px !important;
+  min-height: 35px !important;
+  margin: 10px auto !important;
+  border: 0px !important;
+  width: 60% !important;
+  min-height: 35px !important;
+  flex: none !important;
 }

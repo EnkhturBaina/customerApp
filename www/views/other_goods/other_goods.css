@@ -479,6 +479,7 @@
 .other-goods-checkbox > .checkbox {
   float: left;
   padding: 10px 7px !important;
+  display: none;
 }
 .other-goods-checkbox > .checkbox > .checkbox-icon {
   width: 25px !important;

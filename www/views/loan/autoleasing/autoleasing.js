@@ -1,4 +1,7 @@
 ﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $window, $ionicPlatform) {
+  $rootScope.requestType = "";
+  $rootScope.requestType = localStorage.getItem("requestType");
+
   $scope.getCarDatasId = function (itemCode) {
     $scope.carData = [];
     if ($scope.checkReqiured("step1")) {
@@ -34,8 +37,14 @@
     }
   };
 
-  if (!isEmpty($rootScope.selectedCarData)) {
-    $scope.getLoanAmount = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
+  if ($rootScope.requestType == "consumer") {
+    $scope.getLoanAmount = $rootScope.sumPrice;
+    $rootScope.loanAmountField = $rootScope.sumPrice;
+  } else {
+    if (!isEmpty($rootScope.selectedCarData)) {
+      $scope.getLoanAmount = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
+      $rootScope.loanAmountField = $rootScope.sumPrice;
+    }
   }
 
   $scope.getLookupData();
@@ -111,16 +120,16 @@
     );
   };
 
-  $rootScope.requestType = "";
   $rootScope.selectedBankSuccess = "";
   $rootScope.carCollateralData = {};
+  $rootScope.consumerData = [];
   $scope.perOfAdvancePayment;
 
   $scope.sendRequest = function () {
     var selectedbanks = [];
-    $rootScope.requestType = localStorage.getItem("requestType");
     console.log("$rootScope.requestType", $rootScope.requestType);
     if ($rootScope.requestType == "autoColl") {
+      //===================Авто машин барьцаалсан зээл===================
       $scope.carCollateralData = JSON.parse(localStorage.getItem("carColl"));
 
       $scope.carCollateralData.customerId = $rootScope.loginUserInfo.customerid;
@@ -137,13 +146,45 @@
             console.log("sendReqResponse", sendReqResponse);
             if (sendReqResponse[0] == "success" && sendReqResponse[1] != "") {
               $state.go("loan_success");
+            } else {
+              $rootScope.alert("Хүсэлт бүртгэхэд алдаа гарлаа", "danger");
             }
           });
+        } else {
+          $rootScope.alert("Хүсэлт бүртгэхэд алдаа гарлаа", "danger");
         }
       });
     } else if ($rootScope.requestType == "consumer") {
+      //==================Хэрэглээний лизинг===================
+      $scope.consumerData = JSON.parse(localStorage.getItem("otherGoods"));
+
+      $scope.newReqiust.customerId = $rootScope.loginUserInfo.customerid;
+      $scope.newReqiust.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
+
+      //Хүсэлт бүртгэх
+      serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
+        if (response[0] == "success" && response[1] != "") {
+          $scope.consumerData.map((product) => {
+            product.leasingId = response[1].id;
+            product.picture1 = product.image.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
+            //Бүтээгдэхүүн бүртгэх
+            serverDeferred.requestFull("dcApp_consumer_loan_001", product).then(function (responseProduct) {
+              console.log("responseProduct", responseProduct);
+              if (responseProduct[0] == "success" && responseProduct[1] != "") {
+                $state.go("loan_success");
+              } else {
+                $rootScope.alert("Хүсэлт бүртгэхэд алдаа гарлаа", "danger");
+              }
+            });
+          });
+        } else {
+          $rootScope.alert("Хүсэлт бүртгэхэд алдаа гарлаа", "danger");
+        }
+      });
     } else if ($rootScope.requestType == "business") {
+      //===================Бизнесийн зээл===================
     } else if ($rootScope.requestType == "estate") {
+      //===================Үл хөдлөх барьцаат зээл===================
     } else {
       if ($scope.checkReqiured("step4")) {
         //Сонгосон банк
@@ -280,12 +321,13 @@
 
   $scope.calcLoanAmount = function () {
     var input = document.getElementById("sendRequestAdvancePayment");
-    $scope.getLoanAmount = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
-    if ($scope.getLoanAmount > $rootScope.newReqiust.advancePayment) {
+    $scope.getLoanAmount = $rootScope.loanAmountField;
+    if (parseFloat($scope.getLoanAmount) >= parseFloat($rootScope.newReqiust.advancePayment) || input.value == 0) {
       $scope.getLoanAmount = $scope.getLoanAmount - $rootScope.newReqiust.advancePayment;
       $rootScope.newReqiust.loanAmount = $scope.getLoanAmount;
     } else {
-      input.value = input.value.slice(0, input.value.length - 1);
+      input.value = $scope.loanAmountField;
+      $scope.getLoanAmount = 0;
     }
   };
 
@@ -296,4 +338,16 @@
       $ionicHistory.goBack();
     }
   };
+
+  $scope.isAmountDisable = false;
+  $scope.loanAmountDisable = function () {
+    var local = localStorage.getItem("requestType");
+    if (local == "consumer") {
+      $scope.isAmountDisable = false;
+    } else {
+      $scope.isAmountDisable = true;
+    }
+  };
+
+  $scope.loanAmountDisable();
 });

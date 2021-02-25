@@ -10,17 +10,6 @@
 .left-0 {
   margin-left: auto;
 }
-
-.horizontal-scroller {
-  height: 100px;
-  -webkit-overflow-scrolling: touch;
-  padding: 15px 15px 12px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  list-style: none;
-}
-
 .uppercase-m-title {
   color: #4b5180;
   font-weight: 600;
@@ -36,10 +25,6 @@
   margin: 0px 5px;
   text-align: center;
 }
-
-.horizontal-item .h-item {
-}
-
 .h-item img {
   width: auto;
   height: 100px;
@@ -60,11 +45,6 @@
   overflow: scroll;
   white-space: nowrap;
 }
-
-.scroll {
-  min-width: 100%;
-}
-
 .trend-content {
   height: 100%;
 }
@@ -72,9 +52,6 @@
   display: none;
   width: 0px; /* Remove scrollbar space */
   background: transparent; /* Optional: just make scrollbar invisible */
-}
-*::-webkit-scrollbar {
-  display: none !important;
 }
 .wide-as-needed > .scroll {
   overflow-x: scroll;

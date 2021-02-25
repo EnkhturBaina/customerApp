@@ -75,7 +75,7 @@
       buttons: [
         {
           text: "OK",
-          type: "button-outline button-positive OutbuttonSize OutbuttonSizeFirst",
+          type: "button-outline button-positive OutbuttonSize OutbuttonSizeFirst button-dc-default",
           onTap: function (e) {
             return true;
           },
@@ -129,7 +129,7 @@
   $scope.getAllBankList = function () {
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1603958798356" }).then(function (response) {
       $rootScope.allBankList = response;
-      console.log("$rootScope.allBankList", $rootScope.allBankList);
+      // console.log("$rootScope.allBankList", $rootScope.allBankList);
     });
   };
 
