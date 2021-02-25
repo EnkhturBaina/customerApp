@@ -41,9 +41,8 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function($rootScope
         $rootScope.bankList = [];
         if (!isEmpty($rootScope.selectedCarData) && !isEmpty($rootScope.selectedCarData.itemcode)) {
             // { type: "car", operation: "calculation", productCode: $rootScope.selectedCarData.itemcode }
-            serverDeferred.carCalculation({ "type": "allBanks" }).then(function(response) {
+            serverDeferred.carCalculation({ "type": "autoLeasingFilter", "code": $rootScope.selectedCarData.itemcode }).then(function(response) {
                 $rootScope.bankList = response.result.data;
-                console.log(response.result.data);
                 // console.log(response);
             });
         }

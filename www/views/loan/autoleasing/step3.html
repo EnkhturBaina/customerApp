@@ -16,12 +16,12 @@
                     <div class="bank-list">
                         <p class="middle-title ion-color-big-text">Анхан шатны шалгуур хангасан банкууд</p>
                         <ul class="switch-list">
-                            <li ng-repeat="bank in bankList.correct | filter:{id:'!!'}">
+                            <li ng-repeat="bank in bankListFilter.Agree | filter:{id:'!!'}">
                                 <ion-checkbox ng-model="bank.checked" class="step3-bankList-checkbox-container">
                                     <div class="bank-list-container">
-                                        <img ng-src="{{bank.BANK_LOGO|guessImageMime}}" />
+                                        <img ng-src="{{bank.bank_logo|guessImageMime}}" />
                                     </div>
-                                    <span class="bank-middle-title">{{bank.DEPARTMENT_NAME}}</span>
+                                    <span class="bank-middle-title">{{bank.department_name}}</span>
                                     <p class="bank-desc-green">Тэнцсэн банк</p>
                                 </ion-checkbox>
                                 <button class="right-btn" ng-click="selectBankInfo(bank)">Дэлгэрэнгүй</button>
@@ -32,12 +32,12 @@
                     <div class="bank-list">
                         <p class="middle-title ion-color-big-text" style="margin-top: 50px">Анхан шатны шалгуур хангаагүй банкууд</p>
                         <ul class="switch-list">
-                            <li ng-repeat="bank in bankList.failed">
+                            <li ng-repeat="bank in bankListFilter.NotAgree">
                                 <ion-checkbox>
                                     <div class="bank-list-container">
-                                        <img ng-src="{{$root.imagePath}}{{bank.BANK_LOGO}}" />
+                                        <img ng-src="{{bank.bank_logo|guessImageMime}}" />
                                     </div>
-                                    <span class="bank-middle-title">{{bank.DEPARTMENT_NAME}}</span>
+                                    <span class="bank-middle-title">{{bank.department_name}}</span>
                                     <p class="bank-desc-red">Тэнцээгүй банк</p>
                                 </ion-checkbox>
                             </li>

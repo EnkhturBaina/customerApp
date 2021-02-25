@@ -60,7 +60,7 @@
                     <ion-slide-box class="leasing-badge">
                         <ion-slide ng-repeat="imgs in carData.images">
                             <div class="box1">
-                                <img class="car-img" style="" ng-src="{{imgs|guessImageMime}}" />
+                                <img class="car-img" ng-src="{{imgs|guessImageMime}}" />
                             </div>
                         </ion-slide>
                     </ion-slide-box>
@@ -118,7 +118,7 @@
 
             <div class="bank-container">
                 <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
-                <img ng-repeat="bank in bankList | filter:{id:'!!'}" src="{{bank.bank_logo|guessImageMime}}" />
+                <img ng-repeat="bank in bankList.Agree | filter:{id:'!!'}" src="{{bank.bank_logo|guessImageMime}}" />
 
             </div>
             <div class="suggest-slider-container">
