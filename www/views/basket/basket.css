@@ -1,5 +1,4 @@
 .basket-content {
-  /* background: #000; */
   height: 100%;
 }
 .basket-content > .scroll {
@@ -12,10 +11,6 @@
   color: #000 !important;
   font-weight: bold;
 }
-.basket-item {
-  padding: 0px 0px 0px 30px !important;
-  /* background: #000; */
-}
 .basket-item-left-text {
   float: left;
   align-content: center;
@@ -24,7 +19,6 @@
 .basket-item-left-text h2 {
   font-size: 12px;
   font-weight: bold;
-  /* color: #fff; */
 }
 .basket-item-left-text p {
   font-size: 12px;
@@ -40,16 +34,10 @@
 .basket-item-right-text h2 {
   font-size: 12px;
   font-weight: bold;
-  /* color: #fff; */
 }
 .basket-item-right-text p {
   font-size: 12px;
   color: #a2a7b5;
-}
-.item-complex.item-icon-right .item-content {
-  padding-right: 20px !important;
-  padding-left: 65px !important;
-  /* background: #000; */
 }
 .basket-total-price {
   font-weight: bold;
@@ -76,14 +64,6 @@
 .basket-content > .scroll {
   padding-bottom: 100px !important;
 }
-.basket-add-item {
-  width: 100%;
-  display: flow-root;
-  padding: 0 10px;
-}
-.basket-add-item i {
-  font-size: 25px !important;
-}
 .basket-content label {
   border-color: #a2a7b5 !important;
 }
@@ -97,19 +77,11 @@
   left: 0px !important;
   z-index: 3;
 }
-.basket-item > .checkbox input:checked + .checkbox-icon:before {
-  border-radius: 5px !important;
-  background: #fff !important;
-  background-color: #fff !important;
-  border-color: #acd322 !important;
-}
 .basket-check {
   background: none;
   position: absolute;
   border: none;
   width: 36px;
-  /* height: 100%; */
-  /* padding: 10px 0 !important; */
   margin: auto;
 }
 .card-list-swiper .item .item-content.activated {

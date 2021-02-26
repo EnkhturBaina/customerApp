@@ -66,12 +66,6 @@
   line-height: initial;
   margin-top: 10px;
 }
-.home-card-icon {
-  margin-left: auto;
-  margin-right: 0;
-  zoom: 2;
-  color: #808080;
-}
 .home-card {
   width: 100%;
   height: 150px;
@@ -116,26 +110,11 @@
   background-position: 0 0;
   background-size: cover;
 }
-.loan-card-icon-container {
-  position: absolute;
-  left: 5px;
-  top: 35px;
-  z-index: -1;
-}
-.loan-card-icon {
-  margin-left: 0;
-  margin-right: auto;
-  zoom: 4;
-  color: #a2a7b5;
-}
 .loan-card-text {
   text-align: right;
   word-break: break-word;
   font-size: 14px;
   line-height: initial;
-}
-.has-tabs-top {
-  margin-bottom: 50px;
 }
 .card-body {
   display: grid;

@@ -128,7 +128,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
         console.log("customerProfileData", response);
         $rootScope.loginUserInfo = mergeJsonObjs($scope.customerProfileData, $rootScope.loginUserInfo);
-        $rootScope.alert("Амжилттай", true);
+        $rootScope.alert("Амжилттай", "success");
 
         $rootScope.basePersonData = {
           firstName: response[1].firstname,
@@ -231,7 +231,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           console.log("$rootScope.customerIncomeProfileData", $rootScope.customerIncomeProfileData);
           serverDeferred.requestFull("dcApp_profile_income_dv_002", $rootScope.customerIncomeProfileData).then(function (response) {
             console.log("save income response", response);
-            $rootScope.alert("Амжилттай", true);
+            $rootScope.alert("Амжилттай", "success");
           });
         } else {
           serverDeferred.requestFull("dcApp_profile_income_dv_002", $rootScope.customerIncomeProfileData).then(function (response) {

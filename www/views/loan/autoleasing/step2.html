@@ -1,11 +1,24 @@
 <ion-view id="loanPages" hide-footer-bar="true" hide-nav-bar="true">
+<<<<<<< HEAD
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
     <ion-header-bar align-title="left" class="navbar" style="background: none">
         <div class="title ion-color-big-text navbar-back-button" style="background: none">
             <button ui-sref="car-info" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+||||||| 745fb2e
+  <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+  <ion-header-bar align-title="left" class="navbar" style="background: none">
+    <div class="title ion-color-big-text navbar-back-button" style="background: none">
+      <button ui-sref="car-info" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+=======
+  <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+  <ion-header-bar align-title="left" class="navbar" style="background: none">
+    <div class="title ion-color-big-text navbar-back-button" style="background: none">
+      <button ng-click="backFromStep2()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+>>>>>>> 91638fd45c47a611a39ac9227d9350c4557678aa
         <i class="ion-chevron-left ion-color-header"></i>
         <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Хүсэлт илгээх</span></span>
       </button>
+<<<<<<< HEAD
         </div>
         <div class="navbar-right-icon">
         </div>
@@ -39,6 +52,74 @@
                                     format-input />
                             </div>
                         </div>
+||||||| 745fb2e
+    </div>
+    <div class="navbar-right-icon">
+    </div>
+  </ion-header-bar>
+  <ion-content overflow-scroll="true" class="ion-modified-content has-header autoleasing-step2-content">
+    <div class="big-container">
+      <div class="magic-container">
+        <div class="bg-container">
+          <div style="margin-top: 10px; margin-bottom: 55px">
+            <ul id="progress-bar" class="progressbar">
+              <li class="active step-li-1"></li>
+              <li class="active step-li-2"></li>
+              <li class="step-li-33"></li>
+              <li class="step-li-4"></li>
+            </ul>
+          </div>
+          <div class="money-input">
+            <p class="middle-title ion-color-big-text">Зээлийн хүсэлтийн мэдээлэл</p>
+            <div class="tugrug-input">
+              <span class="title">Зээлийн хэмжээ</span>
+              <div class="tugrug-input-container">
+                <span class="input-tugrug-icon">₮</span>
+                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="getLoanAmount" format-input disabled />
+              </div>
+            </div>
+            <div class="tugrug-input">
+              <span class="title">Урьдчилгаа</span>
+              <div class="tugrug-input-container">
+                <span class="input-tugrug-icon">₮</span>
+                <input inputmode="numeric" pattern="[0-9]*" type="text" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount()" format-input />
+              </div>
+            </div>
+=======
+    </div>
+    <div class="navbar-right-icon">
+    </div>
+  </ion-header-bar>
+  <!-- <div ng-repeat="data in [{'title':'Дэлгэрэнгүй'}]" ng-include src="'views/navbar.html'"></div> -->
+  <ion-content overflow-scroll="true" class="ion-modified-content has-header autoleasing-step2-content">
+    <div class="big-container">
+      <div class="magic-container">
+        <div class="bg-container">
+          <div style="margin-top: 10px; margin-bottom: 55px">
+            <ul id="progress-bar" class="progressbar">
+              <li class="active step-li-1"></li>
+              <li class="active step-li-2"></li>
+              <li class="step-li-33"></li>
+              <li class="step-li-4"></li>
+            </ul>
+          </div>
+          <div class="money-input">
+            <p class="request-middle-title ion-color-big-text">Зээлийн хүсэлтийн мэдээлэл</p>
+            <div class="tugrug-input">
+              <span class="title">Зээлийн хэмжээ</span>
+              <div class="tugrug-input-container">
+                <span class="input-tugrug-icon">₮</span>
+                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="getLoanAmount" format-input ng-disabled="isAmountDisable" />
+              </div>
+            </div>
+            <div class="tugrug-input">
+              <span class="title">Урьдчилгаа</span>
+              <div class="tugrug-input-container">
+                <span class="input-tugrug-icon">₮</span>
+                <input inputmode="numeric" pattern="[0-9]*" type="text" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount()" format-input />
+              </div>
+            </div>
+>>>>>>> 91638fd45c47a611a39ac9227d9350c4557678aa
 
                         <label class="item item-input step2-loan-month">
               <p>Хугацаа (сараар)</p>
@@ -54,15 +135,32 @@
                   {{loc.name}}</option>
               </select>
             </label>
+<<<<<<< HEAD
                         <div class="switch-input-container">
                             <ul class="switch-list">
                                 <li>
                                     Үйлчилгээний нөхцлийг зөвшөөрөх
                                     <span>
                     <label class="step2-switch" id="step2isAgree" ng-click="step2isAgree()">
+||||||| 745fb2e
+            <div class="switch-input-container">
+              <ul class="switch-list">
+                <li>
+                  Үйлчилгээний нөхцлийг зөвшөөрөх
+                  <span>
+                    <label class="step2-switch" id="step2isAgree" ng-click="step2isAgree()">
+=======
+            <div class="switch-input-container">
+              <ul class="switch-list">
+                <li>
+                  Үйлчилгээний нөхцлийг зөвшөөрөх
+                  <span>
+                    <label class="step2-switch" id="step2isAgree">
+>>>>>>> 91638fd45c47a611a39ac9227d9350c4557678aa
                       <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" ng-change="changeEvent($root.newReqiust.serviceAgreementId)" />
                       <div class="step2-slider step2-round">
                         <span id="step2-toggle-on" class="step2-on">Тийм</span>
+<<<<<<< HEAD
                                     <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
                         </div>
                         </label>
@@ -77,6 +175,37 @@
                         <li>
                             <div class="item-detail" ng-click="growDiv()">
                                 <div class="item-img"><img width="100px" src="{{$root.imagePath}}{{$root.selectedCarData.itempic}}" /></div>
+||||||| 745fb2e
+                        <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
+                      </div>
+                    </label>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="items">
+            <p class="middle-title ion-color-big-text">Барааны мэдээлэл</p>
+            <ul>
+              <li>
+                <div class="item-detail" ng-click="growDiv()">
+                  <div class="item-img"><img width="100px" src="{{$root.imagePath}}{{$root.selectedCarData.itempic}}" /></div>
+=======
+                        <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
+                      </div>
+                    </label>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="items" ng-if="$root.requestType == 'autoColl'">
+            <p class="middle-title ion-color-big-text">Барааны мэдээлэл</p>
+            <ul>
+              <li>
+                <div class="item-detail" ng-click="growDiv()">
+                  <div class="item-img"><img width="100px" src="{{$root.imagePath}}{{$root.selectedCarData.itempic}}" /></div>
+>>>>>>> 91638fd45c47a611a39ac9227d9350c4557678aa
 
                                 <div class="desc">
                                     <p class="item-title ion-color-big-text">{{$root.selectedCarData.modelname}} - {{$root.selectedCarData.price|formatNumber}}₮
@@ -111,11 +240,27 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         <ion-footer class="bottom-footer">
             <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button>
         </ion-footer>
         </div>
     </ion-content>
+||||||| 745fb2e
+      </div>
+      <ion-footer class="bottom-footer">
+        <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button>
+      </ion-footer>
+    </div>
+  </ion-content>
+=======
+        <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button>
+      </div>
+      <ion-footer class="bottom-footer">
+      </ion-footer>
+    </div>
+  </ion-content>
+>>>>>>> 91638fd45c47a611a39ac9227d9350c4557678aa
 </ion-view>
 <style>
     .bank-card {

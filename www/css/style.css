@@ -195,7 +195,7 @@ h4 {
 .big-container {
   display: flex;
   flex-direction: column;
-  height: 100% !important;
+  height: auto !important;
   margin-bottom: 44px !important;
 }
 
@@ -462,7 +462,7 @@ h4 {
   padding: 10px 30px 0px 30px;
   box-shadow: 1px 1px 5px -2px grey;
   margin-top: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .bank-container img {
@@ -573,6 +573,7 @@ h4 {
 
 .popup-buttons {
   min-height: initial;
+  padding: 0 20px !important;
 }
 
 .popup-body {
@@ -582,16 +583,6 @@ h4 {
 .popup-title {
   text-align: right !important;
   padding-top: 0 !important;
-}
-
-.myAlertButton {
-  max-width: 40% !important;
-  min-height: 34px !important;
-  display: block !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  line-height: initial !important;
-  border-radius: 5px !important;
 }
 
 .loading-container .loading {
@@ -614,6 +605,7 @@ h4 {
   font-size: 16px;
   padding-left: 16px;
   padding-right: 16px;
+  text-align: center;
 }
 
 .confirmPopup .popup .popup-buttons {
@@ -801,27 +793,6 @@ h4 {
   margin-bottom: 50px !important;
 }
 
-.confirmPopup button {
-  background: rgb(162, 209, 54) !important;
-  background: -moz-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
-  background: -webkit-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
-  background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
-  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#a2d136", endColorstr="#3cc1f9", GradientType=1) !important;
-  color: white !important;
-  width: 55vw !important;
-  border-radius: 10px !important;
-  font-weight: normal !important;
-  text-transform: uppercase !important;
-  font-size: 10px !important;
-  letter-spacing: 1px !important;
-  min-height: 35px !important;
-  margin: 10px auto !important;
-  border: 0px !important;
-  width: 60% !important;
-  min-height: 35px !important;
-  flex: none !important;
-}
-
 .confirmPopup .popup .popup-buttons {
   border-top: 0px !important;
 }
@@ -862,54 +833,6 @@ h4 {
   height: 100%;
   position: absolute;
 }
-.checkmark_alert {
-  text-align: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: block;
-  stroke-width: 2;
-  stroke: #acd322;
-  stroke-miterlimit: 10;
-  margin: 5% auto;
-  box-shadow: inset 0px 0px 0px #fff;
-  animation: fill 0.2s ease-in-out 0.3s forwards, scale 0.2s ease-in-out 0.2s both;
-}
-
-.checkmark_alert__check {
-  transform-origin: 50% 50%;
-  stroke-dasharray: 48;
-  stroke-dashoffset: 48;
-  animation: stroke 0.2s cubic-bezier(0.4, 0, 0.4, 1) 0.8s forwards;
-}
-.checkmark_alert__circle {
-  stroke-dasharray: 166;
-  stroke-dashoffset: 166;
-  stroke-width: 2;
-  stroke-miterlimit: 10;
-  stroke: #acd322;
-  fill: none;
-  animation: stroke 0.5s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-}
-@keyframes stroke {
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-@keyframes scale {
-  0%,
-  100% {
-    transform: none;
-  }
-  50% {
-    transform: scale3d(1.1, 1.1, 1);
-  }
-}
-@keyframes fill {
-  100% {
-    box-shadow: inset 0px 0px 0px 30px #fff;
-  }
-}
 
 .money-input input {
   border: 1px solid;
@@ -949,4 +872,408 @@ h4 {
   margin: 0 0;
   width: 100%;
   padding: 0 15px 0 0px !important;
+}
+
+.step2-switch {
+  float: right;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 25px;
+}
+
+.step2-switch input {
+  display: none;
+}
+
+.step2-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.step2-slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 4px;
+  bottom: 3px;
+  background-color: #acd322;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.step2-switch input:checked + .step2-slider {
+  background-color: #fff;
+}
+
+.step2-switch input:focus + .step2-slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+.step2-switch input:checked + .step2-slider:before {
+  -webkit-transform: translateX(33px);
+  -ms-transform: translateX(33px);
+  transform: translateX(33px);
+}
+.step2-switch input:checked + .step2-slider .step2-on {
+  display: block !important;
+}
+
+.step2-switch input:checked + .step2-slider .step2-off {
+  display: none;
+}
+
+/*------ ADDED CSS ---------*/
+.step2-on {
+  display: none !important;
+}
+
+.step2-on,
+.step2-off {
+  color: #000;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  font-size: 10px;
+  font-family: "Roboto", sans-serif;
+  color: #acd322 !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
+}
+.step2-off {
+  left: 37px;
+}
+.step2-on {
+  left: 20px;
+}
+
+/*--------- END --------*/
+
+/* Rounded sliders */
+.step2-slider.step2-round {
+  border-radius: 34px;
+  border: 1px solid #cccccc;
+}
+
+.step2-slider.step2-round:before {
+  border-radius: 50%;
+}
+.activeSwitch > .step2-slider.step2-round {
+  border: 1px solid #acd322;
+}
+
+.switch-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0 10px 0;
+  color: #606060;
+  padding: 5px 0px !important;
+}
+.switch-list li span {
+  font-weight: bold;
+  background-color: transparent;
+  color: #4b5180;
+  z-index: 1;
+  display: inline-block;
+  padding: 3px 8px;
+  min-width: 10px;
+  border-radius: 10px;
+  vertical-align: baseline;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.bank-middle-title {
+  margin-top: -5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #4b5180;
+}
+
+.request-middle-title {
+  color: #4b5180;
+  font-weight: bold;
+  padding: 10px 0px 0px 0px;
+}
+.svg-box {
+  zoom: 0.8;
+  display: flex;
+  position: relative;
+  width: 150px;
+  margin: 0 auto;
+}
+
+.green-stroke {
+  stroke: #acd322;
+}
+
+.red-stroke {
+  stroke: #ff6245;
+}
+
+.yellow-stroke {
+  stroke: #ffc107;
+}
+
+.circular circle.path {
+  stroke-dasharray: 330;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  opacity: 1;
+  animation: 0.4s draw-circle ease-out;
+}
+
+/*------- Checkmark ---------*/
+.checkmark {
+  stroke-width: 4.25;
+  stroke-linecap: round;
+  position: absolute;
+  top: 56px;
+  left: 49px;
+  width: 52px;
+  height: 40px;
+}
+
+.checkmark path {
+  animation: 0.4s draw-check ease-out;
+}
+
+@keyframes draw-circle {
+  0% {
+    stroke-dasharray: 0, 330;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  80% {
+    stroke-dasharray: 330, 330;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes draw-check {
+  0% {
+    stroke-dasharray: 49, 80;
+    stroke-dashoffset: 48;
+    opacity: 0;
+  }
+
+  50% {
+    stroke-dasharray: 49, 80;
+    stroke-dashoffset: 48;
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dasharray: 130, 80;
+    stroke-dashoffset: 48;
+  }
+}
+
+/*---------- Cross ----------*/
+
+.cross {
+  stroke-width: 6.25;
+  stroke-linecap: round;
+  position: absolute;
+  top: 54px;
+  left: 54px;
+  width: 40px;
+  height: 40px;
+}
+
+.cross .first-line {
+  animation: 0.4s draw-first-line ease-out;
+}
+
+.cross .second-line {
+  animation: 0.4s draw-second-line ease-out;
+}
+
+@keyframes draw-first-line {
+  0% {
+    stroke-dasharray: 0, 56;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 0, 56;
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dasharray: 56, 330;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draw-second-line {
+  0% {
+    stroke-dasharray: 0, 55;
+    stroke-dashoffset: 1;
+  }
+
+  50% {
+    stroke-dasharray: 0, 55;
+    stroke-dashoffset: 1;
+  }
+
+  100% {
+    stroke-dasharray: 55, 0;
+    stroke-dashoffset: 70;
+  }
+}
+
+.alert-sign {
+  stroke-width: 6.25;
+  stroke-linecap: round;
+  position: absolute;
+  top: 40px;
+  left: 68px;
+  width: 15px;
+  height: 70px;
+  animation: 0.4s alert-sign-bounce cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.alert-sign .dot {
+  stroke: none;
+  fill: #ffc107;
+}
+
+@keyframes alert-sign-bounce {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+.big-middle-title {
+  font-size: 14px !important;
+  font-weight: bold !important;
+  color: #4b5180 !important;
+}
+.custom-spinner {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.custom-spinner div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.custom-dot {
+  background: #acd322 !important;
+}
+.custom-spinner div:nth-child(1) {
+  left: 8px;
+  animation: custom-spinner1 0.5s infinite;
+}
+.custom-spinner div:nth-child(2) {
+  left: 8px;
+  animation: custom-spinner2 0.5s infinite;
+}
+.custom-spinner div:nth-child(3) {
+  left: 32px;
+  animation: custom-spinner2 0.5s infinite;
+}
+.custom-spinner div:nth-child(4) {
+  left: 56px;
+  animation: custom-spinner3 0.5s infinite;
+}
+@keyframes custom-spinner1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes custom-spinner3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes custom-spinner2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+.confirmPopup .button-confirm {
+  background: rgb(162, 209, 54) !important;
+  background: -moz-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  background: -webkit-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#a2d136", endColorstr="#3cc1f9", GradientType=1) !important;
+  color: white !important;
+  border-radius: 10px !important;
+  font-weight: normal !important;
+  text-transform: uppercase !important;
+  font-size: 10px !important;
+  letter-spacing: 1px !important;
+  min-height: 35px !important;
+  margin: 10px auto !important;
+  border: 0px !important;
+  width: 50% !important;
+  min-height: 35px !important;
+  flex: none !important;
+}
+.confirmPopup .button-decline {
+  background: transparent !important;
+}
+
+.confirmPopup .button-dc-default {
+  background: rgb(162, 209, 54) !important;
+  background: -moz-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  background: -webkit-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important;
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#a2d136", endColorstr="#3cc1f9", GradientType=1) !important;
+  color: white !important;
+  width: 55vw !important;
+  border-radius: 10px !important;
+  font-weight: normal !important;
+  text-transform: uppercase !important;
+  font-size: 10px !important;
+  letter-spacing: 1px !important;
+  min-height: 35px !important;
+  margin: 10px auto !important;
+  border: 0px !important;
+  width: 60% !important;
+  min-height: 35px !important;
+  flex: none !important;
 }

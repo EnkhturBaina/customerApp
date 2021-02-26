@@ -1,10 +1,6 @@
 .addBtnContainer {
   margin: 20px 0px;
 }
-
-.item_lists {
-}
-
 .item_lists .items {
   display: flex;
 }
@@ -87,13 +83,6 @@
 .ml-42 {
   margin-left: 42px;
   margin-top: -5px;
-}
-
-.bank-middle-title {
-  margin-top: -5px;
-  font-size: 14px;
-  font-weight: 900;
-  color: #4b5180;
 }
 
 .bank-desc-green {
@@ -269,35 +258,6 @@
 
 .keypad-row {
   padding: 10px 15px !important;
-}
-
-.tugrug-input {
-  margin: 14px 0;
-}
-
-.tugrug-input .title {
-  margin: 0 10px;
-  color: #7d7d7d;
-}
-
-.input-tugrug-icon {
-  padding: 7px 0px 7px 0px;
-  font-weight: bold;
-  min-width: 30px;
-  position: absolute;
-  text-align: center;
-  font-size: 16px;
-  color: #b2b2b2;
-}
-
-.input-tugrug-type {
-  background: none;
-  text-align: left !important;
-  border: 1px solid #d5d5d5 !important;
-  border-radius: 5px;
-  margin: 0 0;
-  width: 100%;
-  padding: 0 0px 0 35px !important;
 }
 
 .items li {
@@ -519,6 +479,7 @@
 .other-goods-checkbox > .checkbox {
   float: left;
   padding: 10px 7px !important;
+  display: none;
 }
 .other-goods-checkbox > .checkbox > .checkbox-icon {
   width: 25px !important;
@@ -571,4 +532,11 @@
 }
 .add-goods-content .scroll {
   height: auto !important;
+}
+.add-goods-content-card {
+  background-color: #fff;
+  padding: 15px 0px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 10px;
 }

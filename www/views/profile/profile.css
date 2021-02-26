@@ -236,18 +236,7 @@ input[type="number"] {
   background: #fff;
   background-color: #fff;
 }
-#userID {
-  text-transform: uppercase;
-}
 .profile-input-name-error {
-  position: absolute;
-  font-size: 10px;
-  color: red;
-  bottom: 0;
-  display: none;
-  right: 25px;
-}
-.profile-input-userid-error {
   position: absolute;
   font-size: 10px;
   color: red;

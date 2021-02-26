@@ -49,7 +49,7 @@
             <div class="empty-icon-container">
                 <img src="img/icons8-inbox-100.png" />
                 <span ng-if="!$root.loginUserInfo|isEmpty">Танд зээлийн хүсэлт байхгүй байна.</span>
-                <button ng-if="$root.loginUserInfo|isEmpty" class="button single-button" ui-sref="login" style="height: 35px;">Нэвтрэх</button>
+                <button ng-if="$root.loginUserInfo|isEmpty" class="button single-button" ui-sref="login" style="height: 35px;" ng-click="loginFromRequestList()">Нэвтрэх</button>
             </div>
         </ion-content>
     </ion-pane>

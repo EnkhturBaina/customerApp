@@ -1,4 +1,4 @@
-angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $rootScope, serverDeferred) {
+angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $rootScope, serverDeferred, $ionicLoading) {
   $scope.search = {};
   $scope.searchBy = "$";
   $scope.searchBrand = {};
@@ -7,6 +7,7 @@ angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $
   var brandAr = [];
   // ====== cars ========
   $scope.getCarDatas = function (brandAr) {
+    $rootScope.ShowLoader();
     $rootScope.carDatas = [];
     if (!isEmpty(brandAr)) {
       for (i = 0; i < brandAr.length; i++) {
@@ -14,6 +15,7 @@ angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $
           angular.forEach(response, function (item) {
             if (!isEmpty(item)) {
               $rootScope.carDatas.push(item);
+              $ionicLoading.hide();
             }
           });
         });
@@ -23,6 +25,7 @@ angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $
         angular.forEach(response, function (item) {
           if (!isEmpty(item)) {
             $rootScope.carDatas.push(item);
+            $ionicLoading.hide();
           }
         });
       });

@@ -41,6 +41,8 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.carColorData = [];
 
   $scope.defualtbank = [];
+  //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
+  $rootScope.carCollateralRequestData = {};
 
   $scope.getCarCollateralLookupData = function () {
     if (isEmpty($scope.carCategory)) {
@@ -121,24 +123,49 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       //   $state.go("car_coll2");
       //   $ionicLoading.hide();
       // });
+
+      localStorage.setItem("requestType", "autoColl");
+
       localStorage.removeItem("carColl");
-      console.log("CAR COLL", localStorage.getItem("carColl"));
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
 
-      console.log("CAR COLL", localStorage.getItem("carColl"));
       console.log("local", localStorage);
       $state.go("car_coll2");
     }
   };
 
+  $scope.saveCarCollRequestData = function () {
+    console.log("AAA", $rootScope.carCollateralRequestData);
+    if ($scope.carCollCheckReqiured("step2")) {
+      $state.go("autoleasing-3");
+    }
+  };
+
   $scope.carCollCheckReqiured = function (param) {
     if (param == "step1") {
-      // if (isEmpty($rootScope.newCarReq.carCategoryId) || isEmpty($rootScope.newCarReq.brandId) || isEmpty($rootScope.newCarReq.markId) || isEmpty($rootScope.newCarReq.mile) || isEmpty($rootScope.newCarReq.engineId) || isEmpty($rootScope.newCarReq.engineCapacity) || isEmpty($rootScope.newCarReq.transmissionId) || isEmpty($rootScope.newCarReq.driveTypeId) || isEmpty($rootScope.newCarReq.steeringWheelId) || isEmpty($rootScope.newCarReq.carDoorCount) || isEmpty($rootScope.newCarReq.manufacturedYearId) || isEmpty($rootScope.newCarReq.cameYearId) || isEmpty($rootScope.newCarReq.nationalNumber) || isEmpty($rootScope.newCarReq.carColorId)) {
-      //   $rootScope.alert("Мэдээллээ бүрэн оруулна уу");
-      //   return false;
-      // } else {
-      //   return true;
-      // }
+      if (isEmpty($rootScope.newCarReq.carCategoryId) || isEmpty($rootScope.newCarReq.brandId) || isEmpty($rootScope.newCarReq.markId) || isEmpty($rootScope.newCarReq.mile) || isEmpty($rootScope.newCarReq.engineId) || isEmpty($rootScope.newCarReq.engineCapacity) || isEmpty($rootScope.newCarReq.transmissionId) || isEmpty($rootScope.newCarReq.driveTypeId) || isEmpty($rootScope.newCarReq.steeringWheelId) || isEmpty($rootScope.newCarReq.carDoorCount) || isEmpty($rootScope.newCarReq.manufacturedYearId) || isEmpty($rootScope.newCarReq.cameYearId) || isEmpty($rootScope.newCarReq.carColorId)) {
+        $rootScope.alert("Мэдээллээ бүрэн оруулна уу");
+        return false;
+      } else {
+        return true;
+      }
+      return true;
+    } else if (param == "step2") {
+      if (isEmpty($rootScope.carCollateralRequestData.loanAmount)) {
+        $rootScope.alert("Зээлийн хэмжээ оруулна уу");
+        return false;
+      } else if (isEmpty($rootScope.carCollateralRequestData.loanMonth)) {
+        $rootScope.alert("Зээл авах хугацаа сонгоно уу");
+        return false;
+      } else if (isEmpty($rootScope.carCollateralRequestData.locationId)) {
+        $rootScope.alert("Зээл авах байршил сонгоно уу");
+        return false;
+      } else if (isEmpty($rootScope.carCollateralRequestData.serviceAgreementId) || $rootScope.carCollateralRequestData.serviceAgreementId == 1554263832151) {
+        $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна");
+        return false;
+      } else {
+        return true;
+      }
       return true;
     }
   };

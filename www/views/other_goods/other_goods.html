@@ -18,8 +18,8 @@
                                             <img src="{{item.image}}" />
                                         </div>
                                         <div class="left-text" style="margin-top: 4%;margin-left: 100px;height: 18px;position: absolute;">
-                                            <p class="itemname" style="color: #000;font-weight: bold;">{{item.shopname}}</p>
-                                            <p class="price">{{item.amount|formatNumber}}₮</p>
+                                            <p class="itemname" style="color: #000;font-weight: bold;" ng-repeat="itemSup in $root.suppliers" ng-if="itemSup.id == item.shopId">{{itemSup.suppliername}}</p>
+                                            <p class="price">{{item.unitPrice|formatNumber}}₮</p>
                                         </div>
                                     </ion-checkbox>
                                     <div class="other-goods-trash icon ion-ios7-trash-outline" ng-click="otherGoodsDelete(item.itemid)"></div>
@@ -27,7 +27,7 @@
                             </ul>
                             <div class="total-price">
                                 <span class="total-price-title">Нийт үнэ</span>
-                                <span class="total-price-amount">{{sumPrice|formatNumber}} ₮</span>
+                                <span class="total-price-amount ion-font-weight-bold">{{sumPrice|formatNumber}} ₮</span>
                             </div>
                         </div>
                     </div>
