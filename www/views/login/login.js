@@ -48,7 +48,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function($scope, $http,
                     callBack("Серверт холбогдоход алдаа гарлаа");
                 }
             }
-<<<<<<< HEAD
         );
     };
     $scope.ls = function(username, password, callBack) {
@@ -114,26 +113,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function($scope, $http,
         } else if (isEmpty(b)) {
             $ionicLoading.hide();
             $rootScope.alert("Нууц үгээ оруулна уу");
-||||||| 745fb2e
-          });
-          if (isEmpty($stateParams.path)) {
-            $state.go("profile");
-          } else {
-            $state.go($stateParams.path);
-          }
-=======
-          });
-          if (isEmpty($stateParams.path)) {
-            if ($rootScope.isLoginFromRequestList) {
-              $state.go("requestList");
-              $scope.getRequetData();
-            } else {
-              $state.go("profile");
-            }
-          } else {
-            $state.go($stateParams.path);
-          }
->>>>>>> 91638fd45c47a611a39ac9227d9350c4557678aa
         } else {
             var network = $cordovaNetwork.isOnline();
             if (network) {
