@@ -1,0 +1,30 @@
+﻿<style>
+    #htmlBindView .report-preview-toolbar {
+        display: none;
+    }
+    
+    #htmlBindView #portrait {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<ion-modal-view style="min-height: 100%;top: 0; bottom: 0; width: 100%; left:0;background-image:url(img/erp-bg-login.png);background-size:100% 100%;" id="htmlBindView">
+    <ion-header-bar align-title="left" class="bar-positive">
+        <div class="buttons">
+            <button class="button button-icon icon ion-close" ng-click="closeHtmlBindBluetooth()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="has-header">
+        <iframe src="{{$root.stringHtmlsLink|trustVideo}}" style="width: 100%;height: 100vh;"></iframe>
+    </ion-content>
+
+    <!--<div class="bar bar-footer bar-balanced" ng-click="printSendData()">
+        <div class="title">Хэвлэх</div>
+    </div>-->
+    <!--<div ng-if="$root.selectDataViewItemValue.billbuttonhide!='0'" class="bar bar-footer bar-balanced" ng-click="printSendData()">
+        <div class="title" ng-if="($root.DataViewData[0].billbuttonname|isEmpty)">Хэвлэх</div>
+        <div class="title" ng-if="!($root.DataViewData[0].billbuttonname|isEmpty)">{{ $root.DataViewData[0].billbuttonname}}</div>
+    </div>-->
+</ion-modal-view>

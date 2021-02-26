@@ -121,13 +121,16 @@
                 }
                 return deferred.promise;
             },
-            carCalculation: function(json) {
+            carCalculation: function(json, newurl) {
                 var deferred = $q.defer();
                 $rootScope.OfflineLogin = false;
-
+                var url = "https://services.digitalcredit.mn/api/services/v1";
+                if (newurl) {
+                    url = newurl;
+                }
                 $http({
                     method: "POST",
-                    url: "http://services.digitalcredit.mn/api/services/v1",
+                    url: url,
                     // url: "http://digitalcredit.mn/service/v2",
                     data: json,
                     timeout: 10000,
