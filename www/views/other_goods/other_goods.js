@@ -28,10 +28,13 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $rootScope.calcTotalPrice();
 
   $scope.nexClivk = function () {
+    if ($rootScope.otherGoodsData.length >= 1) {
+      $state.go("autoleasing-2");
+    } else {
+      $rootScope.alert("Та зээлээр авах бараагаа бүртгэнэ үү", "warning");
+    }
     localStorage.setItem("requestType", "consumer");
     console.log("local", localStorage);
-
-    $state.go("autoleasing-2");
   };
 
   $scope.otherGoodsDelete = function (id) {

@@ -58,14 +58,14 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($ionicS
   $scope.registerCustomer = function () {
     $scope.disabledBtn = true;
     if (isEmpty($scope.crmUserData.userName)) {
-      $rootScope.alert("Утасны дугаараа оруулна уу");
+      $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
     } else if (isEmpty($scope.customerPassword.passwordHash)) {
-      $rootScope.alert("Нууц үгээ оруулна уу");
+      $rootScope.alert("Нууц үгээ оруулна уу", "warning");
     } else {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $scope.crmUserData.userName }).then(function (response) {
         console.log("isRegistered", response);
         if (response.length[0] > 1) {
-          $rootScope.alert("<p class=" + "customer_registerd_number" + ">" + $scope.crmUserData.userName + "</p>" + " Утасны дугаараар бүртгэл үүссэн байна");
+          $rootScope.alert("<p class=" + "customer_registerd_number" + ">" + $scope.crmUserData.userName + "</p>" + " Утасны дугаараар бүртгэл үүссэн байна", "warning");
         } else {
           serverDeferred.requestFull("getPasswordHash1", $scope.customerPassword).then(function (response) {
             //Password Hash

@@ -32,12 +32,12 @@
                     <div class="bank-list">
                         <p class="middle-title ion-color-big-text" style="margin-top: 50px">Анхан шатны шалгуур хангаагүй банкууд</p>
                         <ul class="switch-list">
-                            <li ng-repeat="bank in bankListFilter.NotAgree">
-                                <ion-checkbox>
+                            <li ng-repeat="rejectbank in bankListFilter.NotAgree | filter:{id:'!!'}">
+                                <ion-checkbox ng-model="rejectbank.checked">
                                     <div class="bank-list-container">
-                                        <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+                                        <img ng-src="{{rejectbank.bank_logo|guessImageMime}}" />
                                     </div>
-                                    <span class="bank-middle-title">{{bank.department_name}}</span>
+                                    <span class="bank-middle-title">{{rejectbank.department_name}}</span>
                                     <p class="bank-desc-red">Тэнцээгүй банк</p>
                                 </ion-checkbox>
                             </li>

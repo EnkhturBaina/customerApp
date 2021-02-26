@@ -6,7 +6,7 @@ angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $
   $scope.selectedSubCat = [];
   var brandAr = [];
   // ====== cars ========
-  $scope.getCarDatas = function (brandAr) {
+  $rootScope.getCarDatas = function (brandAr) {
     $rootScope.ShowLoader();
     $rootScope.carDatas = [];
     if (!isEmpty(brandAr)) {

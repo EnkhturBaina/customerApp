@@ -27,7 +27,7 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
 
   $scope.sendChat = function () {
     if (isEmpty($rootScope.sendChatData.text1)) {
-      $rootScope.alert("Банкинд илгээх зурвасаа бичнэ үү");
+      $rootScope.alert("Банкинд илгээх зурвасаа бичнэ үү", "warning");
     } else {
       $rootScope.sendChatData.dim1 = $rootScope.selectbank.mapid;
 

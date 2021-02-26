@@ -144,7 +144,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.carCollCheckReqiured = function (param) {
     if (param == "step1") {
       if (isEmpty($rootScope.newCarReq.carCategoryId) || isEmpty($rootScope.newCarReq.brandId) || isEmpty($rootScope.newCarReq.markId) || isEmpty($rootScope.newCarReq.mile) || isEmpty($rootScope.newCarReq.engineId) || isEmpty($rootScope.newCarReq.engineCapacity) || isEmpty($rootScope.newCarReq.transmissionId) || isEmpty($rootScope.newCarReq.driveTypeId) || isEmpty($rootScope.newCarReq.steeringWheelId) || isEmpty($rootScope.newCarReq.carDoorCount) || isEmpty($rootScope.newCarReq.manufacturedYearId) || isEmpty($rootScope.newCarReq.cameYearId) || isEmpty($rootScope.newCarReq.carColorId)) {
-        $rootScope.alert("Мэдээллээ бүрэн оруулна уу");
+        $rootScope.alert("Мэдээллээ бүрэн оруулна уу", "warning");
         return false;
       } else {
         return true;
@@ -152,16 +152,16 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       return true;
     } else if (param == "step2") {
       if (isEmpty($rootScope.carCollateralRequestData.loanAmount)) {
-        $rootScope.alert("Зээлийн хэмжээ оруулна уу");
+        $rootScope.alert("Зээлийн хэмжээ оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carCollateralRequestData.loanMonth)) {
-        $rootScope.alert("Зээл авах хугацаа сонгоно уу");
+        $rootScope.alert("Зээл авах хугацаа сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carCollateralRequestData.locationId)) {
-        $rootScope.alert("Зээл авах байршил сонгоно уу");
+        $rootScope.alert("Зээл авах байршил сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carCollateralRequestData.serviceAgreementId) || $rootScope.carCollateralRequestData.serviceAgreementId == 1554263832151) {
-        $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна");
+        $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
         return false;
       } else {
         return true;

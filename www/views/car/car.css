@@ -219,7 +219,6 @@
   height: auto;
   margin: 0 auto;
   display: block;
-  height: 200px;
 }
 .car-img-suggest {
   width: auto;
@@ -362,7 +361,7 @@
   filter: invert(20%) sepia(91%) saturate(387%) hue-rotate(27deg) brightness(100%) contrast(94%);
 }
 .car-loan-content {
-  height: 88%;
+  height: 100%;
 }
 .car-brandlist-content {
   height: 100%;

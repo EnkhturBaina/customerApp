@@ -67,7 +67,7 @@
             <div class="magic-container car-info-contant-card">
                 <!-- Car -->
                 <div class="item-info car-detail-container" ng-show="isCarDetail">
-                    <ion-slide-box class="leasing-badge">
+                    <ion-slide-box on-slide-changed="slideChanged(index)" class="leasing-badge" delegate-handle="slidebox1">
                         <ion-slide ng-repeat="imgs in carData.images">
                             <div class="box1">
                                 <img class="car-img" ng-src="{{imgs|guessImageMime}}" />
@@ -127,12 +127,12 @@
 
             <div class="bank-container">
                 <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
-                <img ng-repeat="bank in bankList.Agree | filter:{id:'!!'}" src="{{bank.bank_logo|guessImageMime}}" />
+                <img ng-repeat="bank in bankList | filter:{id:'!!'}" src="{{bank.bank_logo|guessImageMime}}" />
 
             </div>
             <div class="suggest-slider-container">
                 <span class="suggest-title">Ижил төстэй бараа</span>
-                <ion-slide-box on-slide-changed="slideChanged(index)" class="suggest-slider-content" does-continue="true">
+                <ion-slide-box on-slide-changed="slideChangedTrend(index)" class="suggest-slider-content" does-continue="true" delegate-handle="slidebox-trend">
                     <ion-slide class="suggest-slider" style="background: none" ng-repeat="car in $root.carDatas" ng-if="$index % 3 == 0">
                         <div class="suggest-card">
                             <img src="{{$root.carDatas[$index].itempic|guessImageMime}}" class="car-img-suggest" />

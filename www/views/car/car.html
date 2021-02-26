@@ -28,7 +28,7 @@
                 <div class="brand-tags">
                     <ul>
                         <li class="tags" ng-repeat="cat in $root.categoryData | filter:{factoryid:'!!'}" ng-if="$index<=categoryShowLimit && cat.factoryname" ng-click="selectCategory(cat)">{{cat.factoryname}}</li>
-                        <li class="tags ion-color-text" ui-sref="car-brandlist" ng-click="showFullCategory()">Бүгд</li>
+                        <li class="tags ion-color-text" ui-sref="car-brandlist" ng-click="showFullCategory()">Бусад</li>
                     </ul>
                 </div>
                 <div class="cars">
@@ -48,6 +48,7 @@
                     </ul>
                 </div>
             </div>
+            <ion-footer class="bottom-footer"></ion-footer>
         </div>
     </ion-content>
 </ion-view>

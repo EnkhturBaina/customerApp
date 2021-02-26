@@ -32,7 +32,7 @@ angular.module("qr.Ctrl", []).controller("qrCtrl", function ($ionicPlatform, $io
         $rootScope.selectedCarData = response[0];
         // console.log("$rootScope.selectedCarData", $rootScope.selectedCarData);
       } else {
-        $rootScope.alert("Код буруу байна");
+        $rootScope.alert("Код буруу байна", "warning");
         $scope.showQRreader();
       }
     });

@@ -7,14 +7,16 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
   // $scope.asdasdasd();
   $scope.savebtn = function () {
     if (isEmpty($rootScope.newCarReq.unitPrice)) {
-      $rootScope.alert("Та барааны үнийг оруулна уу");
+      $rootScope.alert("Та барааны үнийг оруулна уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.shopId)) {
-      $rootScope.alert("Та барааны нийлүүлэгчийг сонгоно уу");
+      $rootScope.alert("Та барааны нийлүүлэгчийг сонгоно уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.categoryId)) {
-      $rootScope.alert("Та барааны төрөл өө сонгоно уу");
-    } else if (isEmpty($rootScope.newCarReq.image)) {
-      $rootScope.alert("Та барааны зургийг оруулна уу");
-    } else {
+      $rootScope.alert("Та барааны төрөл өө сонгоно уу", "warning");
+    }
+    //  else if (isEmpty($rootScope.newCarReq.image)) {
+    //   $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
+    // }
+    else {
       try {
         var otherGoodFirstId = 1;
         if (localStorage.otherGoodsMaxId === undefined) {
