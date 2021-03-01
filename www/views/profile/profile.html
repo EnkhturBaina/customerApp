@@ -47,12 +47,12 @@
                         <div class="list profile-list">
                             <label class="item item-input profile-label" id="lastNameLabel">
                                 <p>Овог</p>
-                                <input type="text" id="customerLastName" placeholder="Овог" name="lastName" ng-model="$root.customerProfileData.lastname" ng-change="replaceCyr($root.customerProfileData.lastname)" />
+                                <input type="text" id="customerLastName" placeholder="Овог" name="lastName" ng-model="$root.customerProfileData.lastname" ng-change="replaceCyr($root.customerProfileData.lastname)" ng-keyup="hideKeyboard($event)" />
                                 <span id="lastNameError" class="profile-input-name-error">Та овогоо крилл үсгээр оруулна уу</span>
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Нэр</p>
-                                <input type="text" id="customerFirstName" placeholder="Нэр" name="firstName" ng-model="$root.customerProfileData.firstname" ng-change="replaceCyr2($root.customerProfileData.firstname)" />
+                                <input type="text" id="customerFirstName" placeholder="Нэр" name="firstName" ng-model="$root.customerProfileData.firstname" ng-change="replaceCyr2($root.customerProfileData.firstname)" ng-keyup="hideKeyboard($event)" />
                                 <span id="firstNameError" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</span>
                             </label>
                             <label class="item item-input profile-label">
@@ -65,15 +65,15 @@
                             </label>
                             <label class="item item-input profile-label">
                                 <p>И-мэйл хаяг</p>
-                                <input type="text" placeholder="И-мэйл хаяг" name="email" ng-model="$root.customerProfileData.email" />
+                                <input type="text" placeholder="И-мэйл хаяг" name="email" ng-model="$root.customerProfileData.email" ng-keyup="hideKeyboard($event)" />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Хаяг</p>
-                                <input type="text" placeholder="Хаяг" name="address" ng-model="$root.customerProfileData.address" />
+                                <input type="text" placeholder="Хаяг" name="address" ng-model="$root.customerProfileData.address" ng-keyup="hideKeyboard($event)" />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Утасны дугаар</p>
-                                <input type="text" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" />
+                                <input type="text" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" ng-keyup="hideKeyboard($event)" />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Гэрлэсэн эсэх</p>
@@ -135,15 +135,15 @@
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Сарын орлого</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlyincome" placeholder="-" name="monthlyincome" format-input />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlyincome" placeholder="-" name="monthlyincome" format-input ng-keyup="hideKeyboard($event)" />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Өрхийн нийт орлого</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.totalincomehousehold" placeholder="-" name="totalincome" format-input />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.totalincomehousehold" placeholder="-" name="totalincome" format-input ng-keyup="hideKeyboard($event)" />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Төлж буй зээл</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlypayment" placeholder="-" name="payloan" format-input />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlypayment" placeholder="-" name="payloan" format-input ng-keyup="hideKeyboard($event)" />
                             </label>
                             <label class="item profile-label">
                                 <p>Харьцдаг банк</p>

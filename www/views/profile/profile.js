@@ -36,9 +36,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
       $rootScope.incomeType = response;
     });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1603958798356" }).then(function (response) {
-      $rootScope.allBankList = response;
-    });
   };
   // $scope.getProData();
   $scope.getProfileLookupData();

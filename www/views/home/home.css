@@ -122,6 +122,9 @@
 .card-body i {
   float: right;
 }
+.home-tab-2-content {
+  height: 80%;
+}
 .home-tab-2-content > .scroll {
   min-height: 0px !important;
   margin: 0 20px;

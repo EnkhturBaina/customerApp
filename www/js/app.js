@@ -335,6 +335,11 @@ var app = angular
     $rootScope.hideShowFooter = function () {
       $rootScope.hideFooter = !$rootScope.hideFooter;
     };
+    $rootScope.hideKeyboard = function (event) {
+      if (event.keyCode === 13) {
+        document.activeElement.blur();
+      }
+    };
   })
 
   .directive("format", [

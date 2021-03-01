@@ -184,4 +184,10 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
     });
     $rootScope.supplierCategory = selectedCategory;
   };
+  $scope.hideKeyboard = function (event) {
+    console.log("event", event);
+    if (event.keyCode === 13) {
+      document.activeElement.blur();
+    }
+  };
 });

@@ -304,7 +304,7 @@
   border-radius: 5px !important;
 }
 .other-goods-checkbox > .item-content {
-  margin-left: 30px;
+  /* margin-left: 30px; */
 }
 .other-goods-trash {
   font-size: 34px;
