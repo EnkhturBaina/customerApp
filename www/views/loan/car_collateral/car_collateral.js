@@ -1,12 +1,4 @@
-angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $ionicLoading, $rootScope, $state) {
-  // $scope.goCarCollLeasing = function () {
-  //   var next = $rootScope.checkLoginUserDatas("home", "car_coll");
-  //   $state.go(next.now, { path: next.nextpath });
-  // };
-
-  // $scope.goCarCollLeasing();
-
-  // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $rootScope, $state) {
   $rootScope.monthData = [];
   $scope.locationData = [];
   $scope.getMonthData = function () {
@@ -112,26 +104,54 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
   $scope.getCarCollateralLookupData();
 
+  localStorage.setItem("requestType", "autoColl");
+
+  $scope.getbankDataCarColl = function () {
+    //Шүүгдсэн банкууд
+    $rootScope.bankListFilter = [];
+    var json = {};
+    $rootScope.newReqiust = {};
+    json.type = "carLoanFilter";
+    json.totalLoan = $rootScope.carCollateralRequestData.loanAmount;
+    json.isPerson = 1;
+    json.location = $rootScope.carCollateralRequestData.locationId;
+    json.month = $rootScope.carCollateralRequestData.loanMonth;
+    json.currency = 16074201974821;
+    json.isMortgage = $rootScope.loginUserInfo.mikmortgagecondition;
+    json.totalIncome = $rootScope.loginUserInfo.totalincomehousehold;
+    json.monthIncome = $rootScope.loginUserInfo.monthlyincome;
+    json.monthPay = $rootScope.loginUserInfo.monthlypayment;
+    serverDeferred.carCalculation(json).then(function (response) {
+      $rootScope.bankListFilter = response.result.data;
+    });
+    console.log("json", json);
+  };
+
   $scope.saveCarCol = function () {
     if (isEmpty($rootScope.newCarReq)) {
       $rootScope.newCarReq = {};
     }
     if ($scope.carCollCheckReqiured("step1")) {
-      // $rootScope.ShowLoader();
-      // serverDeferred.requestFull("dcApp_car_collateral_loan_001", $rootScope.newCarReq).then(function (response) {
-      //   $rootScope.selectedCarData = response[1];
-      //   $state.go("car_coll2");
-      //   $ionicLoading.hide();
-      // });
-
       localStorage.setItem("requestType", "autoColl");
 
       localStorage.removeItem("carColl");
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
 
+      var next = $rootScope.checkLoginUserDatas("car_coll", "car_coll2");
+      $state.go(next.now, { path: next.nextpath });
+
       console.log("local", localStorage);
-      $state.go("car_coll2");
+      // $state.go("car_coll2");
     }
+  };
+  if ($state.current.name == "car_coll2") {
+    $scope.getbankDataCarColl();
+  }
+  $scope.backFromCarCollStep1 = function () {
+    $state.go("home");
+  };
+  $scope.backFromCarCollStep2 = function () {
+    $state.go("car_coll");
   };
 
   $scope.saveCarCollRequestData = function () {
@@ -143,12 +163,12 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
 
   $scope.carCollCheckReqiured = function (param) {
     if (param == "step1") {
-      if (isEmpty($rootScope.newCarReq.carCategoryId) || isEmpty($rootScope.newCarReq.brandId) || isEmpty($rootScope.newCarReq.markId) || isEmpty($rootScope.newCarReq.mile) || isEmpty($rootScope.newCarReq.engineId) || isEmpty($rootScope.newCarReq.engineCapacity) || isEmpty($rootScope.newCarReq.transmissionId) || isEmpty($rootScope.newCarReq.driveTypeId) || isEmpty($rootScope.newCarReq.steeringWheelId) || isEmpty($rootScope.newCarReq.carDoorCount) || isEmpty($rootScope.newCarReq.manufacturedYearId) || isEmpty($rootScope.newCarReq.cameYearId) || isEmpty($rootScope.newCarReq.carColorId)) {
-        $rootScope.alert("Мэдээллээ бүрэн оруулна уу", "warning");
-        return false;
-      } else {
-        return true;
-      }
+      // if (isEmpty($rootScope.newCarReq.carCategoryId) || isEmpty($rootScope.newCarReq.brandId) || isEmpty($rootScope.newCarReq.markId) || isEmpty($rootScope.newCarReq.mile) || isEmpty($rootScope.newCarReq.engineId) || isEmpty($rootScope.newCarReq.engineCapacity) || isEmpty($rootScope.newCarReq.transmissionId) || isEmpty($rootScope.newCarReq.driveTypeId) || isEmpty($rootScope.newCarReq.steeringWheelId) || isEmpty($rootScope.newCarReq.carDoorCount) || isEmpty($rootScope.newCarReq.manufacturedYearId) || isEmpty($rootScope.newCarReq.cameYearId) || isEmpty($rootScope.newCarReq.carColorId)) {
+      //   $rootScope.alert("Мэдээллээ бүрэн оруулна уу", "warning");
+      //   return false;
+      // } else {
+      //   return true;
+      // }
       return true;
     } else if (param == "step2") {
       if (isEmpty($rootScope.carCollateralRequestData.loanAmount)) {
@@ -197,6 +217,8 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $("#productYear").mask("0000");
   $("#entryYear").mask("0000");
   $("#odo").mask("000000000");
+  $("#carDoorCount").mask("0");
+  $("#engineCapacity").mask("000000000");
 
   $("#nationalNumberModal")
     .find("input[type=text]")

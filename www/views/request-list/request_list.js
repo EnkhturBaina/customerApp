@@ -23,6 +23,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
         } else {
           $scope.isEmpty = false;
           $scope.requetData = response;
+          console.log("$scope.requetData", $scope.requetData);
           // angular.forEach(response, function(item) {
           //     if (isObject(item)) {
           //         $scope.requetData.push(item);

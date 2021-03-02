@@ -12,11 +12,9 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       $rootScope.alert("Та барааны нийлүүлэгчийг сонгоно уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.categoryId)) {
       $rootScope.alert("Та барааны төрөл өө сонгоно уу", "warning");
-    }
-    //  else if (isEmpty($rootScope.newCarReq.image)) {
-    //   $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
-    // }
-    else {
+    } else if (isEmpty($rootScope.newCarReq.image)) {
+      $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
+    } else {
       try {
         var otherGoodFirstId = 1;
         if (localStorage.otherGoodsMaxId === undefined) {
@@ -42,12 +40,6 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       // var image = $rootScope.newCarReq.image.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
 
       console.log("local", localStorage);
-      // serverDeferred.request("dcApp_consumer_loan_001", { amount: $rootScope.newCarReq.amount, shopId: $rootScope.newCarReq.shopId, picture1: image, categoryId: $rootScope.newCarReq.categoryId }).then(function (response) {
-      //   $rootScope.newCarReq = {};
-      //   $rootScope.alert("Бараа нэмэгдлээ");
-      //   document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(../../img/note-20.png)";
-      //   document.getElementsByClassName("img-input-area")[0].style.opacity = "0.5";
-      // });
     }
     $rootScope.calcTotalPrice();
     $rootScope.getLocalGoodsData();
@@ -139,27 +131,6 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       }
     );
   };
-  // $scope.takePhoto = function (path) {
-  //   navigator.camera.getPicture(
-  //     function (imageData) {
-  //       if (isEmpty($rootScope.newCarReq)) {
-  //         $rootScope.newCarReq = {};
-  //       }
-  //       $rootScope.newCarReq.image = "data:image/jpeg;base64," + imageData;
-  //       document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(" + $rootScope.newCarReq.image + ")";
-  //       document.getElementsByClassName("img-input-area")[0].style.opacity = "1";
-  //       $scope.$apply();
-  //     },
-  //     function onFail(message) {
-  //       alert("Failed because: " + message);
-  //     },
-  //     {
-  //       quality: 50,
-  //       destinationType: Camera.DestinationType.DATA_URL,
-  //       correctOrientation: true,
-  //     }
-  //   );
-  // };
 
   //Бараны нийлүүлэгч хамаарч Барааны төрөл -г lookup -д дахин сэт хийх
   $scope.changeSupCategory = function (supppp) {
@@ -185,7 +156,6 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
     $rootScope.supplierCategory = selectedCategory;
   };
   $scope.hideKeyboard = function (event) {
-    console.log("event", event);
     if (event.keyCode === 13) {
       document.activeElement.blur();
     }

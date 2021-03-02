@@ -299,11 +299,9 @@ var app = angular
     $scope.toggleSideMenu = function () {
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");
-      console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
     };
     $scope.logOut = function () {
       $rootScope.loginUserInfo = undefined;
-      console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
     };
     $(function () {
       $("#ionNavViewMobile,#ionNavViewMobileFooter").click(function () {
@@ -329,9 +327,7 @@ var app = angular
 
     $scope.rangeData = { volume: "14" };
 
-    $scope.$watch("data.volume", function () {
-      // console.log("Has changed");
-    });
+    $scope.$watch("data.volume", function () {});
     $rootScope.hideShowFooter = function () {
       $rootScope.hideFooter = !$rootScope.hideFooter;
     };

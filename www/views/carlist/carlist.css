@@ -1,7 +1,3 @@
-.right-button-container {
-  float: right;
-  padding: 10px 5px;
-}
 .changelayoutbutton {
   background: none;
   border: none;
@@ -46,7 +42,7 @@
 .cars .car-detail-grid .desc {
   width: 100%;
   display: grid;
-  margin-left: 0px;
+  padding: 5px;
 }
 .cars .car-detail-column .desc {
   width: 100%;

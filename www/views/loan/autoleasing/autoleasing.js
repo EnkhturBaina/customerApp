@@ -1,13 +1,15 @@
-﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $window, $ionicPlatform) {
+﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout) {
   $rootScope.requestType = "";
   $rootScope.requestType = localStorage.getItem("requestType");
 
   $scope.getCarDatasId = function (itemCode) {
+    localStorage.setItem("requestType", "auto");
     $scope.carData = [];
     if ($scope.checkReqiured("step1")) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597654926672135", itemCode: itemCode }).then(function (response) {
         if (!isEmpty(response) && !isEmpty(response[0])) {
           $rootScope.selectedCarData = response[0];
+          console.log("$rootScope.selectedCarData", $rootScope.selectedCarData);
 
           $scope.getLoanAmount = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
           $state.go("car-info");
@@ -37,19 +39,21 @@
     }
   };
 
-  if ($rootScope.requestType == "consumer") {
-    if ($state.current.name == "autoleasing-2") {
-      $rootScope.newReqiust = {};
+  $rootScope.getLoanAmountFunc = function () {
+    if ($rootScope.requestType == "consumer") {
+      if ($state.current.name == "autoleasing-2") {
+        $rootScope.newReqiust = {};
+      }
+      $scope.getLoanAmount = $rootScope.sumPrice;
+      $rootScope.loanAmountField = $rootScope.sumPrice;
+    } else {
+      if (!isEmpty($rootScope.selectedCarData)) {
+        $scope.getLoanAmount = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
+        $rootScope.loanAmountField = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
+      }
     }
-    $scope.getLoanAmount = $rootScope.sumPrice;
-    $rootScope.loanAmountField = $rootScope.sumPrice;
-  } else {
-    if (!isEmpty($rootScope.selectedCarData)) {
-      $scope.getLoanAmount = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
-      $rootScope.loanAmountField = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
-    }
-  }
-
+  };
+  $scope.getLoanAmountFunc();
   $scope.getLookupData();
 
   $scope.getbankData = function () {
@@ -91,7 +95,7 @@
 
   //Банк шүүлт autoleasing-2 дээр шууд ажиллах
   //Банк сонгох autoleasing-3 хуудасруу ороход ажиллах
-  if ($state.current.name == "autoleasing-3" || $state.current.name == "autoleasing-2") {
+  if (($state.current.name == "autoleasing-3" && $rootScope.requestType != "autoColl") || $state.current.name == "autoleasing-2") {
     $scope.getbankData();
   }
   $scope.showQRreader = function () {
@@ -127,8 +131,10 @@
   var selectedbanks = [];
 
   $scope.sendRequest = async function () {
+    $rootScope.requestType = localStorage.getItem("requestType");
     console.log("$rootScope.requestType", $rootScope.requestType);
     if ($rootScope.requestType == "autoColl") {
+      console.log("autoColl LEASING SEND REQUEST");
       //===================Авто машин барьцаалсан зээл===================
       $scope.carCollateralData = JSON.parse(localStorage.getItem("carColl"));
 
@@ -140,12 +146,62 @@
       //Барьцаалах автомашин бүртгэх
       serverDeferred.requestFull("dcApp_car_collateral_loan_001", $scope.carCollateralData).then(function (saveResponse) {
         if (saveResponse[0] == "success" && saveResponse[1] != "") {
-          // console.log("response car collateral", saveResponse);
+          console.log("response SAVE CAR autoColl", saveResponse);
           //Хүсэлт бүртгэх
           serverDeferred.requestFull("dcApp_carCollRequestDV_001", $scope.carCollateralRequestData).then(function (sendReqResponse) {
-            // console.log("sendReqResponse", sendReqResponse);
+            console.log("sendReqResponse autoColl", sendReqResponse);
             if (sendReqResponse[0] == "success" && sendReqResponse[1] != "") {
-              $state.go("loan_success");
+              //Сонгосон банк
+              selectedbanks = [];
+              angular.forEach($rootScope.bankListFilter.Agree, function (item) {
+                if (item.checked) {
+                  var AgreeBank = {
+                    loanId: sendReqResponse[1].id,
+                    customerId: $rootScope.loginUserInfo.customerid,
+                    bankId: item.id,
+                    wfmStatusId: 1585206036474051,
+                    productId: item.products[0].id,
+                  };
+                  selectedbanks.push(AgreeBank);
+                }
+              });
+
+              //нөхцөл хангаагүй банкууд
+              angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
+                if (item.checked) {
+                  var NotAgreeBank = {
+                    loanId: sendReqResponse[1].id,
+                    customerId: $rootScope.loginUserInfo.customerid,
+                    bankId: item.id,
+                    wfmStatusId: 1585206036474051,
+                    productId: item.products[0].id,
+                  };
+                  selectedbanks.push(NotAgreeBank);
+                }
+              });
+
+              var mapBankSuccess = false;
+
+              //MAP table рүү сонгосон банкуудыг бичих
+              selectedbanks.map((bank) => {
+                serverDeferred.requestFull("dcApp_request_map_bank_for_detail_001", bank).then(function (response) {
+                  if (response[0] == "success" && response[1] != "") {
+                    mapBankSuccess = true;
+                    console.log("autoColl BANK response", response);
+                  }
+                });
+              });
+              //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
+              console.log("mapBankSuccess", mapBankSuccess);
+              $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
+
+              $timeout(function () {
+                if (sendReqResponse[0] == "success" && sendReqResponse[1] != "" && mapBankSuccess) {
+                  $state.go("loan_success");
+                } else {
+                  $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+                }
+              }, 1000);
             } else {
               $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
             }
@@ -155,6 +211,7 @@
         }
       });
     } else if ($rootScope.requestType == "consumer") {
+      console.log("CONSUMER LEASING SEND REQUEST");
       //==================Хэрэглээний лизинг===================
       $scope.consumerData = JSON.parse(localStorage.getItem("otherGoods"));
 
@@ -164,7 +221,10 @@
       console.log("$scope.newReqiust", $scope.newReqiust);
       //Хүсэлт бүртгэх
       serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
+        console.log("send request consumer response", response);
         if (response[0] == "success" && response[1] != "") {
+          //Сонгосон банк
+          selectedbanks = [];
           //нөхцөл хангасан банкууд
           angular.forEach($rootScope.bankListFilter.Agree, function (item) {
             if (item.checked) {
@@ -200,7 +260,7 @@
             serverDeferred.requestFull("dcApp_request_map_bank_for_detail_001", bank).then(function (response) {
               if (response[0] == "success" && response[1] != "") {
                 mapBankSuccess = true;
-                console.log("CONSUMER BANK res", response);
+                console.log("CONSUMER BANK response", response);
               }
             });
           });
@@ -214,7 +274,7 @@
             }
             //Бүтээгдэхүүн бүртгэх
             serverDeferred.requestFull("dcApp_consumer_loan_001", product).then(function (responseProduct) {
-              // console.log("responseProduct", responseProduct);
+              console.log("consumer SAVE responseProduct", responseProduct);
               if (responseProduct[0] == "success" && responseProduct[1] != "" && mapBankSuccess) {
                 $state.go("loan_success");
               } else {
@@ -231,13 +291,17 @@
     } else if ($rootScope.requestType == "estate") {
       //===================Үл хөдлөх барьцаат зээл===================
     } else {
+      console.log("AUTO LEASING SEND REQUEST");
       //==================AutoLeasing===================
       if ($scope.checkReqiured("step4")) {
         $scope.newReqiust.customerId = $rootScope.loginUserInfo.customerid;
         $scope.newReqiust.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
 
         serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
+          console.log("save REQUEST response AUTO LEASING", response);
           if (response[0] == "success" && response[1] != "") {
+            //Сонгосон банк
+            selectedbanks = [];
             //нөхцөл хангасан банкууд
             angular.forEach($rootScope.bankListFilter.Agree, function (item) {
               if (item.checked) {
@@ -276,6 +340,7 @@
             };
 
             serverDeferred.requestFull("dcApp_request_product_dv_with_detail_001", onlineLeasingProduct).then(function (response) {
+              console.log("save BANKS response AUTO LEASING", response);
               if (response[0] == "success" && response[1] != "") {
                 $state.go("loan_success");
               } else {
@@ -295,7 +360,12 @@
       if (isEmpty($rootScope.newReqiust.serviceAgreementId)) {
         $rootScope.newReqiust.serviceAgreementId = "1554263832132";
       }
-      $state.go("autoleasing-3");
+
+      if (isEmpty($rootScope.bankListFilter.Agree) && isEmpty($rootScope.bankListFilter.NotAgree)) {
+        $rootScope.alert("Банк !!!", "warning");
+      } else {
+        $state.go("autoleasing-3");
+      }
     }
     $scope.getCustomerId();
   };
@@ -399,13 +469,15 @@
   };
 
   $scope.backFromStep2 = function () {
-    if ($rootScope.requestType == "consumer") {
+    var local = localStorage.getItem("requestType");
+    if (local == "consumer") {
       $state.go("otherGoods");
     } else if ($ionicHistory.viewHistory().backView.stateName == "login" && !isEmpty($rootScope.loginUserInfo)) {
       $state.go("car-info");
     } else {
       $ionicHistory.goBack();
     }
+    $rootScope.newReqiust = {};
   };
 
   $scope.isAmountDisable = false;

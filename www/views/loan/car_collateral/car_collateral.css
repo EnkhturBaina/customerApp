@@ -7,10 +7,6 @@
   height: 100% !important;
 }
 
-.car-collateral-list p {
-  color: #606060 !important;
-  margin: 5px 0;
-}
 .car-collateral-label {
   width: 100%;
   border-left: none;
@@ -20,6 +16,10 @@
   border-bottom-width: 1px;
   border-color: #ccc;
   border-top-width: 0px;
+}
+.car-collateral-label p {
+  color: #606060 !important;
+  margin: 5px 0;
 }
 .car-collateral-label input {
   text-align: right;

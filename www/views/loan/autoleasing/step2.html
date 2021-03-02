@@ -1,4 +1,4 @@
-<ion-view id="loanPages" hide-footer-bar="true" hide-nav-bar="true">
+<ion-view id="loanPages" hide-footer-bar="true" hide-nav-bar="true" cache-view="false">
   <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
   <ion-header-bar align-title="left" class="navbar" style="background: none">
     <div class="title ion-color-big-text navbar-back-button" style="background: none">
@@ -29,14 +29,14 @@
               <span class="title">Зээлийн хэмжээ</span>
               <div class="tugrug-input-container">
                 <span class="input-tugrug-icon">₮</span>
-                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="getLoanAmount" format-input ng-disabled="isAmountDisable" ng-change="getbankData()" ng-keyup="hideKeyboard($event)"/>
+                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="getLoanAmount" format-input ng-disabled="isAmountDisable" ng-change="getbankData()" ng-keyup="hideKeyboard($event)" />
               </div>
             </div>
             <div class="tugrug-input">
               <span class="title">Урьдчилгаа</span>
               <div class="tugrug-input-container">
                 <span class="input-tugrug-icon">₮</span>
-                <input inputmode="numeric" pattern="[0-9]*" type="text" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount();getbankData();" format-input ng-keyup="hideKeyboard($event)"/>
+                <input inputmode="numeric" pattern="[0-9]*" type="text" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount();getbankData();" format-input ng-keyup="hideKeyboard($event)" />
               </div>
             </div>
 

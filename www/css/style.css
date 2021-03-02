@@ -1277,3 +1277,38 @@ h4 {
   min-height: 35px !important;
   flex: none !important;
 }
+
+.container-padding {
+  margin: 0px 15px;
+  padding: 15px 20px;
+}
+
+.middle-title {
+  font-size: 12px;
+  color: #c6c8d4;
+  text-transform: uppercase;
+}
+
+.not-agree-banks {
+  color: red !important;
+}
+.agree-banks {
+  color: #acd322 !important;
+}
+.bank-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.bank {
+  align-items: center;
+  text-align: center;
+}
+.bank img {
+  width: 30px;
+  height: 30px;
+}
+.bank p {
+  font-size: 12px;
+  color: gray;
+  font-weight: bold;
+}

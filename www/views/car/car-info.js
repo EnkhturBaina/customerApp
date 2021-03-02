@@ -4,11 +4,12 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
 
   // auto Leasing
   $scope.goAutoleasing = function () {
+    localStorage.setItem("requestType", "auto");
     var next = $rootScope.checkLoginUserDatas("car-info", "autoleasing-2");
     $state.go(next.now, { path: next.nextpath });
   };
   // get car Data
-  $scope.getCarinfo = function () {
+  $rootScope.getCarinfo = function () {
     $scope.isCarDetail = true;
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597654926672135", id: $rootScope.selectedCarData.id }).then(function (response) {
       if (!isEmpty(response[0]) && isObject(response[0])) {
@@ -37,10 +38,12 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
       }
     });
   };
+
+  $rootScope.getCarinfo();
+
   $scope.getbankData = function () {
     $rootScope.bankList = [];
     if (!isEmpty($rootScope.selectedCarData) && !isEmpty($rootScope.selectedCarData.itemcode)) {
-      // { type: "car", operation: "calculation", productCode: $rootScope.selectedCarData.itemcode }
       serverDeferred.carCalculation({ type: "autoLeasingFilter", code: $rootScope.selectedCarData.itemcode }).then(function (response) {
         $rootScope.bankList = response.result.data;
         console.log(response);
@@ -74,7 +77,6 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
       });
     }
   };
-  $scope.getCarinfo();
 
   // basket
   $scope.addtoBasket = function () {
