@@ -199,6 +199,7 @@
 
               $timeout(function () {
                 if (sendReqResponse[0] == "success" && sendReqResponse[1] != "" && mapBankSuccess) {
+                  localStorage.removeItem("carColl");
                   $state.go("loan_success");
                 } else {
                   $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
@@ -280,6 +281,9 @@
             serverDeferred.requestFull("dcApp_consumer_loan_001", product).then(function (responseProduct) {
               console.log("consumer SAVE responseProduct", responseProduct);
               if (responseProduct[0] == "success" && responseProduct[1] != "" && mapBankSuccess) {
+                localStorage.removeItem("otherGoods");
+                localStorage.removeItem("consumerRequestData");
+                localStorage.removeItem("otherGoodsMaxId");
                 $state.go("loan_success");
               } else {
                 $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");

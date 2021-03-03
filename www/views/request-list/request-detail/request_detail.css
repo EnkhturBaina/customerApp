@@ -19,16 +19,26 @@
   color: #b8b8b8 !important;
 }
 .bank-detail {
-  margin-top: 20px;
+  background-color: #fff;
+  padding: 5px 0px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 0px 10px;
 }
 .bant-detail-title {
   padding-left: 16px;
   padding-bottom: 10px;
   display: block;
   color: #4b5180 !important;
+  margin-top: 21px;
 }
 .bank-detail p {
   color: #c4c8d1 !important;
+}
+.bank-detail-label {
+  border: 0 !important;
+  margin: 0 !important;
+  border-bottom: 1px solid #e5e5e5 !important;
 }
 .bank-detail-label input {
   text-align: right;
@@ -53,6 +63,7 @@
   background-color: #fff !important;
   color: #a2a7b5 !important;
   font-size: 14px !important;
+  border-bottom: 0px !important;
 }
 .detail-checkbox > .checkbox {
   left: unset !important;
@@ -78,22 +89,6 @@
   padding: 35px 20px;
   bottom: 15%;
   position: relative;
-}
-#confirm-overlay {
-  z-index: 99 !important;
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 2;
-  cursor: pointer;
-  margin-bottom: 50px;
-  padding-bottom: 50px;
 }
 #successRequestPopup {
   z-index: 99 !important;
@@ -172,14 +167,6 @@
   display: grid;
   margin: 0 50px;
 }
-@keyframes popup {
-  0% {
-    transform: scale(0.8);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 .confirm-title {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
@@ -194,12 +181,6 @@
 .confirm-btn {
   width: 50%;
   margin: 5px auto;
-}
-.confirm-close-btn {
-  top: 6%;
-  zoom: 1.2;
-  color: #fff;
-  padding: 10px;
 }
 .confirm-overlay-container select {
   border-radius: 5px;
@@ -223,8 +204,8 @@
   border: 1px solid #bebebe;
   border-radius: 10px;
   display: flow-root;
-  width: 90%;
-  margin: 0 auto;
+  margin: 10px;
+  background: #fff;
   box-shadow: 4px 4px 12px 0px #888888;
 }
 .bank-chat-income {
@@ -265,22 +246,6 @@
   padding-left: 15px;
   text-align: right;
   padding-right: 15px;
-}
-.modal-wrapper {
-  /* padding: 0 20px;
-  height: 60vh;
-  width: 80vw; */
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-.modal {
-  position: relative !important;
-  /* border-radius: 10px; */
 }
 .modal-chat-body {
   display: grid;
@@ -334,7 +299,7 @@
   color: #000 !important;
 }
 .request-detail-container {
-  padding-top: 20px;
+  margin-top: 20px;
 }
 .bank-overlay-off-text {
   color: #fff;
@@ -355,4 +320,13 @@
 }
 .bank-chat-body .income-chat-body {
   margin: 10px 0px 10px 30px;
+}
+.dtl-pop-up-bank-name {
+  font-weight: bold;
+}
+.confirmPopup .popup {
+  width: 75% !important;
+}
+.dtl-pop-up-sub-title {
+  font-size: 12px;
 }

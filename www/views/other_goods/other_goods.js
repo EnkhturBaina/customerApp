@@ -43,7 +43,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
 
   $scope.otherGoodsDelete = function (id) {
     $ionicPopup.show({
-      template: "<b>Бараа усгах уу ?</b>",
+      template: "<b>Бараа устгах уу ?</b>",
       cssClass: "confirmPopup",
       buttons: [
         {
