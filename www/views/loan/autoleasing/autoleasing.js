@@ -160,7 +160,7 @@
                     customerId: $rootScope.loginUserInfo.customerid,
                     bankId: item.id,
                     isAgree: 1,
-                    wfmStatusId: 1585206036474051,
+                    wfmStatusId: 1609944755118135,
                     productId: item.products[0].id,
                   };
                   selectedbanks.push(AgreeBank);
@@ -175,7 +175,7 @@
                     customerId: $rootScope.loginUserInfo.customerid,
                     bankId: item.id,
                     isAgree: 0,
-                    wfmStatusId: 1585206036474051,
+                    wfmStatusId: 1609944755118135,
                     productId: item.products[0].id,
                   };
                   selectedbanks.push(NotAgreeBank);
@@ -236,7 +236,7 @@
                 customerId: $rootScope.loginUserInfo.customerid,
                 bankId: item.id,
                 isAgree: 1,
-                wfmStatusId: 1585206036474051,
+                wfmStatusId: 1609944755118135,
                 productId: item.products[0].id,
               };
               selectedbanks.push(AgreeBank);
@@ -251,7 +251,7 @@
                 customerId: $rootScope.loginUserInfo.customerid,
                 bankId: item.id,
                 isAgree: 0,
-                wfmStatusId: 1585206036474051,
+                wfmStatusId: 1609944755118135,
                 productId: item.products[0].id,
               };
               selectedbanks.push(NotAgreeBank);
@@ -318,7 +318,7 @@
                   customerId: $rootScope.loginUserInfo.customerid,
                   bankId: item.id,
                   isAgree: 1,
-                  wfmStatusId: 1585206036474051,
+                  wfmStatusId: 1609944755118135,
                   productId: item.products[0].id,
                 };
                 selectedbanks.push(AgreeBank);
@@ -333,7 +333,7 @@
                   customerId: $rootScope.loginUserInfo.customerid,
                   bankId: item.id,
                   isAgree: 0,
-                  wfmStatusId: 1585206036474051,
+                  wfmStatusId: 1609944755118135,
                   productId: item.products[0].id,
                 };
                 selectedbanks.push(NotAgreeBank);
