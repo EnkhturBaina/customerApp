@@ -159,6 +159,7 @@
                     loanId: sendReqResponse[1].id,
                     customerId: $rootScope.loginUserInfo.customerid,
                     bankId: item.id,
+                    isAgree: 1,
                     wfmStatusId: 1585206036474051,
                     productId: item.products[0].id,
                   };
@@ -173,6 +174,7 @@
                     loanId: sendReqResponse[1].id,
                     customerId: $rootScope.loginUserInfo.customerid,
                     bankId: item.id,
+                    isAgree: 0,
                     wfmStatusId: 1585206036474051,
                     productId: item.products[0].id,
                   };
@@ -232,6 +234,7 @@
                 loanId: response[1].id,
                 customerId: $rootScope.loginUserInfo.customerid,
                 bankId: item.id,
+                isAgree: 1,
                 wfmStatusId: 1585206036474051,
                 productId: item.products[0].id,
               };
@@ -246,6 +249,7 @@
                 loanId: response[1].id,
                 customerId: $rootScope.loginUserInfo.customerid,
                 bankId: item.id,
+                isAgree: 0,
                 wfmStatusId: 1585206036474051,
                 productId: item.products[0].id,
               };
@@ -309,6 +313,7 @@
                   loanId: response[1].id,
                   customerId: $rootScope.loginUserInfo.customerid,
                   bankId: item.id,
+                  isAgree: 1,
                   wfmStatusId: 1585206036474051,
                   productId: item.products[0].id,
                 };
@@ -323,6 +328,7 @@
                   loanId: response[1].id,
                   customerId: $rootScope.loginUserInfo.customerid,
                   bankId: item.id,
+                  isAgree: 0,
                   wfmStatusId: 1585206036474051,
                   productId: item.products[0].id,
                 };
