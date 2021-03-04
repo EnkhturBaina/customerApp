@@ -27,11 +27,6 @@
   };
 
   $scope.getLookupData = function () {
-    if (isEmpty($rootScope.monthData)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1579493650561919" }).then(function (response) {
-        $rootScope.monthData = response;
-      });
-    }
     if (isEmpty($rootScope.locationData)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613011719373208" }).then(function (response) {
         $rootScope.locationData = response;
@@ -143,14 +138,15 @@
       $scope.carCollateralRequestData.customerId = $rootScope.loginUserInfo.customerid;
       $scope.carCollateralRequestData.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
 
-      //Барьцаалах автомашин бүртгэх
-      serverDeferred.requestFull("dcApp_car_collateral_loan_001", $scope.carCollateralData).then(function (saveResponse) {
-        if (saveResponse[0] == "success" && saveResponse[1] != "") {
-          console.log("response SAVE CAR autoColl", saveResponse);
-          //Хүсэлт бүртгэх
-          serverDeferred.requestFull("dcApp_carCollRequestDV_001", $scope.carCollateralRequestData).then(function (sendReqResponse) {
-            console.log("sendReqResponse autoColl", sendReqResponse);
-            if (sendReqResponse[0] == "success" && sendReqResponse[1] != "") {
+      //Хүсэлт бүртгэх
+      serverDeferred.requestFull("dcApp_carCollRequestDV_001", $scope.carCollateralRequestData).then(function (sendReqResponse) {
+        console.log("sendReqResponse autoColl", sendReqResponse);
+        if (sendReqResponse[0] == "success" && sendReqResponse[1] != "") {
+          //Барьцаалах автомашин бүртгэх
+          $scope.carCollateralData.leasingid = sendReqResponse[1].id;
+          serverDeferred.requestFull("dcApp_car_collateral_loan_001", $scope.carCollateralData).then(function (saveResponse) {
+            if (saveResponse[0] == "success" && saveResponse[1] != "") {
+              console.log("response SAVE CAR autoColl", saveResponse);
               //Сонгосон банк
               selectedbanks = [];
               angular.forEach($rootScope.bankListFilter.Agree, function (item) {
@@ -159,8 +155,8 @@
                     loanId: sendReqResponse[1].id,
                     customerId: $rootScope.loginUserInfo.customerid,
                     bankId: item.id,
-                    isAgree: 1,
-                    wfmStatusId: 1609944755118135,
+                    isAgree: "1",
+                    wfmStatusId: "1609944755118135",
                     productId: item.products[0].id,
                   };
                   selectedbanks.push(AgreeBank);
@@ -174,8 +170,8 @@
                     loanId: sendReqResponse[1].id,
                     customerId: $rootScope.loginUserInfo.customerid,
                     bankId: item.id,
-                    isAgree: 0,
-                    wfmStatusId: 1609944755118135,
+                    isAgree: "0",
+                    wfmStatusId: "1609944755118135",
                     productId: item.products[0].id,
                   };
                   selectedbanks.push(NotAgreeBank);
@@ -186,10 +182,11 @@
 
               //MAP table рүү сонгосон банкуудыг бичих
               selectedbanks.map((bank) => {
+                console.log("bank", bank);
                 serverDeferred.requestFull("dcApp_request_map_bank_for_detail_001", bank).then(function (response) {
+                  console.log("autoColl BANK response", response);
                   if (response[0] == "success" && response[1] != "") {
                     mapBankSuccess = true;
-                    console.log("autoColl BANK response", response);
                   }
                 });
               });
@@ -212,7 +209,7 @@
         } else {
           $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
         }
-      });
+      }); /*8888888888888888888888888888*/
     } else if ($rootScope.requestType == "consumer") {
       console.log("CONSUMER LEASING SEND REQUEST");
       //==================Хэрэглээний лизинг===================
@@ -235,8 +232,8 @@
                 loanId: response[1].id,
                 customerId: $rootScope.loginUserInfo.customerid,
                 bankId: item.id,
-                isAgree: 1,
-                wfmStatusId: 1609944755118135,
+                isAgree: "1",
+                wfmStatusId: "1609944755118135",
                 productId: item.products[0].id,
               };
               selectedbanks.push(AgreeBank);
@@ -250,8 +247,8 @@
                 loanId: response[1].id,
                 customerId: $rootScope.loginUserInfo.customerid,
                 bankId: item.id,
-                isAgree: 0,
-                wfmStatusId: 1609944755118135,
+                isAgree: "0",
+                wfmStatusId: "1609944755118135",
                 productId: item.products[0].id,
               };
               selectedbanks.push(NotAgreeBank);
@@ -317,8 +314,8 @@
                   loanId: response[1].id,
                   customerId: $rootScope.loginUserInfo.customerid,
                   bankId: item.id,
-                  isAgree: 1,
-                  wfmStatusId: 1609944755118135,
+                  isAgree: "1",
+                  wfmStatusId: "1609944755118135",
                   productId: item.products[0].id,
                 };
                 selectedbanks.push(AgreeBank);
@@ -332,8 +329,8 @@
                   loanId: response[1].id,
                   customerId: $rootScope.loginUserInfo.customerid,
                   bankId: item.id,
-                  isAgree: 0,
-                  wfmStatusId: 1609944755118135,
+                  isAgree: "0",
+                  wfmStatusId: "1609944755118135",
                   productId: item.products[0].id,
                 };
                 selectedbanks.push(NotAgreeBank);
@@ -492,11 +489,18 @@
 
   $scope.isAmountDisable = false;
   $scope.collateralConditionId = false;
+  //Үйлчилгээний нөхцлийг зөвшөөрөх
+  $scope.agreementChecked = false;
   $scope.loanAmountDisable = function () {
     var local = localStorage.getItem("requestType");
     if (local == "autoColl") {
       $scope.isAmountDisable = false;
       $scope.collateralConditionId = true;
+      $scope.agreementChecked = true;
+    } else if (local == "auto") {
+      $scope.isAmountDisable = true;
+      $scope.collateralConditionId = true;
+      $scope.agreementChecked = true;
     } else {
       $scope.isAmountDisable = true;
       $scope.collateralConditionId = false;

@@ -134,9 +134,6 @@
   background-color: ghostwhite;
   height: 100%;
 }
-.ghostwhite-background {
-  background-color: ghostwhite;
-}
 .margin-lr-20 {
   margin-left: 20px;
   margin-right: 20px;
@@ -152,7 +149,6 @@
   line-height: 34px !important;
 }
 .qr-btn-container .filter {
-  /* background: #f8f8fe; */
   z-index: 0;
   border-radius: 28px;
   width: 229px;
@@ -165,15 +161,6 @@
   z-index: 1;
 }
 
-/* step 2 */
-.step2-btn-container {
-  margin-bottom: 25%;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-.red {
-  color: red !important;
-}
 .toggle input:checked + .track .handle {
   -webkit-transform: translate3d(30px, 0, 0);
   transform: translate3d(30px, 0, 0);
@@ -208,7 +195,6 @@
 .switch-list .item {
   border-bottom: 0px;
   padding: 12px 0px 15px 50px;
-  /* width: 70%; */
   border-color: #ddd;
   border: none;
   background-color: #fff;
@@ -277,12 +263,6 @@
 .checkbox input:checked + .checkbox-icon:before {
   background: #fff;
   border-color: #acd322;
-}
-.step3-btn-container {
-  margin: 10%;
-}
-.scroll-container-bottom-button {
-  margin: 10% 10% 40% 10%;
 }
 .step-4-container > .bottom-footer {
   padding: 0px !important;
@@ -454,7 +434,7 @@
 .autoleasing-step2-content {
   height: 88%;
 }
-.autoleasing-month-select {
+.autoleasing-location-select {
   width: 35%;
   margin: 0 12px 0 auto;
   float: right;
@@ -491,7 +471,7 @@
 .step3-bankList-checkbox-container > .item-content {
   padding-left: 30px;
 }
-.step2-loan-month {
+.step2-loan-location {
   border: 1px solid #d5d5d5 !important;
   border-radius: 5px;
   margin-top: 15px;

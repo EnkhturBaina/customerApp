@@ -47,7 +47,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
       cssClass: "confirmPopup",
       buttons: [
         {
-          text: "Хаах",
+          text: "Үгүй",
           type: "button-decline",
         },
         {

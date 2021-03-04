@@ -39,17 +39,16 @@
                 <input inputmode="numeric" pattern="[0-9]*" type="text" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount();getbankData();" format-input ng-keyup="hideKeyboard($event)" />
               </div>
             </div>
-
-            <label class="item item-input step2-loan-month">
-              <p>Хугацаа (сараар)</p>
-              <select class="autoleasing-month-select" ng-model="$root.newReqiust.loanMonth" ng-change="getbankData();">
-                <option ng-repeat="month in $root.monthData | filter:{id:'!!'}" ng-if="month.name" value="{{month.number1}}">
-                  {{month.name}}</option>
-              </select>
-            </label>
-            <label class="item item-input step2-loan-month">
+            <div class="tugrug-input">
+              <span class="title">Хугацаа (сараар)</span>
+              <div class="tugrug-input-container">
+                <span class="input-tugrug-icon">₮</span>
+                <input type="number" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-change="getbankData()" ng-keyup="hideKeyboard($event)" />
+              </div>
+            </div>
+            <label class="item item-input step2-loan-location">
               <p>Зээл авах байршил</p>
-              <select class="autoleasing-month-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
+              <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                   {{loc.name}}</option>
               </select>
@@ -72,7 +71,7 @@
                   Үйлчилгээний нөхцлийг зөвшөөрөх
                   <span>
                     <label class="step2-switch" id="step2isAgree">
-                      <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" ng-change="changeEvent($root.newReqiust.serviceAgreementId)" />
+                      <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-checked="agreementChecked" ng-model="$root.newReqiust.serviceAgreementId" ng-change="changeEvent($root.newReqiust.serviceAgreementId)" />
                       <div class="step2-slider step2-round">
                         <span id="step2-toggle-on" class="step2-on">Тийм</span>
                         <span id="step2-toggle-off" class="step2-off active">Үгүй</span>

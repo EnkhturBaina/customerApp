@@ -54,11 +54,11 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
 
   $scope.showPopup = function () {
     $ionicPopup.show({
-      template: "<b>Бараа нэмэгдлээ</b></br></br>Та өөр бараа түртгэх үү ?",
+      template: "<b>Бараа нэмэгдлээ</b></br></br>Та өөр бараа бүртгэх үү ?",
       cssClass: "confirmPopup",
       buttons: [
         {
-          text: "Хаах",
+          text: "Үгүй",
           type: "button-decline",
           onTap: function () {
             $ionicHistory.goBack();

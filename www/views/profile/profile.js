@@ -121,6 +121,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
     } else {
       $scope.customerProfileData.id = $rootScope.loginUserInfo.customerid;
+      $scope.customerProfileData.customertypeid = 1;
       $scope.customerEmail = $scope.customerProfileData.email;
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
         console.log("customerProfileData", response);

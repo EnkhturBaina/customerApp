@@ -1,19 +1,13 @@
 angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $rootScope, $state) {
-  $rootScope.monthData = [];
   $scope.locationData = [];
-  $scope.getMonthData = function () {
-    if (isEmpty($rootScope.monthData)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1579493650561919" }).then(function (response) {
-        $rootScope.monthData = response;
-      });
-    }
+  $scope.getLookUpDataCarColl = function () {
     if (isEmpty($rootScope.locationData)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613011719373208" }).then(function (response) {
         $rootScope.locationData = response;
       });
     }
   };
-  $scope.getMonthData();
+  $scope.getLookUpDataCarColl();
 
   //Төрөл
   $scope.carCategory = [];

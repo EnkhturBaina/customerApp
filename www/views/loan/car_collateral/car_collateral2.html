@@ -16,10 +16,6 @@
         <div class="list car-collateral-list" ng-controller="car_collateralCtrl">
             <div class="card car-step2-card money-input">
                 <span class="step2-card-span">Зээлийн хүсэлтийн мэдээлэл</span>
-                <!-- <label class="item item-input step2-input-container">
-                    <p class="step2-card-p">Зээлийн хэмжээ</p>
-                    <input type="tel" ng-model="$root.newCarReq.requestAmount" placeholder="Зээлийн хэмжээ" name="requestAmount" class="car-step2-input" format-input />
-                </label> -->
                 <div class="tugrug-input car-coll-step2-loan-amount">
                     <span class="title car-coll-step2-title">Зээлийн хэмжээ</span>
                     <div class="tugrug-input-container">
@@ -34,12 +30,13 @@
                         <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.carCollateralRequestData.loanFee" format-input ng-keyup="hideKeyboard($event)" />
                     </div>
                 </div>
-                <label class="item item-input step2-loam-month">
-                    <p>Хугацаа сараар</p>
-                    <select class="car-col-step2-select" ng-model="$root.carCollateralRequestData.loanMonth" ng-change="getbankDataCarColl()">
-                        <option ng-repeat="month in $root.monthData | filter:{id:'!!'}" ng-if="month.name" value="{{month.number1}}">{{month.name}}</option>
-                    </select>
-                </label>
+                <div class="tugrug-input car-coll-step2-loan-amount">
+                    <span class="title car-coll-step2-title">Хугацаа сараар</span>
+                    <div class="tugrug-input-container">
+                        <span class="input-tugrug-icon">#</span>
+                        <input type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number" ng-model="$root.carCollateralRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-change="getbankDataCarColl()" />
+                    </div>
+                </div>
                 <label class="item item-input step2-loam-month">
                     <p>Зээл авах байршил</p>
                     <select class="car-col-step2-select" ng-model="$root.carCollateralRequestData.locationId" ng-change="getbankDataCarColl()">
