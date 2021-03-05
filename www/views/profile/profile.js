@@ -36,9 +36,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
       $rootScope.incomeType = response;
     });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1603958798356" }).then(function (response) {
-      $rootScope.allBankList = response;
-    });
   };
   // $scope.getProData();
   $scope.getProfileLookupData();
@@ -107,23 +104,24 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     $rootScope.customerProfileData.crmCustomerId = $rootScope.loginUserInfo.id;
     $rootScope.customerProfileData.mobilenumber = $rootScope.loginUserInfo.customercode;
     if (isEmpty($scope.customerProfileData.lastname)) {
-      $rootScope.alert("Та овогоо оруулна уу");
+      $rootScope.alert("Та овогоо оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.firstname)) {
-      $rootScope.alert("Та өөрийн нэрээ оруулна уу");
+      $rootScope.alert("Та өөрийн нэрээ оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.uniqueidentifier)) {
-      $rootScope.alert("Регситрын дугаараа оруулна уу");
+      $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.address)) {
-      $rootScope.alert("Хаягаа оруулна уу");
+      $rootScope.alert("Хаягаа оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.email)) {
-      $rootScope.alert("И-мэйл хаяг оруулна уу");
+      $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.mobilenumber)) {
-      $rootScope.alert("Утасны дугаараа оруулна уу");
+      $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.ismarried)) {
-      $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу");
+      $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
-      $rootScope.alert("Ажилласан жилээ оруулна уу");
+      $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
     } else {
       $scope.customerProfileData.id = $rootScope.loginUserInfo.customerid;
+      $scope.customerProfileData.customertypeid = 1;
       $scope.customerEmail = $scope.customerProfileData.email;
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
         console.log("customerProfileData", response);
@@ -215,15 +213,15 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   //income data
   $scope.saveIncomeProfileData = function () {
     if (isEmpty($scope.customerIncomeProfileData.incometypeid)) {
-      $rootScope.alert("Та орлогын эх үүсвэр сонгоно уу");
+      $rootScope.alert("Та орлогын эх үүсвэр сонгоно уу", "warning");
     } else if (isEmpty($scope.customerIncomeProfileData.monthlyincome)) {
-      $rootScope.alert("Та сарын орлогоо оруулна уу");
+      $rootScope.alert("Та сарын орлогоо оруулна уу", "warning");
     } else if (isEmpty($scope.customerIncomeProfileData.totalincomehousehold)) {
-      $rootScope.alert("Та өрхийн нийт орлогоо оруулна уу");
+      $rootScope.alert("Та өрхийн нийт орлогоо оруулна уу", "warning");
     } else if (isEmpty($scope.customerIncomeProfileData.monthlypayment)) {
-      $rootScope.alert("Та төлж буй зээлийн дүнгээ оруулна уу");
+      $rootScope.alert("Та төлж буй зээлийн дүнгээ оруулна уу", "warning");
     } else {
-      $scope.getProfileData();
+      // $scope.getProfileData();
 
       $timeout(function () {
         if ($scope.customerIncomeProfileData != "") {
@@ -393,7 +391,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
   $scope.saveRegNums = function () {
     if (keyInput.value.length < 8) {
-      $rootScope.alert("Регистер ээ бүрэн оруулна уу.");
+      $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
     } else {
       $scope.modal.hide();
     }

@@ -10,16 +10,16 @@
           </svg>
         </div>
         <div class="row"><span class="row-2-text ion-text-upper">Амжилттай илгээгдлээ</span></div>
-        <div class="row success-bank-list" ng-repeat="bank in sentBank | unique : 'id'">
-          <img src="{{$root.imagePath}}{{bank.banklogo}}" width="35px" height="35px" />
-          <span>{{bank.departmentname}}</span>
+        <div class="row success-bank-list" ng-repeat="bank in selectedBankSuccess | unique : 'id'" ng-if="bank.checked">
+          <img src="{{$root.imagePath}}{{bank.bank_logo}}" width="35px" height="35px" />
+          <span>{{bank.department_name}}</span>
         </div>
         <div class="row success-row-container"><span class="row-4-text ion-text-upper">Танд баярлалаа</span></div>
         <div class="row success-btm-text">
           <span class="row-5-text"> Зээлийн хүсэлт илгээгдсэн банкуудаас таньруу холбогдох болно. </span>
         </div>
         <div class="row success-btn-container">
-          <button class="button single-button" ui-sref="requestList">БАНК ЦЭС РҮҮ БУЦАХ</button>
+          <button class="button btn single-button" ui-sref="requestList">БАНК ЦЭС РҮҮ БУЦАХ</button>
         </div>
       </div>
     </div>

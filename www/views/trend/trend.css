@@ -20,7 +20,7 @@
 .horizontal-item {
   display: inline-block;
   vertical-align: top;
-  width: 120px;
+  width: 150px;
   white-space: normal;
   margin: 0px 5px;
   text-align: center;
@@ -39,6 +39,7 @@
   justify-content: center;
   display: flex;
   color: #a2a7b5;
+  margin: 5px 0;
 }
 
 .wide-as-needed {
@@ -48,25 +49,24 @@
 .trend-content {
   height: 100%;
 }
-.wide-as-needed > .scroll::-webkit-scrollbar {
-  display: none;
-  width: 0px; /* Remove scrollbar space */
-  background: transparent; /* Optional: just make scrollbar invisible */
-}
-.wide-as-needed > .scroll {
-  overflow-x: scroll;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  scroll-behavior: smooth;
-}
 .trend-card-container {
-  min-height: 165px;
-  background: none;
-  /* box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%); */
-  height: 100%;
-  /* border: 1px solid #e4e4e4; */
+  background: #fff;
+  box-shadow: 1px 1px 5px -2px grey !important;
+  border-radius: 5px !important;
+  margin: 0px 5px;
+  line-height: 13px;
+  min-height: 17vh !important;
+}
+.trend-card-container .h-item {
+  width: 100px;
+}
+.trend-scroll {
+  overflow: scroll;
+  white-space: nowrap;
 }
 .trend-scroll > .scroll {
   padding: 20px 0;
+  /* width: 100%; */
+  min-width: 100%;
+  display: flex;
 }

@@ -1,4 +1,4 @@
-<ion-view id="loanPages" hide-nav-bar="true">
+<ion-view id="loanPages" hide-nav-bar="true" cache-view="false">
     <link href="views/car/car.css" rel="stylesheet" />
     <!-- <div ng-click="backFromcarInfo()" ng-repeat="data in [{'title':'Дэлгэрэнгүй'}]" ng-include src="'views/navbar.html'"></div> -->
     <ion-header-bar align-title="left" class="navbar" style="background: none">
@@ -67,7 +67,7 @@
             <div class="magic-container car-info-contant-card">
                 <!-- Car -->
                 <div class="item-info car-detail-container" ng-show="isCarDetail">
-                    <ion-slide-box class="leasing-badge">
+                    <ion-slide-box on-slide-changed="slideChanged(index)" class="leasing-badge" delegate-handle="slidebox1">
                         <ion-slide ng-repeat="imgs in carData.images">
                             <div class="box1">
                                 <img class="car-img" ng-src="{{imgs|guessImageMime}}" />
@@ -75,7 +75,7 @@
                         </ion-slide>
                     </ion-slide-box>
                     <ul>
-                        <li>Үйлдвэрлэсэн он <span> {{carData.productyear}} </span></li>
+                        <li>Үйлдвэрлэсэн он <span> {{selectCarName}} - {{carData.productyear}} </span></li>
                         <li>Орж ирсэн он <span> {{carData.entryyear}} </span></li>
                         <li>Код <span> {{carData.itemcode}} </span></li>
                         <li>Борлуулагч <span> {{carData.suppliername}} </span></li>
@@ -127,13 +127,13 @@
 
             <div class="bank-container">
                 <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
-                <img ng-repeat="bank in bankList.Agree | filter:{id:'!!'}" src="{{bank.bank_logo|guessImageMime}}" />
+                <img ng-repeat="bank in bankList | filter:{id:'!!'}" src="{{bank.bank_logo|guessImageMime}}" />
 
             </div>
             <div class="suggest-slider-container">
                 <span class="suggest-title">Ижил төстэй бараа</span>
-                <ion-slide-box on-slide-changed="slideChanged(index)" class="suggest-slider-content" does-continue="true">
-                    <ion-slide class="suggest-slider" style="background: none" ng-repeat="car in $root.carDatas" ng-if="$index % 3 == 0">
+                <!-- <ion-slide-box on-slide-changed="slideChangedTrend(index)" class="suggest-slider-content" does-continue="true" delegate-handle="slidebox-trend">
+                    <ion-slide class="suggest-slider" style="background: none" ng-repeat="car in $root.carDatas | filter:selectCarName">
                         <div class="suggest-card">
                             <img src="{{$root.carDatas[$index].itempic|guessImageMime}}" class="car-img-suggest" />
                             <span class="car-name">{{$root.carDatas[$index].modelname}}</span>
@@ -153,9 +153,25 @@
                             <span class="date">{{$root.carDatas[$index+2].productyear}}-{{$root.carDatas[$index+2].entryyear}}</span>
                         </div>
                     </ion-slide>
-                </ion-slide-box>
-                <a class="prev" ng-click="previous()">&#10094;</a>
-                <a class="next" ng-click="next()">&#10095;</a>
+                </ion-slide-box> -->
+
+                <ion-scroll direction="x" class="wide-as-needed suggest-scroll">
+                    <div class="horizontal-item suggest-card-container" ng-repeat="car in $root.carDatas | filter:selectCarName" ng-if="car.id != selectedCarId" ng-click="selectCar(car)">
+                        <div class="h-item suggest-card">
+                            <!-- <img ng-src="{{$root.imagePath}}{{car.itempic}}" />
+                            <span class="trend-item-code">{{car.itemcode}}</span>
+                            <p>{{$root.trendCarData[$index].modelname}}</p> -->
+
+                            <img src="{{car.itempic|guessImageMime}}" class="car-img-suggest" />
+                            <span class="car-name">{{car.modelname}}</span>
+                            <span>{{car.itemcode}}</span>
+                            <span class="date">{{car.productyear}}-{{car.entryyear}}</span>
+                        </div>
+                    </div>
+                </ion-scroll>
+
+                <!-- <a class="prev" ng-click="previous()">&#10094;</a> -->
+                <!-- <a class="next" ng-click="next()">&#10095;</a> -->
             </div>
             <ion-footer class="bottom-footer"></ion-footer>
         </div>

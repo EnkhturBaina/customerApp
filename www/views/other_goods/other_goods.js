@@ -1,4 +1,4 @@
-angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", function ($rootScope, serverDeferred, $window, $scope, $state) {
+angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", function ($rootScope, serverDeferred, $scope, $state, $ionicPopup) {
   $rootScope.otherGoods = [];
   $rootScope.newCarReq = {};
   $rootScope.otherGoodsData = [];
@@ -17,39 +17,65 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   //Нийт үнэ
   $rootScope.sumPrice = 0;
   $rootScope.calcTotalPrice = function () {
+    $rootScope.sumPrice = 0;
     var local = localStorage.getItem("otherGoods");
     if (!isEmpty(local) && local != "undefined") {
       $rootScope.otherGoods = JSON.parse(localStorage.getItem("otherGoods"));
       for (var i = 0; i < $rootScope.otherGoods.length; i++) {
         $rootScope.sumPrice += parseInt($rootScope.otherGoods[i].unitPrice);
       }
+    } else if ($rootScope.otherGoods.length == 0) {
+      $rootScope.sumPrice = 0;
     }
   };
   $rootScope.calcTotalPrice();
 
   $scope.nexClivk = function () {
+    if ($rootScope.otherGoodsData.length >= 1) {
+      var next = $rootScope.checkLoginUserDatas("otherGoods", "autoleasing-2");
+      $state.go(next.now, { path: next.nextpath });
+      // $state.go("autoleasing-2");
+    } else {
+      $rootScope.alert("Та зээлээр авах бараагаа бүртгэнэ үү", "warning");
+    }
     localStorage.setItem("requestType", "consumer");
-    console.log("local", localStorage);
-
-    $state.go("autoleasing-2");
   };
 
   $scope.otherGoodsDelete = function (id) {
-    for (var i = 0; i < $rootScope.otherGoodsData.length; i++) {
-      if ($rootScope.otherGoodsData[i].itemid === id) {
-        $rootScope.otherGoodsData.splice(i, 1);
+    $ionicPopup.show({
+      template: "<b>Бараа устгах уу ?</b>",
+      cssClass: "confirmPopup",
+      buttons: [
+        {
+          text: "Үгүй",
+          type: "button-decline",
+        },
+        {
+          text: "Устгах",
+          type: "button-confirm",
+          onTap: function () {
+            for (var i = 0; i < $rootScope.otherGoodsData.length; i++) {
+              if ($rootScope.otherGoodsData[i].itemid === id) {
+                $rootScope.otherGoodsData.splice(i, 1);
 
-        localStorage.removeItem("otherGoods");
-        localStorage.setItem("otherGoods", JSON.stringify($rootScope.otherGoodsData));
+                localStorage.removeItem("otherGoods");
+                localStorage.setItem("otherGoods", JSON.stringify($rootScope.otherGoodsData));
 
-        $rootScope.calcTotalPrice();
-        $rootScope.getLocalGoodsData();
-      }
-    }
+                $rootScope.calcTotalPrice();
+                $rootScope.getLocalGoodsData();
+              }
+            }
+          },
+        },
+      ],
+    });
   };
 
-  $scope.selectCarBasket = function (item, aa) {
+  $scope.selectItemConsumer = function (item, aa) {
     console.log(item);
     console.log("aa", aa);
+  };
+  $scope.backFromOtherGoods = function () {
+    $state.go("home");
   };
 });

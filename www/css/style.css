@@ -433,18 +433,11 @@ h4 {
   background: -webkit-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%);
   background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%);
   filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#a2d136", endColorstr="#3cc1f9", GradientType=1);
-  color: white;
   width: 55vw;
-  border-radius: 10px;
-  font-weight: normal;
-  text-transform: uppercase;
   font-size: 10px;
   letter-spacing: 1px !important;
-  min-height: 35px;
-  line-height: 35px;
   margin: 10px auto !important;
   display: block !important;
-  border: 0px !important;
 }
 
 .nav-back-btn {
@@ -1276,4 +1269,49 @@ h4 {
   width: 60% !important;
   min-height: 35px !important;
   flex: none !important;
+}
+
+.container-padding {
+  margin: 0px 15px;
+  padding: 15px 20px;
+}
+
+.middle-title {
+  font-size: 12px;
+  color: #c6c8d4;
+  text-transform: uppercase;
+}
+
+.not-agree-banks {
+  color: red !important;
+}
+.agree-banks {
+  color: #acd322 !important;
+}
+.bank-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.bank {
+  align-items: center;
+  text-align: center;
+}
+.bank img {
+  width: 30px;
+  height: 30px;
+}
+.bank p {
+  font-size: 12px;
+  color: gray;
+  font-weight: bold;
+}
+.loan-month-type-number::-webkit-outer-spin-button,
+.loan-month-type-number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

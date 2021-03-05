@@ -68,8 +68,12 @@
   margin: auto auto 20px auto;
 }
 .req-list-product-type {
-  font-size: 90%;
+  font-size: 16px;
+  text-transform: capitalize;
 }
 .request-list-content {
   height: 88%;
+}
+.req-list-date {
+  font-size: 14px;
 }

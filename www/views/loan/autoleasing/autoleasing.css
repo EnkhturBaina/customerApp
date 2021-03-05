@@ -134,9 +134,6 @@
   background-color: ghostwhite;
   height: 100%;
 }
-.ghostwhite-background {
-  background-color: ghostwhite;
-}
 .margin-lr-20 {
   margin-left: 20px;
   margin-right: 20px;
@@ -152,7 +149,6 @@
   line-height: 34px !important;
 }
 .qr-btn-container .filter {
-  /* background: #f8f8fe; */
   z-index: 0;
   border-radius: 28px;
   width: 229px;
@@ -165,102 +161,6 @@
   z-index: 1;
 }
 
-/* step 2 */
-.step2-btn-container {
-  margin-bottom: 25%;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-.red {
-  color: red !important;
-}
-.bank-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-.bank {
-  align-items: center;
-  text-align: center;
-}
-.bank img {
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  width: 30px;
-  height: 30px;
-}
-.bank p {
-  font-size: 11px;
-  color: gray;
-  text-align: center;
-}
-.item-info {
-  /* margin-top: 25px; */
-}
-.item-info li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: grey;
-  border-bottom: 1px solid #cccbcb78;
-  margin: 8px 0 8px 0 !important;
-  padding: 5px 0px;
-}
-.item-info li span {
-  background-color: transparent;
-  color: #4b5180;
-  z-index: 1;
-  display: inline-block;
-  padding: 3px 8px;
-  min-width: 10px;
-  border-radius: 10px;
-  vertical-align: baseline;
-  text-align: center;
-  white-space: nowrap;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 16px;
-}
-.car-img {
-  width: 100%;
-  height: auto;
-}
-.toggle .track {
-  -webkit-transition-timing-function: ease-in-out;
-  transition-timing-function: ease-in-out;
-  -webkit-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-  -webkit-transition-property: background-color, border;
-  transition-property: background-color, border;
-  display: inline-block;
-  box-sizing: border-box;
-  width: 70px;
-  height: 23px;
-  border: solid 2px #e5e5e5;
-  border-radius: 10px;
-  background-color: #e5e5e5;
-  content: " ";
-  cursor: pointer;
-  pointer-events: none;
-}
-.toggle .handle {
-  -webkit-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
-  position: absolute;
-  display: block;
-  width: 40px;
-  height: 23px;
-  border-radius: 10px;
-  background-color: yellowgreen;
-  top: 5px;
-  left: 5px;
-  color: #fff;
-  justify-content: center;
-  align-items: center;
-  line-height: 25px;
-  font-size: 12px;
-  align-content: center;
-}
 .toggle input:checked + .track .handle {
   -webkit-transform: translate3d(30px, 0, 0);
   transform: translate3d(30px, 0, 0);
@@ -271,30 +171,12 @@
   border-color: #cecdcd;
   background-color: #cecdcd;
 }
-.line {
-  border-top: 1px solid #cccbcb;
-  margin: 5px 0 5px 0;
-}
-.container-padding {
-  margin: 20px 15px 0px 15px;
-  padding: 20px;
-}
 .bg-container {
   border-radius: 10px;
   padding: 20px;
   margin: 20px 15px 0px 15px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-.middle-title {
-  font-size: 12px;
-  color: #c6c8d4;
-  text-transform: uppercase;
-}
-.padding-null {
-  margin: 0;
-  margin-left: 10px;
-  color: #c6c8d4;
 }
 /* step 3 */
 .bank-list-container {
@@ -312,8 +194,7 @@
 }
 .switch-list .item {
   border-bottom: 0px;
-  padding: 12px 0px 15px 37px;
-  /* width: 70%; */
+  padding: 12px 0px 15px 50px;
   border-color: #ddd;
   border: none;
   background-color: #fff;
@@ -382,12 +263,6 @@
 .checkbox input:checked + .checkbox-icon:before {
   background: #fff;
   border-color: #acd322;
-}
-.step3-btn-container {
-  margin: 10%;
-}
-.scroll-container-bottom-button {
-  margin: 10% 10% 40% 10%;
 }
 .step-4-container > .bottom-footer {
   padding: 0px !important;
@@ -557,8 +432,9 @@
   position: relative !important;
 }
 .autoleasing-step2-content {
+  height: 88%;
 }
-.autoleasing-month-select {
+.autoleasing-location-select {
   width: 35%;
   margin: 0 12px 0 auto;
   float: right;
@@ -595,7 +471,7 @@
 .step3-bankList-checkbox-container > .item-content {
   padding-left: 30px;
 }
-.step2-loan-month {
+.step2-loan-location {
   border: 1px solid #d5d5d5 !important;
   border-radius: 5px;
   margin-top: 15px;

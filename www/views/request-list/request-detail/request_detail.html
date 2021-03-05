@@ -1,83 +1,52 @@
 <ion-view ng-app="request_detail.Ctrl" class="request-detail-view" hide-nav-bar="true">
   <link href="views/request-list/request-detail/request_detail.css" rel="stylesheet" />
-  <!-- start popup -->
-  <div id="cancelRequestPopup" style="display: none">
-    <span class="bank-overlay-off-text" ng-click="closeOverlay()">&#10006;</span>
-    <div class="confirm-overlay-container">
-      <span class="confirm-title">Хүсэлт цуцлах</span>
-      <span class="confirm-overlay-body-text">Та {{$root.selectbank.departmentname}} руу илгээсэн хүсэлтээ цуцлахад итгэлтэй байна уу</span>
-      <span class="confirm-overlay-body-text">Та хүсэлтээ цуцалснаар банкинд зээл авахгүй гэсэн мэдэгдэл очихыг анхаарна уу</span>
-      <buttond class="button btn confirm-btn single-button" ng-click="responseCancelRequestPopupOn()">Хүсэлт цуцлах</button>
-    </div>
-  </div>
-  <div id="responeCancelRequestPopup" style="display: none">
-    <div class="confirm-overlay-container">
-      <span class="confirm-title">Хүсэлт цуцлах</span>
-      <span class="confirm-overlay-body-text">Таны {{$root.selectbank.departmentname}} руу илгээсэн хүсэлт цуцлагдлаа </span>
-      <buttond class="button btn confirm-btn single-button" ng-click="responseCancelRequestPopupOff()">Хаах</button>
-    </div>
-  </div>
-  <!-- end popup -->
-  <!-- start popup -->
-  <div id="successRequestPopup" style="display: none">
-    <span class="bank-overlay-off-text" ng-click="closeOverlay()">&#10006;</span>
-    <div class="confirm-overlay-container">
-      <span class="confirm-title">Зөвшөөрөл илгээх</span>
-      <span class="confirm-overlay-body-text">Та {{$root.selectbank.departmentname}} руу зөвшөөрөл илгээхдээ итгэлтэй байна уу</span>
-      <button class="button btn confirm-btn single-button" ng-click="responseSuccessRequestPopupOn()">Зөвшөөрөх</button>
-    </div>
-  </div>
-  <div id="responseSuccessRequestPopup" style="display: none">
-    <div class="confirm-overlay-container">
-      <span class="confirm-title">Зөвшөөрөл илгээх </span>
-      <span class="confirm-overlay-body-text">{{$root.selectbank.departmentname}} руу амжилттай илгээгдлээ</span>
-      <button class="button btn confirm-btn single-button" ng-click="responseSuccessRequestPopupOff()">Хаах</button>
-    </div>
-  </div>
-  <!-- end popup -->
   <div ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div>
   <ion-content overflow-scroll="true" class="request-detail-content margin-top-50">
     <div class="list" ng-controller="request_detailCtrl">
       <div class="request-detail-container">
         <div class="request-car-detail">
-          <img src="{{$root.imagePath}}{{$root.selectbank.itempic}}" />
-          <p>{{$root.selectbank.modelname}}</p>
-          <span>{{$root.selectbank.suppliername}}</span><br />
-          <span>{{$root.selectbank.productyear}} - {{$root.selectbank.entryyear}}</span>
+          <img ng-if="loanType == 1 || loanType == 2" src="{{$root.imagePath}}{{$root.selectedMapBankDTL.itempic}}" />
+          <img ng-if="loanType == 3" src="{{$root.selectedMapBankDTL.itempic}}" />
+
+          <p>{{$root.selectedMapBankDTL.modelname}}</p>
+          <p ng-if="loanType == 3">{{$root.selectedMapBankDTL.categoryname}}</p>
+
+          <span>{{$root.selectedMapBankDTL.suppliername}}</span><br />
+          <span ng-if="loanType == 1 || loanType == 2">{{$root.selectedMapBankDTL.productyear}} - {{$root.selectedMapBankDTL.entryyear}}</span>
         </div>
+        <span class="bant-detail-title request-middle-title"> Банкны санал</span>
         <div class="bank-detail">
-          <span class="bant-detail-title"> Банкны санал</span>
           <label class="item item-input bank-detail-label">
             <p>Банк</p>
-            <input type="text" placeholder="Банк" name="bank" ng-model="$root.selectbank.departmentname" disabled />
+            <input type="text" placeholder="Банк" name="bank" ng-model="$root.selectedMapBankDTL.departmentname" disabled />
           </label>
           <label class="item item-input bank-detail-label">
             <p>Хүү</p>
-            <input type="text" placeholder="Хүү" name="fee" ng-model="$root.selectbank.loanfeetext" disabled />
+            <input type="text" placeholder="Хүү" name="fee" ng-model="$root.selectedMapBankDTL.loanfeetext" disabled />
           </label>
           <label class="item item-input bank-detail-label">
             <p>Хугацаа</p>
-            <input type="text" placeholder="Хугацаа" name="month" ng-model="$root.selectbank.loanmonth" disabled />
+            <input type="text" placeholder="Хугацаа" name="month" ng-model="$root.selectedMapBankDTL.loanmonth" disabled />
           </label>
           <label class="item item-input bank-detail-label">
-            <p>Үнэ</p>
-            <input type="text" placeholder="Үнэ" name="price" ng-model="$root.selectbank.price" disabled format-input />
+            <p>Зээлийн хэмжээ</p>
+            <input type="text" placeholder="Зээлийн хэмжээ" name="price" ng-model="$root.selectedMapBankDTL.loanamount" disabled format-input />
           </label>
           <ion-checkbox class="detail-checkbox" data-ng-click="isConfirm = !isConfirm" ng-disabled="isConfirmCheck">
             <span>Батлагдсан зээлийг зөвшөөрөх эсэх</span>
           </ion-checkbox>
-          <span class="bank-chat-title"> Зурвас</span>
-          <div class="bank-chat-container" ng-click="modal.show();getChatHistory()">
-            <div class="bank-chat-income">
-              <span class="income-chat-body">{{bankFirstChat}}</span>
-              <span class="income-chat-time">{{bankFirstChatDate}}</span>
-            </div>
-          </div>
-          <div class="detail-btn-container">
-            <button class="button bottom-first-button" ng-click="cancelRequestPopupOn()" ng-disabled="isCanceled">ЦУЦЛАХ</button>
-            <button class="button bottom-second-button" ng-click="successRequestPopupOn()" ng-disabled="isConfirm">ЗӨВШӨӨРӨХ</button>
-          </div>
         </div>
+      </div>
+      <span class="bank-chat-title request-middle-title"> Зурвас</span>
+      <div class="bank-chat-container" ng-click="modal.show();getChatHistory()">
+        <div class="bank-chat-income">
+          <span class="income-chat-body">{{bankFirstChat}}</span>
+          <span class="income-chat-time">{{bankFirstChatDate}}</span>
+        </div>
+      </div>
+      <div class="detail-btn-container">
+        <button class="button bottom-first-button" ng-click="showPopupDTL('Хүсэлт цуцлах','decline')" ng-disabled="isCanceled">ЦУЦЛАХ</button>
+        <button class="button bottom-second-button" ng-click="showPopupDTL('Зөвшөөрөл илгээх','confirm')" ng-disabled="isConfirm">ЗӨВШӨӨРӨХ</button>
       </div>
     </div>
   </ion-content>
@@ -92,7 +61,7 @@
       <div class="list modal-chat-body">
         <div class="bank-chat-income" ng-repeat="chatBank in chatHistory | filter:{dim2:'2'}">
           <div class="bank-chat-body">
-            <img width="20px" src="{{$root.imagePath}}{{$root.selectbank.banklogo}}" />
+            <img width="20px" src="{{$root.imagePath}}{{$root.selectedMapBankDTL.banklogo}}" />
             <span class="income-chat-body">{{chatBank.text1}}</span>
           </div>
           <span class="income-chat-time">{{chatBank.createddate}}</span>

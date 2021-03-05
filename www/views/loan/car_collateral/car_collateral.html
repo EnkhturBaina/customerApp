@@ -1,4 +1,4 @@
-<ion-view id="loanPages" hide-nav-bar="true">
+<ion-view id="loanPages" hide-nav-bar="true" cache-view="false">
     <link href="views/loan/car_collateral/car_collateral.css" rel="stylesheet" />
     <div id="overlay" ng-click="sourceSelectOff()">
         <div class="overlay-content">
@@ -6,10 +6,20 @@
                 <div class="get-camera" ng-click="takePhoto()"><i class="icon ion-camera photo-choose-icon"></i><span class="photo-choose-span">Камер нээх</span></div>
                 <div class="get-gallery" ng-click="takePhoto('1')"><i class="icon ion-images photo-choose-icon"></i><span class="photo-choose-span">Зурагнаас сонгох</span></div>
             </div>
-            <button class="single-button">Хаах</button>
+            <button class="button btn single-button">Хаах</button>
         </div>
     </div>
-    <div ng-repeat="data in [{'title':'Автомашин барьцаалсан зээл'}]" ng-include src="'views/navbar.html'"></div>
+    <!-- <div ng-repeat="data in [{'title':'Автомашин барьцаалсан зээл'}]" ng-include src="'views/navbar.html'"></div> -->
+    <ion-header-bar align-title="left" class="navbar" style="background: none">
+        <div class="title ion-color-big-text navbar-back-button" style="background: none">
+            <button ng-click="backFromCarCollStep1()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+                <i class="ion-chevron-left ion-color-header"></i>
+                <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Автомашин барьцаалсан зээл</span></span>
+            </button>
+        </div>
+        <div class="navbar-right-icon">
+        </div>
+    </ion-header-bar>
     <ion-content overflow-scroll="true" class="ion-modified-content has-header car-collateral-content">
         <div class="big-container ghostwhite-noscroll-container">
             <div class="magic-container car-collateral-contant-card">
@@ -38,7 +48,7 @@
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Явсан км</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.mile" format-input next-focus-elem />
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.mile" format-input next-focus-elem ng-keyup="hideKeyboard($event)" />
                         </label>
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Хөдөлгүүрийн төрөл</p>
@@ -49,7 +59,7 @@
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Хөдөлгүүрийн багтаамж</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.engineCapacity" format-input next-focus-elem />
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="engineCapacity" placeholder="0" name="engineCapacity" ng-model="$root.newCarReq.engineCapacity" format-input next-focus-elem ng-keyup="hideKeyboard($event)" />
                         </label>
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Хурдны хайрцаг</p>
@@ -74,15 +84,15 @@
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Хаалганы тоо</p>
-                            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.carDoorCount" format-input next-focus-elem />
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" type="text" id="carDoorCount" placeholder="0" name="carDoorCount" ng-model="$root.newCarReq.carDoorCount" format-input next-focus-elem ng-keyup="hideKeyboard($event)" />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Үйлдвэрлэсэн он</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.newCarReq.manufacturedYearId" next-focus-elem />
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.newCarReq.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Орж ирсэн он</p>
-                            <input inputmode="numeric" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.newCarReq.cameYearId" next-focus-elem />
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.newCarReq.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Улсын дугаар</p>
@@ -151,7 +161,7 @@
             </div>
             <div class="bank-container">
                 <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
-                <img ng-repeat=" bank in allBankList" src="{{$root.imagePath}}{{bank.banklogo}}" />
+                <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" src="{{$root.imagePath}}{{bank.bank_logo}}" />
 
             </div>
             <ion-footer class="bottom-footer">

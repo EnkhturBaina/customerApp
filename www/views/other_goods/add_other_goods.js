@@ -7,13 +7,13 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
   // $scope.asdasdasd();
   $scope.savebtn = function () {
     if (isEmpty($rootScope.newCarReq.unitPrice)) {
-      $rootScope.alert("Та барааны үнийг оруулна уу");
+      $rootScope.alert("Та барааны үнийг оруулна уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.shopId)) {
-      $rootScope.alert("Та барааны нийлүүлэгчийг сонгоно уу");
+      $rootScope.alert("Та барааны нийлүүлэгчийг сонгоно уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.categoryId)) {
-      $rootScope.alert("Та барааны төрөл өө сонгоно уу");
+      $rootScope.alert("Та барааны төрөл өө сонгоно уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.image)) {
-      $rootScope.alert("Та барааны зургийг оруулна уу");
+      $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
     } else {
       try {
         var otherGoodFirstId = 1;
@@ -40,12 +40,6 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       // var image = $rootScope.newCarReq.image.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
 
       console.log("local", localStorage);
-      // serverDeferred.request("dcApp_consumer_loan_001", { amount: $rootScope.newCarReq.amount, shopId: $rootScope.newCarReq.shopId, picture1: image, categoryId: $rootScope.newCarReq.categoryId }).then(function (response) {
-      //   $rootScope.newCarReq = {};
-      //   $rootScope.alert("Бараа нэмэгдлээ");
-      //   document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(../../img/note-20.png)";
-      //   document.getElementsByClassName("img-input-area")[0].style.opacity = "0.5";
-      // });
     }
     $rootScope.calcTotalPrice();
     $rootScope.getLocalGoodsData();
@@ -60,11 +54,11 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
 
   $scope.showPopup = function () {
     $ionicPopup.show({
-      template: "<b>Бараа нэмэгдлээ</b></br></br>Та өөр бараа түртгэх үү ?",
+      template: "<b>Бараа нэмэгдлээ</b></br></br>Та өөр бараа бүртгэх үү ?",
       cssClass: "confirmPopup",
       buttons: [
         {
-          text: "Хаах",
+          text: "Үгүй",
           type: "button-decline",
           onTap: function () {
             $ionicHistory.goBack();
@@ -137,27 +131,6 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       }
     );
   };
-  // $scope.takePhoto = function (path) {
-  //   navigator.camera.getPicture(
-  //     function (imageData) {
-  //       if (isEmpty($rootScope.newCarReq)) {
-  //         $rootScope.newCarReq = {};
-  //       }
-  //       $rootScope.newCarReq.image = "data:image/jpeg;base64," + imageData;
-  //       document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(" + $rootScope.newCarReq.image + ")";
-  //       document.getElementsByClassName("img-input-area")[0].style.opacity = "1";
-  //       $scope.$apply();
-  //     },
-  //     function onFail(message) {
-  //       alert("Failed because: " + message);
-  //     },
-  //     {
-  //       quality: 50,
-  //       destinationType: Camera.DestinationType.DATA_URL,
-  //       correctOrientation: true,
-  //     }
-  //   );
-  // };
 
   //Бараны нийлүүлэгч хамаарч Барааны төрөл -г lookup -д дахин сэт хийх
   $scope.changeSupCategory = function (supppp) {
@@ -181,5 +154,10 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       });
     });
     $rootScope.supplierCategory = selectedCategory;
+  };
+  $scope.hideKeyboard = function (event) {
+    if (event.keyCode === 13) {
+      document.activeElement.blur();
+    }
   };
 });

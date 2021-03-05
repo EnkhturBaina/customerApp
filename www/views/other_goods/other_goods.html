@@ -1,19 +1,30 @@
 <ion-view id="loanPages" hide-nav-bar="true">
     <link href="views/other_goods/other_goods.css" rel="stylesheet" />
     <link href="views/loan/business_loan/business_loan.css" rel="stylesheet" />
-    <div ng-repeat="data in [{'title':'Хэрэглээний лизинг'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 autoleasing-step1-content">
+    <!-- <div ng-repeat="data in [{'title':'Хэрэглээний лизинг'}]" ng-include src="'views/navbar.html'"></div> -->
+
+    <ion-header-bar align-title="left" class="navbar" style="background: none">
+        <div class="title ion-color-big-text navbar-back-button" style="background: none">
+            <button ng-click="backFromOtherGoods()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+                <i class="ion-chevron-left ion-color-header"></i>
+                <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Хэрэглээний лизинг</span></span>
+            </button>
+        </div>
+        <div class="navbar-right-icon">
+        </div>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="ion-modified-content autoleasing-step1-content">
         <div class="big-container ghostwhite-noscroll-container">
-            <div class="magic-container">
+            <div class="magic-container other-goods-content">
                 <div class="margin-lr-20">
-                    <div class="margin-tb-20-40">
+                    <div class="">
                         <div class="addBtnContainer">
-                            <button class="button btn single-button" id="Next" ui-sref="addOtherGoods">Бараа нэмэх</button>
+                            <button class="button btn single-button" id="Next" ui-sref="addOtherGoods">Бараа бүртгэх</button>
                         </div>
                         <div class="item_lists">
                             <ul>
                                 <li class="items" ng-repeat="item in $root.otherGoods track by item.itemid">
-                                    <ion-checkbox class="other-goods-checkbox" ng-model="isChecked" ng-change="selectCarBasket(item,isChecked)">
+                                    <ion-checkbox class="other-goods-checkbox" ng-model="isChecked" ng-change="selectItemConsumer(item,isChecked)">
                                         <div class="items-list-container">
                                             <img src="{{item.image}}" />
                                         </div>
@@ -37,6 +48,12 @@
                 <div class="attention-text">
                     <span>Анхааруулга</span>
                     <span>Үнийн дүнгээс гарсан зөрүүг та нэмж төлж болзошгүй тул та үнийн дүнгээ зөв оруулна уу</span>
+                </div>
+                <div class="bank-container">
+                    <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
+
+                    <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" src="{{$root.imagePath}}{{bank.bank_logo}}" />
+
                 </div>
                 <button class="button btn single-button" id="Next" ng-click="nexClivk()">Үргэлжлүүлэх</button>
             </ion-footer>

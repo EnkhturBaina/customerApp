@@ -11,9 +11,10 @@
                         <span class="left-0 ion-color-text" ui-sref="carlist">Дэлгэрэнгүй >>></span>
                     </div>
                     <ion-scroll direction="x" class="wide-as-needed trend-scroll">
-                        <div class="horizontal-item trend-card-container" style="background: none" ng-repeat="car in $root.trendCarData | filter:{id:'!!'}" ng-if="$index % 3 == 0" ng-click="selectCar(car)">
+                        <div class="horizontal-item trend-card-container" ng-repeat="car in $root.trendCarData | filter:{id:'!!'}" ng-if="$index % 3 == 0" ng-click="selectCar(car)">
                             <div class="h-item">
-                                <img ng-src="{{$root.imagePath}}{{$root.trendCarData[$index].itempic}}" />
+                                <img ng-src="{{$root.imagePath}}{{car.itempic}}" />
+                                <span class="trend-item-code">{{car.itemcode}}</span>
                                 <p>{{$root.trendCarData[$index].modelname}}</p>
                             </div>
                         </div>
@@ -25,10 +26,15 @@
                         <span class="left-0 ion-color-text" ui-sref="carlist">Дэлгэрэнгүй >>></span>
                     </div>
                     <ion-scroll direction="x" class="wide-as-needed trend-scroll">
-                        <div class="horizontal-item trend-card-container" style="background: none" ng-repeat="car in $root.trendCarData | filter:{id:'!!'}" ng-if="$index % 3 == 0" ng-click="selectCar(car)">
-                            <div class="h-item" ng-if="!$root.trendCarData[$index+1].itempic|isEmpty">
-                                <img ng-src="{{$root.imagePath}}{{$root.trendCarData[$index+1].itempic}}" />
-                                <p>{{$root.trendCarData[$index+1].modelname}}</p>
+                        <div class="horizontal-item trend-card-container" ng-repeat="car in $root.trendCarData | filter:{id:'!!'}" ng-if="$index % 2 == 0" ng-click="selectCar(car)">
+                            <!-- <div class="h-item" ng-if="!$root.trendCarData[$index+1].itempic|isEmpty"> -->
+                            <div class="h-item">
+                                <!-- <img ng-src="{{$root.imagePath}}{{$root.trendCarData[$index+1].itempic}}" />
+                                <span class="trend-item-code">{{car.itemcode}}</span>
+                                <p>{{$root.trendCarData[$index+1].modelname}}</p> -->
+                                <img ng-src="{{$root.imagePath}}{{car.itempic}}" />
+                                <span class="trend-item-code">{{car.itemcode}}</span>
+                                <p>{{$root.trendCarData[$index].modelname}}</p>
                             </div>
                         </div>
 
@@ -40,10 +46,15 @@
                         <span class="left-0 ion-color-text">Дэлгэрэнгүй >>></span>
                     </div>
                     <ion-scroll direction="x" class="wide-as-needed trend-scroll">
-                        <div class="horizontal-item trend-card-container" style="background: none" ng-repeat="car in $root.trendCarData  | filter:{modelname:'!!'}" ng-if="$index % 3 == 0" ng-click="selectCar(car)">
-                            <div class="h-item" ng-if="!$root.trendCarData[$index+1].itempic|isEmpty">
-                                <img ng-src="{{$root.imagePath}}{{$root.trendCarData[$index+2].itempic}}" />
-                                <p>{{$root.trendCarData[$index+2].modelname}}</p>
+                        <div class="horizontal-item trend-card-container" ng-repeat="car in $root.trendCarData  | filter:{modelname:'!!'}" ng-click="selectCar(car)">
+                            <!-- <div class="h-item" ng-if="!$root.trendCarData[$index+1].itempic|isEmpty"> -->
+                            <div class="h-item">
+                                <!-- <img ng-src="{{$root.imagePath}}{{$root.trendCarData[$index+1].itempic}}" />
+                                <span class="trend-item-code">{{car.itemcode}}</span>
+                                <p>{{$root.trendCarData[$index+1].modelname}}</p> -->
+                                <img ng-src="{{$root.imagePath}}{{car.itempic}}" />
+                                <span class="trend-item-code">{{car.itemcode}}</span>
+                                <p>{{$root.trendCarData[$index].modelname}}</p>
                             </div>
                         </div>
                     </ion-scroll>

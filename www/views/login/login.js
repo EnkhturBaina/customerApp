@@ -87,19 +87,39 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function($scope, $http,
                         }
                     });
                     if (isEmpty($stateParams.path)) {
-                        $state.go("profile");
+                        if ($rootScope.isLoginFromRequestList) {
+                            $state.go("requestList");
+                            $scope.getRequetData();
+                        } else {
+                            $state.go("profile");
+                        }
                     } else {
                         $state.go($stateParams.path);
                     }
                 } else {
                     $ionicLoading.hide();
-                    $rootScope.alert("Нэр, Нууц үг буруу байна");
+                    $rootScope.alert("Нэр, Нууц үг буруу байна", "warning");
                 }
-            },
-            function(response) {
-                $ionicLoading.hide();
-                if (typeof callBack === "function") {
-                    callBack("Серверт холбогдоход алдаа гарлаа");
+                $rootScope.hideFooter = true;
+            }; $scope.gotoDanLogin = function() {
+                serverDeferred.carCalculation({ "type": "auth", "redirect_uri": "customerapp" }, 'https://services.digitalcredit.mn/api/v1/c').then(function(response) {
+                    $rootScope.stringHtmlsLink = response.result.data.url;
+                    console.log($rootScope.stringHtmlsLink);
+                    $ionicModal.fromTemplateUrl('views/login/bind.html', {
+                            scope: $scope,
+                            animation: 'fade-in-scale'
+                        })
+                        .then(function(modalend) {
+                            $rootScope.htmlBindModel = modalend;
+                            $rootScope.htmlBindModel.show();
+                            $ionicLoading.hide();
+                        });
+                });
+            }
+            $scope.loginKey = function(value, username, password) {
+                if (value.keyCode === 13) {
+                    $scope.Login(username, password);
+                    document.getElementById("userpassLogin").blur();
                 }
             }
         );
@@ -109,10 +129,10 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function($scope, $http,
         // $rootScope.ShowLoader();
         if (isEmpty(a)) {
             $ionicLoading.hide();
-            $rootScope.alert("Нэвтрэх нэрээ оруулна уу");
+            $rootScope.alert("Нэвтрэх нэрээ оруулна уу", "warning");
         } else if (isEmpty(b)) {
             $ionicLoading.hide();
-            $rootScope.alert("Нууц үгээ оруулна уу");
+            $rootScope.alert("Нууц үгээ оруулна уу", "warning");
         } else {
             var network = $cordovaNetwork.isOnline();
             if (network) {
@@ -122,12 +142,12 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function($scope, $http,
         $rootScope.hideFooter = true;
     };
     $scope.gotoDanLogin = function() {
-        serverDeferred.carCalculation({ "type": "auth", "redirect_uri": "customerapp" }, 'https://services.digitalcredit.mn/api/v1/c').then(function(response) {
+        serverDeferred.carCalculation({ type: "auth", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function(response) {
             $rootScope.stringHtmlsLink = response.result.data.url;
-            console.log($rootScope.stringHtmlsLink);
-            $ionicModal.fromTemplateUrl('views/login/bind.html', {
+            $ionicModal
+                .fromTemplateUrl("views/login/bind.html", {
                     scope: $scope,
-                    animation: 'fade-in-scale'
+                    animation: "fade-in-scale",
                 })
                 .then(function(modalend) {
                     $rootScope.htmlBindModel = modalend;
@@ -135,7 +155,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function($scope, $http,
                     $ionicLoading.hide();
                 });
         });
-    }
+    };
     $scope.loginKey = function(value, username, password) {
         if (value.keyCode === 13) {
             $scope.Login(username, password);
@@ -147,5 +167,5 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function($scope, $http,
     };
     $scope.closeHtmlBindBluetooth = function() {
         $scope.htmlBindModel.remove();
-    }
+    };
 });

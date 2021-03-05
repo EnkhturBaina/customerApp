@@ -13,7 +13,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
   // ====== Get Data  ========
   $rootScope.getRequetData = function () {
     $scope.requetData = [];
-    console.log("$rootScope.loginUserInfo.id", $rootScope.loginUserInfo);
+    // console.log("$rootScope.loginUserInfo.id", $rootScope.loginUserInfo);
     if ($rootScope.loginUserInfo !== undefined) {
       $rootScope.ShowLoader();
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597814217394980", crmCustomerId: $rootScope.loginUserInfo.id }).then(function (response) {
@@ -23,6 +23,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
         } else {
           $scope.isEmpty = false;
           $scope.requetData = response;
+          // console.log("$scope.requetData", $scope.requetData);
           // angular.forEach(response, function(item) {
           //     if (isObject(item)) {
           //         $scope.requetData.push(item);
@@ -37,7 +38,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
   $scope.getRequetData();
   $scope.selectbank = function (bank) {
     // console.log(bank);
-    $rootScope.selectbank = bank;
+    $rootScope.selectedMapBank = bank;
     $state.go("request_detail");
   };
 

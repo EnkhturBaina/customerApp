@@ -6,7 +6,7 @@ angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $
   $scope.selectedSubCat = [];
   var brandAr = [];
   // ====== cars ========
-  $scope.getCarDatas = function (brandAr) {
+  $rootScope.getCarDatas = function (brandAr) {
     $rootScope.ShowLoader();
     $rootScope.carDatas = [];
     if (!isEmpty(brandAr)) {
@@ -33,7 +33,7 @@ angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $
   };
   $scope.selectCar = function (item) {
     $rootScope.selectedCarData = item;
-    $state.go("car-info");
+    $state.go("car-info", {}, { reload: true });
   };
   // ====== Category ========
   $scope.categoryShowLimit = 7;

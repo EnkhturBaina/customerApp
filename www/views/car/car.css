@@ -22,7 +22,7 @@
 .brand-tags .tags {
   color: #4b5180;
   width: auto;
-  padding: 10px;
+  padding: 5px;
   background-color: #f8f8fe;
   margin: 5px;
   font-weight: bold;
@@ -33,9 +33,13 @@
 .brand-tags .series {
   color: #4b5180;
   width: auto;
-  padding: 10px;
+  padding: 5px;
+  background-color: #f8f8fe;
   margin: 5px;
-  text-align: left;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
 }
 .cars {
   margin: 20px 0 20px 0;
@@ -219,7 +223,7 @@
   height: auto;
   margin: 0 auto;
   display: block;
-  height: 200px;
+  max-height: 400px;
 }
 .car-img-suggest {
   width: auto;
@@ -294,7 +298,6 @@
   line-height: 13px;
   display: grid !important;
   min-height: 17vh !important;
-  /* margin: auto 7px !important; */
 }
 .suggest-card .car-name {
   font-size: 12px;
@@ -310,10 +313,6 @@
   height: 100%;
   display: block;
 }
-/* .suggest-slider-content > .slider-slides {
-  width: fit-content !important;
-  display: flex !important;
-} */
 .suggest-slider {
   padding: 0 30px;
   color: #000;
@@ -349,7 +348,6 @@
   top: 45%;
   width: auto;
   padding: 16px;
-  /* margin-top: -22px; */
   color: #000;
   font-weight: bold;
   font-size: 18px;
@@ -362,7 +360,7 @@
   filter: invert(20%) sepia(91%) saturate(387%) hue-rotate(27deg) brightness(100%) contrast(94%);
 }
 .car-loan-content {
-  height: 88%;
+  height: 100%;
 }
 .car-brandlist-content {
   height: 100%;
@@ -426,4 +424,12 @@
   border-radius: 8px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 10px;
+}
+.suggest-scroll .scroll {
+  display: flex;
+  width: 95%;
+  margin: 10px auto;
+}
+.suggest-card-container {
+  margin: 0px 5px;
 }
