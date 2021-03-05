@@ -63,80 +63,80 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function($rootScope
             $scope.$apply();
         }
         $ionicSlideBoxDelegate.update();
-    }
-});
-};
-$scope.getbankData = function() {
-    $rootScope.bankList = [];
-    if (!isEmpty($rootScope.selectedCarData) && !isEmpty($rootScope.selectedCarData.itemcode)) {
-        // { type: "car", operation: "calculation", productCode: $rootScope.selectedCarData.itemcode }
-        serverDeferred.carCalculation({ type: "allBanks" }).then(function(response) {
-            $rootScope.bankList = response.result.data;
-            console.log(response.result.data);
-            // console.log(response);
-        });
-    }
-};
-$scope.getCarinfo();
 
-// basket
-$scope.addtoBasket = function() {
-    var value = searchJsonValue($rootScope.basketData, "id", $rootScope.selectedCarData.id);
-    $rootScope.selectedCarData.itemquantity = "1";
-    if (isEmpty(value)) {
-        $rootScope.basketData.push($rootScope.selectedCarData);
-        localStorage.setItem("basketData", JSON.stringify($rootScope.basketData));
-        $rootScope.alert("Сагсанд нэмэгдлээ");
-    } else {
-        $rootScope.alert("Сагслагдсан байна");
-    }
-};
+        // });
+    };
+    $scope.getbankData = function() {
+        $rootScope.bankList = [];
+        if (!isEmpty($rootScope.selectedCarData) && !isEmpty($rootScope.selectedCarData.itemcode)) {
+            // { type: "car", operation: "calculation", productCode: $rootScope.selectedCarData.itemcode }
+            serverDeferred.carCalculation({ type: "allBanks" }).then(function(response) {
+                $rootScope.bankList = response.result.data;
+                console.log(response.result.data);
+                // console.log(response);
+            });
+        }
+    };
+    $scope.getCarinfo();
 
-$scope.next = function() {
-    $ionicSlideBoxDelegate.next();
-};
-$scope.previous = function() {
-    $ionicSlideBoxDelegate.previous();
-};
-$scope.slideChanged = function(index) {
-    $scope.slideIndex = index;
-};
-$rootScope.newReqiust = {};
+    // basket
+    $scope.addtoBasket = function() {
+        var value = searchJsonValue($rootScope.basketData, "id", $rootScope.selectedCarData.id);
+        $rootScope.selectedCarData.itemquantity = "1";
+        if (isEmpty(value)) {
+            $rootScope.basketData.push($rootScope.selectedCarData);
+            localStorage.setItem("basketData", JSON.stringify($rootScope.basketData));
+            $rootScope.alert("Сагсанд нэмэгдлээ");
+        } else {
+            $rootScope.alert("Сагслагдсан байна");
+        }
+    };
 
-$scope.payOn = function() {
-    document.getElementById("paypopup").style.display = "block";
-};
-$scope.payOff = function() {
-    document.getElementById("paypopup").style.display = "none";
-};
-$scope.tabhide = function() {
-    document.getElementById("home-tab").style.display = "none";
-};
-$scope.collapse = function() {
-    document.getElementById("addition-info").style.display = "block";
-    document.getElementById("collapse-btn").style.display = "none";
-    document.getElementById("uncollapse-btn").style.display = "block";
-};
-$scope.uncollapse = function() {
-    document.getElementById("addition-info").style.display = "none";
-    document.getElementById("collapse-btn").style.display = "block";
-    document.getElementById("uncollapse-btn").style.display = "none";
-};
-$scope.shouldHide = function() {
-    switch ($state.current.name) {
-        case "statename1":
-            return true;
-        case "statename2":
-            return true;
-        default:
-            return false;
-    }
-};
-$scope.backFromcarInfo = function() {
-if ($ionicHistory.viewHistory().backView.stateName == "autoleasing-2") {
-    $state.go("car");
-} else {
-    $ionicHistory.goBack();
-}
-};
+    $scope.next = function() {
+        $ionicSlideBoxDelegate.next();
+    };
+    $scope.previous = function() {
+        $ionicSlideBoxDelegate.previous();
+    };
+    $scope.slideChanged = function(index) {
+        $scope.slideIndex = index;
+    };
+    $rootScope.newReqiust = {};
+
+    $scope.payOn = function() {
+        document.getElementById("paypopup").style.display = "block";
+    };
+    $scope.payOff = function() {
+        document.getElementById("paypopup").style.display = "none";
+    };
+    $scope.tabhide = function() {
+        document.getElementById("home-tab").style.display = "none";
+    };
+    $scope.collapse = function() {
+        document.getElementById("addition-info").style.display = "block";
+        document.getElementById("collapse-btn").style.display = "none";
+        document.getElementById("uncollapse-btn").style.display = "block";
+    };
+    $scope.uncollapse = function() {
+        document.getElementById("addition-info").style.display = "none";
+        document.getElementById("collapse-btn").style.display = "block";
+        document.getElementById("uncollapse-btn").style.display = "none";
+    };
+    $scope.shouldHide = function() {
+        switch ($state.current.name) {
+            case "statename1":
+                return true;
+            case "statename2":
+                return true;
+            default:
+                return false;
+        }
+    };
+    $scope.backFromcarInfo = function() {
+        if ($ionicHistory.viewHistory().backView.stateName == "autoleasing-2") {
+            $state.go("car");
+        } else {
+            $ionicHistory.goBack();
+        }
+    };
 });

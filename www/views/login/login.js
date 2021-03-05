@@ -124,6 +124,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function($scope, $http,
     $scope.gotoDanLogin = function() {
         serverDeferred.carCalculation({ "type": "auth", "redirect_uri": "customerapp" }, 'https://services.digitalcredit.mn/api/v1/c').then(function(response) {
             $rootScope.stringHtmlsLink = response.result.data.url;
+            console.log($rootScope.stringHtmlsLink);
             $ionicModal.fromTemplateUrl('views/login/bind.html', {
                     scope: $scope,
                     animation: 'fade-in-scale'
