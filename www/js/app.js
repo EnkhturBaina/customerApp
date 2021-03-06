@@ -312,7 +312,6 @@ var app = angular
                 } else if ($("#mobile").hasClass("non-navigation")) {}
             });
         });
-
         $scope.icon = "ion-arrow-down-b";
         $scope.expandMenu = function() {
             var grow = document.getElementById("side-menu-wraps");
@@ -327,37 +326,19 @@ var app = angular
         };
 
         $scope.rangeData = { volume: "14" };
-
-        <<
-        << << < HEAD
         $scope.$watch("data.volume", function() {
             // console.log("Has changed");
         });
+        $scope.$watch("data.volume", function() {});
         $rootScope.hideShowFooter = function() {
             $rootScope.hideFooter = !$rootScope.hideFooter;
         };
-    }) ||
-    || || | d278a43
-$scope.$watch("data.volume", function() {
-    // console.log("Has changed");
-});
-$rootScope.hideShowFooter = function() {
-$rootScope.hideFooter = !$rootScope.hideFooter;
-};
-}) ===
-=== =
-$scope.$watch("data.volume", function() {});
-$rootScope.hideShowFooter = function() {
-    $rootScope.hideFooter = !$rootScope.hideFooter;
-};
-$rootScope.hideKeyboard = function(event) {
-if (event.keyCode === 13) {
-    document.activeElement.blur();
-}
-};
-}) >>>
->>> > bac78ca750413786c2850530501899d2c565e401
-
+        $rootScope.hideKeyboard = function(event) {
+            if (event.keyCode === 13) {
+                document.activeElement.blur();
+            }
+        };
+    })
     .directive("format", [
         "$filter",
         function toAmount($filter) {

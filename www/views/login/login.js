@@ -101,28 +101,15 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function($scope, $http,
                     $rootScope.alert("Нэр, Нууц үг буруу байна", "warning");
                 }
                 $rootScope.hideFooter = true;
-            }; $scope.gotoDanLogin = function() {
-                serverDeferred.carCalculation({ "type": "auth", "redirect_uri": "customerapp" }, 'https://services.digitalcredit.mn/api/v1/c').then(function(response) {
-                    $rootScope.stringHtmlsLink = response.result.data.url;
-                    console.log($rootScope.stringHtmlsLink);
-                    $ionicModal.fromTemplateUrl('views/login/bind.html', {
-                            scope: $scope,
-                            animation: 'fade-in-scale'
-                        })
-                        .then(function(modalend) {
-                            $rootScope.htmlBindModel = modalend;
-                            $rootScope.htmlBindModel.show();
-                            $ionicLoading.hide();
-                        });
-                });
-            }
-            $scope.loginKey = function(value, username, password) {
-                if (value.keyCode === 13) {
-                    $scope.Login(username, password);
-                    document.getElementById("userpassLogin").blur();
-                }
-            }
-        );
+            });
+    }
+
+    $scope.loginKey = function(value, username, password) {
+        if (value.keyCode === 13) {
+            $scope.Login(username, password);
+            document.getElementById("userpassLogin").blur();
+        }
+
     };
     $scope.user.username = "";
     $scope.Login = function(a, b) {
@@ -142,26 +129,75 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function($scope, $http,
         $rootScope.hideFooter = true;
     };
     $scope.gotoDanLogin = function() {
-        serverDeferred.carCalculation({ type: "auth", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function(response) {
-            $rootScope.stringHtmlsLink = response.result.data.url;
-            $ionicModal
-                .fromTemplateUrl("views/login/bind.html", {
-                    scope: $scope,
-                    animation: "fade-in-scale",
-                })
-                .then(function(modalend) {
-                    $rootScope.htmlBindModel = modalend;
-                    $rootScope.htmlBindModel.show();
-                    $ionicLoading.hide();
-                });
+        serverDeferred.carCalculation({ "type": "auth", "redirect_uri": "customerapp" }, 'https://services.digitalcredit.mn/api/v1/c').then(function(response) {
+            $rootScope.stringHtmlsLink = response.result.data;
+
+            // window.open(, "_system", "location=yes");
+            //"state": "16149527413694721614952741900321"
+            var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, '_blank', 'location=no,toolbar=no');
+
+            $(authWindow).on('loadstart', function(e) {
+                var url = e.originalEvent.url;
+                console.log(url)
+                var code = url.indexOf('https://services.digitalcred');
+                console.log(code)
+                console.log($rootScope.stringHtmlsLink.state)
+                var error = /\?error=(.+)$/.exec(url);
+                if (code == 0 || error) {
+                    authWindow.close();
+                }
+
+                if (code == 0) {
+                    serverDeferred.carCalculation({ "state": $rootScope.stringHtmlsLink.state }, 'https://services.digitalcredit.mn/api/sso/check').then(function(response) {
+                        var userInfo = response.result.data.info;
+                        if (!isEmpty(userInfo)) {
+                            $scope.registerFunction(JSON.parse(userInfo));
+                        }
+                    });
+
+                } else if (error) {
+                    console.log(error);
+                }
+            });
+            // $ionicModal.fromTemplateUrl('views/login/bind.html', {
+            //         scope: $scope,
+            //         animation: 'fade-in-scale'
+            //     })
+            //     .then(function(modalend) {
+            //         $rootScope.htmlBindModel = modalend;
+            //         $rootScope.htmlBindModel.show();
+            //         $ionicLoading.hide();
+            //     });
         });
-    };
-    $scope.loginKey = function(value, username, password) {
-        if (value.keyCode === 13) {
-            $scope.Login(username, password);
-            document.getElementById("userpassLogin").blur();
-        }
-    };
+    }
+    $scope.registerFunction = function(value) {
+        serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { 'uniqueIdentifier': value.regnum }).then(function(checkedValue) {
+            var json = { 'customerCode': value.regnum, 'siRegNumber': value.regnum, 'isActive': value.regnum };
+            json.dcApp_crmUser_dan = { userName: value.regnum, userId: 1, isActive: 1 };
+            if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
+                json.id = checkedValue[1].customerid;
+                json.dcApp_crmUser_dan.id = json.id;
+            }
+
+
+            json.dcApp_crmUser_dan.dcApp_dcCustomer_dan = { familyName: value.surname, firstName: value.firstname, lastName: value.lastname, birthDate: value.birthDateAsText, uniqueIdentifier: value.regnum, profilePictureClob: value.image, isActive: '1', customerTypeId: '1' };
+            serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function(response) {
+                if (!isEmpty(response) && !isEmpty(response[0])) {
+                    $rootScope.loginUserInfo = response[0];
+                    if (isEmpty($stateParams.path)) {
+                        if ($rootScope.isLoginFromRequestList) {
+                            $state.go("requestList");
+                            $scope.getRequetData();
+                        } else {
+                            $state.go("profile");
+                        }
+                    } else {
+                        $state.go($stateParams.path);
+                    }
+                }
+            });
+        })
+    }
     $scope.backShowFooter = function() {
         $rootScope.hideFooter = true;
     };
