@@ -519,3 +519,7 @@
   width: 55vw;
   margin: 0 auto;
 }
+.auto-step1-title {
+  text-align: center;
+  font-size: 12px !important;
+}
