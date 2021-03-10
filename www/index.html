@@ -84,7 +84,6 @@
             <div class="side-menu-items side-menu-img-container">
                 <img class="side-menu-picture" src="img/logo.png" width="70px" height="70px" />
             </div>
-            <!-- <div class="side-menu-items side-menu-user-name" ng-if="$root.loginUserInfo|isEmpty">Digital Credit</div> -->
             <div class="side-menu-items side-menu-user-name" ng-if="!$root.loginUserInfo|isEmpty">{{sidebarUserName}}</div>
             <div class="side-menu-items" ng-click="toggleSideMenu();hideShowFooter()" ng-if="!$root.loginUserInfo|isEmpty" ui-sref="profile"><i class="icon fa fa-user-o"></i>Миний мэдээлэл</div>
             <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="loan_calculator"><i class="icon fa fa-calculator"></i>Зээлийн тооцоолуур</div>
@@ -100,20 +99,19 @@
         </div>
         <ion-side-menu-content drag-content="false" id="mobileBodyContent" class="">
             <ion-nav-bar class="bar bar-stable app-header-custom" align-title="left" style="padding: 10px 15px">
-                <!-- <ion-nav-back-button> </ion-nav-back-button> -->
                 <ion-nav-buttons side="left" style="position: absolute; top: 10px; left: 15px" id="burgerBtn">
                     <button class="button button-icon header-icon" style="position: fixed" ng-click="toggleSideMenu()"></button>
                     <i class="icon custom-menu"></i>
                 </ion-nav-buttons>
                 <ion-nav-buttons side="right" style="right: 10px; position: fixed">
                     <button ng-if="!$root.loginUserInfo|isEmpty" ui-sref="notif" class="button button-clear ion-float-right ion-color-brand-green" style="margin-right: 10px">
-            <i class="icon custom-bell-green">
-              <span class="notify-badge"></span>
-            </i>
-          </button>
-                    <button class="button button-clear ion-float-right ion-color-brand-green" ui-sref="search" style="margin-right: 5px">
-            <i class="icon custom-search-green"></i>
-          </button>
+                        <i class="icon custom-bell-green">
+                            <span class="notify-badge"></span>
+                        </i>
+                    </button>
+                    <!-- <button class="button button-clear ion-float-right ion-color-brand-green" ui-sref="search" style="margin-right: 5px">
+                        <i class="icon custom-search-green"></i>
+                    </button> -->
                 </ion-nav-buttons>
             </ion-nav-bar>
             <ion-nav-view animation="no-animation" class="index-ion-nav" id="ionNavViewMobile" ng-click="toggleSideMenu1()"> </ion-nav-view>

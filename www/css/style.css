@@ -1,17 +1,11 @@
-/* Empty. Add your own CSS if you like */
-
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-body {
-  font-family: "Roboto", sans-serif;
-}
-
 @font-face {
-  font-family: "Roboto", sans-serif;
-  src: url("../lib/fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+  font-family: "Nunito";
+  /* src: url("../lib/fonts/Roboto/Roboto-Medium.ttf") format("truetype"); */
+  src: url("../lib/fonts/Nunito/Nunito-Light.ttf") format("truetype");
 }
 
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 .cus-header-icon {
   color: #000 !important;

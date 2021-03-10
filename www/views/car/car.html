@@ -17,7 +17,7 @@
                 <p class="ion-color-text">Та хайх гэж буй автомашины брэндийг сонгох эсвэл кодыг бичнэ үү</p>
                 <div class="search-input">
                     <span class="icon ion-search"></span>
-                    <input type="text" placeholder="Хайх" ng-model="search.modelname" />
+                    <input type="text" placeholder="Хайх" ng-model="search.modelname" select-on-click />
                 </div>
                 <div ng-show="!selectedSubCat|isEmptyCust" style="margin-bottom: 2%">
                     <span class="brand-list-tags-span" ng-repeat="cat in selectedSubCat | filter:{factoryid:'!!'}" ng-click="clearSelectedSubCat(cat.factoryid)">

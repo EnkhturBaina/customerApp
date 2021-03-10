@@ -29,13 +29,13 @@
         <!-- <p class="ion-color-text">Таны утсанд баталгаажуулах код илгээх болно.</p> -->
       </div>
       <div class="step-1-text">
-        <input type="text" placeholder="Утасны дугаар" name="mobileNumber" class="register-mobile" ng-model="$root.crmUserData.userName" />
+        <input type="text" placeholder="Утасны дугаар" name="mobileNumber" class="register-mobile" ng-model="$root.crmUserData.userName" select-on-click />
       </div>
       <div class="step-1-text">
         <p class="ion-color-text">Утасны дугаар нь таны нэвтрэх нэр болно.</p>
       </div>
       <div class="step-1-text">
-        <input type="{{inputType}}" pattern="\d*" placeholder="Нууц үг" name="password" class="register-password" ng-model="$root.customerPassword.passwordHash" />
+        <input type="{{inputType}}" pattern="\d*" placeholder="Нууц үг" name="password" class="register-password" ng-model="$root.customerPassword.passwordHash" select-on-click />
         <button class="button button-icon reg-show-pass-btn" style="zoom: 1" ng-click="hideShowPassword()">
           <i class="ion-eye" id="eye-icon"></i>
         </button>

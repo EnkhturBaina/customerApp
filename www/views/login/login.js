@@ -72,15 +72,16 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
       ],
     }).then(function (response) {
       if (!isEmpty(response.data) && response.data.response.status === "success") {
-        localStorage.setItem("loginUserData", JSON.stringify(response.data.response.result));
         $rootScope.loginUserInfo = response.data.response.result;
         serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", crmCustomerId: $rootScope.loginUserInfo.id }).then(function (response) {
           if (!isEmpty(response) && !isEmpty(response[0])) {
             $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
             // console.log($rootScope.loginUserInfo);
 
+            localStorage.removeItem("loginUserInfo");
+            localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+
             if ($rootScope.loginUserInfo) {
-              $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
             }
             $rootScope.hideFooter = false;
           }
@@ -110,6 +111,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
     }
   };
   $scope.user.username = "";
+  $rootScope.isDanLogin = false;
   $scope.Login = function (a, b) {
     // $rootScope.ShowLoader();
     if (isEmpty(a)) {
@@ -209,8 +211,10 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
           if (isEmpty($stateParams.path)) {
             if ($rootScope.isLoginFromRequestList) {
               $state.go("requestList");
+              $rootScope.isDanLogin = true;
               $scope.getRequetData();
             } else {
+              $rootScope.isDanLogin = true;
               $state.go("profile");
             }
           } else {

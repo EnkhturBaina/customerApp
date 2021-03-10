@@ -41,18 +41,18 @@
         </div>
         <ion-tabs id="profile-tabs-striped" class="tabs-striped tabs-top profile-card-tabs profile-tab profile-tabs-tab">
             <!-- Tab 1 -->
-            <ion-tab title="Хувь">
+            <ion-tab title="Иргэн">
                 <ion-nav-view class="gray-background">
                     <ion-content overflow-scroll="true" class="profile-content">
                         <div class="list profile-list">
                             <label class="item item-input profile-label" id="lastNameLabel">
                                 <p>Овог</p>
-                                <input type="text" id="customerLastName" placeholder="Овог" name="lastName" ng-model="$root.customerProfileData.lastname" ng-change="replaceCyr($root.customerProfileData.lastname)" ng-keyup="hideKeyboard($event)" />
+                                <input type="text" id="customerLastName" placeholder="Овог" name="lastName" ng-model="$root.customerProfileData.lastname" ng-change="replaceCyr($root.customerProfileData.lastname)" ng-keyup="hideKeyboard($event)" select-on-click />
                                 <span id="lastNameError" class="profile-input-name-error">Та овогоо крилл үсгээр оруулна уу</span>
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Нэр</p>
-                                <input type="text" id="customerFirstName" placeholder="Нэр" name="firstName" ng-model="$root.customerProfileData.firstname" ng-change="replaceCyr2($root.customerProfileData.firstname)" ng-keyup="hideKeyboard($event)" />
+                                <input type="text" id="customerFirstName" placeholder="Нэр" name="firstName" ng-model="$root.customerProfileData.firstname" ng-change="replaceCyr2($root.customerProfileData.firstname)" ng-keyup="hideKeyboard($event)" select-on-click />
                                 <span id="firstNameError" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</span>
                             </label>
                             <label class="item item-input profile-label">
@@ -65,31 +65,31 @@
                             </label>
                             <label class="item item-input profile-label">
                                 <p>И-мэйл хаяг</p>
-                                <input type="text" placeholder="И-мэйл хаяг" name="email" ng-model="$root.customerProfileData.email" ng-keyup="hideKeyboard($event)" />
+                                <input type="text" placeholder="И-мэйл хаяг" name="email" ng-model="$root.customerProfileData.email" ng-keyup="hideKeyboard($event)" select-on-click />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Хаяг</p>
-                                <input type="text" placeholder="Хаяг" name="address" ng-model="$root.customerProfileData.address" ng-keyup="hideKeyboard($event)" />
+                                <input type="text" placeholder="Хаяг" name="address" ng-model="$root.customerProfileData.address" ng-keyup="hideKeyboard($event)" select-on-click />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Утасны дугаар</p>
-                                <input type="text" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" ng-keyup="hideKeyboard($event)" />
+                                <input type="text" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" ng-keyup="hideKeyboard($event)" select-on-click />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Гэрлэсэн эсэх</p>
-                                <select class="profile-select" ng-model="$root.customerProfileData.ismarried" selected="!$root.customerProfileData.ismarried">
+                                <select class="profile-select" ng-model="$root.customerProfileData.ismarried">
                                     <option ng-repeat="data in familtStatData | filter:{id:'!!'}" ng-if="data.name" value="{{data.id}}" ng-selected="{{$root.customerProfileData.ismarried==data.id}}">{{data.name}}</option>
                                 </select>
                             </label>
                             <label class="item item-input profile-label">
                                 <p>МИК-ийн зээлтэй эсэх</p>
-                                <select class="profile-select" ng-model="$root.customerProfileData.mikmortgagecondition" selected="!$root.customerProfileData.mikmortgagecondition">
+                                <select class="profile-select" ng-model="$root.customerProfileData.mikmortgagecondition">
                                     <option ng-repeat="md in mortgageData | filter:{id:'!!'}" ng-if="md.name" value="{{md.id}}" ng-selected="{{$root.customerProfileData.mikmortgagecondition==md.id}}">{{md.name}}</option>
                                 </select>
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Ажилласан жил</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="experienceperiodid" ng-model="$root.customerProfileData.experienceperiodid" />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="experienceperiodid" ng-model="$root.customerProfileData.experienceperiodid" select-on-click />
                             </label>
                             <label class="item item-input profile-label">
                                 <p style="padding: 6px 0px">Иргэний үнэмлэхний зураг</p>
@@ -145,10 +145,10 @@
                                 <p>Төлж буй зээл</p>
                                 <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlypayment" placeholder="-" name="payloan" format-input ng-keyup="hideKeyboard($event)" />
                             </label>
-                            <label class="item profile-label">
+                            <!-- <label class="item profile-label">
                                 <p>Харьцдаг банк</p>
                             </label>
-                            <!-- <div id="dealBankContainer" class="item profile-bank-list">
+                            <div id="dealBankContainer" class="item profile-bank-list">
                                 <div class="col  added-deal-bank" ng-repeat="dealbank in customerDealBanks | filter:{id:'!!'}">
                                     <div class="deal-bank-remove">-</div>
                                     <img src="{{$root.imagePath}}{{dealbank.banklogo}}" />
@@ -167,7 +167,7 @@
                 </ion-nav-view>
             </ion-tab>
             <!-- Tab 3 -->
-            <ion-tab title="Хөрөнгө">
+            <!-- <ion-tab title="Хөрөнгө">
                 <ion-nav-view>
                     <ion-content overflow-scroll="true" class="profile-content">
                         <div class="list profile-list">
@@ -273,7 +273,7 @@
                         </div>
                     </ion-content>
                 </ion-nav-view>
-            </ion-tab>
+            </ion-tab> -->
             <!-- Tab 4 -->
             <ion-tab title="QR">
                 <ion-nav-view>

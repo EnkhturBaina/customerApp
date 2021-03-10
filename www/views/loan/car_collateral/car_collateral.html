@@ -48,7 +48,7 @@
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Явсан км</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.mile" format-input next-focus-elem ng-keyup="hideKeyboard($event)" />
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.mile" format-input next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
                         </label>
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Хөдөлгүүрийн төрөл</p>
@@ -59,7 +59,7 @@
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Хөдөлгүүрийн багтаамж</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="engineCapacity" placeholder="0" name="engineCapacity" ng-model="$root.newCarReq.engineCapacity" format-input next-focus-elem ng-keyup="hideKeyboard($event)" />
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="engineCapacity" placeholder="0" name="engineCapacity" ng-model="$root.newCarReq.engineCapacity" format-input next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
                         </label>
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Хурдны хайрцаг</p>
@@ -84,15 +84,15 @@
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Хаалганы тоо</p>
-                            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" type="text" id="carDoorCount" placeholder="0" name="carDoorCount" ng-model="$root.newCarReq.carDoorCount" format-input next-focus-elem ng-keyup="hideKeyboard($event)" />
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" type="text" id="carDoorCount" placeholder="0" name="carDoorCount" ng-model="$root.newCarReq.carDoorCount" format-input next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Үйлдвэрлэсэн он</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.newCarReq.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" />
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.newCarReq.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Орж ирсэн он</p>
-                            <input inputmode="numeric" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.newCarReq.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" />
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.newCarReq.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Улсын дугаар</p>

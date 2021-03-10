@@ -20,21 +20,21 @@
                     <span class="title car-coll-step2-title">Зээлийн хэмжээ</span>
                     <div class="tugrug-input-container">
                         <span class="input-tugrug-icon">₮</span>
-                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.carCollateralRequestData.loanAmount" format-input ng-keyup="hideKeyboard($event)" ng-change="getbankDataCarColl()" />
+                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.carCollateralRequestData.loanAmount" format-input ng-keyup="hideKeyboard($event)" ng-change="getbankDataCarColl()" select-on-click />
                     </div>
                 </div>
                 <div class="tugrug-input car-coll-step2-loan-amount">
                     <span class="title car-coll-step2-title">Зээлийн хүү (сараар)</span>
                     <div class="tugrug-input-container">
                         <span class="input-tugrug-icon">%</span>
-                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.carCollateralRequestData.loanFee" format-input ng-keyup="hideKeyboard($event)" />
+                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.carCollateralRequestData.loanFee" format-input ng-keyup="hideKeyboard($event)" select-on-click />
                     </div>
                 </div>
                 <div class="tugrug-input car-coll-step2-loan-amount">
                     <span class="title car-coll-step2-title">Хугацаа сараар</span>
                     <div class="tugrug-input-container">
                         <span class="input-tugrug-icon">#</span>
-                        <input type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number" ng-model="$root.carCollateralRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-change="getbankDataCarColl()" />
+                        <input type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number" ng-model="$root.carCollateralRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-change="getbankDataCarColl()" select-on-click />
                     </div>
                 </div>
                 <label class="item item-input step2-loam-month">

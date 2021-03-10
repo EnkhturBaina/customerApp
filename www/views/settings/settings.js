@@ -6,5 +6,4 @@ settings.controller("settingsCtrl", function ($scope, serverDeferred, $rootScope
     $("#side-menu-toggle-on").toggleClass("active");
     $("#side-menu-toggle-off").toggleClass("active");
   };
-  // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
 });

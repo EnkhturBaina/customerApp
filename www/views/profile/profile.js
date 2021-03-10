@@ -1,6 +1,11 @@
 angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $ionicHistory, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal, $timeout) {
   $scope.backbutton = function () {
-    $ionicHistory.goBack();
+    if (isEmpty($rootScope.loginUserInfo)) {
+      $ionicHistory.goBack();
+    } else {
+      $state.go("home");
+      $rootScope.hideFooter = false;
+    }
   };
 
   $scope.replaceCyr = function (lastName) {
@@ -24,12 +29,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     }
   };
 
-  $scope.getProData = function () {
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1601286700017285", crmuserid: $rootScope.loginUserInfo.id }).then(function (response) {
-      $rootScope.loginUserInfo = mergeJsonObjs(response, $rootScope.loginUserInfo);
-    });
-  };
-
   $scope.getProfileLookupData = function () {
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
       $rootScope.mortgageData = response;
@@ -41,7 +40,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $rootScope.incomeType = response;
     });
   };
-  // $scope.getProData();
   $scope.getProfileLookupData();
 
   $scope.nextPath = $stateParams.path;
@@ -86,6 +84,11 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
             console.log("get income data", response);
             if (response[0] != "") {
               $rootScope.customerIncomeProfileData = response[0];
+              $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
+
+              // localStorage.removeItem("loginUserInfo");
+              localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+
               console.log("old user income");
             } else {
               console.log("shine user income");
@@ -125,13 +128,23 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
     } else {
-      $scope.customerProfileData.id = $rootScope.loginUserInfo.customerid;
+      if ($rootScope.isDanLogin) {
+        console.log("isDanLogin IF", $rootScope.isDanLogin);
+        $scope.customerProfileData.id = $rootScope.loginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.id;
+      } else if (!$rootScope.isDanLogin) {
+        console.log("isDanLogin ELSE", $rootScope.isDanLogin);
+        $scope.customerProfileData.id = $rootScope.loginUserInfo.customerid;
+      }
       $scope.customerProfileData.customertypeid = 1;
       $scope.customerEmail = $scope.customerProfileData.email;
+      console.log("customerProfileData", $scope.customerProfileData);
+
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
-        console.log("customerProfileData", response);
+        console.log("response customerProfileData", response);
         $rootScope.loginUserInfo = mergeJsonObjs($scope.customerProfileData, $rootScope.loginUserInfo);
-        $rootScope.alert("Амжилттай", "success");
+
+        localStorage.removeItem("loginUserInfo");
+        localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
 
         $rootScope.basePersonData = {
           firstName: response[1].firstname,
@@ -175,6 +188,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
               });
             });
           }
+          $rootScope.alert("Амжилттай", "success");
         });
 
         if (!isEmpty($scope.nextPath)) {
@@ -230,7 +244,11 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
       $timeout(function () {
         if ($scope.customerIncomeProfileData != "") {
-          $rootScope.customerIncomeProfileData.customerid = $scope.customerId;
+          if ($rootScope.isDanLogin) {
+            $scope.customerIncomeProfileData.customerid = $rootScope.loginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.id;
+          } else if (!$rootScope.isDanLogin) {
+            $scope.customerIncomeProfileData.customerid = $rootScope.loginUserInfo.customerid;
+          }
           console.log("$rootScope.customerIncomeProfileData", $rootScope.customerIncomeProfileData);
           serverDeferred.requestFull("dcApp_profile_income_dv_002", $rootScope.customerIncomeProfileData).then(function (response) {
             console.log("save income response", response);
@@ -254,18 +272,18 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     $scope.overlayOn();
   }
 
-  $scope.addDealBank = function () {
-    $scope.customerDealBank.dim1 = $scope.loginUserInfo.customerid;
-    serverDeferred.requestFull("dcApp_deal_bank_customer_001", $scope.customerDealBank).then(function (response) {
-      // console.log("customerDealBank", response);
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1604389075984789", id: response[1].id }).then(function (response) {
-        // console.log("response", response);
-        var appendEl = '<div class="col added-deal-bank">' + '<div class="deal-bank-remove">-</div>' + "<img src=" + $rootScope.imagePath + response[0].banklogo + " />" + "<p>" + response[0].departmentname + "</p>" + "</div>";
-        $(appendEl).insertBefore(".profile-bank-list select:last");
-      });
-    });
-    $scope.customerDealBank.dim2 = null;
-  };
+  // $scope.addDealBank = function () {
+  //   $scope.customerDealBank.dim1 = $scope.loginUserInfo.customerid;
+  //   serverDeferred.requestFull("dcApp_deal_bank_customer_001", $scope.customerDealBank).then(function (response) {
+  //     // console.log("customerDealBank", response);
+  //     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1604389075984789", id: response[1].id }).then(function (response) {
+  //       // console.log("response", response);
+  //       var appendEl = '<div class="col added-deal-bank">' + '<div class="deal-bank-remove">-</div>' + "<img src=" + $rootScope.imagePath + response[0].banklogo + " />" + "<p>" + response[0].departmentname + "</p>" + "</div>";
+  //       $(appendEl).insertBefore(".profile-bank-list select:last");
+  //     });
+  //   });
+  //   $scope.customerDealBank.dim2 = null;
+  // };
 
   $scope.generateQR = function () {
     $rootScope.customeridforQR = {};

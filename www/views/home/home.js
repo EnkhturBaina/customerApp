@@ -5,11 +5,12 @@
   $rootScope.imagePath = "http://leasing.digitalcredit.mn/";
   $rootScope.serverHeader = { "content-type": "application/json;charset=UTF-8" };
   $rootScope.sessionid = "65178215-7896-4513-8e26-896df9cb36ad";
+
   $cordovaNetwork.isOnline = function () {
     return true;
   };
   $rootScope.newCarReq = {};
-  $rootScope.hideFooter = true;
+  $rootScope.hideFooter = false;
   // ========= Slide =============
   $scope.activeSlideIndex = 0;
   $rootScope.showBanner = true;
@@ -143,4 +144,10 @@
 
   localStorage.removeItem("requestType");
   console.log("localStorage", localStorage);
+
+  $rootScope.loginUserInfo = {};
+  $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+  if (!isEmpty($rootScope.loginUserInfo)) {
+    $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
+  }
 });

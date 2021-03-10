@@ -15,7 +15,6 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
     },
   };
 
-  // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
   var registeredUserData = {};
   $rootScope.customerNewPassword = {};
   $scope.getPhoneNumber = function () {

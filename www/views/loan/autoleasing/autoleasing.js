@@ -144,7 +144,7 @@
       $scope.carCollateralData.customerId = $rootScope.loginUserInfo.customerid;
 
       $scope.carCollateralRequestData.customerId = $rootScope.loginUserInfo.customerid;
-      $scope.carCollateralRequestData.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
+      // $scope.carCollateralRequestData.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
 
       //Хүсэлт бүртгэх
       serverDeferred.requestFull("dcApp_carCollRequestDV_001", $scope.carCollateralRequestData).then(function (sendReqResponse) {
@@ -224,7 +224,7 @@
       $scope.consumerData = JSON.parse(localStorage.getItem("otherGoods"));
 
       $scope.newReqiust.customerId = $rootScope.loginUserInfo.customerid;
-      $scope.newReqiust.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
+      // $scope.newReqiust.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
 
       console.log("$scope.newReqiust", $scope.newReqiust);
       //Хүсэлт бүртгэх
@@ -306,67 +306,67 @@
     } else {
       console.log("AUTO LEASING SEND REQUEST");
       //==================AutoLeasing===================
-      if ($scope.checkReqiured("step4")) {
-        $scope.newReqiust.customerId = $rootScope.loginUserInfo.customerid;
-        $scope.newReqiust.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
+      // if ($scope.checkReqiured("step4")) {
+      $scope.newReqiust.customerId = $rootScope.loginUserInfo.customerid;
+      // $scope.newReqiust.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
 
-        serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
-          console.log("save REQUEST response AUTO LEASING", response);
-          if (response[0] == "success" && response[1] != "") {
-            //Сонгосон банк
-            selectedbanks = [];
-            //нөхцөл хангасан банкууд
-            angular.forEach($rootScope.bankListFilter.Agree, function (item) {
-              if (item.checked) {
-                var AgreeBank = {
-                  loanId: response[1].id,
-                  customerId: $rootScope.loginUserInfo.customerid,
-                  bankId: item.id,
-                  isAgree: "1",
-                  wfmStatusId: "1609944755118135",
-                  productId: item.products[0].id,
-                };
-                selectedbanks.push(AgreeBank);
-              }
-            });
+      serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
+        console.log("save REQUEST response AUTO LEASING", response);
+        if (response[0] == "success" && response[1] != "") {
+          //Сонгосон банк
+          selectedbanks = [];
+          //нөхцөл хангасан банкууд
+          angular.forEach($rootScope.bankListFilter.Agree, function (item) {
+            if (item.checked) {
+              var AgreeBank = {
+                loanId: response[1].id,
+                customerId: $rootScope.loginUserInfo.customerid,
+                bankId: item.id,
+                isAgree: "1",
+                wfmStatusId: "1609944755118135",
+                productId: item.products[0].id,
+              };
+              selectedbanks.push(AgreeBank);
+            }
+          });
 
-            //нөхцөл хангаагүй банкууд
-            angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
-              if (item.checked) {
-                var NotAgreeBank = {
-                  loanId: response[1].id,
-                  customerId: $rootScope.loginUserInfo.customerid,
-                  bankId: item.id,
-                  isAgree: "0",
-                  wfmStatusId: "1609944755118135",
-                  productId: item.products[0].id,
-                };
-                selectedbanks.push(NotAgreeBank);
-              }
-            });
-            //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
-            $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
+          //нөхцөл хангаагүй банкууд
+          angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
+            if (item.checked) {
+              var NotAgreeBank = {
+                loanId: response[1].id,
+                customerId: $rootScope.loginUserInfo.customerid,
+                bankId: item.id,
+                isAgree: "0",
+                wfmStatusId: "1609944755118135",
+                productId: item.products[0].id,
+              };
+              selectedbanks.push(NotAgreeBank);
+            }
+          });
+          //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
+          $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
 
-            var onlineLeasingProduct = {
-              leasingId: response[1].id,
-              itemCode: $rootScope.selectedCarData.itemcode,
-              shopId: $rootScope.selectedCarData.supplierid,
-              dcApp_request_map_bank_for_detail: selectedbanks,
-            };
+          var onlineLeasingProduct = {
+            leasingId: response[1].id,
+            itemCode: $rootScope.selectedCarData.itemcode,
+            shopId: $rootScope.selectedCarData.supplierid,
+            dcApp_request_map_bank_for_detail: selectedbanks,
+          };
 
-            serverDeferred.requestFull("dcApp_request_product_dv_with_detail_001", onlineLeasingProduct).then(function (response) {
-              console.log("save BANKS response AUTO LEASING", response);
-              if (response[0] == "success" && response[1] != "") {
-                $state.go("loan_success");
-              } else {
-                $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
-              }
-            });
-          } else {
-            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
-          }
-        });
-      }
+          serverDeferred.requestFull("dcApp_request_product_dv_with_detail_001", onlineLeasingProduct).then(function (response) {
+            console.log("save BANKS response AUTO LEASING", response);
+            if (response[0] == "success" && response[1] != "") {
+              $state.go("loan_success");
+            } else {
+              $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+            }
+          });
+        } else {
+          $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+        }
+      });
+      // }
     }
   };
 
@@ -420,15 +420,16 @@
       } else {
         return true;
       }
-    } else if (param == "step4") {
-      if (input.value === "0" || input.value === 0 || input.value === "") {
-        $rootScope.alert("Та сард төлөх боломжтой дүнгээ оруулна уу", "warning");
-        return false;
-      } else {
-        $rootScope.newReqiust.perOfAdvancePayment = parseInt(input.value);
-        return true;
-      }
     }
+    // else if (param == "step4") {
+    //   if (input.value === "0" || input.value === 0 || input.value === "") {
+    //     $rootScope.alert("Та сард төлөх боломжтой дүнгээ оруулна уу", "warning");
+    //     return false;
+    //   } else {
+    //     $rootScope.newReqiust.perOfAdvancePayment = parseInt(input.value);
+    //     return true;
+    //   }
+    // }
   };
 
   $scope.getCustomerId = function () {
@@ -461,7 +462,7 @@
 
     $scope.addCode = function (key) {
       input.value = addThousandsSeparator(input.value + key);
-      $scope.perOfAdvancePayment = input.value;
+      // $scope.perOfAdvancePayment = input.value;
     };
 
     $scope.emptyCode = function () {
@@ -473,13 +474,23 @@
 
   $scope.calcLoanAmount = function () {
     var input = document.getElementById("sendRequestAdvancePayment");
+    console.log("input", input.value);
     $scope.getLoanAmount = $rootScope.loanAmountField;
     if (parseFloat($scope.getLoanAmount) >= parseFloat($rootScope.newReqiust.advancePayment) || input.value == 0) {
-      $scope.getLoanAmount = $scope.getLoanAmount - $rootScope.newReqiust.advancePayment;
+      console.log("A   input.value", input.value);
+      console.log("A   $scope.getLoanAmount", $scope.getLoanAmount);
+      console.log("A   $rootScope.newReqiust.advancePayment", $rootScope.newReqiust.advancePayment);
+      $scope.getLoanAmount = $scope.getLoanAmount - parseFloat($rootScope.newReqiust.advancePayment);
       $rootScope.newReqiust.loanAmount = $scope.getLoanAmount;
     } else {
-      input.value = $scope.loanAmountField;
-      $scope.getLoanAmount = 0;
+      console.log("A   input.value", input.value);
+      console.log("A   $scope.getLoanAmount", $scope.getLoanAmount);
+      console.log("A   $rootScope.newReqiust.advancePayment", $rootScope.newReqiust.advancePayment);
+
+      // input.value = $scope.loanAmountField;
+      input.value = input.value.slice(0, input.value.length - 1);
+      $scope.getLoanAmount = $scope.loanAmountField - parseFloat($rootScope.newReqiust.advancePayment);
+      // $scope.getLoanAmount = 0;
     }
   };
 

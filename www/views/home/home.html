@@ -3,63 +3,6 @@
     <ion-pane>
         <ion-tabs class="home-tabs tabs-top home-card-tab" id="homeTabsId" delegate-handle="myHeaderTabHandle">
             <!-- Tab 1 -->
-            <ion-tab title="Бараа">
-                <ion-nav-view class="ghostwhite">
-                    <ion-content overflow-scroll="false" style="margin: 0 10px" class="">
-                        <div class="card home-card-1-line" ui-sref="loan_calculator">
-                            <div class="item home-card-1 card-body item-text-wrap">
-                                <div class="home-card-1-first-row">
-                                    <span class="ion-text-bold ion-float-right">Зээлийн хэмжээ тооцох</span>
-                                </div>
-                                <div class="">
-                                    <span class="fleft">САРД ТӨЛӨХ ХЭМЖЭЭ</span>
-                                    <span class="fright"> </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="home-card-container">
-                            <div class="card home-card home-card-2" ui-sref="car">
-                                <div class="item card-body item-text-wrap small-box">
-                                    <div class="ion-text-bold"><span>Автомашин</span></div>
-                                    <div class="home-card-small-text">
-                                        <span>Бүх төрлийн автомашин</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card home-card home-card-3" ui-sref="trend">
-                                <div class="item card-body item-text-wrap small-box">
-                                    <div class="ion-text-bold"><span>Тренд</span></div>
-                                    <div class="home-card-small-text">
-                                        <span>Хандалт өндөртэй бараанууд</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="home-card-container">
-                            <div class="card home-card home-card-4" ui-sref="otherGoods">
-                                <div class="item card-body item-text-wrap small-box">
-                                    <div class="ion-text-bold"><span>Бараа</span></div>
-                                    <div class="home-card-small-text">
-                                        <span>Автомашинаас бусад бараанууд</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card home-card home-card-5" ng-click="callComingSoon()">
-                                <div class="item card-body item-text-wrap small-box">
-                                    <div class="ion-text-bold"><span>Зарлах</span></div>
-                                    <div class="home-card-small-text">
-                                        <span>Хэрэгцээнд тохирсон бараагаа олох</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </ion-content>
-                </ion-nav-view>
-            </ion-tab>
-
-            <!-- Tab 2 -->
             <ion-tab title="Зээл">
                 <ion-nav-view class="ghostwhite">
                     <ion-content overflow-scroll="true" class="padding scroll-content ionic-scroll has-header home-tab-2-content">
@@ -118,6 +61,63 @@
                     </ion-content>
                 </ion-nav-view>
             </ion-tab>
+            <ion-tab title="Бараа" ng-click="callComingSoon()" disabled>
+                <ion-nav-view class="ghostwhite">
+                    <ion-content overflow-scroll="false" style="margin: 0 10px" class="">
+                        <div class="card home-card-1-line" ui-sref="loan_calculator">
+                            <div class="item home-card-1 card-body item-text-wrap">
+                                <div class="home-card-1-first-row">
+                                    <span class="ion-text-bold ion-float-right">Зээлийн хэмжээ тооцох</span>
+                                </div>
+                                <div class="">
+                                    <span class="fleft">САРД ТӨЛӨХ ХЭМЖЭЭ</span>
+                                    <span class="fright"> </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="home-card-container">
+                            <div class="card home-card home-card-2" ui-sref="car">
+                                <div class="item card-body item-text-wrap small-box">
+                                    <div class="ion-text-bold"><span>Автомашин</span></div>
+                                    <div class="home-card-small-text">
+                                        <span>Бүх төрлийн автомашин</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card home-card home-card-3" ui-sref="trend">
+                                <div class="item card-body item-text-wrap small-box">
+                                    <div class="ion-text-bold"><span>Тренд</span></div>
+                                    <div class="home-card-small-text">
+                                        <span>Хандалт өндөртэй бараанууд</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="home-card-container">
+                            <div class="card home-card home-card-4" ui-sref="otherGoods">
+                                <div class="item card-body item-text-wrap small-box">
+                                    <div class="ion-text-bold"><span>Бараа</span></div>
+                                    <div class="home-card-small-text">
+                                        <span>Автомашинаас бусад бараанууд</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card home-card home-card-5" ng-click="callComingSoon()">
+                                <div class="item card-body item-text-wrap small-box">
+                                    <div class="ion-text-bold"><span>Зарлах</span></div>
+                                    <div class="home-card-small-text">
+                                        <span>Хэрэгцээнд тохирсон бараагаа олох</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+
+            <!-- Tab 2 -->
         </ion-tabs>
     </ion-pane>
 </ion-view>
