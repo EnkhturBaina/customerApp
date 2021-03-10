@@ -68,6 +68,7 @@
   border-color: #a2a7b5 !important;
 }
 .item-content img {
+  border-radius: 5px;
   top: 20% !important;
 }
 .basket-content .checkbox {
