@@ -476,11 +476,13 @@
     var input = document.getElementById("sendRequestAdvancePayment");
     $scope.getLoanAmount = $rootScope.loanAmountField;
     if (parseFloat($scope.getLoanAmount) >= parseFloat($rootScope.newReqiust.advancePayment) || input.value == 0) {
-      $scope.getLoanAmount = $scope.getLoanAmount - $rootScope.newReqiust.advancePayment;
+      $scope.getLoanAmount = $scope.getLoanAmount - parseFloat($rootScope.newReqiust.advancePayment);
       $rootScope.newReqiust.loanAmount = $scope.getLoanAmount;
     } else {
-      input.value = $scope.loanAmountField;
-      $scope.getLoanAmount = 0;
+      // input.value = $scope.loanAmountField;
+      input.value = input.value.slice(0, input.value.length - 1);
+      input.value = $rootScope.loanAmountField - input.value;
+      // $scope.getLoanAmount = 0;
     }
   };
 
