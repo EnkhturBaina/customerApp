@@ -474,23 +474,13 @@
 
   $scope.calcLoanAmount = function () {
     var input = document.getElementById("sendRequestAdvancePayment");
-    console.log("input", input.value);
     $scope.getLoanAmount = $rootScope.loanAmountField;
     if (parseFloat($scope.getLoanAmount) >= parseFloat($rootScope.newReqiust.advancePayment) || input.value == 0) {
-      console.log("A   input.value", input.value);
-      console.log("A   $scope.getLoanAmount", $scope.getLoanAmount);
-      console.log("A   $rootScope.newReqiust.advancePayment", $rootScope.newReqiust.advancePayment);
-      $scope.getLoanAmount = $scope.getLoanAmount - parseFloat($rootScope.newReqiust.advancePayment);
+      $scope.getLoanAmount = $scope.getLoanAmount - $rootScope.newReqiust.advancePayment;
       $rootScope.newReqiust.loanAmount = $scope.getLoanAmount;
     } else {
-      console.log("A   input.value", input.value);
-      console.log("A   $scope.getLoanAmount", $scope.getLoanAmount);
-      console.log("A   $rootScope.newReqiust.advancePayment", $rootScope.newReqiust.advancePayment);
-
-      // input.value = $scope.loanAmountField;
-      input.value = input.value.slice(0, input.value.length - 1);
-      $scope.getLoanAmount = $scope.loanAmountField - parseFloat($rootScope.newReqiust.advancePayment);
-      // $scope.getLoanAmount = 0;
+      input.value = $scope.loanAmountField;
+      $scope.getLoanAmount = 0;
     }
   };
 
