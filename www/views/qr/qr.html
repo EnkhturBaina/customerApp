@@ -34,7 +34,7 @@
                     <div class="qr-cars qr" ng-if="!($root.selectedCarData.modelname|isEmpty)">
                         <ul>
                             <li class="car-detail" ui-sref="car-info">
-                                <div class="car-img"><img src="{{$root.imagePath}}{{$root.selectedCarData.itempic}}" /></div>
+                                <div class="car-img"><img ng-src="{{$root.imagePath}}{{$root.selectedCarData.itempic}}" /></div>
                                 <div id="car-dtl" class="desc">
                                     <p class="car-title">{{$root.selectedCarData.modelname}}</p>
                                     <p class="car-price">{{$root.selectedCarData.price|formatNumber}}₮</p>

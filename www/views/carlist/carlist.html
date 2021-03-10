@@ -20,7 +20,7 @@
                     <ul id="glayout">
                         <!-- ui-sref="car-info" href="#/views/loan/car/info" -->
                         <li class="car-detail-column" ng-repeat="car in carListData" ng-if="car.modelname" ng-click="selectCar(car)">
-                            <div class="car-img"><img src="{{car.itempic|guessImageMime}}" /></div>
+                            <div class="car-img"><img ng-src="{{car.itempic|guessImageMime}}" /></div>
                             <div id="car-dtl" class="desc">
                                 <p class="car-title ion-color-big-text">{{car.modelname}}</p>
                                 <span>{{car.productyear}}/{{car.entryyear}}</span>

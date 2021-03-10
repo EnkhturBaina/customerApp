@@ -127,7 +127,7 @@
 
             <div class="bank-container">
                 <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
-                <img ng-repeat="bank in bankList | filter:{id:'!!'}" src="{{bank.bank_logo|guessImageMime}}" />
+                <img ng-repeat="bank in bankList | filter:{id:'!!'}" ng-src="{{bank.bank_logo|guessImageMime}}" />
 
             </div>
             <!-- <div class="suggest-slider-container">

@@ -22,7 +22,7 @@
       </div>
       <div class="bank-container">
         <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
-        <img ng-repeat="bank in allBankList | filter:{id:'!!'}" src="{{bank.bank_logo|guessImageMime}}" />
+        <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-src="{{bank.bank_logo|guessImageMime}}" />
       </div>
       <button class="button btn single-button" ng-click="saveBusinessLoan()">Үргэлжлүүлэх</button>
     </div>

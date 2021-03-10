@@ -23,7 +23,7 @@
                         <div class="{{'measuringWrapper'+$index}}">
                             <a class="item item-thumbnail-left" ng-repeat="bank in banks" ng-click="selectbank(bank);">
                                 <!-- <a class="item item-thumbnail-left" ng-repeat="bank in banks"> -->
-                                <img src="{{$root.imagePath}}{{bank.banklogo}}" />
+                                <img ng-src="{{$root.imagePath}}{{bank.banklogo}}" />
                                 <div class="row">
                                     <div class="col">
                                         <p class="ion-color-big-text">{{bank.departmentname}}</p>

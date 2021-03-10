@@ -25,7 +25,6 @@ var app = angular
     "carlist.Ctrl",
     "qr.Ctrl",
     "trend.Ctrl",
-    "sale.Ctrl",
     "otherGoods.Ctrl",
     "addOtherGoods.Ctrl",
     "reset_password.Ctrl",
@@ -220,21 +219,6 @@ var app = angular
       url: "/views/trend",
       templateUrl: "views/trend/trend.html",
       controller: "trendCtrl",
-    });
-    $stateProvider.state("sale", {
-      url: "/views/sale",
-      templateUrl: "views/sale/sale.html",
-      controller: "saleCtrl",
-    });
-    $stateProvider.state("sale-auto", {
-      url: "/views/sale-auto",
-      templateUrl: "views/sale/auto.html",
-      controller: "saleCtrl",
-    });
-    $stateProvider.state("sale-goods", {
-      url: "/views/sale-goods",
-      templateUrl: "views/sale/goods.html",
-      controller: "saleCtrl",
     });
     $stateProvider.state("otherGoods", {
       url: "/views/otherGoods",

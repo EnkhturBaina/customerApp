@@ -90,7 +90,7 @@
                         <ul>
                             <li>
                                 <div class="item-detail" ng-click="growDiv()">
-                                    <div class="item-img"><img width="100px" src="{{$root.imagePath}}{{$root.selectedCarData.itempic}}" />
+                                    <div class="item-img"><img width="100px" ng-src="{{$root.imagePath}}{{$root.selectedCarData.itempic}}" />
                                     </div>
 
                                     <div class="desc">
@@ -120,7 +120,7 @@
                     <p class="middle-title agree-banks">ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГАСАН БАНК, ББСБ-УУД</p>
                     <div class="bank-grid">
                         <div class="bank" ng-repeat="bank in bankListFilter.Agree">
-                            <img src="{{bank.bank_logo|guessImageMime}}" />
+                            <img ng-src="{{bank.bank_logo|guessImageMime}}" />
                             <p>{{bank.department_name}}</p>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                     <p class="middle-title not-agree-banks">ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГААГҮЙ БАНК, ББСБ-УУД</p>
                     <div class="bank-grid">
                         <div class="bank" ng-repeat="bank in bankListFilter.NotAgree">
-                            <img src="{{bank.bank_logo|guessImageMime}}" />
+                            <img ng-src="{{bank.bank_logo|guessImageMime}}" />
                             <p>{{bank.department_name}}</p>
                         </div>
                     </div>
