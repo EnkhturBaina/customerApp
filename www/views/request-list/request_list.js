@@ -12,8 +12,9 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
   $scope.isEmpty = true;
   // ====== Get Data  ========
   $rootScope.getRequetData = function () {
+    console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
     $scope.requetData = [];
-    if ($rootScope.loginUserInfo !== undefined) {
+    if (!isEmpty($rootScope.loginUserInfo)) {
       $rootScope.ShowLoader();
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597814217394980", crmCustomerId: $rootScope.loginUserInfo.id }).then(function (response) {
         $ionicLoading.hide();

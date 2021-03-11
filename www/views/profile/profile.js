@@ -292,6 +292,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
     if (!isEmpty($rootScope.loginUserInfo)) {
       serverDeferred.requestFull("dcApp_qr_generator", $rootScope.customeridforQR).then(function (response) {
+        console.log("response", response);
         $rootScope.customerQrData = {};
         $rootScope.customerQrData.id = $scope.loginUserInfo.customerid;
         $rootScope.customerQrData.customerqr = "jpg♠" + response[1].value;
