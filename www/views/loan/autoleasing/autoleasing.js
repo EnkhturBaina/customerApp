@@ -2,6 +2,9 @@
   $rootScope.requestType = "";
   $rootScope.requestType = localStorage.getItem("requestType");
 
+  if ($state.current.name == "autoleasing-1") {
+    $rootScope.alert("Та авах автомашиныхаа кодыг оруулах эсвэл QR кодыг уншуулна уу", "success");
+  }
   $scope.getCarDatasId = function (itemCode) {
     localStorage.setItem("requestType", "auto");
     $scope.carData = [];

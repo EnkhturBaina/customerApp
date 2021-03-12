@@ -128,7 +128,7 @@
 .home-tab-2-content > .scroll {
   min-height: 0px !important;
   margin: 0 20px;
-  display: inline-block !important;
+  /* display: inline-block !important; */
 }
 .small-box {
   background: none;

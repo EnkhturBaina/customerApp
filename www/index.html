@@ -82,13 +82,13 @@
             </div>
             <div class="side-menu-items side-menu-user-name" ng-if="!$root.loginUserInfo|isEmpty">{{sidebarUserName}}</div>
             <div class="side-menu-items" ng-click="toggleSideMenu();hideShowFooter()" ng-if="!$root.loginUserInfo|isEmpty" ui-sref="profile"><i class="icon fa fa-user-o"></i>Миний мэдээлэл</div>
-            <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="loan_calculator"><i class="icon fa fa-calculator"></i>Зээлийн тооцоолуур</div>
+            <!-- <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="loan_calculator"><i class="icon fa fa-calculator"></i>Зээлийн тооцоолуур</div> -->
             <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="intro"><i class="icon fa fa-sticky-note-o"></i>Хэрэглэх заавар</div>
             <div class="side-menu-items"><i class="icon fa fa-question-circle-o"></i>Үйлчилгээний нөхцөл</div>
             <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="contact"><i class="icon fa fa-phone"></i>Холбоо барих</div>
-            <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="reset_password" ng-if="!$root.loginUserInfo|isEmpty"><i class="icon fa fa-key"></i>Нууц үг солих</div>
+            <!-- <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="reset_password" ng-if="!$root.loginUserInfo|isEmpty"><i class="icon fa fa-key"></i>Нууц үг солих</div> -->
 
-            <div class="side-menu-items" ng-click="toggleSideMenu()"><i class="icon fa fa-cog" aria-hidden="true"></i>Тохиргоо</div>
+            <!-- <div class="side-menu-items" ng-click="toggleSideMenu()"><i class="icon fa fa-cog" aria-hidden="true"></i>Тохиргоо</div> -->
 
             <div class="side-menu-logout side-menu-items" ng-click="toggleSideMenu();logOut()" ng-if="!$root.loginUserInfo|isEmpty"><i class="icon fa fa-sign-out"></i>Гарах</div>
             <div class="side-menu-logout side-menu-items" ng-click="toggleSideMenu()" ui-sref="login" ng-if="$root.loginUserInfo|isEmpty"><i class="icon fa fa-sign-out"></i>Нэвтрэх</div>

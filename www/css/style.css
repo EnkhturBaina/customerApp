@@ -445,16 +445,14 @@ h4 {
 }
 
 .bank-container {
+  padding: 15px;
   background-color: #fff;
-  width: 100%;
-  padding: 10px 30px 0px 30px;
-  box-shadow: 1px 1px 5px -2px grey;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 10px;
 }
 
 .bank-container img {
-  margin-bottom: 10px;
   margin-right: 10px;
   width: 30px;
   height: 30px;
@@ -1267,14 +1265,18 @@ h4 {
 }
 
 .container-padding {
-  margin: 0px 15px;
-  padding: 15px 20px;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 20px 15px 0px 15px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
 }
 
 .middle-title {
   font-size: 12px;
   color: #c6c8d4;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .not-agree-banks {
@@ -1290,15 +1292,19 @@ h4 {
 .bank {
   align-items: center;
   text-align: center;
+  margin: 0 10px;
 }
 .bank img {
   width: 30px;
   height: 30px;
 }
 .bank p {
+  white-space: break-spaces;
   font-size: 12px;
   color: gray;
   font-weight: bold;
+  line-height: 14px;
+  margin: 0px !important;
 }
 .loan-month-type-number::-webkit-outer-spin-button,
 .loan-month-type-number::-webkit-inner-spin-button {

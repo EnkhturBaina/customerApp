@@ -10,7 +10,8 @@
 }
 .profile-content {
   top: 0px !important;
-  height: 70vh !important;
+  /* height: 70vh !important; */
+  height: calc(100% - 200px);
   background-color: #fff;
 }
 .profile-content > .scroll {
@@ -85,6 +86,8 @@ input[type="number"] {
   align-items: center;
   position: relative;
   display: grid;
+  text-align: center;
+  place-items: center;
 }
 .profile-card-front i {
   position: absolute;
@@ -98,6 +101,8 @@ input[type="number"] {
   align-items: center;
   position: relative;
   display: grid;
+  text-align: center;
+  place-items: center;
 }
 .profile-card-back i {
   position: absolute;
@@ -132,6 +137,12 @@ input[type="number"] {
 }
 .profile-label {
   width: auto !important;
+  line-height: 30px;
+}
+.profile-label-pass {
+  border-bottom: 0;
+  justify-content: center;
+  padding: 6px 0px 0px 0px !important;
 }
 .profile-label p {
   color: #a2a7b5 !important;
@@ -225,8 +236,9 @@ input[type="number"] {
   top: 20%;
 }
 .profile-select {
-  width: 35%;
-  margin: 0 24px 0 auto;
+  width: 60%;
+  text-align-last: right;
+  margin: 0 5px 0 auto;
   float: right;
   border: none;
   border-color: #d5d5d5;
@@ -243,9 +255,10 @@ input[type="number"] {
   bottom: 0;
   display: none;
   right: 25px;
+  line-height: 12px;
 }
 .profile-tab1-save-btn {
-  margin: 10px 0 60px 0;
+  /* margin: 10px 0 60px 0; */
 }
 .profile-select-deal-banks {
   position: relative;
@@ -363,6 +376,7 @@ input[type="number"] {
 .select-reg-chars {
   margin-left: auto;
   margin-right: 95px;
+  height: 30px;
 }
 .select-reg-chars span {
   border: 2px solid #ddd;
@@ -414,16 +428,27 @@ input[type="number"] {
 }
 
 .keyboard-title {
+  height: 45px;
   border-bottom-color: #fff;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  margin: 5px !important;
-  padding: 8px 0px !important;
+  /* padding: 8px 0px !important; */
   font-weight: 600;
   text-transform: uppercase;
   font-size: 12px;
   text-align: center;
   color: #fff;
+}
+.keyboard-row-1 {
+  line-height: 45px;
+}
+.keyboard-title-left {
+  text-align: left;
+  padding: 0px 20px;
+}
+.keyboard-title-right {
+  text-align: right;
+  padding: 0px 20px;
 }
 .reg-num-modal {
   /* position: absolute !important; */

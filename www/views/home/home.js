@@ -56,7 +56,7 @@
   $scope.getBanner();
 
   // ============= glob ========================
-  $rootScope.alert = function (messege, checkmark) {
+  $rootScope.alert = function (messege, checkmark, then) {
     if (!isEmpty($scope.alertPopup)) {
       $scope.alertPopup.close();
     }
@@ -78,6 +78,9 @@
           text: "OK",
           type: "button-outline button-positive OutbuttonSize OutbuttonSizeFirst button-dc-default",
           onTap: function (e) {
+            if (then == "profile") {
+              $ionicTabsDelegate.$getByHandle("profileTabs").select(1);
+            }
             return true;
           },
         },

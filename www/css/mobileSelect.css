@@ -24,16 +24,20 @@
   display: block;
 }
 .mobileSelect .content {
+  border-radius: 10px 10px 0px 0px;
   width: 100%;
   display: block;
   position: fixed;
   z-index: 889;
-  color: black;
+  /* color: black; */
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
   bottom: -350px;
   left: 0;
-  background: white;
+  background: rgb(159, 209, 58);
+  background: -moz-linear-gradient(24deg, rgba(159, 209, 58, 1) 7%, rgba(63, 194, 243, 1) 100%);
+  background: -webkit-linear-gradient(24deg, rgba(159, 209, 58, 1) 7%, rgba(63, 194, 243, 1) 100%);
+  background: linear-gradient(24deg, rgba(159, 209, 58, 1) 7%, rgba(63, 194, 243, 1) 100%);
 }
 .mobileSelect .content .fixWidth {
   width: 100%;
@@ -68,14 +72,17 @@
   cursor: pointer;
   position: absolute;
   top: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
 }
 .mobileSelect .content .btnBar .cancel {
   left: 0;
-  color: #666;
 }
 .mobileSelect .content .btnBar .ensure {
   right: 0;
-  color: #1e83d3;
 }
 .mobileSelect .content .btnBar .title {
   font-size: 15px;
@@ -96,6 +103,7 @@
   height: 200px;
   overflow: hidden;
   display: flex;
+  color: #fff !important;
 }
 .mobileSelect .content .panel .wheel {
   position: relative;
@@ -116,7 +124,6 @@
   transition: transform 0.18s ease-out, -webkit-transform 0.18s ease-out;
 }
 .mobileSelect .content .panel .wheel .selectContainer li {
-  font-size: 16px;
   display: block;
   height: 40px;
   line-height: 40px;
@@ -125,6 +132,8 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   font-weight: bold;
+  font-size: 22px;
+  font-weight: 200;
 }
 .mobileSelect .content .panel .selectLine {
   height: 40px;
@@ -134,11 +143,11 @@
   pointer-events: none;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  border-top: 2px solid #dcdcdc;
-  border-bottom: 2px solid #dcdcdc;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 .mobileSelect .content .panel .shadowMask {
-  position: absolute;
+  /* position: absolute;
   top: 0;
   width: 100%;
   height: 200px;
@@ -146,7 +155,7 @@
   background: -webkit-linear-gradient(top, #ffffff, rgba(255, 255, 255, 0), #ffffff);
   background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0), #ffffff);
   opacity: 0.9;
-  pointer-events: none;
+  pointer-events: none; */
 }
 .mobileSelect-show {
   opacity: 1;

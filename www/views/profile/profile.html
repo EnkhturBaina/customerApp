@@ -39,7 +39,7 @@
                 <img ng-if="!$root.customerProfilePicture.profilepicture|isEmpty" ng-src="{{$root.customerProfilePicture.profilepicture|guessImageMime}}" height="75px" width="120px" style="border-radius: 50px;" />
             </div>
         </div>
-        <ion-tabs id="profile-tabs-striped" class="tabs-striped tabs-top profile-card-tabs profile-tab profile-tabs-tab">
+        <ion-tabs id="profile-tabs-striped" class="tabs-striped tabs-top profile-card-tabs profile-tab profile-tabs-tab" delegate-handle="profileTabs">
             <!-- Tab 1 -->
             <ion-tab title="Иргэн">
                 <ion-nav-view class="gray-background">
@@ -50,12 +50,12 @@
                                 <input type="text" id="customerLastName" placeholder="Овог" name="lastName" ng-model="$root.customerProfileData.lastname" ng-change="replaceCyr($root.customerProfileData.lastname)" ng-keyup="hideKeyboard($event)" select-on-click />
                                 <span id="lastNameError" class="profile-input-name-error">Та овогоо крилл үсгээр оруулна уу</span>
                             </label>
-                            <label class="item item-input profile-label">
+                            <label class="item item-input profile-label" id="firstNameLabel">
                                 <p>Нэр</p>
                                 <input type="text" id="customerFirstName" placeholder="Нэр" name="firstName" ng-model="$root.customerProfileData.firstname" ng-change="replaceCyr2($root.customerProfileData.firstname)" ng-keyup="hideKeyboard($event)" select-on-click />
                                 <span id="firstNameError" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</span>
                             </label>
-                            <label class="item item-input profile-label">
+                            <label class="item item-input profile-label" id="regLabel">
                                 <p style="overflow: unset;">Регситр</p>
                                 <div class="select-reg-chars">
                                     <span id="regCharA" type="text">A</span>
@@ -63,38 +63,38 @@
                                 </div>
                                 <input type="text" inputmode="numeric" pattern="[0-9]*" id="regNums" class="profileRegSelector" placeholder="00000000" name="uniqueIdentifier" readonly />
                             </label>
-                            <label class="item item-input profile-label">
+                            <label class="item item-input profile-label" id="mailLabel">
                                 <p>И-мэйл хаяг</p>
                                 <input type="text" placeholder="И-мэйл хаяг" name="email" ng-model="$root.customerProfileData.email" ng-keyup="hideKeyboard($event)" select-on-click />
                             </label>
-                            <label class="item item-input profile-label">
+                            <!-- <label class="item item-input profile-label">
                                 <p>Хаяг</p>
                                 <input type="text" placeholder="Хаяг" name="address" ng-model="$root.customerProfileData.address" ng-keyup="hideKeyboard($event)" select-on-click />
-                            </label>
-                            <label class="item item-input profile-label">
+                            </label> -->
+                            <label class="item item-input profile-label" id="phoneLabel">
                                 <p>Утасны дугаар</p>
                                 <input type="text" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" ng-keyup="hideKeyboard($event)" select-on-click />
                             </label>
-                            <label class="item item-input profile-label">
+                            <label class="item item-input profile-label" id="marriageLabel">
                                 <p>Гэрлэсэн эсэх</p>
                                 <select class="profile-select" ng-model="$root.customerProfileData.ismarried">
                                     <option ng-repeat="data in familtStatData | filter:{id:'!!'}" ng-if="data.name" value="{{data.id}}" ng-selected="{{$root.customerProfileData.ismarried==data.id}}">{{data.name}}</option>
                                 </select>
                             </label>
-                            <label class="item item-input profile-label">
+                            <label class="item item-input profile-label" id="mikLabel">
                                 <p>МИК-ийн зээлтэй эсэх</p>
                                 <select class="profile-select" ng-model="$root.customerProfileData.mikmortgagecondition">
                                     <option ng-repeat="md in mortgageData | filter:{id:'!!'}" ng-if="md.name" value="{{md.id}}" ng-selected="{{$root.customerProfileData.mikmortgagecondition==md.id}}">{{md.name}}</option>
                                 </select>
                             </label>
-                            <label class="item item-input profile-label">
+                            <label class="item item-input profile-label" id="workLabel">
                                 <p>Ажилласан жил</p>
                                 <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="experienceperiodid" ng-model="$root.customerProfileData.experienceperiodid" select-on-click />
                             </label>
-                            <label class="item item-input profile-label">
-                                <p style="padding: 6px 0px">Иргэний үнэмлэхний зураг</p>
+                            <label class="item item-input profile-label profile-label-pass">
+                                <p style="padding:0px">Иргэний үнэмлэхний зураг</p>
                             </label>
-                            <div class="item item-input profile-label" style="border: 0; margin-top: 1px">
+                            <div class="item item-input profile-label" style="border: 0;padding: 0px 0px 10px 0px;">
                                 <div class="profile-card-front col-50">
                                     <p style="padding: 6px 0px">Урд тал</p>
                                     <div ng-if="$root.customerProfileData.identfrontpic|isEmpty" style="width: 120px; border-radius: 10px; border: 1px dashed #ccc; height: 75px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
@@ -293,8 +293,9 @@
     <ion-modal-view id="profileKeyContainer" class="reg-num-modal">
         <ion-content scroll="false" class="padding overlay-profile-reg-select-content">
             <div id="keypadReg" cellpadding="5" cellspacing="3">
-                <div class="row">
-                    <div class="col keyboard-title" ng-click="saveRegNums()">Хадгалах</div>
+                <div class="row keyboard-row-1">
+                    <div class="col keyboard-title keyboard-title-left" ng-click="cancelRegNums()">Хаах</div>
+                    <div class="col keyboard-title keyboard-title-right" ng-click="saveRegNums()">Хадгалах</div>
                 </div>
                 <div class="row keypad-row">
                     <div class="col keypad-col" ng-click="addCode('1')">1</div>

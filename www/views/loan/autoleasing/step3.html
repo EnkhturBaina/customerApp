@@ -13,8 +13,9 @@
                             <li class="step-li-44"></li>
                         </ul>
                     </div>
+                    <p class="header-title-step3 ion-color-big-text">Та зээл судлуулах банк, ББСБ-аас 3 хүртэлхийг сонгон илгээнэ үү</p>
                     <div class="bank-list">
-                        <p class="middle-title ion-color-big-text">Анхан шатны шалгуур хангасан банкууд</p>
+                        <p class="middle-title ion-color-big-text">Зээлийн нөхцлийг хангасан банк, ББСБ-ууд</p>
                         <ul class="switch-list">
                             <li ng-repeat="bank in bankListFilter.Agree | filter:{id:'!!'}">
                                 <ion-checkbox ng-model="bank.checked" class="step3-bankList-checkbox-container">
@@ -30,7 +31,7 @@
                     </div>
                     <!-- Shalguur hangaagui bankuud -->
                     <div class="bank-list">
-                        <p class="middle-title ion-color-big-text" style="margin-top: 50px">Анхан шатны шалгуур хангаагүй банкууд</p>
+                        <p class="middle-title ion-color-big-text" style="margin-top: 50px">Зээлийн нөхцлийг хангаагүй банк, ББСБ-ууд</p>
                         <ul class="switch-list">
                             <li ng-repeat="rejectbank in bankListFilter.NotAgree | filter:{id:'!!'}">
                                 <ion-checkbox ng-model="rejectbank.checked">

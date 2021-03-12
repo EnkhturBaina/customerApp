@@ -1,4 +1,4 @@
-angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $ionicHistory, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal, $timeout) {
+angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $ionicHistory, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal, $timeout, $ionicTabsDelegate) {
   $scope.backbutton = function () {
     if (isEmpty($rootScope.loginUserInfo)) {
       $ionicHistory.goBack();
@@ -52,6 +52,8 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $rootScope.customerIncomeProfileData = {};
   $scope.customerId;
 
+  $scope.regNum = "";
+
   $scope.customerEmail;
 
   $rootScope.basePersonData = {};
@@ -75,6 +77,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           $scope.customerProfilePicture.profilepicture = response[0].profilepicture;
           $scope.customerId = response[0].id;
           if (response[0].uniqueidentifier) {
+            $scope.regNum = response[0].uniqueidentifier;
             $("#regCharA").text(response[0].uniqueidentifier.substr(0, 1));
             $("#regCharB").text(response[0].uniqueidentifier.substr(1, 1));
             $("#regNums").val(response[0].uniqueidentifier.substr(2, 8));
@@ -107,26 +110,46 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.getProfileData();
 
   $scope.saveProfileData = function () {
+    document.getElementById("lastNameLabel").style.borderBottom = "1px solid #ddd";
+    document.getElementById("firstNameLabel").style.borderBottom = "1px solid #ddd";
+    document.getElementById("regLabel").style.borderBottom = "1px solid #ddd";
+    document.getElementById("mailLabel").style.borderBottom = "1px solid #ddd";
+    document.getElementById("phoneLabel").style.borderBottom = "1px solid #ddd";
+    document.getElementById("marriageLabel").style.borderBottom = "1px solid #ddd";
+    document.getElementById("mikLabel").style.borderBottom = "1px solid #ddd";
+    document.getElementById("workLabel").style.borderBottom = "1px solid #ddd";
     $scope.customerProfileData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
 
     $rootScope.customerProfileData.crmCustomerId = $rootScope.loginUserInfo.id;
     // $rootScope.customerProfileData.mobilenumber = $rootScope.loginUserInfo.customercode;
     if (isEmpty($scope.customerProfileData.lastname)) {
       $rootScope.alert("Та овогоо оруулна уу", "warning");
+      document.getElementById("lastNameLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.firstname)) {
       $rootScope.alert("Та өөрийн нэрээ оруулна уу", "warning");
+      document.getElementById("firstNameLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.uniqueidentifier)) {
       $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
+      document.getElementById("regLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.email)) {
       $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
-    } else if (isEmpty($scope.customerProfileData.address)) {
-      $rootScope.alert("Хаягаа оруулна уу", "warning");
-    } else if (isEmpty($scope.customerProfileData.mobilenumber)) {
+      document.getElementById("mailLabel").style.borderBottom = "2px solid red";
+    }
+    // else if (isEmpty($scope.customerProfileData.address)) {
+    //   $rootScope.alert("Хаягаа оруулна уу", "warning");
+    // }
+    else if (isEmpty($scope.customerProfileData.mobilenumber)) {
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+      document.getElementById("phoneLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.ismarried)) {
       $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
+      document.getElementById("marriageLabel").style.borderBottom = "2px solid red";
+    } else if (isEmpty($scope.customerProfileData.mikmortgagecondition)) {
+      $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
+      document.getElementById("mikLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
+      document.getElementById("workLabel").style.borderBottom = "2px solid red";
     } else {
       if ($rootScope.isDanLogin) {
         console.log("isDanLogin IF", $rootScope.isDanLogin);
@@ -188,7 +211,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
               });
             });
           }
-          $rootScope.alert("Амжилттай", "success");
+          $rootScope.alert("Амжилттай", "success", "profile");
         });
 
         if (!isEmpty($scope.nextPath)) {
@@ -376,7 +399,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         trigger: ".profileRegSelector",
         wheels: [{ data: regChars }, { data: regChars }],
         position: [0, 0],
-        ensureBtnText: "Болсон",
+        ensureBtnText: "Хадгалах",
         cancelBtnText: "Хаах",
         transitionEnd: function (indexArr, data) {
           //scroll xiij bhd ajillah func
@@ -419,6 +442,12 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else {
       $scope.modal.hide();
     }
+  };
+  $scope.cancelRegNums = function () {
+    $("#regCharA").text($scope.regNum.substr(0, 1));
+    $("#regCharB").text($scope.regNum.substr(1, 1));
+    $("#regNums").val($scope.regNum.substr(2, 8));
+    $scope.modal.hide();
   };
   $ionicModal
     .fromTemplateUrl("templates/modal.html", {

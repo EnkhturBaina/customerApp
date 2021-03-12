@@ -123,6 +123,7 @@
   text-align: left !important;
   font-weight: bold;
   color: #4b5180 !important;
+  text-align-last: center;
 }
 .qr-btn-container {
   display: flex;
@@ -140,7 +141,6 @@
 }
 .qr-btn-container .qr-button {
   background: none;
-  border-top: 1px solid;
   border-bottom: 1px solid;
   border-radius: 10px;
   border-color: #acd322;
@@ -435,7 +435,7 @@
   height: 88%;
 }
 .autoleasing-location-select {
-  width: 35%;
+  width: 65%;
   margin: 0 12px 0 auto;
   float: right;
   border: none;
@@ -444,6 +444,7 @@
   padding: 7px 0px 7px 30px;
   color: #a2a7b5;
   background-color: #fff;
+  text-align-last: right;
 }
 
 .step3-bankList-checkbox-container {
@@ -507,13 +508,24 @@
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 10px;
 }
+.wide-scroll-bank {
+  overflow: scroll;
+  white-space: nowrap;
+}
+.wide-scroll-bank .scroll {
+  display: flex;
+  width: calc(100% - 40px);
+}
+.wide-scroll-bank .scroll-bar {
+  display: none;
+}
 .step1-scan-qr-container {
   display: flex;
   height: 40%;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  margin: 15% 0;
+  margin: 5% 0;
 }
 .step1-code-input-container {
   width: 55vw;
@@ -522,4 +534,13 @@
 .auto-step1-title {
   text-align: center;
   font-size: 12px !important;
+}
+.auto-step1-next-btn {
+  margin-top: 100px !important;
+}
+.header-title-step3 {
+  text-transform: uppercase;
+  color: red !important;
+  text-align: center;
+  font-size: 11px;
 }

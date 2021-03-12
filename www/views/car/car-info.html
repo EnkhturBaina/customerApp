@@ -11,7 +11,7 @@
         <div class="navbar-right-icon">
         </div>
     </ion-header-bar>
-    <div id="paypopup" style="display: none">
+    <!-- <div id="paypopup" style="display: none">
         <span class="qr-popup-close" ng-click="payOff()">&#10006;</span>
         <div class="pay-container">
             <ion-tabs class="tabs-striped tabs-top">
@@ -61,7 +61,7 @@
                 </ion-tab>
             </ion-tabs>
         </div>
-    </div>
+    </div> -->
     <ion-content overflow-scroll="true" class="ion-modified-content car-info-content">
         <div class="big-container">
             <div class="magic-container car-info-contant-card">
@@ -94,9 +94,8 @@
                             <li>Хөтлөгч <span> {{carData.drivetype}} </span></li>
                         </div>
                     </ul>
-                    <button id="collapse-btn" class="collapse-btn" ng-click="collapse();">Дэлгэрэнгүй &#8595;</button>
-                    <button id="uncollapse-btn" class="collapse-btn" ng-click="uncollapse();" style="display: none">Хураангуй
-                        &#8593;</button>
+                    <button id="collapse-btn" class="collapse-btn" ng-click="collapse();">&#8594;</button>
+                    <button id="uncollapse-btn" class="collapse-btn" ng-click="uncollapse();" style="display: none">&#8592;</button>
                 </div>
                 <!-- Busad baraa -->
                 <div class="item-info other-detail-container" ng-show="!isCarDetail">
@@ -114,19 +113,20 @@
                     </ul>
                 </div>
                 <div class="custom-buttons">
-                    <button class="ibutton" ng-click="addtoBasket()"><i class="icon custom-cart-fill car-info-custom-icons"></i>
+                    <!-- <button class="ibutton" ng-click="addtoBasket()"><i class="icon custom-cart-fill car-info-custom-icons"></i>
                         Сагслах</button>
                     <button class="ibutton" ng-click="payOn()"><img class="bustom-icons" src="img/icon/icons8-coin-wallet-96.png" /> Бэлнээр
                         авах</button>
                     <button class="ibutton" ng-click="goAutoleasing();">
                         <img class="bustom-icons" src="img/icon/icons8-mortgage-100.png" /><br />
                         Лизинг
-                    </button>
+                    </button> -->
+                    <button class="button btn single-button" id="Next" ng-click="goAutoleasing();">Үргэлжлүүлэх</button>
                 </div>
             </div>
 
             <div class="bank-container">
-                <p>Банк болон ББСБ -ын зээлээр авах боломжтой</p>
+                <p>Танд зээл олнох боломжтой банк, ББСБ-ууд</p>
                 <img ng-repeat="bank in bankList | filter:{id:'!!'}" ng-src="{{bank.bank_logo|guessImageMime}}" />
 
             </div>
