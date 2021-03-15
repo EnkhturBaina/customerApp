@@ -149,7 +149,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
 
   $scope.saveCarCollRequestData = function () {
-    console.log("AAA", $rootScope.carCollateralRequestData);
+    console.log("saveCarCollRequestData", $rootScope.carCollateralRequestData);
     if ($scope.carCollCheckReqiured("step2")) {
       $state.go("autoleasing-3");
     }

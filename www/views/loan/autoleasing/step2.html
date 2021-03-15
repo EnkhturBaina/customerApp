@@ -74,7 +74,7 @@
                                     Үйлчилгээний нөхцлийг зөвшөөрөх
                                     <span>
                                         <label class="step2-switch" id="step2isAgree">
-                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" ng-change="changeEvent($root.newReqiust.serviceAgreementId)" />
+                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-checked="agreementChecked" ng-model="$root.newReqiust.serviceAgreementId" ng-change="changeEvent($root.newReqiust.serviceAgreementId)" />
                                             <div class="step2-slider step2-round">
                                                 <span id="step2-toggle-on" class="step2-on">Тийм</span>
                                                 <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
@@ -85,7 +85,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="items" ng-if="$root.requestType == 'autoColl'">
+                    <!-- <div class="items" ng-if="$root.requestType == 'autoColl'">
                         <p class="middle-title ion-color-big-text">Барааны мэдээлэл</p>
                         <ul>
                             <li>
@@ -114,7 +114,7 @@
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="container-padding">
                     <p class="middle-title agree-banks">ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГАСАН БАНК, ББСБ-УУД</p>

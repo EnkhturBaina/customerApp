@@ -7,6 +7,9 @@
 * {
   font-family: "Nunito", sans-serif !important;
 }
+i {
+  font-family: "FontAwesome", sans-serif !important;
+}
 .cus-header-icon {
   color: #000 !important;
   padding: 0 5px !important;
@@ -211,7 +214,7 @@ h4 {
   background: linear-gradient(86deg, rgba(147, 207, 81, 1) 21%, rgba(100, 199, 174, 1) 90%);
   filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#93cf51", endColorstr="#64c7ae", GradientType=1);
   color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   width: 140px;
   height: 35px;
   margin: 0 auto;
@@ -231,7 +234,7 @@ h4 {
   background: linear-gradient(119deg, rgba(86, 197, 198, 1) 55%, rgba(61, 192, 250, 1) 100%);
   filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#56c5c6", endColorstr="#3dc0fa", GradientType=1);
   color: white;
-  border-radius: 5px;
+  border-radius: 10px;
   width: 140px;
   height: 35px;
   margin: 0 auto;

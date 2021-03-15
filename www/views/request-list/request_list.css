@@ -1,5 +1,5 @@
 .bank-card {
-  padding: 0px 5px !important;
+  padding: 5px 10px !important;
 }
 .loan-card-badge {
   /* position: fixed !important;
@@ -76,4 +76,10 @@
 }
 .req-list-date {
   font-size: 14px;
+}
+.request-list-card {
+  margin: 10px 20px !important;
+}
+.req-list-title {
+  margin: 10px 20px !important;
 }

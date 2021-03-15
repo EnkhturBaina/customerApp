@@ -32,6 +32,7 @@ var app = angular
     "loan_calculator.Ctrl",
     "notif.Ctrl",
     "notif_detail.Ctrl",
+    "term.Ctrl",
   ])
   .run(function ($ionicPlatform, $state, $cordovaSplashscreen) {
     $ionicPlatform.ready(function () {
@@ -264,6 +265,11 @@ var app = angular
       url: "/views/loan/danselect/danselect",
       templateUrl: "views/loan/danselect/danselect.html",
       controller: "danselectCtrl",
+    });
+    $stateProvider.state("term", {
+      url: "/views/term",
+      templateUrl: "views/term/term.html",
+      controller: "termCtrl",
     });
     $urlRouterProvider.otherwise("/views/home");
   })

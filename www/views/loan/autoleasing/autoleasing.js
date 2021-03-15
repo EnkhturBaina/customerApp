@@ -63,6 +63,7 @@
   $scope.getLookupData();
 
   $scope.getbankData = function () {
+    console.log("$rootScope.newReqiust.advancePayment", $rootScope.newReqiust.advancePayment);
     //Шүүгдсэн банкууд
     $rootScope.bankListFilter = [];
     var json = {};
@@ -390,7 +391,7 @@
 
   $scope.selectBankInfo = function (bank) {
     $rootScope.selectedBank = bank;
-    $state.go("autoleasing-bank-info");
+    // $state.go("autoleasing-bank-info");
   };
 
   //other
