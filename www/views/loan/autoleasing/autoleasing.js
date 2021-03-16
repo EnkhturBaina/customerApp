@@ -1,4 +1,4 @@
-﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout) {
+﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal) {
   $rootScope.requestType = "";
   $rootScope.requestType = localStorage.getItem("requestType");
 
@@ -523,4 +523,13 @@
   };
 
   $scope.loanAmountDisable();
+  // MODAL
+  $ionicModal
+    .fromTemplateUrl("templates/term-modal.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (modal) {
+      $scope.modal = modal;
+    });
 });

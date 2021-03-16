@@ -129,7 +129,8 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
     $rootScope.hideFooter = true;
   };
   $scope.gotoDanLogin = function () {
-    serverDeferred.carCalculation({ type: "auth", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
+    serverDeferred.carCalculation({ type: "auth_another", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
+      console.log("response v1 c", response);
       $rootScope.stringHtmlsLink = response.result.data;
 
       // window.open(, "_system", "location=yes");
@@ -149,6 +150,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
 
         if (code == 0) {
           serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://services.digitalcredit.mn/api/sso/check").then(function (response) {
+            console.log("res", response);
             var userInfo = response.result.data.info;
             if (!isEmpty(userInfo)) {
               $scope.registerFunction(JSON.parse(userInfo));

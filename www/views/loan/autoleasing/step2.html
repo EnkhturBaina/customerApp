@@ -1,11 +1,11 @@
 <ion-view id="loanPages" hide-footer-bar="true" hide-nav-bar="true" cache-view="false">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+    <link href="views/term/term.css" rel="stylesheet" />
     <ion-header-bar align-title="left" class="navbar" style="background: none">
         <div class="title ion-color-big-text navbar-back-button" style="background: none">
             <button ng-click="backFromStep2()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
                 <i class="ion-chevron-left ion-color-header"></i>
-                <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Хүсэлт
-                        илгээх</span></span>
+                <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Хүсэлт илгээх</span></span>
             </button>
         </div>
         <div class="navbar-right-icon">
@@ -70,7 +70,7 @@
                                         </label>
                                     </span>
                                 </li>
-                                <li>
+                                <li ng-click="modal.show()">
                                     Үйлчилгээний нөхцлийг зөвшөөрөх
                                     <span>
                                         <label class="step2-switch" id="step2isAgree">
@@ -142,6 +142,14 @@
         </div>
     </ion-content>
 </ion-view>
+<script id="templates/term-modal.html" type="text/ng-template">
+  <ion-modal-view class="term-chat-modal">
+    <ion-content class="padding bank-chat-content">
+        <span class="term-modal-off-text" ng-click="modal.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <div class="term-modal-include" ng-include src="'views/term/term-content.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>
 <style>
     .bank-card {
         padding: 0px 5px !important;
