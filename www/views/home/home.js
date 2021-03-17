@@ -153,4 +153,9 @@
   if (!isEmpty($rootScope.loginUserInfo)) {
     $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
   }
+  $rootScope.focusInput = function (getId) {
+    console.log("A", document.getElementById(`${getId}`));
+    document.getElementById(`${getId}`).focus();
+    document.getElementById("sendRequestAdvancePayment").focus();
+  };
 });

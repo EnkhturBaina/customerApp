@@ -264,9 +264,6 @@
   background: #fff;
   border-color: #acd322;
 }
-.step-4-container > .bottom-footer {
-  padding: 0px !important;
-}
 #keypad {
   margin: auto;
   width: 100%;
@@ -300,40 +297,6 @@
 .backspace ::before {
   content: "\2190";
 }
-.keyboard-title {
-  border-bottom-color: #fff;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  margin: 5px !important;
-  padding: 8px 0px !important;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 12px;
-  text-align: center;
-  color: #fff;
-}
-.money-container {
-  width: 70%;
-  position: absolute;
-  left: 50%;
-  top: 25%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-.money-container span {
-  color: #7e7e7e;
-}
-.money-container input {
-  background: #f8f8fe;
-  width: 100%;
-  border-bottom: 1px solid #7e7e7e;
-  font-weight: bold;
-  font-size: 22px;
-  color: #747474;
-  text-align: right;
-  padding-bottom: 0px;
-  padding-right: 50px;
-}
 .input-container {
   padding-top: 20px;
 }
@@ -347,20 +310,6 @@
   color: #b2b2b2;
   right: 0;
   text-align: right;
-}
-.keypad-col {
-  text-align: center;
-  border-bottom-color: #fff;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  font-size: 30px;
-  font-weight: 200;
-  margin: 0px 30px;
-  color: #fff;
-  line-height: initial;
-}
-.keypad-row {
-  padding: 10px 15px !important;
 }
 .items {
   margin: 20px 0 20px 0;
@@ -477,29 +426,6 @@
   border-radius: 5px;
   margin-top: 15px;
   padding: 0px 0px 0px 16px !important;
-}
-#step4-key {
-  position: fixed;
-  display: block;
-  width: 100%;
-  height: 70vh;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: transparent;
-  z-index: 99;
-  cursor: pointer;
-  margin: 0 auto;
-}
-.overlay-step4-content {
-  color: #000;
-  font-size: 12px;
-  position: absolute;
-  margin: 0 auto;
-  width: 100%;
-  bottom: 0;
-  text-align: center;
-  padding-bottom: 50px;
 }
 .step1-card-content {
   background-color: #fff;

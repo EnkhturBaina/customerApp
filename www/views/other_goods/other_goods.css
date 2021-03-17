@@ -90,22 +90,6 @@
   padding: 0px !important;
   /* margin-bottom: 35% !important; */
 }
-
-.money-container span {
-  color: #7e7e7e;
-}
-
-.money-container input {
-  background: #f8f8fe;
-  width: 100%;
-  border-bottom: 1px solid #7e7e7e;
-  font-weight: bold;
-  font-size: 22px;
-  color: #747474;
-  text-align: right;
-  padding-bottom: 0px;
-  padding-right: 50px;
-}
 .input-container span {
   padding: 9px 8px 8px 8px;
   font-weight: bold;

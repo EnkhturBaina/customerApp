@@ -63,7 +63,6 @@
   $scope.getLookupData();
 
   $scope.getbankData = function () {
-    console.log("$rootScope.newReqiust.advancePayment", $rootScope.newReqiust.advancePayment);
     //Шүүгдсэн банкууд
     $rootScope.bankListFilter = [];
     var json = {};
@@ -97,7 +96,7 @@
         });
       }
     }
-    console.log("json", json);
+    // console.log("json", json);
   };
 
   //Банк шүүлт autoleasing-2 дээр шууд ажиллах
@@ -134,7 +133,6 @@
   $rootScope.selectedBankSuccess = "";
   $rootScope.carCollateralData = {};
   $rootScope.consumerData = [];
-  $scope.perOfAdvancePayment;
   var selectedbanks = [];
 
   $scope.sendRequest = async function () {
@@ -148,7 +146,6 @@
       $scope.carCollateralData.customerId = $rootScope.loginUserInfo.customerid;
 
       $scope.carCollateralRequestData.customerId = $rootScope.loginUserInfo.customerid;
-      // $scope.carCollateralRequestData.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
 
       //Хүсэлт бүртгэх
       serverDeferred.requestFull("dcApp_carCollRequestDV_001", $scope.carCollateralRequestData).then(function (sendReqResponse) {
@@ -228,7 +225,6 @@
       $scope.consumerData = JSON.parse(localStorage.getItem("otherGoods"));
 
       $scope.newReqiust.customerId = $rootScope.loginUserInfo.customerid;
-      // $scope.newReqiust.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
 
       console.log("$scope.newReqiust", $scope.newReqiust);
       //Хүсэлт бүртгэх
@@ -310,9 +306,7 @@
     } else {
       console.log("AUTO LEASING SEND REQUEST");
       //==================AutoLeasing===================
-      // if ($scope.checkReqiured("step4")) {
       $scope.newReqiust.customerId = $rootScope.loginUserInfo.customerid;
-      // $scope.newReqiust.perOfAdvancePayment = $scope.perOfAdvancePayment.replace(/,/g, "");
 
       serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
         console.log("save REQUEST response AUTO LEASING", response);
@@ -370,7 +364,6 @@
           $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
         }
       });
-      // }
     }
   };
 
@@ -425,15 +418,6 @@
         return true;
       }
     }
-    // else if (param == "step4") {
-    //   if (input.value === "0" || input.value === 0 || input.value === "") {
-    //     $rootScope.alert("Та сард төлөх боломжтой дүнгээ оруулна уу", "warning");
-    //     return false;
-    //   } else {
-    //     $rootScope.newReqiust.perOfAdvancePayment = parseInt(input.value);
-    //     return true;
-    //   }
-    // }
   };
 
   $scope.getCustomerId = function () {
@@ -453,29 +437,6 @@
       growDiv.style.height = wrapper.clientHeight + "px";
     }
   };
-  var input = document.getElementById("inputId");
-  if (input) {
-    function addThousandsSeparator(x) {
-      retVal = x ? parseFloat(x.replace(/,/g, "")) : 0;
-      return retVal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    $scope.clearD = function () {
-      input.value = input.value.slice(0, input.value.length - 1);
-    };
-
-    $scope.addCode = function (key) {
-      input.value = addThousandsSeparator(input.value + key);
-      // $scope.perOfAdvancePayment = input.value;
-    };
-
-    $scope.emptyCode = function () {
-      input.value = "";
-    };
-
-    $scope.emptyCode();
-  }
-
   $scope.calcLoanAmount = function () {
     var input = document.getElementById("sendRequestAdvancePayment");
     $scope.getLoanAmount = $rootScope.loanAmountField;
@@ -483,12 +444,31 @@
       $scope.getLoanAmount = $scope.getLoanAmount - parseFloat($rootScope.newReqiust.advancePayment);
       $rootScope.newReqiust.loanAmount = $scope.getLoanAmount;
     } else {
-      // input.value = $scope.loanAmountField;
       input.value = input.value.slice(0, input.value.length - 1);
       input.value = $rootScope.loanAmountField - input.value;
-      // $scope.getLoanAmount = 0;
     }
   };
+  // $scope.calcLoanAmount = function () {
+  //   var input = document.getElementById("sendRequestAdvancePayment");
+  //   console.log("input.value", input.value);
+
+  //   var inputVal = parseFloat(input.value);
+  //   console.log("inputVal", inputVal);
+
+  //   $scope.getLoanAmount = parseFloat($rootScope.loanAmountField);
+  //   console.log("$scope.getLoanAmount", $scope.getLoanAmount);
+
+  //   if ($scope.getLoanAmount >= inputVal || inputVal == 0) {
+  //     console.log("IFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+  //     $scope.getLoanAmount = $scope.getLoanAmount - input.value;
+  //     $rootScope.newReqiust.loanAmount = $scope.getLoanAmount;
+  //   } else {
+  //     console.log("ELSEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+  //     input.value = input.value.slice(0, input.value.length - 1);
+  //     input.value = $rootScope.loanAmountField - input.value;
+  //   }
+  //   console.log("**************************************************");
+  // };
 
   $scope.backFromStep2 = function () {
     var local = localStorage.getItem("requestType");

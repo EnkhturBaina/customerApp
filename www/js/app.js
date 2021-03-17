@@ -146,11 +146,6 @@ var app = angular
       templateUrl: "views/loan/autoleasing/step3-bank-info.html",
       controller: "autoleasingCtrl",
     });
-    $stateProvider.state("autoleasing-4", {
-      url: "/views/autoleasing-4",
-      templateUrl: "views/loan/autoleasing/step4.html",
-      controller: "autoleasingCtrl",
-    });
     $stateProvider.state("business_loan", {
       url: "/views/business_loan",
       templateUrl: "views/loan/business_loan/business_loan.html",
@@ -409,7 +404,16 @@ var app = angular
         },
       };
     },
-  ]);
+  ])
+  .directive("focusMe", function ($timeout) {
+    return {
+      link: function (scope, element, attrs) {
+        $timeout(function () {
+          element[0].focus();
+        }, 150);
+      },
+    };
+  });
 
 function numOnly() {
   var directive = {
