@@ -337,3 +337,25 @@
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 10px;
 }
+.consumer-img-list-grid {
+  border-radius: 12px;
+  border: 1px dashed #ccc;
+  height: 100px;
+  text-align: center;
+  font-size: 46px;
+  color: #ccc;
+  line-height: 95px;
+}
+.consumer-uploaded-img {
+  width: 100% !important;
+  height: 100px !important;
+  border-radius: 12px;
+}
+.consumer-img {
+  width: 100% !important;
+  height: 110px !important;
+  border-radius: 12px;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}

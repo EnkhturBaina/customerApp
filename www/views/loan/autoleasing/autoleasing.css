@@ -470,16 +470,33 @@
   text-align: center;
   font-size: 11px;
 }
-.term-chat-modal{
+.term-chat-modal {
   background: transparent !important;
 }
-.term-modal-off-text{
+.term-chat-modal .term-card {
+  height: 80vh !important;
+  margin: 40px 0px 10px 0px !important;
+}
+.term-modal-off-text {
   right: 6%;
   position: absolute;
-  top: 5%;
+  top: 2%;
   zoom: 1.2;
   z-index: 99;
 }
-.term-modal-include{
-  padding: 20px;
+.term-modal-include {
+  padding: 15px;
+}
+.step2-span {
+  font-weight: normal !important;
+  padding: 0px 5px 0px 5px !important;
+  white-space: inherit !important;
+  text-align: left !important;
+  color: #606060 !important;
+  border-radius: 0px !important;
+}
+
+.step2-term {
+  border-bottom: 1px solid #acd322;
+  border-bottom-style: dotted;
 }

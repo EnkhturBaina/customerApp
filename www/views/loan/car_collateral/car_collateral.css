@@ -287,3 +287,6 @@
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 10px;
 }
+.car-coll-req {
+  color: red;
+}

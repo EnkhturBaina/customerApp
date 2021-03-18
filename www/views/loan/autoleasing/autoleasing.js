@@ -1,4 +1,4 @@
-﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal) {
+﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal, $ionicLoading) {
   $rootScope.requestType = "";
   $rootScope.requestType = localStorage.getItem("requestType");
 
@@ -140,6 +140,7 @@
     console.log("$rootScope.requestType", $rootScope.requestType);
     if ($rootScope.requestType == "autoColl") {
       console.log("autoColl LEASING SEND REQUEST");
+      $rootScope.ShowLoader();
       //===================Авто машин барьцаалсан зээл===================
       $scope.carCollateralData = JSON.parse(localStorage.getItem("carColl"));
 
@@ -206,6 +207,7 @@
               $timeout(function () {
                 if (sendReqResponse[0] == "success" && sendReqResponse[1] != "" && mapBankSuccess) {
                   localStorage.removeItem("carColl");
+                  $ionicLoading.hide();
                   $state.go("loan_success");
                 } else {
                   $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
@@ -221,6 +223,7 @@
       }); /*8888888888888888888888888888*/
     } else if ($rootScope.requestType == "consumer") {
       console.log("CONSUMER LEASING SEND REQUEST");
+      $rootScope.ShowLoader();
       //==================Хэрэглээний лизинг===================
       $scope.consumerData = JSON.parse(localStorage.getItem("otherGoods"));
 
@@ -280,7 +283,16 @@
           $scope.consumerData.map((product) => {
             product.leasingId = response[1].id;
             if (product.picture1) {
-              product.picture1 = product.image.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
+              product.picture1 = product.picture1.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
+            }
+            if (product.picture2) {
+              product.picture2 = product.picture2.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
+            }
+            if (product.picture3) {
+              product.picture3 = product.picture3.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
+            }
+            if (product.picture4) {
+              product.picture4 = product.picture4.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
             }
             //Бүтээгдэхүүн бүртгэх
             serverDeferred.requestFull("dcApp_consumer_loan_001", product).then(function (responseProduct) {
@@ -289,6 +301,7 @@
                 localStorage.removeItem("otherGoods");
                 localStorage.removeItem("consumerRequestData");
                 localStorage.removeItem("otherGoodsMaxId");
+                $ionicLoading.hide();
                 $state.go("loan_success");
               } else {
                 $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
@@ -305,6 +318,7 @@
       //===================Үл хөдлөх барьцаат зээл===================
     } else {
       console.log("AUTO LEASING SEND REQUEST");
+      $rootScope.ShowLoader();
       //==================AutoLeasing===================
       $scope.newReqiust.customerId = $rootScope.loginUserInfo.customerid;
 
@@ -355,6 +369,7 @@
           serverDeferred.requestFull("dcApp_request_product_dv_with_detail_001", onlineLeasingProduct).then(function (response) {
             console.log("save BANKS response AUTO LEASING", response);
             if (response[0] == "success" && response[1] != "") {
+              $ionicLoading.hide();
               $state.go("loan_success");
             } else {
               $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");

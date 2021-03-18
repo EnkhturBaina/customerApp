@@ -353,7 +353,7 @@ var app = angular
           element.on("click", function () {
             if (!$window.getSelection().toString()) {
               // Required for mobile Safari
-              this.setSelectionRange(0, this.value.length);
+              if (!isEmpty(this.value)) this.setSelectionRange(0, this.value.length);
             }
           });
         },

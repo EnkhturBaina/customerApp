@@ -59,7 +59,7 @@
                         <div class="switch-input-container">
                             <ul class="switch-list">
                                 <li ng-if="collateralConditionId">
-                                    Урьдчилгаа төлбөрт ҮХХөрөнгө барьцаалах эсэх
+                                    <span class="step2-span">Урьдчилгаа төлбөрт ҮХХөрөнгө барьцаалах эсэх</span>
                                     <span>
                                         <label class="step2-switch" id="step2isCollateral">
                                             <input type="checkbox" id="step2-isColBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.collateralConditionId" ng-change="changeEvent($root.newReqiust.collateralConditionId);getbankData();" />
@@ -70,8 +70,8 @@
                                         </label>
                                     </span>
                                 </li>
-                                <li ng-click="modal.show()">
-                                    Үйлчилгээний нөхцлийг зөвшөөрөх
+                                <li>
+                                    <span class="step2-span step2-term" ng-click="modal.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
                                     <span>
                                         <label class="step2-switch" id="step2isAgree">
                                             <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-checked="agreementChecked" ng-model="$root.newReqiust.serviceAgreementId" ng-change="changeEvent($root.newReqiust.serviceAgreementId)" />

@@ -157,12 +157,15 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
 
   $scope.carCollCheckReqiured = function (param) {
     if (param == "step1") {
-      // if (isEmpty($rootScope.newCarReq.carCategoryId) || isEmpty($rootScope.newCarReq.brandId) || isEmpty($rootScope.newCarReq.markId) || isEmpty($rootScope.newCarReq.mile) || isEmpty($rootScope.newCarReq.engineId) || isEmpty($rootScope.newCarReq.engineCapacity) || isEmpty($rootScope.newCarReq.transmissionId) || isEmpty($rootScope.newCarReq.driveTypeId) || isEmpty($rootScope.newCarReq.steeringWheelId) || isEmpty($rootScope.newCarReq.carDoorCount) || isEmpty($rootScope.newCarReq.manufacturedYearId) || isEmpty($rootScope.newCarReq.cameYearId) || isEmpty($rootScope.newCarReq.carColorId)) {
-      //   $rootScope.alert("Мэдээллээ бүрэн оруулна уу", "warning");
-      //   return false;
-      // } else {
-      //   return true;
-      // }
+      if (isEmpty($rootScope.newCarReq.carCategoryId) || isEmpty($rootScope.newCarReq.brandId) || isEmpty($rootScope.newCarReq.markId) || isEmpty($rootScope.newCarReq.manufacturedYearId) || isEmpty($rootScope.newCarReq.cameYearId)) {
+        $rootScope.alert("Мэдээллээ бүрэн оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newCarReq.itemPic)) {
+        $rootScope.alert("Автомашины зураг оруулна уу", "warning");
+        return false;
+      } else {
+        return true;
+      }
       return true;
     } else if (param == "step2") {
       if (isEmpty($rootScope.carCollateralRequestData.loanAmount)) {
@@ -182,6 +185,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       }
       return true;
     }
+    console.log("$root.newCarReq.itemPic", $root.newCarReq.itemPic);
   };
   $scope.takePhoto = function (type) {
     var srcType = Camera.PictureSourceType.CAMERA;

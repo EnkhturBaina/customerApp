@@ -12,7 +12,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       $rootScope.alert("Та барааны нийлүүлэгчийг сонгоно уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.categoryId)) {
       $rootScope.alert("Та барааны төрөл өө сонгоно уу", "warning");
-    } else if (isEmpty($rootScope.newCarReq.image)) {
+    } else if (isEmpty($rootScope.newCarReq.picture1)) {
       $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
     } else {
       try {
@@ -31,8 +31,8 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
         localStorage.setItem("otherGoods", JSON.stringify($rootScope.otherGoods));
         $rootScope.newCarReq = {};
 
-        document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(../../img/note-20.png)";
-        document.getElementsByClassName("img-input-area")[0].style.opacity = "0.5";
+        // document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(../../img/note-20.png)";
+        // document.getElementsByClassName("img-input-area")[0].style.opacity = "0.5";
         $scope.showPopup();
       } catch (ex) {}
       // var image = "jpg♠" + $rootScope.newCarReq.image.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
@@ -101,6 +101,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
   $scope.getLookUpData();
   $scope.goodsSourceSelectOn = function (path) {
     $scope.selectedImagePath = path;
+    console.log("$scope.selectedImagePath", $scope.selectedImagePath);
     document.getElementById("overlayItemPicGoods").style.display = "block";
   };
   $scope.goodsSourceSelectOff = function () {
@@ -116,9 +117,9 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
         if (isEmpty($rootScope.newCarReq)) {
           $rootScope.newCarReq = {};
         }
-        $rootScope.newCarReq.image = "data:image/jpeg;base64," + imageData;
-        document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(" + $rootScope.newCarReq.image + ")";
-        document.getElementsByClassName("img-input-area")[0].style.opacity = "1";
+        $rootScope.newCarReq[$scope.selectedImagePath] = "data:image/jpeg;base64," + imageData;
+        document.getElementsByClassName("img-input-area-" + $scope.selectedImagePath + "")[0].style.backgroundImage = "url(" + $rootScope.newCarReq[$scope.selectedImagePath] + ")";
+        document.getElementsByClassName("img-input-area-" + $scope.selectedImagePath + "")[0].style.opacity = "1";
         $scope.$apply();
       },
       function onFail(message) {},

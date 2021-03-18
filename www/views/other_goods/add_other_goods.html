@@ -19,8 +19,38 @@
                         <span class="ion-color-text">Та барааны шинж чанарыг харуулахуйц бүтэн зургийг оруулна уу</span>
                     </div>
                     <div class="">
-                        <div class="img-input-area" ng-click="goodsSourceSelectOn()">
+                        <!-- <div class="img-input-area" ng-click="goodsSourceSelectOn()">
                             <span class="add-ico" ng-if="($root.newCarReq.image|isEmpty)">+</span>
+                        </div> -->
+                        <div class="consumer-img-list">
+                            <div class="row">
+                                <div class="col col-50 consumer-img img-input-area-picture1" ng-click="goodsSourceSelectOn('picture1')">
+                                    <div ng-if="!$root.newCarReq.picture1" width="100px" height="75px" class="consumer-img-list-grid">
+                                        +
+                                    </div>
+                                    <!-- <img ng-if="$root.newCarReq.picture1" ng-src="{{$root.newCarReq.picture1|guessImageMime}}" class="consumer-uploaded-img" /> -->
+                                </div>
+                                <div class="col col-50 consumer-img img-input-area-picture2" ng-click="goodsSourceSelectOn('picture2')">
+                                    <div ng-if="!$root.newCarReq.picture2" width="100px" height="75px" class="consumer-img-list-grid">
+                                        +
+                                    </div>
+                                    <!-- <img ng-if="$root.newCarReq.picture2" ng-src="{{$root.newCarReq.picture2|guessImageMime}}" class="consumer-uploaded-img" /> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-50 consumer-img img-input-area-picture3" ng-click="goodsSourceSelectOn('picture3')">
+                                    <div ng-if="!$root.newCarReq.picture3" width="100px" height="75px" class="consumer-img-list-grid">
+                                        +
+                                    </div>
+                                    <!-- <img ng-if="$root.newCarReq.picture3" ng-src="{{$root.newCarReq.picture3|guessImageMime}}" class="consumer-uploaded-img" /> -->
+                                </div>
+                                <div class="col col-50 consumer-img img-input-area-picture4" ng-click="goodsSourceSelectOn('picture4')">
+                                    <div ng-if="!$root.newCarReq.picture4" width="100px" height="75px" class="consumer-img-list-grid">
+                                        +
+                                    </div>
+                                    <!-- <img ng-if="$root.newCarReq.picture4" ng-src="{{$root.newCarReq.picture4|guessImageMime}}" class="consumer-uploaded-img" /> -->
+                                </div>
+                            </div>
                         </div>
                         <div class="selector-container">
                             <span class="title">Бараа нийлүүлэгч</span>
@@ -35,7 +65,7 @@
                             </select>
                         </div>
                         <div class="selector-container">
-                            <span class="title">Үнэ</span>
+                            <span class="title">Барааны үнэ</span>
                             <div class="search-input-container">
                                 <span class="search-input-icon">₮</span>
                                 <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.newCarReq.unitPrice" name="" class="search-input-type ng-pristine ng-untouched ng-valid ng-valid-pattern" format-input ng-keyup="hideKeyboard($event)" />

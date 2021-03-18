@@ -72,7 +72,7 @@
   text-transform: capitalize;
 }
 .request-list-content {
-  height: 88%;
+  /* height: 88%; */
 }
 .req-list-date {
   font-size: 14px;
@@ -82,4 +82,13 @@
 }
 .req-list-title {
   margin: 10px 20px !important;
+}
+.request-list-more {
+  float: right;
+  background: #acd322;
+  width: fit-content;
+  border-radius: 12px;
+  padding: 0 5px;
+  color: #fff !important;
+  font-weight: bold;
 }
