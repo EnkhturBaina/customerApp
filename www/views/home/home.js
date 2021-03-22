@@ -1,4 +1,4 @@
-﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $timeout) {
+﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $timeout, $ionicPlatform) {
   // $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
   // $rootScope.imagePath = "https://dev.veritech.mn/";
   $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
@@ -150,12 +150,16 @@
 
   $rootScope.loginUserInfo = {};
   $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
-  if (!isEmpty($rootScope.loginUserInfo)) {
+  console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+  if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
     $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
   }
   $rootScope.focusInput = function (getId) {
-    console.log("A", document.getElementById(`${getId}`));
     document.getElementById(`${getId}`).focus();
     document.getElementById("sendRequestAdvancePayment").focus();
   };
+  //Утасны back button
+  $ionicPlatform.onHardwareBackButton(function () {
+    $rootScope.hideFooter = false;
+  });
 });

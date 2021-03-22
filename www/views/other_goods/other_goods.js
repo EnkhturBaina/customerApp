@@ -31,7 +31,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $rootScope.calcTotalPrice();
 
   $scope.nexClivk = function () {
-    if ($rootScope.otherGoodsData.length >= 1) {
+    if (!isEmpty($rootScope.otherGoodsData)) {
       var next = $rootScope.checkLoginUserDatas("otherGoods", "autoleasing-2");
       $state.go(next.now, { path: next.nextpath });
       // $state.go("autoleasing-2");

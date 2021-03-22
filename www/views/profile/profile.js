@@ -69,7 +69,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     if (!isEmpty($rootScope.loginUserInfo)) {
       console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: $rootScope.loginUserInfo.id }).then(function (response) {
-        console.log("getProfileData", response);
+        console.log("get Profile Data response", response);
         $rootScope.hideFooter = true;
         if (response[0] != "") {
           $rootScope.customerProfileData = response[0];
@@ -89,7 +89,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
               $rootScope.customerIncomeProfileData = response[0];
               $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
 
-              // localStorage.removeItem("loginUserInfo");
+              localStorage.removeItem("loginUserInfo");
               localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
 
               console.log("old user income");
@@ -166,6 +166,8 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         console.log("response customerProfileData", response);
         $rootScope.loginUserInfo = mergeJsonObjs($scope.customerProfileData, $rootScope.loginUserInfo);
 
+        $rootScope.sidebarUserName = response[1].lastname.substr(0, 1) + ". " + response[1].firstname;
+
         localStorage.removeItem("loginUserInfo");
         localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
 
@@ -212,6 +214,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
             });
           }
           $rootScope.alert("Амжилттай", "success", "profile");
+          $scope.getProfileData();
         });
 
         if (!isEmpty($scope.nextPath)) {
@@ -263,8 +266,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerIncomeProfileData.monthlypayment)) {
       $rootScope.alert("Та төлж буй зээлийн дүнгээ оруулна уу", "warning");
     } else {
-      // $scope.getProfileData();
-
       $timeout(function () {
         if ($scope.customerIncomeProfileData != "") {
           if ($rootScope.isDanLogin) {

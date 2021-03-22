@@ -17,6 +17,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
     if (!isEmpty($rootScope.loginUserInfo)) {
       $rootScope.ShowLoader();
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597814217394980", crmCustomerId: $rootScope.loginUserInfo.id }).then(function (response) {
+        console.log("res", response);
         $ionicLoading.hide();
         if (isEmpty(response)) {
           $scope.isEmpty = true;

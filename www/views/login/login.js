@@ -226,9 +226,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
       });
     });
   };
-  $scope.backShowFooter = function () {
-    $rootScope.hideFooter = true;
-  };
   $scope.closeHtmlBindBluetooth = function () {
     $scope.htmlBindModel.remove();
   };

@@ -121,6 +121,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     console.log("json", json);
   };
 
+  localStorage.removeItem("carColl");
   $scope.saveCarCol = function () {
     if (isEmpty($rootScope.newCarReq)) {
       $rootScope.newCarReq = {};
