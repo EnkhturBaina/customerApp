@@ -1,4 +1,4 @@
-﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $timeout, $ionicPlatform) {
+﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform) {
   // $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
   // $rootScope.imagePath = "https://dev.veritech.mn/";
   $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
@@ -160,6 +160,37 @@
   };
   //Утасны back button
   $ionicPlatform.onHardwareBackButton(function () {
+    console.log("onHardwareBackButton Утасны back button");
     $rootScope.hideFooter = false;
   });
+
+  $ionicPlatform.registerBackButtonAction(function (e) {
+    e.preventDefault();
+    // Is there a page to go back to?
+    if ($ionicHistory.viewHistory().backView) {
+      // Go back in history
+      $ionicHistory.viewHistory().backView.go();
+    } else {
+      // This is the last page: Show confirmation popup
+      $ionicPopup.show({
+        template: "<b>Апп -г хаах уу ?</b>",
+        cssClass: "confirmPopup",
+        buttons: [
+          {
+            text: "Үгүй",
+            type: "button-decline",
+          },
+          {
+            text: "Тийм",
+            type: "button-confirm",
+            onTap: function () {
+              ionic.Platform.exitApp();
+            },
+          },
+        ],
+      });
+    }
+
+    return false;
+  }, 101);
 });

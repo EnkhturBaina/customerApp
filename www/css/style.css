@@ -836,6 +836,7 @@ h4 {
 .tugrug-input {
   margin: 14px 0;
   position: relative;
+  z-index: 99;
 }
 .tugrug-input .title {
   margin: 0 10px;
@@ -843,6 +844,9 @@ h4 {
   top: 20%;
   margin-left: 30px;
   color: #606060;
+}
+.input-label-front {
+  z-index: -1;
 }
 .input-tugrug-icon {
   padding: 7px 0px 7px 0px;
