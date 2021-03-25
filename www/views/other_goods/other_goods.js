@@ -33,12 +33,13 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $scope.nexClivk = function () {
     if (!isEmpty($rootScope.otherGoodsData)) {
       var next = $rootScope.checkLoginUserDatas("otherGoods", "autoleasing-2");
+      localStorage.setItem("requestType", "consumer");
       $state.go(next.now, { path: next.nextpath });
+      $rootScope.getLoanAmountFunc();
       // $state.go("autoleasing-2");
     } else {
       $rootScope.alert("Та зээлээр авах бараагаа бүртгэнэ үү", "warning");
     }
-    localStorage.setItem("requestType", "consumer");
   };
 
   $scope.otherGoodsDelete = function (id) {

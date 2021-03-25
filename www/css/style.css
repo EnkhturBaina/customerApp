@@ -1318,8 +1318,40 @@ h4 {
   -webkit-appearance: none;
   margin: 0;
 }
-
+.pulse-animation {
+  animation: pulse 1.5s infinite;
+}
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+@keyframes pulse {
+  /* 0% {
+    box-shadow: 0 0px 0px rgb(0 0 0 / 30%);
+  }
+  70% {
+    box-shadow: 0 1px 5px rgba(204, 169, 44, 0);
+  }
+  100% {
+    box-shadow: 0 1px 10px rgba(204, 169, 44, 0);
+  } */
+  /* 0% {
+    box-shadow: 0 1px 17px black;
+  }
+  50% {
+    box-shadow: 0 3px 45px black;
+  }
+  100% {
+    box-shadow: 0 1px 17px black;
+  } */
+
+  0% {
+    box-shadow: 0 0px 3px rgba(172, 211, 34, 0.5);
+  }
+  70% {
+    box-shadow: 0 3px 20px rgba(172, 211, 34, 0.8);
+  }
+  100% {
+    box-shadow: 0 0px 3px rgba(172, 211, 34, 0.4);
+  }
 }
