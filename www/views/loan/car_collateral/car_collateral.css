@@ -290,3 +290,10 @@
 .car-coll-req {
   color: red;
 }
+.wrap-text-car-col {
+  white-space: pre-wrap !important;
+  text-align: center;
+}
+.car-coll-img-row {
+  padding: 0 !important;
+}

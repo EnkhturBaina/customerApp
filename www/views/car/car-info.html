@@ -66,11 +66,11 @@
         <div class="big-container">
             <div class="magic-container car-info-contant-card">
                 <!-- Car -->
-                <div class="item-info car-detail-container" ng-show="isCarDetail">
-                    <ion-slide-box on-slide-changed="slideChanged(index)" class="leasing-badge" delegate-handle="slidebox1">
+                <div class="item-info car-detail-container">
+                    <ion-slide-box id="carInfoSlideBox" on-slide-changed="slideChanged(index)" class="leasing-badge" delegate-handle="slidebox1">
                         <ion-slide ng-repeat="imgs in carData.images">
                             <div class="box1">
-                                <img class="car-img image-list-thumb" ng-src="{{imgs|guessImageMime}}" ng-click="showImages($index)" />
+                                <img id="carImg{{$index}}" class="car-img image-list-thumb" ng-src="{{imgs|guessImageMime}}" ng-click="showImages($index)" />
                             </div>
                         </ion-slide>
                     </ion-slide-box>
@@ -96,21 +96,6 @@
                     </ul>
                     <button id="collapse-btn" class="collapse-btn" ng-click="collapse();">&#8594;</button>
                     <button id="uncollapse-btn" class="collapse-btn" ng-click="uncollapse();" style="display: none">&#8592;</button>
-                </div>
-                <!-- Busad baraa -->
-                <div class="item-info other-detail-container" ng-show="!isCarDetail">
-                    <ion-slide-box class="leasing-badge">
-                        <ion-slide ng-repeat="imgs in carData.images">
-                            <div class="box1">
-                                <img class="car-img" style="width: 100%; height: 200px" ng-src="{{imgs|guessImageMime}}" />
-                            </div>
-                        </ion-slide>
-                    </ion-slide-box>
-                    <p class="middle-title">{{carData.modelname}}</p>
-                    <ul>
-                        <li>Үнэ <span> {{carData.price|formatNumber}} ₮</span></li>
-                        <li>Борлуулагч <span> {{carData.suppliername}} </span></li>
-                    </ul>
                 </div>
                 <div class="custom-buttons">
                     <!-- <button class="ibutton" ng-click="addtoBasket()"><i class="icon custom-cart-fill car-info-custom-icons"></i>
@@ -154,7 +139,7 @@
 
 <script id="templates/image-zoom.html" type="text/ng-template">
     <div class="modal image-modal transparent" ng-click="closeModal()">
-        <ion-slide-box on-slide-changed="slideChanged(index)" show-pager="true" active-slide="activeSlide">
+        <ion-slide-box on-slide-changed="slideChangedZoom(index)" show-pager="true" active-slide="activeSlide">
             <ion-slide ng-repeat="imgs in carData.images">
                 <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false"
                             zooming="true" min-zoom="{{zoomMin}}" style="width: 100%;height: 100%"

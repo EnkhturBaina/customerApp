@@ -1,8 +1,9 @@
-angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScope, $state, serverDeferred, $window, $scope, $ionicSlideBoxDelegate, $ionicHistory, $ionicLoading, $ionicModal, $ionicScrollDelegate) {
+angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScope, $state, serverDeferred, $window, $scope, $ionicSlideBoxDelegate, $ionicHistory, $ionicLoading, $ionicModal, $ionicScrollDelegate, $timeout) {
   $scope.Math = $window.Math;
   $rootScope.newReqiust = {};
   $scope.selectCarName = "";
   $scope.selectedCarId = "";
+  $rootScope.ShowLoader();
   // auto Leasing
   $scope.goAutoleasing = function () {
     localStorage.setItem("requestType", "auto");
@@ -12,7 +13,6 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
   };
   // get car Data
   $rootScope.getCarinfo = function () {
-    $scope.isCarDetail = true;
     serverDeferred
       .request("PL_MDVIEW_004", {
         systemmetagroupid: "1597654926672135",
@@ -20,11 +20,6 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
       })
       .then(function (response) {
         if (!isEmpty(response[0]) && isObject(response[0])) {
-          if (response[0].text10 == "101") {
-            $scope.isCarDetail = false;
-          } else if (response[0].text10 == "102") {
-            $scope.isCarDetail = true;
-          }
           var images = [];
           if (response[0].itempic) images.push(response[0].itempic);
           if (response[0].itempic2) images.push(response[0].itempic2);
@@ -80,6 +75,12 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
     $ionicSlideBoxDelegate.previous();
   };
   $scope.slideChanged = function (index) {
+    var img = document.getElementById("carImg" + index);
+    document.getElementById("carImg" + index).style.height = img.clientHeight + "px";
+    document.getElementById("carInfoSlideBox").style.height = img.clientHeight + 30 + "px";
+    $scope.slideIndex = index;
+  };
+  $scope.slideChangedZoom = function (index) {
     $scope.slideIndex = index;
   };
   $rootScope.newReqiust = {};
@@ -123,7 +124,6 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
 
   $scope.zoomMin = 1;
   $scope.showImages = function (index) {
-    console.log("index", index);
     $scope.activeSlide = index;
     $scope.showModal("templates/image-zoom.html");
   };
@@ -151,4 +151,12 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
       $ionicSlideBoxDelegate.enableSlide(false);
     }
   };
+  $timeout(function () {
+    var img = document.getElementById("carImg0");
+    if (img) {
+      document.getElementById("carImg0").style.height = img.clientHeight + "px";
+      document.getElementById("carInfoSlideBox").style.height = img.clientHeight + 30 + "px";
+      $ionicLoading.hide();
+    }
+  }, 1000);
 });
