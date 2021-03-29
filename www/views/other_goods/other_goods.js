@@ -1,4 +1,4 @@
-angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", function ($rootScope, serverDeferred, $scope, $state, $ionicPopup) {
+angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", function ($rootScope, serverDeferred, $scope, $state, $ionicPopup, $ionicModal, $timeout) {
   $rootScope.otherGoods = [];
   $rootScope.newCarReq = {};
   $rootScope.otherGoodsData = [];
@@ -79,4 +79,15 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $scope.backFromOtherGoods = function () {
     $state.go("home");
   };
+  $ionicModal
+    .fromTemplateUrl("templates/consumer.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (consumerModal) {
+      $scope.consumerModal = consumerModal;
+    });
+  $timeout(function () {
+    $scope.consumerModal.show();
+  }, 0);
 });

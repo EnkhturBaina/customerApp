@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="bank-container">
-        <p>Танд зээл олнох боломжтой банк, ББСБ-ууд</p>
+        <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
         <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-src="{{bank.bank_logo|guessImageMime}}" />
       </div>
       <button class="button btn single-button" ng-click="saveBusinessLoan()">Үргэлжлүүлэх</button>

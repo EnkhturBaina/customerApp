@@ -3,6 +3,8 @@
   // $rootScope.imagePath = "https://dev.veritech.mn/";
   $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
   $rootScope.imagePath = "http://leasing.digitalcredit.mn/";
+
+  $rootScope.carMarketURL = "http://0001.mn/";
   $rootScope.serverHeader = { "content-type": "application/json;charset=UTF-8" };
   $rootScope.sessionid = "65178215-7896-4513-8e26-896df9cb36ad";
 
@@ -193,4 +195,5 @@
 
     return false;
   }, 101);
+  $rootScope.profilePictureSideMenu = localStorage.getItem("profilePictureSideMenu");
 });

@@ -64,8 +64,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     $rootScope.customerProfileData.crmCustomerId = $rootScope.loginUserInfo.id;
     $rootScope.customerProfileData.mobilenumber = $rootScope.loginUserInfo.customercode;
   }
-
-  $scope.getProfileData = function () {
+  $rootScope.getProfileData = function () {
     if (!isEmpty($rootScope.loginUserInfo)) {
       console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: $rootScope.loginUserInfo.id }).then(function (response) {
@@ -74,7 +73,11 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         if (response[0] != "") {
           $rootScope.customerProfileData = response[0];
           console.log("$rootScope.customerProfileData", $rootScope.customerProfileData);
+
+          localStorage.removeItem("profilePictureSideMenu");
+          localStorage.setItem("profilePictureSideMenu", response[0].profilepicture);
           $scope.customerProfilePicture.profilepicture = response[0].profilepicture;
+
           $scope.customerId = response[0].id;
           if (response[0].uniqueidentifier) {
             $scope.regNum = response[0].uniqueidentifier;
@@ -107,7 +110,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       });
     }
   };
-  $scope.getProfileData();
+  $rootScope.getProfileData();
 
   $scope.saveProfileData = function () {
     document.getElementById("lastNameLabel").style.borderBottom = "1px solid #ddd";
@@ -164,6 +167,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
         console.log("response customerProfileData", response);
+
         $rootScope.loginUserInfo = mergeJsonObjs($scope.customerProfileData, $rootScope.loginUserInfo);
 
         $rootScope.sidebarUserName = response[1].lastname.substr(0, 1) + ". " + response[1].firstname;
@@ -214,7 +218,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
             });
           }
           $rootScope.alert("Амжилттай", "success", "profile");
-          $scope.getProfileData();
+          $rootScope.getProfileData();
         });
 
         if (!isEmpty($scope.nextPath)) {
@@ -253,6 +257,8 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         encodingType: Camera.EncodingType.JPEG,
       }
     );
+    localStorage.removeItem("profilePictureSideMenu");
+    localStorage.setItem("profilePictureSideMenu", $scope.customerProfilePicture.profilepicture);
   };
 
   //income data
@@ -323,7 +329,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
         serverDeferred.requestFull("dcApp_customer_qr_dv_002", $rootScope.customerQrData).then(function (response) {
           // console.log("customerQrData response", response);
-          $scope.getProfileData();
+          $rootScope.getProfileData();
         });
       });
     }

@@ -4,7 +4,19 @@
 
   $rootScope.selectedBanksList = [];
   if ($state.current.name == "autoleasing-1") {
-    $rootScope.alert("Та авах автомашиныхаа кодыг оруулах эсвэл QR кодыг уншуулна уу", "success");
+    // $rootScope.alert("Та авах автомашиныхаа кодыг оруулах эсвэл QR кодыг уншуулна уу", "success");
+    $ionicModal
+      .fromTemplateUrl("templates/auto.html", {
+        scope: $scope,
+        animation: "slide-in-up",
+      })
+      .then(function (autoModal) {
+        $scope.autoModal = autoModal;
+      });
+    // modals.show();
+    $timeout(function () {
+      $scope.autoModal.show();
+    }, 0);
   }
   $scope.getCarDatasId = function (itemCode) {
     localStorage.setItem("requestType", "auto");
