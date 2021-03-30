@@ -2,7 +2,7 @@
     <link href="views/loan/danselect/danselect.css" rel="stylesheet" />
     <div ng-repeat="data in [{'title':'Автомашин барьцаалсан зээл'}]" ng-include src="'views/navbar.html'"></div>
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 danselect-content">
-        <div ng-controller="danselectCtrl" class="danselect-container">
+        <div class="danselect-container">
             <div class="item danselect-card card-body item-text-wrap">
                 <div class="danselect-card-row1">
                     <img class="danselect-img" src="img/dan-logo60.png" />
@@ -24,3 +24,10 @@
         </div>
     </ion-content>
 </ion-view>
+<script id="templates/autoColl.html" type="text/ng-template">
+  <ion-modal-view class="auto-temp-modal-view">
+    <ion-content class="padding bank-chat-content">
+        <div class="templates-modal-include" ng-include src="'views/templates/autoColl.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>

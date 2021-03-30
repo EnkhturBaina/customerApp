@@ -33,6 +33,7 @@ var app = angular
     "notif.Ctrl",
     "notif_detail.Ctrl",
     "term.Ctrl",
+    "danselect.Ctrl",
   ])
   .run(function ($ionicPlatform, $state, $cordovaSplashscreen) {
     $ionicPlatform.ready(function () {

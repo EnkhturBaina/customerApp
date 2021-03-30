@@ -72,6 +72,8 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
         });
     };
 
+    <<
+    << << < HEAD
     $scope.selectItemConsumer = function(item, aa) {
         console.log(item);
         console.log("aa", aa);
@@ -79,4 +81,34 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     $scope.backFromOtherGoods = function() {
         $state.go("home");
     };
-});
+}); ||
+|| || | 2983 ff1
+$scope.selectItemConsumer = function(item, aa) {
+    console.log(item);
+    console.log("aa", aa);
+};
+$scope.backFromOtherGoods = function() {
+$state.go("home");
+};
+}); ===
+=== =
+$scope.selectItemConsumer = function(item, aa) {
+    console.log(item);
+    console.log("aa", aa);
+};
+$scope.backFromOtherGoods = function() {
+    $state.go("home");
+};
+$ionicModal
+    .fromTemplateUrl("templates/consumer.html", {
+        scope: $scope,
+        animation: "slide-in-up",
+    })
+    .then(function(consumerModal) {
+        $scope.consumerModal = consumerModal;
+    });
+$timeout(function() {
+$scope.consumerModal.show();
+}, 0);
+}); >>>
+>>> > 24155769 b2b8fde39f48af821777a8d0308e3abf

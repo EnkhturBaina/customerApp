@@ -1355,3 +1355,15 @@ input[type="number"] {
     box-shadow: 0 0px 3px rgba(172, 211, 34, 0.4);
   }
 }
+
+.wide-scroll-bank {
+  overflow: scroll;
+  white-space: nowrap;
+}
+.wide-scroll-bank .scroll {
+  display: flex;
+  width: calc(100% - 40px);
+}
+.wide-scroll-bank .scroll-bar {
+  display: none;
+}

@@ -1,0 +1,76 @@
+.auto-temp-modal-view {
+  background: transparent !important;
+}
+.templates-card {
+  padding: 20px;
+  height: fit-content;
+  background-color: #fff !important;
+  margin: 70px 20px 10px 20px !important;
+}
+
+.templates-scroll {
+  height: 100%;
+}
+.templates-scroll .scroll-bar {
+  display: none;
+}
+.templates-modal-off-text {
+  right: 6%;
+  position: absolute;
+  top: 2%;
+  zoom: 1.2;
+  z-index: 99;
+}
+.templates-title {
+  width: 100%;
+  display: grid;
+  text-align: center;
+  margin: 0px auto;
+}
+.templates-sub-title {
+  width: 70%;
+  margin: auto;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+}
+.templates-content {
+  border: 1px solid #acd322;
+  border-radius: 12px;
+  margin: 30px 10px;
+}
+.templates-content-ul {
+  display: flex;
+  padding: 10px 10px 0px 10px;
+}
+.templates-content-ul span {
+  align-self: center;
+  padding-left: 10px;
+}
+.click-here {
+  color: #acd322;
+  font-weight: bold;
+}
+.bank-container-template {
+  padding: 15px;
+  text-align: center;
+}
+.bank-container-template img {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 10%;
+}
+
+.bank-container-template p {
+  text-transform: uppercase;
+  color: #515151;
+  font-size: 11px;
+  line-height: normal;
+}
+.auto-template-btn {
+  margin: 20px auto !important;
+}
+.auto-template-bank-title {
+  font-weight: bold;
+}
