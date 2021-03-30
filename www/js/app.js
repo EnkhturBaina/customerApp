@@ -267,6 +267,11 @@ var app = angular
       templateUrl: "views/term/term.html",
       controller: "termCtrl",
     });
+    $stateProvider.state("income", {
+      url: "/views/templates/income",
+      templateUrl: "views/templates/income.html",
+      controller: "autoleasingCtrl",
+    });
     $urlRouterProvider.otherwise("/views/home");
   })
   .controller("index", function ($scope, $ionicPlatform, $state) {

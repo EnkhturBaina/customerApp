@@ -8,7 +8,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     }
   };
   $scope.getLookUpDataCarColl();
-
+  console.log("$rootScope.isDanLoginAutoColl", $rootScope.isDanLoginAutoColl);
   //Төрөл
   $scope.carCategory = [];
   //Үйлдвэр
@@ -121,7 +121,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     console.log("json", json);
   };
 
-  localStorage.removeItem("carColl");
+  // localStorage.removeItem("carColl");
   $scope.saveCarCol = function () {
     if (isEmpty($rootScope.newCarReq)) {
       $rootScope.newCarReq = {};
@@ -129,9 +129,9 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     if ($scope.carCollCheckReqiured("step1")) {
       localStorage.setItem("requestType", "autoColl");
 
-      localStorage.removeItem("carColl");
+      // localStorage.removeItem("carColl");
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
-
+      console.log("carColl DATAAAAAAAAA", JSON.parse(localStorage.getItem("carColl")));
       var next = $rootScope.checkLoginUserDatas("car_coll", "car_coll2");
       $state.go(next.now, { path: next.nextpath });
 
@@ -158,8 +158,20 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
 
   $scope.carCollCheckReqiured = function (param) {
     if (param == "step1") {
-      if (isEmpty($rootScope.newCarReq.carCategoryId) || isEmpty($rootScope.newCarReq.brandId) || isEmpty($rootScope.newCarReq.markId) || isEmpty($rootScope.newCarReq.manufacturedYearId) || isEmpty($rootScope.newCarReq.cameYearId)) {
-        $rootScope.alert("Мэдээллээ бүрэн оруулна уу", "warning");
+      if (isEmpty($rootScope.newCarReq.carCategoryId) && !$rootScope.isDanLoginAutoColl) {
+        $rootScope.alert("Автомашины төрөлөө сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newCarReq.brandId) && !$rootScope.isDanLoginAutoColl) {
+        $rootScope.alert("Үйлдвэрээ сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newCarReq.markId) && !$rootScope.isDanLoginAutoColl) {
+        $rootScope.alert("Загвараа сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newCarReq.manufacturedYearId) && !$rootScope.isDanLoginAutoColl) {
+        $rootScope.alert("Үйлдвэрлэсэн он оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newCarReq.cameYearId) && !$rootScope.isDanLoginAutoColl) {
+        $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newCarReq.itemPic)) {
         $rootScope.alert("Автомашины зураг оруулна уу", "warning");
