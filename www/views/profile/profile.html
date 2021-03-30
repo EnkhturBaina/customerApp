@@ -1,4 +1,4 @@
-<ion-view hide-nav-bar="true">
+<ion-view hide-nav-bar="true" cache-view="false" ng-controller="profileCtrl">
     <link href="views/profile/profile.css" rel="stylesheet" />
     <div id="overlayProfilePicute" ng-click="ppSourceSelectOff()">
         <div class="overlay-profile-content">
@@ -58,10 +58,10 @@
                             <label class="item item-input profile-label" id="regLabel">
                                 <p style="overflow: unset;">Регситр</p>
                                 <div class="select-reg-chars">
-                                    <span id="regCharA" type="text">A</span>
-                                    <span id="regCharB" type="text">A</span>
+                                    <span id="regCharA" type="text">{{$root.customerProfileData.uniqueidentifier.substr(0, 1)}}</span>
+                                    <span id="regCharB" type="text">{{$root.customerProfileData.uniqueidentifier.substr(1, 1)}}</span>
                                 </div>
-                                <input type="text" inputmode="numeric" pattern="[0-9]*" id="regNums" class="profileRegSelector" placeholder="00000000" name="uniqueIdentifier" readonly />
+                                <input type="text" inputmode="numeric" pattern="[0-9]*" id="regNums" class="profileRegSelector" value="{{$root.customerProfileData.uniqueidentifier.substr(2, 8)}}" placeholder="00000000" name="uniqueIdentifier" readonly />
                             </label>
                             <label class="item item-input profile-label" id="mailLabel">
                                 <p>И-мэйл хаяг</p>
@@ -111,6 +111,7 @@
                                     <i class="icon ion-edit ident-icon" ng-click="ppSourceSelectOn(2)"></i>
 
                                 </div>
+                                {{nextPath}}
                             </div>
                             <div class="profile-tab1-save-btn">
                                 <button class="button btn single-button" ng-click="saveProfileData()">
