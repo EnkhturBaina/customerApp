@@ -97,9 +97,12 @@
     json.month = $rootScope.newReqiust.loanMonth;
     json.currency = 16074201974821;
     json.isMortgage = $rootScope.loginUserInfo.mikmortgagecondition;
-    json.totalIncome = $rootScope.loginUserInfo.totalincomehousehold;
-    json.monthIncome = $rootScope.loginUserInfo.monthlyincome;
-    json.monthPay = $rootScope.loginUserInfo.monthlypayment;
+    // json.totalIncome = $rootScope.loginUserInfo.totalincomehousehold;
+    // json.monthIncome = $rootScope.loginUserInfo.monthlyincome;
+    // json.monthPay = $rootScope.loginUserInfo.monthlypayment;
+    json.totalIncome = $rootScope.danIncomeData.totalincomehousehold;
+    json.monthIncome = $rootScope.danIncomeData.monthlyincome;
+    json.monthPay = $rootScope.danIncomeData.monthlypayment;
 
     if ($rootScope.requestType == "consumer") {
       //Хэрэглээний лизинг банк шүүлт
