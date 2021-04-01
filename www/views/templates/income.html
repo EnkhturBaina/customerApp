@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true" cache-view="false">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
     <div ng-repeat="data in [{'title':'Орлогын мэдээлэл'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content overflow-scroll="true" class="ion-modified-content has-header profile-content">
+    <ion-content overflow-scroll="true" class="ion-modified-content has-header">
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
@@ -25,21 +25,24 @@
                         <span class="title input-label-front">Сарын орлого</span>
                         <div class="tugrug-input-container">
                             <span class="input-tugrug-icon">₮</span>
-                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.monthlyincome" ng-keyup="hideKeyboard($event)" ng-change="getbankData()" format-input select-on-click />
+                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.monthlyincome" ng-keyup="hideKeyboard($event)" ng-change="getbankData()" format-input
+                                select-on-click />
                         </div>
                     </div>
                     <div class="tugrug-input">
                         <span class="title input-label-front">Өрхийн нийт орлого</span>
                         <div class="tugrug-input-container">
                             <span class="input-tugrug-icon">₮</span>
-                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.totalincomehousehold" ng-keyup="hideKeyboard($event)" ng-change="getbankData()" format-input select-on-click />
+                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.totalincomehousehold" ng-keyup="hideKeyboard($event)" ng-change="getbankData()"
+                                format-input select-on-click />
                         </div>
                     </div>
                     <div class="tugrug-input">
                         <span class="title input-label-front">Төлж буй зээл</span>
                         <div class="tugrug-input-container">
                             <span class="input-tugrug-icon">₮</span>
-                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.monthlypayment" ng-keyup="hideKeyboard($event)" ng-change="getbankData()" format-input select-on-click />
+                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.monthlypayment" ng-keyup="hideKeyboard($event)" ng-change="getbankData()" format-input
+                                select-on-click />
                         </div>
                     </div>
                 </div>
