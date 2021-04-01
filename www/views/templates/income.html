@@ -18,7 +18,7 @@
                         <i class="icon fa fa-calendar fa-2x input-tugrug-icon"></i>
                         <p>Орлогын эх үүсвэр</p>
                         <select class="select-income-type" ng-model="$root.danIncomeData.incometypeid">
-                            <option ng-repeat="income in incomeType | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}">{{income.name}}</option>
+                            <option ng-repeat="income in incomeType | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.danIncomeData.incometypeid==income.id}}">{{income.name}}</option>
                         </select>
                     </label>
                     <div class="tugrug-input">
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <ion-footer class="bottom-footer">
-                <button class="button btn single-button" ng-click="sendRequest()">Хүсэлт илгээх</button>
+                <button class="button btn single-button" ng-click="checkBankSelectedStep()">Иргэлжлүүлэх</button>
             </ion-footer>
         </div>
     </ion-content>
