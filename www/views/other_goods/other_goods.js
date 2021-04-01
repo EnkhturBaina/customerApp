@@ -1,4 +1,4 @@
-angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", function($rootScope, serverDeferred, $scope, $state, $ionicPopup) {
+angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", function($rootScope, serverDeferred, $scope, $state, $ionicPopup, $ionicModal, $timeout) {
     $rootScope.otherGoods = [];
     $rootScope.newCarReq = {};
     $rootScope.otherGoodsData = [];

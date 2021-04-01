@@ -24,7 +24,7 @@
         <div class="big-container ghostwhite-noscroll-container">
             <div class="magic-container car-collateral-contant-card">
                 <div class="margin-lr-20">
-                    <div class="list car-collateral-list">
+                    <div class="list car-collateral-list" ng-if="!$root.isDanLoginAutoColl">
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Төрөл <span class="car-coll-req">*</span></p>
                             <select ng-model="$root.newCarReq.carCategoryId" style="background-color: transparent" ng-change="getCarFactoryCategory(newCarReq.carCategoryId)">
@@ -105,6 +105,22 @@
                                     {{com.name}}</option>
                             </select>
                         </label>
+                    </div>
+                    <div class="list car-collateral-list" ng-if="$root.isDanLoginAutoColl">
+                        <div class="item-info-dan">
+                            <ul>
+                                <li>Үйлдвэр <span>{{autoCollDanCarData.markName}} </span></li>
+                                <li>Загвар <span> {{autoCollDanCarData.modelName}} </span></li>
+                                <li>Улсын дугаар <span>{{autoCollDanCarData.plateNumber}} </span></li>
+                                <li>Үйлдвэрлэсэн улс <span> {{autoCollDanCarData.countryName}} </span></li>
+                                <li>Үйлдвэрлэсэн он <span> {{autoCollDanCarData.buildYear}} </span></li>
+                                <li>Импортлогдсон огноо <span>{{autoCollDanCarData.importDate}} </span></li>
+                                <li>Шатахууны төрөл <span>{{autoCollDanCarData.fueltype}} </span></li>
+                                <li>Жолооны хүрд <span>{{autoCollDanCarData.wheelPosition}} </span></li>
+                                <li>Өнгө <span>{{autoCollDanCarData.colorName}} </span></li>
+                                <li>Суудлын тоо <span>{{autoCollDanCarData.manCount}} </span></li>
+                            </ul>
+                        </div>
                     </div>
                     <label class="item car-collateral-label" style="border: none">
                         <p style="color: #a2a7b5">Зураг</p>

@@ -297,3 +297,27 @@
 .car-coll-img-row {
   padding: 0 !important;
 }
+.item-info-dan li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #a2a7b5;
+  border-bottom: 1px solid #cccbcb78;
+  margin: 8px 0 8px 0 !important;
+  padding: 5px;
+}
+.item-info-dan li span {
+  background-color: transparent;
+  color: #4b5180;
+  z-index: 1;
+  display: inline-block;
+  padding: 3px 8px;
+  min-width: 10px;
+  border-radius: 10px;
+  vertical-align: baseline;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+}
