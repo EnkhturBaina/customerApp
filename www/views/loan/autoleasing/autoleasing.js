@@ -93,7 +93,7 @@
     json.month = $rootScope.newReqiust.loanMonth;
     json.currency = 16074201974821;
     json.isMortgage = 1554263832151;
-    if ($state.current.name == "income") {
+    if ($state.current.name == "autoleasing-5") {
       json.totalIncome = $rootScope.danIncomeData.totalincomehousehold;
       json.monthIncome = $rootScope.danIncomeData.monthlyincome;
       json.monthPay = $rootScope.danIncomeData.monthlypayment;
