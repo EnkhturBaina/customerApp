@@ -54,6 +54,7 @@
 .row-2-text {
   text-align: center;
   margin: 0 auto;
+  width: 50%;
   color: #acd322;
 }
 .success-bank-list {
@@ -86,7 +87,7 @@
 }
 .success-btm-text {
   width: 80%;
-  margin: 0 auto;
+  margin: 20px auto !important;
 }
 .success-row-container {
   margin-top: 15px !important;

@@ -31,7 +31,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
     return [year, month, day].join("-");
   }
 
-  $scope.gotoDanLogin = function () {
+  $scope.gotoDanLoginDanSelect = function () {
     serverDeferred.carCalculation({ type: "auth_car_collateral", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
       $rootScope.stringHtmlsLink = response.result.data;
       var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");

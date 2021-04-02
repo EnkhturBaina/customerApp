@@ -174,7 +174,7 @@
 .bg-container {
   border-radius: 10px;
   padding: 20px;
-  margin: 20px 15px 0px 15px;
+  margin: 20px 20px 0px 20px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
@@ -441,7 +441,7 @@
   padding: 15px 0px;
   border-radius: 8px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  margin: 10px;
+  margin: 10px 20px;
 }
 .step1-scan-qr-container {
   display: flex;
@@ -520,6 +520,7 @@
 }
 .dan-container {
   text-align: center;
+  /* padding: 20px; */
 }
 .step4-loan-location {
   border: 1px solid #d5d5d5 !important;
@@ -534,4 +535,8 @@
 .step4-loan-location i {
   font-size: 1.1em !important;
   padding: 10px !important;
+}
+.dan-user-data {
+  margin-left: 10px !important;
+  padding-left: 0px !important;
 }

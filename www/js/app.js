@@ -142,6 +142,16 @@ var app = angular
       templateUrl: "views/loan/autoleasing/step3.html",
       controller: "autoleasingCtrl",
     });
+    $stateProvider.state("autoleasing-4", {
+      url: "/views/autoleasing-4",
+      templateUrl: "views/loan/autoleasing/step4.html",
+      controller: "autoleasingCtrl",
+    });
+    $stateProvider.state("autoleasing-5", {
+      url: "/views/autoleasing-5",
+      templateUrl: "views/loan/autoleasing/step5.html",
+      controller: "autoleasingCtrl",
+    });
     $stateProvider.state("autoleasing-bank-info", {
       url: "/views/autoleasing-bank-info",
       templateUrl: "views/loan/autoleasing/step3-bank-info.html",
@@ -294,6 +304,8 @@ var app = angular
     $scope.logOut = function () {
       $rootScope.loginUserInfo = undefined;
       localStorage.removeItem("loginUserInfo");
+      localStorage.removeItem("profilePictureSideMenu");
+      $rootScope.profilePictureSideMenu = "";
     };
     $(function () {
       $("#ionNavViewMobile,#ionNavViewMobileFooter").click(function () {

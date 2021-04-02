@@ -63,7 +63,7 @@
                                     <span class="step2-span">Урьдчилгаа төлбөрт ҮХХөрөнгө барьцаалах эсэх</span>
                                     <span>
                                         <label class="step2-switch" id="step2isCollateral">
-                                            <input type="checkbox" id="step2-isColBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.collateralConditionId" ng-change="changeEvent($root.newReqiust.collateralConditionId);getbankData();" />
+                                            <input type="checkbox" id="step2-isColBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.collateralConditionId" ng-change="getbankData();" />
                                             <div class="step2-slider step2-round">
                                                 <span id="step2-toggle-on" class="step2-on">Тийм</span>
                                                 <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
@@ -75,7 +75,7 @@
                                     <span class="step2-span step2-term" ng-click="modal.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
                                     <span>
                                         <label class="step2-switch" id="step2isAgree">
-                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-checked="agreementChecked" ng-model="$root.newReqiust.serviceAgreementId" ng-change="changeEvent($root.newReqiust.serviceAgreementId)" />
+                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-checked="agreementChecked" ng-model="$root.newReqiust.serviceAgreementId" ng-change="" />
                                             <div class="step2-slider step2-round">
                                                 <span id="step2-toggle-on" class="step2-on">Тийм</span>
                                                 <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
@@ -90,7 +90,7 @@
                         <p class="middle-title ion-color-big-text">Барааны мэдээлэл</p>
                         <ul>
                             <li>
-                                <div class="item-detail" ng-click="growDiv()">
+                                <div class="item-detail" ng-click="growDivAuto()">
                                     <div class="item-img"><img width="100px" ng-src="{{$root.imagePath}}{{$root.selectedCarData.itempic}}" />
                                     </div>
 

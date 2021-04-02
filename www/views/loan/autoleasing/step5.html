@@ -1,49 +1,34 @@
-<ion-view hide-nav-bar="true" cache-view="false">
+<ion-view id="loanPages" hide-nav-bar="true">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
-    <link href="views/loan/danselect/danselect.css" rel="stylesheet" />
     <div ng-repeat="data in [{'title':'Орлогын мэдээлэл'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content overflow-scroll="true" class="ion-modified-content has-header">
+    <ion-content overflow-scroll="true" class="ion-modified-content has-header autoleas-step3-content">
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
-                    <div class="dan-container">
-                        <div class="danselect-card-row1">
-                            <img class="danselect-img" style=" width: 150px; " src="img/emongolia.svg" />
-                        </div>
-                        <div class="danselect-card-row2">
-                            <span class="danselect-card-text">Та E-Mongolia системээр дамжуулан зээл авахад шаарддаг мэдээлэл, материалаа яг одоо өгснөөр <span class="dan-select-title-span">ЦАГ ЗАРДАЛ, МӨНГӨӨ</span> хэмнэх болно.</span>
-                        </div>
-                        <button class="button btn single-button" ng-click="gotoDanLoginAutoIncome();">Мэдээлэл татах</button>
-                        <div class="dan-hand-btn" ui-sref="autoleasing-4">Гараар бөглөх</div>
-                    </div>
-                    <!-- <label class="item item-input step4-loan-location">
-                        <i class="icon fa fa-calendar fa-2x input-tugrug-icon"></i>
-                        <p>Орлогын эх үүсвэр</p>
+                    <label class="item item-input step4-loan-location">
+                        <p class="dan-user-data">Орлогын эх үүсвэр</p>
                         <select class="select-income-type" ng-model="$root.danIncomeData.incometypeid">
                             <option ng-repeat="income in incomeType | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.danIncomeData.incometypeid==income.id}}">{{income.name}}</option>
                         </select>
                     </label>
                     <div class="tugrug-input">
-                        <span class="title input-label-front">Сарын орлого</span>
+                        <span class="title input-label-front dan-user-data">Сарын орлого</span>
                         <div class="tugrug-input-container">
-                            <span class="input-tugrug-icon">₮</span>
                             <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.monthlyincome" ng-keyup="hideKeyboard($event)" ng-change="getbankData()" format-input select-on-click />
                         </div>
                     </div>
                     <div class="tugrug-input">
-                        <span class="title input-label-front">Өрхийн нийт орлого</span>
+                        <span class="title input-label-front dan-user-data">Өрхийн нийт орлого</span>
                         <div class="tugrug-input-container">
-                            <span class="input-tugrug-icon">₮</span>
                             <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.totalincomehousehold" ng-keyup="hideKeyboard($event)" ng-change="getbankData()" format-input select-on-click />
                         </div>
                     </div>
                     <div class="tugrug-input">
-                        <span class="title input-label-front">Төлж буй зээл</span>
+                        <span class="title input-label-front dan-user-data">Төлж буй зээл</span>
                         <div class="tugrug-input-container">
-                            <span class="input-tugrug-icon">₮</span>
                             <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.monthlypayment" ng-keyup="hideKeyboard($event)" ng-change="getbankData()" format-input select-on-click />
                         </div>
-                    </div> -->
+                    </div>
                 </div>
                 <div class="container-padding pulse-animation">
                     <p class="middle-title agree-banks">ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГАСАН БАНК, ББСБ-УУД</p>
@@ -65,7 +50,7 @@
                 </div>
             </div>
             <ion-footer class="bottom-footer">
-                <!-- <button class="button btn single-button" ng-click="checkBankSelectedStep()">Иргэлжлүүлэх</button> -->
+                <button class="button btn single-button" id="Next" ng-click="checkBankSelectedStep()">Үргэлжлүүлэх</button>
             </ion-footer>
         </div>
     </ion-content>

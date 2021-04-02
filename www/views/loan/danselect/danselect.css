@@ -14,10 +14,17 @@
   display: flex;
   height: 40px;
 }
+.danselect-card-row1 img {
+  width: 150px;
+}
 .danselect-card-row2 {
   text-align: center;
-  padding: 10px 20px 0px 20px;
+  margin: 30px 15px;
 }
 .danselect-card-text {
   font-size: 14px;
+}
+.dan-hand-btn {
+  margin: 20px auto 0px auto;
+  width: fit-content;
 }

@@ -79,6 +79,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($ionicS
               serverDeferred.requestFull("dcApp_login_register_dv_001", $scope.crmUserData).then(function (response) {
                 // console.log("respone", response);
                 $state.go("login");
+                $rootScope.alert("Нэвтэрнэ үү", "success");
               });
             });
           });

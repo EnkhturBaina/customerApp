@@ -1,0 +1,81 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+    <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Иргэний мэдээлэл'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content overflow-scroll="true" class="ion-modified-content has-header autoleas-step3-content">
+        <div class="big-container">
+            <div class="magic-container">
+                <div class="bg-container">
+                    <div class="tugrug-input">
+                        <span class="title input-label-front dan-user-data">Овог</span>
+                        <div class="tugrug-input-container">
+                            <input type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.lastname" select-on-click />
+                        </div>
+                    </div>
+                    <div class="tugrug-input">
+                        <span class="title input-label-front dan-user-data">Нэр</span>
+                        <div class="tugrug-input-container">
+                            <input type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.firstname" select-on-click />
+                        </div>
+                    </div>
+                    <div class="tugrug-input">
+                        <span class="title input-label-front dan-user-data">Регистр</span>
+                        <div class="tugrug-input-container">
+                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.uniqueidentifier" select-on-click />
+                        </div>
+                    </div>
+                    <div class="tugrug-input">
+                        <span class="title input-label-front dan-user-data">И-мэйл хаяг</span>
+                        <div class="tugrug-input-container">
+                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.email" select-on-click />
+                        </div>
+                    </div>
+                    <div class="tugrug-input">
+                        <span class="title input-label-front dan-user-data">Утасны дугаар</span>
+                        <div class="tugrug-input-container">
+                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.mobilenumber" select-on-click />
+                        </div>
+                    </div>
+                    <label class="item item-input step4-loan-location">
+                        <p class="dan-user-data">Гэрлэсэн эсэх</p>
+                        <select class="select-income-type" ng-model="$root.danCustomerData.ismarried">
+                            <option ng-repeat="income in familtStatData | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.danCustomerData.ismarried==income.id}}">{{income.name}}</option>
+                        </select>
+                    </label>
+                    <label class="item item-input step4-loan-location">
+                        <p class="dan-user-data">МИК-ийн зээлтэй эсэх</p>
+                        <select class="select-income-type" ng-model="$root.danCustomerData.mikmortgagecondition">
+                            <option ng-repeat="income in mortgageData | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.danCustomerData.mikmortgagecondition==income.id}}">{{income.name}}</option>
+                        </select>
+                    </label>
+                    <div class="tugrug-input">
+                        <span class="title input-label-front dan-user-data">Ажилласан жил</span>
+                        <div class="tugrug-input-container">
+                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.experienceperiodid" select-on-click />
+                        </div>
+                    </div>
+                </div>
+                <div class="container-padding pulse-animation">
+                    <p class="middle-title agree-banks">ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГАСАН БАНК, ББСБ-УУД</p>
+                    <ion-scroll direction="x" class="wide-scroll-bank">
+                        <div class="bank" ng-repeat="bank in bankListFilter.Agree">
+                            <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+                            <p>{{bank.department_name}}</p>
+                        </div>
+                    </ion-scroll>
+                </div>
+                <div class="container-padding pulse-animation">
+                    <p class="middle-title not-agree-banks">ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГААГҮЙ БАНК, ББСБ-УУД</p>
+                    <ion-scroll direction="x" class="wide-scroll-bank">
+                        <div class="bank" ng-repeat="bank in bankListFilter.NotAgree">
+                            <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+                            <p>{{bank.department_name}}</p>
+                        </div>
+                    </ion-scroll>
+                </div>
+            </div>
+            <ion-footer class="bottom-footer">
+                <button class="button btn single-button" id="Next" ng-click="goStep5()">Үргэлжлүүлэх</button>
+            </ion-footer>
+        </div>
+    </ion-content>
+</ion-view>

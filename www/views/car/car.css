@@ -245,14 +245,7 @@
   position: absolute;
   top: 34px;
   right: -16px;
-  clip-path: polygon(
-    120px 20px,
-    90px -10px,
-    30px -10px,
-    0px 20px,
-    10px 30px,
-    110px 30px
-  );
+  clip-path: polygon(120px 20px, 90px -10px, 30px -10px, 0px 20px, 10px 30px, 110px 30px);
   height: 20px;
   width: 120px;
 }
@@ -329,8 +322,7 @@
   background-color: #fff;
   text-align: center;
   display: flex;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
-    Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
   width: 100vw !important;
   margin-bottom: 20px;
@@ -368,8 +360,7 @@
 }
 .car-info-custom-icons {
   height: 30px;
-  filter: invert(20%) sepia(91%) saturate(387%) hue-rotate(27deg)
-    brightness(100%) contrast(94%);
+  filter: invert(20%) sepia(91%) saturate(387%) hue-rotate(27deg) brightness(100%) contrast(94%);
 }
 .car-loan-content {
   height: 100%;
@@ -434,7 +425,7 @@
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  margin: 10px;
+  margin: 10px 20px;
 }
 .suggest-scroll .scroll {
   display: flex;
