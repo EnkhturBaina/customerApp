@@ -426,7 +426,7 @@
       }
 
       if (isEmpty($rootScope.bankListFilter.Agree) && isEmpty($rootScope.bankListFilter.NotAgree)) {
-        $rootScope.alert("Банк !!!", "warning");
+        $rootScope.alert("Банк олдсонгүй", "warning");
       } else {
         // $state.go("autoleasing-3");
         $state.go("income");
@@ -644,5 +644,14 @@
       });
     });
     $rootScope.isDanLoginAutoColl = true;
+  };
+  $scope.danHand = function () {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
+      $rootScope.mortgageData = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
+      $rootScope.familtStatData = response;
+    });
+    $state.go("autoleasing-4");
   };
 });

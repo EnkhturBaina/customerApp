@@ -118,7 +118,6 @@
     $ionicLoading.show({
       showBackdrop: true,
       showDelay: 0,
-      // template: '<div class="loadingio-spinner-spinner-v5m2iut1fj" > <div class="ldio-agte97219x" ><div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div > <div > </div ></div > </div >',
       template: '<div class="custom-spinner"><div></div><div class="custom-dot"></div><div></div><div class="custom-dot"></div></div>',
     });
   };
@@ -156,10 +155,6 @@
   if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
     $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
   }
-  $rootScope.focusInput = function (getId) {
-    document.getElementById(`${getId}`).focus();
-    document.getElementById("sendRequestAdvancePayment").focus();
-  };
   //Утасны back button
   $ionicPlatform.onHardwareBackButton(function () {
     console.log("onHardwareBackButton Утасны back button");

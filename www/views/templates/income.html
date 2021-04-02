@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true" cache-view="false">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
     <link href="views/loan/danselect/danselect.css" rel="stylesheet" />
-    <div ng-repeat="data in [{'title':'Орлогын мэдээлэл'}]" ng-include src="'views/navbar.html'"></div>
+    <div ng-repeat="data in [{'title':'Иргэний мэдээлэл'}]" ng-include src="'views/navbar.html'"></div>
     <ion-content overflow-scroll="true" class="ion-modified-content has-header">
         <div class="big-container">
             <div class="magic-container">
@@ -14,7 +14,7 @@
                             <span class="danselect-card-text">Та E-Mongolia системээр дамжуулан зээл авахад шаарддаг мэдээлэл, материалаа яг одоо өгснөөр <span class="dan-select-title-span">ЦАГ ЗАРДАЛ, МӨНГӨӨ</span> хэмнэх болно.</span>
                         </div>
                         <button class="button btn single-button" ng-click="gotoDanLoginAutoIncome();">Мэдээлэл татах</button>
-                        <div class="dan-hand-btn" ui-sref="autoleasing-4">Гараар бөглөх</div>
+                        <div class="dan-hand-btn" ng-click="danHand()">Гараар бөглөх</div>
                     </div>
                     <!-- <label class="item item-input step4-loan-location">
                         <i class="icon fa fa-calendar fa-2x input-tugrug-icon"></i>
