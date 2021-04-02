@@ -16,7 +16,7 @@
     // modals.show();
     $timeout(function () {
       $scope.autoModal.show();
-    }, 0);
+    }, 300);
   }
   $scope.getCarDatasId = function (itemCode) {
     $rootScope.selectedCarData = [];

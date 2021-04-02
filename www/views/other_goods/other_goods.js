@@ -89,5 +89,5 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
         });
     $timeout(function() {
         $scope.consumerModal.show();
-    }, 0);
+    }, 300);
 });

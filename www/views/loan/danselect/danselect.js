@@ -11,7 +11,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
   // modals.show();
   $timeout(function () {
     $scope.autoCollModal.show();
-  }, 0);
+  }, 300);
 
   $rootScope.isDanLoginAutoColl = false;
   $scope.autoCollHand = function () {
