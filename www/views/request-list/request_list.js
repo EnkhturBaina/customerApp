@@ -12,11 +12,12 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
   $scope.isEmpty = true;
   // ====== Get Data  ========
   $rootScope.getRequetData = function () {
-    console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     $scope.requetData = [];
     if (!isEmpty($rootScope.loginUserInfo)) {
       $rootScope.ShowLoader();
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597814217394980", crmCustomerId: $rootScope.loginUserInfo.id }).then(function (response) {
+
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597814217394980", crmCustomerId: all_ID.crmcustomerid }).then(function (response) {
         console.log("res", response);
         $ionicLoading.hide();
         if (isEmpty(response)) {

@@ -79,7 +79,7 @@
         <span class="side-menu-off-icon" style="color: #fff !important" ng-click="toggleSideMenu()"><img style="width: 20px" src="img/x_mark.png" /></span>
         <div id="nav" on-swipe-left="toggleSideMenu()">
             <div class="side-menu-items side-menu-img-container">
-                <img class="side-menu-picture" ng-if="!$root.profilePictureSideMenu|isEmpty" ng-src="{{$root.profilePictureSideMenu|guessImageMime}}" width="70px" height="70px" />
+                <img class="side-menu-picture" ng-if="!$root.profilePictureSideMenu|isEmpty" ng-src="{{'data:image/png;base64,'+$root.profilePictureSideMenu}}" width="70px" height="70px" />
             </div>
             <div class="side-menu-items side-menu-user-name" ng-if="!$root.loginUserInfo|isEmpty">{{sidebarUserName}}</div>
             <div class="side-menu-items" ng-click="toggleSideMenu();hideShowFooter()" ng-if="!$root.loginUserInfo|isEmpty" ui-sref="profile"><i class="icon fa fa-user-o"></i>Миний мэдээлэл</div>

@@ -87,7 +87,7 @@
       <button class="bottom-first-button" ng-click="nextSlideChanged()">ДАРААХ</button>
       <button class="bottom-second-button" ng-click="endSlideChanged()">АЛГАСАХ</button>
     </div>
-    <div ng-if="((bannerData|objLength)==activeSlideIndex+1)">
+    <div ng-if="((bannerData|objLength)==activeSlideIndex+1) || !$root.loginUserInfo|isEmpty">
       <ion-checkbox class="intro-not-show" ng-model="isBanneNotShowChecked.checked" ng-change="isNotShow()">
         <span>Дахин харуулахгүй</span>
       </ion-checkbox>

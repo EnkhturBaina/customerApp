@@ -275,7 +275,7 @@
   background: none;
   color: #a2a7b5;
   float: right;
-  margin-bottom: 20px;
+  margin-bottom: 0px !important;
   font-weight: bold;
   font-size: 26px;
   line-height: inherit;

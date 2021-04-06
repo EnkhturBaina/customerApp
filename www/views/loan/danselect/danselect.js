@@ -12,6 +12,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
   $timeout(function () {
     $scope.autoCollModal.show();
   }, 300);
+  $rootScope.hideFooter = true;
 
   $rootScope.isDanLoginAutoColl = false;
   $scope.autoCollHand = function () {
@@ -32,6 +33,8 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
   }
 
   $scope.gotoDanLoginDanSelect = function () {
+    $rootScope.danCustomerData = {};
+    $rootScope.danIncomeData = {};
     serverDeferred.carCalculation({ type: "auth_car_collateral", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
       $rootScope.stringHtmlsLink = response.result.data;
       var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");
@@ -47,7 +50,8 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
           serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://services.digitalcredit.mn/api/sso/check").then(function (response) {
             console.log("response autoColl DAN", response);
             if (!isEmpty(response.result.data)) {
-              var userInfo = response.result.data.info;
+              var userInfo = JSON.parse(response.result.data.info);
+              console.log("userInfo", userInfo);
               if (!isEmpty(response.result.data.vehicle)) {
                 $rootScope.userVehicleData = JSON.parse(response.result.data.vehicle);
                 console.log("$rootScope.userVehicleData", $rootScope.userVehicleData);
@@ -57,8 +61,52 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                 $rootScope.autoCollDanCarData.importDate = formatDate($rootScope.userVehicleData.list[0].importDate);
                 console.log("$rootScope.autoCollDanCarData", $rootScope.autoCollDanCarData);
                 if (!isEmpty(userInfo)) {
-                  $scope.registerFunction(JSON.parse(userInfo));
+                  $scope.registerFunction(userInfo);
                 }
+
+                var userSalaryInfo = JSON.parse(response.result.data.salary);
+                serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.regnum.toUpperCase() }).then(function (checkedValue) {
+                  console.log("checkedValue", checkedValue);
+                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
+                    console.log("responseCustomerData", responseCustomerData);
+                    if (responseCustomerData[0] != "") {
+                      //Бүртгэлтэй USER -н дата татаж харуулах
+                      $rootScope.danCustomerData = responseCustomerData[0];
+                      $rootScope.danCustomerData.id = checkedValue[1].customerid;
+                    }
+                  });
+
+                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: checkedValue[1].dccustomerid }).then(function (response) {
+                    console.log("get income data response", response);
+                    if (response[0] != "") {
+                      $rootScope.danIncomeData = response[0];
+                    }
+                  });
+                  console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+
+                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
+                    $rootScope.mortgageData = response;
+                  });
+                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
+                    $rootScope.familtStatData = response;
+                  });
+                });
+                $timeout(function () {
+                  $rootScope.danCustomerData.lastname = userInfo.lastname;
+                  $rootScope.danCustomerData.firstname = userInfo.firstname;
+                  $rootScope.danCustomerData.uniqueidentifier = userInfo.regnum.toUpperCase();
+
+                  console.log("userSalaryInfo", userSalaryInfo);
+                  if (userSalaryInfo) {
+                    serverDeferred.carCalculation(userSalaryInfo.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
+                      console.log("res salary", response);
+                      $rootScope.monthlyAverage = response.result;
+                      console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
+                      $rootScope.danIncomeData.monthlyincome = response.result;
+                      console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
+                    });
+                  }
+                }, 1000);
               }
             }
           });
@@ -70,6 +118,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
     $rootScope.isDanLoginAutoColl = true;
   };
   $scope.registerFunction = function (value) {
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     var json = {
       customerCode: value.regnum.toUpperCase(),
       siRegNumber: value.regnum.toUpperCase(),
@@ -102,9 +151,18 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
       serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (response) {
         console.log("res", response);
         if (!isEmpty(response) && !isEmpty(response[0])) {
-          $rootScope.loginUserInfo = response[1];
-          $rootScope.loginUserInfo.id = response[1].dcapp_crmuser_dan.id;
-          localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+          $rootScope.loginUserInfo = {};
+          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
+            if (response[0] != "") {
+              $rootScope.customerIncomeProfileData = response[0];
+              $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
+
+              localStorage.removeItem("loginUserInfo");
+              localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+              console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+            } else {
+            }
+          });
           $state.go("car_coll");
         }
       });

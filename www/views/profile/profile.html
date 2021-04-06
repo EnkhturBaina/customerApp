@@ -36,7 +36,7 @@
                 <div class="profile-picture-edit" ng-click="ppSourceSelectOn(3)" style="border-radius: 10px;border: 1px solid #ccfffc;text-align: center;font-size: 20px;color: #eaf6e2;line-height: 86px;background: #65c8ae;padding: 4px;">
                     <i class="icon ion-edit"></i>
                 </div>
-                <img ng-if="!$root.customerProfilePicture.profilepicture|isEmpty" ng-src="{{$root.customerProfilePicture.profilepicture|guessImageMime}}" height="75px" width="120px" style="border-radius: 50px;" />
+                <img ng-if="!$root.customerProfilePicture.profilepicture|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfilePicture.profilepicture}}" height="75px" width="120px" style="border-radius: 50px;" />
             </div>
         </div>
         <ion-tabs id="profile-tabs-striped" class="tabs-striped tabs-top profile-card-tabs profile-tab profile-tabs-tab" delegate-handle="profileTabs">
@@ -73,7 +73,7 @@
                             </label> -->
                             <label class="item item-input profile-label" id="phoneLabel">
                                 <p>Утасны дугаар</p>
-                                <input type="text" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" ng-keyup="hideKeyboard($event)" select-on-click />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" ng-keyup="hideKeyboard($event)" select-on-click />
                             </label>
                             <label class="item item-input profile-label" id="marriageLabel">
                                 <p>Гэрлэсэн эсэх</p>
@@ -89,7 +89,7 @@
                             </label>
                             <label class="item item-input profile-label" id="workLabel">
                                 <p>Ажилласан жил</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="experienceperiodid" ng-model="$root.customerProfileData.experienceperiodid" select-on-click />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="experienceperiodid" ng-model="$root.customerProfileData.experienceperiodid" ng-keyup="hideKeyboard($event)" select-on-click />
                             </label>
                             <label class="item item-input profile-label profile-label-pass">
                                 <p style="padding:0px">Иргэний үнэмлэхний зураг</p>

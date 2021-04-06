@@ -148,7 +148,6 @@
 
   localStorage.removeItem("requestType");
   console.log("localStorage", localStorage);
-
   $rootScope.loginUserInfo = {};
   $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
   console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
@@ -157,18 +156,14 @@
   }
   //Утасны back button
   $ionicPlatform.onHardwareBackButton(function () {
-    console.log("onHardwareBackButton Утасны back button");
     $rootScope.hideFooter = false;
   });
 
   $ionicPlatform.registerBackButtonAction(function (e) {
     e.preventDefault();
-    // Is there a page to go back to?
     if ($ionicHistory.viewHistory().backView) {
-      // Go back in history
       $ionicHistory.viewHistory().backView.go();
     } else {
-      // This is the last page: Show confirmation popup
       $ionicPopup.show({
         template: "<b>Апп -г хаах уу ?</b>",
         cssClass: "confirmPopup",
@@ -191,4 +186,8 @@
     return false;
   }, 101);
   $rootScope.profilePictureSideMenu = localStorage.getItem("profilePictureSideMenu");
+
+  $scope.$on("$ionicView.enter", function () {
+    $rootScope.hideFooter = false;
+  });
 });

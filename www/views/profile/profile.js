@@ -1,12 +1,7 @@
-angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $ionicHistory, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal, $timeout, $ionicTabsDelegate) {
+angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $ionicHistory, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal, $timeout, $ionicTabsDelegate, $ionicLoading) {
   $scope.backbutton = function () {
     $rootScope.hideFooter = false;
-    // if (isEmpty($rootScope.loginUserInfo)) {
     $ionicHistory.goBack();
-    // } else {
-    //     $state.go("home");
-
-    // }
   };
   $rootScope.hideFooter = true;
   $scope.replaceCyr = function (lastName) {
@@ -51,24 +46,19 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.customerProfileData.customerTypeId = 1;
 
   $rootScope.customerIncomeProfileData = {};
-  $scope.customerId;
 
   $scope.regNum = "";
 
-  $scope.customerEmail;
-
-  $rootScope.basePersonData = {};
   $rootScope.umSystemUser = {};
-  $rootScope.umUser = {};
 
-  if (!isEmpty($rootScope.loginUserInfo)) {
-    $rootScope.customerProfileData.crmCustomerId = $rootScope.loginUserInfo.id;
-    $rootScope.customerProfileData.mobilenumber = $rootScope.loginUserInfo.customercode;
-  }
   $rootScope.getProfileData = function () {
+    console.log("localStorage", localStorage);
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+    $rootScope.ShowLoader();
     if (!isEmpty($rootScope.loginUserInfo)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: $rootScope.loginUserInfo.id }).then(function (response) {
-        console.log("getProfileData response", response);
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (response) {
+        console.log("get Profile Data response", response);
+
         $rootScope.hideFooter = true;
         if (response[0] != "") {
           $rootScope.customerProfileData = response[0];
@@ -76,21 +66,21 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           localStorage.setItem("profilePictureSideMenu", response[0].profilepicture);
           $scope.customerProfilePicture.profilepicture = response[0].profilepicture;
 
-          $scope.customerId = response[0].id;
           if (response[0].uniqueidentifier) {
             $scope.regNum = response[0].uniqueidentifier;
             $("#regCharA").text(response[0].uniqueidentifier.substr(0, 1));
             $("#regCharB").text(response[0].uniqueidentifier.substr(1, 1));
             $("#regNums").val(response[0].uniqueidentifier.substr(2, 8));
           }
-
-          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: response[0].id }).then(function (response) {
+          console.log("all_ID", all_ID);
+          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
             if (response[0] != "") {
               $rootScope.customerIncomeProfileData = response[0];
               $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
 
               localStorage.removeItem("loginUserInfo");
               localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+              console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
             } else {
             }
           });
@@ -98,10 +88,16 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1604389075984789", dim1: $rootScope.loginUserInfo.customerid }).then(function (response) {
           $rootScope.customerDealBanks = response;
         });
+        $ionicLoading.hide();
       });
     }
   };
-  $rootScope.getProfileData();
+  $scope.$on("$ionicView.enter", function () {
+    $timeout(function () {
+      console.log("ASDASDASDASDASDASDAS");
+      $rootScope.getProfileData();
+    }, 1000);
+  });
 
   $scope.saveProfileData = function () {
     document.getElementById("lastNameLabel").style.borderBottom = "1px solid #ddd";
@@ -114,8 +110,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     document.getElementById("workLabel").style.borderBottom = "1px solid #ddd";
     $scope.customerProfileData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
 
-    $rootScope.customerProfileData.crmCustomerId = $rootScope.loginUserInfo.id;
-    // $rootScope.customerProfileData.mobilenumber = $rootScope.loginUserInfo.customercode;
     if (isEmpty($scope.customerProfileData.lastname)) {
       $rootScope.alert("Та овогоо оруулна уу", "warning");
       document.getElementById("lastNameLabel").style.borderBottom = "2px solid red";
@@ -128,11 +122,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerProfileData.email)) {
       $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
       document.getElementById("mailLabel").style.borderBottom = "2px solid red";
-    }
-    // else if (isEmpty($scope.customerProfileData.address)) {
-    //   $rootScope.alert("Хаягаа оруулна уу", "warning");
-    // }
-    else if (isEmpty($scope.customerProfileData.mobilenumber)) {
+    } else if (isEmpty($scope.customerProfileData.mobilenumber)) {
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
       document.getElementById("phoneLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.ismarried)) {
@@ -145,63 +135,40 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
       document.getElementById("workLabel").style.borderBottom = "2px solid red";
     } else {
-      if ($rootScope.isDanLogin) {
-        $scope.customerProfileData.id = $rootScope.loginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.id;
-      } else if (!$rootScope.isDanLogin) {
-        $scope.customerProfileData.id = $rootScope.loginUserInfo.customerid;
-      }
+      var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+      console.log("ALL_ID", all_ID);
       $scope.customerProfileData.customertypeid = 1;
-      $scope.customerEmail = $scope.customerProfileData.email;
-      $scope.customerProfileData.id = $scope.customerId;
+      $scope.customerProfileData.id = all_ID.dccustomerid;
+      $rootScope.customerProfileData.crmCustomerId = all_ID.crmuserid;
       console.log("$scope.customerProfileData", $scope.customerProfileData);
 
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
-        $rootScope.loginUserInfo = mergeJsonObjs($scope.customerProfileData, $rootScope.loginUserInfo);
-
         $rootScope.sidebarUserName = response[1].lastname.substr(0, 1) + ". " + response[1].firstname;
 
-        localStorage.removeItem("loginUserInfo");
-        localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
-
-        $rootScope.basePersonData = {
-          firstName: response[1].firstname,
-          lastName: response[1].lastname,
-          stateRegNumber: response[1].uniqueidentifier.toUpperCase(),
-          parentId: response[1].id,
+        $rootScope.umSystemUser = {
+          id: all_ID.systemuserid,
+          email: $scope.customerProfileData.email,
         };
-
-        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613634433158205", stateRegNumber: response[1].uniqueidentifier.toUpperCase() }).then(function (response) {
-          if (response[0] == "") {
-            //BasePerson
-            serverDeferred.requestFull("dcApp_basePerson_002", $scope.basePersonData).then(function (response) {
-              $rootScope.umSystemUser = {
-                username: response[1].stateregnumber.toUpperCase(),
-                email: $scope.customerEmail,
-                personId: response[1].id,
-              };
-              //umSystemUser
-              serverDeferred.requestFull("dcApp_umSystemUser_001", $scope.umSystemUser).then(function (response) {
-                $rootScope.umUser = {
-                  systemUserId: response[1].id,
-                };
-                //umUser
-                serverDeferred.requestFull("dcApp_umUser_001", $scope.umUser).then(function (response) {});
-              });
-            });
-          } else {
-            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613634471804840", personId: response[0].id }).then(function (response) {
-              $rootScope.umSystemUser = {
-                id: response[0].id,
-                email: $scope.customerEmail,
-              };
-
-              serverDeferred.requestFull("dcApp_umSystemUserEmailChange_002", $scope.umSystemUser).then(function (response) {});
-            });
-          }
-          $rootScope.alert("Амжилттай", "success", "profile");
-          $rootScope.getProfileData();
+        console.log("$rootScope.umSystemUser", $rootScope.umSystemUser);
+        var crmPhoneNumber = {
+          id: all_ID.crmuserid,
+          userName: $scope.customerProfileData.mobilenumber,
+        };
+        serverDeferred.requestFull("dcApp_umSystemUserEmailChange_002", $scope.umSystemUser).then(function (response) {
+          serverDeferred.requestFull("dcApp_loginPhoneNumber_002", crmPhoneNumber).then(function (response) {
+            $rootScope.alert("Амжилттай", "success", "profile");
+          });
         });
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", crmCustomerId: $rootScope.loginUserInfo.id }).then(function (response) {
+          if (!isEmpty(response) && !isEmpty(response[0])) {
+            $rootScope.loginUserInfo = {};
+            $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
+            console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
 
+            localStorage.removeItem("loginUserInfo");
+            localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+          }
+        });
         if (!isEmpty($scope.nextPath)) {
           $state.go($scope.nextPath);
         }
@@ -210,6 +177,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   };
 
   $scope.takePhoto = function (type) {
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     var srcType = Camera.PictureSourceType.CAMERA;
     if (type == "1") {
       srcType = Camera.PictureSourceType.PHOTOLIBRARY;
@@ -223,7 +191,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         } else if ($scope.selectedImagePath == 3) {
           $scope.customerProfilePicture.profilepicture = "jpg♠" + imageData;
 
-          $scope.customerProfilePicture.id = $scope.loginUserInfo.customerid;
+          $scope.customerProfilePicture.id = all_ID.dccustomerid;
 
           serverDeferred.requestFull("dcApp_profile_pricture_dv_002", $scope.customerProfilePicture).then(function (response) {});
         }
@@ -255,12 +223,8 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else {
       $timeout(function () {
         if ($scope.customerIncomeProfileData != "") {
-          //   if ($rootScope.isDanLogin) {
-          //     $scope.customerIncomeProfileData.customerid = $rootScope.loginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.id;
-          //   } else if (!$rootScope.isDanLogin) {
-          //     $scope.customerIncomeProfileData.customerid = $rootScope.loginUserInfo.customerid;
-          //   }
-          $rootScope.customerIncomeProfileData.customerid = $scope.customerId;
+          var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+          $rootScope.customerIncomeProfileData.customerid = all_ID.dccustomerid;
           console.log("$rootScope.customerIncomeProfileData", $rootScope.customerIncomeProfileData);
           serverDeferred.requestFull("dcApp_profile_income_dv_002", $rootScope.customerIncomeProfileData).then(function (response) {
             $rootScope.alert("Амжилттай", "success");
@@ -268,7 +232,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         } else {
           serverDeferred.requestFull("dcApp_profile_income_dv_002", $rootScope.customerIncomeProfileData).then(function (response) {});
         }
-      }, 1000);
+      }, 500);
     }
   };
   $scope.overlayOn = function () {
@@ -279,19 +243,18 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   };
 
   $scope.generateQR = function () {
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     $rootScope.customeridforQR = {};
     $scope.showCreateQr = true;
-    $rootScope.customeridforQR.text = $scope.loginUserInfo.customerid;
+    $rootScope.customeridforQR.text = all_ID.dccustomerid;
 
     if (!isEmpty($rootScope.loginUserInfo)) {
       serverDeferred.requestFull("dcApp_qr_generator", $rootScope.customeridforQR).then(function (response) {
         $rootScope.customerQrData = {};
-        $rootScope.customerQrData.id = $scope.loginUserInfo.customerid;
+        $rootScope.customerQrData.id = all_ID.dccustomerid;
         $rootScope.customerQrData.customerqr = "jpg♠" + response[1].value;
 
-        serverDeferred.requestFull("dcApp_customer_qr_dv_002", $rootScope.customerQrData).then(function (response) {
-          $rootScope.getProfileData();
-        });
+        serverDeferred.requestFull("dcApp_customer_qr_dv_002", $rootScope.customerQrData).then(function (response) {});
       });
     }
   };
@@ -376,7 +339,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   var keyInput;
   $ionicPlatform.ready(function () {
     setTimeout(function () {
-      console.log("ASd");
       var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "Ю", "Ф", "Х", "У", "Ч"];
       new MobileSelect({
         trigger: ".profileRegSelector",

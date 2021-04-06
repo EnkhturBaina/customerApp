@@ -381,7 +381,7 @@
   position: relative !important;
 }
 .autoleasing-step2-content {
-  height: 88%;
+  /* height: 88%; */
 }
 .autoleasing-location-select {
   width: 100%;
@@ -539,4 +539,7 @@
 .dan-user-data {
   margin-left: 10px !important;
   padding-left: 0px !important;
+}
+.step-bottom-footer {
+  margin-bottom: 30px !important;
 }

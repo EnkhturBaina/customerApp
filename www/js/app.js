@@ -172,11 +172,6 @@ var app = angular
       templateUrl: "views/loan/car_collateral/car_collateral2.html",
       controller: "car_collateralCtrl",
     });
-    $stateProvider.state("car_coll3", {
-      url: "/views/car_collateral3",
-      templateUrl: "views/loan/car_collateral/car_collateral3.html",
-      controller: "car_collateralCtrl",
-    });
     $stateProvider.state("property_collateral", {
       url: "/views/property_collateral",
       templateUrl: "views/loan/property_collateral/collateral.html",
@@ -296,7 +291,7 @@ var app = angular
       }
     };
   })
-  .controller("indexCtrl", function ($scope, $ionicPlatform, $state, $rootScope, $ionicTabsDelegate) {
+  .controller("indexCtrl", function ($scope, $rootScope, $ionicTabsDelegate) {
     $scope.toggleSideMenu = function () {
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");
@@ -305,6 +300,7 @@ var app = angular
       $rootScope.loginUserInfo = undefined;
       localStorage.removeItem("loginUserInfo");
       localStorage.removeItem("profilePictureSideMenu");
+      localStorage.removeItem("all_ID");
       $rootScope.profilePictureSideMenu = "";
     };
     $(function () {

@@ -1,4 +1,4 @@
-angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http, $ionicModal, $stateParams, $rootScope, $cordovaNetwork, $ionicLoading, $state, serverDeferred) {
+angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http, $ionicModal, $stateParams, $rootScope, $cordovaNetwork, $ionicLoading, $state, serverDeferred, $timeout) {
   $scope.inputType = "password";
   $scope.user = {};
 
@@ -86,16 +86,23 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
             $rootScope.hideFooter = false;
           }
         });
-        if (isEmpty($stateParams.path)) {
-          if ($rootScope.isLoginFromRequestList) {
-            $state.go("requestList");
-            $scope.getRequetData();
+        console.log("username", username);
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", mobileNumber: username }).then(function (response) {
+          console.log("res", response);
+          localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
+          console.log("localStorage", localStorage);
+
+          if (isEmpty($stateParams.path)) {
+            if ($rootScope.isLoginFromRequestList) {
+              $state.go("requestList");
+              $scope.getRequetData();
+            } else {
+              $state.go("profile");
+            }
           } else {
-            $state.go("profile");
+            $state.go($stateParams.path);
           }
-        } else {
-          $state.go($stateParams.path);
-        }
+        });
       } else {
         $ionicLoading.hide();
         $rootScope.alert("Нэр, Нууц үг буруу байна", "warning");
@@ -129,7 +136,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
     $rootScope.hideFooter = true;
   };
   $scope.gotoDanLogin = function () {
-    serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
+    serverDeferred.carCalculation({ type: "auth", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
       console.log("response v1 c", response);
       $rootScope.stringHtmlsLink = response.result.data;
 
@@ -172,13 +179,14 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
     });
   };
   $scope.registerFunction = function (value) {
+    $rootScope.sidebarUserName = value.lastname.substr(0, 1) + ". " + value.firstname;
     var json = {
       customerCode: value.regnum.toUpperCase(),
       siRegNumber: value.regnum.toUpperCase(),
       isActive: "1",
     };
     json.dcApp_crmUser_dan = {
-      userName: value.regnum.toUpperCase(),
+      userName: "",
       userId: "1",
       isActive: "1",
     };
@@ -193,6 +201,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
       customerTypeId: "1",
     };
 
+    $rootScope.profilePictureSideMenu = value.image;
     serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
       console.log("checkedValue", checkedValue);
       if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
@@ -201,24 +210,65 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
         json.dcApp_crmUser_dan.id = checkedValue[1].custuserid;
         json.dcApp_crmUser_dan.dcApp_dcCustomer_dan.id = checkedValue[1].dccustomerid;
       }
+      console.log("json", json);
       serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (response) {
         console.log("res", response);
-        if (!isEmpty(response) && !isEmpty(response[0])) {
+        if (!isEmpty(response) && response[0] == "success") {
           $rootScope.loginUserInfo = response[1];
           $rootScope.loginUserInfo.id = response[1].dcapp_crmuser_dan.id;
           localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
-          if (isEmpty($stateParams.path)) {
-            if ($rootScope.isLoginFromRequestList) {
-              $state.go("requestList");
-              $rootScope.isDanLogin = true;
-              $scope.getRequetData();
+
+          var basePersonData = {
+            firstName: value.firstname,
+            lastName: value.lastname,
+            stateRegNumber: value.regnum.toUpperCase(),
+            parentId: response[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id,
+          };
+          basePersonData.dcApp_all_um_system_user = {
+            username: value.regnum.toUpperCase(),
+            email: "",
+            typeCode: "internal",
+          };
+          basePersonData.dcApp_all_um_system_user.dcApp_all_um_user = {
+            isActive: "1",
+          };
+          if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
+            if (isEmpty($stateParams.path)) {
+              if ($rootScope.isLoginFromRequestList) {
+                $state.go("requestList");
+                $rootScope.isDanLogin = true;
+                $scope.getRequetData();
+              } else {
+                $rootScope.isDanLogin = true;
+                $state.go("profile");
+              }
             } else {
-              $rootScope.isDanLogin = true;
-              $state.go("profile");
+              $state.go($stateParams.path);
             }
           } else {
-            $state.go($stateParams.path);
+            serverDeferred.requestFull("dcApp_all_base_person_001", basePersonData).then(function (response) {
+              if (isEmpty($stateParams.path)) {
+                if ($rootScope.isLoginFromRequestList) {
+                  $state.go("requestList");
+                  $rootScope.isDanLogin = true;
+                  $scope.getRequetData();
+                } else {
+                  $rootScope.isDanLogin = true;
+                  $state.go("profile");
+                }
+              } else {
+                $state.go($stateParams.path);
+              }
+            });
           }
+          $timeout(function () {
+            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: response[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id }).then(function (response) {
+              console.log("res", response);
+              localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
+              console.log("basePersonData", basePersonData);
+              console.log("localStorage", localStorage);
+            });
+          }, 500);
         }
       });
     });

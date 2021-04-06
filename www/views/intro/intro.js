@@ -30,4 +30,5 @@ angular.module("intro.Ctrl", []).controller("introCtrl", function ($ionicSlideBo
     $scope.showBanner = false;
   };
   $scope.getBanner();
+  $rootScope.hideFooter = true;
 });

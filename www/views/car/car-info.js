@@ -12,37 +12,35 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
     // $state.go(next.now, { path: next.nextpath });
     $state.go("autoleasing-2");
     $rootScope.getLoanAmountFunc();
+    $rootScope.calcLoanAmount();
   };
   // get car Data
   $rootScope.getCarinfo = function () {
-    serverDeferred
-      .request("PL_MDVIEW_004", {
-        systemmetagroupid: "1597654926672135",
-        id: $rootScope.selectedCarData.id,
-      })
-      .then(function (response) {
-        if (!isEmpty(response[0]) && isObject(response[0])) {
-          var images = [];
-          if (response[0].itempic) images.push(response[0].itempic);
-          if (response[0].itempic2) images.push(response[0].itempic2);
-          if (response[0].itempic3) images.push(response[0].itempic3);
-          if (response[0].itempic4) images.push(response[0].itempic4);
-          if (response[0].itempic5) images.push(response[0].itempic5);
-          if (response[0].itempic6) images.push(response[0].itempic6);
-          if (response[0].itempic7) images.push(response[0].itempic7);
-          if (response[0].itempic8) images.push(response[0].itempic8);
-          response[0].images = images;
-          $scope.carData = response[0];
-          $scope.selectCarName = response[0].modelname.split(" ")[0];
-          $scope.selectedCarId = response[0].id;
-          $rootScope.selectedCarData = response[0];
-          $scope.getbankData();
-          if (!$scope.$$phase) {
-            $scope.$apply();
-          }
-          $ionicSlideBoxDelegate.update();
+    $rootScope.carData = [];
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597654926672135", id: $rootScope.selectedCarData.id }).then(function (response) {
+      console.log("res", response);
+      if (!isEmpty(response[0]) && isObject(response[0])) {
+        var images = [];
+        if (response[0].itempic) images.push(response[0].itempic);
+        if (response[0].itempic2) images.push(response[0].itempic2);
+        if (response[0].itempic3) images.push(response[0].itempic3);
+        if (response[0].itempic4) images.push(response[0].itempic4);
+        if (response[0].itempic5) images.push(response[0].itempic5);
+        if (response[0].itempic6) images.push(response[0].itempic6);
+        if (response[0].itempic7) images.push(response[0].itempic7);
+        if (response[0].itempic8) images.push(response[0].itempic8);
+        response[0].images = images;
+        $scope.carData = response[0];
+        $scope.selectCarName = response[0].modelname.split(" ")[0];
+        $scope.selectedCarId = response[0].id;
+        $rootScope.selectedCarData = response[0];
+        $scope.getbankData();
+        if (!$scope.$$phase) {
+          $scope.$apply();
         }
-      });
+        $ionicSlideBoxDelegate.update();
+      }
+    });
   };
   $scope.getbankData = function () {
     $rootScope.bankList = [];
