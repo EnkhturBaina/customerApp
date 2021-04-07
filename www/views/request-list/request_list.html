@@ -1,60 +1,60 @@
 <ion-view id="request_listPage" title="Хүсэлтийн жагсаалт">
     <ion-pane>
         <link href="views/request-list/request_list.css" rel="stylesheet" />
-        <ion-content overflow-scroll="true" class="ion-modified-content request-list-content" ng-show="!isEmpty">
-            <p class="loan-tab-title ion-color-text req-list-title">Таны зээлийн хүсэлтийн жагсаалт.</p>
-            <div class="card request-list-card" ng-repeat="banks in requetData|groupBy:'leasingid'" ng-if="!(banks[0].producttypename|isEmpty)">
-                <div class="item bank-card card-body item-text-wrap">
-                    <div class="expandcollapse-item" ng-click="{{'growDiv('+$index+')'}}">
-                        <div class="row">
-                            <div class="col">
-                                <span class="ion-float-left ion-color-text req-list-product-type">{{banks[0].producttypename}}</span>
+        <ion-content overflow-scroll="true" class="ion-modified-content request-list-content">
+            <div ng-if="!isEmptyReq">
+                <p class="loan-tab-title ion-color-text req-list-title">Таны зээлийн хүсэлтийн жагсаалт.</p>
+                <div class="card request-list-card" ng-repeat="banks in requetData|groupBy:'leasingid'" ng-if="!(banks[0].producttypename|isEmpty)">
+                    <div class="item bank-card card-body item-text-wrap">
+                        <div class="expandcollapse-item" ng-click="{{'growDiv('+$index+')'}}">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="ion-float-left ion-color-text req-list-product-type">{{banks[0].producttypename}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <span class="ion-color-big-text"><span class="ion-text-bold">{{banks[0].loanamount|formatNumber}}</span></span>
+                                </div>
+                                <div class="col">
+                                    <span class="ion-float-right ion-color-text req-list-date">{{banks[0].createddate.substr(0,10)}}</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <span class="ion-color-big-text"><span class="ion-text-bold">{{banks[0].loanamount|formatNumber}}</span></span>
+                        <div class="list fix-list grow" ng-hide="active" id="{{'grow'+$index}}">
+                            <div class="{{'measuringWrapper'+$index}}">
+                                <a class="item item-thumbnail-left" ng-repeat="bank in banks" ng-click="selectbank(bank);">
+                                    <!-- <a class="item item-thumbnail-left" ng-repeat="bank in banks"> -->
+                                    <img ng-src="{{$root.imagePath}}{{bank.banklogo}}" />
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="ion-color-big-text">{{bank.departmentname}}</p>
+                                        </div>
+                                        <div class="col">
+                                            <!-- <p class="ion-float-right">Хүү: {{bank.loanfeetext}}</p> -->
+                                            <p class="ion-float-right">Хугацаа: {{bank.loanmonth}} сар</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="ion-color-brand-green">{{bank.statusname}}</p>
+                                        </div>
+                                        <div class="col">
+                                            <p class="ion-float-right ion-color-brand-green">Дэлгэрэнгүй &#8594;</p>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="col">
-                                <span class="ion-float-right ion-color-text req-list-date">{{banks[0].createddate.substr(0,10)}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list fix-list grow" ng-hide="active" id="{{'grow'+$index}}">
-                        <div class="{{'measuringWrapper'+$index}}">
-                            <a class="item item-thumbnail-left" ng-repeat="bank in banks" ng-click="selectbank(bank);">
-                                <!-- <a class="item item-thumbnail-left" ng-repeat="bank in banks"> -->
-                                <img ng-src="{{$root.imagePath}}{{bank.banklogo}}" />
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="ion-color-big-text">{{bank.departmentname}}</p>
-                                    </div>
-                                    <div class="col">
-                                        <!-- <p class="ion-float-right">Хүү: {{bank.loanfeetext}}</p> -->
-                                        <p class="ion-float-right">Хугацаа: {{bank.loanmonth}} сар</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <p class="ion-color-brand-green">{{bank.statusname}}</p>
-                                    </div>
-                                    <div class="col">
-                                        <p class="ion-float-right ion-color-brand-green">Дэлгэрэнгүй &#8594;</p>
-                                    </div>
-                                </div>
-                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <ion-footer class="bottom-footer" style="display: inline-flex;"></ion-footer>
-        </ion-content>
-        <ion-content ng-show="isEmpty" id="emptyRequestList">
-            <div class="empty-icon-container">
+            <div class="empty-icon-container" ng-if="isEmptyReq">
                 <img src="img/icons8-inbox-100.png" />
-                <span ng-if="!requetData|isEmpty">Танд зээлийн хүсэлт байхгүй байна.</span>
+                <span>Танд зээлийн хүсэлт байхгүй байна.</span>
                 <button ng-if="$root.loginUserInfo|isEmpty" class="button btn single-button" ui-sref="login" style="height: 35px;" ng-click="loginFromRequestList()">Нэвтрэх</button>
             </div>
+            <ion-footer class="bottom-footer" style="display: inline-flex;"></ion-footer>
         </ion-content>
     </ion-pane>
 </ion-view>

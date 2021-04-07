@@ -291,7 +291,7 @@ var app = angular
       }
     };
   })
-  .controller("indexCtrl", function ($scope, $rootScope, $ionicTabsDelegate) {
+  .controller("indexCtrl", function ($scope, $rootScope, $ionicTabsDelegate, $state) {
     $scope.toggleSideMenu = function () {
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");
@@ -302,6 +302,7 @@ var app = angular
       localStorage.removeItem("profilePictureSideMenu");
       localStorage.removeItem("all_ID");
       $rootScope.profilePictureSideMenu = "";
+      $state.go("home");
     };
     $(function () {
       $("#ionNavViewMobile,#ionNavViewMobileFooter").click(function () {

@@ -9,31 +9,25 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
       grow.style.height = wrapper.clientHeight + "px";
     }
   };
-  $scope.isEmpty = true;
+  $scope.isEmptyReq = true;
   // ====== Get Data  ========
   $rootScope.getRequetData = function () {
+    $rootScope.ShowLoader();
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     $scope.requetData = [];
     if (!isEmpty($rootScope.loginUserInfo)) {
-      $rootScope.ShowLoader();
-
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597814217394980", crmCustomerId: all_ID.crmcustomerid }).then(function (response) {
-        $ionicLoading.hide();
-        if (isEmpty(response)) {
-          $scope.isEmpty = true;
+        if (isEmpty(response[0])) {
+          $scope.isEmptyReq = true;
+          $ionicLoading.hide();
         } else {
-          $scope.isEmpty = false;
+          $scope.isEmptyReq = false;
           $scope.requetData = response;
-          // console.log("$scope.requetData", $scope.requetData);
-          // angular.forEach(response, function(item) {
-          //     if (isObject(item)) {
-          //         $scope.requetData.push(item);
-          //     }
-          // });
+          $ionicLoading.hide();
         }
       });
     } else {
-      $scope.isEmpty = true;
+      $scope.isEmptyReq = true;
     }
   };
   $scope.$on("$ionicView.enter", function () {

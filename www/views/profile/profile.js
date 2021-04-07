@@ -401,4 +401,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   //   });
   //   $scope.customerDealBank.dim2 = null;
   // };
+  $rootScope.backFromProfile = function () {
+    $state.go("home");
+  };
 });
