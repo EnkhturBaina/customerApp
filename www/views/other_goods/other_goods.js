@@ -7,7 +7,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $rootScope.getLocalGoodsData = function () {
     $rootScope.otherGoodsData = JSON.parse(localStorage.getItem("otherGoods"));
     // console.log("otherGoodsData", otherGoodsData);
-    console.log("$rootScope.otherGoodsData", $rootScope.otherGoodsData);
+    // console.log("$rootScope.otherGoodsData", $rootScope.otherGoodsData);
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614232214127503" }).then(function (response) {
       $rootScope.suppliers = response;
       // console.log("allSupplierList respionse", response);
@@ -73,13 +73,10 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     });
   };
 
-  $scope.selectItemConsumer = function (item, aa) {
-    console.log(item);
-    console.log("aa", aa);
-  };
   $scope.backFromOtherGoods = function () {
     $state.go("home");
   };
+
   $ionicModal
     .fromTemplateUrl("templates/consumer.html", {
       scope: $scope,

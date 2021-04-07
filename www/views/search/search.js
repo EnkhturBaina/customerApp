@@ -13,7 +13,6 @@ app.controller("searchCtrl", function ($scope, $rootScope, serverDeferred, $stat
     }
   };
   $scope.getCarDatas = function (id) {
-    // console.log(id);
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1544591440537", factoryid: id }).then(function (response) {
       $scope.carData = response;
     });
@@ -28,9 +27,7 @@ app.controller("searchCtrl", function ($scope, $rootScope, serverDeferred, $stat
     });
     criteria.price = { 0: { operator: ">", operand: "" + $scope.searchValPrice.max + "" }, 1: { operator: "<", operand: "" + $scope.searchValPrice.min + "" } };
     $rootScope.searchData = criteria;
-    // console.log("criteria", criteria);
     $state.go("carlist");
-    // ui-sref="carlist"
   };
   $("#productYear").mask("0000");
   $("#entryYear").mask("0000");

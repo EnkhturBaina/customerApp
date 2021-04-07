@@ -1,4 +1,4 @@
-angular.module("register.Ctrl", []).controller("registerCtrl", function ($ionicSlideBoxDelegate, $scope, $rootScope, $state, serverDeferred) {
+angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeout, $scope, $rootScope, $state, serverDeferred) {
   $(".register-mobile").mask("00000000");
   var progressBar = {
     Bar: $("#progress-bar"),
@@ -64,22 +64,61 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($ionicS
     } else {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $scope.crmUserData.userName }).then(function (response) {
         console.log("isRegistered", response);
-        if (response.length[0] > 1) {
+        if (!isEmpty(response[0])) {
           $rootScope.alert("<p class=" + "customer_registerd_number" + ">" + $scope.crmUserData.userName + "</p>" + " Утасны дугаараар бүртгэл үүссэн байна", "warning");
         } else {
           serverDeferred.requestFull("getPasswordHash1", $scope.customerPassword).then(function (response) {
+            console.log("pass response", response);
             //Password Hash
             $rootScope.passwordHashResult = response;
-            serverDeferred.requestFull("dcApp_crmCustomer_001", $scope.crmUserData).then(function (response) {
-              //crm_user
-              $rootScope.crmUserData.customerId = response[1].id;
-              $rootScope.crmUserData.password = $scope.customerPassword.passwordHash;
-              $rootScope.crmUserData.passwordHash = $scope.passwordHashResult[1].result;
-              $rootScope.crmUserData.userId = 1;
-              serverDeferred.requestFull("dcApp_login_register_dv_001", $scope.crmUserData).then(function (response) {
-                // console.log("respone", response);
-                $state.go("login");
-                $rootScope.alert("Нэвтэрнэ үү", "success");
+            var json = {
+              userName: $scope.crmUserData.userName,
+              siRegNumber: $scope.crmUserData.userName,
+            };
+            json.dcApp_all_crm_user = {
+              userName: $scope.crmUserData.userName,
+              userId: "1",
+              password: $scope.customerPassword.passwordHash,
+              passwordHash: $scope.passwordHashResult[1].result,
+              userId: "1",
+            };
+            json.dcApp_all_crm_user.dcApp_all_dc_customer = {
+              mobileNumber: $scope.crmUserData.userName,
+            };
+            console.log("json", json);
+            serverDeferred.requestFull("dcApp_all_crm_customer_001", json).then(function (crmResponse) {
+              console.log("register response", crmResponse);
+              var basePersonData = {
+                firstName: $scope.crmUserData.userName,
+                lastName: $scope.crmUserData.userName,
+                stateRegNumber: $scope.crmUserData.userName,
+                parentId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id,
+              };
+              basePersonData.dcApp_all_um_system_user = {
+                username: $scope.crmUserData.userName,
+                email: "",
+                typeCode: "internal",
+              };
+              basePersonData.dcApp_all_um_system_user.dcApp_all_um_user = {
+                isActive: "1",
+              };
+              console.log("basePersonData", basePersonData);
+              serverDeferred.requestFull("dcApp_all_base_person_001", basePersonData).then(function (response) {
+                console.log("base response", response);
+                if (response[0] == "success") {
+                  $timeout(function () {
+                    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id }).then(function (response) {
+                      console.log("res", response);
+                      localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
+                      console.log("basePersonData", basePersonData);
+                      console.log("localStorage", localStorage);
+                    });
+                    $state.go("login");
+                    $rootScope.alert("Нэвтэрнэ үү", "success");
+                  }, 500);
+                } else {
+                  $rootScope.alert("Бүртгэхэд алдаа гарлаа", "warning");
+                }
               });
             });
           });

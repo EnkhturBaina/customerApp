@@ -71,9 +71,11 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
         },
       ],
     }).then(function (response) {
+      console.log("res", response);
       if (!isEmpty(response.data) && response.data.response.status === "success") {
         $rootScope.loginUserInfo = response.data.response.result;
-        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", crmCustomerId: $rootScope.loginUserInfo.id }).then(function (response) {
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", mobileNumber: `${username}` }).then(function (response) {
+          console.log("AAAAAAAAA 1", response);
           if (!isEmpty(response) && !isEmpty(response[0])) {
             $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
             // console.log($rootScope.loginUserInfo);
@@ -81,26 +83,24 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
             localStorage.removeItem("loginUserInfo");
             localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
 
-            if ($rootScope.loginUserInfo) {
-            }
-            $rootScope.hideFooter = false;
-          }
-        });
-        console.log("username", username);
-        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", mobileNumber: username }).then(function (response) {
-          console.log("res", response);
-          localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
-          console.log("localStorage", localStorage);
+            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", mobileNumber: `${username}` }).then(function (response) {
+              console.log("AAAAAAAAA 2", response);
+              if (!isEmpty(response[0])) {
+                localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
 
-          if (isEmpty($stateParams.path)) {
-            if ($rootScope.isLoginFromRequestList) {
-              $state.go("requestList");
-              $scope.getRequetData();
-            } else {
-              $state.go("profile");
-            }
-          } else {
-            $state.go($stateParams.path);
+                if (isEmpty($stateParams.path)) {
+                  if ($rootScope.isLoginFromRequestList) {
+                    $state.go("requestList");
+                    $scope.getRequetData();
+                  } else {
+                    $state.go("profile");
+                  }
+                } else {
+                  $state.go($stateParams.path);
+                }
+              }
+            });
+            $rootScope.hideFooter = false;
           }
         });
       } else {

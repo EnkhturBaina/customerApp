@@ -59,6 +59,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (response) {
         console.log("get Profile Data response", response);
 
+        $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
         $rootScope.hideFooter = true;
         if (response[0] != "") {
           $rootScope.customerProfileData = response[0];
@@ -74,7 +75,8 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           }
           console.log("all_ID", all_ID);
           serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
-            if (response[0] != "") {
+            console.log("ASDFSDFSDFSDF", response);
+            if (!isEmpty(response[0])) {
               $rootScope.customerIncomeProfileData = response[0];
               $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
 
@@ -94,9 +96,8 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   };
   $scope.$on("$ionicView.enter", function () {
     $timeout(function () {
-      console.log("ASDASDASDASDASDASDAS");
       $rootScope.getProfileData();
-    }, 1000);
+    }, 500);
   });
 
   $scope.saveProfileData = function () {
@@ -129,7 +130,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
       document.getElementById("marriageLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.mikmortgagecondition)) {
-      $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
+      $rootScope.alert("МИК-ийн зээлтэй эсэхээ сонгоно уу", "warning");
       document.getElementById("mikLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");

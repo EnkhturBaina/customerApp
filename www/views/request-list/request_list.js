@@ -18,7 +18,6 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
       $rootScope.ShowLoader();
 
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597814217394980", crmCustomerId: all_ID.crmcustomerid }).then(function (response) {
-        console.log("res", response);
         $ionicLoading.hide();
         if (isEmpty(response)) {
           $scope.isEmpty = true;
@@ -37,7 +36,9 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
       $scope.isEmpty = true;
     }
   };
-  $scope.getRequetData();
+  $scope.$on("$ionicView.enter", function () {
+    $scope.getRequetData();
+  });
   $scope.selectbank = function (bank) {
     // console.log(bank);
     $rootScope.selectedMapBank = bank;

@@ -10,11 +10,9 @@ angular.module("trend.Ctrl", []).controller("trendCtrl", function ($ionicSlideBo
       });
       // $rootScope.carDatas = response;
     });
-    console.log("$rootScope.trendCarData", $rootScope.trendCarData);
   };
   $scope.getTrendCarData();
   $scope.selectCar = function (item) {
-    // console.log(item)
     $rootScope.selectedCarData = item;
     $state.go("car-info");
   };

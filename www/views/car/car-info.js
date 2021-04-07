@@ -53,8 +53,17 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
       });
     }
   };
-  $scope.getCarinfo();
-
+  $scope.$on("$ionicView.enter", function () {
+    $scope.getCarinfo();
+    $timeout(function () {
+      var img = document.getElementById("carImg0");
+      if (img) {
+        document.getElementById("carImg0").style.height = img.clientHeight + "px";
+        document.getElementById("carInfoSlideBox").style.height = img.clientHeight + 30 + "px";
+        $ionicLoading.hide();
+      }
+    }, 500);
+  });
   // basket
   $scope.addtoBasket = function () {
     var value = searchJsonValue($rootScope.basketData, "id", $rootScope.selectedCarData.id);
@@ -152,12 +161,4 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
       $ionicSlideBoxDelegate.enableSlide(false);
     }
   };
-  $timeout(function () {
-    var img = document.getElementById("carImg0");
-    if (img) {
-      document.getElementById("carImg0").style.height = img.clientHeight + "px";
-      document.getElementById("carInfoSlideBox").style.height = img.clientHeight + 30 + "px";
-      $ionicLoading.hide();
-    }
-  }, 1000);
 });

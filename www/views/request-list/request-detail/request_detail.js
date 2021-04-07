@@ -101,7 +101,6 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
       $rootScope.sendChatData.dim1 = $rootScope.selectedMapBank.mapid;
 
       serverDeferred.requestFull("dcApp_chat_dv_001", $rootScope.sendChatData).then(function (response) {
-        // console.log("send chat", response);
         $rootScope.sendChatData.text1 = "";
         $scope.getChatHistory();
       });

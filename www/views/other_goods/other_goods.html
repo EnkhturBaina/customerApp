@@ -24,7 +24,7 @@
                         <div class="item_lists">
                             <ul>
                                 <li class="items" ng-repeat="item in $root.otherGoods track by item.itemid">
-                                    <ion-checkbox class="other-goods-checkbox" ng-model="isChecked" ng-change="selectItemConsumer(item,isChecked)">
+                                    <ion-checkbox class="other-goods-checkbox" ng-model="isChecked">
                                         <div class="items-list-container">
                                             <img ng-src="{{item.picture1}}" />
                                         </div>

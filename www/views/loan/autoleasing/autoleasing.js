@@ -181,12 +181,11 @@
   };
   var selectedbanks = [];
   $scope.checkBankSelectedStep = function () {
-    // if ($scope.checkReqiured("danIncomeReq")) {
-    //   // $state.go("income");
-    //   $state.go("autoleasing-3");
-    // } else {
-    // }
-    $state.go("autoleasing-3");
+    if ($scope.checkReqiured("danIncomeReq")) {
+      // $state.go("income");
+      $state.go("autoleasing-3");
+    } else {
+    }
   };
   $scope.sendRequest = async function () {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -456,13 +455,15 @@
     }
   };
   $scope.goStep5 = function () {
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
-      $rootScope.incomeType = response;
-    });
-    $state.go("autoleasing-5");
-    console.log("$rootScope.isDanHand", $rootScope.isDanHand);
-    if ($rootScope.isDanHand) {
-      $scope.getCustomerIncomeData();
+    if ($scope.checkReqiured("danCustomerData")) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
+        $rootScope.incomeType = response;
+      });
+      $state.go("autoleasing-5");
+      console.log("$rootScope.isDanHand", $rootScope.isDanHand);
+      if ($rootScope.isDanHand) {
+        $scope.getCustomerIncomeData();
+      }
     }
   };
 
@@ -516,6 +517,34 @@
           return false;
         }
       });
+    } else if (param == "danCustomerData") {
+      if (isEmpty($rootScope.danCustomerData.lastname)) {
+        $rootScope.alert("Та овогоо оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.firstname)) {
+        $rootScope.alert("Та өөрийн нэрээ оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
+        $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.email)) {
+        $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+        $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.ismarried)) {
+        $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.mikmortgagecondition)) {
+        $rootScope.alert("МИК-ийн зээлтэй эсэхээ сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.experienceperiodid)) {
+        $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
+        return false;
+      } else {
+        return true;
+      }
     } else if (param == "danIncomeReq") {
       if (isEmpty($rootScope.danIncomeData.incometypeid)) {
         $rootScope.alert("Та орлогын эх үүсвэр сонгоно уу", "warning");
@@ -555,7 +584,7 @@
         input.value = input.value.slice(0, input.value.length - 1);
         input.value = $rootScope.loanAmountField - input.value;
       }
-    }, 500);
+    }, 100);
   };
 
   $scope.backFromStep2 = function () {
@@ -698,8 +727,10 @@
     });
     $rootScope.isDanLoginAutoColl = true;
   };
+
   $rootScope.isDanHand = false;
   $scope.danHand = function () {
+    //Гараар бөглөх үед харилцагчийн хувийн мэдээлэл болон орлогын мэдээлэл татаж харуулах
     $rootScope.isDanHand = true;
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
       $rootScope.mortgageData = response;
@@ -708,7 +739,24 @@
       $rootScope.familtStatData = response;
     });
     $state.go("autoleasing-4");
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (responseCustomerData) {
+      console.log("responseCustomerData", responseCustomerData);
+      if (responseCustomerData[0] != "") {
+        $rootScope.danCustomerData = responseCustomerData[0];
+        $rootScope.danCustomerData.id = all_ID.dccustomerid;
+      }
+    });
+
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
+      console.log("get income data response", response);
+      if (response[0] != "") {
+        $rootScope.danIncomeData = response[0];
+      }
+    });
   };
+
   $scope.registerFunctionAuto = function (value) {
     console.log("value", value);
     var json = {
