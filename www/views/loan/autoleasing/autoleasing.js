@@ -127,7 +127,6 @@
         });
       }
     }
-    console.log("json", json);
   };
   //Банк шүүлт autoleasing-2 дээр шууд ажиллах
   //Банк сонгох autoleasing-3 хуудасруу ороход ажиллах
@@ -411,7 +410,17 @@
               if (response[0] == "success" && response[1] != "") {
                 $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
                 delete $rootScope.danIncomeData.id;
+
+                var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+                console.log("DanloginUserInfo", DanloginUserInfo);
+                console.log("DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan", DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan);
+
+                $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+                $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+                $rootScope.danCustomerData.birthDate = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.birthdate.substring(0, 10);
+                $rootScope.danCustomerData.crmCustomerId = all_ID.crmuserid;
                 console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+
                 serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (response) {
                   console.log("response SAVE CUSTOMER DATA", response);
                   console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
@@ -455,7 +464,7 @@
     }
   };
   $scope.goStep5 = function () {
-    if ($scope.checkReqiured("danCustomerData")) {
+    if ($scope.checkReqiured("step4CustomerData")) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
         $rootScope.incomeType = response;
       });
@@ -517,7 +526,7 @@
           return false;
         }
       });
-    } else if (param == "danCustomerData") {
+    } else if (param == "step4CustomerData") {
       if (isEmpty($rootScope.danCustomerData.lastname)) {
         $rootScope.alert("Та овогоо оруулна уу", "warning");
         return false;
@@ -564,15 +573,6 @@
     }
   };
 
-  // $scope.growDivAuto = function () {
-  //   var growDiv = document.getElementById("car-grow");
-  //   if (growDiv.clientHeight) {
-  //     growDiv.style.height = 0;
-  //   } else {
-  //     var wrapper = document.querySelector(".car-measuringWrapper");
-  //     growDiv.style.height = wrapper.clientHeight + "px";
-  //   }
-  // };
   $rootScope.calcLoanAmount = function () {
     $timeout(function () {
       var input = document.getElementById("sendRequestAdvancePayment");
@@ -623,6 +623,7 @@
     $scope.getLoanAmountFunc();
     $scope.getLookupData();
     $scope.loanAmountDisable();
+    $rootScope.hideFooter = true;
   });
   // MODAL
   $ionicModal
@@ -675,22 +676,23 @@
 
               serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.regnum.toUpperCase() }).then(function (checkedValue) {
                 console.log("checkedValue", checkedValue);
-                serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
-                  console.log("responseCustomerData", responseCustomerData);
-                  if (responseCustomerData[0] != "") {
-                    //Бүртгэлтэй USER -н дата татаж харуулах
-                    $rootScope.danCustomerData = responseCustomerData[0];
-                    $rootScope.danCustomerData.id = checkedValue[1].dccustomerid;
-                  }
-                });
+                if (!isEmpty(checkedValue[1])) {
+                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
+                    console.log("responseCustomerData", responseCustomerData);
+                    if (responseCustomerData[0] != "") {
+                      //Бүртгэлтэй USER -н дата татаж харуулах
+                      $rootScope.danCustomerData = responseCustomerData[0];
+                      $rootScope.danCustomerData.id = checkedValue[1].dccustomerid;
+                    }
+                  });
 
-                serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: checkedValue[1].dccustomerid }).then(function (response) {
-                  console.log("get income data response", response);
-                  if (response[0] != "") {
-                    $rootScope.danIncomeData = response[0];
-                  }
-                });
-                console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: checkedValue[1].dccustomerid }).then(function (response) {
+                    console.log("get income data response", response);
+                    if (response[0] != "") {
+                      $rootScope.danIncomeData = response[0];
+                    }
+                  });
+                }
 
                 serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
                   $rootScope.mortgageData = response;
@@ -780,6 +782,9 @@
       customerTypeId: "1",
     };
 
+    $rootScope.profilePictureSideMenu = value.image;
+    $rootScope.sidebarUserName = value.lastname.substr(0, 1) + ". " + value.firstname;
+
     serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
       console.log("checkedValue", checkedValue);
       if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
@@ -788,28 +793,62 @@
         json.dcApp_crmUser_dan.id = checkedValue[1].custuserid;
         json.dcApp_crmUser_dan.dcApp_dcCustomer_dan.id = checkedValue[1].dccustomerid;
       }
-      serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (response) {
-        console.log("res", response);
-        if (!isEmpty(response) && !isEmpty(response[0])) {
-          $rootScope.loginUserInfo = {};
-          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: checkedValue[1].dccustomerid }).then(function (response) {
-            if (response[0] != "") {
-              $rootScope.customerIncomeProfileData = response[0];
-              $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
+      serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
+        console.log("responseCRM", responseCRM);
+        $rootScope.loginUserInfo = mergeJsonObjs(responseCRM[1], $rootScope.loginUserInfo);
+        localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
 
-              localStorage.removeItem("loginUserInfo");
-              localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
-              console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
-              serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: checkedValue[1].dccustomerid }).then(function (response) {
-                console.log("res", response);
-                localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
-                console.log("localStorage", localStorage);
-              });
-            } else {
-            }
+        if (isEmpty(checkedValue[1]) && checkedValue[0] == "success") {
+          var basePersonData = {
+            firstName: value.firstname,
+            lastName: value.lastname,
+            stateRegNumber: value.regnum.toUpperCase(),
+            parentId: responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id,
+          };
+          basePersonData.dcApp_all_um_system_user = {
+            username: value.regnum.toUpperCase(),
+            email: "",
+            typeCode: "internal",
+          };
+          basePersonData.dcApp_all_um_system_user.dcApp_all_um_user = {
+            isActive: "1",
+          };
+          serverDeferred.requestFull("dcApp_all_base_person_001", basePersonData).then(function (response) {
+            console.log("base person response", response);
           });
         }
+        $timeout(function () {
+          if (!isEmpty(responseCRM[1]) && responseCRM[0] == "success") {
+            console.log("responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id", responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id);
+            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id }).then(function (responseALLID) {
+              console.log("res all_ID", responseALLID);
+              localStorage.setItem("ALL_ID", JSON.stringify(responseALLID[0]));
+              $rootScope.danCustomerData.id = responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id;
+              console.log("localStorage", localStorage);
+            });
+          }
+        }, 500);
       });
     });
+  };
+  $scope.replaceCyrAuto = function (lastName) {
+    var rex = /^[А-ЯӨҮа-яөү\-\s]+$/;
+    var inputLastName = document.getElementById("customerLastNameDan");
+    if (rex.test(lastName) == false) {
+      document.getElementById("lastNameErrorDan").style.display = "block";
+      inputLastName.value = inputLastName.value.replace(inputLastName.value, "");
+    } else {
+      document.getElementById("lastNameErrorDan").style.display = "none";
+    }
+  };
+  $scope.replaceCyr2Auto = function (firstName) {
+    var rex = /^[А-ЯӨҮа-яөү\-\s]+$/;
+    var inputFirstName = document.getElementById("customerFirstNameDan");
+    if (rex.test(firstName) == false) {
+      document.getElementById("firstNameErrorDan").style.display = "block";
+      inputFirstName.value = inputFirstName.value.replace(inputFirstName.value, "");
+    } else {
+      document.getElementById("firstNameErrorDan").style.display = "none";
+    }
   };
 });

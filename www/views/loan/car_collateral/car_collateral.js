@@ -274,4 +274,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       $("#nationalNumber").val(data).trigger("input");
     });
   };
+  $scope.$on("$ionicView.enter", function () {
+    $rootScope.hideFooter = true;
+  });
 });

@@ -36,7 +36,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $rootScope.incomeType = response;
     });
   };
-  $scope.getProfileLookupData();
 
   $scope.nextPath = $stateParams.path;
 
@@ -95,9 +94,11 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     }
   };
   $scope.$on("$ionicView.enter", function () {
+    $scope.getProfileLookupData();
     $timeout(function () {
       $rootScope.getProfileData();
     }, 500);
+    $rootScope.hideFooter = true;
   });
 
   $scope.saveProfileData = function () {

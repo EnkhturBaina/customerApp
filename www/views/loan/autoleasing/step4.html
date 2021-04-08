@@ -8,14 +8,16 @@
                     <div class="tugrug-input">
                         <span class="title input-label-front dan-user-data">Овог</span>
                         <div class="tugrug-input-container">
-                            <input type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.lastname" select-on-click />
+                            <input type="text" id="customerLastNameDan" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.lastname" ng-change="replaceCyrAuto($root.danCustomerData.lastname)" select-on-click />
                         </div>
+                        <span id="lastNameErrorDan" class="profile-input-name-error">Та овогоо крилл үсгээр оруулна уу</span>
                     </div>
                     <div class="tugrug-input">
                         <span class="title input-label-front dan-user-data">Нэр</span>
                         <div class="tugrug-input-container">
-                            <input type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.firstname" select-on-click />
+                            <input type="text" id="customerFirstNameDan" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.firstname" ng-change="replaceCyr2Auto($root.danCustomerData.firstname)" select-on-click />
                         </div>
+                        <span id="firstNameErrorDan" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</span>
                     </div>
                     <div class="tugrug-input">
                         <span class="title input-label-front dan-user-data">Регистр</span>

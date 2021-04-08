@@ -12,8 +12,10 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
   $timeout(function () {
     $scope.autoCollModal.show();
   }, 300);
-  $rootScope.hideFooter = true;
 
+  $scope.$on("$ionicView.enter", function () {
+    $rootScope.hideFooter = true;
+  });
   $rootScope.isDanLoginAutoColl = false;
   $scope.autoCollHand = function () {
     $rootScope.isDanLoginAutoColl = false;

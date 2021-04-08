@@ -1,5 +1,5 @@
 angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailCtrl", function (serverDeferred, $scope, $ionicModal, $rootScope, $ionicPopup) {
-  // console.log("selectedMapBank", $rootScope.selectedMapBank);
+  console.log("selectedMapBank", $rootScope.selectedMapBank);
   $rootScope.loanType = $rootScope.selectedMapBank.loantype;
   $rootScope.selectedMapBankDTL = [];
 
