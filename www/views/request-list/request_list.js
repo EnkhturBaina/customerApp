@@ -1,5 +1,5 @@
 var expandCollapseApp = angular.module("request_list.Ctrl", ["ngAnimate"]);
-expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicLoading, $ionicPlatform) {
+expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicLoading, $timeout) {
   $scope.growDiv = function (id) {
     var grow = document.getElementById("grow" + id);
     if (grow.clientHeight) {
@@ -28,6 +28,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
       });
     } else {
       $scope.isEmptyReq = true;
+      $ionicLoading.hide();
     }
   };
   $scope.$on("$ionicView.enter", function () {

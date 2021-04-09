@@ -27,4 +27,5 @@ app.controller("contactCtrl", function ($scope, $rootScope, $ionicPlatform, $sta
   //     console.log("Could not get location");
   //   }
   // );
+  $rootScope.hideFooter = true;
 });
