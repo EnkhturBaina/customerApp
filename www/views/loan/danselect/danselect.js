@@ -12,7 +12,14 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
   $timeout(function () {
     $scope.autoCollModal.show();
   }, 300);
-
+  $ionicModal
+    .fromTemplateUrl("templates/danIs.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (danIsModal) {
+      $scope.danIsModal = danIsModal;
+    });
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
   });
@@ -42,6 +49,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
       var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");
       $(authWindow).on("loadstart", function (e) {
         var url = e.originalEvent.url;
+
         var code = url.indexOf("https://services.digitalcred");
         var error = /\?error=(.+)$/.exec(url);
         if (code == 0 || error) {
@@ -115,6 +123,10 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
         } else if (error) {
           console.log(error);
         }
+      });
+      //Дан-н цонх дуудагдахад Регистр оруулах талбар харуулах
+      $(authWindow).on("loadstop", function (e) {
+        authWindow.executeScript({ code: "$('#m-one-sign').attr('class', 'show');" });
       });
     });
     $rootScope.isDanLoginAutoColl = true;

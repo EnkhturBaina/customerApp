@@ -167,6 +167,10 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
           console.log(error);
         }
       });
+      //Дан-н цонх дуудагдахад Регистр оруулах талбар харуулах
+      $(authWindow).on("loadstop", function (e) {
+        authWindow.executeScript({ code: "$('#m-one-sign').attr('class', 'show');" });
+      });
       // $ionicModal.fromTemplateUrl('views/login/bind.html', {
       //         scope: $scope,
       //         animation: 'fade-in-scale'

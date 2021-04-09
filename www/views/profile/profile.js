@@ -64,6 +64,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           $rootScope.customerProfileData = response[0];
           localStorage.removeItem("profilePictureSideMenu");
           localStorage.setItem("profilePictureSideMenu", response[0].profilepicture);
+          $rootScope.profilePictureSideMenu = response[0].profilepicture;
           $scope.customerProfilePicture.profilepicture = response[0].profilepicture;
 
           if (response[0].uniqueidentifier) {

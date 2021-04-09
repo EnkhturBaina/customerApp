@@ -61,7 +61,7 @@
                         <div class="selector-container">
                             <span class="title">Барааны төрөл</span>
                             <select class="consumer-loan-suppp-select" ng-model="$root.newCarReq.categoryId">
-                                <option ng-repeat="cat in supplierCategory" ng-if="cat.name" value="{{cat.id}}">{{cat.name}}</option>
+                                <option ng-repeat="cat in supplierCategory track by $index" ng-if="cat.name" value="{{cat.id}}">{{cat.name}}</option>
                             </select>
                         </div>
                         <div class="selector-container">

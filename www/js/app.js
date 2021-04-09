@@ -291,7 +291,7 @@ var app = angular
       }
     };
   })
-  .controller("indexCtrl", function ($scope, $rootScope, $ionicTabsDelegate, $state) {
+  .controller("indexCtrl", function ($scope, $rootScope, $ionicTabsDelegate, $state, $ionicModal) {
     $scope.toggleSideMenu = function () {
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");

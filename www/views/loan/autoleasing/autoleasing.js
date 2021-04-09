@@ -77,6 +77,8 @@
         $rootScope.newReqiust = {};
       }
       $scope.getLoanAmount = $rootScope.sumPrice;
+      // $rootScope.newReqiust.loanAmount = $rootScope.sumPrice;
+      // $rootScope.newReqiust.advancePayment = 0;
       $rootScope.loanAmountField = $rootScope.sumPrice;
     } else {
       if (!isEmpty($rootScope.selectedCarData)) {
@@ -131,8 +133,9 @@
   //Банк шүүлт autoleasing-2 дээр шууд ажиллах
   //Банк сонгох autoleasing-3 хуудасруу ороход ажиллах
   if (($state.current.name == "autoleasing-3" && $rootScope.requestType != "autoColl") || $state.current.name == "autoleasing-2") {
-    $rootScope.newReqiust.collateralConditionId = 1554263832151;
-    $scope.getbankData();
+    $timeout(function () {
+      $scope.getbankData();
+    }, 700);
   }
   $scope.showQRreader = function () {
     var optionCodeCam = {
@@ -176,7 +179,7 @@
     }
     $timeout(function () {
       $scope.getbankData();
-    }, 1000);
+    }, 500);
   };
   var selectedbanks = [];
   $scope.checkBankSelectedStep = function () {
@@ -272,7 +275,10 @@
       $scope.consumerData = JSON.parse(localStorage.getItem("otherGoods"));
       $scope.newReqiust.customerId = all_ID.dccustomerid;
       //Хүсэлт бүртгэх
+      $rootScope.newReqiust.collateralConditionId = 1554263832151;
+      console.log("$rootScope.newReqiust", $rootScope.newReqiust);
       serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
+        console.log("respionse OL", response);
         if (response[0] == "success" && response[1] != "") {
           //Сонгосон банк
           selectedbanks = [];
@@ -287,7 +293,7 @@
                 isMobile: "1",
                 wfmStatusId: "1609944755118135",
                 productId: item.products[0].id,
-                vendorId: $rootScope.selectedCarData.vendorid,
+                vendorId: $scope.consumerData.shopId,
               };
               selectedbanks.push(AgreeBank);
             }
@@ -303,7 +309,7 @@
                 isMobile: "1",
                 wfmStatusId: "1609944755118135",
                 productId: item.products[0].id,
-                vendorId: $rootScope.selectedCarData.vendorid,
+                vendorId: $scope.consumerData.shopId,
               };
               selectedbanks.push(NotAgreeBank);
             }
@@ -447,6 +453,10 @@
       }
     }
     $rootScope.hideFooter = false;
+    $timeout(function () {
+      $ionicLoading.hide();
+      $ionicHistory.clearHistory();
+    }, 3000);
   };
 
   $scope.goStep3 = function (param) {
@@ -725,6 +735,10 @@
         } else if (error) {
           console.log(error);
         }
+      });
+      //Дан-н цонх дуудагдахад Регистр оруулах талбар харуулах
+      $(authWindow).on("loadstop", function (e) {
+        authWindow.executeScript({ code: "$('#m-one-sign').attr('class', 'show');" });
       });
     });
     $rootScope.isDanLoginAutoColl = true;

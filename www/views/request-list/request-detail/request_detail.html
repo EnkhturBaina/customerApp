@@ -6,7 +6,7 @@
       <div class="request-detail-container">
         <div class="request-car-detail">
           <img ng-if="loanType == 1 || loanType == 2" ng-src="{{$root.imagePath}}{{$root.selectedMapBankDTL.itempic}}" />
-          <img ng-if="loanType == 3" ng-src="{{$root.selectedMapBankDTL.itempic}}" />
+          <img ng-if="loanType == 3" ng-src="{{'data:image/png;base64,'+$root.selectedMapBankDTL.picture1}}" />
 
           <p>{{$root.selectedMapBankDTL.modelname}}</p>
           <p ng-if="loanType == 3">{{$root.selectedMapBankDTL.categoryname}}</p>

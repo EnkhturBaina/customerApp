@@ -78,3 +78,10 @@
   color: #acd322 !important;
   font-weight: bold;
 }
+.templates-sub-title-dan-is {
+  width: 90%;
+  margin: auto;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+}

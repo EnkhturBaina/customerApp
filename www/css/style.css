@@ -1389,3 +1389,43 @@ input[type="number"] {
   right: 15px;
   line-height: 12px;
 }
+.more-scroll-div {
+  position: absolute;
+  bottom: 77px;
+  right: 20%;
+  z-index: 2;
+  display: inline-block;
+  color: #fff;
+  font: normal 400 20px/1 "Josefin Sans", sans-serif;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+.more-scroll {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: -12px;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
+  -webkit-transform: rotate(225deg);
+  transform: rotate(225deg);
+  -webkit-animation: scrollMore 1.5s infinite;
+  animation: scrollMore 1.5s infinite;
+  box-sizing: border-box;
+}
+@keyframes scrollMore {
+  0% {
+    transform: rotate(225deg) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(225deg) translate(-20px, 20px);
+    opacity: 0;
+  }
+}

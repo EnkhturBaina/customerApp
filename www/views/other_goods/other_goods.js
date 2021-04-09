@@ -32,10 +32,11 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
 
   $scope.nexClivk = function () {
     if (!isEmpty($rootScope.otherGoodsData)) {
-      var next = $rootScope.checkLoginUserDatas("otherGoods", "autoleasing-2");
+      // var next = $rootScope.checkLoginUserDatas("otherGoods", "autoleasing-2");
+      $state.go("autoleasing-2");
       localStorage.setItem("requestType", "consumer");
       // $rootScope.getLoanAmountFunc();
-      $state.go(next.now, { path: next.nextpath }, { reload: true });
+      // $state.go(next.now, { path: next.nextpath }, { reload: true });
 
       // $state.go("autoleasing-2");
     } else {
