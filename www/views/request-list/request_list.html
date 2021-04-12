@@ -6,15 +6,16 @@
                 <p class="loan-tab-title ion-color-text req-list-title">Таны зээлийн хүсэлтийн жагсаалт.</p>
                 <div class="card request-list-card" ng-repeat="banks in requetData|groupBy:'leasingid'" ng-if="!(banks[0].producttypename|isEmpty)">
                     <div class="item bank-card card-body item-text-wrap">
-                        <div class="expandcollapse-item" ng-click="{{'growDiv('+$index+')'}}">
+                        <!-- <div class="expandcollapse-item" ng-click="{{'growDiv('+$index+')'}}"> -->
+                        <div class="expandcollapse-item">
                             <div class="row">
                                 <div class="col">
-                                    <span class="ion-float-left ion-color-text req-list-product-type">{{banks[0].producttypename}}</span>
+                                    <span class="ion-float-left ion-color-text req-list-product-type ion-text-bold">{{banks[0].producttypename}}</span>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <span class="ion-color-big-text"><span class="ion-text-bold">{{banks[0].loanamount|formatNumber}}</span></span>
+                                    <span class="ion-color-big-text"><span class="">{{banks[0].loanamount|formatNumber}}</span></span>
                                 </div>
                                 <div class="col">
                                     <span class="ion-float-right ion-color-text req-list-date">{{banks[0].createddate.substr(0,10)}}</span>

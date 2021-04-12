@@ -25,8 +25,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.steeringWheelData = [];
   //Машины өнгө
   $scope.carColorData = [];
-
-  $scope.defualtbank = [];
   //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
   $rootScope.carCollateralRequestData = {};
 
@@ -67,18 +65,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         $scope.carColorData = datas;
       });
     }
-    if (isEmpty($scope.defualtbank)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1603952821400122" }).then(function (datas) {
-        delete datas.aggregatecolumns;
-        angular.forEach(datas, function (item) {
-          item.BANK_LOGO = item.banklogo;
-          item.DEPARTMENT_NAME = item.departmentname;
-          item.PARENT_ID = item.id;
-        });
-        $rootScope.bankList = { correct: datas };
-        $scope.defualtbank = datas;
-      });
-    }
   };
   $scope.getCarFactoryCategory = function (val) {
     var json = { systemmetagroupid: "1613364305380357", number1: val };
@@ -111,14 +97,16 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     json.location = $rootScope.carCollateralRequestData.locationId;
     json.month = $rootScope.carCollateralRequestData.loanMonth;
     json.currency = 16074201974821;
-    json.isMortgage = $rootScope.loginUserInfo.mikmortgagecondition;
-    json.totalIncome = $rootScope.loginUserInfo.totalincomehousehold;
-    json.monthIncome = $rootScope.loginUserInfo.monthlyincome;
-    json.monthPay = $rootScope.loginUserInfo.monthlypayment;
+    if (!isEmpty($rootScope.loginUserInfo)) {
+      json.isMortgage = $rootScope.loginUserInfo.mikmortgagecondition;
+      json.totalIncome = $rootScope.loginUserInfo.totalincomehousehold;
+      json.monthIncome = $rootScope.loginUserInfo.monthlyincome;
+      json.monthPay = $rootScope.loginUserInfo.monthlypayment;
+    }
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
     });
-    console.log("json", json);
+    console.log("getbankDataCarColl json", json);
   };
 
   // localStorage.removeItem("carColl");
@@ -132,11 +120,11 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       // localStorage.removeItem("carColl");
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
       console.log("carColl DATAAAAAAAAA", JSON.parse(localStorage.getItem("carColl")));
-      var next = $rootScope.checkLoginUserDatas("car_coll", "car_coll2");
-      $state.go(next.now, { path: next.nextpath });
+      // var next = $rootScope.checkLoginUserDatas("car_coll", "car_coll2");
+      // $state.go(next.now, { path: next.nextpath });
 
       console.log("local", localStorage);
-      // $state.go("car_coll2");
+      $state.go("car_coll2");
     }
   };
   if ($state.current.name == "car_coll2") {
@@ -174,10 +162,12 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       } else if (isEmpty($rootScope.newCarReq.cameYearId) && !$rootScope.isDanLoginAutoColl) {
         $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newCarReq.itemPic)) {
-        $rootScope.alert("Автомашины зураг оруулна уу", "warning");
-        return false;
-      } else {
+      }
+      //  else if (isEmpty($rootScope.newCarReq.itemPic)) {
+      //   $rootScope.alert("Автомашины зураг оруулна уу", "warning");
+      //   return false;
+      // }
+      else {
         return true;
       }
       return true;

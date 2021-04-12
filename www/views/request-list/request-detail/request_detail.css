@@ -251,7 +251,11 @@
   display: grid;
 }
 .bank-chat-modal > .bar-header {
-  border-bottom: 1px solid #dbdbdb;
+  /* border-bottom: 1px solid #dbdbdb; */
+  background: rgb(162, 209, 54);
+  background: -moz-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%);
+  background: -webkit-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%);
+  background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%);
 }
 .bank-chat-content {
   margin-bottom: 70px !important;
@@ -295,8 +299,8 @@
   width: 100%;
 }
 .bank-chat-hide-btn {
-  padding: 3px 6px !important;
-  color: #000 !important;
+  padding: 3px 12px !important;
+  color: #fff !important;
 }
 .request-detail-container {
   margin-top: 20px;

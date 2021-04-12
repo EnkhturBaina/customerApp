@@ -45,7 +45,7 @@
                     </label>
                     <label class="item item-input step4-loan-location">
                         <p class="dan-user-data">МИК-ийн зээлтэй эсэх</p>
-                        <select class="select-income-type" ng-model="$root.danCustomerData.mikmortgagecondition">
+                        <select class="select-income-type" ng-model="$root.danCustomerData.mikmortgagecondition" ng-change="getbankData();">
                             <option ng-repeat="income in mortgageData | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.danCustomerData.mikmortgagecondition==income.id}}">{{income.name}}</option>
                         </select>
                     </label>

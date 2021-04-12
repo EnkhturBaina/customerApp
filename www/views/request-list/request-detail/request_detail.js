@@ -17,7 +17,7 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
       dvId = 0;
     }
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: dvId, mapId: $rootScope.selectedMapBank.mapid }).then(function (response) {
-      // console.log("res", response);
+      console.log("res", response);
       $rootScope.selectedMapBankDTL = response[0];
     });
   };

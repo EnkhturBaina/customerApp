@@ -77,23 +77,24 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                 var userSalaryInfo = JSON.parse(response.result.data.salary);
                 serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.regnum.toUpperCase() }).then(function (checkedValue) {
                   console.log("checkedValue", checkedValue);
-                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
-                    console.log("responseCustomerData", responseCustomerData);
-                    if (responseCustomerData[0] != "") {
-                      //Бүртгэлтэй USER -н дата татаж харуулах
-                      $rootScope.danCustomerData = responseCustomerData[0];
-                      $rootScope.danCustomerData.id = checkedValue[1].customerid;
-                    }
-                  });
+                  if (!isEmpty(checkedValue[1])) {
+                    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
+                      console.log("responseCustomerData", responseCustomerData);
+                      if (responseCustomerData[0] != "") {
+                        //Бүртгэлтэй USER -н дата татаж харуулах
+                        $rootScope.danCustomerData = responseCustomerData[0];
+                        $rootScope.danCustomerData.id = checkedValue[1].customerid;
+                      }
+                    });
 
-                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: checkedValue[1].dccustomerid }).then(function (response) {
-                    console.log("get income data response", response);
-                    if (response[0] != "") {
-                      $rootScope.danIncomeData = response[0];
-                    }
-                  });
-                  console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
-
+                    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: checkedValue[1].dccustomerid }).then(function (response) {
+                      console.log("get income data response", response);
+                      if (response[0] != "") {
+                        $rootScope.danIncomeData = response[0];
+                      }
+                    });
+                    console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+                  }
                   serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
                     $rootScope.mortgageData = response;
                   });
@@ -139,7 +140,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
       isActive: "1",
     };
     json.dcApp_crmUser_dan = {
-      userName: value.regnum.toUpperCase(),
+      userName: "",
       userId: "1",
       isActive: "1",
     };
@@ -162,21 +163,53 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
         json.dcApp_crmUser_dan.dcApp_dcCustomer_dan.id = checkedValue[1].dccustomerid;
       }
 
-      serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (response) {
-        console.log("res", response);
-        if (!isEmpty(response) && !isEmpty(response[0])) {
-          $rootScope.loginUserInfo = {};
-          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
-            if (response[0] != "") {
-              $rootScope.customerIncomeProfileData = response[0];
-              $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
+      serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
+        console.log("responseCRM", responseCRM);
+        if (!isEmpty(responseCRM) && !isEmpty(responseCRM[0])) {
+          // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
+          //   if (response[0] != "") {
+          //     $rootScope.customerIncomeProfileData = response[0];
+          //     $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
 
-              localStorage.removeItem("loginUserInfo");
-              localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
-              console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
-            } else {
+          //     localStorage.removeItem("loginUserInfo");
+          //     localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+          //     console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+          //   } else {
+          //   }
+          // });
+          $rootScope.loginUserInfo = mergeJsonObjs(responseCRM[1], $rootScope.loginUserInfo);
+          localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+
+          if (isEmpty(checkedValue[1]) && checkedValue[0] == "success") {
+            var basePersonData = {
+              firstName: value.firstname,
+              lastName: value.lastname,
+              stateRegNumber: value.regnum.toUpperCase(),
+              parentId: responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id,
+            };
+            basePersonData.dcApp_all_um_system_user = {
+              username: value.regnum.toUpperCase(),
+              email: "",
+              typeCode: "internal",
+            };
+            basePersonData.dcApp_all_um_system_user.dcApp_all_um_user = {
+              isActive: "1",
+            };
+            serverDeferred.requestFull("dcApp_all_base_person_001", basePersonData).then(function (response) {
+              console.log("base person response", response);
+            });
+          }
+          $timeout(function () {
+            if (!isEmpty(responseCRM[1]) && responseCRM[0] == "success") {
+              console.log("responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id", responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id);
+              serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id }).then(function (responseALLID) {
+                console.log("res all_ID", responseALLID);
+                localStorage.setItem("ALL_ID", JSON.stringify(responseALLID[0]));
+                $rootScope.danCustomerData.id = responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id;
+                console.log("localStorage", localStorage);
+              });
             }
-          });
+          }, 500);
           $state.go("car_coll");
         }
       });

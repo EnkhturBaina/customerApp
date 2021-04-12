@@ -5,7 +5,13 @@
   padding: 20px;
   height: fit-content;
   background-color: #fff !important;
-  margin: 70px 20px 10px 20px !important;
+  margin-left: 40px !important;
+  margin-right: 40px !important;
+  position: absolute;
+  top: 48%;
+  left: calc(50% - 40px);
+  transform: translate(-50%, -50%);
+  width: 90%;
 }
 
 .templates-scroll {
@@ -84,4 +90,8 @@
   font-weight: bold;
   text-align: center;
   display: block;
+}
+.templates-list {
+  position: relative;
+  height: 100vh;
 }

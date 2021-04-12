@@ -51,9 +51,9 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $rootScope.umSystemUser = {};
 
   $rootScope.getProfileData = function () {
+    $rootScope.ShowLoader();
     console.log("localStorage", localStorage);
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
-    $rootScope.ShowLoader();
     if (!isEmpty($rootScope.loginUserInfo)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (response) {
         console.log("get Profile Data response", response);
@@ -291,18 +291,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1544591440502" }).then(function (datas) {
         delete datas.aggregatecolumns;
         $scope.companyData = datas;
-      });
-    }
-    if (isEmpty($scope.defualtbank)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1603952821400122" }).then(function (datas) {
-        delete datas.aggregatecolumns;
-        angular.forEach(datas, function (item) {
-          item.BANK_LOGO = item.banklogo;
-          item.DEPARTMENT_NAME = item.departmentname;
-          item.PARENT_ID = item.id;
-        });
-        $rootScope.bankList = { correct: datas };
-        $scope.defualtbank = datas;
       });
     }
   };

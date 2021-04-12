@@ -1,14 +1,5 @@
 var expandCollapseApp = angular.module("request_list.Ctrl", ["ngAnimate"]);
 expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicLoading, $timeout) {
-  $scope.growDiv = function (id) {
-    var grow = document.getElementById("grow" + id);
-    if (grow.clientHeight) {
-      grow.style.height = 0;
-    } else {
-      var wrapper = document.querySelector(".measuringWrapper" + id);
-      grow.style.height = wrapper.clientHeight + "px";
-    }
-  };
   $scope.isEmptyReq = true;
   // ====== Get Data  ========
   $rootScope.getRequetData = function () {
@@ -23,7 +14,12 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
         } else {
           $scope.isEmptyReq = false;
           $scope.requetData = response;
-          $ionicLoading.hide();
+          $timeout(function () {
+            for (i = 0; i < $scope.requetData.length - 1; i++) {
+              $scope.growDiv(i);
+            }
+            $ionicLoading.hide();
+          }, 100);
         }
       });
     } else {
@@ -44,5 +40,14 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
   $rootScope.isLoginFromRequestList = false;
   $scope.loginFromRequestList = function () {
     $rootScope.isLoginFromRequestList = true;
+  };
+  $scope.growDiv = function (id) {
+    var grow = document.getElementById("grow" + id);
+    if (grow.clientHeight) {
+      grow.style.height = 0;
+    } else {
+      var wrapper = document.querySelector(".measuringWrapper" + id);
+      grow.style.height = wrapper.clientHeight + "px";
+    }
   };
 });
