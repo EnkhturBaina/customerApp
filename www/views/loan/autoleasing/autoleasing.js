@@ -379,16 +379,43 @@
             }
             //Бүтээгдэхүүн бүртгэх
             serverDeferred.requestFull("dcApp_consumer_loan_001", product).then(function (responseProduct) {
-              if (responseProduct[0] == "success" && responseProduct[1] != "" && mapBankSuccess) {
-                localStorage.removeItem("otherGoods");
-                localStorage.removeItem("consumerRequestData");
-                localStorage.removeItem("otherGoodsMaxId");
-                $ionicLoading.hide();
-                $rootScope.newReqiust = {};
-                $state.go("loan_success");
-              } else {
-                $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
-              }
+              $timeout(function () {
+                if (responseProduct[0] == "success" && responseProduct[1] != "" && mapBankSuccess) {
+                  $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
+                  delete $rootScope.danIncomeData.id;
+
+                  var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+                  console.log("DanloginUserInfo", DanloginUserInfo);
+                  if (DanloginUserInfo.dcapp_crmuser_dan) {
+                    $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+                    $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+                    $rootScope.danCustomerData.birthDate = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.birthdate.substring(0, 10);
+                  }
+
+                  $rootScope.danCustomerData.crmCustomerId = all_ID.crmuserid;
+                  console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+
+                  serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (danCustomerDataResponse) {
+                    console.log("danCustomerDataResponse", danCustomerDataResponse);
+                    serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (danIncomeDataResponse) {
+                      console.log("danIncomeDataResponse", danIncomeDataResponse);
+                      if (danIncomeDataResponse[0] == "success" && danIncomeDataResponse[1] != "") {
+                        $state.go("loan_success");
+
+                        localStorage.removeItem("otherGoods");
+                        localStorage.removeItem("consumerRequestData");
+                        localStorage.removeItem("otherGoodsMaxId");
+                        $ionicLoading.hide();
+                        $scope.getLoanAmount = "";
+                        $rootScope.newReqiust = {};
+                        $state.go("loan_success");
+                      }
+                    });
+                  });
+                } else {
+                  $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+                }
+              }, 1000);
             });
           });
         } else {
@@ -672,6 +699,13 @@
     $scope.getLookupData();
     $scope.loanAmountDisable();
     $rootScope.hideFooter = true;
+
+    var local = localStorage.getItem("requestType");
+    console.log("ASD local", local);
+    if ($state.current.name == "autoleasing-4" && local == "autoColl") {
+      console.log("ASD local", local);
+      $scope.danHand();
+    }
   });
   // MODAL
   $ionicModal

@@ -65,7 +65,7 @@
               <p style="padding: 6px 0px">Барилгын гаднах зураг</p>
               <div ng-if="$root.collateralLoanData.picture1|isEmpty" style="width: 120px; border-radius: 10px; border: 1px dashed #ccc; height: 75px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
               </div>
-              <img ng-if="!$root.collateralLoanData.picture1|isEmpty" src="{{$root.collateralLoanData.picture1|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
+              <img ng-if="!$root.collateralLoanData.picture1|isEmpty" ng-src="{{$root.collateralLoanData.picture1|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
               <i class="icon ion-edit ident-icon" ng-click="pCSourceSelectOn(1)"></i>
 
             </div>
@@ -73,7 +73,7 @@
               <p style="padding: 6px 0px">Гэрчилгээний зураг</p>
               <div ng-if="$root.collateralLoanData.picture2|isEmpty" style="width: 120px; border-radius: 10px; border: 1px dashed #ccc; height: 75px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
               </div>
-              <img ng-if="!$root.collateralLoanData.picture2|isEmpty" src="{{$root.customerProfileData.picture2|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
+              <img ng-if="!$root.collateralLoanData.picture2|isEmpty" ng-src="{{$root.customerProfileData.picture2|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
               <i class="icon ion-edit ident-icon" ng-click="pCSourceSelectOn(2)"></i>
 
             </div>
