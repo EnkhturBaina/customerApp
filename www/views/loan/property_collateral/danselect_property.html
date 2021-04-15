@@ -1,0 +1,41 @@
+<ion-view hide-nav-bar="true">
+    <link href="views/loan/danselect/danselect.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Үл хөдлөх хөрөнгийн зээл'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 danselect-content">
+        <div class="danselect-container">
+            <div class="item danselect-card card-body item-text-wrap">
+                <div class="danselect-card-row1">
+                    <img class="danselect-img" src="img/dan-logo60.png" />
+                </div>
+                <div class="danselect-card-row2">
+                    <span class="danselect-card-text">Та ДАН мэдээллийн системээр дамжуулан зээл авах гэж буй санхүүгийн байгууллагад өөрийн мэдээллийг баталгаажуулан илгээснээр зээлээ хурдан авах боломж бүрдэнэ.</span>
+                </div>
+                <button class="button btn single-button" ng-click="gotoDanLoginDanSelectEstate()">ДАН-с татах</button>
+                <div class="dan-is-btn" ng-click="danIsModal.show()">Дан гэж юу вэ?</div>
+            </div>
+            <div class="item danselect-card card-body item-text-wrap">
+                <div class="danselect-card-row1">
+                    <img class="danselect-img" src="img/info60.png" />
+                </div>
+                <div class="danselect-card-row2">
+                    <span class="danselect-card-text">Та ХУР, ДАН мэдээллийн системд хандах боломжгүй байгаа бол өөрийн мэдээллийг бөглөж зээлийн хүсэлтээ илгээгээрэй.</span>
+                </div>
+                <button class="button btn single-button" ng-click="propertyHand()" ui-sref="property_collateral">Мэдээлэл бөглөх</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<script id="templates/property.html" type="text/ng-template">
+  <ion-modal-view class="auto-temp-modal-view">
+    <ion-content class="padding bank-chat-content">
+        <div class="templates-modal-include" ng-include src="'views/templates/property.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>
+<script id="templates/danIs.html" type="text/ng-template">
+  <ion-modal-view class="auto-temp-modal-view">
+    <ion-content class="padding bank-chat-content">
+        <div class="templates-modal-include" ng-include src="'views/templates/danIs.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>

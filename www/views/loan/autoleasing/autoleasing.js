@@ -124,6 +124,12 @@
       json.totalLoan = $rootScope.carCollateralRequestData.loanAmount;
       json.location = $rootScope.carCollateralRequestData.locationId;
       json.month = $rootScope.carCollateralRequestData.loanMonth;
+    } else if ($rootScope.requestType == "estate") {
+      //ҮХХ Барьцаат лизинг банк шүүлт
+      json.type = "estateLoanFilter";
+      json.totalLoan = $rootScope.propertyRequestData.loanAmount;
+      json.location = $rootScope.propertyRequestData.locationId;
+      json.month = $rootScope.propertyRequestData.loanMonth;
     } else if ($rootScope.requestType == "auto") {
       //Авто лизинг банк шүүлт
       if (!isEmpty($rootScope.selectedCarData) && !isEmpty($rootScope.selectedCarData.itemcode)) {
@@ -702,8 +708,7 @@
 
     var local = localStorage.getItem("requestType");
     console.log("ASD local", local);
-    if ($state.current.name == "autoleasing-4" && local == "autoColl") {
-      console.log("ASD local", local);
+    if (local == "autoColl" || (local == "estate" && $state.current.name == "autoleasing-4")) {
       $scope.danHand();
     }
   });
@@ -713,8 +718,8 @@
       scope: $scope,
       animation: "slide-in-up",
     })
-    .then(function (modal) {
-      $scope.modal = modal;
+    .then(function (termModalAgreement) {
+      $scope.termModalAgreement = termModalAgreement;
     });
   $scope.itemShow = function (item, id) {
     if (item) {
@@ -734,7 +739,7 @@
   $scope.gotoDanLoginAutoIncome = function () {
     $rootScope.danCustomerData = {};
     $rootScope.danIncomeData = {};
-    serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
+    serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, "serverDeferred").then(function (response) {
       $rootScope.stringHtmlsLink = response.result.data;
       var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");
       $(authWindow).on("loadstart", function (e) {

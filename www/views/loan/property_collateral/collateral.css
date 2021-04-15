@@ -98,10 +98,49 @@
   position: absolute;
   zoom: 2;
 }
+.property-coll-label {
+  padding: 5px 0 !important;
+  display: contents !important;
+}
 .property-coll-label p {
   padding: 6px 0px;
-  width: 80%;
+  width: 100%;
   text-align: center;
   white-space: pre-line !important;
   color: #a2a7b5;
+}
+.property-loan-container-card {
+  background-color: #fff;
+  padding: 15px 0px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 10px 20px;
+}
+.property-label {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: 0px !important;
+  border-bottom: 1px solid #a2a7b552 !important;
+  padding: 0 5px !important;
+  display: block !important;
+}
+.property-label span {
+  font-size: 14px !important;
+}
+.property-label::after {
+  display: none !important;
+}
+.property-select {
+  padding: 7px 15px !important;
+  text-align-last: right !important;
+  position: relative !important;
+  float: right !important;
+  appearance: auto !important;
+  direction: ltr !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.property-input {
+  text-align: right !important;
+  background: #fff !important;
 }

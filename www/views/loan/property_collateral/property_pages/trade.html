@@ -1,0 +1,89 @@
+<!-- Орон сууцанд байрлах худалдаа, үйлчилгээ -->
+<label class="item item-input item-stacked-label property-label" ng-if="$root.propertyIsDan">
+    <span class="input-label">Хөрөнгийн дэд төрөл</span>
+    <input id="propertySubCategory" type="text" placeholder="0" class="property-input" disabled>
+</label>
+<label class="item item-input item-stacked-label property-label">
+    <span class="input-label">Талбайн хэмжээ /м2/</span>
+    <input id="squareSize" ng-model="$root.propertyData.squareSize" type="number" placeholder="0" class="property-input">
+</label>
+<label class="item item-input item-stacked-label property-label">
+    <span class="input-label">Өрөөний тоо</span>
+    <input id="squareSize" ng-model="$root.propertyData.roomCount" type="number" placeholder="0" class="property-input">
+</label>
+<label class="item item-input item-stacked-label property-label">
+    <span class="input-label">Давхарын тоо</span>
+    <input id="squareSize" ng-model="$root.propertyData.floorCount" type="number" placeholder="0" class="property-input">
+</label>
+<label class="item item-input item-stacked-label property-label" ng-if="$root.propertyIsDan">
+    <span class="input-label">Хаяг</span>
+    <input type="text" placeholder="0" class="property-input">
+</label>
+<label class="item item-input item-select property-label" ng-if="!$root.propertyIsDan">
+    <p class="input-label" style="margin: 0;">Хот/аймаг</p>
+    <select style="background-color: transparent" ng-model="$root.propertyData.line1" class="property-select" ng-change="getDistrictData(propertyData.line1)">
+        <option ng-repeat="com in provinceData" ng-if="com.name" value="{{com.id}}">{{com.name}}</option>
+    </select>
+</label>
+<label class="item item-input item-select property-label" ng-if="!$root.propertyIsDan">
+    <p class="input-label" style="margin: 0;">Дүүрэг/сум</p>
+    <select id="districtSelect" style="background-color: transparent" ng-model="$root.propertyData.line2" class="property-select" ng-change="getStreetData(propertyData.line2)" disabled>
+        <option ng-repeat="com in districtData" ng-if="com.name" value="{{com.id}}">{{com.name}}</option>
+    </select>
+</label>
+<label class="item item-input item-select property-label" ng-if="!$root.propertyIsDan">
+    <p class="input-label" style="margin: 0;">Хороо/баг</p>
+    <select id="streetSelect" style="background-color: transparent" ng-model="$root.propertyData.line3" class="property-select" disabled>
+        <option ng-repeat="com in streetData" ng-if="com.name" value="{{com.id}}">{{com.name}}</option>
+    </select>
+</label>
+<div class="item item-input property-coll-label" style="border: 0;margin-top: 1px;background: transparent;">
+    <div class="row car-coll-img-row">
+        <div class="col col-50 car-img" ng-click="pCSourceSelectOn('itemPic')">
+            <div ng-if="!$root.propertyData.itemPic" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                +
+            </div>
+            <img ng-if="$root.propertyData.itemPic" ng-src="{{$root.propertyData.itemPic|guessImageMime}}" width="100px" height="75px" />
+            <p class="car-coll-img-p">Гаднах зураг</p>
+        </div>
+        <div class="col col-50 car-img" ng-click="pCSourceSelectOn('itemPic2')">
+            <div ng-if="!$root.propertyData.itemPic2" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                +
+            </div>
+            <img ng-if="$root.propertyData.itemPic2" ng-src="{{$root.propertyData.itemPic2|guessImageMime}}" width="100px" height="75px" />
+            <p class="car-coll-img-p">Орчны зураг</p>
+        </div>
+    </div>
+    <div class="row car-coll-img-row">
+        <div class="col col-50 car-img" ng-click="pCSourceSelectOn('itemPic')">
+            <div ng-if="!$root.propertyData.itemPic" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                +
+            </div>
+            <img ng-if="$root.propertyData.itemPic" ng-src="{{$root.propertyData.itemPic|guessImageMime}}" width="100px" height="75px" />
+            <p class="car-coll-img-p">Бусад зураг 1</p>
+        </div>
+        <div class="col col-50 car-img" ng-click="pCSourceSelectOn('itemPic2')">
+            <div ng-if="!$root.propertyData.itemPic2" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                +
+            </div>
+            <img ng-if="$root.propertyData.itemPic2" ng-src="{{$root.propertyData.itemPic2|guessImageMime}}" width="100px" height="75px" />
+            <p class="car-coll-img-p">Бусад зураг 2</p>
+        </div>
+    </div>
+    <div class="row car-coll-img-row">
+        <div class="col col-50 car-img" ng-click="pCSourceSelectOn('itemPic')">
+            <div ng-if="!$root.propertyData.itemPic" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                +
+            </div>
+            <img ng-if="$root.propertyData.itemPic" ng-src="{{$root.propertyData.itemPic|guessImageMime}}" width="100px" height="75px" />
+            <p class="car-coll-img-p">Бусад зураг 3</p>
+        </div>
+        <div class="col col-50 car-img" ng-click="pCSourceSelectOn('itemPic2')">
+            <div ng-if="!$root.propertyData.itemPic2" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
+                +
+            </div>
+            <img ng-if="$root.propertyData.itemPic2" ng-src="{{$root.propertyData.itemPic2|guessImageMime}}" width="100px" height="75px" />
+            <p class="car-coll-img-p">Бусад зураг 4</p>
+        </div>
+    </div>
+</div>

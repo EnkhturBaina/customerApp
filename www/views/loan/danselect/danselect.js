@@ -64,9 +64,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
               console.log("userInfo", userInfo);
               if (!isEmpty(response.result.data.vehicle)) {
                 $rootScope.userVehicleData = JSON.parse(response.result.data.vehicle);
-                console.log("$rootScope.userVehicleData", $rootScope.userVehicleData);
 
-                // $rootScope.newCarReq = $rootScope.userVehicleData.list[0];
                 $rootScope.autoCollDanCarData = $rootScope.userVehicleData.list[0];
                 $rootScope.autoCollDanCarData.importDate = formatDate($rootScope.userVehicleData.list[0].importDate);
                 console.log("$rootScope.autoCollDanCarData", $rootScope.autoCollDanCarData);

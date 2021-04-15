@@ -1,0 +1,52 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+	<link href="views/loan/property_collateral/collateral.css" rel="stylesheet" />
+	<div id="overlayCollateralLoan" ng-click="pCSourceSelectOff()">
+		<div class="overlay-pc-content">
+			<div class="get-photo-choose">
+				<div class="get-camera" ng-click="takePhoto()"><i class="icon ion-camera photo-choose-icon"></i><span class="photo-choose-span">Камер нээх</span></div>
+				<div class="get-gallery" ng-click="takePhoto('1')"><i class="icon ion-images photo-choose-icon"></i><span class="photo-choose-span">Зурагнаас сонгох</span></div>
+			</div>
+			<button class="button btn single-button">Хаах</button>
+		</div>
+	</div>
+	<ion-header-bar align-title="left" class="navbar" style="background: none">
+		<div class="title ion-color-big-text navbar-back-button" style="background: none">
+			<button ng-click="backFromPropertyStep1()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+				<i class="ion-chevron-left ion-color-header"></i>
+				<span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Үл хөдлөх хөрөнгийн зээл</span></span>
+			</button>
+		</div>
+		<div class="navbar-right-icon">
+		</div>
+	</ion-header-bar>
+	<ion-content overflow-scroll="true" class="ion-modified-content has-header collateral-loan-content">
+		<div class="big-container ghostwhite-noscroll-container">
+			<div class="magic-container property-loan-container-card">
+				<div class="margin-lr-20">
+					<div class="">
+						<label class="item item-input item-select property-label">
+							<p class="input-label" style="margin: 0;">Хөрөнгийн төрөл</p>
+							<select ng-model="$root.propertyData.categoryId" style="background-color: transparent" class="property-select" ng-change="clearPropertyData()">
+								<option ng-repeat="com in propertyCategory" ng-if="com.name" value="{{com.id}}">{{com.name}}</option>
+							</select>
+						</label>
+						<select ng-model="template" ng-options="t.name for t in templates">
+						</select>
+						<hr />
+						<div class="slide-animate-container">
+							<div ng-include="template.url"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bank-container">
+				<p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
+				<img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" />
+
+			</div>
+			<ion-footer class="bottom-footer">
+				<button class="button btn single-button" id="Next" ng-click="saveProperty()">Үргэлжлүүлэх</button>
+			</ion-footer>
+		</div>
+	</ion-content>
+</ion-view>

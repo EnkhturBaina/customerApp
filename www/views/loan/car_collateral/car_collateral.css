@@ -95,11 +95,18 @@
   padding: 10px 0px 0px 15px;
 }
 .step2-loam-month {
-  margin: 10px 0;
-  border: 0 !important;
+  border: 1px solid #d5d5d5 !important;
   border-radius: 5px;
-  margin-top: 15px;
-  padding: 0px 0px 0px 16px !important;
+  margin: 15px !important;
+  padding: 15px 5px 15px 0px !important;
+}
+.step2-loam-month p {
+  position: absolute;
+  padding-left: 30px;
+}
+.step2-loam-month i {
+  font-size: 1.3em !important;
+  padding: 10px !important;
 }
 .step2-bank-container {
   padding: 0 10px;

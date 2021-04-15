@@ -174,7 +174,17 @@ var app = angular
     });
     $stateProvider.state("property_collateral", {
       url: "/views/property_collateral",
-      templateUrl: "views/loan/property_collateral/collateral.html",
+      templateUrl: "views/loan/property_collateral/property_collateral.html",
+      controller: "property_collateralCtrl",
+    });
+    $stateProvider.state("property_collateral2", {
+      url: "/views/property_collateral",
+      templateUrl: "views/loan/property_collateral/property_collateral2.html",
+      controller: "property_collateralCtrl",
+    });
+    $stateProvider.state("property_collateral_danselect", {
+      url: "/views/danselect_property",
+      templateUrl: "views/loan/property_collateral/danselect_property.html",
       controller: "property_collateralCtrl",
     });
     $stateProvider.state("basket", {

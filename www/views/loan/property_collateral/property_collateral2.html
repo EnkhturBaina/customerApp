@@ -1,46 +1,35 @@
-<ion-view ng-app="car_collateral.Ctrl" hide-nav-bar="true">
+<ion-view ng-app="property_collateral .Ctrl" hide-nav-bar="true">
     <link href="views/loan/car_collateral/car_collateral.css" rel="stylesheet" />
     <ion-content id="car-collateral2" overflow-scroll="true" class="car-col-content">
-        <!-- <ion-content id="car-collateral2" scroll="true" class="car-col-content margin-top-50"> -->
-        <!-- <div class="car-col-step2-back" ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div> -->
-        <ion-header-bar align-title="left" class="navbar car-col-step2-back" style="background: none">
-            <div class="title ion-color-big-text navbar-back-button" style="background: none">
-                <button ng-click="backFromCarCollStep2()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
-                    <i class="ion-chevron-left ion-color-header"></i>
-                    <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Хүсэлт илгээх</span></span>
-                </button>
-            </div>
-            <div class="navbar-right-icon">
-            </div>
-        </ion-header-bar>
-        <div class="list car-collateral-list" ng-controller="car_collateralCtrl">
+        <div class="car-col-step2-back" ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div>
+        <div class="list car-collateral-list" ng-controller="property_collateralCtrl">
             <div class="card car-step2-card money-input">
                 <span class="step2-card-span">Зээлийн хүсэлтийн мэдээлэл</span>
                 <div class="tugrug-input car-coll-step2-loan-amount">
                     <span class="title car-coll-step2-title">Зээлийн хэмжээ</span>
                     <div class="tugrug-input-container">
                         <span class="input-tugrug-icon">₮</span>
-                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.carCollateralRequestData.loanAmount" format-input ng-keyup="hideKeyboard($event)" ng-change="getbankDataCarColl()" select-on-click />
+                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.propertyRequestData.loanAmount" format-input ng-keyup="hideKeyboard($event)" ng-change="getbankDataProperty()" select-on-click />
                     </div>
                 </div>
                 <!-- <div class="tugrug-input car-coll-step2-loan-amount">
                     <span class="title car-coll-step2-title">Зээлийн хүү (сараар)</span>
                     <div class="tugrug-input-container">
                         <span class="input-tugrug-icon">%</span>
-                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.carCollateralRequestData.loanFee" format-input ng-keyup="hideKeyboard($event)" select-on-click />
+                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.propertyRequestData.loanFee" format-input ng-keyup="hideKeyboard($event)" select-on-click />
                     </div>
                 </div> -->
                 <div class="tugrug-input car-coll-step2-loan-amount">
                     <span class="title car-coll-step2-title">Хугацаа сараар</span>
                     <div class="tugrug-input-container">
                         <span class="input-tugrug-icon"><i class="icon fa fa-calendar"></i></span>
-                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number" ng-model="$root.carCollateralRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-change="getbankDataCarColl()" select-on-click />
+                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number" ng-model="$root.propertyRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-change="getbankDataProperty()" select-on-click />
                     </div>
                 </div>
                 <label class="item item-input step2-loam-month">
                     <i class="icon fa fa-map-marker fa-2x input-tugrug-icon"></i>
                     <p>Байршил</p>
-                    <select class="car-col-step2-select" ng-model="$root.carCollateralRequestData.locationId" ng-change="getbankDataCarColl()">
+                    <select class="car-col-step2-select" ng-model="$root.propertyRequestData.locationId" ng-change="getbankDataProperty()">
                         <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">{{loc.name}}</option>
                     </select>
                 </label>
@@ -50,7 +39,7 @@
                             <span class="step2-span step2-term" ng-click="termModalAgreement.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
                             <span>
                                 <label class="step2-switch" id="step2isAgree">
-                                    <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.carCollateralRequestData.serviceAgreementId" ng-change="" />
+                                    <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.propertyRequestData.serviceAgreementId" ng-change="" />
                                     <div class="step2-slider step2-round">
                                         <span id="step2-toggle-on" class="step2-on">Тийм</span>
                                         <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
@@ -80,7 +69,7 @@
                     </div>
                 </div>
             </div>
-            <button class="button btn single-button" id="Next" ng-click="saveCarCollRequestData()">Үргэлжлүүлэх</button>
+            <button class="button btn single-button" id="Next" ng-click="savePropertyRequestData()">Үргэлжлүүлэх</button>
         </div>
     </ion-content>
 </ion-view>

@@ -72,7 +72,7 @@
                                     </span>
                                 </li>
                                 <li>
-                                    <span class="step2-span step2-term" ng-click="modal.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
+                                    <span class="step2-span step2-term" ng-click="termModalAgreement.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
                                     <span>
                                         <label class="step2-switch" id="step2isAgree">
                                             <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-checked="agreementChecked" ng-model="$root.newReqiust.serviceAgreementId" ng-change="" />
@@ -116,7 +116,7 @@
 <script id="templates/term-content.html" type="text/ng-template">
   <ion-modal-view class="term-chat-modal">
     <ion-content class="padding bank-chat-content">
-        <span class="term-modal-off-text" ng-click="modal.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <span class="term-modal-off-text" ng-click="termModalAgreement.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
         <div class="term-modal-include" ng-include src="'views/term/term-content.html'"></div>
     </ion-content>
   </ion-modal-view>

@@ -1,4 +1,4 @@
-angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $rootScope, $state) {
+angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $rootScope, $state, $ionicModal) {
   $scope.locationData = [];
   $scope.getLookUpDataCarColl = function () {
     if (isEmpty($rootScope.locationData)) {
@@ -267,4 +267,13 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
   });
+  // MODAL
+  $ionicModal
+    .fromTemplateUrl("templates/term-content.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (termModalAgreement) {
+      $scope.termModalAgreement = termModalAgreement;
+    });
 });
