@@ -178,7 +178,7 @@ var app = angular
       controller: "property_collateralCtrl",
     });
     $stateProvider.state("property_collateral2", {
-      url: "/views/property_collateral",
+      url: "/views/property_collateral2",
       templateUrl: "views/loan/property_collateral/property_collateral2.html",
       controller: "property_collateralCtrl",
     });

@@ -61,9 +61,6 @@
   background-color: #fff !important;
   margin: 70px 20px 10px 20px !important;
 }
-.car-coll-step2-loan-amount {
-  margin: 15px !important;
-}
 .car-step2-card select {
   width: auto;
   margin: 0 12px 0 auto;
@@ -77,6 +74,9 @@
   background-color: #fff;
   position: absolute;
   right: 0;
+}
+.car-coll-step2-loan-amount {
+  margin: 15px !important;
 }
 .car-step2-input {
   text-align: left !important;

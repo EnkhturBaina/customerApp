@@ -1526,3 +1526,8 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.item-select select {
+  color: #4b5180 !important;
+  font-weight: bold;
+}

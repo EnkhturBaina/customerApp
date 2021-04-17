@@ -432,6 +432,99 @@
       //===================Бизнесийн зээл===================
     } else if ($rootScope.requestType == "estate") {
       //===================Үл хөдлөх барьцаат зээл===================
+      $rootScope.propertyRequestData.customerId = all_ID.dccustomerid;
+      //Хүсэлт бүртгэх
+      serverDeferred.requestFull("dcApp_carCollRequestDV_001", $rootScope.propertyRequestData).then(function (sendReqResponse) {
+        console.log("sendReqResponse", sendReqResponse);
+
+        if (sendReqResponse[0] == "success" && sendReqResponse[1] != "") {
+          //ҮХХ бүртгэх
+          $rootScope.danIncomeData.leasingid = sendReqResponse[1].id;
+          $scope.propertyData.leasingId = sendReqResponse[1].id;
+          serverDeferred.requestFull("dcApp_property_data_001", $scope.propertyData).then(function (saveResponse) {
+            console.log("saveResponse", saveResponse);
+            if (saveResponse[0] == "success" && saveResponse[1] != "") {
+              //Сонгосон банк
+              selectedbanks = [];
+              angular.forEach($rootScope.bankListFilter.Agree, function (item) {
+                if (item.checked) {
+                  var AgreeBank = {
+                    loanId: sendReqResponse[1].id,
+                    customerId: all_ID.dccustomerid,
+                    bankId: item.id,
+                    isAgree: "1",
+                    isMobile: "1",
+                    wfmStatusId: "1609944755118135",
+                    productId: item.products[0].id,
+                  };
+                  selectedbanks.push(AgreeBank);
+                }
+              });
+              //нөхцөл хангаагүй банкууд
+              angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
+                if (item.checked) {
+                  var NotAgreeBank = {
+                    loanId: sendReqResponse[1].id,
+                    customerId: all_ID.dccustomerid,
+                    bankId: item.id,
+                    isAgree: "0",
+                    isMobile: "1",
+                    wfmStatusId: "1609944755118135",
+                    productId: item.products[0].id,
+                  };
+                  selectedbanks.push(NotAgreeBank);
+                }
+              });
+              var mapBankSuccess = false;
+              //MAP table рүү сонгосон банкуудыг бичих
+              selectedbanks.map((bank) => {
+                serverDeferred.requestFull("dcApp_request_map_bank_for_detail_001", bank).then(function (response) {
+                  if (response[0] == "success" && response[1] != "") {
+                    mapBankSuccess = true;
+                  }
+                });
+              });
+              //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
+              $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
+              $timeout(function () {
+                if (sendReqResponse[0] == "success" && sendReqResponse[1] != "" && mapBankSuccess) {
+                  $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
+                  delete $rootScope.danIncomeData.id;
+
+                  var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+                  console.log("DanloginUserInfo", DanloginUserInfo);
+                  if (DanloginUserInfo.dcapp_crmuser_dan) {
+                    $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+                    $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+                    $rootScope.danCustomerData.birthDate = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.birthdate.substring(0, 10);
+                  }
+
+                  $rootScope.danCustomerData.crmCustomerId = all_ID.crmuserid;
+                  console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+
+                  serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (danCustomerDataResponse) {
+                    console.log("danCustomerDataResponse", danCustomerDataResponse);
+                    serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (danIncomeDataResponse) {
+                      console.log("danIncomeDataResponse", danIncomeDataResponse);
+                      if (danIncomeDataResponse[0] == "success" && danIncomeDataResponse[1] != "") {
+                        $ionicLoading.hide();
+                        $rootScope.propertyRequestData = {};
+                        $state.go("loan_success");
+                      }
+                    });
+                  });
+                } else {
+                  $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+                }
+              }, 1000);
+            } else {
+              $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+            }
+          });
+        } else {
+          $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+        }
+      });
     } else {
       if (!isEmpty($rootScope.selectedBanksList)) {
         $rootScope.ShowLoader();

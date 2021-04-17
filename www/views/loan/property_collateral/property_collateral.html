@@ -26,15 +26,11 @@
 					<div class="">
 						<label class="item item-input item-select property-label">
 							<p class="input-label" style="margin: 0;">Хөрөнгийн төрөл</p>
-							<select ng-model="$root.propertyData.categoryId" style="background-color: transparent" class="property-select" ng-change="clearPropertyData()">
-								<option ng-repeat="com in propertyCategory" ng-if="com.name" value="{{com.id}}">{{com.name}}</option>
+							<select ng-model="template" ng-options="t.name for t in propertyCategory | filter:{name:'!!'}" class="property-select" ng-change="categoryChange(template)">
 							</select>
 						</label>
-						<select ng-model="template" ng-options="t.name for t in templates">
-						</select>
-						<hr />
-						<div class="slide-animate-container">
-							<div ng-include="template.url"></div>
+						<div class=" slide-animate-container">
+							<div ng-include="template.mobiletemplatepath"></div>
 						</div>
 					</div>
 				</div>
@@ -44,7 +40,7 @@
 				<img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" />
 
 			</div>
-			<ion-footer class="bottom-footer">
+			<ion-footer class="">
 				<button class="button btn single-button" id="Next" ng-click="saveProperty()">Үргэлжлүүлэх</button>
 			</ion-footer>
 		</div>

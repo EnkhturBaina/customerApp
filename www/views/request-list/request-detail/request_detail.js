@@ -12,14 +12,14 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
     } else if ($rootScope.loanType === "3") {
       dvId = "1614744306112512";
     } else if ($rootScope.loanType === "4") {
-      dvId = 0;
     } else if ($rootScope.loanType === "5") {
-      dvId = 0;
     }
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: dvId, mapId: $rootScope.selectedMapBank.mapid }).then(function (response) {
-      console.log("res", response);
-      $rootScope.selectedMapBankDTL = response[0];
-    });
+    if (dvId != "") {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: dvId, mapId: $rootScope.selectedMapBank.mapid }).then(function (response) {
+        console.log("res", response);
+        $rootScope.selectedMapBankDTL = response[0];
+      });
+    }
   };
   $scope.getRequestDTL();
 

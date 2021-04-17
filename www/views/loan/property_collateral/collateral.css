@@ -9,7 +9,7 @@
   color: #a2a7b5;
 }
 .collateral-loan-content {
-  margin-bottom: 50px !important;
+  /* margin-bottom: 50px !important;  */
 }
 .collateral-loan-label {
   width: 100%;
@@ -32,6 +32,9 @@
   color: #a2a7b5;
   position: absolute;
   overflow: unset !important;
+}
+.property-step2-select {
+  padding: 7px 0px 7px 0px !important;
 }
 #overlayCollateralLoan {
   position: fixed;
@@ -130,6 +133,10 @@
 .property-label::after {
   display: none !important;
 }
+.property-label input {
+  color: #4b5180 !important;
+  font-weight: bold !important;
+}
 .property-select {
   padding: 7px 15px !important;
   text-align-last: right !important;
@@ -143,4 +150,30 @@
 .property-input {
   text-align: right !important;
   background: #fff !important;
+}
+.property-img-row img {
+  margin: auto !important;
+  width: 100% !important;
+}
+
+.property-step2-card {
+  padding: 10px;
+  margin: 20px 15px 0px 15px;
+  height: auto;
+  background-color: #fff !important;
+  margin: 70px 20px 10px 20px !important;
+}
+.property-step2-card select {
+  width: auto;
+  margin: 0 12px 0 auto;
+  float: right;
+  border: none;
+  border-color: #d5d5d5;
+  border-radius: 5px;
+  padding: 7px 0px 7px 30px;
+  color: #606060;
+  text-align-last: right;
+  background-color: #fff;
+  position: absolute;
+  right: 0;
 }

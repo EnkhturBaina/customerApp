@@ -7,7 +7,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   $scope.pCSourceSelectOff = function () {
     document.getElementById("overlayCollateralLoan").style.display = "none";
   };
-  $rootScope.propertyData = {};
   $scope.takePhoto = function (type) {
     var srcType = Camera.PictureSourceType.CAMERA;
     if (type == "1") {
@@ -33,10 +32,12 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   $rootScope.propertyRequestData = {};
 
   $scope.saveProperty = function () {
-    localStorage.setItem("requestType", "estate");
-    console.log("local", localStorage);
-    console.log("$rootScope.propertyData", $rootScope.propertyData);
-    $state.go("property_collateral2");
+    if ($scope.propertyCheckReqiured("step1")) {
+      localStorage.setItem("requestType", "estate");
+      console.log("local", localStorage);
+      console.log("$rootScope.propertyData", $rootScope.propertyData);
+      $state.go("property_collateral2");
+    }
   };
   $ionicModal
     .fromTemplateUrl("templates/property.html", {
@@ -232,8 +233,40 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       $state.go("autoleasing-4");
     }
   };
+  console.log("$rootScope.propertyIsDan", $rootScope.propertyIsDan);
   $scope.propertyCheckReqiured = function (param) {
     if (param == "step1") {
+      console.log("$scope.template.code", $scope.template.code);
+      if (isEmpty($rootScope.propertyData.squareSize)) {
+        $rootScope.alert("Талбайн хэмжээ оруулна уу", "warning");
+        return false;
+      } else if (["A001", "A002", "A003", "A004"].includes($scope.template.code) && isEmpty($rootScope.propertyData.roomCount)) {
+        $rootScope.alert("Өрөөний тоо оруулна уу", "warning");
+        return false;
+      } else if (["A001", "A002"].includes($scope.template.code) && isEmpty($rootScope.propertyData.floorCount) && !$rootScope.propertyIsDan) {
+        $rootScope.alert("Давхарын тоо оруулна уу", "warning");
+        return false;
+      } else if (["A001", "A004"].includes($scope.template.code) && isEmpty($rootScope.propertyData.floorCount) && !$rootScope.propertyIsDan) {
+        $rootScope.alert("Давхарын байршил оруулна уу", "warning");
+        return false;
+      } else if (["A002", "A003"].includes($scope.template.code) && isEmpty($rootScope.propertyData.isConCentralInf) && !$rootScope.propertyIsDan) {
+        $rootScope.alert("Төвийн дэд бүтцэд холбогдсон эсэх", "warning");
+        return false;
+      } else if ($scope.template.code == "A008" && isEmpty($rootScope.propertyData.dedicationId)) {
+        $rootScope.alert("Зориулалт сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.propertyData.line1) && !$rootScope.propertyIsDan) {
+        $rootScope.alert("Хот/аймаг сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.propertyData.line2) && !$rootScope.propertyIsDan) {
+        $rootScope.alert("Дүүрэг/сум сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.propertyData.line3) && !$rootScope.propertyIsDan) {
+        $rootScope.alert("Хороо/баг сонгоно уу", "warning");
+        return false;
+      } else {
+        return true;
+      }
       return true;
     } else if (param == "step2") {
       if (isEmpty($rootScope.propertyRequestData.loanAmount)) {
@@ -292,17 +325,16 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   $scope.provinceData = [];
   $scope.districtData = [];
   $scope.streetData = [];
+  $scope.dedicateData = [];
   $scope.isConCentralInfData = [];
   $scope.propertyCategory = [];
   $scope.getLookUpDataProperty = function () {
-    if (isEmpty($rootScope.locationData)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613011719373208" }).then(function (response) {
-        $rootScope.locationData = response;
-      });
-    }
     if (isEmpty($scope.propertyCategory)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1618473508871492" }).then(function (response) {
         $scope.propertyCategory = response;
+        $scope.template = response[0];
+        $rootScope.propertyData = {};
+        $rootScope.propertyData.categoryId = response[0].id;
       });
     }
     if (isEmpty($scope.provinceData)) {
@@ -315,14 +347,22 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         $scope.isConCentralInfData = response;
       });
     }
-    // if (isEmpty($scope.streetData)) {
-    //   serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1539850576148471" }).then(function (response) {
-    //     console.log("Res", response);
-    //     $scope.streetData = response;
-    //   });
-    // }
+    if (isEmpty($scope.dedicateData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1618545785227116" }).then(function (response) {
+        $scope.dedicateData = response;
+      });
+    }
   };
-  $scope.getLookUpDataProperty();
+  if ($state.current.name == "property_collateral") {
+    $scope.getLookUpDataProperty();
+  }
+  if ($state.current.name == "property_collateral2") {
+    if (isEmpty($scope.locationData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613011719373208" }).then(function (response) {
+        $scope.locationData = response;
+      });
+    }
+  }
   $scope.savePropertyRequestData = function () {
     console.log("propertyRequestData", $rootScope.propertyRequestData);
     if ($scope.propertyCheckReqiured("step2")) {
@@ -345,17 +385,14 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     });
     val != "" ? (document.getElementById("streetSelect").disabled = false) : (document.getElementById("streetSelect").disabled = true);
   };
-  $scope.templates = [
-    { name: "template1.html", url: "views/loan/property_collateral/property_pages/car_parking.html" },
-    { name: "template2.html", url: "views/loan/property_collateral/property_pages/house.html" },
-    { name: "template2.html", url: "views/loan/property_collateral/property_pages/office_trade.html" },
-    { name: "template2.html", url: "views/loan/property_collateral/property_pages/other_building.html" },
-    { name: "template2.html", url: "views/loan/property_collateral/property_pages/public_apartment.html" },
-    { name: "template2.html", url: "views/loan/property_collateral/property_pages/stall_building.html" },
-    { name: "template2.html", url: "views/loan/property_collateral/property_pages/trade.html" },
-  ];
-  $scope.template = $scope.templates[0];
-  $scope.clearPropertyData = function () {
+  $scope.categoryChange = function (val) {
+    console.log("val", val);
+    console.log("$scope.template", $scope.template);
+    $scope.template = val;
     $rootScope.propertyData = {};
+    $rootScope.propertyData.categoryId = val.id;
   };
+  $scope.$on("$ionicView.enter", function () {
+    $rootScope.hideFooter = true;
+  });
 });

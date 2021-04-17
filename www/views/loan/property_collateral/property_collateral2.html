@@ -3,7 +3,7 @@
     <ion-content id="car-collateral2" overflow-scroll="true" class="car-col-content">
         <div class="car-col-step2-back" ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div>
         <div class="list car-collateral-list" ng-controller="property_collateralCtrl">
-            <div class="card car-step2-card money-input">
+            <div class="card property-step2-card money-input">
                 <span class="step2-card-span">Зээлийн хүсэлтийн мэдээлэл</span>
                 <div class="tugrug-input car-coll-step2-loan-amount">
                     <span class="title car-coll-step2-title">Зээлийн хэмжээ</span>
@@ -29,8 +29,8 @@
                 <label class="item item-input step2-loam-month">
                     <i class="icon fa fa-map-marker fa-2x input-tugrug-icon"></i>
                     <p>Байршил</p>
-                    <select class="car-col-step2-select" ng-model="$root.propertyRequestData.locationId" ng-change="getbankDataProperty()">
-                        <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">{{loc.name}}</option>
+                    <select class="property-step2-select" ng-model="$root.propertyRequestData.locationId" ng-change="getbankDataProperty()">
+                        <option ng-repeat="loc in locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">{{loc.name}}</option>
                     </select>
                 </label>
                 <div class="switch-input-container car-coll-switch">
