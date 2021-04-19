@@ -57,12 +57,11 @@
 .car-step2-card {
   padding: 10px;
   margin: 20px 15px 0px 15px;
-  height: 300px;
   background-color: #fff !important;
   margin: 70px 20px 10px 20px !important;
 }
 .car-step2-card select {
-  width: auto;
+  width: 100%;
   margin: 0 12px 0 auto;
   float: right;
   border: none;
@@ -71,20 +70,13 @@
   padding: 7px 0px 7px 30px;
   color: #606060;
   text-align-last: right;
-  background-color: #fff;
   position: absolute;
   right: 0;
+  z-index: 99;
+  background: transparent !important;
 }
 .car-coll-step2-loan-amount {
   margin: 15px !important;
-}
-.car-step2-input {
-  text-align: left !important;
-  border: 1px solid #d5d5d5 !important;
-  border-radius: 10px;
-  margin: 0 auto;
-  width: 90%;
-  padding: 0 10px 0 35px !important;
 }
 .step2-card-span {
   color: #4b5180;
@@ -108,12 +100,6 @@
   font-size: 1.3em !important;
   padding: 10px !important;
 }
-.step2-bank-container {
-  padding: 0 10px;
-  left: 0;
-  display: flex !important;
-  /* position: absolute; */
-}
 .step2-bank-container img {
   display: block;
   margin-left: auto;
@@ -126,54 +112,9 @@
   align-items: center;
   font-size: 12px;
 }
-.step2-bank-span {
-  color: #4b5180;
-  padding-left: 20px !important;
-}
-.step2-description-field {
-  display: block !important;
-}
-.step2-description-field textarea {
-  min-height: 100px;
-}
 .car-coll-step2-title {
   color: #606060 !important;
-}
-.bank-logo-container {
-  display: flex;
-  position: relative;
-  float: left;
-}
-.ml-42 {
-  margin-left: 42px;
-  margin-top: -5px;
-}
-.logo-size {
-  width: 35px;
-  height: 35px;
-}
-.car-step3-card {
-  background-color: #fff !important;
-  margin: 10px 20px 10px 20px !important;
-}
-.car-step3-card label {
-  padding-bottom: 10px !important;
-  padding-top: 10px !important;
-}
-.car-step3-card .item.item-input input {
-  padding-right: 24px !important;
-  width: 100px;
-  position: absolute;
-  right: 0;
-}
-.step3-container .scroll {
-  height: 100% !important;
-}
-.bank-desc-green {
-  color: #acd322 !important;
-}
-.step3-checkbox-container > .item-content {
-  padding-left: 35px;
+  z-index: -1;
 }
 .checkbox input:checked + .checkbox-icon::after {
   border-radius: 5px !important;
@@ -199,23 +140,6 @@
   background-position: 0% 0%;
   background-size: cover;
 }
-.step3-btn-container {
-  bottom: 10px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-}
-.car-col-step3-label {
-  line-height: 20px !important;
-}
-.loanFee-car-col {
-  padding-right: 24px !important;
-  width: 30vw;
-  position: absolute;
-  right: 0;
-}
 .car-collateral-content {
   height: 100%;
 }
@@ -229,16 +153,6 @@
 .car-col-step2-back span {
   color: #fff !important;
 }
-.step3-checkbox-container {
-  padding-left: 15px !important;
-  background-color: #fff !important;
-  color: #a2a7b5 !important;
-  font-size: 14px !important;
-}
-.step3-checkbox-container > .checkbox > .checkbox-icon {
-  width: 25px !important;
-  height: 25px !important;
-}
 .step3-checkbox-container > .checkbox > .checkbox input:after,
 .checkbox-icon:after {
   color: #fff !important;
@@ -247,12 +161,6 @@
 .checkbox input:checked + .checkbox-icon:before {
   background-color: #acd322 !important;
   border-color: #acd322 !important;
-}
-.step3-checkbox-container > .checkbox > .checkbox-icon::before {
-  border-radius: 5px !important;
-}
-.step3-bank-dtl-container {
-  padding-top: 2px;
 }
 #overlay {
   position: fixed;

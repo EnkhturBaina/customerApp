@@ -625,14 +625,9 @@
 
   $scope.goStep3 = function (param) {
     if ($scope.checkReqiured("step2")) {
-      if (isEmpty($rootScope.newReqiust.serviceAgreementId)) {
-        $rootScope.newReqiust.serviceAgreementId = "1554263832132";
-      }
-
       if (isEmpty($rootScope.bankListFilter.Agree) && isEmpty($rootScope.bankListFilter.NotAgree)) {
         $rootScope.alert("Банк олдсонгүй", "warning");
       } else {
-        // $state.go("autoleasing-3");
         $state.go("income");
       }
     }
@@ -681,6 +676,9 @@
         return false;
       } else if (isEmpty($rootScope.newReqiust.locationId)) {
         $rootScope.alert("Байршил сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == "1554263832151") {
+        $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
         return false;
       } else {
         return true;
@@ -782,11 +780,11 @@
     if (local == "autoColl") {
       $scope.isAmountDisable = false;
       $scope.collateralConditionId = true;
-      $scope.agreementChecked = true;
+      // $scope.agreementChecked = true;
     } else if (local == "auto") {
       $scope.isAmountDisable = true;
       $scope.collateralConditionId = true;
-      $scope.agreementChecked = true;
+      // $scope.agreementChecked = true;
     } else {
       $scope.isAmountDisable = true;
       $scope.collateralConditionId = false;
@@ -794,15 +792,18 @@
   };
 
   $scope.$on("$ionicView.enter", function () {
-    $scope.getLoanAmountFunc();
-    $scope.getLookupData();
-    $scope.loanAmountDisable();
     $rootScope.hideFooter = true;
 
     var local = localStorage.getItem("requestType");
     console.log("ASD local", local);
     if (local == "autoColl" || (local == "estate" && $state.current.name == "autoleasing-4")) {
       $scope.danHand();
+    }
+
+    if ($state.current.name == "autoleasing-2") {
+      $scope.getLoanAmountFunc();
+      $scope.getLookupData();
+      $scope.loanAmountDisable();
     }
   });
   // MODAL
@@ -832,7 +833,7 @@
   $scope.gotoDanLoginAutoIncome = function () {
     $rootScope.danCustomerData = {};
     $rootScope.danIncomeData = {};
-    serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, "serverDeferred").then(function (response) {
+    serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
       $rootScope.stringHtmlsLink = response.result.data;
       var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");
       $(authWindow).on("loadstart", function (e) {

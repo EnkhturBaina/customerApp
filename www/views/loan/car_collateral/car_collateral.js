@@ -1,4 +1,4 @@
-angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $rootScope, $state, $ionicModal) {
+angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $rootScope, $state, $ionicModal, $ionicPlatform) {
   $scope.locationData = [];
   $scope.getLookUpDataCarColl = function () {
     if (isEmpty($rootScope.locationData)) {
@@ -7,7 +7,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       });
     }
   };
-  $scope.getLookUpDataCarColl();
   console.log("$rootScope.isDanLoginAutoColl", $rootScope.isDanLoginAutoColl);
   //Төрөл
   $scope.carCategory = [];
@@ -82,7 +81,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     });
     val != "" ? (document.getElementById("modelSelect").disabled = false) : (document.getElementById("modelSelect").disabled = true);
   };
-  $scope.getCarCollateralLookupData();
 
   localStorage.setItem("requestType", "autoColl");
 
@@ -127,8 +125,43 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       $state.go("car_coll2");
     }
   };
+  if ($state.current.name == "car_coll") {
+    $scope.getCarCollateralLookupData();
+    var charA = ["А", "Б", "Г", "Д", "З", "Н", "О", "Ө", "С", "Т", "Х", "У", "Ц", "Ч"];
+    var chars = ["А", "Б", "В", "Г", "Д", "Е", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "Х", "У", "Ү", "Ц", "Ч", "Э", "Я"];
+    var nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+    $ionicPlatform.ready(function () {
+      setTimeout(function () {
+        new MobileSelect({
+          trigger: ".nationalNumberPicker",
+          wheels: [{ data: nums }, { data: nums }, { data: nums }, { data: nums }, { data: charA }, { data: chars }, { data: chars }],
+          position: [0, 0],
+          ensureBtnText: "Болсон",
+          maskOpacity: 0.5,
+          cancelBtnText: "Хаах",
+          transitionEnd: function (indexArr, data) {
+            //scrolldood duusahad ajillah func
+          },
+          callback: function (indexArr, data) {
+            var a = data.join("");
+            $scope.setNumber(a);
+            $rootScope.newCarReq.nationalNumber = a;
+          },
+        });
+      }, 1000);
+    });
+
+    $scope.setNumber = function (data) {
+      //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
+      $(function () {
+        $("#nationalNumber").val(data).trigger("input");
+      });
+    };
+  }
   if ($state.current.name == "car_coll2") {
     $scope.getbankDataCarColl();
+    $scope.getLookUpDataCarColl();
   }
   $scope.backFromCarCollStep1 = function () {
     $state.go("home");
@@ -148,7 +181,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.carCollCheckReqiured = function (param) {
     if (param == "step1") {
       if (isEmpty($rootScope.newCarReq.carCategoryId) && !$rootScope.isDanLoginAutoColl) {
-        $rootScope.alert("Автомашины төрөлөө сонгоно уу", "warning");
+        $rootScope.alert("Машины төрлөө сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newCarReq.brandId) && !$rootScope.isDanLoginAutoColl) {
         $rootScope.alert("Үйлдвэрээ сонгоно уу", "warning");
@@ -164,7 +197,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         return false;
       }
       //  else if (isEmpty($rootScope.newCarReq.itemPic)) {
-      //   $rootScope.alert("Автомашины зураг оруулна уу", "warning");
+      //   $rootScope.alert("Машины зураг оруулна уу", "warning");
       //   return false;
       // }
       else {
@@ -236,33 +269,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
   $scope.sourceSelectOff = function () {
     document.getElementById("overlay").style.display = "none";
-  };
-  var charA = ["А", "Б", "Г", "Д", "З", "Н", "О", "Ө", "С", "Т", "Х", "У", "Ц", "Ч"];
-  var chars = ["А", "Б", "В", "Г", "Д", "Е", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "Х", "У", "Ү", "Ц", "Ч", "Э", "Я"];
-  var nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
-  new MobileSelect({
-    trigger: ".nationalNumberPicker",
-    wheels: [{ data: nums }, { data: nums }, { data: nums }, { data: nums }, { data: charA }, { data: chars }, { data: chars }],
-    position: [0, 0],
-    ensureBtnText: "Болсон",
-    maskOpacity: 0.5,
-    cancelBtnText: "Хаах",
-    transitionEnd: function (indexArr, data) {
-      //scrolldood duusahad ajillah func
-    },
-    callback: function (indexArr, data) {
-      var a = data.join("");
-      $scope.setNumber(a);
-      $rootScope.newCarReq.nationalNumber = a;
-    },
-  });
-
-  $scope.setNumber = function (data) {
-    //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
-    $(function () {
-      $("#nationalNumber").val(data).trigger("input");
-    });
   };
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
