@@ -311,6 +311,11 @@ var app = angular
       localStorage.removeItem("loginUserInfo");
       localStorage.removeItem("profilePictureSideMenu");
       localStorage.removeItem("all_ID");
+      //Хэрэглээний лизинг
+      localStorage.removeItem("otherGoods");
+      localStorage.removeItem("consumerRequestData");
+      localStorage.removeItem("otherGoodsMaxId");
+
       $rootScope.profilePictureSideMenu = "";
       $state.go("home");
     };

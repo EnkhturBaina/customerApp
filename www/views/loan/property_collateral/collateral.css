@@ -177,3 +177,8 @@
   position: absolute;
   right: 0;
 }
+.property-dan-content .scroll {
+  position: static !important;
+  height: 100% !important;
+  padding: 10px 0 !important;
+}

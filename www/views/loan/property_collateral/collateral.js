@@ -236,7 +236,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   console.log("$rootScope.propertyIsDan", $rootScope.propertyIsDan);
   $scope.propertyCheckReqiured = function (param) {
     if (param == "step1") {
-      console.log("$scope.template.code", $scope.template.code);
       if (isEmpty($rootScope.propertyData.squareSize)) {
         $rootScope.alert("Талбайн хэмжээ оруулна уу", "warning");
         return false;
@@ -332,7 +331,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     if (isEmpty($scope.propertyCategory)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1618473508871492" }).then(function (response) {
         $scope.propertyCategory = response;
-        $scope.template = response[0];
+        // $scope.template = response[0];
         $rootScope.propertyData = {};
         $rootScope.propertyData.categoryId = response[0].id;
       });
@@ -395,4 +394,119 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
   });
+  $scope.propJson = [
+    {
+      code: "300002",
+      codeName: "Автозогсоолын",
+      firstname: "гончиг",
+      fullAddress: "Улаанбаатар Хан-Уул дүүрэг 11-р хороо Стадион оргил /17012/ Зайсан гудамж 63 байр, зоорийн давхарт 27 тоот",
+      lastname: "олхонууд",
+      movedCount: 1,
+      movedDate: "05-OCT-11",
+      movedJustification: "Худалдах , худалдан авах гэрээ",
+      ownershipId: "000003",
+      ownershipStatus: "Бэлэглэсэн",
+      personCorpId: "ию88102291",
+      personNameCorp: "баатарсүх",
+      propertyNationRegisterNumber: "ү2206011605",
+      propertyServiceId: "20111005070003",
+      propertySize: "12",
+      serviceDate: "2011-10-05 00:00:00.0",
+      serviceName: "Худалдах , худалдан авах гэрээ",
+      serviceType: "Үл хөдлөх",
+    },
+    {
+      code: "300076",
+      codeName: "Орон сууцны",
+      firstname: "гончиг",
+      fullAddress: "Улаанбаатар Баянгол дүүрэг 4-р хороо Голден парк Энх тайвны өргөн чөлөө гудамж 103 байр, 109 тоот",
+      lastname: "олхонууд",
+      movedCount: 1,
+      movedDate: "03-SEP-15",
+      movedJustification: "Худалдах , худалдан авах гэрээ",
+      ownershipId: "000002",
+      ownershipStatus: "Худалдсан",
+      personCorpId: "ию88102291",
+      personNameCorp: "баатарсүх",
+      propertyNationRegisterNumber: "ү2205042688",
+      propertyServiceId: "20150903020205",
+      propertySize: "40",
+      serviceDate: "2015-09-03 00:00:00.0",
+      serviceName: "Худалдах , худалдан авах гэрээ",
+      serviceType: "Үл хөдлөх",
+    },
+    {
+      code: "300076",
+      codeName: "Орон сууцны",
+      firstname: "гончиг",
+      fullAddress: "Улаанбаатар Баянзүрх дүүрэг 26-р хороо Их монгол улс гудамж 418 байр, 86 тоот",
+      lastname: "олхонууд",
+      movedCount: 2,
+      movedDate: "17-SEP-15",
+      movedJustification: "Худалдах , худалдан авах гэрээ",
+      ownershipId: "000001",
+      ownershipStatus: "Өмчилсөн",
+      personCorpId: "ию88102291",
+      personNameCorp: "баатарсүх",
+      propertyNationRegisterNumber: "ү2204040125",
+      propertyServiceId: "20150916050445",
+      propertySize: "71,8",
+      serviceDate: "2015-09-17 00:00:00.0",
+      serviceName: "Худалдах , худалдан авах гэрээ",
+      serviceType: "Үл хөдлөх",
+    },
+    {
+      code: "300076",
+      codeName: "Орон сууцны",
+      firstname: "гончиг",
+      fullAddress: "Улаанбаатар Баянзүрх дүүрэг 26-р хороо Их монгол улс гудамж 418 байр, 86 тоот",
+      lastname: "олхонууд",
+      movedCount: 2,
+      movedDate: "17-SEP-15",
+      movedJustification: "Худалдах , худалдан авах гэрээ",
+      ownershipId: "000001",
+      ownershipStatus: "Өмчилсөн",
+      personCorpId: "ию88102291",
+      personNameCorp: "баатарсүх",
+      propertyNationRegisterNumber: "ү2204040125",
+      propertyServiceId: "20150916050445",
+      propertySize: "71,8",
+      serviceDate: "2015-09-17 00:00:00.0",
+      serviceName: "Худалдах , худалдан авах гэрээ",
+      serviceType: "Үл хөдлөх",
+    },
+    {
+      code: "300076",
+      codeName: "Орон сууцны",
+      firstname: "гончиг",
+      fullAddress: "Улаанбаатар Баянзүрх дүүрэг 26-р хороо Их монгол улс гудамж 418 байр, 86 тоот",
+      lastname: "олхонууд",
+      movedCount: 2,
+      movedDate: "17-SEP-15",
+      movedJustification: "Худалдах , худалдан авах гэрээ",
+      ownershipId: "000001",
+      ownershipStatus: "Өмчилсөн",
+      personCorpId: "ию88102291",
+      personNameCorp: "баатарсүх",
+      propertyNationRegisterNumber: "ү2204040125",
+      propertyServiceId: "20150916050445",
+      propertySize: "71,8",
+      serviceDate: "2015-09-17 00:00:00.0",
+      serviceName: "Худалдах , худалдан авах гэрээ",
+      serviceType: "Үл хөдлөх",
+    },
+  ];
+  $ionicModal
+    .fromTemplateUrl("templates/propertyDan.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (propertyDan) {
+      $scope.propertyDan = propertyDan;
+    });
+  $timeout(function () {
+    if ($state.current.name == "property_collateral") {
+      $scope.propertyDan.show();
+    }
+  }, 300);
 });
