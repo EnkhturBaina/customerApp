@@ -53,15 +53,21 @@
                             </div>
                         </div>
                         <div class="selector-container">
+                            <span class="title">Барааны төрөл</span>
+                            <select class="consumer-loan-suppp-select" ng-model="$root.newCarReq.categoryId" ng-change="changeSupCategory($root.newCarReq.categoryId)">
+                                <option ng-repeat="cat in supplierCategory track by $index" ng-if="cat.name" value="{{cat.id}}">{{cat.name}}</option>
+                            </select>
+                        </div>
+                        <div class="selector-container">
                             <span class="title">Бараа нийлүүлэгч</span>
-                            <select class="consumer-loan-suppp-select" ng-model="$root.newCarReq.shopId" ng-change="changeSupCategory($root.newCarReq.shopId)">
+                            <select id="shopId" class="consumer-loan-suppp-select" ng-model="$root.newCarReq.shopId" ng-change="changeSubVendor($root.newCarReq.shopId)" disabled>
                                 <option ng-repeat="supp in allSupplierList track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
                         </div>
                         <div class="selector-container">
-                            <span class="title">Барааны төрөл</span>
-                            <select class="consumer-loan-suppp-select" ng-model="$root.newCarReq.categoryId">
-                                <option ng-repeat="cat in supplierCategory track by $index" ng-if="cat.name" value="{{cat.id}}">{{cat.name}}</option>
+                            <span class="title">Салбар</span>
+                            <select id="subVendorId" class="consumer-loan-suppp-select" ng-model="$root.newCarReq.subVendorId" disabled>
+                                <option ng-repeat="supp in subVendor track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
                         </div>
                         <div class="selector-container">

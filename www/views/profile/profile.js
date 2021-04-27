@@ -48,8 +48,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
   $scope.regNum = "";
 
-  $rootScope.umSystemUser = {};
-
   $rootScope.getProfileData = function () {
     $rootScope.ShowLoader();
     console.log("localStorage", localStorage);
@@ -140,40 +138,46 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else {
       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
       console.log("ALL_ID", all_ID);
-      $scope.customerProfileData.customertypeid = 1;
       $scope.customerProfileData.id = all_ID.dccustomerid;
       $rootScope.customerProfileData.crmCustomerId = all_ID.crmuserid;
-      console.log("$scope.customerProfileData", $scope.customerProfileData);
 
-      serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (response) {
-        $rootScope.sidebarUserName = response[1].lastname.substr(0, 1) + ". " + response[1].firstname;
+      serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (responseSaveCustomer) {
+        console.log("responseSaveCustomer", responseSaveCustomer);
+        if (responseSaveCustomer[0] == "success" && !isEmpty(responseSaveCustomer[1])) {
+          $rootScope.sidebarUserName = responseSaveCustomer[1].lastname.substr(0, 1) + ". " + responseSaveCustomer[1].firstname;
 
-        $rootScope.umSystemUser = {
-          id: all_ID.systemuserid,
-          email: $scope.customerProfileData.email,
-        };
-        console.log("$rootScope.umSystemUser", $rootScope.umSystemUser);
-        var crmPhoneNumber = {
-          id: all_ID.crmuserid,
-          userName: $scope.customerProfileData.mobilenumber,
-        };
-        serverDeferred.requestFull("dcApp_umSystemUserEmailChange_002", $scope.umSystemUser).then(function (response) {
-          serverDeferred.requestFull("dcApp_loginPhoneNumber_002", crmPhoneNumber).then(function (response) {
-            $rootScope.alert("Амжилттай", "success", "profile");
+          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", uniqueIdentifier: $scope.customerProfileData.uniqueidentifier }).then(function (response) {
+            console.log("res", response);
+            if (!isEmpty(response) && !isEmpty(response[0])) {
+              var json = {
+                id: all_ID.crmcustomerid,
+                mobileNumber: $scope.customerProfileData.mobilenumber,
+                siRegNumber: $scope.customerProfileData.uniqueidentifier,
+              };
+              json.dcApp_crmUser_update = {
+                id: all_ID.crmuserid,
+                customerId: all_ID.crmcustomerid,
+                userName: $scope.customerProfileData.mobilenumber,
+              };
+              serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                console.log("crmRes", crmResponse);
+              });
+              $rootScope.loginUserInfo = {};
+              $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
+              console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+
+              localStorage.removeItem("loginUserInfo");
+              localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+              $rootScope.alert("Амжилттай", "success", "profile");
+            } else {
+              $rootScope.alert("Мэдээлэл хадгалахад алдаа гарлаа", "success", "profile");
+            }
           });
-        });
-        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", crmCustomerId: $rootScope.loginUserInfo.id }).then(function (response) {
-          if (!isEmpty(response) && !isEmpty(response[0])) {
-            $rootScope.loginUserInfo = {};
-            $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
-            console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
-
-            localStorage.removeItem("loginUserInfo");
-            localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+          if (!isEmpty($scope.nextPath)) {
+            $state.go($scope.nextPath);
           }
-        });
-        if (!isEmpty($scope.nextPath)) {
-          $state.go($scope.nextPath);
+        } else {
+          $rootScope.alert("Мэдээлэл хадгалахад алдаа гарлаа", "success", "profile");
         }
       });
     }
@@ -394,4 +398,13 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $rootScope.backFromProfile = function () {
     $state.go("home");
   };
+  $ionicPlatform.onHardwareBackButton(function () {
+    console.log("ASDAD");
+    $state.go("home");
+  });
+  // $ionicPlatform.registerBackButtonAction(function (e) {
+  //   e.preventDefault();
+  //   console.log("ASDAD");
+  //   $state.go("home");
+  // }, 101);
 });

@@ -76,6 +76,7 @@
 }
 .auto-template-btn {
   margin: 20px auto !important;
+  height: 35px;
 }
 .auto-template-bank-title {
   font-weight: bold;

@@ -137,6 +137,10 @@
   color: #4b5180 !important;
   font-weight: bold !important;
 }
+.property-label textarea {
+  color: #4b5180 !important;
+  font-weight: bold !important;
+}
 .property-select {
   padding: 7px 15px !important;
   text-align-last: right !important;

@@ -82,6 +82,8 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                         //Бүртгэлтэй USER -н дата татаж харуулах
                         $rootScope.danCustomerData = responseCustomerData[0];
                         $rootScope.danCustomerData.id = checkedValue[1].customerid;
+                      } else {
+                        $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "warning");
                       }
                     });
 
@@ -117,6 +119,8 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                   }
                 }, 1000);
               }
+            } else {
+              $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "warning");
             }
           });
         } else if (error) {
@@ -164,39 +168,9 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
       serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
         console.log("responseCRM", responseCRM);
         if (!isEmpty(responseCRM) && !isEmpty(responseCRM[0])) {
-          // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
-          //   if (response[0] != "") {
-          //     $rootScope.customerIncomeProfileData = response[0];
-          //     $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
-
-          //     localStorage.removeItem("loginUserInfo");
-          //     localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
-          //     console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
-          //   } else {
-          //   }
-          // });
           $rootScope.loginUserInfo = mergeJsonObjs(responseCRM[1], $rootScope.loginUserInfo);
           localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
 
-          if (isEmpty(checkedValue[1]) && checkedValue[0] == "success") {
-            var basePersonData = {
-              firstName: value.firstname,
-              lastName: value.lastname,
-              stateRegNumber: value.regnum.toUpperCase(),
-              parentId: responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id,
-            };
-            basePersonData.dcApp_all_um_system_user = {
-              username: value.regnum.toUpperCase(),
-              email: "",
-              typeCode: "internal",
-            };
-            basePersonData.dcApp_all_um_system_user.dcApp_all_um_user = {
-              isActive: "1",
-            };
-            serverDeferred.requestFull("dcApp_all_base_person_001", basePersonData).then(function (response) {
-              console.log("base person response", response);
-            });
-          }
           $timeout(function () {
             if (!isEmpty(responseCRM[1]) && responseCRM[0] == "success") {
               console.log("responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id", responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id);

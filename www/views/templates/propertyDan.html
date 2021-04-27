@@ -3,16 +3,7 @@
     <div class="card property-dan-card">
         <span class="property-dan-title">Барьцаалаах үл хөдлөх хөрөнгөө сонгоно уу</span>
         <ion-scroll direction="y" class="templates-scroll">
-            <!-- <ul class="switch-list">
-                <li ng-repeat="bank in propJson" class="dan-li">
-                    <ion-checkbox ng-model="bank.checked" class="property-checkbox-container">
-                        <h2 class="property-category">{{bank.codeName}}</h2>
-                        <p class="property-size">{{bank.propertySize}} м.кв</p>
-                        <p class="property-address">{{bank.fullAddress}}</p>
-                    </ion-checkbox>
-                </li>
-            </ul> -->
-            <ion-radio ng-repeat="bank in propJson" ng-model="choice" class="property-dan-select">
+            <ion-radio ng-repeat="bank in propJson" ng-model="choice" class="property-dan-select" ng-click="selectDanProperty(bank)">
                 <p class="property-size">{{bank.propertyNationRegisterNumber}}</p>
                 <h2 class="property-category">{{bank.codeName}} {{bank.propertySize}} м.кв</h2>
                 <p class="property-address">{{bank.fullAddress}}</p>

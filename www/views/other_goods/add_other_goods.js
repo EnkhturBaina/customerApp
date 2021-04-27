@@ -75,6 +75,8 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
   };
   //Бараа нийлүүлэгч
   $rootScope.allSupplierList = [];
+  //Барааны ДЭД нийлүүлэгч
+  $rootScope.subVendor = [];
   //Барааны төрөл
   $rootScope.supplierCategory = [];
   //Нийлүүлэгчийн борлуулдаг барааны төрлийн хамаарал
@@ -85,25 +87,21 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
   $rootScope.suppcategoryStore = [];
 
   $scope.getLookUpData = function () {
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614232214127503" }).then(function (response) {
-      $rootScope.allSupplierList = response;
-      // console.log("allSupplierList respionse", response);
-    });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614229736963117" }).then(function (response) {
       $rootScope.supplierCategory = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614232214127503" }).then(function (response) {
+      $rootScope.allSupplierList = response;
       $rootScope.suppcategoryStore = response;
-      // console.log(" supplierCategoryrespionse", response);
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614229588590652" }).then(function (response) {
       $rootScope.supplierHaveCategory = response;
-      // console.log("supplierHaveCategoryrespionse", response);
     });
   };
 
   $scope.getLookUpData();
   $scope.goodsSourceSelectOn = function (path) {
     $scope.selectedImagePath = path;
-    console.log("$scope.selectedImagePath", $scope.selectedImagePath);
     document.getElementById("overlayItemPicGoods").style.display = "block";
   };
   $scope.goodsSourceSelectOff = function () {
@@ -140,15 +138,15 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
     $scope.selectedSupplierCategory = [];
 
     $scope.supplierHaveCategory.map((item) => {
-      if (item.supplierid === supppp) {
-        $scope.selectedSupplierCategory.push(item.categoryid);
+      if (item.categoryid === supppp) {
+        $scope.selectedSupplierCategory.push(item.supplierid);
         return true;
       }
     });
 
     var selectedCategory = [];
 
-    $rootScope.supplierCategory = $rootScope.suppcategoryStore.some((item) => {
+    $rootScope.allSupplierList = $rootScope.suppcategoryStore.some((item) => {
       $scope.selectedSupplierCategory.map((item2) => {
         if (item2 == item.id) {
           selectedCategory.push(item);
@@ -156,7 +154,20 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
         }
       });
     });
-    $rootScope.supplierCategory = selectedCategory;
+    $rootScope.allSupplierList = selectedCategory;
+    supppp != "" ? (document.getElementById("shopId").disabled = false) : (document.getElementById("shopId").disabled = true);
+  };
+  $scope.changeSubVendor = function (parentId) {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619503143703351", parentId: parentId }).then(function (response) {
+      if (!isEmpty(response[0])) {
+        $rootScope.subVendor = response;
+      } else {
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619503143703351", id: parentId }).then(function (response) {
+          $rootScope.subVendor = response;
+        });
+      }
+    });
+    parentId != "" ? (document.getElementById("subVendorId").disabled = false) : (document.getElementById("subVendorId").disabled = true);
   };
   $scope.hideKeyboard = function (event) {
     if (event.keyCode === 13) {

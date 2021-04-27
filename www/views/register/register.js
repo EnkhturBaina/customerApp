@@ -72,8 +72,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
             //Password Hash
             $rootScope.passwordHashResult = response;
             var json = {
-              userName: $scope.crmUserData.userName,
-              siRegNumber: $scope.crmUserData.userName,
+              mobileNumber: $scope.crmUserData.userName,
             };
             json.dcApp_all_crm_user = {
               userName: $scope.crmUserData.userName,
@@ -88,38 +87,19 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
             console.log("json", json);
             serverDeferred.requestFull("dcApp_all_crm_customer_001", json).then(function (crmResponse) {
               console.log("register response", crmResponse);
-              var basePersonData = {
-                firstName: $scope.crmUserData.userName,
-                lastName: $scope.crmUserData.userName,
-                stateRegNumber: $scope.crmUserData.userName,
-                parentId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id,
-              };
-              basePersonData.dcApp_all_um_system_user = {
-                username: $scope.crmUserData.userName,
-                email: "",
-                typeCode: "internal",
-              };
-              basePersonData.dcApp_all_um_system_user.dcApp_all_um_user = {
-                isActive: "1",
-              };
-              console.log("basePersonData", basePersonData);
-              serverDeferred.requestFull("dcApp_all_base_person_001", basePersonData).then(function (response) {
-                console.log("base response", response);
-                if (response[0] == "success") {
-                  $timeout(function () {
-                    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id }).then(function (response) {
-                      console.log("res", response);
-                      localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
-                      console.log("basePersonData", basePersonData);
-                      console.log("localStorage", localStorage);
-                    });
-                    $state.go("login");
-                    $rootScope.alert("Нэвтэрнэ үү", "success");
-                  }, 500);
-                } else {
-                  $rootScope.alert("Бүртгэхэд алдаа гарлаа", "warning");
-                }
-              });
+              if (crmResponse[0] == "success") {
+                $timeout(function () {
+                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id }).then(function (response) {
+                    console.log("res", response);
+                    localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
+                    console.log("localStorage", localStorage);
+                  });
+                  $state.go("login");
+                  $rootScope.alert("Нэвтэрнэ үү", "success");
+                }, 500);
+              } else {
+                $rootScope.alert("Бүртгэхэд алдаа гарлаа", "warning");
+              }
             });
           });
         }

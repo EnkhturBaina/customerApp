@@ -1,5 +1,4 @@
 angular.module("property_collateral.Ctrl", []).controller("property_collateralCtrl", function ($scope, $timeout, $state, $ionicModal, $rootScope, serverDeferred) {
-  // When button is clicked, the popup will be shown...
   $scope.pCSourceSelectOn = function (path) {
     $scope.selectedImagePath = path;
     document.getElementById("overlayCollateralLoan").style.display = "block";
@@ -63,10 +62,8 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   $scope.backFromPropertyStep1 = function () {
     $state.go("home");
   };
-  $rootScope.propertyIsDan = false;
 
   $scope.gotoDanLoginDanSelectEstate = function () {
-    $rootScope.propertyIsDan = true;
     $rootScope.danCustomerData = {};
     $rootScope.danIncomeData = {};
     serverDeferred.carCalculation({ type: "auth_estate_collateral", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
@@ -88,58 +85,63 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
               var userInfo = JSON.parse(response.result.data.info);
               console.log("userInfo", userInfo);
               if (!isEmpty(response.result.data.property)) {
-                $rootScope.userPropertyData = JSON.parse(response.result.data.property.listData);
+                $rootScope.userPropertyData = JSON.parse(response.result.data.property);
+                $rootScope.propJson = $rootScope.userPropertyData.listData;
+                console.log("$rootScope.propJson", $rootScope.propJson);
                 console.log("$rootScope.userPropertyData", $rootScope.userPropertyData);
-
-                if (!isEmpty(userInfo)) {
-                  $scope.registerFunctionEstate(userInfo);
-                }
-
-                var userSalaryInfo = JSON.parse(response.result.data.salary);
-                serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.regnum.toUpperCase() }).then(function (checkedValue) {
-                  console.log("checkedValue", checkedValue);
-                  if (!isEmpty(checkedValue[1])) {
-                    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
-                      console.log("responseCustomerData", responseCustomerData);
-                      if (responseCustomerData[0] != "") {
-                        //Бүртгэлтэй USER -н дата татаж харуулах
-                        $rootScope.danCustomerData = responseCustomerData[0];
-                        $rootScope.danCustomerData.id = checkedValue[1].customerid;
-                      }
-                    });
-
-                    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: checkedValue[1].dccustomerid }).then(function (response) {
-                      console.log("get income data response", response);
-                      if (response[0] != "") {
-                        $rootScope.danIncomeData = response[0];
-                      }
-                    });
-                    console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
-                  }
-                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
-                    $rootScope.mortgageData = response;
-                  });
-                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
-                    $rootScope.familtStatData = response;
-                  });
-                });
-                $timeout(function () {
-                  $rootScope.danCustomerData.lastname = userInfo.lastname;
-                  $rootScope.danCustomerData.firstname = userInfo.firstname;
-                  $rootScope.danCustomerData.uniqueidentifier = userInfo.regnum.toUpperCase();
-
-                  console.log("userSalaryInfo", userSalaryInfo);
-                  if (userSalaryInfo) {
-                    serverDeferred.carCalculation(userSalaryInfo.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
-                      console.log("res salary", response);
-                      $rootScope.monthlyAverage = response.result;
-                      console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
-                      $rootScope.danIncomeData.monthlyincome = response.result;
-                      console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
-                    });
-                  }
-                }, 1000);
               }
+              if (!isEmpty(userInfo)) {
+                $scope.registerFunctionEstate(userInfo);
+              }
+
+              var userSalaryInfo = JSON.parse(response.result.data.salary);
+              serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.regnum.toUpperCase() }).then(function (checkedValue) {
+                console.log("checkedValue", checkedValue);
+                if (!isEmpty(checkedValue[1])) {
+                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
+                    console.log("responseCustomerData", responseCustomerData);
+                    if (responseCustomerData[0] != "") {
+                      //Бүртгэлтэй USER -н дата татаж харуулах
+                      $rootScope.danCustomerData = responseCustomerData[0];
+                      $rootScope.danCustomerData.id = checkedValue[1].customerid;
+                    } else {
+                      $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "warning");
+                    }
+                  });
+
+                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: checkedValue[1].dccustomerid }).then(function (response) {
+                    console.log("get income data response", response);
+                    if (response[0] != "") {
+                      $rootScope.danIncomeData = response[0];
+                    }
+                  });
+                  console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+                }
+                serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
+                  $rootScope.mortgageData = response;
+                });
+                serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
+                  $rootScope.familtStatData = response;
+                });
+              });
+              $timeout(function () {
+                $rootScope.danCustomerData.lastname = userInfo.lastname;
+                $rootScope.danCustomerData.firstname = userInfo.firstname;
+                $rootScope.danCustomerData.uniqueidentifier = userInfo.regnum.toUpperCase();
+
+                console.log("userSalaryInfo", userSalaryInfo);
+                if (userSalaryInfo) {
+                  serverDeferred.carCalculation(userSalaryInfo.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
+                    console.log("res salary", response);
+                    $rootScope.monthlyAverage = response.result;
+                    console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
+                    $rootScope.danIncomeData.monthlyincome = response.result;
+                    console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
+                  });
+                }
+              }, 1000);
+            } else {
+              $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "warning");
             }
           });
         } else if (error) {
@@ -151,7 +153,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         authWindow.executeScript({ code: "$('#m-one-sign').attr('class', 'show');" });
       });
     });
-    $rootScope.isDanLoginAutoColl = true;
+    $rootScope.propertyIsDan = true;
   };
   $scope.registerFunctionEstate = function (value) {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -189,26 +191,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         if (!isEmpty(responseCRM) && !isEmpty(responseCRM[0])) {
           $rootScope.loginUserInfo = mergeJsonObjs(responseCRM[1], $rootScope.loginUserInfo);
           localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
-
-          if (isEmpty(checkedValue[1]) && checkedValue[0] == "success") {
-            var basePersonData = {
-              firstName: value.firstname,
-              lastName: value.lastname,
-              stateRegNumber: value.regnum.toUpperCase(),
-              parentId: responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id,
-            };
-            basePersonData.dcApp_all_um_system_user = {
-              username: value.regnum.toUpperCase(),
-              email: "",
-              typeCode: "internal",
-            };
-            basePersonData.dcApp_all_um_system_user.dcApp_all_um_user = {
-              isActive: "1",
-            };
-            serverDeferred.requestFull("dcApp_all_base_person_001", basePersonData).then(function (response) {
-              console.log("base person response", response);
-            });
-          }
           $timeout(function () {
             if (!isEmpty(responseCRM[1]) && responseCRM[0] == "success") {
               console.log("responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id", responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id);
@@ -220,7 +202,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
               });
             }
           }, 500);
-          $state.go("car_coll");
+          $state.go("property_collateral");
         }
       });
     });
@@ -233,6 +215,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       $state.go("autoleasing-4");
     }
   };
+
   console.log("$rootScope.propertyIsDan", $rootScope.propertyIsDan);
   $scope.propertyCheckReqiured = function (param) {
     if (param == "step1") {
@@ -385,117 +368,14 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     val != "" ? (document.getElementById("streetSelect").disabled = false) : (document.getElementById("streetSelect").disabled = true);
   };
   $scope.categoryChange = function (val) {
-    console.log("val", val);
-    console.log("$scope.template", $scope.template);
     $scope.template = val;
-    $rootScope.propertyData = {};
+    // $rootScope.propertyData = {};
     $rootScope.propertyData.categoryId = val.id;
+    console.log("$rootScope.propertyData", $rootScope.propertyData);
   };
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
   });
-  $scope.propJson = [
-    {
-      code: "300002",
-      codeName: "Автозогсоолын",
-      firstname: "гончиг",
-      fullAddress: "Улаанбаатар Хан-Уул дүүрэг 11-р хороо Стадион оргил /17012/ Зайсан гудамж 63 байр, зоорийн давхарт 27 тоот",
-      lastname: "олхонууд",
-      movedCount: 1,
-      movedDate: "05-OCT-11",
-      movedJustification: "Худалдах , худалдан авах гэрээ",
-      ownershipId: "000003",
-      ownershipStatus: "Бэлэглэсэн",
-      personCorpId: "ию88102291",
-      personNameCorp: "баатарсүх",
-      propertyNationRegisterNumber: "ү2206011605",
-      propertyServiceId: "20111005070003",
-      propertySize: "12",
-      serviceDate: "2011-10-05 00:00:00.0",
-      serviceName: "Худалдах , худалдан авах гэрээ",
-      serviceType: "Үл хөдлөх",
-    },
-    {
-      code: "300076",
-      codeName: "Орон сууцны",
-      firstname: "гончиг",
-      fullAddress: "Улаанбаатар Баянгол дүүрэг 4-р хороо Голден парк Энх тайвны өргөн чөлөө гудамж 103 байр, 109 тоот",
-      lastname: "олхонууд",
-      movedCount: 1,
-      movedDate: "03-SEP-15",
-      movedJustification: "Худалдах , худалдан авах гэрээ",
-      ownershipId: "000002",
-      ownershipStatus: "Худалдсан",
-      personCorpId: "ию88102291",
-      personNameCorp: "баатарсүх",
-      propertyNationRegisterNumber: "ү2205042688",
-      propertyServiceId: "20150903020205",
-      propertySize: "40",
-      serviceDate: "2015-09-03 00:00:00.0",
-      serviceName: "Худалдах , худалдан авах гэрээ",
-      serviceType: "Үл хөдлөх",
-    },
-    {
-      code: "300076",
-      codeName: "Орон сууцны",
-      firstname: "гончиг",
-      fullAddress: "Улаанбаатар Баянзүрх дүүрэг 26-р хороо Их монгол улс гудамж 418 байр, 86 тоот",
-      lastname: "олхонууд",
-      movedCount: 2,
-      movedDate: "17-SEP-15",
-      movedJustification: "Худалдах , худалдан авах гэрээ",
-      ownershipId: "000001",
-      ownershipStatus: "Өмчилсөн",
-      personCorpId: "ию88102291",
-      personNameCorp: "баатарсүх",
-      propertyNationRegisterNumber: "ү2204040125",
-      propertyServiceId: "20150916050445",
-      propertySize: "71,8",
-      serviceDate: "2015-09-17 00:00:00.0",
-      serviceName: "Худалдах , худалдан авах гэрээ",
-      serviceType: "Үл хөдлөх",
-    },
-    {
-      code: "300076",
-      codeName: "Орон сууцны",
-      firstname: "гончиг",
-      fullAddress: "Улаанбаатар Баянзүрх дүүрэг 26-р хороо Их монгол улс гудамж 418 байр, 86 тоот",
-      lastname: "олхонууд",
-      movedCount: 2,
-      movedDate: "17-SEP-15",
-      movedJustification: "Худалдах , худалдан авах гэрээ",
-      ownershipId: "000001",
-      ownershipStatus: "Өмчилсөн",
-      personCorpId: "ию88102291",
-      personNameCorp: "баатарсүх",
-      propertyNationRegisterNumber: "ү2204040125",
-      propertyServiceId: "20150916050445",
-      propertySize: "71,8",
-      serviceDate: "2015-09-17 00:00:00.0",
-      serviceName: "Худалдах , худалдан авах гэрээ",
-      serviceType: "Үл хөдлөх",
-    },
-    {
-      code: "300076",
-      codeName: "Орон сууцны",
-      firstname: "гончиг",
-      fullAddress: "Улаанбаатар Баянзүрх дүүрэг 26-р хороо Их монгол улс гудамж 418 байр, 86 тоот",
-      lastname: "олхонууд",
-      movedCount: 2,
-      movedDate: "17-SEP-15",
-      movedJustification: "Худалдах , худалдан авах гэрээ",
-      ownershipId: "000001",
-      ownershipStatus: "Өмчилсөн",
-      personCorpId: "ию88102291",
-      personNameCorp: "баатарсүх",
-      propertyNationRegisterNumber: "ү2204040125",
-      propertyServiceId: "20150916050445",
-      propertySize: "71,8",
-      serviceDate: "2015-09-17 00:00:00.0",
-      serviceName: "Худалдах , худалдан авах гэрээ",
-      serviceType: "Үл хөдлөх",
-    },
-  ];
   $ionicModal
     .fromTemplateUrl("templates/propertyDan.html", {
       scope: $scope,
@@ -506,7 +386,20 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     });
   $timeout(function () {
     if ($state.current.name == "property_collateral") {
-      $scope.propertyDan.show();
+      if (!isEmpty($rootScope.propJson) && $rootScope.propertyIsDan) {
+        $scope.propertyDan.show();
+      } else if (($rootScope.propertyIsDan && isEmpty($rootScope.propJson)) || ($rootScope.propertyIsDan && $rootScope.propJson != undefined)) {
+        $rootScope.alert("Таньд ҮХХ бүртгэлгүй байна", "warning");
+      }
     }
   }, 300);
+  $scope.selectDanProperty = function (el) {
+    if (el.propertySize.match(/,/g)) {
+      $rootScope.propertyData.squareSize = parseFloat(el.propertySize.replace(",", "."));
+    } else {
+      $rootScope.propertyData.squareSize = parseFloat(el.propertySize);
+    }
+    $rootScope.propertyData.assetName = el.codeName;
+    $rootScope.propertyData.address = el.fullAddress;
+  };
 });

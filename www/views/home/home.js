@@ -149,6 +149,7 @@
   localStorage.removeItem("requestType");
   $rootScope.loginUserInfo = {};
   $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+  console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
   if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
     $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
   }
@@ -158,8 +159,6 @@
   });
 
   $ionicPlatform.registerBackButtonAction(function (e) {
-    console.log("AAAAAAAAAAAAAA", $ionicHistory.viewHistory());
-    console.log("AAAAAAAAAAAAAA", $ionicHistory.viewHistory().histories);
     e.preventDefault();
     // if ($ionicHistory.viewHistory().currentView.stateName == "requestList") {
     //   $state.go("home");
