@@ -31,17 +31,13 @@
           $rootScope.selectedCarData = response[0];
           console.log("$rootScope.selectedCarData", $rootScope.selectedCarData);
           $scope.selectCarName = response[0].modelname.split(" ")[0];
-          serverDeferred
-            .request("PL_MDVIEW_004", {
-              systemmetagroupid: "1597646717653727",
-            })
-            .then(function (response) {
-              angular.forEach(response, function (item) {
-                if (!isEmpty(item)) {
-                  $rootScope.carDatas.push(item);
-                }
-              });
+          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597646717653727" }).then(function (response) {
+            angular.forEach(response, function (item) {
+              if (!isEmpty(item)) {
+                $rootScope.carDatas.push(item);
+              }
             });
+          });
           if (!isEmpty($rootScope.selectedCarData.itemquantity)) {
             $scope.getLoanAmount = $rootScope.selectedCarData.price * parseInt($rootScope.selectedCarData.itemquantity);
           } else {

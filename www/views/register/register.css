@@ -1,108 +1,44 @@
-.btn {
-  background: rgb(162, 209, 52);
-  background: -moz-linear-gradient(45deg, rgba(162, 209, 52, 1) 30%, rgba(59, 193, 249, 1) 77%);
-  background: -webkit-linear-gradient(45deg, rgba(162, 209, 52, 1) 30%, rgba(59, 193, 249, 1) 77%);
-  background: linear-gradient(45deg, rgba(162, 209, 52, 1) 30%, rgba(59, 193, 249, 1) 77%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#a2d134",endColorstr="#3bc1f9",GradientType=1);
-  color: white;
-  width: 70%;
-  border-radius: 10px;
-}
 .btn:hover {
   color: white;
 }
 .btn:focus {
   color: white;
 }
-.btn-container {
-  /* display: flex; */
-  display: block;
-  justify-content: center;
-  width: 100%;
-  bottom: 10%;
-  position: absolute;
-}
-body {
-  background-color: #333333;
-}
 .remove-step {
   display: none;
 }
-.add-step {
-  display: block;
-}
-/* .register-step-1 {
-  padding: 20px 40px;
-} */
-.register-step-1 {
-  position: absolute;
-  top: 35%;
-  left: 20%;
-  width: 60%;
-  margin: 0 auto;
-}
-.register-step-2 {
-  padding: 20px 40px;
-}
 .register-step-1 input {
-  background-color: #f8f8fd;
+  background-color: #fff;
   border-bottom: 1px solid;
   border-radius: 10px;
   border-color: #acd322;
   padding: 0 15px 0 20px;
   font-weight: bold;
   color: #4b5180 !important;
-  background: #f8f8fd;
-}
-.register-step-1 input::-webkit-outer-spin-button,
-.register-step-1 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.register-step-1 input {
-  -moz-appearance: textfield; /* Firefox */
-}
-.register-step-2 input::-webkit-outer-spin-button,
-.register-step-2 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.register-step-2 input {
-  -moz-appearance: textfield; /* Firefox */
+  background: #fff;
+  margin: 40px 0;
 }
 .register-step-2 input {
-  background-color: #f8f8fd;
+  background-color: #fff;
   border-bottom: 1px solid;
   border-radius: 10px;
   border-color: #acd322;
   padding: 0 15px 0 20px;
   font-weight: bold;
   color: #4b5180 !important;
-  background: #f8f8fd;
+  background: #fff;
+  margin: 20px 0;
 }
 .register-mobile {
   text-align: left !important;
 }
-.register-mobile::-webkit-outer-spin-button,
-.register-mobile::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 .register-confirm {
   text-align: left !important;
 }
-.register-next-button {
-  border-color: white;
-  min-height: 35px;
-  line-height: 35px;
-  font-weight: normal;
-}
 .reg-show-pass-btn {
   position: absolute;
-  right: 7px;
-  top: 80px;
+  right: 5px;
+  top: 0px;
   color: #add326;
   min-height: 0px !important;
 }
@@ -112,4 +48,35 @@ body {
 }
 .register-content > .scroll {
   height: 100%;
+}
+.register-step1-container {
+  background-color: #fff;
+  padding: 15px 50px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 40% 20px;
+}
+.register-step1-title {
+  text-align: center;
+  font-size: 12px !important;
+  text-transform: uppercase;
+  width: 70%;
+  margin: 0 auto;
+}
+.step-1-text {
+  position: relative;
+}
+.resend-code-btn {
+  background: #fff;
+  width: 55vw;
+  font-size: 10px;
+  letter-spacing: 1px !important;
+  margin: 10px auto !important;
+  display: block !important;
+  color: #000;
+  border-radius: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  min-height: 35px;
+  line-height: 35px;
 }

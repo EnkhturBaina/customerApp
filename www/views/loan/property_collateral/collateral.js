@@ -86,9 +86,13 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
               console.log("userInfo", userInfo);
               if (!isEmpty(response.result.data.property)) {
                 $rootScope.userPropertyData = JSON.parse(response.result.data.property);
-                $rootScope.propJson = $rootScope.userPropertyData.listData;
-                console.log("$rootScope.propJson", $rootScope.propJson);
-                console.log("$rootScope.userPropertyData", $rootScope.userPropertyData);
+                if (!isEmpty($rootScope.userPropertyData)) {
+                  $rootScope.propJson = $rootScope.userPropertyData.listData;
+                  console.log("$rootScope.propJson", $rootScope.propJson);
+                  console.log("$rootScope.userPropertyData", $rootScope.userPropertyData);
+                } else {
+                  $rootScope.propJson = null;
+                }
               }
               if (!isEmpty(userInfo)) {
                 $scope.registerFunctionEstate(userInfo);

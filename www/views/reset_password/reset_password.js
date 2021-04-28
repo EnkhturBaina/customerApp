@@ -1,5 +1,5 @@
 angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", function ($window, $ionicSlideBoxDelegate, $scope, $rootScope, $state, serverDeferred) {
-  document.getElementById("saveNewPassword").setAttribute("style", "display:none !important");
+  // document.getElementById("saveNewPassword").setAttribute("style", "display:none !important");
   $(".register-mobile").mask("00000000");
   var progressBar = {
     Bar: $("#pr-progress-bar"),
