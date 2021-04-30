@@ -5,15 +5,29 @@
     <div class="register-step1-container">
       <div id="register-step-1" class="register-step-1">
         <p class="big-middle-title register-step1-title">Утасны дугаар нь таны нэвтрэх нэр болно</p>
-        <div class="step-1-text">
-          <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Утасны дугаар" name="mobileNumber" class="register-mobile" ng-model="$root.crmUserData.userName" select-on-click />
-        </div>
-        <div class="step-1-text">
-          <input type="{{inputType}}" pattern="\d*" placeholder="Нууц үг" name="password" class="register-password" ng-model="$root.customerPassword.passwordHash" select-on-click />
-          <button class="button button-icon reg-show-pass-btn" style="zoom: 1" ng-click="hideShowPassword()">
-            <i class="ion-eye" id="eye-icon"></i>
-          </button>
-        </div>
+        <!-- <div class="step-1-text">
+        </div> -->
+        <label class="item item-input item-stacked-label register-label">
+          <span class="input-label">Утасны дугаар</span>
+          <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="**********" name="mobileNumber" class="register-mobile" ng-model="$root.crmUserData.userName" select-on-click />
+        </label>
+        <label class="item item-input item-stacked-label register-label" id="regLabel">
+          <span class="input-label">Регистр</span>
+          <div class="reg-chars-container">
+            <div class="select-reg-chars">
+              <span id="regCharA" type="text">Р</span>
+              <span id="regCharB" type="text">Д</span>
+            </div>
+            <input inputmode="numeric" pattern="[0-9]*" type="text" id="regNums" class="registerRegSelector" placeholder="00000000" name="uniqueIdentifier" readonly />
+          </div>
+        </label>
+        <label class="item item-input item-stacked-label register-label">
+          <span class="input-label">Нууц үг</span>
+          <!-- <button class="button button-icon reg-show-pass-btn" style="zoom: 1" ng-click="hideShowPassword()">
+              <i class="ion-eye" id="eye-icon"></i>
+            </button> -->
+          <input type="{{inputType}}" placeholder="Нууц үг" name="password" class="register-password" ng-model="$root.customerPassword.passwordHash" select-on-click />
+        </label>
       </div>
       <div id="register-step-2" class="register-step-2 remove-step">
         <div class="step-1-text">
@@ -31,3 +45,35 @@
     </div>
   </ion-content>
 </ion-view>
+<script id="templates/modal.html" type="text/ng-template">
+    <ion-modal-view id="profileKeyContainer" class="reg-num-modal">
+        <ion-content scroll="false" class="padding overlay-profile-reg-select-content">
+            <div id="keypadReg" cellpadding="5" cellspacing="3">
+                <div class="row keyboard-row-1">
+                    <div class="col keyboard-title keyboard-title-left" ng-click="cancelRegNums()">Хаах</div>
+                    <div class="col keyboard-title keyboard-title-right" ng-click="saveRegNums()">Хадгалах</div>
+                </div>
+                <div class="row keypad-row">
+                    <div class="col keypad-col" ng-click="addCode('1')">1</div>
+                    <div class="col keypad-col" ng-click="addCode('2')">2</div>
+                    <div class="col keypad-col" ng-click="addCode('3')">3</div>
+                </div>
+                <div class="row keypad-row">
+                    <div class="col keypad-col" ng-click="addCode('4')">4</div>
+                    <div class="col keypad-col" ng-click="addCode('5')">5</div>
+                    <div class="col keypad-col" ng-click="addCode('6')">6</div>
+                </div>
+                <div class="row keypad-row">
+                    <div class="col keypad-col" ng-click="addCode('7')">7</div>
+                    <div class="col keypad-col" ng-click="addCode('8')">8</div>
+                    <div class="col keypad-col" ng-click="addCode('9')">9</div>
+                </div>
+                <div class="row keypad-row">
+                    <div class="col keypad-col" ng-click="emptyCode()">C</div>
+                    <div class="col keypad-col" ng-click="addCode('0')">0</div>
+                    <div class="col keypad-col" ng-click="clearD()"><i class="ion-arrow-left-c"></i></div>
+                </div>
+            </div>
+        </ion-content>
+    </ion-modal-view>
+</script>

@@ -1,5 +1,6 @@
-angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeout, $scope, $rootScope, $state, serverDeferred) {
+angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeout, $scope, $rootScope, $state, serverDeferred, $ionicPlatform, $ionicModal) {
   $(".register-mobile").mask("00000000");
+  $(".registerRegSelector").mask("00000000");
   var progressBar = {
     Bar: $("#progress-bar"),
     step1: $("register-step-1"),
@@ -30,11 +31,14 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
   $scope.inputType = "password";
   $scope.user = {};
   $scope.hideShowPassword = function () {
+    console.log("A");
     if ($scope.inputType == "password") {
+      console.log("B");
       $("#eye-icon").removeClass("ion-eye");
       $("#eye-icon").addClass("ion-eye-disabled");
       $scope.inputType = "text";
     } else {
+      console.log("C");
       $scope.inputType = "password";
       $("#eye-icon").removeClass("ion-eye-disabled");
       $("#eye-icon").addClass("ion-eye");
@@ -51,15 +55,14 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
     } else if (isEmpty($scope.customerPassword.passwordHash)) {
       $rootScope.alert("Нууц үгээ оруулна уу", "warning");
+    } else if ($("#regNums").val() == "" || $("#regNums").val() == null) {
+      $rootScope.alert("Регистрээ оруулна уу", "warning");
     } else {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $scope.crmUserData.userName }).then(function (response) {
         console.log("isRegistered", response);
         if (!isEmpty(response[0])) {
           $rootScope.alert("<p class=" + "customer_registerd_number" + ">" + $scope.crmUserData.userName + "</p>" + " Утасны дугаараар бүртгэл үүссэн байна", "warning");
         } else {
-          $scope.isStep1 = false;
-          $scope.isStep2 = true;
-          progressBar.Next();
           var generatedCode = Math.floor(100000 + Math.random() * 900000);
           serverDeferred.requestFull("getPasswordHash1", $scope.customerPassword).then(function (response) {
             console.log("pass response", response);
@@ -67,13 +70,14 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
             $rootScope.passwordHashResult = response;
             var json = {
               mobileNumber: $scope.crmUserData.userName,
+              siRegNumber: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
+              customerCode: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
             };
             json.dcApp_all_crm_user = {
               userName: $scope.crmUserData.userName,
               userId: "1",
               password: $scope.customerPassword.passwordHash,
               passwordHash: $scope.passwordHashResult[1].result,
-              userId: "1",
             };
             json.dcApp_all_crm_user.dcApp_all_dc_customer = {
               mobileNumber: $scope.crmUserData.userName,
@@ -83,6 +87,9 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
             serverDeferred.requestFull("dcApp_all_crm_customer_001", json).then(function (crmResponse) {
               console.log("register response", crmResponse);
               if (crmResponse[0] == "success") {
+                $scope.isStep1 = false;
+                $scope.isStep2 = true;
+                progressBar.Next();
                 $timeout(function () {
                   serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id }).then(function (response) {
                     console.log("res", response);
@@ -157,5 +164,68 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
       }
       timeleft -= 1;
     }, 1000);
+  };
+  $ionicPlatform.ready(function () {
+    setTimeout(function () {
+      var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "Ю", "Ф", "Х", "У", "Ч"];
+      new MobileSelect({
+        trigger: ".registerRegSelector",
+        wheels: [{ data: regChars }, { data: regChars }],
+        position: [0, 0],
+        ensureBtnText: "Хадгалах",
+        cancelBtnText: "Хаах",
+        transitionEnd: function (indexArr, data) {
+          //scroll xiij bhd ajillah func
+        },
+        callback: function (indexArr, data) {
+          console.log("data", data);
+          $("#regCharA").text(data[0]);
+          $("#regCharB").text(data[1]);
+          $scope.overlayKeyOn();
+
+          keyInput = document.getElementById("regNums");
+          if (keyInput) {
+            $scope.clearD = function () {
+              keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
+            };
+
+            $scope.addCode = function (key) {
+              keyInput.value = keyInput.value + key;
+            };
+
+            $scope.emptyCode = function () {
+              keyInput.value = "";
+            };
+
+            $scope.emptyCode();
+          }
+        },
+      });
+      $("#regNums").mask("00000000");
+    }, 1000);
+  });
+  $ionicModal
+    .fromTemplateUrl("templates/modal.html", {
+      scope: $scope,
+      backdropClickToClose: false,
+    })
+    .then(function (modal) {
+      $scope.modal = modal;
+    });
+  $scope.overlayKeyOn = function () {
+    $scope.modal.show();
+  };
+  $scope.saveRegNums = function () {
+    if (keyInput.value.length < 8) {
+      $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
+    } else {
+      $scope.modal.hide();
+    }
+  };
+  $scope.cancelRegNums = function () {
+    // $("#regCharA").text($scope.regNum.substr(0, 1));
+    // $("#regCharB").text($scope.regNum.substr(1, 1));
+    // $("#regNums").val($scope.regNum.substr(2, 8));
+    $scope.modal.hide();
   };
 });

@@ -50,7 +50,7 @@
         <icon height="144" src="res/icons/ios/icon-72-2x.png" width="144" />
         <icon height="29" src="res/icons/ios/icon-small.png" width="29" />
         <icon height="58" src="res/icons/ios/icon-small-2x.png" width="58" />
-        <icon height="50" src="res/icons/ios/icon-50.png" width="50" />
+        <icon height="50" src="res/icons/ios/icon-50.png" width="50" />        
         <icon height="100" src="res/icons/ios/icon-50-2x.png" width="100" />
     </platform>
     <platform name="windows">

@@ -9,14 +9,11 @@
 }
 .register-step-1 input {
   background-color: #fff;
-  border-bottom: 1px solid;
-  border-radius: 10px;
-  border-color: #acd322;
   padding: 0 15px 0 20px;
   font-weight: bold;
   color: #4b5180 !important;
   background: #fff;
-  margin: 40px 0;
+  text-align-last: right;
 }
 .register-step-2 input {
   background-color: #fff;
@@ -51,7 +48,7 @@
 }
 .register-step1-container {
   background-color: #fff;
-  padding: 15px 50px;
+  padding: 15px 20px;
   border-radius: 8px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 40% 20px;
@@ -79,4 +76,140 @@
   text-transform: uppercase;
   min-height: 35px;
   line-height: 35px;
+}
+.register-label {
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+  border-bottom: 1px solid #bcbcbc;
+  padding: 6px 0 5px 5px;
+}
+.register-label .input-label {
+  font-size: 14px !important;
+}
+.select-reg-chars {
+  margin-left: auto;
+  margin-right: 95px;
+  height: auto;
+}
+
+.select-reg-chars span {
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  padding: 0px 5px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #4b5180;
+}
+
+#keypadReg {
+  margin: auto;
+  width: 100%;
+  height: 95%;
+  border-radius: 10px 10px 0px 0px;
+  margin-top: 20px;
+  background: rgb(159, 209, 58);
+  background: -moz-linear-gradient(24deg, rgba(159, 209, 58, 1) 7%, rgba(63, 194, 243, 1) 100%);
+  background: -webkit-linear-gradient(24deg, rgba(159, 209, 58, 1) 7%, rgba(63, 194, 243, 1) 100%);
+  background: linear-gradient(24deg, rgba(159, 209, 58, 1) 7%, rgba(63, 194, 243, 1) 100%);
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#9fd13a", endColorstr="#3fc2f3", GradientType=1);
+}
+
+#keypadReg tr td {
+  vertical-align: middle;
+  text-align: center;
+  border-bottom: 1px solid red;
+  font-size: 18px;
+  font-weight: bold;
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  color: #fff;
+  padding: 0 10px !important;
+}
+
+.keypad-col {
+  text-align: center;
+  border-bottom-color: #fff;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  font-size: 30px;
+  font-weight: 200;
+  margin: 0px 30px;
+  color: #fff;
+  line-height: initial;
+}
+
+.keypad-row {
+  padding: 10px 15px !important;
+}
+
+.keyboard-title {
+  height: 45px;
+  border-bottom-color: #fff;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  /* padding: 8px 0px !important; */
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-align: center;
+  color: #fff;
+}
+
+.keyboard-row-1 {
+  line-height: 45px;
+}
+
+.keyboard-title-left {
+  text-align: left;
+  padding: 0px 20px;
+}
+
+.keyboard-title-right {
+  text-align: right;
+  padding: 0px 20px;
+}
+
+.reg-num-modal {
+  background: transparent !important;
+}
+
+#regNums {
+  position: absolute;
+  right: 0;
+  width: 80px;
+  padding: 0px;
+  background: #fff !important;
+  margin-right: 15px;
+}
+
+#profileKeyContainer {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 70vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 99;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.overlay-profile-reg-select-content {
+  color: #000;
+  font-size: 12px;
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+  bottom: 0;
+  top: auto !important;
+}
+
+.reg-chars-container {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
 }
