@@ -82,7 +82,8 @@
   font-weight: bold;
 }
 .dan-select-title-span {
-  color: #acd322 !important;
+  /* color: #acd322 !important; */
+  color: #4b5180 !important;
   font-weight: bold;
 }
 .templates-sub-title-dan-is {

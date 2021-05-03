@@ -63,7 +63,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           localStorage.removeItem("profilePictureSideMenu");
           localStorage.setItem("profilePictureSideMenu", response[0].profilepicture);
           $rootScope.profilePictureSideMenu = response[0].profilepicture;
-          $scope.customerProfilePicture.profilepicture = response[0].profilepicture;
+          $scope.customerProfilePicture.profilePictureClob = response[0].profilepicture;
 
           if (response[0].uniqueidentifier) {
             $scope.regNum = response[0].uniqueidentifier;
@@ -120,10 +120,12 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerProfileData.uniqueidentifier)) {
       $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
       document.getElementById("regLabel").style.borderBottom = "2px solid red";
-    } else if (isEmpty($scope.customerProfileData.email)) {
-      $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
-      document.getElementById("mailLabel").style.borderBottom = "2px solid red";
-    } else if (isEmpty($scope.customerProfileData.mobilenumber)) {
+    }
+    // else if (isEmpty($scope.customerProfileData.email)) {
+    //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
+    //   document.getElementById("mailLabel").style.borderBottom = "2px solid red";
+    // }
+    else if (isEmpty($scope.customerProfileData.mobilenumber)) {
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
       document.getElementById("phoneLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.ismarried)) {
@@ -192,15 +194,17 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     navigator.camera.getPicture(
       function (imageData) {
         if ($scope.selectedImagePath == 1) {
-          $scope.customerProfileData.identfrontpic = "jpg♠" + imageData;
+          $scope.customerProfileData.identfrontpic = imageData;
         } else if ($scope.selectedImagePath == 2) {
-          $scope.customerProfileData.identbackpic = "jpg♠" + imageData;
+          $scope.customerProfileData.identbackpic = imageData;
         } else if ($scope.selectedImagePath == 3) {
-          $scope.customerProfilePicture.profilepicture = "jpg♠" + imageData;
+          $scope.customerProfilePicture.profilePictureClob = imageData;
 
           $scope.customerProfilePicture.id = all_ID.dccustomerid;
 
-          serverDeferred.requestFull("dcApp_profile_pricture_dv_002", $scope.customerProfilePicture).then(function (response) {});
+          serverDeferred.requestFull("dcApp_profile_pricture_dv_002", $scope.customerProfilePicture).then(function (response) {
+            console.log("res change profile picture", response);
+          });
         }
         $scope.$apply();
       },
@@ -214,7 +218,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       }
     );
     localStorage.removeItem("profilePictureSideMenu");
-    localStorage.setItem("profilePictureSideMenu", $scope.customerProfilePicture.profilepicture);
+    localStorage.setItem("profilePictureSideMenu", $scope.customerProfilePicture.profilePictureClob);
   };
 
   //income data
@@ -242,12 +246,12 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       }, 500);
     }
   };
-  $scope.overlayOn = function () {
-    document.getElementById("overlay").style.display = "block";
-  };
-  $scope.overlayOff = function () {
-    document.getElementById("overlay").style.display = "none";
-  };
+  // $scope.overlayOn = function () {
+  //   document.getElementById("overlay").style.display = "block";
+  // };
+  // $scope.overlayOff = function () {
+  //   document.getElementById("overlay").style.display = "none";
+  // };
 
   $scope.generateQR = function () {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));

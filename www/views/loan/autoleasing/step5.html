@@ -7,9 +7,10 @@
                 <div class="bg-container">
                     <label class="item item-input step4-loan-location">
                         <p class="dan-user-data">Орлогын эх үүсвэр</p>
-                        <select class="select-income-type" ng-model="$root.danIncomeData.incometypeid">
+                        <!-- <select class="select-income-type" ng-model="$root.danIncomeData.incometypeid">
                             <option ng-repeat="income in incomeType | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.danIncomeData.incometypeid==income.id}}">{{income.name}}</option>
-                        </select>
+                        </select> -->
+                        <select class="select-income-type" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid"></select>
                     </label>
                     <div class="tugrug-input">
                         <span class="title input-label-front dan-user-data">Сарын орлого</span>

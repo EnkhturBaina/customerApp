@@ -17,7 +17,8 @@
         <div class="big-container ghostwhite-noscroll-container">
             <div class="magic-container other-goods-content">
                 <div class="margin-lr-20">
-                    <div class="">
+                    <div class="goods-row1-container">
+                        <span class="goods-row1-text">Та яг одоо дэлгүүр дээрээс <span class="middle-card-mid-text">ЛИЗИНГИЙН ОНЛАЙН</span> хүсэлт илгээх бол бараагаа энд бүртгүүлээрэй.</span>
                         <div class="addBtnContainer">
                             <button class="button btn single-button" id="Next" ui-sref="addOtherGoods">Бараа бүртгэх</button>
                         </div>
@@ -29,7 +30,7 @@
                                             <img ng-src="{{item.picture1}}" />
                                         </div>
                                         <div class="left-text" style="margin-top: 4%;margin-left: 100px;height: 18px;position: absolute;">
-                                            <p class="itemname" style="color: #000;font-weight: bold;" ng-repeat="itemSup in $root.suppliers" ng-if="itemSup.id == item.shopId">{{itemSup.suppliername}}</p>
+                                            <p class="itemname" style="color: #4b5180 !important;font-weight: bold;" ng-repeat="itemSup in $root.suppliers" ng-if="itemSup.id == item.shopId">{{itemSup.suppliername}}</p>
                                             <p class="price">{{item.unitPrice|formatNumber}}₮</p>
                                         </div>
                                     </ion-checkbox>
@@ -43,6 +44,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="goods-middle-card">
+                <span>Та бараагаа <span class="middle-card-mid-text">ОНЛАЙНААР, ЛИЗИНГЭЭР</span> авах гэж байгаа бол доорх e-shop уудаас бараа сонгон онлайн лизингээр аваарай</span>
             </div>
             <ion-footer class="bottom-footer">
                 <!-- <div class="attention-text">

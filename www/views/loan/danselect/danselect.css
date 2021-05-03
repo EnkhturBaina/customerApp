@@ -24,14 +24,16 @@
   font-size: 14px;
 }
 .dan-hand-btn {
-  margin: 20px auto 0px auto;
-  width: fit-content;
+  margin: 10px auto 0px auto;
   border-bottom: 1px solid;
   border-radius: 10px;
   border-color: #acd322;
-  width: 220px;
   min-height: 37px;
   line-height: 34px !important;
+  font-weight: bold;
+  color: #4b5180;
+  font-size: 14px;
+  width: 55vw;
 }
 .dan-is-btn {
   font-weight: bold;
@@ -40,9 +42,19 @@
   border-bottom: 1px solid;
   border-radius: 10px;
   border-color: #acd322;
-  margin: 20px auto 0px auto;
+  margin: 10px auto 0px auto;
   width: 55vw;
   text-align: center;
   min-height: 37px;
   line-height: 34px !important;
+}
+.dan-is-btn-txt {
+  color: #4b5180;
+  font-weight: bold;
+  font-size: 14px;
+  border-bottom: 1px;
+  border-bottom-color: #acd322;
+  border-bottom-style: dashed;
+  width: fit-content;
+  margin: 0 auto;
 }

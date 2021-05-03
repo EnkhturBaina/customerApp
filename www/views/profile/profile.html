@@ -9,7 +9,7 @@
             <button class="button btn single-button">Хаах</button>
         </div>
     </div>
-    <div id="overlay">
+    <!-- <div id="overlay">
         <span class="overlay-off-text" ng-click="overlayOff()"><img style="width: 20px" src="img/x_mark.png" /></span>
         <div class="overlay-content" id="text">
             <span class="overlay-title-text"> АНХААРУУЛГА!!! </span>
@@ -18,7 +18,7 @@
         <div class="overlay-btn-container">
             <button class="button overlay-btn-1" ng-click="overlayOff()">Хувийн мэдээллээ оруулах бол ЭНД дарна уу.</button>
         </div>
-    </div>
+    </div> -->
     <ion-pane class="profile-info-container has-header">
         <div class="profile-avatar">
             <ion-header-bar align-title="left" class="navbar" style="background: none">
@@ -32,11 +32,14 @@
                 </div>
             </ion-header-bar>
 
-            <div class="avatar-base">
+            <div class="avatar-base" ng-click="ppSourceSelectOn(3)">
+                <div ng-if="!$root.customerProfilePicture.profilePictureClob" class="profile-picture-add-btn">
+                    +
+                </div>
                 <!-- <div class="profile-picture-edit" ng-click="ppSourceSelectOn(3)" style="border-radius: 10px;border: 1px solid #ccfffc;text-align: center;font-size: 20px;color: #eaf6e2;line-height: 86px;background: #65c8ae;padding: 4px;">
                     <i class="icon ion-edit"></i>
                 </div> -->
-                <img ng-if="!$root.customerProfilePicture.profilepicture|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfilePicture.profilepicture}}" height="75px" width="120px" style="border-radius: 50px;" />
+                <img ng-if="!$root.customerProfilePicture.profilePictureClob|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfilePicture.profilePictureClob}}" height="75px" width="120px" style="border-radius: 50px;" />
             </div>
         </div>
         <ion-tabs id="profile-tabs-striped" class="tabs-striped tabs-top profile-card-tabs profile-tab profile-tabs-tab" delegate-handle="profileTabs">
@@ -77,15 +80,18 @@
                             </label>
                             <label class="item item-input profile-label" id="marriageLabel">
                                 <p>Гэрлэсэн эсэх</p>
-                                <select class="profile-select" ng-model="$root.customerProfileData.ismarried">
+                                <!-- <select class="profile-select" ng-model="$root.customerProfileData.ismarried">
                                     <option ng-repeat="data in familtStatData | filter:{id:'!!'}" ng-if="data.name" value="{{data.id}}" ng-selected="{{$root.customerProfileData.ismarried==data.id}}">{{data.name}}</option>
-                                </select>
+                                </select> -->
+
+                                <select class="profile-select" class="select-income-type" ng-model="$root.customerProfileData.ismarried" ng-options="c.id as c.name for c in familtStatData | filter:{id:'!!'}" ng-init="$root.customerProfileData.ismarried = $root.customerProfileData.ismarried"></select>
                             </label>
                             <label class="item item-input profile-label" id="mikLabel">
                                 <p>МИК-ийн зээлтэй эсэх</p>
-                                <select class="profile-select" ng-model="$root.customerProfileData.mikmortgagecondition">
+                                <!-- <select class="profile-select" ng-model="$root.customerProfileData.mikmortgagecondition">
                                     <option ng-repeat="md in mortgageData | filter:{id:'!!'}" ng-if="md.name" value="{{md.id}}" ng-selected="{{$root.customerProfileData.mikmortgagecondition==md.id}}">{{md.name}}</option>
-                                </select>
+                                </select> -->
+                                <select class="profile-select" class="select-income-type" ng-model="$root.customerProfileData.mikmortgagecondition" ng-options="c.id as c.name for c in mortgageData | filter:{id:'!!'}" ng-init="$root.customerProfileData.mikmortgagecondition = $root.customerProfileData.mikmortgagecondition"></select>
                             </label>
                             <label class="item item-input profile-label" id="workLabel">
                                 <p>Ажилласан жил</p>
@@ -129,9 +135,11 @@
                         <div class="list profile-list">
                             <label class="item item-input profile-label">
                                 <p>Орлогын эх үүсвэр</p>
-                                <select class="profile-select" ng-model="$root.customerIncomeProfileData.incometypeid">
+                                <!-- <select class="profile-select" ng-model="$root.customerIncomeProfileData.incometypeid">
                                     <option ng-repeat="income in incomeType | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.customerIncomeProfileData.incometypeid==income.id}}">{{income.name}}</option>
-                                </select>
+                                </select> -->
+
+                                <select class="profile-select" ng-model="$root.customerIncomeProfileData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.customerIncomeProfileData.incometypeid = $root.customerIncomeProfileData.incometypeid"></select>
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Сарын орлого</p>

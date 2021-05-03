@@ -75,7 +75,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
       if (!isEmpty(response.data) && response.data.response.status === "success") {
         $rootScope.loginUserInfo = response.data.response.result;
         serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", userName: `${username}` }).then(function (response) {
-          console.log("AAAAAAAAA 1", response);
           if (!isEmpty(response) && !isEmpty(response[0])) {
             $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
             // console.log($rootScope.loginUserInfo);
@@ -84,7 +83,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
             localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
 
             serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", mobileNumber: `${username}` }).then(function (response) {
-              console.log("AAAAAAAAA 2", response);
               if (!isEmpty(response[0])) {
                 localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
 
@@ -98,9 +96,15 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
                 } else {
                   $state.go($stateParams.path);
                 }
+              } else {
+                $ionicLoading.hide();
+                $rootScope.alert("Нэр, Нууц үг буруу байна", "warning");
               }
             });
             $rootScope.hideFooter = false;
+          } else {
+            $ionicLoading.hide();
+            $rootScope.alert("Нэр, Нууц үг буруу байна", "warning");
           }
         });
       } else {
@@ -137,7 +141,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   };
   $scope.gotoDanLogin = function () {
     serverDeferred.carCalculation({ type: "auth", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
-      console.log("response v1 c", response);
       $rootScope.stringHtmlsLink = response.result.data;
 
       // window.open(, "_system", "location=yes");
@@ -198,17 +201,16 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
     };
     //Sidebar profile зураг
     $rootScope.profilePictureSideMenu = value.image;
+    localStorage.removeItem("profilePictureSideMenu");
+    localStorage.setItem("profilePictureSideMenu", value.image);
 
     serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
-      console.log("checkedValue", checkedValue);
       if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
-        console.log("IS REGISTERED !!!");
         json.id = checkedValue[1].customerid;
         json.dcApp_crmUser_dan.id = checkedValue[1].custuserid;
         json.dcApp_crmUser_dan.dcApp_dcCustomer_dan.id = checkedValue[1].dccustomerid;
       }
       serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (response) {
-        console.log("res", response);
         if (!isEmpty(response) && response[0] == "success") {
           $rootScope.loginUserInfo = response[1];
           $rootScope.loginUserInfo.id = response[1].dcapp_crmuser_dan.id;
@@ -229,9 +231,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
 
           $timeout(function () {
             serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: response[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id }).then(function (response) {
-              console.log("res", response);
               localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
-              console.log("localStorage", localStorage);
             });
           }, 500);
         } else {

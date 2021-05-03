@@ -760,10 +760,12 @@
       } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
         $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.email)) {
-        $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+      }
+      // else if (isEmpty($rootScope.danCustomerData.email)) {
+      //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
+      //   return false;
+      // }
+      else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
         $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.ismarried)) {
@@ -936,6 +938,7 @@
                 });
                 serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
                   $rootScope.familtStatData = response;
+                  console.log("$rootScope.familtStatData", $rootScope.familtStatData);
                 });
               });
               $timeout(function () {
@@ -982,6 +985,7 @@
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
       $rootScope.familtStatData = response;
+      console.log("$rootScope.familtStatData", $rootScope.familtStatData);
     });
     $state.go("autoleasing-4");
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -991,13 +995,12 @@
       if (responseCustomerData[0] != "") {
         $rootScope.danCustomerData = responseCustomerData[0];
         $rootScope.danCustomerData.id = all_ID.dccustomerid;
-      }
-    });
-
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
-      console.log("get income data response", response);
-      if (response[0] != "") {
-        $rootScope.danIncomeData = response[0];
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
+          console.log("get income data response", response);
+          if (response[0] != "") {
+            $rootScope.danIncomeData = response[0];
+          }
+        });
       }
     });
   };
@@ -1026,6 +1029,8 @@
     };
 
     $rootScope.profilePictureSideMenu = value.image;
+    localStorage.removeItem("profilePictureSideMenu");
+    localStorage.setItem("profilePictureSideMenu", value.image);
     $rootScope.sidebarUserName = value.lastname.substr(0, 1) + ". " + value.firstname;
 
     serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {

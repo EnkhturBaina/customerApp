@@ -58,14 +58,13 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
     } else if ($("#regNums").val() == "" || $("#regNums").val() == null) {
       $rootScope.alert("Регистрээ оруулна уу", "warning");
     } else {
+      //User бүртгэлтэй эсэхийг шалгах
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $scope.crmUserData.userName }).then(function (response) {
-        console.log("isRegistered", response);
         if (!isEmpty(response[0])) {
           $rootScope.alert("<p class=" + "customer_registerd_number" + ">" + $scope.crmUserData.userName + "</p>" + " Утасны дугаараар бүртгэл үүссэн байна", "warning");
         } else {
           var generatedCode = Math.floor(100000 + Math.random() * 900000);
           serverDeferred.requestFull("getPasswordHash1", $scope.customerPassword).then(function (response) {
-            console.log("pass response", response);
             //Password Hash
             $rootScope.passwordHashResult = response;
             var json = {
@@ -80,12 +79,12 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
               passwordHash: $scope.passwordHashResult[1].result,
             };
             json.dcApp_all_crm_user.dcApp_all_dc_customer = {
+              uniqueidentifier: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
               mobileNumber: $scope.crmUserData.userName,
               smsCode: generatedCode,
             };
             console.log("json", json);
             serverDeferred.requestFull("dcApp_all_crm_customer_001", json).then(function (crmResponse) {
-              console.log("register response", crmResponse);
               if (crmResponse[0] == "success") {
                 $scope.isStep1 = false;
                 $scope.isStep2 = true;

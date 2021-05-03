@@ -359,3 +359,24 @@
   background-size: cover !important;
   background-repeat: no-repeat !important;
 }
+.goods-middle-card {
+  display: inline-block;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  height: auto;
+  margin: 10px 20px;
+  text-align: center;
+}
+.goods-middle-card span {
+  font-size: 14px !important;
+}
+.middle-card-mid-text {
+  color: #4b5180 !important;
+  font-weight: bold;
+}
+.goods-row1-text {
+  text-align: center;
+  display: block;
+}
