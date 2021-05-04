@@ -42,7 +42,7 @@
 }
 .templates-content {
   border: 1px solid #acd322;
-  border-radius: 12px;
+  border-radius: 10px;
   margin: 30px 10px;
 }
 .templates-content-ul {
@@ -121,12 +121,10 @@
   font-weight: bold !important;
 }
 .property-dan-card {
-  max-height: 70vh !important;
   padding: 0px 20px 0px 20px;
-  height: 50vh;
+  height: 40vh;
   background-color: #fff !important;
   margin: 70px 20px 10px 20px !important;
-
   background-color: #fff !important;
   margin-left: 40px !important;
   margin-right: 40px !important;
@@ -148,12 +146,18 @@
   font-weight: bold;
   padding: 10px;
 }
+.property-dan-select {
+  border: none !important;
+  margin: 2px 0 !important;
+}
 .property-dan-select .radio-icon {
   border: 1px solid #acd322;
   width: 100% !important;
+  color: #acd322;
+  border-radius: 10px !important;
 }
 .property-dan-select .radio-icon::before {
-  display: none;
+  float: right;
 }
 .property-address {
   font-size: 10px !important;
@@ -161,4 +165,5 @@
 }
 .property-dan-select .item-content {
   padding-right: 0px !important;
+  background: #fff !important;
 }

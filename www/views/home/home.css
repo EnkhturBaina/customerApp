@@ -139,6 +139,7 @@
 .card {
   box-shadow: -1px 2px 7px rgba(0, 0, 0, 0.3);
   background-color: #acd322;
+  border-radius: 10px !important;
 }
 .loan-tab-title {
   padding: 10px 13px;

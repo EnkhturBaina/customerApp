@@ -88,7 +88,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
                 $rootScope.userPropertyData = JSON.parse(response.result.data.property);
                 if (!isEmpty($rootScope.userPropertyData)) {
                   $rootScope.propJson = $rootScope.userPropertyData.listData;
-                  console.log("$rootScope.propJson", $rootScope.propJson);
                   console.log("$rootScope.userPropertyData", $rootScope.userPropertyData);
                 } else {
                   $rootScope.propJson = null;
@@ -182,6 +181,10 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       customerTypeId: "1",
     };
 
+    $rootScope.profilePictureSideMenu = value.image;
+    localStorage.removeItem("profilePictureSideMenu");
+    localStorage.setItem("profilePictureSideMenu", value.image);
+
     serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
       console.log("checkedValue", checkedValue);
       if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
@@ -192,6 +195,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
 
       serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
         console.log("responseCRM", responseCRM);
+        $rootScope.changeUserDan();
         if (!isEmpty(responseCRM) && !isEmpty(responseCRM[0])) {
           $rootScope.loginUserInfo = mergeJsonObjs(responseCRM[1], $rootScope.loginUserInfo);
           localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
@@ -406,4 +410,46 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     $rootScope.propertyData.assetName = el.codeName;
     $rootScope.propertyData.address = el.fullAddress;
   };
+  // $scope.propJson = [
+  //   {
+  //     code: "100003",
+  //     codeName: "Гэр бүлийн хэрэгцээний",
+  //     firstname: "дамдин",
+  //     fullAddress: "Улаанбаатар Баянзүрх дүүрэг 21-р хороо Бага дарь эх 6 гудамж, 1290 тоот",
+  //     lastname: "тэмээчин",
+  //     movedCount: 2,
+  //     movedDate: "10-AUG-06",
+  //     movedJustification: "Төрөөс хувьчилсан газрын өмчлөх эрхийг анх удаа бүртгэх ",
+  //     ownershipId: "000003",
+  //     ownershipStatus: "Бэлэглэсэн",
+  //     personCorpId: "рп82020114",
+  //     personNameCorp: "болорэрдэнэ",
+  //     propertyNationRegisterNumber: "г2204005058",
+  //     propertyServiceId: "20060810070002",
+  //     propertySize: "673",
+  //     serviceDate: "2006-08-10 00:00:00.0",
+  //     serviceName: "Төрөөс хувьчилсан газрын өмчлөх эрхийг анх удаа бүртгэх ",
+  //     serviceType: "Газар",
+  //   },
+  //   {
+  //     code: "300137",
+  //     codeName: "Хувийн сууц",
+  //     firstname: "дамдин",
+  //     fullAddress: "Улаанбаатар Баянзүрх дүүрэг 21-р хороо Дунд дарь эх 6 гудамж, 1290 тоот",
+  //     lastname: "тэмээчин",
+  //     movedCount: 2,
+  //     movedDate: "10-AUG-06",
+  //     movedJustification: "Газраас бусад үл хөдлөх эд хөрөнгө өмчлөх эрхийг анх удаа бүртгэх",
+  //     ownershipId: "000003",
+  //     ownershipStatus: "Бэлэглэсэн",
+  //     personCorpId: "рп82020114",
+  //     personNameCorp: "болорэрдэнэ",
+  //     propertyNationRegisterNumber: "ү2204018772",
+  //     propertyServiceId: "20060810090002",
+  //     propertySize: "36.5",
+  //     serviceDate: "2006-08-10 00:00:00.0",
+  //     serviceName: "Газраас бусад үл хөдлөх эд хөрөнгө өмчлөх эрхийг анх удаа бүртгэх",
+  //     serviceType: "Үл хөдлөх",
+  //   },
+  // ];
 });

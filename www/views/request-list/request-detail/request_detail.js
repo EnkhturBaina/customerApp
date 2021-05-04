@@ -2,7 +2,7 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
   console.log("selectedMapBank", $rootScope.selectedMapBank);
   $rootScope.loanType = $rootScope.selectedMapBank.loantype;
   $rootScope.selectedMapBankDTL = [];
-
+  // /1609944955126013 БАТАЛСАН
   $scope.getRequestDTL = function () {
     var dvId = "";
     if ($rootScope.loanType === "1") {
@@ -18,6 +18,11 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: dvId, mapId: $rootScope.selectedMapBank.mapid }).then(function (response) {
         console.log("res", response);
         $rootScope.selectedMapBankDTL = response[0];
+        if ($rootScope.selectedMapBankDTL.wfmstatusid != 1609944955126013) {
+          $rootScope.selectedMapBankDTL.loanamount = "";
+          $rootScope.selectedMapBankDTL.loanmonth = "";
+          $rootScope.selectedMapBankDTL.loanfeetext = "";
+        }
       });
     }
   };
@@ -106,21 +111,19 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
       });
     }
   };
-
-  $scope.isConfirm = true;
+  $scope.isConfirm = { checked: false };
   $scope.isConfirmCheck = false;
-  $scope.isCanceled = false;
   $scope.isConfirmedOrCanceled = function () {
-    if ($rootScope.selectedMapBank.wfmstatusid == 1601547332926267) {
+    if ($rootScope.selectedMapBank.wfmstatusid != 1609944955126013) {
       $scope.isConfirmCheck = true;
-      $scope.isCanceled = true;
-    } else if ($rootScope.selectedMapBank.wfmstatusid == 1601547332659475) {
-      $scope.isConfirmCheck = true;
-      $scope.isCanceled = true;
     }
   };
   $scope.isConfirmedOrCanceled();
-
+  $scope.checkIsConfirmed = function () {
+    if ($rootScope.selectedMapBank.wfmstatusid != 1609944955126013) {
+      $rootScope.alert("Таны хүсэлт банкинд батлагдаагүй байна", "warning");
+    }
+  };
   // MODAL
   $ionicModal
     .fromTemplateUrl("templates/modal.html", {

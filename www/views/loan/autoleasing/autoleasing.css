@@ -360,7 +360,7 @@
   padding: 8px;
   overflow: hidden;
   margin: 5px 0px;
-  border-radius: 12px;
+  border-radius: 10px;
   background-color: #fff;
 }
 .car-grow {
@@ -439,7 +439,7 @@
 .step1-card-content {
   background-color: #fff;
   padding: 15px 0px;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 10px 20px;
 }

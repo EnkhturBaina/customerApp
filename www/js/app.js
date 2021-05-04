@@ -306,6 +306,16 @@ var app = angular
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");
     };
+    $rootScope.changeUserDan = function () {
+      $rootScope.loginUserInfo = undefined;
+      localStorage.removeItem("loginUserInfo");
+      localStorage.removeItem("profilePictureSideMenu");
+      localStorage.removeItem("all_ID");
+      //Хэрэглээний лизинг
+      localStorage.removeItem("otherGoods");
+      localStorage.removeItem("consumerRequestData");
+      localStorage.removeItem("otherGoodsMaxId");
+    };
     $scope.logOut = function () {
       $rootScope.loginUserInfo = undefined;
       localStorage.removeItem("loginUserInfo");

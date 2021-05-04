@@ -326,19 +326,19 @@
 .add-goods-content-card {
   background-color: #fff;
   padding: 15px 0px;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 10px;
 }
 .other-goods-content {
   background-color: #fff;
   padding: 15px 0px;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 10px 20px;
 }
 .consumer-img-list-grid {
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px dashed #ccc;
   height: 100px;
   text-align: center;
@@ -349,12 +349,12 @@
 .consumer-uploaded-img {
   width: 100% !important;
   height: 100px !important;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 .consumer-img {
   width: 100% !important;
   height: 110px !important;
-  border-radius: 12px;
+  border-radius: 10px;
   background-position: center !important;
   background-size: cover !important;
   background-repeat: no-repeat !important;
@@ -363,7 +363,7 @@
   display: inline-block;
   background-color: #fff;
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   height: auto;
   margin: 10px 20px;

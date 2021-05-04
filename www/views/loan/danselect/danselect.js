@@ -27,19 +27,6 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
   $scope.autoCollHand = function () {
     $rootScope.isDanLoginAutoColl = false;
   };
-  $rootScope.autoCollDanCarData = {};
-
-  function formatDate(date) {
-    var d = new Date(date),
-      month = "" + (d.getMonth() + 1),
-      day = "" + d.getDate(),
-      year = d.getFullYear();
-
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
-
-    return [year, month, day].join("-");
-  }
 
   $scope.gotoDanLoginDanSelect = function () {
     $rootScope.danCustomerData = {};
@@ -64,10 +51,16 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
               console.log("userInfo", userInfo);
               if (!isEmpty(response.result.data.vehicle)) {
                 $rootScope.userVehicleData = JSON.parse(response.result.data.vehicle);
-
-                $rootScope.autoCollDanCarData = $rootScope.userVehicleData.list[0];
-                $rootScope.autoCollDanCarData.importDate = formatDate($rootScope.userVehicleData.list[0].importDate);
-                console.log("$rootScope.autoCollDanCarData", $rootScope.autoCollDanCarData);
+                if (!isEmpty($rootScope.userVehicleData)) {
+                  $rootScope.propJsonAutoColl = $rootScope.userVehicleData.list;
+                  console.log("$rootScope.propJsonAutoColl", $rootScope.propJsonAutoColl);
+                  if ($rootScope.propJsonAutoColl.length == 1) {
+                    $rootScope.autoCollDanCarData = $rootScope.propJsonAutoColl[0];
+                    $rootScope.autoCollDanCarData.importDate = formatDate($rootScope.propJsonAutoColl[0].importDate);
+                  }
+                } else {
+                  $rootScope.propJsonAutoColl = null;
+                }
                 if (!isEmpty(userInfo)) {
                   $scope.registerFunction(userInfo);
                 }
@@ -157,6 +150,10 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
       customerTypeId: "1",
     };
 
+    $rootScope.profilePictureSideMenu = value.image;
+    localStorage.removeItem("profilePictureSideMenu");
+    localStorage.setItem("profilePictureSideMenu", value.image);
+
     serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
       console.log("checkedValue", checkedValue);
       if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
@@ -168,6 +165,8 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
       serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
         console.log("responseCRM", responseCRM);
         if (!isEmpty(responseCRM) && !isEmpty(responseCRM[0])) {
+          $rootScope.changeUserDan();
+
           $rootScope.loginUserInfo = mergeJsonObjs(responseCRM[1], $rootScope.loginUserInfo);
           localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
 

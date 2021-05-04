@@ -1,4 +1,4 @@
-angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $rootScope, $state, $ionicModal, $ionicPlatform) {
+angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $rootScope, $state, $ionicModal, $ionicPlatform, $timeout) {
   $scope.locationData = [];
   $scope.getLookUpDataCarColl = function () {
     if (isEmpty($rootScope.locationData)) {
@@ -282,4 +282,28 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     .then(function (termModalAgreement) {
       $scope.termModalAgreement = termModalAgreement;
     });
+  $ionicModal
+    .fromTemplateUrl("templates/autoCollDan.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (autoCollDan) {
+      $scope.autoCollDan = autoCollDan;
+    });
+  $timeout(function () {
+    if ($state.current.name == "car_coll") {
+      if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
+        $scope.autoCollDan.show();
+      } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {
+        $rootScope.alert("Таньд автомашин бүртгэлгүй байна", "warning");
+      }
+    }
+  }, 300);
+
+  $scope.selectDanAutoColl = function (el) {
+    console.log("el", el);
+    $rootScope.autoCollDanCarData = el;
+    $rootScope.autoCollDanCarData.importDate = formatDate(el.importDate);
+    console.log("$rootScope.autoCollDanCarData", $rootScope.autoCollDanCarData);
+  };
 });

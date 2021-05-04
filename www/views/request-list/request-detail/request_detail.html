@@ -4,7 +4,7 @@
   <ion-content overflow-scroll="true" class="request-detail-content margin-top-50">
     <div class="list" ng-controller="request_detailCtrl">
       <div class="request-detail-container">
-        <div class="request-car-detail">
+        <!-- <div class="request-car-detail">
           <img ng-if="loanType == 1 || loanType == 2" ng-src="{{$root.imagePath}}{{$root.selectedMapBankDTL.itempic}}" />
           <img ng-if="loanType == 3" ng-src="{{'data:image/png;base64,'+$root.selectedMapBankDTL.picture1}}" />
 
@@ -13,12 +13,16 @@
 
           <span>{{$root.selectedMapBankDTL.suppliername}}</span><br />
           <span ng-if="loanType == 1 || loanType == 2">{{$root.selectedMapBankDTL.productyear}} - {{$root.selectedMapBankDTL.entryyear}}</span>
-        </div>
+        </div> -->
         <span class="bant-detail-title request-middle-title"> Банкны санал</span>
         <div class="bank-detail">
           <label class="item item-input bank-detail-label">
             <p>Банк</p>
             <input type="text" placeholder="Банк" name="bank" ng-model="$root.selectedMapBankDTL.departmentname" disabled />
+          </label>
+          <label class="item item-input bank-detail-label">
+            <p>Төлөв</p>
+            <input type="text" placeholder="Төлөв" name="fee" ng-model="$root.selectedMapBankDTL.wfmstatusname" disabled />
           </label>
           <label class="item item-input bank-detail-label">
             <p>Хүү</p>
@@ -32,7 +36,7 @@
             <p>Зээлийн хэмжээ</p>
             <input type="text" placeholder="Зээлийн хэмжээ" name="price" ng-model="$root.selectedMapBankDTL.loanamount" disabled format-input />
           </label>
-          <ion-checkbox class="detail-checkbox" data-ng-click="isConfirm = !isConfirm" ng-disabled="isConfirmCheck">
+          <ion-checkbox class="detail-checkbox" ng-model="isConfirm.checked" ng-disabled="isConfirmCheck" ng-click="checkIsConfirmed()">
             <span>Батлагдсан зээлийг зөвшөөрөх эсэх</span>
           </ion-checkbox>
         </div>
@@ -45,8 +49,8 @@
         </div>
       </div>
       <div class="detail-btn-container">
-        <button class="button bottom-first-button" ng-click="showPopupDTL('Хүсэлт цуцлах','decline')" ng-disabled="isCanceled">ЦУЦЛАХ</button>
-        <button class="button bottom-second-button" ng-click="showPopupDTL('Зөвшөөрөл илгээх','confirm')" ng-disabled="isConfirm">ЗӨВШӨӨРӨХ</button>
+        <button class="button bottom-first-button" ng-click="showPopupDTL('Хүсэлт цуцлах','decline')" ng-disabled="!isConfirm.checked">ЦУЦЛАХ</button>
+        <button class="button bottom-second-button" ng-click="showPopupDTL('Зөвшөөрөл илгээх','confirm')" ng-disabled="!isConfirm.checked">ЗӨВШӨӨРӨХ</button>
       </div><br />
     </div>
   </ion-content>

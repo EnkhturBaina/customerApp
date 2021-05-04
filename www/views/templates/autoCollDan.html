@@ -1,0 +1,14 @@
+<link href="views/templates/templates.css" rel="stylesheet" />
+<div class="list templates-list">
+    <div class="card property-dan-card">
+        <span class="property-dan-title">Барьцаалаах автомашинаа сонгоно уу</span>
+        <ion-scroll direction="y" class="templates-scroll">
+            <ion-radio ng-repeat="json in propJsonAutoColl" ng-model="choice" class="property-dan-select" ng-click="selectDanAutoColl(json)">
+                <p class="property-size">{{json.markName}}</p>
+                <h2 class="property-category">{{json.modelName}} {{json.buildYear}} {{json.colorName}}</h2>
+                <p class="property-address">{{json.cabinNumber}}</p>
+            </ion-radio>
+        </ion-scroll>
+        <button class="button btn single-button auto-template-btn" id="Next" ng-click="autoCollDan.hide()">Барьцаалах</button>
+    </div>
+</div>

@@ -382,7 +382,7 @@ input[type="number"] {
 .property-card-body {
   overflow: hidden;
   box-shadow: -1px 2px 7px rgba(0, 0, 0, 0.3);
-  border-radius: 12px;
+  border-radius: 10px;
   margin: 15px;
   display: grid;
 }

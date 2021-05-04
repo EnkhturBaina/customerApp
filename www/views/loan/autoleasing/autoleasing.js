@@ -149,7 +149,7 @@
   if (($state.current.name == "autoleasing-3" && $rootScope.requestType != "autoColl") || $state.current.name == "autoleasing-2") {
     $timeout(function () {
       $scope.getbankData();
-    }, 700);
+    }, 300);
   }
   $scope.showQRreader = function () {
     var optionCodeCam = {
@@ -1043,8 +1043,12 @@
       }
       serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
         console.log("responseCRM", responseCRM);
+
+        $rootScope.changeUserDan();
+
         $rootScope.loginUserInfo = mergeJsonObjs(responseCRM[1], $rootScope.loginUserInfo);
         localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+
         $timeout(function () {
           if (!isEmpty(responseCRM[1]) && responseCRM[0] == "success") {
             console.log("responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id", responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id);
