@@ -39,16 +39,10 @@
                     </div>
                     <label class="item item-input step4-loan-location">
                         <p class="dan-user-data">Гэрлэсэн эсэх</p>
-                        <!-- <select class="select-income-type" ng-model="$root.danCustomerData.ismarried">
-                            <option ng-repeat="income in familtStatData | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.danCustomerData.ismarried==income.id}}">{{income.name}}</option>
-                        </select> -->
                         <select class="select-income-type" ng-model="$root.danCustomerData.ismarried" ng-options="c.id as c.name for c in familtStatData | filter:{id:'!!'}" ng-init="$root.danCustomerData.ismarried = $root.danCustomerData.ismarried"></select>
                     </label>
                     <label class="item item-input step4-loan-location">
                         <p class="dan-user-data">МИК-ийн зээлтэй эсэх</p>
-                        <!-- <select class="select-income-type" ng-model="$root.danCustomerData.mikmortgagecondition" ng-change="getbankData();">
-                            <option ng-repeat="income in mortgageData | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.danCustomerData.mikmortgagecondition==income.id}}">{{income.name}}</option>
-                        </select> -->
                         <select class="select-income-type" ng-model="$root.danCustomerData.mikmortgagecondition" ng-options="c.id as c.name for c in mortgageData | filter:{id:'!!'}" ng-init="$root.danCustomerData.mikmortgagecondition = $root.danCustomerData.mikmortgagecondition"></select>
                     </label>
                     <div class="tugrug-input">

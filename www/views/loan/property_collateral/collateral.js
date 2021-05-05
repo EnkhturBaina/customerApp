@@ -88,7 +88,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
                 $rootScope.userPropertyData = JSON.parse(response.result.data.property);
                 if (!isEmpty($rootScope.userPropertyData)) {
                   $rootScope.propJson = $rootScope.userPropertyData.listData;
-                  console.log("$rootScope.userPropertyData", $rootScope.userPropertyData);
                 } else {
                   $rootScope.propJson = null;
                 }
@@ -138,6 +137,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
                     console.log("res salary", response);
                     $rootScope.monthlyAverage = response.result;
                     console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
+                    $rootScope.monthlyIncomeDisable = true;
                     $rootScope.danIncomeData.monthlyincome = response.result;
                     console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
                   });
@@ -409,6 +409,9 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     }
     $rootScope.propertyData.assetName = el.codeName;
     $rootScope.propertyData.address = el.fullAddress;
+  };
+  $scope.registerHandProperty = function () {
+    $rootScope.propertyData = {};
   };
   // $scope.propJson = [
   //   {

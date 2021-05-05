@@ -488,6 +488,9 @@
   text-align: right !important;
   font-weight: bold;
 }
+.dan-monthly-income {
+  background: transparent !important;
+}
 .dan-container {
   text-align: center;
   /* padding: 20px; */

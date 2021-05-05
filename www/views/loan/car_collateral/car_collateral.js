@@ -7,7 +7,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       });
     }
   };
-  console.log("$rootScope.isDanLoginAutoColl", $rootScope.isDanLoginAutoColl);
   //Төрөл
   $scope.carCategory = [];
   //Үйлдвэр
@@ -104,7 +103,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
     });
-    console.log("getbankDataCarColl json", json);
   };
 
   // localStorage.removeItem("carColl");
@@ -114,14 +112,8 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     }
     if ($scope.carCollCheckReqiured("step1")) {
       localStorage.setItem("requestType", "autoColl");
-
-      // localStorage.removeItem("carColl");
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
-      console.log("carColl DATAAAAAAAAA", JSON.parse(localStorage.getItem("carColl")));
-      // var next = $rootScope.checkLoginUserDatas("car_coll", "car_coll2");
-      // $state.go(next.now, { path: next.nextpath });
 
-      console.log("local", localStorage);
       $state.go("car_coll2");
     }
   };
@@ -171,9 +163,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
 
   $scope.saveCarCollRequestData = function () {
-    console.log("saveCarCollRequestData", $rootScope.carCollateralRequestData);
     if ($scope.carCollCheckReqiured("step2")) {
-      // $state.go("autoleasing-3");
       $state.go("autoleasing-4");
     }
   };
@@ -222,7 +212,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       }
       return true;
     }
-    console.log("$root.newCarReq.itemPic", $root.newCarReq.itemPic);
   };
   $scope.takePhoto = function (type) {
     var srcType = Camera.PictureSourceType.CAMERA;
@@ -264,7 +253,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     });
   $scope.sourceSelectOn = function (path) {
     $scope.selectedImagePath = path;
-    console.log(document.getElementById("overlay"));
     document.getElementById("overlay").style.display = "block";
   };
   $scope.sourceSelectOff = function () {
@@ -301,9 +289,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   }, 300);
 
   $scope.selectDanAutoColl = function (el) {
-    console.log("el", el);
     $rootScope.autoCollDanCarData = el;
     $rootScope.autoCollDanCarData.importDate = formatDate(el.importDate);
-    console.log("$rootScope.autoCollDanCarData", $rootScope.autoCollDanCarData);
   };
 });

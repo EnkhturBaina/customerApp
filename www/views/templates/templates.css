@@ -121,7 +121,7 @@
   font-weight: bold !important;
 }
 .property-dan-card {
-  padding: 0px 20px 0px 20px;
+  padding: 0px 20px 10px 20px;
   height: 40vh;
   background-color: #fff !important;
   margin: 70px 20px 10px 20px !important;
@@ -166,4 +166,18 @@
 .property-dan-select .item-content {
   padding-right: 0px !important;
   background: #fff !important;
+}
+.register-property-hand {
+  font-weight: bold;
+  color: #4b5180;
+  font-size: 14px;
+  border-bottom: 1px solid;
+  border-radius: 10px;
+  border-color: #acd322;
+  margin: 0px auto 0px auto;
+  width: 55vw;
+  text-align: center;
+  min-height: 37px;
+  line-height: 34px !important;
+  align-self: center;
 }

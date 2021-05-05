@@ -24,7 +24,7 @@
 			<div class="magic-container property-loan-container-card">
 				<div class="margin-lr-20">
 					<div class="">
-						<button class="button btn single-button" id="Next" ng-click="propertyDan.show()">Хөрөнгө сонгох</button>
+						<button class="button btn single-button" id="Next" ng-click="propertyDan.show()" ng-if="$root.propertyIsDan">Өөр хөрөнгө сонгох</button>
 						<label class="item item-input item-select property-label">
 							<p class="input-label" style="margin: 0;">Хөрөнгийн төрөл</p>
 							<select ng-model="template" ng-options="t.name for t in propertyCategory | filter:{name:'!!'}" class="property-select" ng-change="categoryChange(template)">

@@ -11,14 +11,13 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
     // $rootScope.hideFooter = true;
     // $state.go(next.now, { path: next.nextpath });
     $state.go("autoleasing-2");
-    $rootScope.getLoanAmountFunc();
-    $rootScope.calcLoanAmount();
+    // $rootScope.getLoanAmountFunc();
+    // $rootScope.calcLoanAmount();
   };
   // get car Data
   $rootScope.getCarinfo = function () {
     $rootScope.carData = [];
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597654926672135", id: $rootScope.selectedCarData.id }).then(function (response) {
-      console.log("res", response);
       if (!isEmpty(response[0]) && isObject(response[0])) {
         var images = [];
         if (response[0].itempic) images.push(response[0].itempic);
@@ -34,7 +33,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
         $scope.selectCarName = response[0].modelname.split(" ")[0];
         $scope.selectedCarId = response[0].id;
         $rootScope.selectedCarData = response[0];
-        $scope.getbankData();
+        $scope.getbankDataCarInfo();
         if (!$scope.$$phase) {
           $scope.$apply();
         }
@@ -42,13 +41,12 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
       }
     });
   };
-  $scope.getbankData = function () {
+  $scope.getbankDataCarInfo = function () {
     $rootScope.bankList = [];
     if (!isEmpty($rootScope.selectedCarData) && !isEmpty($rootScope.selectedCarData.itemcode)) {
       // { type: "car", operation: "calculation", productCode: $rootScope.selectedCarData.itemcode }
       serverDeferred.carCalculation({ type: "allBanks" }).then(function (response) {
         $rootScope.bankList = response.result.data;
-        console.log(response.result.data);
         // console.log(response);
       });
     }
@@ -125,11 +123,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
   };
   $scope.backFromcarInfo = function () {
     $rootScope.hideFooter = false;
-    // if ($ionicHistory.viewHistory().backView.stateName == "autoleasing-2") {
-    //     $state.go("car");
-    // } else {
     $ionicHistory.goBack();
-    // }
   };
 
   $scope.zoomMin = 1;

@@ -352,7 +352,6 @@ var app = angular
 
     $scope.rangeData = { volume: "14" };
     $scope.$watch("data.volume", function () {
-      // console.log("Has changed");
     });
     $scope.$watch("data.volume", function () {});
     $rootScope.hideShowFooter = function () {
