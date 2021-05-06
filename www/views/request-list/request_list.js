@@ -1,5 +1,5 @@
 var expandCollapseApp = angular.module("request_list.Ctrl", ["ngAnimate"]);
-expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicLoading, $timeout, $ionicPlatform, $ionicHistory) {
+expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicLoading, $timeout, $ionicPlatform, $ionicHistory, $filter) {
   $scope.isEmptyReq = true;
   // ====== Get Data  ========
   $rootScope.getRequetData = function () {
@@ -16,7 +16,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
           $scope.requetData = response;
           $timeout(function () {
             for (i = 0; i < $scope.requetData.length - 1; i++) {
-              $scope.growDiv(i);
+              // $scope.growDiv(i);
             }
             $ionicLoading.hide();
           }, 100);
@@ -53,16 +53,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
       grow.style.height = wrapper.clientHeight + "px";
     }
   };
-  // $ionicPlatform.registerBackButtonAction(function (e) {
-  //   console.log("AAAA 1 ");
-  //   console.log("$ionicHistory.viewHistory().backView.stateName", $ionicHistory.viewHistory().backView.stateName);
-  //   console.log("$ionicHistory.viewHistory().backView.stateName");
-  //   e.preventDefault();
-  //   if ($ionicHistory.viewHistory().backView.stateName == "loan_success") {
-  //     console.log("BBBB 2 ");
-  //     $state.go("home");
-  //   } else {
-  //     $ionicHistory.viewHistory().backView.go();
-  //   }
-  // }, 101);
+  $scope.min = function (arr) {
+    return $filter("min")($filter("map")(arr, "createddate"));
+  };
 });

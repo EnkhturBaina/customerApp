@@ -32,9 +32,9 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
 
   $scope.nexClivk = function () {
     if (!isEmpty($rootScope.otherGoodsData)) {
-      $state.go("autoleasing-2");
       localStorage.setItem("requestType", "consumer");
-      // $rootScope.getLoanAmountFunc();
+      // $state.go("otherGoods2");
+      $state.go("autoleasing-2");
     } else {
       $rootScope.alert("Та зээлээр авах бараагаа бүртгэнэ үү", "warning");
     }

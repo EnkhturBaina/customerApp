@@ -11,7 +11,6 @@
         <div class="navbar-right-icon">
         </div>
     </ion-header-bar>
-    <!-- <div ng-repeat="data in [{'title':'Дэлгэрэнгүй'}]" ng-include src="'views/navbar.html'"></div> -->
     <ion-content overflow-scroll="true" class="ion-modified-content has-header autoleasing-step2-content">
         <div class="big-container">
             <div class="magic-container">
@@ -30,14 +29,14 @@
                             <span class="title input-label-front">Зээлийн хэмжээ</span>
                             <div class="tugrug-input-container">
                                 <span class="input-tugrug-icon">₮</span>
-                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" format-input disabled select-on-click />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="getLoanAmount" format-input disabled select-on-click />
                             </div>
                         </div>
                         <div class="tugrug-input">
                             <span class="title input-label-front">Урьдчилгаа</span>
                             <div class="tugrug-input-container">
                                 <span class="input-tugrug-icon">₮</span>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount();getbankData()" ng-click="removeAdvancePayment()" format-input select-on-click />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.consumerRequest.advancePayment" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount();getbankData()" ng-click="removeAdvancePayment()" format-input select-on-click />
                             </div>
                         </div>
 
@@ -45,37 +44,25 @@
                             <span class="title input-label-front">Хугацаа (сараар)</span>
                             <div class="tugrug-input-container">
                                 <span class="input-tugrug-icon"><i class="icon fa fa-calendar"></i></span>
-                                <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-change="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
+                                <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.consumerRequest.loanMonth" ng-change="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
                             </div>
                         </div>
 
                         <label class="item item-input step2-loan-location">
                             <i class="icon fa fa-map-marker fa-2x input-tugrug-icon"></i>
                             <p>Байршил</p>
-                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
+                            <select class="autoleasing-location-select" ng-model="$root.consumerRequest.locationId" ng-change="getbankData();">
                                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>
                         </label>
                         <div class="switch-input-container">
                             <ul class="switch-list">
-                                <li ng-if="collateralConditionId">
-                                    <span class="step2-span">Урьдчилгаа төлбөрт ҮХХөрөнгө барьцаалах эсэх</span>
-                                    <span>
-                                        <label class="step2-switch" id="step2isCollateral">
-                                            <input type="checkbox" id="step2-isColBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.collateralConditionId" ng-change="getbankData();" />
-                                            <div class="step2-slider step2-round">
-                                                <span id="step2-toggle-on" class="step2-on">Тийм</span>
-                                                <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
-                                            </div>
-                                        </label>
-                                    </span>
-                                </li>
                                 <li>
                                     <span class="step2-span step2-term" ng-click="termModalAgreement.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
                                     <span>
                                         <label class="step2-switch" id="step2isAgree">
-                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" ng-change="" />
+                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.consumerRequest.serviceAgreementId" ng-change="" />
                                             <div class="step2-slider step2-round">
                                                 <span id="step2-toggle-on" class="step2-on">Тийм</span>
                                                 <span id="step2-toggle-off" class="step2-off active">Үгүй</span>

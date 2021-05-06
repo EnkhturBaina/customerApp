@@ -7,12 +7,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
   // auto Leasing
   $scope.goAutoleasing = function () {
     localStorage.setItem("requestType", "auto");
-    // var next = $rootScope.checkLoginUserDatas("car-info", "autoleasing-2");
-    // $rootScope.hideFooter = true;
-    // $state.go(next.now, { path: next.nextpath });
     $state.go("autoleasing-2");
-    // $rootScope.getLoanAmountFunc();
-    // $rootScope.calcLoanAmount();
   };
   // get car Data
   $rootScope.getCarinfo = function () {
@@ -30,6 +25,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
         if (response[0].itempic8) images.push(response[0].itempic8);
         response[0].images = images;
         $scope.carData = response[0];
+        // console.log("$scope.carData", $scope.carData);
         $scope.selectCarName = response[0].modelname.split(" ")[0];
         $scope.selectedCarId = response[0].id;
         $rootScope.selectedCarData = response[0];

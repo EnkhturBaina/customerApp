@@ -116,19 +116,6 @@
   color: #606060 !important;
   z-index: -1;
 }
-.checkbox input:checked + .checkbox-icon::after {
-  border-radius: 5px !important;
-}
-.checkbox input[type="checkbox"]:checked + i:after {
-  content: "\2713";
-  transform: rotate(0);
-  top: 0% !important;
-  left: 20% !important;
-  border: none !important;
-  display: flex;
-  text-align: center;
-  color: #acd322;
-}
 #car-collateral2 > .scroll {
   height: 170px;
   background: rgb(134, 205, 109);
@@ -152,15 +139,6 @@
 
 .car-col-step2-back span {
   color: #fff !important;
-}
-.step3-checkbox-container > .checkbox > .checkbox input:after,
-.checkbox-icon:after {
-  color: #fff !important;
-}
-.step3-checkbox-container > .checkbox > .checkbox input:checked:before,
-.checkbox input:checked + .checkbox-icon:before {
-  background-color: #acd322 !important;
-  border-color: #acd322 !important;
 }
 #overlay {
   position: fixed;

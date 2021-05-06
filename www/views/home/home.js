@@ -5,6 +5,7 @@
   $rootScope.imagePath = "http://leasing.digitalcredit.mn/";
 
   $rootScope.carMarketURL = "http://0001.mn/";
+  $rootScope.carMarketStorageURL = "http://0001.mn/storage/";
   $rootScope.serverHeader = { "content-type": "application/json;charset=UTF-8" };
   $rootScope.sessionid = "65178215-7896-4513-8e26-896df9cb36ad";
 

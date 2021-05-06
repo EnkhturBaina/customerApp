@@ -70,7 +70,8 @@
                     <ion-slide-box id="carInfoSlideBox" on-slide-changed="slideChanged(index)" class="leasing-badge" delegate-handle="slidebox1">
                         <ion-slide ng-repeat="imgs in carData.images">
                             <div class="box1">
-                                <img id="carImg{{$index}}" class="car-img image-list-thumb" ng-src="{{imgs|guessImageMime}}" ng-click="showImages($index)" />
+                                <img ng-if="carData.itemimagefront == 0" id="carImg{{$index}}" class="car-img image-list-thumb" ng-src="{{imgs|guessImageMime}}" ng-click="showImages($index)" />
+                                <img ng-if="carData.itemimagefront == 1" id="carImg{{$index}}" class="car-img image-list-thumb" ng-src="{{$root.carMarketStorageURL}}{{imgs}}" ng-click="showImages($index)" />
                             </div>
                         </ion-slide>
                     </ion-slide-box>
