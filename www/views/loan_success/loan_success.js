@@ -1,4 +1,4 @@
-app.controller("loan_successCtrl", function ($ionicPlatform, $state, $ionicHistory) {
+app.controller("loan_successCtrl", function ($ionicPlatform, $scope, $rootScope) {
   //   $ionicPlatform.registerBackButtonAction(function (e) {
   //     console.log("AAAA");
   //     e.preventDefault();
@@ -9,4 +9,8 @@ app.controller("loan_successCtrl", function ($ionicPlatform, $state, $ionicHisto
   //       $ionicHistory.viewHistory().backView.go();
   //     }
   //   }, 101);
+  $scope.goBankMenu = function () {
+    console.log("ASD");
+    $rootScope.hideFooter = false;
+  };
 });

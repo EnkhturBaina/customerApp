@@ -664,7 +664,6 @@
           }
         });
       }
-      $rootScope.hideFooter = false;
       $timeout(function () {
         $ionicLoading.hide();
         $ionicHistory.clearHistory();

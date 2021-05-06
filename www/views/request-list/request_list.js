@@ -32,6 +32,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
   };
   $scope.$on("$ionicView.enter", function () {
     $scope.getRequetData();
+    $rootScope.hideFooter = false;
   });
   $scope.selectbank = function (bank) {
     // console.log(bank);
