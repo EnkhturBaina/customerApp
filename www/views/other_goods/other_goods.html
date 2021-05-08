@@ -37,7 +37,7 @@
                                     <div class="other-goods-trash icon ion-ios7-trash-outline" ng-click="otherGoodsDelete(item.itemid)"></div>
                                 </li>
                             </ul>
-                            <div class="total-price">
+                            <div class="total-price" ng-if="!sumPrice|isEmpty">
                                 <span class="total-price-title">Нийт үнэ</span>
                                 <span class="total-price-amount ion-font-weight-bold">{{sumPrice|formatNumber}} ₮</span>
                             </div>

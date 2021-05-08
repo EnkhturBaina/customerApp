@@ -19,6 +19,14 @@
     }, 300);
     $rootScope.hideFooter = true;
   }
+  $ionicModal
+    .fromTemplateUrl("templates/danIs.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (danIsModal) {
+      $scope.danIsModal = danIsModal;
+    });
   $scope.getCarDatasId = function (itemCode) {
     $rootScope.selectedCarData = [];
     localStorage.setItem("requestType", "auto");

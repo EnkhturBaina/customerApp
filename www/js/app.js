@@ -237,11 +237,6 @@ var app = angular
       templateUrl: "views/other_goods/other_goods.html",
       controller: "addOtherGoodsCtrl",
     });
-    $stateProvider.state("otherGoods2", {
-      url: "/views/other_goods2",
-      templateUrl: "views/other_goods/other_goods2.html",
-      controller: "autoleasingCtrl",
-    });
     $stateProvider.state("addOtherGoods", {
       url: "/views/addOtherGoods",
       templateUrl: "views/other_goods/add_other_goods.html",

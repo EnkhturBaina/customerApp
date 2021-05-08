@@ -12,11 +12,9 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       $rootScope.alert("Та барааны нийлүүлэгчийг сонгоно уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.categoryId)) {
       $rootScope.alert("Та барааны төрөл өө сонгоно уу", "warning");
-    }
-    //  else if (isEmpty($rootScope.newCarReq.picture1)) {
-    //   $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
-    // }
-    else {
+    } else if (isEmpty($rootScope.newCarReq.picture1)) {
+      $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
+    } else {
       try {
         var otherGoodFirstId = 1;
         if (localStorage.otherGoodsMaxId === undefined) {

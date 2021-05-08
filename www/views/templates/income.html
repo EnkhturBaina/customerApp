@@ -12,6 +12,7 @@
                         </div>
                         <div class="danselect-card-row2">
                             <span class="danselect-card-text">Та E-Mongolia системээр дамжуулан зээл авахад шаарддаг мэдээлэл, материалаа яг одоо өгснөөр <span class="dan-select-title-span">ЦАГ ЗАРДАЛ, МӨНГӨӨ</span> хэмнэх болно.</span>
+                            <div class="dan-is-btn-txt" ng-click="danIsModal.show()">Дан гэж юу вэ?</div>
                         </div>
                         <button class="button btn single-button" ng-click="gotoDanLoginAutoIncome();">Мэдээлэл татах</button>
                         <div class="dan-hand-btn" ng-click="danHand()">Гараар бөглөх</div>
@@ -41,3 +42,10 @@
         </div>
     </ion-content>
 </ion-view>
+<script id="templates/danIs.html" type="text/ng-template">
+  <ion-modal-view class="auto-temp-modal-view">
+    <ion-content class="padding bank-chat-content">
+        <div class="templates-modal-include" ng-include src="'views/templates/danIs.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>
