@@ -137,6 +137,10 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
       document.getElementById("workLabel").style.borderBottom = "2px solid red";
+    } else if (isEmpty($scope.customerProfileData.identfrontpic)) {
+      $rootScope.alert("Иргэний үнэмлэхний урд талын зургийг оруулна уу", "warning");
+    } else if (isEmpty($scope.customerProfileData.identbackpic)) {
+      $rootScope.alert("Иргэний үнэмлэхний ард талын зургийг оруулна уу", "warning");
     } else {
       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
       console.log("ALL_ID", all_ID);
@@ -194,9 +198,9 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     navigator.camera.getPicture(
       function (imageData) {
         if ($scope.selectedImagePath == 1) {
-          $scope.customerProfileData.identfrontpic = imageData;
+          $scope.customerProfileData.identfrontpic = "jpeg♠" + imageData;
         } else if ($scope.selectedImagePath == 2) {
-          $scope.customerProfileData.identbackpic = imageData;
+          $scope.customerProfileData.identbackpic = "jpeg♠" + imageData;
         } else if ($scope.selectedImagePath == 3) {
           $scope.customerProfilePicture.profilePictureClob = imageData;
 
