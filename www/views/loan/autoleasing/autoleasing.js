@@ -65,6 +65,11 @@
         $rootScope.locationData = response;
       });
     }
+    if (isEmpty($rootScope.isColl)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
+        $rootScope.isColl = response;
+      });
+    }
   };
 
   $scope.getLoanAmountFunc = function () {
@@ -335,7 +340,6 @@
         $scope.consumerData = JSON.parse(localStorage.getItem("otherGoods"));
         $scope.newReqiust.customerId = all_ID.dccustomerid;
         //Хүсэлт бүртгэх
-        $rootScope.newReqiust.collateralConditionId = 1554263832151;
         // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
         serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
           // console.log("respionse OL", response);
@@ -688,6 +692,7 @@
   };
 
   $scope.goStep3 = function (param) {
+    console.log("$rootScope.newReqiust", $rootScope.newReqiust);
     if ($scope.checkReqiured("step2")) {
       if (isEmpty($rootScope.bankListFilter.Agree) && isEmpty($rootScope.bankListFilter.NotAgree)) {
         $rootScope.alert("Банк олдсонгүй", "warning");
@@ -733,11 +738,17 @@
       } else if (isEmpty($rootScope.newReqiust.advancePayment)) {
         $rootScope.alert("Урьдчилгаа оруулна уу", "warning");
         return false;
+      } else if (isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isCollShow) {
+        $rootScope.alert("ҮХХөрөнгө барьцаалах эсэхээ сонгоно уу", "warning");
+        return false;
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
         $rootScope.alert("Хугацаагаа сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.locationId)) {
         $rootScope.alert("Байршил сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+        $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == "1554263832151") {
         $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
@@ -834,17 +845,6 @@
     $rootScope.newReqiust = {};
   };
 
-  $scope.collateralConditionId = false;
-  //Үйлчилгээний нөхцлийг зөвшөөрөх
-  $scope.loanAmountDisable = function () {
-    var local = localStorage.getItem("requestType");
-    if (local == "auto") {
-      $scope.collateralConditionId = true;
-    } else {
-      $scope.collateralConditionId = false;
-    }
-  };
-
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
     var local = localStorage.getItem("requestType");
@@ -855,12 +855,18 @@
     }
 
     if ($state.current.name == "autoleasing-2") {
+      console.log("$scope.isCollShow", $scope.isCollShow);
+      console.log("local", local);
+      if (local == "auto") {
+        $scope.isCollShow = true;
+      } else {
+        $scope.isCollShow = false;
+      }
       $rootScope.newReqiust = {};
       $rootScope.newReqiust.getLoanAmount = "";
       console.log("autoleasing-2");
       $scope.getLoanAmountFunc();
       $scope.getLookupData();
-      $scope.loanAmountDisable();
     }
   });
   // MODAL
@@ -939,7 +945,9 @@
                 });
                 serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
                   $rootScope.familtStatData = response;
-                  // console.log("$rootScope.familtStatData", $rootScope.familtStatData);
+                });
+                serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1620623825290326" }).then(function (response) {
+                  $rootScope.experiencePeriodData = response;
                 });
               });
               $timeout(function () {
@@ -987,7 +995,9 @@
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
       $rootScope.familtStatData = response;
-      // console.log("$rootScope.familtStatData", $rootScope.familtStatData);
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1620623825290326" }).then(function (response) {
+      $rootScope.experiencePeriodData = response;
     });
     $state.go("autoleasing-4");
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));

@@ -256,9 +256,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.sourceSelectOff = function () {
     document.getElementById("overlay").style.display = "none";
   };
-  $scope.$on("$ionicView.enter", function () {
-    $rootScope.hideFooter = true;
-  });
   // MODAL
   $ionicModal
     .fromTemplateUrl("templates/term-content.html", {
@@ -276,15 +273,20 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     .then(function (autoCollDan) {
       $scope.autoCollDan = autoCollDan;
     });
-  $timeout(function () {
-    if ($state.current.name == "car_coll") {
-      if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
-        $scope.autoCollDan.show();
-      } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {
-        $rootScope.alert("Таньд автомашин бүртгэлгүй байна", "warning");
+  $scope.$on("$ionicView.enter", function () {
+    $rootScope.hideFooter = true;
+    $timeout(function () {
+      if ($state.current.name == "car_coll") {
+        console.log("$rootScope.propJsonAutoColl", $rootScope.propJsonAutoColl);
+        console.log("$rootScope.isDanLoginAutoColl", $rootScope.isDanLoginAutoColl);
+        if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
+          $scope.autoCollDan.show();
+        } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {
+          $rootScope.alert("Таньд автомашин бүртгэлгүй байна", "warning");
+        }
       }
-    }
-  }, 300);
+    }, 500);
+  });
 
   $scope.selectDanAutoColl = function (el) {
     $rootScope.autoCollDanCarData = el;
@@ -292,5 +294,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
   $scope.registerHandAutoColl = function () {
     $rootScope.autoCollDanCarData = {};
+    $rootScope.isDanLoginAutoColl = false;
   };
 });

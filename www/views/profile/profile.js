@@ -35,6 +35,9 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
       $rootScope.incomeType = response;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1620623825290326" }).then(function (response) {
+      $rootScope.experiencePeriodData = response;
+    });
   };
 
   $scope.nextPath = $stateParams.path;

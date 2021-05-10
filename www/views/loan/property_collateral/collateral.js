@@ -157,6 +157,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       });
     });
     $rootScope.propertyIsDan = true;
+    $rootScope.showPropertyBtn = true;
   };
   $scope.registerFunctionEstate = function (value) {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -217,6 +218,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   };
   $scope.propertyHand = function () {
     $rootScope.propertyIsDan = false;
+    $rootScope.showPropertyBtn = false;
   };
   $scope.savePropertyRequestData = function () {
     if ($scope.propertyCheckReqiured("step2")) {
@@ -386,6 +388,21 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   };
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
+    $timeout(function () {
+      if ($state.current.name == "property_collateral") {
+        console.log("$rootScope.propertyIsDan", $rootScope.propertyIsDan);
+        console.log("$rootScope.propJson", $rootScope.propJson);
+        console.log("$rootScope.showPropertyBtn", $rootScope.showPropertyBtn);
+        if (!isEmpty($rootScope.propJson) && $rootScope.propertyIsDan) {
+          $scope.propertyDan.show();
+          $rootScope.showPropertyBtn = true;
+        } else if (($rootScope.propertyIsDan && isEmpty($rootScope.propJson)) || ($rootScope.propertyIsDan && $rootScope.propJson != undefined)) {
+          $rootScope.alert("Таньд ҮХХ бүртгэлгүй байна", "warning");
+          $rootScope.showPropertyBtn = false;
+          $rootScope.propertyIsDan = false;
+        }
+      }
+    }, 500);
   });
   $ionicModal
     .fromTemplateUrl("templates/propertyDan.html", {
@@ -395,15 +412,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     .then(function (propertyDan) {
       $scope.propertyDan = propertyDan;
     });
-  $timeout(function () {
-    if ($state.current.name == "property_collateral") {
-      if (!isEmpty($rootScope.propJson) && $rootScope.propertyIsDan) {
-        $scope.propertyDan.show();
-      } else if (($rootScope.propertyIsDan && isEmpty($rootScope.propJson)) || ($rootScope.propertyIsDan && $rootScope.propJson != undefined)) {
-        $rootScope.alert("Таньд ҮХХ бүртгэлгүй байна", "warning");
-      }
-    }
-  }, 300);
+
   $scope.selectDanProperty = function (el) {
     if (el.propertySize.match(/,/g)) {
       $rootScope.propertyData.squareSize = parseFloat(el.propertySize.replace(",", "."));
@@ -415,6 +424,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   };
   $scope.registerHandProperty = function () {
     $rootScope.propertyData = {};
+    $rootScope.propertyIsDan = false;
   };
   // $scope.propJson = [
   //   {

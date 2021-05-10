@@ -80,22 +80,15 @@
                             </label>
                             <label class="item item-input profile-label" id="marriageLabel">
                                 <p>Гэрлэсэн эсэх</p>
-                                <!-- <select class="profile-select" ng-model="$root.customerProfileData.ismarried">
-                                    <option ng-repeat="data in familtStatData | filter:{id:'!!'}" ng-if="data.name" value="{{data.id}}" ng-selected="{{$root.customerProfileData.ismarried==data.id}}">{{data.name}}</option>
-                                </select> -->
-
-                                <select class="profile-select" class="select-income-type" ng-model="$root.customerProfileData.ismarried" ng-options="c.id as c.name for c in familtStatData | filter:{id:'!!'}" ng-init="$root.customerProfileData.ismarried = $root.customerProfileData.ismarried"></select>
+                                <select class="profile-select" ng-model="$root.customerProfileData.ismarried" ng-options="c.id as c.name for c in familtStatData | filter:{id:'!!'}" ng-init="$root.customerProfileData.ismarried = $root.customerProfileData.ismarried"></select>
                             </label>
                             <label class="item item-input profile-label" id="mikLabel">
                                 <p>МИК-ийн зээлтэй эсэх</p>
-                                <!-- <select class="profile-select" ng-model="$root.customerProfileData.mikmortgagecondition">
-                                    <option ng-repeat="md in mortgageData | filter:{id:'!!'}" ng-if="md.name" value="{{md.id}}" ng-selected="{{$root.customerProfileData.mikmortgagecondition==md.id}}">{{md.name}}</option>
-                                </select> -->
-                                <select class="profile-select" class="select-income-type" ng-model="$root.customerProfileData.mikmortgagecondition" ng-options="c.id as c.name for c in mortgageData | filter:{id:'!!'}" ng-init="$root.customerProfileData.mikmortgagecondition = $root.customerProfileData.mikmortgagecondition"></select>
+                                <select class="profile-select" ng-model="$root.customerProfileData.mikmortgagecondition" ng-options="c.id as c.name for c in mortgageData | filter:{id:'!!'}" ng-init="$root.customerProfileData.mikmortgagecondition = $root.customerProfileData.mikmortgagecondition"></select>
                             </label>
                             <label class="item item-input profile-label" id="workLabel">
                                 <p>Ажилласан жил</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Ажилласан жил" name="experienceperiodid" ng-model="$root.customerProfileData.experienceperiodid" ng-keyup="hideKeyboard($event)" select-on-click />
+                                <select class="profile-select" ng-model="$root.customerProfileData.experienceperiodid" ng-options="c.id as c.name for c in experiencePeriodData | filter:{id:'!!'}" ng-init="$root.customerProfileData.experienceperiodid = $root.customerProfileData.experienceperiodid"></select>
                             </label>
                             <label class="item item-input profile-label profile-label-pass">
                                 <p style="padding:0px">Иргэний үнэмлэхний зураг</p>

@@ -451,6 +451,26 @@ var app = angular
         }, 150);
       },
     };
+  })
+  .directive("tooltip", function () {
+    return {
+      restrict: "C",
+      link: function (scope, element, attrs) {
+        if (attrs.title) {
+          console.log("asd", attrs);
+          var $element = $(element);
+          $element.attr("title", attrs.title);
+          $element.tooltipster({
+            animation: attrs.animation,
+            trigger: "click",
+            position: "top",
+            positionTracker: true,
+            maxWidth: 500,
+            contentAsHTML: true,
+          });
+        }
+      },
+    };
   });
 
 function numOnly() {

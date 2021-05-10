@@ -180,7 +180,7 @@
                 <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" />
 
             </div>
-            <ion-footer class="bottom-footer">
+            <ion-footer class="bottom-footer" style="margin-bottom: 50px;">
                 <button class="button btn single-button" id="Next" ng-click="saveCarCol()">Үргэлжлүүлэх</button>
             </ion-footer>
         </div>

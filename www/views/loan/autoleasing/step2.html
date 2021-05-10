@@ -40,37 +40,40 @@
                                 <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount();getbankData()" ng-click="removeAdvancePayment()" format-input select-on-click />
                             </div>
                         </div>
-
+                        <label class="item item-input step2-loan-location" ng-if="isCollShow">
+                            <i class="icon fa fa-building-o input-tugrug-icon"></i>
+                            <p>ҮХХөрөнгө барьцаалах уу?</p>
+                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.collateralConditionId" ng-change="getbankData();">
+                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}</option>
+                            </select>
+                        </label>
                         <div class="tugrug-input">
                             <span class="title input-label-front">Хугацаа (сараар)</span>
                             <div class="tugrug-input-container">
                                 <span class="input-tugrug-icon"><i class="icon fa fa-calendar"></i></span>
-                                <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-change="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
+                                <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask tooltip" ng-model="$root.newReqiust.loanMonth" ng-change="getbankData()" ng-keyup="hideKeyboard($event)" title="Зээл авах сар 0-с 96 хооронд байна" animation="fade" select-on-click />
                             </div>
                         </div>
 
                         <label class="item item-input step2-loan-location">
-                            <i class="icon fa fa-map-marker fa-2x input-tugrug-icon"></i>
+                            <i class="icon fa fa-map-marker fa-lg input-tugrug-icon"></i>
                             <p>Байршил</p>
                             <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
                                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>
                         </label>
+                        <label class="item item-input step2-loan-location">
+                            <i class="icon fa fa-user-o fa-1x input-tugrug-icon"></i>
+                            <p>Хамтран зээлдэгчтэй эсэх</p>
+                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.isCoBorrower">
+                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}</option>
+                            </select>
+                        </label>
                         <div class="switch-input-container">
                             <ul class="switch-list">
-                                <li ng-if="collateralConditionId">
-                                    <span class="step2-span">Урьдчилгаа төлбөрт ҮХХөрөнгө барьцаалах эсэх</span>
-                                    <span>
-                                        <label class="step2-switch" id="step2isCollateral">
-                                            <input type="checkbox" id="step2-isColBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.collateralConditionId" ng-change="getbankData();" />
-                                            <div class="step2-slider step2-round">
-                                                <span id="step2-toggle-on" class="step2-on">Тийм</span>
-                                                <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
-                                            </div>
-                                        </label>
-                                    </span>
-                                </li>
                                 <li>
                                     <span class="step2-span step2-term" ng-click="termModalAgreement.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
                                     <span>

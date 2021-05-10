@@ -3,7 +3,7 @@
     <div class="card property-dan-card">
         <span class="property-dan-title">Барьцаалаах үл хөдлөх хөрөнгөө сонгоно уу</span>
         <ion-scroll direction="y" class="templates-scroll">
-            <ion-radio ng-repeat="bank in propJson" ng-model="choice" class="property-dan-select" ng-click="selectDanProperty(bank)">
+            <ion-radio ng-repeat="bank in propJson" class="property-dan-select" ng-click="selectDanProperty(bank)">
                 <p class="property-size">{{bank.propertyNationRegisterNumber}}</p>
                 <h2 class="property-category">{{bank.codeName}} {{bank.propertySize}} м.кв</h2>
                 <p class="property-address">{{bank.fullAddress}}</p>
