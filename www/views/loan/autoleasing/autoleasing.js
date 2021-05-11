@@ -104,11 +104,13 @@
     json.currency = 16074201974821;
     json.isMortgage = 1554263832151;
 
+    if ($state.current.name == "autoleasing-4") {
+      json.isMortgage = $rootScope.danCustomerData.mikmortgagecondition;
+    }
     if ($state.current.name == "autoleasing-5") {
       json.totalIncome = $rootScope.danIncomeData.totalincomehousehold;
       json.monthIncome = $rootScope.danIncomeData.monthlyincome;
       json.monthPay = $rootScope.danIncomeData.monthlypayment;
-      json.isMortgage = $rootScope.danCustomerData.mikmortgagecondition;
     }
 
     if ($rootScope.requestType == "consumer") {
@@ -146,6 +148,7 @@
     console.log("Bank shuuuuult", json);
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
+      console.log("rootScope.bankListFilter.NotAgree", $rootScope.bankListFilter.NotAgree);
       $ionicLoading.hide();
     });
   };
@@ -209,7 +212,9 @@
   $scope.checkBankSelectedStep = function () {
     if ($scope.checkReqiured("danIncomeReq")) {
       // $state.go("income");
-      $state.go("autoleasing-3");
+      if ($scope.checkReqiured("agreeBank")) {
+        $state.go("autoleasing-3");
+      }
     } else {
     }
   };
@@ -255,20 +260,20 @@
                   }
                 });
                 //нөхцөл хангаагүй банкууд
-                angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
-                  if (item.checked) {
-                    var NotAgreeBank = {
-                      loanId: sendReqResponse[1].id,
-                      customerId: all_ID.dccustomerid,
-                      bankId: item.id,
-                      isAgree: "0",
-                      isMobile: "1",
-                      wfmStatusId: "1609944755118135",
-                      productId: item.products[0].id,
-                    };
-                    selectedbanks.push(NotAgreeBank);
-                  }
-                });
+                // angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
+                //   if (item.checked) {
+                //     var NotAgreeBank = {
+                //       loanId: sendReqResponse[1].id,
+                //       customerId: all_ID.dccustomerid,
+                //       bankId: item.id,
+                //       isAgree: "0",
+                //       isMobile: "1",
+                //       wfmStatusId: "1609944755118135",
+                //       productId: item.products[0].id,
+                //     };
+                //     selectedbanks.push(NotAgreeBank);
+                //   }
+                // });
                 var mapBankSuccess = false;
                 //MAP table рүү сонгосон банкуудыг бичих
                 selectedbanks.map((bank) => {
@@ -279,7 +284,8 @@
                   });
                 });
                 //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
-                $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
+                $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
+                // $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
                 $timeout(function () {
                   if (sendReqResponse[0] == "success" && sendReqResponse[1] != "" && mapBankSuccess) {
                     $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
@@ -363,21 +369,21 @@
               }
             });
             //нөхцөл хангаагүй банкууд
-            angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
-              if (item.checked) {
-                var NotAgreeBank = {
-                  loanId: response[1].id,
-                  customerId: all_ID.dccustomerid,
-                  bankId: item.id,
-                  isAgree: "0",
-                  isMobile: "1",
-                  wfmStatusId: "1609944755118135",
-                  productId: item.products[0].id,
-                  vendorId: $scope.consumerData.shopId,
-                };
-                selectedbanks.push(NotAgreeBank);
-              }
-            });
+            // angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
+            //   if (item.checked) {
+            //     var NotAgreeBank = {
+            //       loanId: response[1].id,
+            //       customerId: all_ID.dccustomerid,
+            //       bankId: item.id,
+            //       isAgree: "0",
+            //       isMobile: "1",
+            //       wfmStatusId: "1609944755118135",
+            //       productId: item.products[0].id,
+            //       vendorId: $scope.consumerData.shopId,
+            //     };
+            //     selectedbanks.push(NotAgreeBank);
+            //   }
+            // });
             var mapBankSuccess = false;
             //MAP table рүү сонгосон банкуудыг бичих
             selectedbanks.map((bank) => {
@@ -388,21 +394,10 @@
               });
             });
             //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
-            $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
+            $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
+            // $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
             $scope.consumerData.map((product) => {
               product.leasingId = response[1].id;
-              if (product.picture1) {
-                product.picture1 = product.picture1.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
-              }
-              if (product.picture2) {
-                product.picture2 = product.picture2.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
-              }
-              if (product.picture3) {
-                product.picture3 = product.picture3.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
-              }
-              if (product.picture4) {
-                product.picture4 = product.picture4.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
-              }
               //Бүтээгдэхүүн бүртгэх
               serverDeferred.requestFull("dcApp_consumer_loan_001", product).then(function (responseProduct) {
                 $timeout(function () {
@@ -496,20 +491,20 @@
                   }
                 });
                 //нөхцөл хангаагүй банкууд
-                angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
-                  if (item.checked) {
-                    var NotAgreeBank = {
-                      loanId: sendReqResponse[1].id,
-                      customerId: all_ID.dccustomerid,
-                      bankId: item.id,
-                      isAgree: "0",
-                      isMobile: "1",
-                      wfmStatusId: "1609944755118135",
-                      productId: item.products[0].id,
-                    };
-                    selectedbanks.push(NotAgreeBank);
-                  }
-                });
+                // angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
+                //   if (item.checked) {
+                //     var NotAgreeBank = {
+                //       loanId: sendReqResponse[1].id,
+                //       customerId: all_ID.dccustomerid,
+                //       bankId: item.id,
+                //       isAgree: "0",
+                //       isMobile: "1",
+                //       wfmStatusId: "1609944755118135",
+                //       productId: item.products[0].id,
+                //     };
+                //     selectedbanks.push(NotAgreeBank);
+                //   }
+                // });
                 var mapBankSuccess = false;
                 //MAP table рүү сонгосон банкуудыг бичих
                 selectedbanks.map((bank) => {
@@ -520,7 +515,8 @@
                   });
                 });
                 //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
-                $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
+                $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
+                // $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
                 $timeout(function () {
                   if (sendReqResponse[0] == "success" && sendReqResponse[1] != "" && mapBankSuccess) {
                     $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
@@ -602,23 +598,24 @@
               }
             });
             //нөхцөл хангаагүй банкууд
-            angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
-              if (item.checked) {
-                var NotAgreeBank = {
-                  loanId: response[1].id,
-                  customerId: all_ID.dccustomerid,
-                  bankId: item.id,
-                  isAgree: "0",
-                  isMobile: "1",
-                  wfmStatusId: "1609944755118135",
-                  productId: item.products[0].id,
-                  vendorId: $rootScope.selectedCarData.vendorid,
-                };
-                selectedbanks.push(NotAgreeBank);
-              }
-            });
+            // angular.forEach($rootScope.bankListFilter.NotAgree, function (item) {
+            //   if (item.checked) {
+            //     var NotAgreeBank = {
+            //       loanId: response[1].id,
+            //       customerId: all_ID.dccustomerid,
+            //       bankId: item.id,
+            //       isAgree: "0",
+            //       isMobile: "1",
+            //       wfmStatusId: "1609944755118135",
+            //       productId: item.products[0].id,
+            //       vendorId: $rootScope.selectedCarData.vendorid,
+            //     };
+            //     selectedbanks.push(NotAgreeBank);
+            //   }
+            // });
             //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
-            $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
+            $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
+            // $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree.concat($rootScope.bankListFilter.NotAgree);
             var onlineLeasingProduct = {
               leasingId: response[1].id,
               itemCode: $rootScope.selectedCarData.itemcode,
@@ -692,17 +689,32 @@
   };
 
   $scope.goStep3 = function (param) {
-    console.log("$rootScope.newReqiust", $rootScope.newReqiust);
+    console.log("$rootScope.bankListFilter.Agree", $rootScope.bankListFilter.Agree);
     if ($scope.checkReqiured("step2")) {
-      if (isEmpty($rootScope.bankListFilter.Agree) && isEmpty($rootScope.bankListFilter.NotAgree)) {
-        $rootScope.alert("Банк олдсонгүй", "warning");
-      } else {
+      if ($scope.checkReqiured("agreeBank")) {
         $state.go("income");
       }
     }
   };
-  $scope.goStep5 = function () {
+  $scope.goStep5ORIdent = function () {
     if ($scope.checkReqiured("step4CustomerData")) {
+      if ($scope.checkReqiured("agreeBank")) {
+        if (isEmpty($rootScope.danCustomerData.identfrontpic) || isEmpty($rootScope.danCustomerData.identbackpic)) {
+          $state.go("ident-pic");
+        } else {
+          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
+            $rootScope.incomeType = response;
+          });
+          $state.go("autoleasing-5");
+          if ($rootScope.isDanHand) {
+            $scope.getCustomerIncomeData();
+          }
+        }
+      }
+    }
+  };
+  $scope.goStep5 = function () {
+    if ($scope.checkReqiured("identPic")) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
         $rootScope.incomeType = response;
       });
@@ -813,6 +825,23 @@
         return false;
       } else if (isEmpty($rootScope.danIncomeData.monthlypayment)) {
         $rootScope.alert("Та төлж буй зээлийн дүнгээ оруулна уу", "warning");
+        return false;
+      } else {
+        return true;
+      }
+    } else if (param == "identPic") {
+      if (isEmpty($rootScope.danCustomerData.identfrontpic)) {
+        $rootScope.alert("Иргэний үнэмлэхний урд талын зургийг оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.identbackpic)) {
+        $rootScope.alert("Иргэний үнэмлэхний ард талын зургийг оруулна уу", "warning");
+        return false;
+      } else {
+        return true;
+      }
+    } else if (param == "agreeBank") {
+      if (isEmpty($rootScope.bankListFilter.Agree)) {
+        $rootScope.alert("Таны нөхцлийн дагуу зээл олгох банк, ББСБ одоогоор байхгүй байна. Та оруулсан мэдээллээ дахин шалгаарай", "warning");
         return false;
       } else {
         return true;
@@ -1007,6 +1036,7 @@
       if (responseCustomerData[0] != "") {
         $rootScope.danCustomerData = responseCustomerData[0];
         $rootScope.danCustomerData.id = all_ID.dccustomerid;
+        console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
         serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
           // console.log("get income data response", response);
           if (response[0] != "") {
@@ -1092,5 +1122,36 @@
     } else {
       document.getElementById("firstNameErrorDan").style.display = "none";
     }
+  };
+  $scope.ppSourceSelectOnReq = function (path) {
+    $scope.selectedImagePath = path;
+    document.getElementById("overlayProfilePicuteRequest").style.display = "block";
+  };
+  $scope.ppSourceSelectOffReq = function () {
+    document.getElementById("overlayProfilePicuteRequest").style.display = "none";
+  };
+  $scope.takePhoto = function (type) {
+    var srcType = Camera.PictureSourceType.CAMERA;
+    if (type == "1") {
+      srcType = Camera.PictureSourceType.PHOTOLIBRARY;
+    }
+    navigator.camera.getPicture(
+      function (imageData) {
+        if ($scope.selectedImagePath == 1) {
+          $rootScope.danCustomerData.identfrontpic = imageData;
+        } else if ($scope.selectedImagePath == 2) {
+          $rootScope.danCustomerData.identbackpic = imageData;
+        }
+        $scope.$apply();
+      },
+      function onFail(message) {},
+      {
+        quality: 50,
+        destinationType: Camera.DestinationType.DATA_URL,
+        correctOrientation: true,
+        sourceType: srcType,
+        encodingType: Camera.EncodingType.JPEG,
+      }
+    );
   };
 });

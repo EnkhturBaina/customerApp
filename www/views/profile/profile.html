@@ -98,7 +98,7 @@
                                     <p style="padding: 6px 0px">Урд тал</p>
                                     <div ng-if="$root.customerProfileData.identfrontpic|isEmpty" style="width: 120px; border-radius: 10px; border: 1px dashed #ccc; height: 75px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                                     </div>
-                                    <img ng-if="!$root.customerProfileData.identfrontpic|isEmpty" ng-src="{{$root.customerProfileData.identfrontpic|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
+                                    <img ng-if="!$root.customerProfileData.identfrontpic|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfileData.identfrontpic}}" height="75px" width="120px" style="border-radius: 10px;" />
                                     <i class="icon ion-edit ident-icon" ng-click="ppSourceSelectOn(1)"></i>
 
                                 </div>
@@ -106,7 +106,7 @@
                                     <p style="padding: 6px 0px">Ард тал</p>
                                     <div ng-if="$root.customerProfileData.identbackpic|isEmpty" style="width: 120px; border-radius: 10px; border: 1px dashed #ccc; height: 75px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                                     </div>
-                                    <img ng-if="!$root.customerProfileData.identbackpic|isEmpty" ng-src="{{$root.customerProfileData.identbackpic|guessImageMime}}" height="75px" width="120px" style="border-radius: 10px;" />
+                                    <img ng-if="!$root.customerProfileData.identbackpic|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfileData.identbackpic}}" height="75px" width="120px" style="border-radius: 10px;" />
                                     <i class="icon ion-edit ident-icon" ng-click="ppSourceSelectOn(2)"></i>
 
                                 </div>

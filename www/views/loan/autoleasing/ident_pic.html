@@ -1,0 +1,40 @@
+<ion-view id="loanPages" hide-nav-bar="true">
+    <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+    <div id="overlayProfilePicuteRequest" ng-click="ppSourceSelectOffReq()">
+        <div class="overlay-profile-content-request">
+            <div class="get-photo-choose">
+                <div class="get-camera" ng-click="takePhoto()"><i class="icon ion-camera photo-choose-icon"></i><span class="photo-choose-span">Камер нээх</span></div>
+                <div class="get-gallery" ng-click="takePhoto('1')"><i class="icon ion-images photo-choose-icon"></i><span class="photo-choose-span">Зурагнаас сонгох</span></div>
+            </div>
+            <button class="button btn single-button">Хаах</button>
+        </div>
+    </div>
+    <div ng-repeat="data in [{'title':'Иргэний үнэмлэхний зураг'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content overflow-scroll="true" class="ion-modified-content has-header autoleas-step3-content">
+        <div class="big-container">
+            <div class="magic-container">
+                <div class="bg-container">
+                    <div class="ident-pic-label" style="border: 0;padding: 0px 0px 10px 0px;">
+                        <div class="profile-card-front">
+                            <span>Урд тал</span>
+                            <div ng-click="ppSourceSelectOnReq(1)" class="ident-pic-container">
+                                <div ng-if="$root.danCustomerData.identfrontpic|isEmpty" class="ident-pic-border">+</div>
+                                <img ng-if="!$root.danCustomerData.identfrontpic|isEmpty" class="ident-pic-border" ng-src="{{'data:image/png;base64,'+$root.danCustomerData.identfrontpic}}" />
+                            </div>
+                        </div>
+                        <div class="profile-card-back">
+                            <span>Ард тал</span>
+                            <div ng-click="ppSourceSelectOnReq(2)" class="ident-pic-container">
+                                <div ng-if="$root.danCustomerData.identbackpic|isEmpty" class="ident-pic-border">+</div>
+                                <img ng-if="!$root.danCustomerData.identbackpic|isEmpty" class="ident-pic-border" ng-src="{{'data:image/png;base64,'+$root.danCustomerData.identbackpic}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ion-footer class="bottom-footer step-bottom-footer">
+                <button class="button btn single-button" id="Next" ng-click="goStep5()">Үргэлжлүүлэх</button>
+            </ion-footer>
+        </div>
+    </ion-content>
+</ion-view>

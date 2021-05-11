@@ -66,7 +66,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           localStorage.removeItem("profilePictureSideMenu");
           localStorage.setItem("profilePictureSideMenu", response[0].profilepicture);
           $rootScope.profilePictureSideMenu = response[0].profilepicture;
-          $scope.customerProfilePicture.profilePictureClob = response[0].profilepicture;
+          $rootScope.customerProfilePicture.profilePictureClob = response[0].profilepicture;
 
           if (response[0].uniqueidentifier) {
             $scope.regNum = response[0].uniqueidentifier;
@@ -104,6 +104,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   });
 
   $scope.saveProfileData = function () {
+    $rootScope.ShowLoader();
     document.getElementById("lastNameLabel").style.borderBottom = "1px solid #ddd";
     document.getElementById("firstNameLabel").style.borderBottom = "1px solid #ddd";
     document.getElementById("regLabel").style.borderBottom = "1px solid #ddd";
@@ -147,8 +148,11 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else {
       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
       console.log("ALL_ID", all_ID);
+      $rootScope.customerProfileData.profilepicture = localStorage.getItem("profilePictureSideMenu");
       $scope.customerProfileData.id = all_ID.dccustomerid;
       $rootScope.customerProfileData.crmCustomerId = all_ID.crmuserid;
+
+      console.log("$scope.customerProfileData", $scope.customerProfileData);
 
       serverDeferred.requestFull("dcApp_profile_dv_002", $scope.customerProfileData).then(function (responseSaveCustomer) {
         console.log("responseSaveCustomer", responseSaveCustomer);
@@ -177,7 +181,15 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
               localStorage.removeItem("loginUserInfo");
               localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+
+              $rootScope.customerProfilePicture.id = all_ID.dccustomerid;
+
+              serverDeferred.requestFull("dcApp_profile_pricture_dv_002", $rootScope.customerProfilePicture).then(function (response) {
+                console.log("res change profile picture", response);
+              });
+
               $rootScope.alert("Амжилттай", "success", "profile");
+              $ionicLoading.hide();
             } else {
               $rootScope.alert("Мэдээлэл хадгалахад алдаа гарлаа", "success", "profile");
             }
@@ -190,6 +202,9 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         }
       });
     }
+    $timeout(function () {
+      $ionicLoading.hide();
+    }, 5000);
   };
 
   $scope.takePhoto = function (type) {
@@ -201,15 +216,15 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     navigator.camera.getPicture(
       function (imageData) {
         if ($scope.selectedImagePath == 1) {
-          $scope.customerProfileData.identfrontpic = "jpeg♠" + imageData;
+          $scope.customerProfileData.identfrontpic = imageData;
         } else if ($scope.selectedImagePath == 2) {
-          $scope.customerProfileData.identbackpic = "jpeg♠" + imageData;
+          $scope.customerProfileData.identbackpic = imageData;
         } else if ($scope.selectedImagePath == 3) {
-          $scope.customerProfilePicture.profilePictureClob = imageData;
+          $rootScope.customerProfilePicture.profilePictureClob = imageData;
 
-          $scope.customerProfilePicture.id = all_ID.dccustomerid;
+          $rootScope.customerProfilePicture.id = all_ID.dccustomerid;
 
-          serverDeferred.requestFull("dcApp_profile_pricture_dv_002", $scope.customerProfilePicture).then(function (response) {
+          serverDeferred.requestFull("dcApp_profile_pricture_dv_002", $rootScope.customerProfilePicture).then(function (response) {
             console.log("res change profile picture", response);
           });
         }
@@ -225,7 +240,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       }
     );
     localStorage.removeItem("profilePictureSideMenu");
-    localStorage.setItem("profilePictureSideMenu", $scope.customerProfilePicture.profilePictureClob);
+    localStorage.setItem("profilePictureSideMenu", $rootScope.customerProfilePicture.profilePictureClob);
   };
 
   //income data

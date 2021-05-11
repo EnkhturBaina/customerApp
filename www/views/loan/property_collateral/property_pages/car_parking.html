@@ -36,14 +36,14 @@
             <div ng-if="!$root.propertyData.itemPic" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                 +
             </div>
-            <img ng-if="$root.propertyData.itemPic" ng-src="{{$root.propertyData.itemPic|guessImageMime}}" width="100px" height="75px" />
+            <img ng-if="$root.propertyData.itemPic" ng-src="{{'data:image/png;base64,'+$root.propertyData.itemPic}}" width="100px" height="75px" />
             <p class="car-coll-img-p">Ерөнхий</p>
         </div>
         <div class="col col-50 car-img" ng-click="pCSourceSelectOn('itemPic2')">
             <div ng-if="!$root.propertyData.itemPic2" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
                 +
             </div>
-            <img ng-if="$root.propertyData.itemPic2" ng-src="{{$root.propertyData.itemPic2|guessImageMime}}" width="100px" height="75px" />
+            <img ng-if="$root.propertyData.itemPic2" ng-src="{{'data:image/png;base64,'+$root.propertyData.itemPic2}}" width="100px" height="75px" />
             <p class="car-coll-img-p">Зогсоолын дугаар</p>
         </div>
     </div>

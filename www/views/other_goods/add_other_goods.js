@@ -115,9 +115,9 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
         if (isEmpty($rootScope.newCarReq)) {
           $rootScope.newCarReq = {};
         }
-        $rootScope.newCarReq[$scope.selectedImagePath] = "data:image/jpeg;base64," + imageData;
-        document.getElementsByClassName("img-input-area-" + $scope.selectedImagePath + "")[0].style.backgroundImage = "url(" + $rootScope.newCarReq[$scope.selectedImagePath] + ")";
-        document.getElementsByClassName("img-input-area-" + $scope.selectedImagePath + "")[0].style.opacity = "1";
+        $rootScope.newCarReq[$scope.selectedImagePath] = imageData;
+        // document.getElementsByClassName("img-input-area-" + $scope.selectedImagePath + "")[0].style.backgroundImage = "url(" + $rootScope.newCarReq[$scope.selectedImagePath] + ")";
+        // document.getElementsByClassName("img-input-area-" + $scope.selectedImagePath + "")[0].style.opacity = "1";
         $scope.$apply();
       },
       function onFail(message) {},

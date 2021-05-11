@@ -152,6 +152,11 @@ var app = angular
       templateUrl: "views/loan/autoleasing/step5.html",
       controller: "autoleasingCtrl",
     });
+    $stateProvider.state("ident-pic", {
+      url: "/views/ident-pic",
+      templateUrl: "views/loan/autoleasing/ident_pic.html",
+      controller: "autoleasingCtrl",
+    });
     $stateProvider.state("autoleasing-bank-info", {
       url: "/views/autoleasing-bank-info",
       templateUrl: "views/loan/autoleasing/step3-bank-info.html",
@@ -301,7 +306,7 @@ var app = angular
       }
     };
   })
-  .controller("indexCtrl", function ($scope, $rootScope, $ionicTabsDelegate, $state, $ionicModal) {
+  .controller("indexCtrl", function ($scope, $rootScope, $state, $ionicPopup) {
     $scope.toggleSideMenu = function () {
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");
@@ -317,17 +322,33 @@ var app = angular
       localStorage.removeItem("otherGoodsMaxId");
     };
     $scope.logOut = function () {
-      $rootScope.loginUserInfo = undefined;
-      localStorage.removeItem("loginUserInfo");
-      localStorage.removeItem("profilePictureSideMenu");
-      localStorage.removeItem("all_ID");
-      //Хэрэглээний лизинг
-      localStorage.removeItem("otherGoods");
-      localStorage.removeItem("consumerRequestData");
-      localStorage.removeItem("otherGoodsMaxId");
+      $ionicPopup.show({
+        template: "<b>Апп -с гарах уу ?</b>",
+        cssClass: "confirmPopup",
+        buttons: [
+          {
+            text: "Үгүй",
+            type: "button-decline",
+          },
+          {
+            text: "Тийм",
+            type: "button-confirm",
+            onTap: function () {
+              $rootScope.loginUserInfo = undefined;
+              localStorage.removeItem("loginUserInfo");
+              localStorage.removeItem("profilePictureSideMenu");
+              localStorage.removeItem("all_ID");
+              //Хэрэглээний лизинг
+              localStorage.removeItem("otherGoods");
+              localStorage.removeItem("consumerRequestData");
+              localStorage.removeItem("otherGoodsMaxId");
 
-      $rootScope.profilePictureSideMenu = "";
-      $state.go("home");
+              $rootScope.profilePictureSideMenu = "";
+              $state.go("home");
+            },
+          },
+        ],
+      });
     };
     $(function () {
       $("#ionNavViewMobile,#ionNavViewMobileFooter").click(function () {

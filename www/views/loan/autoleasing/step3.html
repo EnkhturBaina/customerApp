@@ -23,7 +23,7 @@
                                         <img ng-src="{{bank.bank_logo|guessImageMime}}" />
                                     </div>
                                     <span class="bank-middle-title">{{bank.department_name}}</span>
-                                    <p class="bank-desc-green">Тэнцсэн банк</p>
+                                    <p class="bank-desc-green">Тэнцсэн</p>
                                 </ion-checkbox>
                             </li>
                         </ul>
@@ -33,13 +33,15 @@
                         <p class="middle-title ion-color-big-text" style="margin-top: 50px">Зээлийн нөхцлийг хангаагүй банк, ББСБ-ууд</p>
                         <ul class="switch-list">
                             <li ng-repeat="rejectbank in bankListFilter.NotAgree | filter:{id:'!!'}">
-                                <ion-checkbox ng-model="rejectbank.checked" class="step3-bankList-checkbox-container" ng-change="itemShow(rejectbank.checked,rejectbank.id)">
+                                <!-- <ion-checkbox ng-model="rejectbank.checked" class="step3-bankList-checkbox-container " ng-change="itemShow(rejectbank.checked,rejectbank.id)"> -->
+                                <div class="checkBank-not-agree">
                                     <div class="bank-list-container">
                                         <img ng-src="{{rejectbank.bank_logo|guessImageMime}}" />
                                     </div>
                                     <span class="bank-middle-title">{{rejectbank.department_name}}</span>
-                                    <p class="bank-desc-red">Тэнцээгүй банк</p>
-                                </ion-checkbox>
+                                    <p class="bank-desc-red">Тэнцээгүй</p>
+                                </div>
+                                <!-- </ion-checkbox> -->
                             </li>
                         </ul>
                     </div>

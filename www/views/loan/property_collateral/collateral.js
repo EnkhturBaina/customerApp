@@ -13,7 +13,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     }
     navigator.camera.getPicture(
       function (imageData) {
-        $rootScope.propertyData[$scope.selectedImagePath] = "jpg♠" + imageData;
+        $rootScope.propertyData[$scope.selectedImagePath] = imageData;
         $scope.$apply();
       },
       function onFail(message) {},

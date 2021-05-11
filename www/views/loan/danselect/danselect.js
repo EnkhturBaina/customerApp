@@ -26,6 +26,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
   $rootScope.isDanLoginAutoColl = false;
   $scope.autoCollHand = function () {
     $rootScope.isDanLoginAutoColl = false;
+    $rootScope.newCarReq = {};
   };
 
   $scope.gotoDanLoginDanSelect = function () {

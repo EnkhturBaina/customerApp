@@ -221,7 +221,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         if (isEmpty($rootScope.newCarReq)) {
           $rootScope.newCarReq = {};
         }
-        $rootScope.newCarReq[$scope.selectedImagePath] = "jpeg♠" + imageData;
+        $rootScope.newCarReq[$scope.selectedImagePath] = imageData;
         if (!$scope.$$phase) {
           $scope.$apply();
         }
@@ -277,8 +277,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     $rootScope.hideFooter = true;
     $timeout(function () {
       if ($state.current.name == "car_coll") {
-        console.log("$rootScope.propJsonAutoColl", $rootScope.propJsonAutoColl);
-        console.log("$rootScope.isDanLoginAutoColl", $rootScope.isDanLoginAutoColl);
         if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
           $scope.autoCollDan.show();
         } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {

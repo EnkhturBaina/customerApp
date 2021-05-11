@@ -17,6 +17,9 @@
   border-color: #ccc;
   border-top-width: 0px;
 }
+.car-collateral-label select {
+  padding: 12px 20px 12px 5px !important;
+}
 .car-collateral-label p {
   color: #606060 !important;
   margin: 5px 0;

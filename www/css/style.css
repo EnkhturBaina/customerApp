@@ -964,7 +964,7 @@ h4 {
 
 .switch-list li {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   margin: 10px 0 10px 0;
   color: #606060;
@@ -1272,7 +1272,7 @@ h4 {
 
 .container-padding {
   border-radius: 10px;
-  padding: 15px;
+  padding: 20px;
   margin: 20px 20px 0px 20px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
@@ -1357,13 +1357,15 @@ input[type="number"] {
 }
 @keyframes pulse {
   0% {
-    box-shadow: 0 0px 3px rgba(172, 211, 34, 0.5);
+    box-shadow: 0 0 0 0 rgba(172, 211, 34, 0.7);
   }
+
   70% {
-    box-shadow: 0 3px 10px rgba(172, 211, 34, 0.8);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
   }
+
   100% {
-    box-shadow: 0 0px 3px rgba(172, 211, 34, 0.4);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
 }
 
@@ -1529,4 +1531,74 @@ input[type="number"] {
 .item-select select {
   color: #4b5180 !important;
   font-weight: bold;
+}
+
+#section07 {
+  position: relative;
+}
+#section07 .arrow-anim-container {
+  zoom: 0.6;
+  float: right;
+  position: absolute;
+  right: 70px;
+  bottom: 35%;
+}
+#section07 .arrow-anim-container span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  margin-left: -12px;
+  border-left: 3px solid #acd322;
+  border-bottom: 3px solid #acd322;
+  -webkit-transform: rotate(225deg);
+  transform: rotate(225deg);
+  -webkit-animation: sdb07 2s infinite;
+  animation: sdb07 2s infinite;
+  opacity: 0;
+  box-sizing: border-box;
+}
+#section07 .arrow-anim-container span:nth-of-type(1) {
+  left: 0px;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+#section07 .arrow-anim-container span:nth-of-type(2) {
+  left: 16px;
+  -webkit-animation-delay: 0.15s;
+  animation-delay: 0.15s;
+}
+#section07 .arrow-anim-container span:nth-of-type(3) {
+  left: 32px;
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+@-webkit-keyframes sdb07 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sdb07 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.agree-bank-arrow {
+  margin-right: 35px;
+}
+.checkBank-not-agree {
+  padding-left: 30px;
 }
