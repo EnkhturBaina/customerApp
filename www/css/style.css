@@ -1276,6 +1276,7 @@ h4 {
   margin: 20px 20px 0px 20px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+  min-height: 160px;
 }
 
 .middle-title {
@@ -1283,6 +1284,8 @@ h4 {
   color: #c6c8d4;
   text-transform: uppercase;
   text-align: center;
+  margin: 0px auto 15px auto;
+  width: 80%;
 }
 
 .not-agree-banks {
@@ -1541,7 +1544,7 @@ input[type="number"] {
   float: right;
   position: absolute;
   right: 70px;
-  bottom: 35%;
+  bottom: 45%;
 }
 #section07 .arrow-anim-container span {
   position: absolute;

@@ -18,7 +18,7 @@
                         <p class="middle-title ion-color-big-text">Зээлийн нөхцлийг хангасан банк, ББСБ-ууд</p>
                         <ul class="switch-list">
                             <li ng-repeat="bank in bankListFilter.Agree | filter:{id:'!!'}">
-                                <ion-checkbox ng-model="bank.checked" class="step3-bankList-checkbox-container" ng-change="itemShow(bank.checked,bank.id)">
+                                <ion-checkbox ng-model="bank.checked" class="step3-bankList-checkbox-container" ng-change="selectBankLastStep(bank.checked,bank.id)">
                                     <div class="bank-list-container">
                                         <img ng-src="{{bank.bank_logo|guessImageMime}}" />
                                     </div>
@@ -33,7 +33,7 @@
                         <p class="middle-title ion-color-big-text" style="margin-top: 50px">Зээлийн нөхцлийг хангаагүй банк, ББСБ-ууд</p>
                         <ul class="switch-list">
                             <li ng-repeat="rejectbank in bankListFilter.NotAgree | filter:{id:'!!'}">
-                                <!-- <ion-checkbox ng-model="rejectbank.checked" class="step3-bankList-checkbox-container " ng-change="itemShow(rejectbank.checked,rejectbank.id)"> -->
+                                <!-- <ion-checkbox ng-model="rejectbank.checked" class="step3-bankList-checkbox-container " ng-change="selectBankLastStep(rejectbank.checked,rejectbank.id)"> -->
                                 <div class="checkBank-not-agree">
                                     <div class="bank-list-container">
                                         <img ng-src="{{rejectbank.bank_logo|guessImageMime}}" />
