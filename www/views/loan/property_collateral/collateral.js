@@ -29,6 +29,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
 
   //ҮХХ барьцаалсан зээлийн хүсэлтийн мэдээлэл
   $rootScope.propertyRequestData = {};
+  $rootScope.propertyRequestData.serviceAgreementId = "1554263832132";
 
   $scope.saveProperty = function () {
     if ($scope.propertyCheckReqiured("step1")) {
@@ -134,12 +135,12 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
                 console.log("userSalaryInfo", userSalaryInfo);
                 if (userSalaryInfo) {
                   serverDeferred.carCalculation(userSalaryInfo.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
-                    console.log("res salary", response);
+                    // console.log("res salary", response);
                     $rootScope.monthlyAverage = response.result;
-                    console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
+                    // console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
                     $rootScope.monthlyIncomeDisable = true;
                     $rootScope.danIncomeData.monthlyincome = response.result;
-                    console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
+                    // console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
                   });
                 }
               }, 1000);
@@ -219,6 +220,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   $scope.propertyHand = function () {
     $rootScope.propertyIsDan = false;
     $rootScope.showPropertyBtn = false;
+    $rootScope.monthlyIncomeDisable = false;
   };
   $scope.savePropertyRequestData = function () {
     if ($scope.propertyCheckReqiured("step2")) {
@@ -256,10 +258,12 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       } else if (isEmpty($rootScope.propertyData.line3) && !$rootScope.propertyIsDan) {
         $rootScope.alert("Хороо/баг сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.propertyData.itemPic)) {
-        $rootScope.alert("Зураг оруулна уу", "warning");
-        return false;
-      } else {
+      }
+      //  else if (isEmpty($rootScope.propertyData.itemPic)) {
+      //   $rootScope.alert("Зураг оруулна уу", "warning");
+      //   return false;
+      // }
+      else {
         return true;
       }
       return true;

@@ -1,69 +1,29 @@
-angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", function ($window, $ionicSlideBoxDelegate, $scope, $rootScope, $state, serverDeferred) {
-  // document.getElementById("saveNewPassword").setAttribute("style", "display:none !important");
+angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", function ($window, $state, $scope, $rootScope, $timeout, serverDeferred) {
   $(".register-mobile").mask("00000000");
   var progressBar = {
     Bar: $("#pr-progress-bar"),
-    step1: $("pr-register-step-1"),
-    step2: $("pr-register-step-2"),
+    step1: $("reset-step-1"),
+    step2: $("reset-step-2"),
 
     Next: function () {
-      $("#pr-register-step-1").addClass("pr-remove-step");
-      $("#pr-register-step-1").removeClass("pr-add-step");
+      $("#reset-step-1").addClass("remove-step");
+      $("#reset-step-1").removeClass("add-step");
 
-      $("#pr-register-step-2").removeClass("pr-remove-step");
-      $("#pr-register-step-2").addClass("pr-add-step");
+      $("#reset-step-2").removeClass("remove-step");
+      $("#reset-step-2").addClass("add-step");
     },
   };
 
   var registeredUserData = {};
   $rootScope.customerNewPassword = {};
-  $scope.getPhoneNumber = function () {
-    $rootScope.customerNewPassword.userName = $rootScope.loginUserInfo.customercode;
-  };
-  if (!isEmpty($rootScope.loginUserInfo)) {
-    $scope.getPhoneNumber();
-  }
-  $scope.checkMobileNumber = function () {
-    if ($scope.customerNewPassword === undefined) {
-      $rootScope.alert("Утасны дугаараа оруулна уу");
-    } else {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $scope.customerNewPassword.userName }).then(function (response) {
-        if (response.length == 1 || response.length[0] == "") {
-          $rootScope.alert("Утасны дугаар бүртгэлгүй байна");
-        } else {
-          registeredUserData = response[0];
-          // console.log("registeredUserData", registeredUserData);
-          progressBar.Next();
-          document.getElementById("saveNewPassword").setAttribute("style", "display:block !important");
-          document.getElementById("continueNewPassword").setAttribute("style", "display:none !important");
-        }
-      });
-    }
-  };
+  $rootScope.customerData = {};
   $rootScope.newPasswordHashResult = {};
-  $scope.saveNewPassword = function () {
-    if ($scope.customerNewPassword.passwordHash !== $scope.customerNewPassword.confirmPasswordHash) {
-      $rootScope.alert("Нууц үг тохирохгүй байна");
-    } else if ($scope.customerNewPassword.oldPassword !== registeredUserData.password) {
-      $rootScope.alert("Хуучин нууц үг буруу байна");
-    } else {
-      serverDeferred.requestFull("getPasswordHash1", $scope.customerNewPassword).then(function (response) {
-        $rootScope.newPasswordHashResult.passwordHash = response[1].result;
-        $rootScope.newPasswordHashResult.password = $scope.customerNewPassword.passwordHash;
-        $rootScope.newPasswordHashResult.customerId = registeredUserData.customerid;
-        $rootScope.newPasswordHashResult.id = registeredUserData.id;
-        $rootScope.newPasswordHashResult.userId = registeredUserData.userid;
-        $rootScope.newPasswordHashResult.userName = $scope.customerNewPassword.userName;
-        serverDeferred.requestFull("dcApp_login_register_dv_002", $scope.newPasswordHashResult).then(function (response) {
-          $state.go("login");
-        });
-      });
-    }
-  };
   $rootScope.goBack = function () {
     $window.history.back();
   };
-
+  $scope.smsCode = "";
+  $scope.isStep1 = true;
+  $scope.isStep2 = false;
   $scope.hideShowPassword = function (inputName) {
     if (document.getElementById(inputName).type == "password") {
       $("#" + inputName + "-eye-icon").removeClass("ion-eye");
@@ -73,6 +33,121 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
       $("#" + inputName + "-eye-icon").removeClass("ion-eye-disabled");
       $("#" + inputName + "-eye-icon").addClass("ion-eye");
       document.getElementById(inputName).type = "password";
+    }
+  };
+  $scope.sendSmsCode = function () {
+    if (isEmpty($rootScope.customerData.userName)) {
+      $rootScope.alert("Утасны дугаараа оруулна уу");
+    } else {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $rootScope.customerData.userName }).then(function (response) {
+        console.log("res", response);
+        if (isEmpty(response[0])) {
+          $rootScope.alert("Утасны дугаар бүртгэлгүй байна");
+        } else {
+          var generatedCode = Math.floor(100000 + Math.random() * 900000);
+          registeredUserData = response[0];
+          progressBar.Next();
+          $scope.isStep1 = false;
+          $scope.isStep2 = true;
+          $timeout(function () {
+            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", crmUserId: response[0].id }).then(function (response) {
+              console.log("res", response);
+              localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
+              console.log("localStorage", localStorage);
+            });
+
+            var sendSms = {
+              msg: `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`,
+              phoneNumber: $rootScope.customerData.userName,
+            };
+            serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
+              console.log("sendSmsResponse", sendSmsResponse);
+            });
+          }, 500);
+        }
+      });
+    }
+  };
+  $scope.resetPassword = function () {
+    if (isEmpty($scope.smsCode)) {
+      $rootScope.alert("Баталгаажуулах кодоо оруулна уу");
+    } else if (isEmpty($rootScope.customerNewPassword.passwordHash)) {
+      $rootScope.alert("Та шинэ нууц үгээ оруулна уу");
+    } else {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619583335021155", mobileNumber: $rootScope.customerData.userName }).then(function (response) {
+        console.log("res", response);
+        if (response[0] != "") {
+          if (document.getElementById("smsCode").value == response[0].smscode) {
+            console.log("$rootScope.customerNewPassword", $rootScope.customerNewPassword);
+            serverDeferred.requestFull("getPasswordHash1", $rootScope.customerNewPassword).then(function (response) {
+              console.log("res", response);
+              $rootScope.newPasswordHashResult.passwordHash = response[1].result;
+              $rootScope.newPasswordHashResult.password = $rootScope.customerNewPassword.passwordHash;
+              $rootScope.newPasswordHashResult.customerId = registeredUserData.customerid;
+              $rootScope.newPasswordHashResult.id = registeredUserData.id;
+              $rootScope.newPasswordHashResult.userId = registeredUserData.userid;
+              $rootScope.newPasswordHashResult.userName = $rootScope.customerData.userName;
+              serverDeferred.requestFull("dcApp_login_register_dv_002", $rootScope.newPasswordHashResult).then(function (response) {
+                $state.go("login");
+                $rootScope.alert("Нэвтэрнэ үү", "success");
+              });
+            });
+          } else {
+            $rootScope.alert("Баталгаажуулах код буруу байна", "warning");
+          }
+        }
+      });
+    }
+  };
+  $scope.resendCode = function () {
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+    var generatedCode = Math.floor(100000 + Math.random() * 900000);
+
+    var updateCode = {
+      id: all_ID.dccustomerid,
+      smsCode: generatedCode,
+    };
+    var sendSms = {
+      msg: `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`,
+      phoneNumber: $scope.customerData.userName,
+    };
+    serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
+      console.log("sendSmsResponse", sendSmsResponse);
+      serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
+        console.log("sendSmsResponse", sendSmsResponse);
+      });
+    });
+    $scope.onTimer();
+  };
+  $scope.onTimer = function () {
+    var timeleft = 30;
+    var downloadTimer = setInterval(function () {
+      if (timeleft <= 0) {
+        clearInterval(downloadTimer);
+        document.getElementById("resendBtn").innerHTML = "Дахин код илгээх";
+        document.getElementById("resendBtn").disabled = false;
+      } else {
+        if ($state.current.name == "register") {
+          document.getElementById("resendBtn").innerHTML = "Дахин код илгээх " + timeleft;
+          document.getElementById("resendBtn").disabled = true;
+        }
+      }
+      timeleft -= 1;
+    }, 1000);
+  };
+  $scope.inputType = "password";
+  $scope.hideShowPassword = function () {
+    console.log("A");
+    if ($scope.inputType == "password") {
+      console.log("B");
+      $("#eye-icon").removeClass("ion-eye");
+      $("#eye-icon").addClass("ion-eye-disabled");
+      $scope.inputType = "text";
+    } else {
+      console.log("C");
+      $scope.inputType = "password";
+      $("#eye-icon").removeClass("ion-eye-disabled");
+      $("#eye-icon").addClass("ion-eye");
     }
   };
 });

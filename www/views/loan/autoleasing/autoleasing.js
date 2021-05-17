@@ -76,10 +76,28 @@
     var input = document.getElementById("loanAmountRequest");
     $rootScope.loanAmountField = "";
     input.value = "";
+    // if (isEmpty($rootScope.newReqiust.advancePayment)) {
+    //   $timeout(function () {
+    //     $rootScope.requestType = localStorage.getItem("requestType");
+    //     if ($rootScope.requestType == "consumer") {
+    //       // $rootScope.newReqiust = {};
+    //       $rootScope.newReqiust.serviceAgreementId = "1554263832132";
+    //       $rootScope.newReqiust.loanAmount = $rootScope.sumPrice.toString();
+    //       $rootScope.newReqiust.getLoanAmount = $rootScope.sumPrice.toString();
+    //       $rootScope.loanAmountField = $rootScope.sumPrice.toString();
+    //     } else {
+    //       if (!isEmpty($rootScope.selectedCarData)) {
+    //         $rootScope.newReqiust.getLoanAmount = $rootScope.selectedCarData.price;
+    //         $rootScope.loanAmountField = $rootScope.selectedCarData.price;
+    //       }
+    //     }
+    //   }, 100);
+    // }
     $timeout(function () {
       $rootScope.requestType = localStorage.getItem("requestType");
       if ($rootScope.requestType == "consumer") {
-        $rootScope.newReqiust = {};
+        // $rootScope.newReqiust = {};
+        $rootScope.newReqiust.serviceAgreementId = "1554263832132";
         $rootScope.newReqiust.loanAmount = $rootScope.sumPrice.toString();
         $rootScope.newReqiust.getLoanAmount = $rootScope.sumPrice.toString();
         $rootScope.loanAmountField = $rootScope.sumPrice.toString();
@@ -90,6 +108,7 @@
         }
       }
     }, 100);
+    console.log("$rootScope.newReqiust.advancePayment", $rootScope.newReqiust.advancePayment);
   };
   console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
   $rootScope.getbankData = function () {
@@ -160,7 +179,12 @@
   if ($state.current.name == "autoleasing-2") {
     $timeout(function () {
       $scope.getbankData();
-    }, 700);
+    }, 300);
+  }
+  if ($state.current.name == "autoleasing-5") {
+    $timeout(function () {
+      $scope.getbankData();
+    }, 300);
   }
   $scope.showQRreader = function () {
     var optionCodeCam = {
@@ -210,7 +234,11 @@
     if ($scope.checkReqiured("danIncomeReq")) {
       // $state.go("income");
       if ($scope.checkReqiured("agreeBank")) {
-        $state.go("autoleasing-3");
+        if (isEmpty($rootScope.danCustomerData.identfrontpic) || isEmpty($rootScope.danCustomerData.identbackpic)) {
+          $state.go("ident-pic");
+        } else {
+          $state.go("autoleasing-3");
+        }
       }
     } else {
     }
@@ -613,6 +641,7 @@
   };
 
   $scope.goStep3 = function (param) {
+    console.log("asdasd", $rootScope.newReqiust);
     if ($scope.checkReqiured("step2")) {
       if ($scope.checkReqiured("agreeBank")) {
         $state.go("income");
@@ -622,29 +651,22 @@
   $scope.goStep5ORIdent = function () {
     if ($scope.checkReqiured("step4CustomerData")) {
       if ($scope.checkReqiured("agreeBank")) {
-        if (isEmpty($rootScope.danCustomerData.identfrontpic) || isEmpty($rootScope.danCustomerData.identbackpic)) {
-          $state.go("ident-pic");
-        } else {
-          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
-            $rootScope.incomeType = response;
-          });
-          $state.go("autoleasing-5");
-          if ($rootScope.isDanHand) {
-            $scope.getCustomerIncomeData();
-          }
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
+          $rootScope.incomeType = response;
+        });
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
+          $rootScope.incomeType = response;
+        });
+        $state.go("autoleasing-5");
+        if ($rootScope.isDanHand) {
+          $scope.getCustomerIncomeData();
         }
       }
     }
   };
   $scope.goStep5 = function () {
     if ($scope.checkReqiured("identPic")) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
-        $rootScope.incomeType = response;
-      });
-      $state.go("autoleasing-5");
-      if ($rootScope.isDanHand) {
-        $scope.getCustomerIncomeData();
-      }
+      $state.go("autoleasing-3");
     }
   };
 
@@ -794,7 +816,7 @@
     } else {
       $ionicHistory.goBack();
     }
-    $rootScope.newReqiust = {};
+    // $rootScope.newReqiust = {};
   };
 
   $scope.$on("$ionicView.enter", function () {
@@ -812,8 +834,9 @@
       } else {
         $scope.isCollShow = false;
       }
-      $rootScope.newReqiust = {};
+      // $rootScope.newReqiust = {};
       $rootScope.newReqiust.getLoanAmount = "";
+      $rootScope.newReqiust.serviceAgreementId = "1554263832132";
       $scope.getLoanAmountFunc();
       $scope.getLookupData();
     }
@@ -965,6 +988,7 @@
         });
       }
     });
+    $rootScope.monthlyIncomeDisable = false;
   };
 
   $scope.registerFunctionAuto = function (value) {

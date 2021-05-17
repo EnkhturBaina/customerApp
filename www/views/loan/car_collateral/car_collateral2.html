@@ -34,7 +34,7 @@
                     <span class="title car-coll-step2-title">Хугацаа сараар</span>
                     <div class="tugrug-input-container">
                         <span class="input-tugrug-icon"><i class="icon fa fa-calendar"></i></span>
-                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number" ng-model="$root.carCollateralRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-change="getbankDataCarColl()" select-on-click />
+                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number tooltip" ng-model="$root.carCollateralRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-change="getbankDataCarColl()" title="Зээл авах сар 0-с 96 хооронд байна" animation="fade" select-on-click />
                     </div>
                 </div>
                 <label class="item item-input step2-loam-month">
@@ -50,7 +50,7 @@
                             <span class="step2-span step2-term" ng-click="termModalAgreement.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
                             <span>
                                 <label class="step2-switch" id="step2isAgree">
-                                    <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.carCollateralRequestData.serviceAgreementId" ng-change="" />
+                                    <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-checked="true" ng-model="$root.carCollateralRequestData.serviceAgreementId" ng-change="" />
                                     <div class="step2-slider step2-round">
                                         <span id="step2-toggle-on" class="step2-on">Тийм</span>
                                         <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
@@ -80,7 +80,6 @@
                         <p>{{bank.department_name}}</p>
                     </div>
                 </ion-scroll>
-                <div class="arrow-anim-container"><span></span><span></span><span></span></div>
             </div>
             <button class="button btn single-button" id="Next" ng-click="saveCarCollRequestData()">Үргэлжлүүлэх</button>
         </div>

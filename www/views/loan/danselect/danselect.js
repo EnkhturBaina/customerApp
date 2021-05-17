@@ -27,6 +27,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
   $scope.autoCollHand = function () {
     $rootScope.isDanLoginAutoColl = false;
     $rootScope.newCarReq = {};
+    $rootScope.monthlyIncomeDisable = false;
   };
 
   $scope.gotoDanLoginDanSelect = function () {
@@ -46,15 +47,12 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
 
         if (code == 0) {
           serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://services.digitalcredit.mn/api/sso/check").then(function (response) {
-            console.log("response autoColl DAN", response);
             if (!isEmpty(response.result.data)) {
               var userInfo = JSON.parse(response.result.data.info);
-              console.log("userInfo", userInfo);
               if (!isEmpty(response.result.data.vehicle)) {
                 $rootScope.userVehicleData = JSON.parse(response.result.data.vehicle);
                 if (!isEmpty($rootScope.userVehicleData)) {
                   $rootScope.propJsonAutoColl = $rootScope.userVehicleData.list;
-                  console.log("$rootScope.propJsonAutoColl", $rootScope.propJsonAutoColl);
                   if ($rootScope.propJsonAutoColl.length == 1) {
                     $rootScope.autoCollDanCarData = $rootScope.propJsonAutoColl[0];
                     $rootScope.autoCollDanCarData.importDate = formatDate($rootScope.propJsonAutoColl[0].importDate);
@@ -68,10 +66,8 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
 
                 var userSalaryInfo = JSON.parse(response.result.data.salary);
                 serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.regnum.toUpperCase() }).then(function (checkedValue) {
-                  console.log("checkedValue", checkedValue);
                   if (!isEmpty(checkedValue[1])) {
                     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
-                      console.log("responseCustomerData", responseCustomerData);
                       if (responseCustomerData[0] != "") {
                         //Бүртгэлтэй USER -н дата татаж харуулах
                         $rootScope.danCustomerData = responseCustomerData[0];
@@ -104,12 +100,12 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                   console.log("userSalaryInfo", userSalaryInfo);
                   if (userSalaryInfo) {
                     serverDeferred.carCalculation(userSalaryInfo.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
-                      console.log("res salary", response);
+                      // console.log("res salary", response);
                       $rootScope.monthlyAverage = response.result;
-                      console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
+                      // console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
                       $rootScope.monthlyIncomeDisable = true;
                       $rootScope.danIncomeData.monthlyincome = response.result;
-                      console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
+                      // console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
                     });
                   }
                 }, 1000);

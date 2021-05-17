@@ -78,7 +78,7 @@
                                     <span class="step2-span step2-term" ng-click="termModalAgreement.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
                                     <span>
                                         <label class="step2-switch" id="step2isAgree">
-                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" ng-change="" />
+                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-checked="true" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" ng-change="" />
                                             <div class="step2-slider step2-round">
                                                 <span id="step2-toggle-on" class="step2-on">Тийм</span>
                                                 <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
@@ -108,7 +108,6 @@
                             <p>{{bank.department_name}}</p>
                         </div>
                     </ion-scroll>
-                    <div class="arrow-anim-container"><span></span><span></span><span></span></div>
                 </div>
             </div>
             <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
