@@ -30,6 +30,19 @@
 							<select ng-model="template" ng-options="t.name for t in propertyCategory | filter:{name:'!!'}" class="property-select" ng-change="categoryChange(template)">
 							</select>
 						</label>
+						<label class="item item-input item-stacked-label property-label" ng-if="$root.propertyIsDan">
+							<span class="input-label">Хөрөнгийн дэд төрөл</span>
+							<input id="propertySubCategory" ng-model="$root.propertyData.assetName" type="text" placeholder="-" class="property-input" disabled>
+						</label>
+						<label class="item item-input item-stacked-label property-label" ng-if="$root.showSquareSizeField">
+							<span class="input-label">Талбайн хэмжээ /м2/</span>
+							<input id="squareSize" ng-model="$root.propertyData.squareSize" type="number" placeholder="0" class="property-input" ng-disabled="$root.propertyIsDan">
+						</label>
+						<label class="item item-input item-stacked-label property-label" ng-if="$root.propertyIsDan">
+							<span class="input-label">Хаяг</span>
+							<textarea rows="4" cols="10" ng-model="$root.propertyData.address" placeholder="-" class="property-input" ng-disabled="$root.propertyIsDan">
+							</textarea>
+						</label>
 						<div class=" slide-animate-container">
 							<div ng-include="template.mobiletemplatepath"></div>
 						</div>
@@ -38,7 +51,7 @@
 			</div>
 			<div class="bank-container">
 				<p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
-				<img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" />
+				<img class="tooltip" ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" title="{{bank.department_name}}" animation="fade" />
 
 			</div>
 			<ion-footer class="">

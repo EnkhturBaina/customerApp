@@ -24,7 +24,7 @@
                 <p class="auto-template-bank-title">Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
                 <ion-scroll direction="x" class="wide-scroll-bank">
                     <div class="" ng-repeat="bank in allBankList" ng-if="bank.bank_logo">
-                        <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+                        <img class="tooltip" ng-src="{{bank.bank_logo|guessImageMime}}" title="{{bank.department_name}}" animation="fade" />
                     </div>
                 </ion-scroll>
             </div>

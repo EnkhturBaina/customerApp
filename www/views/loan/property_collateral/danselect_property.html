@@ -16,7 +16,7 @@
             </div>
             <div class="bank-container">
                 <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
-                <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" />
+                <img class="tooltip" ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" title="{{bank.department_name}}" animation="fade" />
             </div>
         </div>
     </ion-content>

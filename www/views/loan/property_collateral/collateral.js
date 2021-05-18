@@ -49,7 +49,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     });
   $timeout(function () {
     if ($state.current.name == "property_collateral_danselect") {
-      // $scope.propertyModal.show();
+      $scope.propertyModal.show();
     }
   }, 300);
   $ionicModal
@@ -135,12 +135,12 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
                 console.log("userSalaryInfo", userSalaryInfo);
                 if (userSalaryInfo) {
                   serverDeferred.carCalculation(userSalaryInfo.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
-                    // console.log("res salary", response);
+                    console.log("res salary", response);
                     $rootScope.monthlyAverage = response.result;
-                    // console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
+                    console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
                     $rootScope.monthlyIncomeDisable = true;
                     $rootScope.danIncomeData.monthlyincome = response.result;
-                    // console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
+                    console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
                   });
                 }
               }, 1000);
@@ -159,6 +159,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     });
     $rootScope.propertyIsDan = true;
     $rootScope.showPropertyBtn = true;
+    $rootScope.showSquareSizeField = true;
   };
   $scope.registerFunctionEstate = function (value) {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -221,6 +222,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     $rootScope.propertyIsDan = false;
     $rootScope.showPropertyBtn = false;
     $rootScope.monthlyIncomeDisable = false;
+    $rootScope.showSquareSizeField = false;
   };
   $scope.savePropertyRequestData = function () {
     if ($scope.propertyCheckReqiured("step2")) {
@@ -231,10 +233,13 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   console.log("$rootScope.propertyIsDan", $rootScope.propertyIsDan);
   $scope.propertyCheckReqiured = function (param) {
     if (param == "step1") {
-      if (isEmpty($rootScope.propertyData.squareSize)) {
+      if (isEmpty($scope.template)) {
+        $rootScope.alert("Хөрөнгийн төрөл сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.propertyData.squareSize)) {
         $rootScope.alert("Талбайн хэмжээ оруулна уу", "warning");
         return false;
-      } else if (["A001", "A002", "A003", "A004"].includes($scope.template.code) && isEmpty($rootScope.propertyData.roomCount)) {
+      } else if (["A001", "A002", "A003", "A004"].includes($scope.template.code) && isEmpty($rootScope.propertyData.roomCount) && !$rootScope.propertyIsDan) {
         $rootScope.alert("Өрөөний тоо оруулна уу", "warning");
         return false;
       } else if (["A001", "A002"].includes($scope.template.code) && isEmpty($rootScope.propertyData.floorCount) && !$rootScope.propertyIsDan) {
@@ -385,10 +390,14 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     val != "" ? (document.getElementById("streetSelect").disabled = false) : (document.getElementById("streetSelect").disabled = true);
   };
   $scope.categoryChange = function (val) {
+    console.log("val", val);
     $scope.template = val;
     // $rootScope.propertyData = {};
     $rootScope.propertyData.categoryId = val.id;
     console.log("$rootScope.propertyData", $rootScope.propertyData);
+    if (!isEmpty($scope.template)) {
+      $rootScope.showSquareSizeField = true;
+    }
   };
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;

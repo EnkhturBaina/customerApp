@@ -12,6 +12,7 @@
   background-repeat: no-repeat;
   background-position: 0% 0%;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .home-card-2 {
   color: #fff;
@@ -23,6 +24,7 @@
   background-repeat: no-repeat;
   background-position: 0% 0%;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .home-card-3 {
   color: #fff;
@@ -34,6 +36,7 @@
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .home-card-4 {
   color: #fff;
@@ -45,6 +48,7 @@
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .home-card-5 {
   color: #fff;
@@ -57,6 +61,7 @@
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .home-card-1-first-row {
   margin-bottom: 50px;
@@ -77,6 +82,7 @@
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .loan-card-2 {
   background: url(../../img/lines/home-bigcard-cover-line-1.png), #3cc1fa;
@@ -85,6 +91,7 @@
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .loan-card-3 {
   background: url(../../img/lines/home-bigcard-cover-line-1.png), linear-gradient(-160deg, #42c2ee, #68c8a5);
@@ -93,6 +100,7 @@
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .loan-card-4 {
   background: url(../../img/lines/home-bigcard-cover-line-1.png), linear-gradient(-160deg, #56c5c7, #87cd68);
@@ -101,6 +109,7 @@
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .loan-card-5 {
   background: url(../../img/lines/home-bigcard-cover-line-1.png), linear-gradient(-120deg, #74ca8c, #a7d22a);
@@ -109,6 +118,7 @@
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
+  image-rendering: pixelated;
 }
 .loan-card-text {
   text-align: right;

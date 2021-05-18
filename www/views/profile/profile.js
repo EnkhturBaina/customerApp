@@ -425,8 +425,9 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     $state.go("home");
   };
   $ionicPlatform.onHardwareBackButton(function () {
-    console.log("ASDAD");
-    $state.go("home");
+    if ($state.current.name == "autoleasing-2") {
+      $state.go("home");
+    }
   });
   // $ionicPlatform.registerBackButtonAction(function (e) {
   //   e.preventDefault();

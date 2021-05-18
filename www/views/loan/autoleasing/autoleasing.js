@@ -1,10 +1,9 @@
 ﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal, $ionicLoading) {
   $rootScope.requestType = "";
   $rootScope.requestType = localStorage.getItem("requestType");
-
+  //Сүүлийн Step дээр сонгосон банк
   $rootScope.selectedBanksList = [];
   if ($state.current.name == "autoleasing-1") {
-    // $rootScope.alert("Та авах автомашиныхаа кодыг оруулах эсвэл QR кодыг уншуулна уу", "success");
     $ionicModal
       .fromTemplateUrl("templates/auto.html", {
         scope: $scope,
@@ -13,12 +12,12 @@
       .then(function (autoModal) {
         $scope.autoModal = autoModal;
       });
-    // modals.show();
     $timeout(function () {
       $scope.autoModal.show();
     }, 300);
     $rootScope.hideFooter = true;
   }
+
   $ionicModal
     .fromTemplateUrl("templates/danIs.html", {
       scope: $scope,
@@ -27,6 +26,7 @@
     .then(function (danIsModal) {
       $scope.danIsModal = danIsModal;
     });
+
   $scope.getCarDatasId = function (itemCode) {
     $rootScope.selectedCarData = [];
     localStorage.setItem("requestType", "auto");
@@ -76,39 +76,25 @@
     var input = document.getElementById("loanAmountRequest");
     $rootScope.loanAmountField = "";
     input.value = "";
-    // if (isEmpty($rootScope.newReqiust.advancePayment)) {
-    //   $timeout(function () {
-    //     $rootScope.requestType = localStorage.getItem("requestType");
-    //     if ($rootScope.requestType == "consumer") {
-    //       // $rootScope.newReqiust = {};
-    //       $rootScope.newReqiust.serviceAgreementId = "1554263832132";
-    //       $rootScope.newReqiust.loanAmount = $rootScope.sumPrice.toString();
-    //       $rootScope.newReqiust.getLoanAmount = $rootScope.sumPrice.toString();
-    //       $rootScope.loanAmountField = $rootScope.sumPrice.toString();
-    //     } else {
-    //       if (!isEmpty($rootScope.selectedCarData)) {
-    //         $rootScope.newReqiust.getLoanAmount = $rootScope.selectedCarData.price;
-    //         $rootScope.loanAmountField = $rootScope.selectedCarData.price;
-    //       }
-    //     }
-    //   }, 100);
-    // }
-    $timeout(function () {
-      $rootScope.requestType = localStorage.getItem("requestType");
-      if ($rootScope.requestType == "consumer") {
-        // $rootScope.newReqiust = {};
-        $rootScope.newReqiust.serviceAgreementId = "1554263832132";
-        $rootScope.newReqiust.loanAmount = $rootScope.sumPrice.toString();
-        $rootScope.newReqiust.getLoanAmount = $rootScope.sumPrice.toString();
-        $rootScope.loanAmountField = $rootScope.sumPrice.toString();
-      } else {
-        if (!isEmpty($rootScope.selectedCarData)) {
-          $rootScope.newReqiust.getLoanAmount = $rootScope.selectedCarData.price;
-          $rootScope.loanAmountField = $rootScope.selectedCarData.price;
-        }
+    $rootScope.requestType = localStorage.getItem("requestType");
+
+    if ($rootScope.requestType == "consumer") {
+      $rootScope.newReqiust.serviceAgreementId = "1554263832132";
+      $rootScope.newReqiust.loanAmount = $rootScope.sumPrice.toString();
+      $rootScope.newReqiust.getLoanAmount = $rootScope.sumPrice.toString();
+      $rootScope.loanAmountField = $rootScope.sumPrice.toString();
+    } else {
+      if (!isEmpty($rootScope.selectedCarData)) {
+        $rootScope.newReqiust.getLoanAmount = $rootScope.selectedCarData.price;
+        $rootScope.loanAmountField = $rootScope.selectedCarData.price;
       }
-    }, 100);
-    console.log("$rootScope.newReqiust.advancePayment", $rootScope.newReqiust.advancePayment);
+    }
+
+    $timeout(function () {
+      if (!isEmpty($rootScope.newReqiust.advancePayment)) {
+        $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.getLoanAmount - $rootScope.newReqiust.advancePayment;
+      }
+    }, 200);
   };
   console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
   $rootScope.getbankData = function () {
@@ -169,17 +155,12 @@
       $ionicLoading.hide();
     });
   };
-  //Банк шүүлт autoleasing-2 дээр шууд ажиллах
+  //Банк шүүлт step 2 дээр шууд ажиллах
   //Банк сонгох autoleasing-3 хуудасруу ороход ажиллах
   if ($state.current.name == "autoleasing-3" && $rootScope.requestType != "autoColl") {
     $timeout(function () {
       $scope.getbankData();
     }, 500);
-  }
-  if ($state.current.name == "autoleasing-2") {
-    $timeout(function () {
-      $scope.getbankData();
-    }, 300);
   }
   if ($state.current.name == "autoleasing-5") {
     $timeout(function () {
@@ -217,7 +198,7 @@
   //Дан -с нийгмийн даатгалын мэдээлэл татаж хадгалах
   $scope.getCustomerIncomeData = function () {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
-    $rootScope.danIncomeData = {};
+    // $rootScope.danIncomeData = {};
     if (!isEmpty($rootScope.loginUserInfo)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
         if (response[0] != "") {
@@ -786,7 +767,7 @@
       }
     } else if (param == "agreeBank") {
       if (isEmpty($rootScope.bankListFilter.Agree)) {
-        $rootScope.alert("Таны нөхцлийн дагуу зээл олгох банк, ББСБ одоогоор байхгүй байна. Та оруулсан мэдээллээ дахин шалгаарай", "warning");
+        $rootScope.alert("Таны мэдээллийн дагуу зээл олгох банк, ББСБ байхгүй байна. Та мэдээллээ дахин оруулна уу.", "warning");
         return false;
       } else {
         return true;
@@ -839,6 +820,9 @@
       $rootScope.newReqiust.serviceAgreementId = "1554263832132";
       $scope.getLoanAmountFunc();
       $scope.getLookupData();
+      $timeout(function () {
+        $scope.getbankData();
+      }, 200);
     }
   });
   // MODAL

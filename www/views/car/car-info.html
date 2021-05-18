@@ -113,7 +113,7 @@
 
             <div class="bank-container">
                 <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
-                <img ng-repeat="bank in bankList | filter:{id:'!!'}" ng-src="{{bank.bank_logo|guessImageMime}}" />
+                <img class="tooltip" ng-repeat="bank in bankList | filter:{id:'!!'}" ng-src="{{bank.bank_logo|guessImageMime}}" title="{{bank.department_name}}" animation="fade" />
 
             </div>
             <!-- <div class="suggest-slider-container">

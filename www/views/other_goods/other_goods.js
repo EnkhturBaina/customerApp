@@ -2,7 +2,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $rootScope.otherGoods = [];
   $rootScope.newCarReq = {};
   $rootScope.otherGoodsData = [];
-
+  $rootScope.newReqiust = {};
   $rootScope.suppliers = [];
   $rootScope.getLocalGoodsData = function () {
     $rootScope.otherGoodsData = JSON.parse(localStorage.getItem("otherGoods"));

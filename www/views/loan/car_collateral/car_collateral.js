@@ -108,6 +108,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
 
   // localStorage.removeItem("carColl");
   $scope.saveCarCol = function () {
+    console.log("newCarReq", $rootScope.newCarReq);
     if (isEmpty($rootScope.newCarReq)) {
       $rootScope.newCarReq = {};
     }
@@ -118,12 +119,22 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       $state.go("car_coll2");
     }
   };
+  $rootScope.yearsArray = [];
   if ($state.current.name == "car_coll") {
     $scope.getCarCollateralLookupData();
     var charA = ["А", "Б", "Г", "Д", "З", "Н", "О", "Ө", "С", "Т", "Х", "У", "Ц", "Ч"];
     var chars = ["А", "Б", "В", "Г", "Д", "Е", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "Х", "У", "Ү", "Ц", "Ч", "Э", "Я"];
     var nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
+    $scope.generateArrayOfYears = function () {
+      var max = new Date().getFullYear();
+      var min = max - 30;
+
+      for (var i = max; i >= min; i--) {
+        $rootScope.yearsArray.push(i);
+      }
+    };
+    $scope.generateArrayOfYears();
     $ionicPlatform.ready(function () {
       setTimeout(function () {
         new MobileSelect({
@@ -138,17 +149,58 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
           },
           callback: function (indexArr, data) {
             var a = data.join("");
-            $scope.setNumber(a);
+            $scope.setNumber("nationalNumber", a);
             $rootScope.newCarReq.nationalNumber = a;
+          },
+        });
+        new MobileSelect({
+          trigger: ".productYearPicker",
+          wheels: [{ data: $rootScope.yearsArray }],
+          position: [0, 0],
+          ensureBtnText: "Болсон",
+          title: "Үйлдвэрлэсэн он",
+          maskOpacity: 0.5,
+          cancelBtnText: "Хаах",
+          transitionEnd: function (indexArr, data) {
+            //scrolldood duusahad ajillah func
+          },
+          callback: function (indexArr, data) {
+            var a = data.join("");
+            $scope.setNumber("manufacturedYearId", a);
+            $rootScope.newCarReq.manufacturedYearId = a;
+            mobileSelect4.show();
+          },
+        });
+        var mobileSelect4 = new MobileSelect({
+          trigger: ".cameYearPicker",
+          wheels: [{ data: $rootScope.yearsArray }],
+          position: [0, 0],
+          ensureBtnText: "Болсон",
+          title: "Орж ирсэн он",
+          maskOpacity: 0.5,
+          cancelBtnText: "Хаах",
+          transitionEnd: function (indexArr, data) {
+            //scrolldood duusahad ajillah func
+          },
+          callback: function (indexArr, data) {
+            var a = data.join("");
+            $scope.setNumber("cameYearId", a);
+            $rootScope.newCarReq.cameYearId = a;
           },
         });
       }, 1000);
     });
 
-    $scope.setNumber = function (data) {
+    $scope.setNumber = function (type, data) {
       //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
       $(function () {
-        $("#nationalNumber").val(data).trigger("input");
+        if (type == "manufacturedYearId") {
+          $("#productYear").val(data).trigger("input");
+        } else if (type == "cameYearId") {
+          $("#entryYear").val(data).trigger("input");
+        } else if (type == "nationalNumber") {
+          $("#nationalNumber").val(data).trigger("input");
+        }
       });
     };
   }

@@ -88,11 +88,11 @@
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Үйлдвэрлэсэн он <span class="car-coll-req">*</span></p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.newCarReq.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
+                            <input inputmode="numeric" class="productYearPicker" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.newCarReq.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Орж ирсэн он <span class="car-coll-req">*</span></p>
-                            <input inputmode="numeric" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.newCarReq.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
+                            <input inputmode="numeric" class="cameYearPicker" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.newCarReq.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Улсын дугаар</p>
@@ -177,7 +177,7 @@
             </div>
             <div class="bank-container">
                 <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
-                <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" />
+                <img class="tooltip" ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" title="{{bank.department_name}}" animation="fade" />
 
             </div>
             <ion-footer class="bottom-footer" style="margin-bottom: 50px;">
