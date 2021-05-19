@@ -125,10 +125,14 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   $rootScope.isDanLogin = false;
   $scope.Login = function (a, b) {
     // $rootScope.ShowLoader();
+    console.log("A", a);
     if (isEmpty(a)) {
       $ionicLoading.hide();
-      $rootScope.alert("Нэвтрэх нэрээ оруулна уу", "warning");
+      $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
     } else if (isEmpty(b)) {
+      $ionicLoading.hide();
+      $rootScope.alert("Утасны дугаараа бүрэн уу", "warning");
+    } else if (a.length < 8) {
       $ionicLoading.hide();
       $rootScope.alert("Нууц үгээ оруулна уу", "warning");
     } else {
@@ -203,6 +207,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
     $rootScope.profilePictureSideMenu = value.image;
     localStorage.removeItem("profilePictureSideMenu");
     localStorage.setItem("profilePictureSideMenu", value.image);
+    $rootScope.sidebarUserName = value.lastname.substr(0, 1) + ". " + value.firstname;
 
     serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
       if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {

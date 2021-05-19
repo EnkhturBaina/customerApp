@@ -53,6 +53,8 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
   $scope.sendSmsCode = function () {
     if (isEmpty($scope.crmUserData.userName)) {
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+    } else if ($scope.crmUserData.userName.length < 8) {
+      $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
     } else if (isEmpty($scope.customerPassword.passwordHash)) {
       $rootScope.alert("Нууц үгээ оруулна уу", "warning");
     } else if ($("#regNums").val() == "" || $("#regNums").val() == null) {

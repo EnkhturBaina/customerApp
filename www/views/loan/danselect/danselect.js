@@ -151,6 +151,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
     $rootScope.profilePictureSideMenu = value.image;
     localStorage.removeItem("profilePictureSideMenu");
     localStorage.setItem("profilePictureSideMenu", value.image);
+    $rootScope.sidebarUserName = value.lastname.substr(0, 1) + ". " + value.firstname;
 
     serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
       console.log("checkedValue", checkedValue);

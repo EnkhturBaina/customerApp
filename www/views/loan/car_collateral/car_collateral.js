@@ -104,6 +104,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
     });
+    console.log("json", json);
   };
 
   // localStorage.removeItem("carColl");

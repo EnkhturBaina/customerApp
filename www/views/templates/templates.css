@@ -2,7 +2,7 @@
   background: transparent !important;
 }
 .templates-card {
-  padding: 20px;
+  padding: 0px 20px;
   height: fit-content;
   background-color: #fff !important;
   margin-left: 40px !important;
@@ -16,6 +16,7 @@
 
 .templates-scroll {
   height: 100%;
+  padding: 10px 0px;
 }
 .templates-scroll .scroll-bar {
   display: none;
@@ -180,4 +181,18 @@
   min-height: 37px;
   line-height: 34px !important;
   align-self: center;
+}
+.photobanner {
+  width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: bannermove 15s linear infinite;
+}
+@keyframes bannermove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-40%, 0);
+  }
 }

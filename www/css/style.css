@@ -1372,18 +1372,29 @@ input[type="number"] {
   }
 }
 
+.wide-scroll-bank-step {
+  overflow: scroll;
+  white-space: nowrap;
+}
+.wide-scroll-bank-step .scroll {
+  display: flex;
+  width: calc(100% - 40px);
+}
+.wide-scroll-bank-step .scroll-bar {
+  display: none;
+}
+
 .wide-scroll-bank {
   overflow: scroll;
   white-space: nowrap;
 }
 .wide-scroll-bank .scroll {
-  display: flex;
+  display: block;
   width: calc(100% - 40px);
 }
 .wide-scroll-bank .scroll-bar {
   display: none;
 }
-
 .profile-input-name-error {
   position: absolute;
   font-size: 10px;

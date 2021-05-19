@@ -31,3 +31,36 @@
   width: 100%;
   height: 100%;
 }
+
+.red {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 44px);
+  background: red;
+}
+.green {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 44px);
+  background: green;
+}
+.blue {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 44px);
+  background: blue;
+}
+.slide {
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
+  -webkit-scroll-snap-type: mandatory;
+  /* scroll-snap-destination is not required in this case but could be necessary in some situations */
+  -webkit-scroll-snap-destination: 100% 0%;
+  -webkit-scroll-snap-points-y: repeat(calc(100vh - 44px));
+}

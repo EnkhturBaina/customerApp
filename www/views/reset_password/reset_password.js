@@ -38,6 +38,8 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
   $scope.sendSmsCode = function () {
     if (isEmpty($rootScope.customerData.userName)) {
       $rootScope.alert("Утасны дугаараа оруулна уу");
+    } else if ($rootScope.customerData.userName.length < 8) {
+      $rootScope.alert("Утасны дугаараа бүрэн оруулна уу");
     } else {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $rootScope.customerData.userName }).then(function (response) {
         console.log("res", response);

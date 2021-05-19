@@ -105,45 +105,58 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
   $scope.saveProfileData = function () {
     $rootScope.ShowLoader();
-    document.getElementById("lastNameLabel").style.borderBottom = "1px solid #ddd";
-    document.getElementById("firstNameLabel").style.borderBottom = "1px solid #ddd";
-    document.getElementById("regLabel").style.borderBottom = "1px solid #ddd";
-    document.getElementById("mailLabel").style.borderBottom = "1px solid #ddd";
-    document.getElementById("phoneLabel").style.borderBottom = "1px solid #ddd";
-    document.getElementById("marriageLabel").style.borderBottom = "1px solid #ddd";
-    document.getElementById("mikLabel").style.borderBottom = "1px solid #ddd";
-    document.getElementById("workLabel").style.borderBottom = "1px solid #ddd";
+    // document.getElementById("lastNameLabel").style.borderBottom = "1px solid #ddd";
+    // document.getElementById("firstNameLabel").style.borderBottom = "1px solid #ddd";
+    // document.getElementById("regLabel").style.borderBottom = "1px solid #ddd";
+    // document.getElementById("mailLabel").style.borderBottom = "1px solid #ddd";
+    // document.getElementById("phoneLabel").style.borderBottom = "1px solid #ddd";
+    // document.getElementById("marriageLabel").style.borderBottom = "1px solid #ddd";
+    // document.getElementById("mikLabel").style.borderBottom = "1px solid #ddd";
+    // document.getElementById("workLabel").style.borderBottom = "1px solid #ddd";
     $scope.customerProfileData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
 
     if (isEmpty($scope.customerProfileData.lastname)) {
+      $ionicLoading.hide();
       $rootScope.alert("Та овогоо оруулна уу", "warning");
-      document.getElementById("lastNameLabel").style.borderBottom = "2px solid red";
+      // document.getElementById("lastNameLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.firstname)) {
+      $ionicLoading.hide();
       $rootScope.alert("Та өөрийн нэрээ оруулна уу", "warning");
-      document.getElementById("firstNameLabel").style.borderBottom = "2px solid red";
+      // document.getElementById("firstNameLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.uniqueidentifier)) {
+      $ionicLoading.hide();
       $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
-      document.getElementById("regLabel").style.borderBottom = "2px solid red";
+      // document.getElementById("regLabel").style.borderBottom = "2px solid red";
     }
     // else if (isEmpty($scope.customerProfileData.email)) {
     //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
     //   document.getElementById("mailLabel").style.borderBottom = "2px solid red";
     // }
     else if (isEmpty($scope.customerProfileData.mobilenumber)) {
+      $ionicLoading.hide();
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
-      document.getElementById("phoneLabel").style.borderBottom = "2px solid red";
+      // document.getElementById("phoneLabel").style.borderBottom = "2px solid red";
+    } else if ($scope.customerProfileData.mobilenumber.length < 8) {
+      $ionicLoading.hide();
+      $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
+      return false;
     } else if (isEmpty($scope.customerProfileData.ismarried)) {
+      $ionicLoading.hide();
       $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
-      document.getElementById("marriageLabel").style.borderBottom = "2px solid red";
+      // document.getElementById("marriageLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.mikmortgagecondition)) {
+      $ionicLoading.hide();
       $rootScope.alert("МИК-ийн зээлтэй эсэхээ сонгоно уу", "warning");
-      document.getElementById("mikLabel").style.borderBottom = "2px solid red";
+      // document.getElementById("mikLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
+      $ionicLoading.hide();
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
-      document.getElementById("workLabel").style.borderBottom = "2px solid red";
+      // document.getElementById("workLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.identfrontpic)) {
+      $ionicLoading.hide();
       $rootScope.alert("Иргэний үнэмлэхний урд талын зургийг оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.identbackpic)) {
+      $ionicLoading.hide();
       $rootScope.alert("Иргэний үнэмлэхний ард талын зургийг оруулна уу", "warning");
     } else {
       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));

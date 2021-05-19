@@ -28,4 +28,10 @@ app.controller("contactCtrl", function ($scope, $rootScope, $ionicPlatform, $sta
   //   }
   // );
   $rootScope.hideFooter = true;
+  $scope.options = {
+    loop: false,
+    effect: "fade",
+    speed: 500,
+    autoplay: 1000,
+  };
 });
