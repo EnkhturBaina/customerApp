@@ -749,27 +749,6 @@ h4 {
   overflow: hidden !important;
 }
 
-.side-menu-wraps {
-  margin: 5px 0px !important;
-}
-
-.side-bar-expand-menu {
-  margin: 5px 20px 5px 0px !important;
-  display: block;
-}
-
-.side-bar-expand-menu span {
-  color: #fff;
-}
-
-.side-menu-collapsible {
-  margin: 0px 0px 0px 20px !important;
-}
-
-.side-menu-expand-icon {
-  padding-left: 20px;
-}
-
 .pane,
 .view {
   background-color: #f8f8fd !important;

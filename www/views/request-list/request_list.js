@@ -1,5 +1,5 @@
 var expandCollapseApp = angular.module("request_list.Ctrl", ["ngAnimate"]);
-expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicLoading, $timeout, $ionicPlatform, $ionicHistory, $filter) {
+expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicLoading, $timeout, $filter) {
   $scope.isEmptyReq = true;
   // ====== Get Data  ========
   $rootScope.getRequetData = function () {

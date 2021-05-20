@@ -1,4 +1,4 @@
-<ion-view id="loanPages" hide-nav-bar="true">
+<ion-view id="loanPages" hide-nav-bar="true" cache-view="false">
 	<link href="views/loan/property_collateral/collateral.css" rel="stylesheet" />
 	<div id="overlayCollateralLoan" ng-click="pCSourceSelectOff()">
 		<div class="overlay-pc-content">
@@ -27,7 +27,7 @@
 						<button class="button btn single-button" id="Next" ng-click="propertyDan.show()" ng-if="$root.showPropertyBtn">Өөр хөрөнгө сонгох</button>
 						<label class="item item-input item-select property-label">
 							<p class="input-label" style="margin: 0;">Хөрөнгийн төрөл</p>
-							<select ng-model="template" ng-options="t.name for t in propertyCategory | filter:{name:'!!'}" class="property-select" ng-change="categoryChange(template)">
+							<select ng-model="$root.template" ng-options="t.name for t in propertyCategory | filter:{name:'!!'}" class="property-select" ng-change="categoryChange($root.template)">
 							</select>
 						</label>
 						<label class="item item-input item-stacked-label property-label" ng-if="$root.propertyIsDan">
@@ -43,8 +43,8 @@
 							<textarea rows="4" cols="10" ng-model="$root.propertyData.address" placeholder="-" class="property-input" ng-disabled="$root.propertyIsDan">
 							</textarea>
 						</label>
-						<div class=" slide-animate-container">
-							<div ng-include="template.mobiletemplatepath"></div>
+						<div class="slide-animate-container">
+							<div ng-include="$root.template.mobiletemplatepath"></div>
 						</div>
 					</div>
 				</div>

@@ -12,6 +12,7 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
     } else if ($rootScope.loanType === "3") {
       dvId = "1614744306112512";
     } else if ($rootScope.loanType === "4") {
+      dvId = "1614748505027675";
     } else if ($rootScope.loanType === "5") {
     }
     if (dvId != "") {

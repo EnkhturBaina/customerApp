@@ -128,9 +128,6 @@
                         <div class="list profile-list">
                             <label class="item item-input profile-label">
                                 <p>Орлогын эх үүсвэр</p>
-                                <!-- <select class="profile-select" ng-model="$root.customerIncomeProfileData.incometypeid">
-                                    <option ng-repeat="income in incomeType | filter:{id:'!!'}" ng-if="income.name" value="{{income.id}}" ng-selected="{{$root.customerIncomeProfileData.incometypeid==income.id}}">{{income.name}}</option>
-                                </select> -->
 
                                 <select class="profile-select" ng-model="$root.customerIncomeProfileData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.customerIncomeProfileData.incometypeid = $root.customerIncomeProfileData.incometypeid"></select>
                             </label>

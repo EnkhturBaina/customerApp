@@ -30,18 +30,15 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
 
   $scope.inputType = "password";
   $scope.user = {};
-  $scope.hideShowPassword = function () {
-    console.log("A");
+  $scope.hideShowPasswordReg = function () {
     if ($scope.inputType == "password") {
-      console.log("B");
-      $("#eye-icon").removeClass("ion-eye");
-      $("#eye-icon").addClass("ion-eye-disabled");
+      $("#eye-icon-register").removeClass("ion-eye");
+      $("#eye-icon-register").addClass("ion-eye-disabled");
       $scope.inputType = "text";
     } else {
-      console.log("C");
+      $("#eye-icon-register").removeClass("ion-eye-disabled");
+      $("#eye-icon-register").addClass("ion-eye");
       $scope.inputType = "password";
-      $("#eye-icon").removeClass("ion-eye-disabled");
-      $("#eye-icon").addClass("ion-eye");
     }
   };
   $rootScope.customerPassword = {};

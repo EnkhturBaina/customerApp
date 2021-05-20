@@ -1,4 +1,4 @@
-﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform, $state) {
+﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform) {
   // $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
   // $rootScope.imagePath = "https://dev.veritech.mn/";
   $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
@@ -13,7 +13,6 @@
     return true;
   };
   $rootScope.newCarReq = {};
-  $rootScope.hideFooter = false;
   // ========= Slide =============
   $scope.activeSlideIndex = 0;
   $rootScope.showBanner = true;
@@ -147,13 +146,6 @@
     $rootScope.alert("Тун удахгүй", "warning");
   };
 
-  localStorage.removeItem("requestType");
-  $rootScope.loginUserInfo = {};
-  $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
-  console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
-  if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
-    $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
-  }
   //Утасны back button
   $ionicPlatform.onHardwareBackButton(function () {
     $rootScope.hideFooter = false;
@@ -192,5 +184,12 @@
 
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = false;
+    localStorage.removeItem("requestType");
+    $rootScope.loginUserInfo = {};
+    $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+
+    if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
+      $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
+    }
   });
 });

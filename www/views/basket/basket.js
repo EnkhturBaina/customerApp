@@ -1,5 +1,5 @@
 var basket = angular.module("basket.Ctrl", []);
-basket.controller("basketCtrl", function ($scope, $rootScope, $ionicPlatform, $state) {
+basket.controller("basketCtrl", function ($scope, $rootScope, $state) {
   var basketData = $scope.basketData;
 
   $scope.basketGoLeasing = function () {

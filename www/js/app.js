@@ -294,23 +294,13 @@ var app = angular
     });
     $urlRouterProvider.otherwise("/views/home");
   })
-  .controller("index", function ($scope, $ionicPlatform, $state) {
-    $scope.shouldHide = function () {
-      switch ($state.current.name) {
-        case "statename1":
-          return true;
-        case "statename2":
-          return true;
-        default:
-          return false;
-      }
-    };
-  })
+  .controller("index", function ($scope, $ionicPlatform, $state) {})
   .controller("indexCtrl", function ($scope, $rootScope, $state, $ionicPopup) {
     $scope.toggleSideMenu = function () {
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");
     };
+    //Дан-р нэвтэрсэн байх үед өөр customer дангаар нэвтрэх
     $rootScope.changeUserDan = function () {
       $rootScope.loginUserInfo = undefined;
       localStorage.removeItem("loginUserInfo");
@@ -358,22 +348,7 @@ var app = angular
         }
       });
     });
-    $scope.icon = "ion-arrow-down-b";
-    $scope.expandMenu = function () {
-      var grow = document.getElementById("side-menu-wraps");
-      if (grow.clientHeight) {
-        grow.style.height = 0;
-        $scope.icon = "ion-arrow-down-b";
-      } else {
-        var wrapper = document.querySelector(".side-menu-collapsible");
-        grow.style.height = wrapper.clientHeight + "px";
-        $scope.icon = "ion-arrow-up-b";
-      }
-    };
 
-    $scope.rangeData = { volume: "14" };
-    $scope.$watch("data.volume", function () {});
-    $scope.$watch("data.volume", function () {});
     $rootScope.hideShowFooter = function () {
       $rootScope.hideFooter = !$rootScope.hideFooter;
     };

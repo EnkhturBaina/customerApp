@@ -1,4 +1,4 @@
-app.controller("contactCtrl", function ($scope, $rootScope, $ionicPlatform, $state, $cordovaGeolocation) {
+app.controller("contactCtrl", function ($scope, $rootScope, $cordovaGeolocation) {
   // var options = { timeout: 10000, enableHighAccuracy: true };
   // $cordovaGeolocation.getCurrentPosition(options).then(
   //   function (position) {

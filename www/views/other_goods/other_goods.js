@@ -6,11 +6,8 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $rootScope.suppliers = [];
   $rootScope.getLocalGoodsData = function () {
     $rootScope.otherGoodsData = JSON.parse(localStorage.getItem("otherGoods"));
-    // console.log("otherGoodsData", otherGoodsData);
-    // console.log("$rootScope.otherGoodsData", $rootScope.otherGoodsData);
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614232214127503" }).then(function (response) {
       $rootScope.suppliers = response;
-      // console.log("allSupplierList respionse", response);
     });
   };
   $rootScope.getLocalGoodsData();
@@ -33,7 +30,6 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $scope.nexClivk = function () {
     if (!isEmpty($rootScope.otherGoodsData)) {
       localStorage.setItem("requestType", "consumer");
-      // $state.go("otherGoods2");
       $state.go("autoleasing-2");
     } else {
       $rootScope.alert("Та зээлээр авах бараагаа бүртгэнэ үү", "warning");

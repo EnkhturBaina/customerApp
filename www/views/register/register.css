@@ -39,6 +39,12 @@
   color: #add326;
   min-height: 0px !important;
 }
+.register-show-pass-btn {
+  color: #4b5180;
+  z-index: 99;
+  top: -40px;
+  min-height: 0px !important;
+}
 .register-if-account {
   margin: 0 auto;
   width: fit-content;

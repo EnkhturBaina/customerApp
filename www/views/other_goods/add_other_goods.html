@@ -19,9 +19,6 @@
                         <span class="ion-color-text">Та Зээлээр авах барааны шинж чанарыг харуулахуйц бүтэн зургийг оруулна уу</span>
                     </div>
                     <div class="">
-                        <!-- <div class="img-input-area" ng-click="goodsSourceSelectOn()">
-                            <span class="add-ico" ng-if="($root.newCarReq.image|isEmpty)">+</span>
-                        </div> -->
                         <div class="consumer-img-list">
                             <div class="row">
                                 <div class="col col-50 consumer-img img-input-area-picture1" ng-click="goodsSourceSelectOn('picture1')">
@@ -93,8 +90,7 @@
                     <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" />
 
                 </div>
-                <!-- ui-sref="otherGoods" -->
-                <button class="button btn single-button" id="Next" ng-click="savebtn(higherCost)">Хадгалах</button>
+                <button class="button btn single-button" id="Next" ng-click="addOther()">Хадгалах</button>
             </ion-footer>
         </div>
     </ion-content>

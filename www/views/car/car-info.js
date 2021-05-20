@@ -107,16 +107,6 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
     document.getElementById("collapse-btn").style.display = "block";
     document.getElementById("uncollapse-btn").style.display = "none";
   };
-  $scope.shouldHide = function () {
-    switch ($state.current.name) {
-      case "statename1":
-        return true;
-      case "statename2":
-        return true;
-      default:
-        return false;
-    }
-  };
   $scope.backFromcarInfo = function () {
     $rootScope.hideFooter = false;
     $ionicHistory.goBack();

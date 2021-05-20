@@ -27,10 +27,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     );
   };
 
-  //ҮХХ барьцаалсан зээлийн хүсэлтийн мэдээлэл
-  $rootScope.propertyRequestData = {};
-  $rootScope.propertyRequestData.serviceAgreementId = "1554263832132";
-
   $scope.saveProperty = function () {
     if ($scope.propertyCheckReqiured("step1")) {
       localStorage.setItem("requestType", "estate");
@@ -234,25 +230,25 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   console.log("$rootScope.propertyIsDan", $rootScope.propertyIsDan);
   $scope.propertyCheckReqiured = function (param) {
     if (param == "step1") {
-      if (isEmpty($scope.template)) {
+      if (isEmpty($rootScope.template)) {
         $rootScope.alert("Хөрөнгийн төрөл сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.propertyData.squareSize)) {
         $rootScope.alert("Талбайн хэмжээ оруулна уу", "warning");
         return false;
-      } else if (["A001", "A002", "A003", "A004"].includes($scope.template.code) && isEmpty($rootScope.propertyData.roomCount) && !$rootScope.propertyIsDan) {
+      } else if (["A001", "A002", "A003", "A004"].includes($rootScope.template.code) && isEmpty($rootScope.propertyData.roomCount) && !$rootScope.propertyIsDan) {
         $rootScope.alert("Өрөөний тоо оруулна уу", "warning");
         return false;
-      } else if (["A001", "A002"].includes($scope.template.code) && isEmpty($rootScope.propertyData.floorCount) && !$rootScope.propertyIsDan) {
+      } else if (["A001", "A002"].includes($rootScope.template.code) && isEmpty($rootScope.propertyData.floorCount) && !$rootScope.propertyIsDan) {
         $rootScope.alert("Давхарын тоо оруулна уу", "warning");
         return false;
-      } else if (["A001", "A004"].includes($scope.template.code) && isEmpty($rootScope.propertyData.floorCount) && !$rootScope.propertyIsDan) {
+      } else if (["A001", "A004"].includes($rootScope.template.code) && isEmpty($rootScope.propertyData.floorCount) && !$rootScope.propertyIsDan) {
         $rootScope.alert("Давхарын байршил оруулна уу", "warning");
         return false;
-      } else if (["A002", "A003"].includes($scope.template.code) && isEmpty($rootScope.propertyData.isConCentralInf) && !$rootScope.propertyIsDan) {
+      } else if (["A002", "A003"].includes($rootScope.template.code) && isEmpty($rootScope.propertyData.isConCentralInf) && !$rootScope.propertyIsDan) {
         $rootScope.alert("Төвийн дэд бүтцэд холбогдсон эсэх", "warning");
         return false;
-      } else if ($scope.template.code == "A008" && isEmpty($rootScope.propertyData.dedicationId)) {
+      } else if ($rootScope.template.code == "A008" && isEmpty($rootScope.propertyData.dedicationId)) {
         $rootScope.alert("Зориулалт сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.propertyData.line1) && !$rootScope.propertyIsDan) {
@@ -392,11 +388,11 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   };
   $scope.categoryChange = function (val) {
     console.log("val", val);
-    $scope.template = val;
+    $rootScope.template = val;
     // $rootScope.propertyData = {};
     $rootScope.propertyData.categoryId = val.id;
     console.log("$rootScope.propertyData", $rootScope.propertyData);
-    if (!isEmpty($scope.template)) {
+    if (!isEmpty($rootScope.template)) {
       $rootScope.showSquareSizeField = true;
     }
   };
@@ -404,6 +400,10 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     $rootScope.hideFooter = true;
     $timeout(function () {
       if ($state.current.name == "property_collateral") {
+        //ҮХХ барьцаалсан зээлийн хүсэлтийн мэдээлэл
+        $rootScope.propertyRequestData = {};
+        $rootScope.propertyRequestData.serviceAgreementId = "1554263832132";
+
         console.log("$rootScope.propertyIsDan", $rootScope.propertyIsDan);
         console.log("$rootScope.propJson", $rootScope.propJson);
         console.log("$rootScope.showPropertyBtn", $rootScope.showPropertyBtn);

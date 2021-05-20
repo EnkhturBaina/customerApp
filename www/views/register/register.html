@@ -23,11 +23,11 @@
         </label>
         <label class="item item-input item-stacked-label register-label">
           <span class="input-label">Нууц үг</span>
-          <!-- <button class="button button-icon reg-show-pass-btn" style="zoom: 1" ng-click="hideShowPassword()">
-              <i class="ion-eye" id="eye-icon"></i>
-            </button> -->
           <input type="{{inputType}}" placeholder="Нууц үг" name="password" class="register-password" ng-model="$root.customerPassword.passwordHash" select-on-click />
         </label>
+        <button class="button button-icon register-show-pass-btn" style="zoom: 1" ng-click="hideShowPasswordReg()">
+          <i class="ion-eye" id="eye-icon-register"></i>
+        </button>
       </div>
       <div id="register-step-2" class="register-step-2 remove-step">
         <div class="step-1-text">

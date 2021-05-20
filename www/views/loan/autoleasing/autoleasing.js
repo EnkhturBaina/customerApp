@@ -164,7 +164,7 @@
       $scope.getbankData();
     }, 500);
   }
-  if ($state.current.name == "autoleasing-5") {
+  if ($state.current.name == "autoleasing-4" || $state.current.name == "autoleasing-5") {
     $timeout(function () {
       $scope.getbankData();
     }, 300);
@@ -312,11 +312,10 @@
                           };
                           serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
                             $ionicLoading.hide();
+                            localStorage.removeItem("carColl");
+                            $rootScope.carCollateralRequestData = {};
+                            $state.go("loan_success");
                           });
-                          $ionicLoading.hide();
-                          localStorage.removeItem("carColl");
-                          $rootScope.carCollateralRequestData = {};
-                          $state.go("loan_success");
                         }
                       });
                     });
@@ -407,16 +406,13 @@
                           };
                           serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
                             $ionicLoading.hide();
+                            localStorage.removeItem("otherGoods");
+                            localStorage.removeItem("consumerRequestData");
+                            localStorage.removeItem("otherGoodsMaxId");
+                            $rootScope.newReqiust.getLoanAmount = "";
+                            $rootScope.newReqiust = {};
+                            $state.go("loan_success");
                           });
-                          $state.go("loan_success");
-
-                          localStorage.removeItem("otherGoods");
-                          localStorage.removeItem("consumerRequestData");
-                          localStorage.removeItem("otherGoodsMaxId");
-                          $ionicLoading.hide();
-                          $rootScope.newReqiust.getLoanAmount = "";
-                          $rootScope.newReqiust = {};
-                          $state.go("loan_success");
                         }
                       });
                     });
@@ -444,6 +440,7 @@
             //ҮХХ бүртгэх
             $rootScope.danIncomeData.leasingid = sendReqResponse[1].id;
             $scope.propertyData.leasingId = sendReqResponse[1].id;
+            $scope.propertyData.customerId = all_ID.dccustomerid;
             serverDeferred.requestFull("dcApp_property_data_001", $scope.propertyData).then(function (saveResponse) {
               // console.log("saveResponse", saveResponse);
               if (saveResponse[0] == "success" && saveResponse[1] != "") {
@@ -507,12 +504,12 @@
                             userName: $rootScope.danCustomerData.mobilenumber,
                           };
                           serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                            $state.go("loan_success");
+                            $rootScope.propertyData = {};
+                            $rootScope.propertyRequestData = {};
+                            $rootScope.template = {};
                             $ionicLoading.hide();
                           });
-                          $ionicLoading.hide();
-                          $rootScope.propertyData = {};
-                          $rootScope.propertyRequestData = {};
-                          $state.go("loan_success");
                         }
                       });
                     });
@@ -591,13 +588,11 @@
                     };
                     serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
                       $ionicLoading.hide();
+                      $rootScope.newReqiust = {};
+                      $rootScope.selectedCarData = [];
+                      $rootScope.carData = [];
+                      $state.go("loan_success");
                     });
-                    // console.log("response", response);
-                    $ionicLoading.hide();
-                    $rootScope.newReqiust = {};
-                    $rootScope.selectedCarData = [];
-                    $rootScope.carData = [];
-                    $state.go("loan_success");
                   });
                 });
               } else {
@@ -625,7 +620,6 @@
   };
 
   $scope.goStep3 = function (param) {
-    console.log("asdasd", $rootScope.newReqiust);
     if ($scope.checkReqiured("step2")) {
       if ($scope.checkReqiured("agreeBank")) {
         $state.go("income");

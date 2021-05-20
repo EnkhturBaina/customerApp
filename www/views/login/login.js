@@ -3,17 +3,17 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   $scope.user = {};
 
   $rootScope.hideFooter = true;
-
   $(".login-mobile").mask("00000000");
+
   $scope.hideShowPassword = function () {
     if ($scope.inputType == "password") {
       $("#eye-icon").removeClass("ion-eye");
       $("#eye-icon").addClass("ion-eye-disabled");
       $scope.inputType = "text";
     } else {
-      $scope.inputType = "password";
       $("#eye-icon").removeClass("ion-eye-disabled");
       $("#eye-icon").addClass("ion-eye");
+      $scope.inputType = "password";
     }
   };
 
@@ -124,8 +124,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   $scope.user.username = "";
   $rootScope.isDanLogin = false;
   $scope.Login = function (a, b) {
-    // $rootScope.ShowLoader();
-    console.log("A", a);
     if (isEmpty(a)) {
       $ionicLoading.hide();
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");

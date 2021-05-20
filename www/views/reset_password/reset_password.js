@@ -138,18 +138,15 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
     }, 1000);
   };
   $scope.inputType = "password";
-  $scope.hideShowPassword = function () {
-    console.log("A");
+  $scope.hideShowPasswordReset = function () {
     if ($scope.inputType == "password") {
-      console.log("B");
-      $("#eye-icon").removeClass("ion-eye");
-      $("#eye-icon").addClass("ion-eye-disabled");
+      $("#eye-icon-reset").removeClass("ion-eye");
+      $("#eye-icon-reset").addClass("ion-eye-disabled");
       $scope.inputType = "text";
     } else {
-      console.log("C");
+      $("#eye-icon-reset").removeClass("ion-eye-disabled");
+      $("#eye-icon-reset").addClass("ion-eye");
       $scope.inputType = "password";
-      $("#eye-icon").removeClass("ion-eye-disabled");
-      $("#eye-icon").addClass("ion-eye");
     }
   };
 });

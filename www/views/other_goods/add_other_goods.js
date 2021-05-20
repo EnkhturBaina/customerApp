@@ -1,11 +1,6 @@
 otherGoods = angular.module("otherGoods.Ctrl", []);
 otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $scope, $ionicPopup, $ionicHistory) {
-  $scope.asdasdasd = function () {
-    localStorage.removeItem("otherGoods");
-    localStorage.removeItem("otherGoodsMaxId");
-  };
-  // $scope.asdasdasd();
-  $scope.savebtn = function () {
+  $scope.addOther = function () {
     if (isEmpty($rootScope.newCarReq.unitPrice)) {
       $rootScope.alert("Та барааны үнийг оруулна уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.shopId)) {
