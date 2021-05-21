@@ -273,7 +273,7 @@ input[type="number"] {
 }
 
 .profile-select {
-  width: 60%;
+  width: 45%;
   text-align-last: right;
   margin: 0 5px 0 auto;
   float: right;
@@ -285,6 +285,7 @@ input[type="number"] {
   background-color: #fff;
   color: #4b5180;
   font-weight: bold;
+  margin-right: 20px;
 }
 
 .profile-tab1-save-btn {
@@ -420,7 +421,7 @@ input[type="number"] {
 
 .select-reg-chars {
   margin-left: auto;
-  margin-right: 95px;
+  margin-right: 100px;
   height: 30px;
 }
 
@@ -513,7 +514,7 @@ input[type="number"] {
   cursor: pointer;
   position: absolute;
   right: 0;
-  width: 95px;
+  width: 100px;
 }
 
 #profileKeyContainer {

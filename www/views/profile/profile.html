@@ -64,11 +64,11 @@
                                     <span id="regCharA" type="text">{{$root.customerProfileData.uniqueidentifier.substr(0, 1)}}</span>
                                     <span id="regCharB" type="text">{{$root.customerProfileData.uniqueidentifier.substr(1, 1)}}</span>
                                 </div>
-                                <input type="text" inputmode="numeric" pattern="[0-9]*" id="regNums" class="profileRegSelector" value="{{$root.customerProfileData.uniqueidentifier.substr(2, 8)}}" placeholder="00000000" name="uniqueIdentifier" readonly />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="00000000" id="regNums" class="profileRegSelector" value="{{$root.customerProfileData.uniqueidentifier.substr(2, 8)}}" name="uniqueIdentifier" readonly />
                             </label>
                             <label class="item item-input profile-label" id="mailLabel">
                                 <p>И-мэйл хаяг</p>
-                                <input type="text" placeholder="И-мэйл хаяг" name="email" ng-model="$root.customerProfileData.email" ng-keyup="hideKeyboard($event)" select-on-click />
+                                <input type="text" placeholder="И-мэйл хаяг" name="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" ng-model="$root.customerProfileData.email" ng-keyup="hideKeyboard($event)" select-on-click />
                             </label>
                             <!-- <label class="item item-input profile-label">
                                 <p>Хаяг</p>

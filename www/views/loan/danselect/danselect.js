@@ -28,6 +28,8 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
     $rootScope.isDanLoginAutoColl = false;
     $rootScope.newCarReq = {};
     $rootScope.monthlyIncomeDisable = false;
+    $("#entryYear").val("");
+    $("#productYear").val("");
   };
 
   $scope.gotoDanLoginDanSelect = function () {
@@ -73,7 +75,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                         $rootScope.danCustomerData = responseCustomerData[0];
                         $rootScope.danCustomerData.id = checkedValue[1].customerid;
                       } else {
-                        $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "warning");
+                        $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "danger");
                       }
                     });
 
@@ -111,7 +113,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                 }, 1000);
               }
             } else {
-              $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "warning");
+              $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "danger");
             }
           });
         } else if (error) {
@@ -181,6 +183,8 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
             }
           }, 500);
           $state.go("car_coll");
+          $("#entryYear").val("");
+          $("#productYear").val("");
         }
       });
     });

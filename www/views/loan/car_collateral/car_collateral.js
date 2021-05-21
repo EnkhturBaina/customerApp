@@ -23,9 +23,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.steeringWheelData = [];
   //Машины өнгө
   $scope.carColorData = [];
-  //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
-  $rootScope.carCollateralRequestData = {};
-  $rootScope.carCollateralRequestData.serviceAgreementId = "1554263832132";
 
   $scope.getCarCollateralLookupData = function () {
     if (isEmpty($scope.carCategory)) {
@@ -104,7 +101,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
     });
-    console.log("json", json);
+    // console.log("json", json);
   };
 
   // localStorage.removeItem("carColl");
@@ -334,6 +331,10 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     $rootScope.hideFooter = true;
     $timeout(function () {
       if ($state.current.name == "car_coll") {
+        //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
+        $rootScope.carCollateralRequestData = {};
+        $rootScope.carCollateralRequestData.serviceAgreementId = "1554263832132";
+        console.log("$rootScope.carCollateralRequestData.serviceAgreementId", $rootScope.carCollateralRequestData.serviceAgreementId);
         if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
           $scope.autoCollDan.show();
         } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {

@@ -56,7 +56,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
         document.getElementById("carInfoSlideBox").style.height = img.clientHeight + 30 + "px";
         $ionicLoading.hide();
       }
-    }, 500);
+    }, 300);
   });
   // basket
   $scope.addtoBasket = function () {

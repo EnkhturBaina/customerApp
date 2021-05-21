@@ -3,6 +3,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     $rootScope.hideFooter = false;
     $ionicHistory.goBack();
   };
+  $(".profileRegSelector").mask("99999999");
   $rootScope.hideFooter = true;
   $scope.replaceCyr = function (lastName) {
     var rex = /^[А-ЯӨҮа-яөү\-\s]+$/;
@@ -56,6 +57,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     console.log("localStorage", localStorage);
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     if (!isEmpty($rootScope.loginUserInfo)) {
+      $rootScope.loginUserInfo = {};
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (response) {
         console.log("get Profile Data response", response);
 
@@ -74,91 +76,81 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
             $("#regCharB").text(response[0].uniqueidentifier.substr(1, 1));
             $("#regNums").val(response[0].uniqueidentifier.substr(2, 8));
           }
-          console.log("all_ID", all_ID);
-          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
-            console.log("ASDFSDFSDFSDF", response);
-            if (!isEmpty(response[0])) {
-              $rootScope.customerIncomeProfileData = response[0];
-              $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
+          // console.log("all_ID", all_ID);
+          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (responseIncome) {
+            console.log("responseIncome", responseIncome);
+            if (!isEmpty(responseIncome[0])) {
+              $rootScope.customerIncomeProfileData = responseIncome[0];
+              $rootScope.loginUserInfo = mergeJsonObjs(responseIncome[0], $rootScope.loginUserInfo);
 
               localStorage.removeItem("loginUserInfo");
               localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
-              console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+              // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
             } else {
             }
           });
         }
-        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1604389075984789", dim1: $rootScope.loginUserInfo.customerid }).then(function (response) {
-          $rootScope.customerDealBanks = response;
-        });
+        // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1604389075984789", dim1: $rootScope.loginUserInfo.customerid }).then(function (response) {
+        //   $rootScope.customerDealBanks = response;
+        // });
         $ionicLoading.hide();
       });
     }
   };
   $scope.$on("$ionicView.enter", function () {
+    $rootScope.ShowLoader();
     $scope.getProfileLookupData();
     $timeout(function () {
       $rootScope.getProfileData();
-    }, 500);
+    }, 200);
     $rootScope.hideFooter = true;
   });
 
   $scope.saveProfileData = function () {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     $rootScope.ShowLoader();
-    // document.getElementById("lastNameLabel").style.borderBottom = "1px solid #ddd";
-    // document.getElementById("firstNameLabel").style.borderBottom = "1px solid #ddd";
-    // document.getElementById("regLabel").style.borderBottom = "1px solid #ddd";
-    // document.getElementById("mailLabel").style.borderBottom = "1px solid #ddd";
-    // document.getElementById("phoneLabel").style.borderBottom = "1px solid #ddd";
-    // document.getElementById("marriageLabel").style.borderBottom = "1px solid #ddd";
-    // document.getElementById("mikLabel").style.borderBottom = "1px solid #ddd";
-    // document.getElementById("workLabel").style.borderBottom = "1px solid #ddd";
     $scope.customerProfileData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
 
     if (isEmpty($scope.customerProfileData.lastname)) {
       $ionicLoading.hide();
       $rootScope.alert("Та овогоо оруулна уу", "warning");
-      // document.getElementById("lastNameLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.firstname)) {
       $ionicLoading.hide();
       $rootScope.alert("Та өөрийн нэрээ оруулна уу", "warning");
-      // document.getElementById("firstNameLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.uniqueidentifier)) {
       $ionicLoading.hide();
       $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
-      // document.getElementById("regLabel").style.borderBottom = "2px solid red";
     }
     // else if (isEmpty($scope.customerProfileData.email)) {
     //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
-    //   document.getElementById("mailLabel").style.borderBottom = "2px solid red";
     // }
-    else if (isEmpty($scope.customerProfileData.mobilenumber)) {
+    else if (!re.test($scope.customerProfileData.email)) {
+      $ionicLoading.hide();
+      $rootScope.alert("И-мэйл хаягаа зөв оруулна уу", "warning");
+    } else if (isEmpty($scope.customerProfileData.mobilenumber)) {
       $ionicLoading.hide();
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
-      // document.getElementById("phoneLabel").style.borderBottom = "2px solid red";
     } else if ($scope.customerProfileData.mobilenumber.length < 8) {
       $ionicLoading.hide();
       $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
-      return false;
     } else if (isEmpty($scope.customerProfileData.ismarried)) {
       $ionicLoading.hide();
       $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
-      // document.getElementById("marriageLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.mikmortgagecondition)) {
       $ionicLoading.hide();
       $rootScope.alert("МИК-ийн зээлтэй эсэхээ сонгоно уу", "warning");
-      // document.getElementById("mikLabel").style.borderBottom = "2px solid red";
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
       $ionicLoading.hide();
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
-      // document.getElementById("workLabel").style.borderBottom = "2px solid red";
-    } else if (isEmpty($scope.customerProfileData.identfrontpic)) {
-      $ionicLoading.hide();
-      $rootScope.alert("Иргэний үнэмлэхний урд талын зургийг оруулна уу", "warning");
-    } else if (isEmpty($scope.customerProfileData.identbackpic)) {
-      $ionicLoading.hide();
-      $rootScope.alert("Иргэний үнэмлэхний ард талын зургийг оруулна уу", "warning");
-    } else {
+    }
+    //  else if (isEmpty($scope.customerProfileData.identfrontpic)) {
+    //   $ionicLoading.hide();
+    //   $rootScope.alert("Иргэний үнэмлэхний урд талын зургийг оруулна уу", "warning");
+    // } else if (isEmpty($scope.customerProfileData.identbackpic)) {
+    //   $ionicLoading.hide();
+    //   $rootScope.alert("Иргэний үнэмлэхний ард талын зургийг оруулна уу", "warning");
+    // }
+    else {
       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
       console.log("ALL_ID", all_ID);
       $rootScope.customerProfileData.profilepicture = localStorage.getItem("profilePictureSideMenu");
@@ -204,14 +196,14 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
               $rootScope.alert("Амжилттай", "success", "profile");
               $ionicLoading.hide();
             } else {
-              $rootScope.alert("Мэдээлэл хадгалахад алдаа гарлаа", "success", "profile");
+              $rootScope.alert("Мэдээлэл хадгалахад алдаа гарлаа 100", "danger", "profile");
             }
           });
           if (!isEmpty($scope.nextPath)) {
             $state.go($scope.nextPath);
           }
         } else {
-          $rootScope.alert("Мэдээлэл хадгалахад алдаа гарлаа", "success", "profile");
+          $rootScope.alert("Мэдээлэл хадгалахад алдаа гарлаа 200", "danger", "profile");
         }
       });
     }
@@ -408,7 +400,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           }
         },
       });
-      $("#regNums").mask("00000000");
     }, 1000);
   });
   $scope.overlayKeyOn = function () {

@@ -552,7 +552,7 @@
   border: 1px solid #acd322;
 }
 .ident-pic-border {
-  width: 100%;
+  width: 85%;
   border-radius: 10px;
   border: 1px dashed #ccc;
   height: 150px;
@@ -563,6 +563,7 @@
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  margin: 0 auto;
 }
 .ident-pic-container {
   width: 100%;
@@ -580,4 +581,9 @@
 
 .profile-card-back {
   margin: 15px 0;
+}
+.ident-pic-middle-text {
+  font-weight: normal !important;
+  width: 85% !important;
+  margin: 10px auto !important;
 }

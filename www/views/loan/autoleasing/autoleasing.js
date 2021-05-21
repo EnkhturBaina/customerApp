@@ -155,7 +155,7 @@
       $rootScope.bankListFilter = response.result.data;
       $ionicLoading.hide();
     });
-    console.log("json", json);
+    // console.log("json", json);
   };
   //Банк шүүлт step 2 дээр шууд ажиллах
   //Банк сонгох autoleasing-3 хуудасруу ороход ажиллах
@@ -320,15 +320,15 @@
                       });
                     });
                   } else {
-                    $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+                    $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
                   }
-                }, 1000);
+                }, 500);
               } else {
-                $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+                $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 200", "danger");
               }
             });
           } else {
-            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 300", "danger");
           }
         });
       } else if ($rootScope.requestType == "consumer") {
@@ -417,13 +417,13 @@
                       });
                     });
                   } else {
-                    $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+                    $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
                   }
-                }, 1000);
+                }, 500);
               });
             });
           } else {
-            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 200", "danger");
           }
         });
       } else if ($rootScope.requestType == "business") {
@@ -434,7 +434,7 @@
         $rootScope.propertyRequestData.customerId = all_ID.dccustomerid;
         //Хүсэлт бүртгэх
         serverDeferred.requestFull("dcApp_carCollRequestDV_001", $rootScope.propertyRequestData).then(function (sendReqResponse) {
-          // console.log("sendReqResponse", sendReqResponse);
+          console.log("sendReqResponse", sendReqResponse);
 
           if (sendReqResponse[0] == "success" && sendReqResponse[1] != "") {
             //ҮХХ бүртгэх
@@ -442,7 +442,7 @@
             $scope.propertyData.leasingId = sendReqResponse[1].id;
             $scope.propertyData.customerId = all_ID.dccustomerid;
             serverDeferred.requestFull("dcApp_property_data_001", $scope.propertyData).then(function (saveResponse) {
-              // console.log("saveResponse", saveResponse);
+              console.log("saveResponse", saveResponse);
               if (saveResponse[0] == "success" && saveResponse[1] != "") {
                 //Сонгосон банк
                 selectedbanks = [];
@@ -488,9 +488,9 @@
                     // console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
 
                     serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (danCustomerDataResponse) {
-                      // console.log("danCustomerDataResponse", danCustomerDataResponse);
+                      console.log("danCustomerDataResponse", danCustomerDataResponse);
                       serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (danIncomeDataResponse) {
-                        // console.log("danIncomeDataResponse", danIncomeDataResponse);
+                        console.log("danIncomeDataResponse", danIncomeDataResponse);
                         if (danIncomeDataResponse[0] == "success" && danIncomeDataResponse[1] != "") {
                           //Утасны дугаар регистр өөрчлөгдсөн бол Update хийх
                           var json = {
@@ -514,15 +514,15 @@
                       });
                     });
                   } else {
-                    $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+                    $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
                   }
-                }, 1000);
+                }, 500);
               } else {
-                $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+                $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 200", "danger");
               }
             });
           } else {
-            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 300", "danger");
           }
         });
       } else {
@@ -596,11 +596,11 @@
                   });
                 });
               } else {
-                $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+                $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
               }
             });
           } else {
-            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа", "danger");
+            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 200", "danger");
           }
         });
       }
@@ -613,7 +613,7 @@
         $rootScope.newCarReq = {};
         $rootScope.newReqiust = {};
         $rootScope.loanAmountField = "";
-      }, 1000);
+      }, 2000);
     } else {
       $rootScope.alert("Та хүсэлт илгээх банкаа сонгоно уу", "warning");
     }
@@ -708,6 +708,7 @@
         }
       });
     } else if (param == "step4CustomerData") {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (isEmpty($rootScope.danCustomerData.lastname)) {
         $rootScope.alert("Та овогоо оруулна уу", "warning");
         return false;
@@ -722,7 +723,11 @@
       //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
       //   return false;
       // }
-      else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+      else if (!re.test($scope.danCustomerData.email)) {
+        // $ionicLoading.hide();
+        $rootScope.alert("И-мэйл хаягаа зөв оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
         $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
         return false;
       } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {

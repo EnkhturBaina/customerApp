@@ -104,7 +104,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
                       $rootScope.danCustomerData = responseCustomerData[0];
                       $rootScope.danCustomerData.id = checkedValue[1].customerid;
                     } else {
-                      $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "warning");
+                      $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "danger");
                     }
                   });
 
@@ -141,7 +141,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
                 }
               }, 1000);
             } else {
-              $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "warning");
+              $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "danger");
             }
           });
         } else if (error) {
@@ -317,7 +317,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
     });
-    console.log("getbankDataProperty json", json);
+    // console.log("getbankDataProperty json", json);
   };
   if ($state.current.name == "property_collateral2") {
     $scope.getbankDataProperty();
@@ -403,7 +403,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         //ҮХХ барьцаалсан зээлийн хүсэлтийн мэдээлэл
         $rootScope.propertyRequestData = {};
         $rootScope.propertyRequestData.serviceAgreementId = "1554263832132";
-
+        console.log("$rootScope.propertyRequestData.serviceAgreementId", $rootScope.propertyRequestData.serviceAgreementId);
         console.log("$rootScope.propertyIsDan", $rootScope.propertyIsDan);
         console.log("$rootScope.propJson", $rootScope.propJson);
         console.log("$rootScope.showPropertyBtn", $rootScope.showPropertyBtn);

@@ -1,6 +1,6 @@
 angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeout, $scope, $rootScope, $state, serverDeferred, $ionicPlatform, $ionicModal) {
   $(".register-mobile").mask("00000000");
-  $(".registerRegSelector").mask("00000000");
+  $(".registerRegSelector").mask("99999999");
   var progressBar = {
     Bar: $("#progress-bar"),
     step1: $("register-step-1"),
@@ -45,7 +45,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
   $rootScope.crmUserData = {};
   $rootScope.passwordHashResult = {};
   $scope.crmUserData.userName = "";
-
+  $scope.smsConfirmCode = "";
   $scope.disabledBtn = false;
   $scope.sendSmsCode = function () {
     if (isEmpty($scope.crmUserData.userName)) {
@@ -81,7 +81,9 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
               uniqueidentifier: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
               mobileNumber: $scope.crmUserData.userName,
               smsCode: generatedCode,
+              customertypeid: "1",
             };
+            $scope.smsConfirmCode = generatedCode;
             console.log("json", json);
             serverDeferred.requestFull("dcApp_all_crm_customer_001", json).then(function (crmResponse) {
               if (crmResponse[0] == "success") {
@@ -99,12 +101,12 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
                     msg: `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`,
                     phoneNumber: $scope.crmUserData.userName,
                   };
-                  serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
-                    console.log("sendSmsResponse", sendSmsResponse);
-                  });
+                  // serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
+                  //   console.log("sendSmsResponse", sendSmsResponse);
+                  // });
                 }, 500);
               } else {
-                $rootScope.alert("Бүртгэхэд алдаа гарлаа", "warning");
+                $rootScope.alert("Бүртгэхэд алдаа гарлаа", "danger");
               }
             });
           });
@@ -127,9 +129,9 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
     };
     serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
       console.log("sendSmsResponse", sendSmsResponse);
-      serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
-        console.log("sendSmsResponse", sendSmsResponse);
-      });
+      // serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
+      //   console.log("sendSmsResponse", sendSmsResponse);
+      // });
     });
     $scope.onTimer();
   };
@@ -150,12 +152,12 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
   $scope.onTimer = function () {
     var timeleft = 30;
     var downloadTimer = setInterval(function () {
-      if (timeleft <= 0) {
-        clearInterval(downloadTimer);
-        document.getElementById("resendBtn").innerHTML = "Дахин код илгээх";
-        document.getElementById("resendBtn").disabled = false;
-      } else {
-        if ($state.current.name == "register") {
+      if ($state.current.name == "register") {
+        if (timeleft <= 0) {
+          clearInterval(downloadTimer);
+          document.getElementById("resendBtn").innerHTML = "Дахин код илгээх";
+          document.getElementById("resendBtn").disabled = false;
+        } else {
           document.getElementById("resendBtn").innerHTML = "Дахин код илгээх " + timeleft;
           document.getElementById("resendBtn").disabled = true;
         }
