@@ -486,7 +486,49 @@ var app = angular
         });
       },
     };
-  });
+  })
+  .directive("thousandSeparator", [
+    "$timeout",
+    function ($timeout) {
+      return {
+        require: "ngModel",
+        link: function (scope, element, attrs, controller) {
+          var sep = attrs.thousandSeparator || ",";
+          var model = attrs.ngModel;
+
+          var doReplace = function () {
+            var curValue = element.val();
+            var replace = new RegExp(sep, "g");
+            var cleanValue = curValue.replace(replace, "");
+
+            // Create dotted value from clean
+            var x1 = cleanValue + "";
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+              x1 = x1.replace(rgx, "$1" + "," + "$2");
+            }
+
+            element.val(x1);
+
+            scope.$apply(function () {
+              controller.$setViewValue(cleanValue);
+            });
+          };
+
+          element.on("keyup", function () {
+            doReplace();
+          });
+
+          element.on("blur", function () {
+            doReplace();
+          });
+
+          // trigger for existing model values
+          $timeout(doReplace, 1);
+        },
+      };
+    },
+  ]);
 
 function numOnly() {
   var directive = {

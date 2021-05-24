@@ -213,6 +213,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   };
 
   $scope.takePhoto = function (type) {
+    console.log("type", type);
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     var srcType = Camera.PictureSourceType.CAMERA;
     if (type == "1") {

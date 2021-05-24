@@ -16,9 +16,35 @@
             <div class="magic-container add-goods-content-card">
                 <div class="margin-lr-20">
                     <div class="margin-tb-20-40">
-                        <span class="ion-color-text">Та Зээлээр авах барааны шинж чанарыг харуулахуйц бүтэн зургийг оруулна уу</span>
+                        <span class="ion-color-text">Та бараа авах баримтын зурагаа борлуулалтын ажилтнаас авч оруулна уу. Мөн барааны зурагаа оруулна уу.</span>
                     </div>
                     <div class="">
+                        <label class="item item-input selector-container">
+                            <p class="title">Барааны төрөл</p>
+                            <select class="consumer-loan-suppp-select" ng-model="$root.newCarReq.categoryId" ng-change="changeSupCategory($root.newCarReq.categoryId)">
+                                <option ng-repeat="cat in supplierCategory track by $index" ng-if="cat.name" value="{{cat.id}}">{{cat.name}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input selector-container">
+                            <p class="title">Бараа нийлүүлэгч</p>
+                            <select id="shopId" class="consumer-loan-suppp-select" ng-model="$root.newCarReq.shopId" ng-change="changeSubVendor($root.newCarReq.shopId)" disabled>
+                                <option ng-repeat="supp in allSupplierList track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input selector-container">
+                            <p class="title">Салбар</p>
+                            <select id="subVendorId" class="consumer-loan-suppp-select" ng-model="$root.newCarReq.subVendorId" disabled>
+                                <option ng-repeat="supp in subVendor track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
+                            </select>
+                        </label>
+                        <div class="selector-container">
+                            <p class="title">Барааны үнэ</p>
+                            <div class="search-input-container">
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.newCarReq.unitPrice" name="" class="search-input-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-keyup="hideKeyboard($event)" thousand-separator />
+                                <input type="hidden" ng-model="$root.newCarReq.itemid" select-on-click />
+
+                            </div>
+                        </div>
                         <div class="consumer-img-list">
                             <div class="row">
                                 <div class="col col-50 consumer-img img-input-area-picture1" ng-click="goodsSourceSelectOn('picture1')">
@@ -47,33 +73,6 @@
                                     </div>
                                     <img ng-if="$root.newCarReq.picture4" ng-src="{{'data:image/png;base64,'+$root.newCarReq.picture4}}" class="consumer-uploaded-img" />
                                 </div>
-                            </div>
-                        </div>
-                        <div class="selector-container">
-                            <span class="title">Барааны төрөл</span>
-                            <select class="consumer-loan-suppp-select" ng-model="$root.newCarReq.categoryId" ng-change="changeSupCategory($root.newCarReq.categoryId)">
-                                <option ng-repeat="cat in supplierCategory track by $index" ng-if="cat.name" value="{{cat.id}}">{{cat.name}}</option>
-                            </select>
-                        </div>
-                        <div class="selector-container">
-                            <span class="title">Бараа нийлүүлэгч</span>
-                            <select id="shopId" class="consumer-loan-suppp-select" ng-model="$root.newCarReq.shopId" ng-change="changeSubVendor($root.newCarReq.shopId)" disabled>
-                                <option ng-repeat="supp in allSupplierList track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
-                            </select>
-                        </div>
-                        <div class="selector-container">
-                            <span class="title">Салбар</span>
-                            <select id="subVendorId" class="consumer-loan-suppp-select" ng-model="$root.newCarReq.subVendorId" disabled>
-                                <option ng-repeat="supp in subVendor track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
-                            </select>
-                        </div>
-                        <div class="selector-container">
-                            <span class="title">Барааны үнэ</span>
-                            <div class="search-input-container">
-                                <span class="search-input-icon">₮</span>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.newCarReq.unitPrice" name="" class="search-input-type ng-pristine ng-untouched ng-valid ng-valid-pattern" format-input ng-keyup="hideKeyboard($event)" />
-                                <input type="hidden" ng-model="$root.newCarReq.itemid" select-on-click />
-
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
   $rootScope.ShowLoader();
   // auto Leasing
   $scope.goAutoleasing = function () {
+    $rootScope.bankproductDtlNumber = $rootScope.bankproductDtl.find((o) => o.categoryid === "16082024283142");
     localStorage.setItem("requestType", "auto");
     $state.go("autoleasing-2");
   };

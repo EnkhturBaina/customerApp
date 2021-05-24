@@ -565,3 +565,18 @@ input[type="number"] {
   font-weight: bold;
   background: cadetblue;
 }
+.profile-ident-pic-container {
+  width: 250px;
+  border-radius: 10px;
+  border: 1px dashed #ccc;
+  height: 140px;
+  text-align: center;
+  font-size: 46px;
+  color: #ccc;
+  line-height: 86px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin: 0 auto;
+}

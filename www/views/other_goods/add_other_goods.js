@@ -28,13 +28,8 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
         localStorage.setItem("otherGoods", JSON.stringify($rootScope.otherGoods));
         $rootScope.newCarReq = {};
 
-        // document.getElementsByClassName("img-input-area")[0].style.backgroundImage = "url(../../img/note-20.png)";
-        // document.getElementsByClassName("img-input-area")[0].style.opacity = "0.5";
         $scope.showPopup();
       } catch (ex) {}
-      // var image = "jpg♠" + $rootScope.newCarReq.image.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
-
-      // var image = $rootScope.newCarReq.image.replace(/data:([A-Za-z0-9_.\\/\-;:]+)base64,/g, "");
 
       console.log("local", localStorage);
     }
@@ -113,8 +108,6 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
           $rootScope.newCarReq = {};
         }
         $rootScope.newCarReq[$scope.selectedImagePath] = imageData;
-        // document.getElementsByClassName("img-input-area-" + $scope.selectedImagePath + "")[0].style.backgroundImage = "url(" + $rootScope.newCarReq[$scope.selectedImagePath] + ")";
-        // document.getElementsByClassName("img-input-area-" + $scope.selectedImagePath + "")[0].style.opacity = "1";
         $scope.$apply();
       },
       function onFail(message) {},

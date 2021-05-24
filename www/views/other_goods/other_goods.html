@@ -16,7 +16,7 @@
             <div class="magic-container other-goods-content">
                 <div class="margin-lr-20">
                     <div class="goods-row1-container">
-                        <span class="goods-row1-text">Та яг одоо дэлгүүр дээрээс <span class="middle-card-mid-text">ЛИЗИНГИЙН ОНЛАЙН</span> хүсэлт илгээх бол бараагаа энд бүртгүүлээрэй.</span>
+                        <span class="goods-row1-text">Та яг одоо дэлгүүр дээрээс <span class="middle-card-mid-text">ЛИЗИНГ</span> авах гэж байгаа бол энд бараагаа бүртгүүлээрэй.</span>
                         <div class="addBtnContainer">
                             <button class="button btn single-button" id="Next" ui-sref="addOtherGoods">Бараа бүртгэх</button>
                         </div>
@@ -43,8 +43,13 @@
                     </div>
                 </div>
             </div>
-            <div class="goods-middle-card">
-                <span>Та бараагаа <span class="middle-card-mid-text">ОНЛАЙНААР, ЛИЗИНГЭЭР</span> авах гэж байгаа бол доорх e-shop уудаас бараа сонгон онлайн лизингээр аваарай</span>
+            <div class="goods-middle-card" ng-if="$root.showSec">
+                <span>Та бараагаа <span class="middle-card-mid-text">ОНЛАЙНААР, ЛИЗИНГЭЭР</span> авах гэж байгаа бол манай харилцагчдын web сайтаар бараагаа сонгон zeelme-р лизингээ аваарай</span>
+                <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" ng-if="consumerSuppliers.length" pager-click="clickSlidePager(index)">
+                    <ion-slide ng-repeat="bg in consumerSuppliers | filter:{id:'!!'}">
+                        <img style="width: 200px;" ng-src="{{$root.imagePath}}{{bg.supplierpic}}" />
+                    </ion-slide>
+                </ion-slide-box>
             </div>
             <ion-footer class="bottom-footer">
                 <div class="bank-container">
@@ -61,6 +66,7 @@
 <script id="templates/consumer.html" type="text/ng-template">
     <ion-modal-view class="auto-temp-modal-view">
       <ion-content class="padding bank-chat-content" scroll="false">
+        <span class="term-modal-off-text" ng-click="consumerModal.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
           <div class="templates-modal-include" ng-include src="'views/templates/consumer.html'"></div>
       </ion-content>
     </ion-modal-view>

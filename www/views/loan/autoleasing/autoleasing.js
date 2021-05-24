@@ -30,10 +30,10 @@
 
   $scope.getCarDatasId = function (itemCode) {
     $rootScope.selectedCarData = [];
-    localStorage.setItem("requestType", "auto");
     $rootScope.carDatas = [];
     if ($scope.checkReqiured("step1")) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597654926672135", itemCode: itemCode }).then(function (response) {
+        console.log("res", response);
         if (!isEmpty(response) && !isEmpty(response[0])) {
           $rootScope.selectedCarData = response[0];
           // console.log("$rootScope.selectedCarData", $rootScope.selectedCarData);
@@ -200,7 +200,6 @@
   //Дан -с нийгмийн даатгалын мэдээлэл татаж хадгалах
   $scope.getCustomerIncomeData = function () {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
-    // $rootScope.danIncomeData = {};
     if (!isEmpty($rootScope.loginUserInfo)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
         if (response[0] != "") {
@@ -230,10 +229,8 @@
   $scope.sendRequest = async function () {
     if (!isEmpty($rootScope.selectedBanksList)) {
       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
-      if ($rootScope.isDanHand) {
-        $scope.getCustomerIncomeData();
-      }
       $rootScope.requestType = localStorage.getItem("requestType");
+
       if ($rootScope.requestType == "autoColl") {
         $scope.carCollateralData = {};
         $rootScope.ShowLoader();
@@ -314,6 +311,7 @@
                             $ionicLoading.hide();
                             localStorage.removeItem("carColl");
                             $rootScope.carCollateralRequestData = {};
+                            $rootScope.danIncomeData = {};
                             $state.go("loan_success");
                           });
                         }
@@ -387,11 +385,11 @@
                     }
 
                     $rootScope.danCustomerData.crmCustomerId = all_ID.crmuserid;
-                    // console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+                    console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
                     serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (danCustomerDataResponse) {
-                      // console.log("danCustomerDataResponse", danCustomerDataResponse);
+                      console.log("danCustomerDataResponse", danCustomerDataResponse);
                       serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (danIncomeDataResponse) {
-                        // console.log("danIncomeDataResponse", danIncomeDataResponse);
+                        console.log("danIncomeDataResponse", danIncomeDataResponse);
                         if (danIncomeDataResponse[0] == "success" && danIncomeDataResponse[1] != "") {
                           //Утасны дугаар регистр өөрчлөгдсөн бол Update хийх
                           var json = {
@@ -411,19 +409,25 @@
                             localStorage.removeItem("otherGoodsMaxId");
                             $rootScope.newReqiust.getLoanAmount = "";
                             $rootScope.newReqiust = {};
+                            $rootScope.danIncomeData = {};
                             $state.go("loan_success");
                           });
+                        } else {
+                          $ionicLoading.hide();
+                          $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
                         }
                       });
                     });
                   } else {
-                    $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
+                    $ionicLoading.hide();
+                    $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 200", "danger");
                   }
                 }, 500);
               });
             });
           } else {
-            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 200", "danger");
+            $ionicLoading.hide();
+            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 300", "danger");
           }
         });
       } else if ($rootScope.requestType == "business") {
@@ -507,6 +511,7 @@
                             $state.go("loan_success");
                             $rootScope.propertyData = {};
                             $rootScope.propertyRequestData = {};
+                            $rootScope.danIncomeData = {};
                             $rootScope.template = {};
                             $ionicLoading.hide();
                           });
@@ -590,6 +595,7 @@
                       $ionicLoading.hide();
                       $rootScope.newReqiust = {};
                       $rootScope.selectedCarData = [];
+                      $rootScope.danIncomeData = {};
                       $rootScope.carData = [];
                       $state.go("loan_success");
                     });
@@ -978,6 +984,8 @@
         });
       }
     });
+    $rootScope.alert("Та гараар мэдээллээ бөглөсөн тохиолдолд зээл олгох байгууллагаас нэмэлт материал авах хүсэлт ирэхийг анхаарна уу", "");
+
     $rootScope.monthlyIncomeDisable = false;
   };
   $scope.registerFunctionAuto = function (value) {

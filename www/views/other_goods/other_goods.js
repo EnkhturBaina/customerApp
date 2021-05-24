@@ -1,16 +1,18 @@
-angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", function ($rootScope, serverDeferred, $scope, $state, $ionicPopup, $ionicModal, $timeout) {
+angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", function ($rootScope, serverDeferred, $scope, $state, $ionicPopup, $ionicModal, $timeout, $ionicSlideBoxDelegate) {
   $rootScope.otherGoods = [];
   $rootScope.newCarReq = {};
   $rootScope.otherGoodsData = [];
   $rootScope.newReqiust = {};
   $rootScope.suppliers = [];
+
+  $rootScope.showSec = true;
+
   $rootScope.getLocalGoodsData = function () {
     $rootScope.otherGoodsData = JSON.parse(localStorage.getItem("otherGoods"));
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614232214127503" }).then(function (response) {
       $rootScope.suppliers = response;
     });
   };
-  $rootScope.getLocalGoodsData();
   //Нийт үнэ
   $rootScope.sumPrice = 0;
   $rootScope.calcTotalPrice = function () {
@@ -24,11 +26,13 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     } else if ($rootScope.otherGoods.length == 0) {
       $rootScope.sumPrice = 0;
     }
+
+    !isEmpty($rootScope.otherGoods) ? ($rootScope.showSec = false) : ($rootScope.showSec = true);
   };
-  $rootScope.calcTotalPrice();
 
   $scope.nexClivk = function () {
     if (!isEmpty($rootScope.otherGoodsData)) {
+      $rootScope.bankproductDtlNumber = $rootScope.bankproductDtl.find((o) => o.categoryid === "16082024252191");
       localStorage.setItem("requestType", "consumer");
       $state.go("autoleasing-2");
     } else {
@@ -64,6 +68,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
         },
       ],
     });
+    !isEmpty($rootScope.otherGoods) ? ($rootScope.showSec = false) : ($rootScope.showSec = true);
   };
 
   $scope.backFromOtherGoods = function () {
@@ -82,4 +87,19 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     $scope.consumerModal.show();
   }, 300);
   $rootScope.hideFooter = true;
+  $scope.getLookUpData = function () {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621830937132722" }).then(function (response) {
+      $rootScope.consumerSuppliers = response;
+    });
+  };
+
+  $scope.clickSlidePager = function (index) {
+    $ionicSlideBoxDelegate.slide(index);
+  };
+
+  $scope.$on("$ionicView.enter", function () {
+    $rootScope.getLocalGoodsData();
+    $rootScope.calcTotalPrice();
+    $scope.getLookUpData();
+  });
 });

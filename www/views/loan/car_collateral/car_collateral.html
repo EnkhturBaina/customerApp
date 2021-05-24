@@ -48,18 +48,21 @@
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Явсан км</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.mile" format-input next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.mile" thousand-separator next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
                         </label>
                         <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label" style="margin: 0;">Хөдөлгүүрийн төрөл</p>
+                            <p class="input-label" style="margin: 0;">ХӨ төрөл</p>
                             <select ng-model="$root.newCarReq.engineId" style="background-color: transparent">
                                 <option ng-repeat="com in engineTypeData" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>
                         </label>
-                        <label class="item item-input car-collateral-label">
-                            <p>Хөдөлгүүрийн багтаамж</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="engineCapacity" placeholder="0" name="engineCapacity" ng-model="$root.newCarReq.engineCapacity" format-input next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
+                        <label class="item item-input item-select car-collateral-label">
+                            <p>ХӨ багтаамж</p>
+                            <select ng-model="$root.newCarReq.engineCapacity" style="background-color: transparent">
+                                <option ng-repeat="com in engineCapData" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
+                            </select>
                         </label>
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Хурдны хайрцаг</p>
@@ -84,7 +87,7 @@
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Хаалганы тоо</p>
-                            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" type="text" id="carDoorCount" placeholder="0" name="carDoorCount" ng-model="$root.newCarReq.carDoorCount" format-input next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" type="text" id="carDoorCount" placeholder="0" name="carDoorCount" ng-model="$root.newCarReq.carDoorCount" thousand-separator next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
                         </label>
                         <label class="item item-input car-collateral-label">
                             <p>Үйлдвэрлэсэн он <span class="car-coll-req">*</span></p>
@@ -189,6 +192,7 @@
 <script id="templates/autoCollDan.html" type="text/ng-template">
 	<ion-modal-view class="auto-temp-modal-view">
 	  <ion-content class="padding property-dan-content" scroll="false">
+        <span class="term-modal-off-text" ng-click="autoCollDan.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
 		  <div class="templates-modal-include" ng-include src="'views/templates/autoCollDan.html'"></div>
 	  </ion-content>
 	</ion-modal-view>

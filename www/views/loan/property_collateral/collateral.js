@@ -29,6 +29,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
 
   $scope.saveProperty = function () {
     if ($scope.propertyCheckReqiured("step1")) {
+      $rootScope.bankproductDtlNumber = $rootScope.bankproductDtl.find((o) => o.categoryid === "16082024283512");
       localStorage.setItem("requestType", "estate");
       console.log("local", localStorage);
       console.log("$rootScope.propertyData", $rootScope.propertyData);

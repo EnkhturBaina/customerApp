@@ -191,5 +191,11 @@
     if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
       $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
     }
+    //dc_bank_product table -с үээлийн бүтээгдэхүүн бүрийн max зээлийн хугацаа авах
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621843239702927" }).then(function (response) {
+      delete response.aggregatecolumns;
+      $rootScope.bankproductDtl = response;
+      console.log("$rootScope.bankproductDtl ", $rootScope.bankproductDtl);
+    });
   });
 });

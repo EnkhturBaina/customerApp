@@ -15,6 +15,8 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.modelData = [];
   //Хөдөлгүүрийн төрөл
   $scope.engineTypeData = [];
+  //Хөдөлгүүрийн багтаамж
+  $scope.engineCapData = [];
   //Хурдны хайрцаг
   $scope.transmissionData = [];
   //Хөтлөгч
@@ -35,6 +37,12 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363836067418" }).then(function (datas) {
         delete datas.aggregatecolumns;
         $scope.engineTypeData = datas;
+      });
+    }
+    if (isEmpty($scope.engineCapData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16215890441161" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        $scope.engineCapData = datas;
       });
     }
     if (isEmpty($scope.transmissionData)) {
@@ -79,8 +87,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     val != "" ? (document.getElementById("modelSelect").disabled = false) : (document.getElementById("modelSelect").disabled = true);
   };
 
-  localStorage.setItem("requestType", "autoColl");
-
   $scope.getbankDataCarColl = function () {
     //Шүүгдсэн банкууд
     $rootScope.bankListFilter = [];
@@ -111,6 +117,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       $rootScope.newCarReq = {};
     }
     if ($scope.carCollCheckReqiured("step1")) {
+      $rootScope.bankproductDtlNumber = $rootScope.bankproductDtl.find((o) => o.categoryid === "16082024252301");
       localStorage.setItem("requestType", "autoColl");
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
 

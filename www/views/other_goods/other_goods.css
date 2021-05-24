@@ -187,48 +187,13 @@
   margin-bottom: 10px;
 }
 
-.img-input-area {
-  background-image: url(../../img/note-20.png);
-  opacity: 0.5;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 220px;
-  height: 220px;
-  margin: auto;
-  margin-bottom: 40px;
-  border-radius: 10px;
-  display: flex;
-}
-
-.add-ico {
-  font-size: 120px;
-  color: #fff;
-  margin: auto;
-  opacity: initial;
-  font-weight: 100;
-  font-family: none;
-}
-
 .selector-container {
   margin: 14px 0;
+  padding: 0 10px;
+  text-align-last: right;
+  border: 0 !important;
+  z-index: 99;
 }
-
-.selector-container .title {
-  margin: 0 10px;
-  color: #a2a7b5;
-}
-
-.search-input-icon {
-  padding: 7px 0px 7px 0px;
-  font-weight: bold;
-  min-width: 30px;
-  position: absolute;
-  text-align: center;
-  font-size: 16px;
-  color: #a2a7b5;
-  border-right: 1px solid #dcdcdc;
-}
-
 .search-input-type {
   background: none;
   text-align: left !important;
@@ -236,18 +201,23 @@
   border-radius: 5px;
   margin: 0 0;
   width: 100%;
-  padding: 0 0px 0 35px !important;
+  padding: 0 10px 0 0px !important;
   font-weight: bold;
   color: #4b5180 !important;
+  text-align-last: right;
 }
 
 .selector-container {
   margin: 14px 0;
+  position: relative;
 }
 
 .selector-container .title {
-  margin: 0 10px;
+  position: absolute;
   color: #a2a7b5;
+  margin-left: 10px;
+  top: 20%;
+  z-index: -1;
 }
 
 .consumer-loan-suppp-select {
@@ -258,6 +228,9 @@
   padding: 7px 15px 7px 10px;
   color: #4b5180;
   background-color: #fff !important;
+  text-align-last: right;
+  z-index: 99;
+  background: transparent !important;
 }
 .other-goods-checkbox {
   width: 100%;
@@ -328,7 +301,7 @@
   padding: 15px 0px;
   border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  margin: 10px;
+  margin: 10px 20px;
 }
 .other-goods-content {
   background-color: #fff;
@@ -379,4 +352,7 @@
 .goods-row1-text {
   text-align: center;
   display: block;
+}
+.consumer-img-list .row {
+  padding: 3px !important;
 }
