@@ -94,6 +94,7 @@
       showBackdrop: true,
       showDelay: 0,
       template: '<div class="custom-spinner"><div></div><div class="custom-dot"></div><div></div><div class="custom-dot"></div></div>',
+      // template: '<div class="loader"></div>',
     });
   };
   //========= first run ==========================

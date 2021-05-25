@@ -9,7 +9,7 @@
                     <span class="title car-coll-step2-title">Зээлийн хэмжээ</span>
                     <div class="tugrug-input-container">
                         <span class="input-tugrug-icon">₮</span>
-                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.propertyRequestData.loanAmount" thousand-separator ng-keyup="hideKeyboard($event)" ng-change="getbankDataProperty()" select-on-click />
+                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.propertyRequestData.loanAmount" thousand-separator ng-keyup="hideKeyboard($event)" ng-blur="getbankDataProperty()" select-on-click />
                     </div>
                 </div>
                 <!-- <div class="tugrug-input car-coll-step2-loan-amount">
@@ -23,7 +23,7 @@
                     <span class="title car-coll-step2-title">Хугацаа сараар</span>
                     <div class="tugrug-input-container">
                         <span class="input-tugrug-icon"><i class="icon fa fa-calendar"></i></span>
-                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number" ng-model="$root.propertyRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-change="getbankDataProperty()" select-on-click />
+                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number tooltip" ng-model="$root.propertyRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataProperty()" title="Тухайн зээлийн хугацаа хамгийн ихдээ {{$root.bankproductDtlNumber.maxmonth}} сар байна" animation="fade" select-on-click />
                     </div>
                 </div>
                 <label class="item item-input step2-loam-month">

@@ -1,6 +1,6 @@
-app.controller("loan_successCtrl", function ($scope, $rootScope) {
+app.controller("loan_successCtrl", function ($scope, $rootScope, $state) {
   $scope.goBankMenu = function () {
-    console.log("ASD");
+    $state.go("requestList");
     $rootScope.hideFooter = false;
   };
 });

@@ -253,7 +253,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerIncomeProfileData.monthlyincome)) {
       $rootScope.alert("Та сарын орлогоо оруулна уу", "warning");
     } else if (isEmpty($scope.customerIncomeProfileData.totalincomehousehold)) {
-      $rootScope.alert("Та өрхийн нийт орлогоо оруулна уу", "warning");
+      $rootScope.alert("Та бусад орлогоо оруулна уу", "warning");
     } else if (isEmpty($scope.customerIncomeProfileData.monthlypayment)) {
       $rootScope.alert("Та төлж буй зээлийн дүнгээ оруулна уу", "warning");
     } else {

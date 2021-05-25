@@ -140,7 +140,9 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       localStorage.setItem("requestType", "autoColl");
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
 
-      $state.go("car_coll2");
+      if (!isEmpty($rootScope.bankproductDtlNumber)) {
+        $state.go("car_coll2");
+      }
     }
   };
   $rootScope.yearsArray = [];

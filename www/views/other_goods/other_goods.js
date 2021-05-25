@@ -39,6 +39,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
       $rootScope.bankProductMinPaymentNumber = $rootScope.bankProductMinPayment.find((o) => o.categoryid === "16082024283142");
       $rootScope.displayMinPayment = $rootScope.sumPrice * ($rootScope.bankProductMinPaymentNumber.minpayment / 100);
       if (!isEmpty($rootScope.displayMinPayment)) {
+        $rootScope.newReqiust.advancePayment = "";
         localStorage.setItem("requestType", "consumer");
         $state.go("autoleasing-2");
       }
@@ -82,17 +83,17 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     $state.go("home");
   };
 
-  $ionicModal
-    .fromTemplateUrl("templates/consumer.html", {
-      scope: $scope,
-      animation: "slide-in-up",
-    })
-    .then(function (consumerModal) {
-      $scope.consumerModal = consumerModal;
-    });
-  $timeout(function () {
-    $scope.consumerModal.show();
-  }, 300);
+  // $ionicModal
+  //   .fromTemplateUrl("templates/consumer.html", {
+  //     scope: $scope,
+  //     animation: "slide-in-up",
+  //   })
+  //   .then(function (consumerModal) {
+  //     $scope.consumerModal = consumerModal;
+  //   });
+  // $timeout(function () {
+  //   $scope.consumerModal.show();
+  // }, 300);
   $rootScope.hideFooter = true;
   $scope.getLookUpData = function () {
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621830937132722" }).then(function (response) {

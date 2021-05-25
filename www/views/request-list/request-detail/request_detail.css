@@ -250,6 +250,10 @@
 .modal-chat-body {
   display: grid;
 }
+.bank-chat-modal {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
 .bank-chat-modal > .bar-header {
   /* border-bottom: 1px solid #dbdbdb; */
   background: rgb(162, 209, 54);
@@ -259,6 +263,7 @@
 }
 .bank-chat-content {
   margin-bottom: 70px !important;
+  padding: 10px 0;
 }
 .bank-chat-content > .scroll {
   height: 100% !important;

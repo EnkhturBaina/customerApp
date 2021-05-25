@@ -313,7 +313,7 @@ var app = angular
     };
     $scope.logOut = function () {
       $ionicPopup.show({
-        template: "<b>Апп -с гарах уу ?</b>",
+        template: "<b>Та аппликейшнээс гарах уу?</b>",
         cssClass: "confirmPopup",
         buttons: [
           {
@@ -329,6 +329,8 @@ var app = angular
               localStorage.removeItem("loginUserInfo");
               localStorage.removeItem("profilePictureSideMenu");
               localStorage.removeItem("all_ID");
+              $rootScope.danCustomerData = {};
+              $rootScope.danIncomeData = {};
               //Хэрэглээний лизинг
               localStorage.removeItem("otherGoods");
               localStorage.removeItem("consumerRequestData");
@@ -404,8 +406,6 @@ var app = angular
         link: function (scope, element, attrs, controller) {
           var sep = attrs.thousandSeparator || ",";
           var model = attrs.ngModel;
-
-          console.info(model);
 
           var doReplace = function () {
             var curValue = element.val();

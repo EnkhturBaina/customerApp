@@ -3,7 +3,7 @@
     <div>
         <ion-tabs class="home-tabs tabs-top home-card-tab" id="homeTabsId" delegate-handle="myHeaderTabHandle">
             <!-- Tab 1 -->
-            <ion-tab title="Зээл">
+            <ion-tab title="Зээлийн маркет">
                 <ion-nav-view class="ghostwhite">
                     <ion-content overflow-scroll="true" class="padding scroll-content ionic-scroll has-header home-tab-2-content">
                         <p class="loan-tab-title ion-color-text">Та авах зээлийн төрлөө сонгоно уу.</p>
@@ -33,7 +33,7 @@
                                     <span class="ion-text-bold ion-float-right">Хэрэглээний лизинг</span>
                                 </div>
                                 <div class="loan-card-2-first-row">
-                                    <span class="ion-float-right loan-card-text">Та бүх төрлийн цахилгаан бараа, тавилга, гар утсыг хэрэглээний лизингээр худалдан аваарай.</span>
+                                    <span class="ion-float-right loan-card-text">Та бүх төрлийн цахилгаан бараа, гар утсыг хэрэглээний лизингээр аваарай.</span>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                         <div class="card" ui-sref="property_collateral_danselect">
                             <div class="item loan-card-4 card-body item-text-wrap">
                                 <div class="loan-card-first-row">
-                                    <span class="ion-text-bold ion-float-right">Үл хөдлөх барьцаат зээл</span>
+                                    <span class="ion-text-bold ion-float-right">Үл хөдлөх барьцаалсан зээл</span>
                                 </div>
                                 <div class="loan-card-2-first-row">
                                     <span class="ion-float-right loan-card-text">Та үл хөдлөх хөрөнгөө барьцаалан өөрт тохирсон зээлийг эндээс аваарай. </span>
@@ -62,7 +62,7 @@
                     </ion-content>
                 </ion-nav-view>
             </ion-tab>
-            <ion-tab title="Бараа" ng-click="callComingSoon()" disabled>
+            <ion-tab title="Барааны маркет" ng-click="callComingSoon()" disabled>
                 <ion-nav-view class="ghostwhite">
                     <ion-content overflow-scroll="false" style="margin: 0 10px" class="">
                         <div class="card home-card-1-line" ui-sref="loan_calculator">
@@ -191,7 +191,7 @@
                     border-radius: 5px !important;
                 }
             </style>
-            <ion-slide-box show-pager="true" style="height: 80%; padding-top: 20%" active-slide="$root.activeSlideImage" on-slide-changed="slideChanged(index)">
+            <ion-slide-box auto-play="true" slide-interval="2000" style="height: 80%; padding-top: 20%" active-slide="$root.activeSlideImage" on-slide-changed="slideChanged(index)">
                 <ion-slide ng-repeat="banner in bannerData">
                     <h2 class="intro-title">{{banner.text2}}</h2>
                     <p class="intro-body-text">{{banner.name}}</p>

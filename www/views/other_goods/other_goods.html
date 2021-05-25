@@ -27,7 +27,7 @@
                                         <div class="items-list-container">
                                             <img ng-src="{{'data:image/png;base64,'+item.picture1}}" />
                                         </div>
-                                        <div class="left-text" style="margin-top: 4%;margin-left: 100px;height: 18px;position: absolute;">
+                                        <div class="left-text" style="margin-top: 4%;margin-left: 90px;height: 18px;position: absolute;">
                                             <p class="itemname" style="color: #4b5180 !important;font-weight: bold;" ng-repeat="itemSup in $root.suppliers" ng-if="itemSup.id == item.shopId">{{itemSup.suppliername}}</p>
                                             <p class="price">{{item.unitPrice|formatNumber}}₮</p>
                                         </div>

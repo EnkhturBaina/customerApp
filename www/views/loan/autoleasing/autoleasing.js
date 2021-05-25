@@ -33,7 +33,7 @@
     $rootScope.carDatas = [];
     if ($scope.checkReqiured("step1")) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597654926672135", itemCode: itemCode }).then(function (response) {
-        console.log("res", response);
+        // console.log("res", response);
         if (!isEmpty(response) && !isEmpty(response[0])) {
           $rootScope.selectedCarData = response[0];
           // console.log("$rootScope.selectedCarData", $rootScope.selectedCarData);
@@ -154,7 +154,7 @@
       $rootScope.bankListFilter = response.result.data;
       $ionicLoading.hide();
     });
-    // console.log("json", json);
+    console.log("json", json);
   };
   //Банк шүүлт step 2 дээр шууд ажиллах
   //Банк сонгох autoleasing-3 хуудасруу ороход ажиллах
@@ -199,6 +199,7 @@
   //Дан -с нийгмийн даатгалын мэдээлэл татаж хадгалах
   $scope.getCustomerIncomeData = function () {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+    //Нэвтэрсэн үед мэдээлэл татах
     if (!isEmpty($rootScope.loginUserInfo)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
         if (response[0] != "") {
@@ -758,7 +759,7 @@
         $rootScope.alert("Та сарын орлогоо оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danIncomeData.totalincomehousehold)) {
-        $rootScope.alert("Та өрхийн нийт орлогоо оруулна уу", "warning");
+        $rootScope.alert("Та бусад орлогоо оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danIncomeData.monthlypayment)) {
         $rootScope.alert("Та төлж буй зээлийн дүнгээ оруулна уу", "warning");
@@ -787,23 +788,12 @@
   };
 
   $rootScope.calcLoanAmount = function () {
-    // var input = document.getElementById("sendRequestAdvancePayment");
-    // var aaaaa = $rootScope.loanAmountField;
-    // if (parseFloat(aaaaa) >= parseFloat($rootScope.newReqiust.advancePayment) || input.value == 0) {
-    //   $rootScope.newReqiust.getLoanAmount = "";
-    //   $rootScope.newReqiust.getLoanAmount = aaaaa - parseFloat($rootScope.newReqiust.advancePayment);
-    //   $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
-    // } else {
-    //   input.value = input.value.slice(0, input.value.length - 1);
-    //   input.value = $rootScope.loanAmountField - input.value;
-    // }
-    if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.newReqiust.getLoanAmount) {
+    if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.loanAmountField) {
       $rootScope.newReqiust.getLoanAmount = $rootScope.loanAmountField - $rootScope.newReqiust.advancePayment;
       $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
     } else if (parseInt($rootScope.newReqiust.advancePayment) > $rootScope.loanAmountField) {
-      // $rootScope.newReqiust.advancePayment = $rootScope.newReqiust.advancePayment / 10;
       var tmp = $rootScope.newReqiust.advancePayment;
-      $rootScope.newReqiust.advancePayment = tmp.substr(0, tmp.length - 1);
+      $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
     }
   };
 
@@ -828,12 +818,13 @@
     }
   };
   $scope.$on("$ionicView.enter", function () {
+    console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
     $rootScope.collTrueStep2 = false;
     $rootScope.hideFooter = true;
     var local = localStorage.getItem("requestType");
-    if (local == "estate" && $state.current.name == "autoleasing-4") {
+    if (local == "estate" && $state.current.name == "autoleasing-4" && !$rootScope.propertyIsDan) {
       $scope.danHand();
-    } else if (local == "autoColl" && $state.current.name == "autoleasing-4") {
+    } else if (local == "autoColl" && $state.current.name == "autoleasing-4" && !$rootScope.isDanLoginAutoColl) {
       $scope.danHand();
     }
 
@@ -984,23 +975,25 @@
       $rootScope.experiencePeriodData = response;
     });
     $state.go("autoleasing-4");
-    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
-
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (responseCustomerData) {
-      // console.log("responseCustomerData", responseCustomerData);
-      if (responseCustomerData[0] != "") {
-        $rootScope.danCustomerData = responseCustomerData[0];
-        $rootScope.danCustomerData.id = all_ID.dccustomerid;
-        console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
-        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
-          // console.log("get income data response", response);
-          if (response[0] != "") {
-            $rootScope.danIncomeData = response[0];
-          }
-        });
-      }
-    });
     $rootScope.alert("Та гараар мэдээллээ бөглөсөн тохиолдолд зээл олгох байгууллагаас нэмэлт материал авах хүсэлт ирэхийг анхаарна уу", "");
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+    //Нэвтэрсэн үед мэдээлэл татах
+    if (!isEmpty($rootScope.loginUserInfo)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (responseCustomerData) {
+        // console.log("responseCustomerData", responseCustomerData);
+        if (responseCustomerData[0] != "") {
+          $rootScope.danCustomerData = responseCustomerData[0];
+          $rootScope.danCustomerData.id = all_ID.dccustomerid;
+          console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
+            // console.log("get income data response", response);
+            if (response[0] != "") {
+              $rootScope.danIncomeData = response[0];
+            }
+          });
+        }
+      });
+    }
 
     $rootScope.monthlyIncomeDisable = false;
   };
