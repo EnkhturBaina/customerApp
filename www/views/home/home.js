@@ -16,7 +16,9 @@
   // ========= Slide =============
   $scope.activeSlideIndex = 0;
   $rootScope.showBanner = true;
+
   $scope.getBanner = function () {
+    console.log("A");
     document.getElementsByTagName("ion-nav-bar")[0].style.visibility = "hidden";
     $scope.bannerData = JSON.parse(localStorage.getItem("banner"));
     serverDeferred.requestFull("PL_MDVIEW_004", { systemmetagroupid: "1597631698242718" }).then(function (data) {
@@ -35,13 +37,11 @@
   };
   $scope.nextSlideChanged = function () {
     $ionicSlideBoxDelegate.next();
-    // $rootScope.showBanner = false;
   };
   $scope.endSlideChanged = function (index) {
     $ionicSlideBoxDelegate.slide(Object.keys($scope.bannerData).length - 1, 0);
-    //$scope.activeSlideIndex = $scope.bannerData.length - 1;
   };
-  $scope.showlogin = function () {
+  $scope.hideIntro = function () {
     document.getElementsByTagName("ion-nav-bar")[0].style.visibility = "visible";
     $rootScope.showBanner = false;
     $rootScope.hideFooter = false;
@@ -55,7 +55,6 @@
       localStorage.removeItem("bannerNotShow");
     }
   };
-  $scope.getBanner();
 
   // ============= glob ========================
   $rootScope.alert = function (messege, checkmark, then) {
@@ -89,31 +88,7 @@
       ],
     });
   };
-  $rootScope.checkLoginUserReq = function () {
-    if (isEmpty($rootScope.loginUserInfo.incometypeid)) {
-      return false;
-    } else if (isEmpty($rootScope.loginUserInfo.monthlyincome)) {
-      return false;
-    } else if (isEmpty($rootScope.loginUserInfo.totalincomehousehold)) {
-      return false;
-    } else if (isEmpty($rootScope.loginUserInfo.monthlypayment)) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-  $rootScope.checkLoginUserDatas = function (correntPath, next) {
-    if (!isEmpty($rootScope.loginUserInfo)) {
-      if ($rootScope.checkLoginUserReq()) {
-        return { now: next, nextpath: next };
-      } else {
-        return { now: "profile", nextpath: next };
-      }
-    } else {
-      $rootScope.hideFooter = true;
-      return { now: "login", nextpath: next };
-    }
-  };
+
   $rootScope.ShowLoader = function () {
     $ionicLoading.show({
       showBackdrop: true,
@@ -124,7 +99,7 @@
   //========= first run ==========================
   var basket = localStorage.getItem("basketData");
   // console.log("basket", basket);
-  // console.log("localStorage", localStorage);
+  console.log("localStorage", localStorage);
   if (!isEmpty(basket)) $rootScope.basketData = JSON.parse(basket);
   else $rootScope.basketData = [];
 
@@ -134,13 +109,6 @@
       // console.log("allBanks", response.result.data);
     });
   };
-
-  $scope.getAllBankList();
-
-  var bannerNotShow = localStorage.getItem("bannerNotShow");
-  if (bannerNotShow == "true") {
-    $scope.showlogin();
-  }
 
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");
@@ -153,9 +121,6 @@
 
   $ionicPlatform.registerBackButtonAction(function (e) {
     e.preventDefault();
-    // if ($ionicHistory.viewHistory().currentView.stateName == "requestList") {
-    //   $state.go("home");
-    // } else
     if ($ionicHistory.viewHistory().backView) {
       $ionicHistory.viewHistory().backView.go();
     } else {
@@ -191,9 +156,26 @@
     if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
       $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
     }
-    //dc_bank_product table -с үээлийн бүтээгдэхүүн бүрийн max зээлийн хугацаа авах
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621843239702927" }).then(function (response) {
-      $rootScope.bankproductDtl = response;
-    });
+    $rootScope.displayMinPayment = "";
+    $rootScope.bankproductDtlNumber = "";
+    //dc_bank_product table -с зээлийн бүтээгдэхүүн бүрийн max зээлийн хугацаа авах
+    if (isEmpty($rootScope.bankproductDtl)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621843239702927" }).then(function (response) {
+        $rootScope.bankproductDtl = response;
+      });
+    }
+    //dc_bank_product table -с зээлийн бүтээгдэхүүн бүрийн min урьдчилгаа авах
+    if (isEmpty($rootScope.bankProductMinPayment)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621921912497648" }).then(function (response) {
+        $rootScope.bankProductMinPayment = response;
+      });
+    }
+    var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
+
+    !bannerNotShow ? $scope.getBanner() : $scope.hideIntro();
+
+    if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
+
+    isEmpty($rootScope.loginUserInfo) ? ($rootScope.profilePath = "login") : ($rootScope.profilePath = "profile");
   });
 });

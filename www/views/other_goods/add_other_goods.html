@@ -37,14 +37,14 @@
                                 <option ng-repeat="supp in subVendor track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
                         </label>
-                        <div class="selector-container">
+                        <label class="item item-input selector-container">
                             <p class="title">Барааны үнэ</p>
                             <div class="search-input-container">
                                 <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.newCarReq.unitPrice" name="" class="search-input-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-keyup="hideKeyboard($event)" thousand-separator />
                                 <input type="hidden" ng-model="$root.newCarReq.itemid" select-on-click />
 
                             </div>
-                        </div>
+                        </label>
                         <div class="consumer-img-list">
                             <div class="row">
                                 <div class="col col-50 consumer-img img-input-area-picture1" ng-click="goodsSourceSelectOn('picture1')">

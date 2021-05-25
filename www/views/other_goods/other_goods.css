@@ -190,15 +190,15 @@
 .selector-container {
   margin: 14px 0;
   padding: 0 10px;
-  text-align-last: right;
   border: 0 !important;
   z-index: 99;
+  display: block !important;
 }
 .search-input-type {
   background: none;
   text-align: left !important;
   border: 1px solid #d5d5d5 !important;
-  border-radius: 5px;
+  border-radius: 5px !important;
   margin: 0 0;
   width: 100%;
   padding: 0 10px 0 0px !important;
@@ -207,17 +207,9 @@
   text-align-last: right;
 }
 
-.selector-container {
-  margin: 14px 0;
-  position: relative;
-}
-
 .selector-container .title {
-  position: absolute;
   color: #a2a7b5;
   margin-left: 10px;
-  top: 20%;
-  z-index: -1;
 }
 
 .consumer-loan-suppp-select {

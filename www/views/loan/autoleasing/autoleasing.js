@@ -76,7 +76,7 @@
   $scope.getLoanAmountFunc = function () {
     var input = document.getElementById("loanAmountRequest");
     $rootScope.loanAmountField = "";
-    input.value = "";
+    // input.value = "";
     $rootScope.requestType = localStorage.getItem("requestType");
 
     if ($rootScope.requestType == "consumer") {
@@ -101,7 +101,6 @@
   $rootScope.getbankData = function () {
     $rootScope.ShowLoader();
     $rootScope.requestType = localStorage.getItem("requestType");
-    console.log("$rootScope.requestType", $rootScope.requestType);
     //Шүүгдсэн банкууд
     $rootScope.bankListFilter = [];
     var json = {};
@@ -677,7 +676,7 @@
         $rootScope.newReqiust.loanAmountReq = true;
         $rootScope.alert("Зээлийн хэмжээгээ оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.advancePayment)) {
+      } else if ((isEmpty($rootScope.newReqiust.advancePayment) && $rootScope.newReqiust.collateralConditionId == "1554263832151") || (isEmpty($rootScope.newReqiust.advancePayment) && !$scope.isCollShow)) {
         $rootScope.alert("Урьдчилгаа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isCollShow) {
@@ -788,17 +787,27 @@
   };
 
   $rootScope.calcLoanAmount = function () {
-    var input = document.getElementById("sendRequestAdvancePayment");
-    var aaaaa = $rootScope.loanAmountField;
-    if (parseFloat(aaaaa) >= parseFloat($rootScope.newReqiust.advancePayment) || input.value == 0) {
-      $rootScope.newReqiust.getLoanAmount = "";
-      $rootScope.newReqiust.getLoanAmount = aaaaa - parseFloat($rootScope.newReqiust.advancePayment);
+    // var input = document.getElementById("sendRequestAdvancePayment");
+    // var aaaaa = $rootScope.loanAmountField;
+    // if (parseFloat(aaaaa) >= parseFloat($rootScope.newReqiust.advancePayment) || input.value == 0) {
+    //   $rootScope.newReqiust.getLoanAmount = "";
+    //   $rootScope.newReqiust.getLoanAmount = aaaaa - parseFloat($rootScope.newReqiust.advancePayment);
+    //   $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
+    // } else {
+    //   input.value = input.value.slice(0, input.value.length - 1);
+    //   input.value = $rootScope.loanAmountField - input.value;
+    // }
+    if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.newReqiust.getLoanAmount) {
+      $rootScope.newReqiust.getLoanAmount = $rootScope.loanAmountField - $rootScope.newReqiust.advancePayment;
       $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
-    } else {
-      input.value = input.value.slice(0, input.value.length - 1);
-      input.value = $rootScope.loanAmountField - input.value;
+    } else if (parseInt($rootScope.newReqiust.advancePayment) > $rootScope.loanAmountField) {
+      // $rootScope.newReqiust.advancePayment = $rootScope.newReqiust.advancePayment / 10;
+      var tmp = $rootScope.newReqiust.advancePayment;
+      $rootScope.newReqiust.advancePayment = tmp.substr(0, tmp.length - 1);
     }
   };
+
+  $rootScope.calculateLoan = function () {};
 
   $scope.backFromStep2 = function () {
     var local = localStorage.getItem("requestType");
@@ -811,8 +820,15 @@
     }
     // $rootScope.newReqiust = {};
   };
-
+  $scope.changeToolTipData = function () {
+    if ($rootScope.newReqiust.collateralConditionId == "1554263832132") {
+      $rootScope.collTrueStep2 = true;
+    } else {
+      $rootScope.collTrueStep2 = false;
+    }
+  };
   $scope.$on("$ionicView.enter", function () {
+    $rootScope.collTrueStep2 = false;
     $rootScope.hideFooter = true;
     var local = localStorage.getItem("requestType");
     if (local == "estate" && $state.current.name == "autoleasing-4") {

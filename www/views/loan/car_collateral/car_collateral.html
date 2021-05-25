@@ -28,21 +28,21 @@
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Төрөл <span class="car-coll-req">*</span></p>
                             <select ng-model="$root.newCarReq.carCategoryId" style="background-color: transparent" ng-change="getCarFactoryCategory(newCarReq.carCategoryId)">
-                                <option ng-repeat="com in carCategory" ng-if="com.name" value="{{com.id}}">
+                                <option ng-repeat="com in carCategory track by $index" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Үйлдвэр <span class="car-coll-req">*</span></p>
                             <select id="brandSelect" ng-model="$root.newCarReq.brandId" style="background-color: transparent" disabled ng-change="getCarModelData(newCarReq.brandId)">
-                                <option ng-repeat="com in factoryData" ng-if="com.name" value="{{com.id}}">
+                                <option ng-repeat="com in factoryData track by $index" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select car-collateral-label">
                             <p class="input-label" style="margin: 0;">Загвар <span class="car-coll-req">*</span></p>
                             <select id="modelSelect" ng-model="$root.newCarReq.markId" style="background-color: transparent" disabled>
-                                <option ng-repeat="model in modelData" ng-if="model.name" value="{{model.id}}">
+                                <option ng-repeat="model in modelData track by $index" ng-if="model.name" value="{{model.id}}">
                                     {{model.name}}</option>
                             </select>
                         </label>

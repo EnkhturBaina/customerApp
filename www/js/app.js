@@ -325,6 +325,7 @@ var app = angular
             type: "button-confirm",
             onTap: function () {
               $rootScope.loginUserInfo = undefined;
+              $rootScope.profilePath = "login";
               localStorage.removeItem("loginUserInfo");
               localStorage.removeItem("profilePictureSideMenu");
               localStorage.removeItem("all_ID");

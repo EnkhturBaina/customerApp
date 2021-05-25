@@ -83,15 +83,5 @@
         <img ng-src="{{banner.text1}}" style="margin-left: auto; display: block; margin-right: auto; max-width: 80%; height: auto" />
       </ion-slide>
     </ion-slide-box>
-    <div class="slider-button-container" ng-if="((bannerData|objLength)!=activeSlideIndex+1)">
-      <button class="bottom-first-button" ng-click="nextSlideChanged()">ДАРААХ</button>
-      <button class="bottom-second-button" ng-click="endSlideChanged()">АЛГАСАХ</button>
-    </div>
-    <div ng-if="((bannerData|objLength)==activeSlideIndex+1) || !$root.loginUserInfo|isEmpty">
-      <ion-checkbox class="intro-not-show" ng-model="isBanneNotShowChecked.checked" ng-change="isNotShow()">
-        <span>Дахин харуулахгүй</span>
-      </ion-checkbox>
-      <button ng-click="showlogin()" class="button btn single-button">Үргэлжлүүлэх</button>
-    </div>
   </ion-content>
 </ion-view>

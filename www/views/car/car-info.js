@@ -6,9 +6,16 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
   $rootScope.ShowLoader();
   // auto Leasing
   $scope.goAutoleasing = function () {
+    //Боломжит дээд хугацаа
     $rootScope.bankproductDtlNumber = $rootScope.bankproductDtl.find((o) => o.categoryid === "16082024283142");
-    localStorage.setItem("requestType", "auto");
-    $state.go("autoleasing-2");
+
+    //Төлөх хамгийн бага урдьчилгаа
+    $rootScope.bankProductMinPaymentNumber = $rootScope.bankProductMinPayment.find((o) => o.categoryid === "16082024283142");
+    $rootScope.displayMinPayment = $rootScope.selectedCarData.price * ($rootScope.bankProductMinPaymentNumber.minpayment / 100);
+    if (!isEmpty($rootScope.displayMinPayment)) {
+      localStorage.setItem("requestType", "auto");
+      $state.go("autoleasing-2");
+    }
   };
   // get car Data
   $rootScope.getCarinfo = function () {

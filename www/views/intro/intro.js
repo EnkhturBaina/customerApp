@@ -23,9 +23,6 @@ angular.module("intro.Ctrl", []).controller("introCtrl", function ($ionicSlideBo
   $scope.endSlideChanged = function (index) {
     $ionicSlideBoxDelegate.slide(Object.keys($scope.bannerData).length - 1, 0);
   };
-  $scope.showlogin = function () {
-    $scope.showBanner = false;
-  };
   $scope.getBanner();
   $rootScope.hideFooter = true;
 });

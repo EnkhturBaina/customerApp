@@ -4,8 +4,6 @@ basket.controller("basketCtrl", function ($scope, $rootScope, $state) {
 
   $scope.basketGoLeasing = function () {
     if (!isEmpty($rootScope.selectedCarData)) {
-      var next = $rootScope.checkLoginUserDatas("basket", "autoleasing-2");
-      $state.go(next.now, { path: next.nextpath });
     }
   };
   $scope.isChecked = false;

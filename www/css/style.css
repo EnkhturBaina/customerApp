@@ -1604,3 +1604,8 @@ input[type="number"] {
 .checkBank-not-agree {
   padding-left: 30px;
 }
+.tooltipster-base {
+  text-align: center !important;
+  max-width: 80vw !important;
+  margin: 0 auto !important;
+}

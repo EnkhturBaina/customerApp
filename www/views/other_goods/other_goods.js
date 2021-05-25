@@ -32,9 +32,16 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
 
   $scope.nexClivk = function () {
     if (!isEmpty($rootScope.otherGoodsData)) {
+      //Боломжит дээд хугацаа
       $rootScope.bankproductDtlNumber = $rootScope.bankproductDtl.find((o) => o.categoryid === "16082024252191");
-      localStorage.setItem("requestType", "consumer");
-      $state.go("autoleasing-2");
+
+      //Төлөх хамгийн бага урдьчилгаа
+      $rootScope.bankProductMinPaymentNumber = $rootScope.bankProductMinPayment.find((o) => o.categoryid === "16082024283142");
+      $rootScope.displayMinPayment = $rootScope.sumPrice * ($rootScope.bankProductMinPaymentNumber.minpayment / 100);
+      if (!isEmpty($rootScope.displayMinPayment)) {
+        localStorage.setItem("requestType", "consumer");
+        $state.go("autoleasing-2");
+      }
     } else {
       $rootScope.alert("Та зээлээр авах бараагаа бүртгэнэ үү", "warning");
     }

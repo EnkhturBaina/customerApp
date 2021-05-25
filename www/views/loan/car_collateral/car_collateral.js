@@ -9,8 +9,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
   //Төрөл
   $scope.carCategory = [];
-  //Үйлдвэр
-  $scope.factoryData = [];
   //Загвар
   $scope.modelData = [];
   //Хөдөлгүүрийн төрөл
@@ -69,20 +67,41 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         $scope.carColorData = datas;
       });
     }
+    if (isEmpty($scope.carColorData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613364305380357" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        $scope.carFactoryData = datas;
+      });
+    }
+    if (isEmpty($scope.carColorData)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613364325545258" }).then(function (datas) {
+        delete datas.aggregatecolumns;
+        $scope.carModelData = datas;
+      });
+    }
   };
+
   $scope.getCarFactoryCategory = function (val) {
-    var json = { systemmetagroupid: "1613364305380357", number1: val };
-    serverDeferred.request("PL_MDVIEW_004", json).then(function (datas) {
-      delete datas.aggregatecolumns;
-      $scope.factoryData = datas;
+    $scope.factoryData = [];
+    $rootScope.newCarReq.brandId = "";
+
+    $scope.carFactoryData.map((item) => {
+      if (item.number1 === val) {
+        $scope.factoryData.push(item);
+        return true;
+      }
     });
     val != "" ? (document.getElementById("brandSelect").disabled = false) : (document.getElementById("brandSelect").disabled = true);
   };
   $scope.getCarModelData = function (val) {
-    var json = { systemmetagroupid: "1613364325545258", parentId: val };
-    serverDeferred.request("PL_MDVIEW_004", json).then(function (datas) {
-      delete datas.aggregatecolumns;
-      $scope.modelData = datas;
+    $scope.modelData = [];
+    $rootScope.newCarReq.markId = "";
+
+    $scope.carModelData.map((item) => {
+      if (item.parentid === val) {
+        $scope.modelData.push(item);
+        return true;
+      }
     });
     val != "" ? (document.getElementById("modelSelect").disabled = false) : (document.getElementById("modelSelect").disabled = true);
   };

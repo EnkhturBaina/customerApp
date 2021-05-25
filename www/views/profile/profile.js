@@ -199,9 +199,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
               $rootScope.alert("Мэдээлэл хадгалахад алдаа гарлаа 100", "danger", "profile");
             }
           });
-          if (!isEmpty($scope.nextPath)) {
-            $state.go($scope.nextPath);
-          }
         } else {
           $rootScope.alert("Мэдээлэл хадгалахад алдаа гарлаа 200", "danger", "profile");
         }
