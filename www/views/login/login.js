@@ -93,6 +93,9 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
                   } else {
                     $state.go("profile");
                   }
+                  if ($rootScope.isRemmberUsername && !isEmpty($scope.user.username)) {
+                    localStorage.setItem("rememberUsername", $scope.user.username);
+                  }
                 } else {
                   $state.go($stateParams.path);
                 }
@@ -123,6 +126,14 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   };
   $scope.user.username = "";
   $rootScope.isDanLogin = false;
+  $rootScope.isRemmberUsername = true;
+
+  var rememberedUsername = JSON.parse(localStorage.getItem("rememberUsername"));
+
+  if (!isEmpty(rememberedUsername)) {
+    $scope.user.username = rememberedUsername;
+  }
+
   $scope.Login = function (a, b) {
     if (isEmpty(a)) {
       $ionicLoading.hide();

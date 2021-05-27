@@ -13,7 +13,7 @@
         </ion-header-bar>
         <div ng-controller="loginCtrl" class="login-container">
             <div class="box">
-                <img class="login-favicon" src="img/dlogo-white.png" />
+                <img class="login-favicon" src="img/logo-light.png" />
                 <input type="number" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="login-mobile" ng-model="user.username" next-focus-elem ng-keyup="hideKeyboard($event)" />
                 <div class="login-password-container" select-on-click>
                     <input type="{{inputType}}" class="login-password" placeholder="Нууц үг" name="password" id="myInput" ng-model="user.password" ng-keyup="loginKey($event,user.username,user.userpassword);hideKeyboard($event)" select-on-click />
@@ -26,7 +26,7 @@
                 <div class="login-radio">
                     <ul class="unstyled centered">
                         <li>
-                            <input class="styled-checkbox" id="styled-checkbox-1" type="checkbox" value="value1" checked />
+                            <input class="styled-checkbox" ng-model="$root.isRemmberUsername" id="styled-checkbox-1" type="checkbox" value="value1" />
                             <label for="styled-checkbox-1">Нэвтрэх нэр сануулах</label>
                         </li>
                         <li>
@@ -40,7 +40,7 @@
                     <!-- ui-sref="profile" -->
                     <button class="button login-button" ng-click="Login(user.username,user.password);">Нэвтрэх</button>
                     <!-- <button class="button login-button">Нэвтрэх</button> -->
-                    <button class="button login-button" ng-click="gotoDanLogin()" style="margin-top: 5%;">ДАН системээр нэвтрэх</button>
+                    <button class="button login-button" ng-click="gotoDanLogin()" style="margin-top: 5%;">E-mongolia системээр нэвтрэх</button>
                     <div class="login-to-register" ui-sref="register">Бүртгүүлэх</div>
                 </div>
             </div>
