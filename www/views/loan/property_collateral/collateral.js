@@ -7,6 +7,8 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     document.getElementById("overlayCollateralLoan").style.display = "none";
   };
   // $("#squareSize").mask("0.000", { reverse: true });
+  $("#roomCount").mask("000");
+  $("#floorCount").mask("00");
   $scope.takePhoto = function (type) {
     var srcType = Camera.PictureSourceType.CAMERA;
     if (type == "1") {
