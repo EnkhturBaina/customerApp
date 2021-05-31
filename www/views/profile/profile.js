@@ -87,7 +87,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1604389075984789", dim1: $rootScope.loginUserInfo.customerid }).then(function (response) {
         //   $rootScope.customerDealBanks = response;
         // });
-        $ionicLoading.hide();
+        $rootScope.HideLoader();
       });
     }
   };
@@ -106,41 +106,41 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     $scope.customerProfileData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
 
     if (isEmpty($scope.customerProfileData.lastname)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Та овогоо оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.firstname)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Та өөрийн нэрээ оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.uniqueidentifier)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
     }
     // else if (isEmpty($scope.customerProfileData.email)) {
     //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
     // }
     else if (!re.test($scope.customerProfileData.email)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("И-мэйл хаягаа зөв оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.mobilenumber)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
     } else if ($scope.customerProfileData.mobilenumber.length < 8) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.ismarried)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
     } else if (isEmpty($scope.customerProfileData.mikmortgagecondition)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("МИК-ийн зээлтэй эсэхээ сонгоно уу", "warning");
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.identfrontpic)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Иргэний үнэмлэхний урд талын зургийг оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.identbackpic)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Иргэний үнэмлэхний ард талын зургийг оруулна уу", "warning");
     } else {
       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -176,7 +176,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
               serverDeferred.requestFull("dcApp_profile_pricture_dv_002", $rootScope.customerProfilePicture).then(function (response) {});
 
               $rootScope.alert("Амжилттай", "success", "profile");
-              $ionicLoading.hide();
+              $rootScope.HideLoader();
             } else {
               $rootScope.alert("Мэдээлэл хадгалахад алдаа гарлаа 100", "danger", "profile");
             }
@@ -187,7 +187,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       });
     }
     $timeout(function () {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
     }, 5000);
   };
 

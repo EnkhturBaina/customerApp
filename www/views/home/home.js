@@ -87,15 +87,22 @@
       ],
     });
   };
-
   $rootScope.ShowLoader = function () {
     $ionicLoading.show({
       showBackdrop: true,
       showDelay: 0,
-      template: '<div class="custom-spinner"><div></div><div class="custom-dot"></div><div></div><div class="custom-dot"></div></div>',
-      // template: '<div class="loader"></div>',
+      // template: '<div class="custom-spinner"><div></div><div class="custom-dot"></div><div></div><div class="custom-dot"></div></div>',
+      template: '<div class="loader"></div>',
     });
+    $("#mobile").addClass("blur-full-screen");
   };
+
+  $rootScope.HideLoader = function () {
+    $ionicLoading.hide();
+
+    $("#mobile").removeClass("blur-full-screen");
+  };
+
   //========= first run ==========================
   var basket = localStorage.getItem("basketData");
   // console.log("basket", basket);

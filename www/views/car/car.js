@@ -16,7 +16,7 @@ angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $
             if (!isEmpty(item)) {
               $rootScope.carDatas.push(item);
               // console.log("$rootScope.carDatas", $rootScope.carDatas);
-              $ionicLoading.hide();
+              $rootScope.HideLoader();
             }
           });
         });
@@ -27,7 +27,7 @@ angular.module("car.Ctrl", []).controller("carCtrl", function ($scope, $state, $
           if (!isEmpty(item)) {
             $rootScope.carDatas.push(item);
             // console.log("$rootScope.carDatas", $rootScope.carDatas);
-            $ionicLoading.hide();
+            $rootScope.HideLoader();
           }
         });
       });

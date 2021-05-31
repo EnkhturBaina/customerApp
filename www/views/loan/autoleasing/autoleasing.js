@@ -3,6 +3,11 @@
   $rootScope.requestType = localStorage.getItem("requestType");
   $(".mobile-number-step4").mask("00000000");
   $("#step2loanMonth").mask("00");
+  $("#step4UniqueIdentifier").mask("AA00000000", {
+    translation: {
+      A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
+    },
+  });
   //Сүүлийн Step дээр сонгосон банк
   $rootScope.selectedBanksList = [];
   if ($state.current.name == "autoleasing-1") {
@@ -153,7 +158,7 @@
     }
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
     });
     // console.log("json", json);
   };
@@ -309,7 +314,7 @@
                             userName: $rootScope.danCustomerData.mobilenumber,
                           };
                           serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
-                            $ionicLoading.hide();
+                            $rootScope.HideLoader();
                             localStorage.removeItem("carColl");
                             $rootScope.carCollateralRequestData = {};
                             $rootScope.danIncomeData = {};
@@ -404,7 +409,7 @@
                             userName: $rootScope.danCustomerData.mobilenumber,
                           };
                           serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
-                            $ionicLoading.hide();
+                            $rootScope.HideLoader();
                             localStorage.removeItem("otherGoods");
                             localStorage.removeItem("consumerRequestData");
                             localStorage.removeItem("otherGoodsMaxId");
@@ -414,20 +419,20 @@
                             $state.go("loan_success");
                           });
                         } else {
-                          $ionicLoading.hide();
+                          $rootScope.HideLoader();
                           $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
                         }
                       });
                     });
                   } else {
-                    $ionicLoading.hide();
+                    $rootScope.HideLoader();
                     $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 200", "danger");
                   }
                 }, 500);
               });
             });
           } else {
-            $ionicLoading.hide();
+            $rootScope.HideLoader();
             $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 300", "danger");
           }
         });
@@ -514,7 +519,7 @@
                             $rootScope.propertyRequestData = {};
                             $rootScope.danIncomeData = {};
                             $rootScope.template = {};
-                            $ionicLoading.hide();
+                            $rootScope.HideLoader();
                           });
                         }
                       });
@@ -593,7 +598,7 @@
                       userName: $rootScope.danCustomerData.mobilenumber,
                     };
                     serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
-                      $ionicLoading.hide();
+                      $rootScope.HideLoader();
                       $rootScope.newReqiust = {};
                       $rootScope.selectedCarData = [];
                       $rootScope.danIncomeData = {};
@@ -612,7 +617,7 @@
         });
       }
       $timeout(function () {
-        $ionicLoading.hide();
+        $rootScope.HideLoader();
         $ionicHistory.clearHistory();
         $rootScope.bankListFilter = [];
         localStorage.removeItem("requestType");
@@ -730,7 +735,7 @@
       //   return false;
       // }
       else if (!re.test($scope.danCustomerData.email)) {
-        // $ionicLoading.hide();
+        // $rootScope.HideLoader();
         $rootScope.alert("И-мэйл хаягаа зөв оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {

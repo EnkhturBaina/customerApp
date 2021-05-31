@@ -6,6 +6,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   $scope.pCSourceSelectOff = function () {
     document.getElementById("overlayCollateralLoan").style.display = "none";
   };
+  // $("#squareSize").mask("0.000", { reverse: true });
   $scope.takePhoto = function (type) {
     var srcType = Camera.PictureSourceType.CAMERA;
     if (type == "1") {
@@ -216,6 +217,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   };
 
   $scope.propertyCheckReqiured = function (param) {
+    console.log("$rootScope.propertyData.squareSize", $rootScope.propertyData.squareSize.length);
     if (param == "step1") {
       if (isEmpty($rootScope.template)) {
         $rootScope.alert("Хөрөнгийн төрөл сонгоно уу", "warning");

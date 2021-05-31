@@ -34,7 +34,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
       ],
     }).then(
       function (response) {
-        $ionicLoading.hide();
+        $rootScope.HideLoader();
         if ($scope.loginChecks.fingerprint != "1") {
           $state.go("appHome", { beforePath: "login" });
           $rootScope.runFunctionDataView = true;
@@ -44,7 +44,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
       },
       function (response) {
         if (typeof callBack === "function") {
-          $ionicLoading.hide();
+          $rootScope.HideLoader();
           callBack("Серверт холбогдоход алдаа гарлаа");
         }
       }
@@ -98,18 +98,18 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
                   $state.go($stateParams.path);
                 }
               } else {
-                $ionicLoading.hide();
+                $rootScope.HideLoader();
                 $rootScope.alert("Нэр, Нууц үг буруу байна", "warning");
               }
             });
             $rootScope.hideFooter = false;
           } else {
-            $ionicLoading.hide();
+            $rootScope.HideLoader();
             $rootScope.alert("Нэр, Нууц үг буруу байна", "warning");
           }
         });
       } else {
-        $ionicLoading.hide();
+        $rootScope.HideLoader();
         $rootScope.alert("Нэр, Нууц үг буруу байна", "warning");
       }
       $rootScope.hideFooter = true;
@@ -135,13 +135,13 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   $scope.Login = function (a, b) {
     var value = document.getElementById("loginMobileNumber").value;
     if (isEmpty(a)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
     } else if (value.length < 8) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Утасны дугаараа бүрэн уу", "warning");
     } else if (isEmpty(b)) {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
       $rootScope.alert("Нууц үгээ оруулна уу", "warning");
     } else {
       var network = $cordovaNetwork.isOnline();

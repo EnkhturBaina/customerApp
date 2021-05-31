@@ -10,7 +10,7 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597814217394980", crmCustomerId: all_ID.crmcustomerid }).then(function (response) {
         if (isEmpty(response[0])) {
           $scope.isEmptyReq = true;
-          $ionicLoading.hide();
+          $rootScope.HideLoader();
         } else {
           $scope.isEmptyReq = false;
           $scope.requetData = response;
@@ -18,16 +18,16 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
             for (i = 0; i < $scope.requetData.length - 1; i++) {
               // $scope.growDiv(i);
             }
-            $ionicLoading.hide();
+            $rootScope.HideLoader();
           }, 100);
         }
       });
     } else {
       $scope.isEmptyReq = true;
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
     }
     $timeout(function () {
-      $ionicLoading.hide();
+      $rootScope.HideLoader();
     }, 2000);
   };
   $scope.$on("$ionicView.enter", function () {
