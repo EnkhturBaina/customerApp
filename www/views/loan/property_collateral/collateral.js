@@ -212,7 +212,9 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   };
   $scope.savePropertyRequestData = function () {
     if ($scope.propertyCheckReqiured("step2")) {
-      $state.go("autoleasing-4");
+      if ($scope.propertyCheckReqiured("agreeBank")) {
+        $state.go("autoleasing-4");
+      }
     }
   };
 
@@ -273,6 +275,13 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         return true;
       }
       return true;
+    } else if (param == "agreeBank") {
+      if (isEmpty($rootScope.bankListFilter.Agree)) {
+        $rootScope.alert("Таны мэдээллийн дагуу зээл олгох банк, ББСБ байхгүй байна. Та мэдээллээ дахин оруулна уу.", "warning");
+        return false;
+      } else {
+        return true;
+      }
     }
   };
   // MODAL
@@ -358,11 +367,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       });
     }
   }
-  $scope.savePropertyRequestData = function () {
-    if ($scope.propertyCheckReqiured("step2")) {
-      $state.go("autoleasing-4");
-    }
-  };
   $scope.getDistrictData = function (val) {
     $scope.districtData = [];
     $rootScope.propertyData.line2 = "";

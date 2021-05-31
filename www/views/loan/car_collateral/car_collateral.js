@@ -242,7 +242,9 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
 
   $scope.saveCarCollRequestData = function () {
     if ($scope.carCollCheckReqiured("step2")) {
-      $state.go("autoleasing-4");
+      if ($scope.carCollCheckReqiured("agreeBank")) {
+        $state.go("autoleasing-4");
+      }
     }
   };
 
@@ -287,6 +289,13 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         return true;
       }
       return true;
+    } else if (param == "agreeBank") {
+      if (isEmpty($rootScope.bankListFilter.Agree)) {
+        $rootScope.alert("Таны мэдээллийн дагуу зээл олгох банк, ББСБ байхгүй байна. Та мэдээллээ дахин оруулна уу.", "warning");
+        return false;
+      } else {
+        return true;
+      }
     }
   };
   $scope.takePhoto = function (type) {

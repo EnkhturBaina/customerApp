@@ -33,6 +33,7 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
     $scope.bankFirstChat = "";
     $scope.bankFirstChatDate = "";
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602494134391582", dim1: $rootScope.selectedMapBank.mapid }).then(function (response) {
+      console.log("res", response);
       $rootScope.chatHistory = [];
       angular.forEach(response, function (item) {
         $rootScope.chatHistory.push(item);
@@ -77,11 +78,9 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
           type: "button-confirm",
           onTap: function () {
             if (type == "confirm") {
-              serverDeferred.requestFull("dcApp_decline_accept_request_002", $scope.acceptRequestData).then(function (response) {
-              });
+              serverDeferred.requestFull("dcApp_decline_accept_request_002", $scope.acceptRequestData).then(function (response) {});
             } else if (type == "decline") {
-              serverDeferred.requestFull("dcApp_decline_accept_request_002", $scope.cancelRequestData).then(function (response) {
-              });
+              serverDeferred.requestFull("dcApp_decline_accept_request_002", $scope.cancelRequestData).then(function (response) {});
             }
             $rootScope.alert(alertBody, "success");
           },
