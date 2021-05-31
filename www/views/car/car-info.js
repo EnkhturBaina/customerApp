@@ -49,10 +49,8 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
   $scope.getbankDataCarInfo = function () {
     $rootScope.bankList = [];
     if (!isEmpty($rootScope.selectedCarData) && !isEmpty($rootScope.selectedCarData.itemcode)) {
-      // { type: "car", operation: "calculation", productCode: $rootScope.selectedCarData.itemcode }
       serverDeferred.carCalculation({ type: "allBanks" }).then(function (response) {
         $rootScope.bankList = response.result.data;
-        // console.log(response);
       });
     }
   };

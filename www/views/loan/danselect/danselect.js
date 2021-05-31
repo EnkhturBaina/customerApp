@@ -80,12 +80,10 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                     });
 
                     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: checkedValue[1].dccustomerid }).then(function (response) {
-                      console.log("get income data response", response);
                       if (response[0] != "") {
                         $rootScope.danIncomeData = response[0];
                       }
                     });
-                    console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
                   }
                   serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
                     $rootScope.mortgageData = response;
@@ -99,15 +97,11 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                   $rootScope.danCustomerData.firstname = userInfo.firstname;
                   $rootScope.danCustomerData.uniqueidentifier = userInfo.regnum.toUpperCase();
 
-                  console.log("userSalaryInfo", userSalaryInfo);
                   if (userSalaryInfo) {
                     serverDeferred.carCalculation(userSalaryInfo.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
-                      // console.log("res salary", response);
                       $rootScope.monthlyAverage = response.result;
-                      // console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
                       $rootScope.monthlyIncomeDisable = true;
                       $rootScope.danIncomeData.monthlyincome = response.result;
-                      // console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
                     });
                   }
                 }, 1000);
@@ -156,7 +150,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
     $rootScope.sidebarUserName = value.lastname.substr(0, 1) + ". " + value.firstname;
 
     serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
-      console.log("checkedValue", checkedValue);
+      // console.log("checkedValue", checkedValue);
       if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
         json.id = checkedValue[1].customerid;
         json.dcApp_crmUser_dan.id = checkedValue[1].custuserid;
@@ -164,7 +158,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
       }
 
       serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
-        console.log("responseCRM", responseCRM);
+        // console.log("responseCRM", responseCRM);
         if (!isEmpty(responseCRM) && !isEmpty(responseCRM[0])) {
           $rootScope.changeUserDan();
 
@@ -173,12 +167,12 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
 
           $timeout(function () {
             if (!isEmpty(responseCRM[1]) && responseCRM[0] == "success") {
-              console.log("responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id", responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id);
+              // console.log("responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id", responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id);
               serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id }).then(function (responseALLID) {
-                console.log("res all_ID", responseALLID);
+                // console.log("res all_ID", responseALLID);
                 localStorage.setItem("ALL_ID", JSON.stringify(responseALLID[0]));
                 $rootScope.danCustomerData.id = responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id;
-                console.log("localStorage", localStorage);
+                // console.log("localStorage", localStorage);
               });
             }
           }, 500);

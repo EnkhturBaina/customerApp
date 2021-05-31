@@ -131,7 +131,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
 
   // localStorage.removeItem("carColl");
   $scope.saveCarCol = function () {
-    console.log("newCarReq", $rootScope.newCarReq);
     if (isEmpty($rootScope.newCarReq)) {
       $rootScope.newCarReq = {};
     }
@@ -242,7 +241,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
 
   $scope.saveCarCollRequestData = function () {
-    console.log("$rootScope.carCollateralRequestData", $rootScope.carCollateralRequestData);
     if ($scope.carCollCheckReqiured("step2")) {
       $state.go("autoleasing-4");
     }
@@ -265,12 +263,10 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       } else if (isEmpty($rootScope.newCarReq.cameYearId) && !$rootScope.isDanLoginAutoColl) {
         $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
         return false;
-      }
-      //  else if (isEmpty($rootScope.newCarReq.itemPic)) {
-      //   $rootScope.alert("Машины зураг оруулна уу", "warning");
-      //   return false;
-      // }
-      else {
+      } else if (isEmpty($rootScope.newCarReq.itemPic)) {
+        $rootScope.alert("Машины зураг оруулна уу", "warning");
+        return false;
+      } else {
         return true;
       }
       return true;
@@ -318,6 +314,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       }
     );
   };
+  $("#monthInput").mask("00");
   $("#productYear").mask("0000");
   $("#entryYear").mask("0000");
   $("#odo").mask("000000000");
@@ -362,7 +359,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
         $rootScope.carCollateralRequestData = {};
         $rootScope.carCollateralRequestData.serviceAgreementId = "1554263832132";
-        console.log("$rootScope.carCollateralRequestData.serviceAgreementId", $rootScope.carCollateralRequestData.serviceAgreementId);
         if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
           $scope.autoCollDan.show();
         } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {

@@ -18,7 +18,6 @@
   $rootScope.showBanner = true;
 
   $scope.getBanner = function () {
-    console.log("A");
     document.getElementsByTagName("ion-nav-bar")[0].style.visibility = "hidden";
     $scope.bannerData = JSON.parse(localStorage.getItem("banner"));
     serverDeferred.requestFull("PL_MDVIEW_004", { systemmetagroupid: "1597631698242718" }).then(function (data) {
@@ -100,7 +99,7 @@
   //========= first run ==========================
   var basket = localStorage.getItem("basketData");
   // console.log("basket", basket);
-  console.log("localStorage", localStorage);
+  // console.log("localStorage", localStorage);
   if (!isEmpty(basket)) $rootScope.basketData = JSON.parse(basket);
   else $rootScope.basketData = [];
 
@@ -126,7 +125,7 @@
       $ionicHistory.viewHistory().backView.go();
     } else {
       $ionicPopup.show({
-        template: "<b>Апп -г хаах уу ?</b>",
+        template: "<b>Аппликейшнийг  -г хаах уу ?</b>",
         cssClass: "confirmPopup",
         buttons: [
           {
@@ -176,7 +175,5 @@
     !bannerNotShow ? $scope.getBanner() : $scope.hideIntro();
 
     if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
-
-    isEmpty($rootScope.loginUserInfo) ? ($rootScope.profilePath = "login") : ($rootScope.profilePath = "profile");
   });
 });

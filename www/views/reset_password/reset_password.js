@@ -42,7 +42,6 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
       $rootScope.alert("Утасны дугаараа бүрэн оруулна уу");
     } else {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $rootScope.customerData.userName }).then(function (response) {
-        console.log("res", response);
         if (isEmpty(response[0])) {
           $rootScope.alert("Утасны дугаар бүртгэлгүй байна");
         } else {
@@ -53,9 +52,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
           $scope.isStep2 = true;
           $timeout(function () {
             serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", crmUserId: response[0].id }).then(function (response) {
-              console.log("res", response);
               localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
-              console.log("localStorage", localStorage);
             });
 
             var sendSms = {
@@ -63,7 +60,6 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
               phoneNumber: $rootScope.customerData.userName,
             };
             serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
-              console.log("sendSmsResponse", sendSmsResponse);
             });
           }, 500);
         }
@@ -77,12 +73,9 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
       $rootScope.alert("Та шинэ нууц үгээ оруулна уу");
     } else {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619583335021155", mobileNumber: $rootScope.customerData.userName }).then(function (response) {
-        console.log("res", response);
         if (response[0] != "") {
           if (document.getElementById("smsCode").value == response[0].smscode) {
-            console.log("$rootScope.customerNewPassword", $rootScope.customerNewPassword);
             serverDeferred.requestFull("getPasswordHash1", $rootScope.customerNewPassword).then(function (response) {
-              console.log("res", response);
               $rootScope.newPasswordHashResult.passwordHash = response[1].result;
               $rootScope.newPasswordHashResult.password = $rootScope.customerNewPassword.passwordHash;
               $rootScope.newPasswordHashResult.customerId = registeredUserData.customerid;
@@ -114,10 +107,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
       phoneNumber: $scope.customerData.userName,
     };
     serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
-      console.log("sendSmsResponse", sendSmsResponse);
-      serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
-        console.log("sendSmsResponse", sendSmsResponse);
-      });
+      serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {});
     });
     $scope.onTimer();
   };

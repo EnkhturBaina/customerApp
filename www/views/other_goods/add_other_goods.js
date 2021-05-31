@@ -30,8 +30,6 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
 
         $scope.showPopup();
       } catch (ex) {}
-
-      console.log("local", localStorage);
     }
     $rootScope.calcTotalPrice();
     $rootScope.getLocalGoodsData();

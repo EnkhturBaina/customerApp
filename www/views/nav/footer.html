@@ -8,7 +8,7 @@
   <!-- <ion-tab title="Сагс" ui-sref="basket" icon-on="custom-cart-fill" icon-off="custom-cart-line">
     <ion-nav-view name="basket-tab"></ion-nav-view>
   </ion-tab> -->
-  <ion-tab title="Профайл" ui-sref="{{$root.profilePath || false}}" icon-on="custom-fingerprint" icon-off="custom-fingerprint">
+  <ion-tab title="Профайл" ng-click="stateGoFromProfile()" icon-on="custom-fingerprint" icon-off="custom-fingerprint">
     <ion-nav-view name="qr-tab"></ion-nav-view>
   </ion-tab>
 </ion-tabs>

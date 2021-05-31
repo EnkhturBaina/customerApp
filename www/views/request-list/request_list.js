@@ -35,7 +35,6 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
     $rootScope.hideFooter = false;
   });
   $scope.selectbank = function (bank) {
-    // console.log(bank);
     $rootScope.selectedMapBank = bank;
     $state.go("request_detail");
   };

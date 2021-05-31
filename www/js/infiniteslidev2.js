@@ -1,11 +1,9 @@
 (function ($) {
-  console.log("ASDASDASDASDASD");
   $(window).on("load", function () {
     window.loaded = true;
   });
   $(function () {
     $.fn.infiniteslide = function (options) {
-      console.log("infiniteslideinfiniteslideinfiniteslideinfiniteslideinfiniteslideinfiniteslideinfiniteslideinfiniteslide");
       //option
       var settings = $.extend(
         {

@@ -84,7 +84,6 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
               customertypeid: "1",
             };
             $scope.smsConfirmCode = generatedCode;
-            console.log("json", json);
             serverDeferred.requestFull("dcApp_all_crm_customer_001", json).then(function (crmResponse) {
               if (crmResponse[0] == "success") {
                 $scope.isStep1 = false;
@@ -92,9 +91,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
                 progressBar.Next();
                 $timeout(function () {
                   serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id }).then(function (response) {
-                    console.log("res", response);
                     localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
-                    console.log("localStorage", localStorage);
                   });
 
                   var sendSms = {
@@ -128,7 +125,6 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
       phoneNumber: $scope.crmUserData.userName,
     };
     serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
-      console.log("sendSmsResponse", sendSmsResponse);
       // serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
       //   console.log("sendSmsResponse", sendSmsResponse);
       // });
@@ -137,9 +133,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
   };
   $scope.registerCustomer = function () {
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619583335021155", mobileNumber: $scope.crmUserData.userName }).then(function (response) {
-      console.log("res", response);
       if (response[0] != "") {
-        console.log(document.getElementById("confirmationCode").value);
         if (document.getElementById("confirmationCode").value == response[0].smscode) {
           $state.go("login");
           $rootScope.alert("Нэвтэрнэ үү", "success");
@@ -178,7 +172,6 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
           //scroll xiij bhd ajillah func
         },
         callback: function (indexArr, data) {
-          console.log("data", data);
           $("#regCharA").text(data[0]);
           $("#regCharB").text(data[1]);
           $scope.overlayKeyOn();

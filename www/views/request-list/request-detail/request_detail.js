@@ -1,5 +1,4 @@
 angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailCtrl", function (serverDeferred, $scope, $ionicModal, $rootScope, $ionicPopup) {
-  console.log("selectedMapBank", $rootScope.selectedMapBank);
   $rootScope.loanType = $rootScope.selectedMapBank.loantype;
   $rootScope.selectedMapBankDTL = [];
   // /1609944955126013 БАТАЛСАН
@@ -17,7 +16,6 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
     }
     if (dvId != "") {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: dvId, mapId: $rootScope.selectedMapBank.mapid }).then(function (response) {
-        console.log("res", response);
         $rootScope.selectedMapBankDTL = response[0];
         if ($rootScope.selectedMapBankDTL.wfmstatusid != 1609944955126013) {
           $rootScope.selectedMapBankDTL.loanamount = "";
@@ -35,7 +33,6 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
     $scope.bankFirstChat = "";
     $scope.bankFirstChatDate = "";
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602494134391582", dim1: $rootScope.selectedMapBank.mapid }).then(function (response) {
-      // console.log("getChatHistory response", response);
       $rootScope.chatHistory = [];
       angular.forEach(response, function (item) {
         $rootScope.chatHistory.push(item);
@@ -80,14 +77,10 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
           type: "button-confirm",
           onTap: function () {
             if (type == "confirm") {
-              // console.log("$rootScope.customerRequestData", $rootScope.acceptRequestData);
               serverDeferred.requestFull("dcApp_decline_accept_request_002", $scope.acceptRequestData).then(function (response) {
-                // console.log("confirm", response);
               });
             } else if (type == "decline") {
-              // console.log("$rootScope.customerRequestData", $rootScope.cancelRequestData);
               serverDeferred.requestFull("dcApp_decline_accept_request_002", $scope.cancelRequestData).then(function (response) {
-                // console.log("decline", response);
               });
             }
             $rootScope.alert(alertBody, "success");

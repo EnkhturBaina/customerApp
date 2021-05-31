@@ -325,7 +325,6 @@ var app = angular
             type: "button-confirm",
             onTap: function () {
               $rootScope.loginUserInfo = undefined;
-              $rootScope.profilePath = "login";
               localStorage.removeItem("loginUserInfo");
               localStorage.removeItem("profilePictureSideMenu");
               localStorage.removeItem("all_ID");
@@ -359,6 +358,14 @@ var app = angular
       if (event.keyCode === 13) {
         document.activeElement.blur();
       }
+    };
+    $rootScope.stateGoFromProfile = function () {
+      if (!isEmpty($rootScope.loginUserInfo)) {
+        $state.go("profile");
+      } else {
+        $state.go("login");
+      }
+      $rootScope.hideFooter = true;
     };
   })
   .directive("format", [

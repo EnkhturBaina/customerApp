@@ -14,7 +14,7 @@
         <div ng-controller="loginCtrl" class="login-container">
             <div class="box">
                 <img class="login-favicon" src="img/logo-light.png" />
-                <input type="number" maxlength="8" placeholder="Утасны дугаар" name="mobileNumber" class="login-mobile" ng-model="user.username" next-focus-elem ng-keyup="hideKeyboard($event)" />
+                <input type="number" maxlength="8" placeholder="Утасны дугаар" id="loginMobileNumber" name="mobileNumber" class="login-mobile" ng-model="user.username" next-focus-elem ng-keyup="hideKeyboard($event)" />
                 <div class="login-password-container" select-on-click>
                     <input type="{{inputType}}" class="login-password" placeholder="Нууц үг" name="password" id="myInput" ng-model="user.password" ng-keyup="loginKey($event,user.username,user.userpassword);hideKeyboard($event)" select-on-click />
                     <button class="button button-icon show-pass-btn" style="zoom: 1" ng-click="hideShowPassword()">
@@ -22,24 +22,22 @@
                     </button>
                 </div>
                 <a ui-sref="reset_password" class="login-forgot">Нууц үг мартсан?</a>
-                <!-- <a class="login-forgot">Нууц үг мартсан?</a> -->
                 <div class="login-radio">
                     <ul class="unstyled centered">
                         <li>
                             <input class="styled-checkbox" ng-model="$root.isRemmberUsername" id="styled-checkbox-1" type="checkbox" value="value1" />
                             <label for="styled-checkbox-1">Нэвтрэх нэр сануулах</label>
                         </li>
-                        <li>
+                        <!-- <li>
                             <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox" value="value2" checked />
                             <label for="styled-checkbox-2">Цаашид хурууны хээгээр нэвтрэх</label>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
 
                 <div class="sign-class-login">
                     <!-- ui-sref="profile" -->
                     <button class="button login-button" ng-click="Login(user.username,user.password);">Нэвтрэх</button>
-                    <!-- <button class="button login-button">Нэвтрэх</button> -->
                     <button class="button login-button" ng-click="gotoDanLogin()" style="margin-top: 5%;">E-mongolia системээр нэвтрэх</button>
                     <div class="login-to-register" ui-sref="register">Бүртгүүлэх</div>
                 </div>

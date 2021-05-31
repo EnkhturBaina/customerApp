@@ -30,7 +30,6 @@ angular.module("qr.Ctrl", []).controller("qrCtrl", function ($ionicPlatform, $io
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597654926672135", itemCode: itemCode }).then(function (response) {
       if (!isEmpty(response) && !isEmpty(response[0])) {
         $rootScope.selectedCarData = response[0];
-        // console.log("$rootScope.selectedCarData", $rootScope.selectedCarData);
       } else {
         $rootScope.alert("Код буруу байна", "warning");
         $scope.showQRreader();

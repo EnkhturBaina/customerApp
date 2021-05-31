@@ -71,13 +71,11 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
         },
       ],
     }).then(function (response) {
-      console.log("res", response);
       if (!isEmpty(response.data) && response.data.response.status === "success") {
         $rootScope.loginUserInfo = response.data.response.result;
         serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", userName: `${username}` }).then(function (response) {
           if (!isEmpty(response) && !isEmpty(response[0])) {
             $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
-            // console.log($rootScope.loginUserInfo);
 
             localStorage.removeItem("loginUserInfo");
             localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
@@ -135,13 +133,14 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   }
 
   $scope.Login = function (a, b) {
+    var value = document.getElementById("loginMobileNumber").value;
     if (isEmpty(a)) {
       $ionicLoading.hide();
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
-    } else if (isEmpty(b)) {
+    } else if (value.length < 8) {
       $ionicLoading.hide();
       $rootScope.alert("Утасны дугаараа бүрэн уу", "warning");
-    } else if (a.length < 8) {
+    } else if (isEmpty(b)) {
       $ionicLoading.hide();
       $rootScope.alert("Нууц үгээ оруулна уу", "warning");
     } else {
@@ -162,10 +161,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
 
       $(authWindow).on("loadstart", function (e) {
         var url = e.originalEvent.url;
-        console.log(url);
         var code = url.indexOf("https://services.digitalcred");
-        console.log(code);
-        console.log($rootScope.stringHtmlsLink.state);
         var error = /\?error=(.+)$/.exec(url);
         if (code == 0 || error) {
           authWindow.close();
@@ -173,7 +169,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
 
         if (code == 0) {
           serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://services.digitalcredit.mn/api/sso/check").then(function (response) {
-            console.log("res", response);
             var userInfo = response.result.data.info;
             if (!isEmpty(userInfo)) {
               $scope.registerFunction(JSON.parse(userInfo));

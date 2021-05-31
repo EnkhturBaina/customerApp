@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget defaultlocale="en-US" id="com.digital.customer" version="1.0.0"
+<widget defaultlocale="en-US" id="com.zeelme.customer" version="1.0.0"
     xmlns="http://www.w3.org/ns/widgets"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cdv="http://cordova.apache.org/ns/1.0"
     xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps">
     <name>ZeelMe</name>
     <description>Зээлийн дижитал маркет.</description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">Your name here</author>
+    <author email="dev@cordova.apache.org" href="http://cordova.io"></author>
     <vs:is-from-base-template>true</vs:is-from-base-template>
     <vs:template-name>BlankJS</vs:template-name>
     <vs:toolsetVersion>6.3.1</vs:toolsetVersion>
