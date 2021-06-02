@@ -38,11 +38,22 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
         $scope.selectCarName = response[0].modelname.split(" ")[0];
         $scope.selectedCarId = response[0].id;
         $rootScope.selectedCarData = response[0];
+
         $scope.getbankDataCarInfo();
         if (!$scope.$$phase) {
           $scope.$apply();
         }
+
         $ionicSlideBoxDelegate.update();
+
+        $timeout(function () {
+          if (!isEmpty($scope.carImages)) {
+            var img = document.getElementById("carImg0");
+            document.getElementById("carImg0").style.height = img.clientHeight + "px";
+            document.getElementById("carInfoSlideBox").style.height = img.clientHeight + 30 + "px";
+            $rootScope.HideLoader();
+          }
+        }, 1000);
       }
     });
   };
@@ -56,14 +67,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
   };
   $scope.$on("$ionicView.enter", function () {
     $scope.getCarinfo();
-    $timeout(function () {
-      var img = document.getElementById("carImg0");
-      if (img) {
-        document.getElementById("carImg0").style.height = img.clientHeight + "px";
-        document.getElementById("carInfoSlideBox").style.height = img.clientHeight + 30 + "px";
-        $rootScope.HideLoader();
-      }
-    }, 500);
+
     $timeout(function () {
       $rootScope.HideLoader();
     }, 2000);
