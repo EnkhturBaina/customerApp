@@ -1,4 +1,4 @@
-﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform) {
+﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform, $timeout) {
   // $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
   // $rootScope.imagePath = "https://dev.veritech.mn/";
   $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
@@ -19,14 +19,12 @@
 
   $scope.getBanner = function () {
     document.getElementsByTagName("ion-nav-bar")[0].style.visibility = "hidden";
-    $scope.bannerData = JSON.parse(localStorage.getItem("banner"));
     serverDeferred.requestFull("PL_MDVIEW_004", { systemmetagroupid: "1597631698242718" }).then(function (data) {
       // console.log(data);
       delete data[1].aggregatecolumns;
       delete data[1].paging;
       if (!isEmpty(data[1])) {
         $scope.bannerData = data[1];
-        localStorage.setItem("banner", JSON.stringify(data[1]));
         $ionicSlideBoxDelegate.update();
       }
     });
@@ -103,10 +101,16 @@
     $("#mobile").removeClass("blur-full-screen");
   };
 
+  $rootScope.ShowLoader();
+
+  $timeout(function () {
+    $rootScope.HideLoader();
+  }, 1000);
+
   //========= first run ==========================
   var basket = localStorage.getItem("basketData");
   // console.log("basket", basket);
-  // console.log("localStorage", localStorage);
+  console.log("localStorage", localStorage);
   if (!isEmpty(basket)) $rootScope.basketData = JSON.parse(basket);
   else $rootScope.basketData = [];
 
@@ -117,6 +121,21 @@
     });
   };
 
+  $scope.getProfileLookupData = function () {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
+      $rootScope.mortgageData = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
+      $rootScope.familtStatData = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
+      $rootScope.incomeType = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1620623825290326" }).then(function (response) {
+      $rootScope.experiencePeriodData = response;
+    });
+  };
+  $scope.getProfileLookupData();
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");
   };

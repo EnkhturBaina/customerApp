@@ -9,23 +9,13 @@
             <button class="button btn single-button">Хаах</button>
         </div>
     </div>
-    <!-- <div id="overlay">
-        <span class="overlay-off-text" ng-click="overlayOff()"><img style="width: 20px" src="img/x_mark.png" /></span>
-        <div class="overlay-content" id="text">
-            <span class="overlay-title-text"> АНХААРУУЛГА!!! </span>
-            <span class="overlay-body-text"> Таны хувийн мэдээлэл дутуу байгаа тул хүсэлт илгээх боломжгүй байна.</span>
-        </div>
-        <div class="overlay-btn-container">
-            <button class="button overlay-btn-1" ng-click="overlayOff()">Хувийн мэдээллээ оруулах бол ЭНД дарна уу.</button>
-        </div>
-    </div> -->
     <ion-pane class="profile-info-container has-header">
         <div class="profile-avatar">
-            <ion-header-bar align-title="left" class="navbar" style="background: none">
-                <div class="title ion-color-big-text navbar-back-button" style="background: none">
-                    <button class="nav-back-button button buttons button-clear header-item car-back-nav" style="left: 10px" ng-click="hideShowFooter();backbutton();backFromProfile();">
-                        <i class="ion-chevron-left ion-color-header" style="color: #fff !important"></i>
-                        <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px); color: #fff !important"><span>Хувийн мэдээлэл</span></span>
+            <ion-header-bar align-title="left" class="navbar ion-bg-none">
+                <div class="title ion-color-big-text navbar-back-button ion-bg-none">
+                    <button class="nav-back-button button buttons button-clear header-item car-back-nav" style="left: 10px" ng-click="hideShowFooter();backFromProfile();">
+                        <i class="ion-chevron-left ion-color-header ion-color-white"></i>
+                        <span class="navbar-back-text ion-color-header ion-color-white"><span>Хувийн мэдээлэл</span></span>
                     </button>
                 </div>
                 <div class="navbar-right-icon">
@@ -36,10 +26,7 @@
                 <div ng-if="!$root.customerProfilePicture.profilePictureClob" class="profile-picture-add-btn">
                     +
                 </div>
-                <!-- <div class="profile-picture-edit" ng-click="ppSourceSelectOn(3)" style="border-radius: 10px;border: 1px solid #ccfffc;text-align: center;font-size: 20px;color: #eaf6e2;line-height: 86px;background: #65c8ae;padding: 4px;">
-                    <i class="icon ion-edit"></i>
-                </div> -->
-                <img ng-if="!$root.customerProfilePicture.profilePictureClob|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfilePicture.profilePictureClob}}" height="75px" width="120px" style="border-radius: 50px;" />
+                <img ng-if="!$root.customerProfilePicture.profilePictureClob|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfilePicture.profilePictureClob}}" />
             </div>
         </div>
         <ion-tabs id="profile-tabs-striped" class="tabs-striped tabs-top profile-card-tabs profile-tab profile-tabs-tab" delegate-handle="profileTabs">
@@ -59,7 +46,7 @@
                                 <span id="firstNameError" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</span>
                             </label>
                             <label class="item item-input profile-label" id="regLabel">
-                                <p style="overflow: unset;">Регситр</p>
+                                <p class="ion-overflow-unset">Регситр</p>
                                 <div class="select-reg-chars">
                                     <span id="regCharA" type="text">{{$root.customerProfileData.uniqueidentifier.substr(0, 1)}}</span>
                                     <span id="regCharB" type="text">{{$root.customerProfileData.uniqueidentifier.substr(1, 1)}}</span>
@@ -88,16 +75,16 @@
                             </label>
                             <label class="item item-input profile-label profile-label-pass">
                             </label>
-                            <div class="item item-input profile-label" style="border: 0;padding: 0px 0px 10px 0px;display: block;">
+                            <div class="item item-input profile-label profile-ident-container-div">
                                 <div class="profile-card-front" ng-click="ppSourceSelectOn(1)">
-                                    <p style="padding: 6px 0px">Иргэний үнэмлэхний урд талын зураг</p>
+                                    <p>Иргэний үнэмлэхний урд талын зураг</p>
                                     <div ng-if="$root.customerProfileData.identfrontpic|isEmpty" class="profile-ident-pic-container">+</div>
-                                    <img ng-if="!$root.customerProfileData.identfrontpic|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfileData.identfrontpic}}" height="140px" width="250px" style="border-radius: 10px;" />
+                                    <img ng-if="!$root.customerProfileData.identfrontpic|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfileData.identfrontpic}}" height="140px" width="250px" />
                                 </div>
                                 <div class="profile-card-back" ng-click="ppSourceSelectOn(2)">
-                                    <p style="padding: 6px 0px">Иргэний үнэмлэхний ард талын зураг</p>
+                                    <p>Иргэний үнэмлэхний ард талын зураг</p>
                                     <div ng-if="$root.customerProfileData.identbackpic|isEmpty" class="profile-ident-pic-container">+</div>
-                                    <img ng-if="!$root.customerProfileData.identbackpic|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfileData.identbackpic}}" height="140px" width="250px" style="border-radius: 10px;" />
+                                    <img ng-if="!$root.customerProfileData.identbackpic|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfileData.identbackpic}}" height="140px" width="250px" />
                                 </div>
                             </div>
                             <div class="profile-tab1-save-btn">

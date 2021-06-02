@@ -34,7 +34,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
         if (response[0].itempic8) $scope.carImages.push(response[0].itempic8);
 
         $scope.carData = response[0];
-        console.log("$scope.carData", $scope.carData);
+        // console.log("$scope.carData", $scope.carData);
         $scope.selectCarName = response[0].modelname.split(" ")[0];
         $scope.selectedCarId = response[0].id;
         $rootScope.selectedCarData = response[0];

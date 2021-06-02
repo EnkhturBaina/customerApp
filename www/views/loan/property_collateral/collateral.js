@@ -117,12 +117,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
                     }
                   });
                 }
-                serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
-                  $rootScope.mortgageData = response;
-                });
-                serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
-                  $rootScope.familtStatData = response;
-                });
               });
               $timeout(function () {
                 $rootScope.danCustomerData.lastname = userInfo.lastname;

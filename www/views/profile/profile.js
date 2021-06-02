@@ -1,8 +1,4 @@
 angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $ionicHistory, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal, $timeout, $ionicTabsDelegate, $ionicLoading) {
-  $scope.backbutton = function () {
-    $rootScope.hideFooter = false;
-    $ionicHistory.goBack();
-  };
   $(".profileRegSelector").mask("99999999");
   $rootScope.hideFooter = true;
   $scope.replaceCyr = function (lastName) {
@@ -24,21 +20,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else {
       document.getElementById("firstNameError").style.display = "none";
     }
-  };
-
-  $scope.getProfileLookupData = function () {
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
-      $rootScope.mortgageData = response;
-    });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
-      $rootScope.familtStatData = response;
-    });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
-      $rootScope.incomeType = response;
-    });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1620623825290326" }).then(function (response) {
-      $rootScope.experiencePeriodData = response;
-    });
   };
 
   $scope.nextPath = $stateParams.path;
@@ -93,10 +74,12 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   };
   $scope.$on("$ionicView.enter", function () {
     $rootScope.ShowLoader();
-    $scope.getProfileLookupData();
     $timeout(function () {
       $rootScope.getProfileData();
     }, 200);
+    $timeout(function () {
+      $rootScope.HideLoader();
+    }, 2000);
     $rootScope.hideFooter = true;
   });
 
@@ -249,12 +232,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       }, 500);
     }
   };
-  // $scope.overlayOn = function () {
-  //   document.getElementById("overlay").style.display = "block";
-  // };
-  // $scope.overlayOff = function () {
-  //   document.getElementById("overlay").style.display = "none";
-  // };
 
   $scope.generateQR = function () {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -312,7 +289,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $scope.carmerkData = datas;
     });
   };
-  $scope.getCompanyData();
 
   $scope.saveRegNums = function () {
     if (keyInput.value.length < 8) {

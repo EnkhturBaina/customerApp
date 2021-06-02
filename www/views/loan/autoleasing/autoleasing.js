@@ -641,12 +641,6 @@
   $scope.goStep5ORIdent = function () {
     if ($scope.checkReqiured("step4CustomerData")) {
       if ($scope.checkReqiured("agreeBank")) {
-        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
-          $rootScope.incomeType = response;
-        });
-        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554274244505" }).then(function (response) {
-          $rootScope.incomeType = response;
-        });
         $state.go("autoleasing-5");
         if ($rootScope.isDanHand) {
           $scope.getCustomerIncomeData();
@@ -916,16 +910,6 @@
                     }
                   });
                 }
-
-                serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
-                  $rootScope.mortgageData = response;
-                });
-                serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
-                  $rootScope.familtStatData = response;
-                });
-                serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1620623825290326" }).then(function (response) {
-                  $rootScope.experiencePeriodData = response;
-                });
               });
               $timeout(function () {
                 $rootScope.danCustomerData.lastname = userInfo.lastname;
@@ -967,15 +951,6 @@
   $scope.danHand = function () {
     //Гараар бөглөх үед харилцагчийн хувийн мэдээлэл болон орлогын мэдээлэл татаж харуулах
     $rootScope.isDanHand = true;
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
-      $rootScope.mortgageData = response;
-    });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "21553236817016" }).then(function (response) {
-      $rootScope.familtStatData = response;
-    });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1620623825290326" }).then(function (response) {
-      $rootScope.experiencePeriodData = response;
-    });
     $state.go("autoleasing-4");
     $rootScope.alert("Та гараар мэдээллээ бөглөсөн тохиолдолд зээл олгох байгууллагаас нэмэлт материал авах хүсэлт ирэхийг анхаарна уу", "");
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
