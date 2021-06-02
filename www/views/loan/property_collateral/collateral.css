@@ -158,6 +158,8 @@
 .property-img-row img {
   margin: auto !important;
   width: 100% !important;
+  height: 88px;
+  border-radius: 10px;
 }
 
 .property-step2-card {

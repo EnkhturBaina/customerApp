@@ -86,7 +86,7 @@
     $rootScope.requestType = localStorage.getItem("requestType");
 
     if ($rootScope.requestType == "consumer") {
-      $rootScope.newReqiust.serviceAgreementId = "1554263832132";
+      $rootScope.newReqiust.serviceAgreementId = 1554263832132;
       $rootScope.newReqiust.loanAmount = $rootScope.sumPrice.toString();
       $rootScope.newReqiust.getLoanAmount = $rootScope.sumPrice.toString();
       $rootScope.loanAmountField = $rootScope.sumPrice.toString();
@@ -697,7 +697,7 @@
       } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
         $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == "1554263832151") {
+      } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
         $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
         return false;
       } else {
@@ -837,9 +837,8 @@
       } else {
         $scope.isCollShow = false;
       }
-      // $rootScope.newReqiust = {};
       $rootScope.newReqiust.getLoanAmount = "";
-      $rootScope.newReqiust.serviceAgreementId = "1554263832132";
+      $rootScope.newReqiust.serviceAgreementId = 1554263832132;
       $scope.getLoanAmountFunc();
       $scope.getLookupData();
       $timeout(function () {

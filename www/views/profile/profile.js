@@ -402,6 +402,9 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     $state.go("home");
   };
   $ionicPlatform.onHardwareBackButton(function () {
+    if ($state.current.name == "profile") {
+      $state.go("home");
+    }
     if ($state.current.name == "autoleasing-2") {
       $state.go("home");
     }

@@ -38,8 +38,8 @@
   right: 5px !important;
 }
 .car-img img {
-  width: 90px;
-  height: 90px;
+  width: 100% !important;
+  height: 88px;
   border-radius: 10px;
 }
 .car-collateral-img-list {

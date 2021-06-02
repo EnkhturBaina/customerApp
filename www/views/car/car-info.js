@@ -23,18 +23,18 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
     $rootScope.carData = [];
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597654926672135", id: $rootScope.selectedCarData.id }).then(function (response) {
       if (!isEmpty(response[0]) && isObject(response[0])) {
-        var images = [];
-        if (response[0].itempic) images.push(response[0].itempic);
-        if (response[0].itempic2) images.push(response[0].itempic2);
-        if (response[0].itempic3) images.push(response[0].itempic3);
-        if (response[0].itempic4) images.push(response[0].itempic4);
-        if (response[0].itempic5) images.push(response[0].itempic5);
-        if (response[0].itempic6) images.push(response[0].itempic6);
-        if (response[0].itempic7) images.push(response[0].itempic7);
-        if (response[0].itempic8) images.push(response[0].itempic8);
-        response[0].images = images;
+        $scope.carImages = [];
+        if (response[0].itempic) $scope.carImages.push(response[0].itempic);
+        if (response[0].itempic2) $scope.carImages.push(response[0].itempic2);
+        if (response[0].itempic3) $scope.carImages.push(response[0].itempic3);
+        if (response[0].itempic4) $scope.carImages.push(response[0].itempic4);
+        if (response[0].itempic5) $scope.carImages.push(response[0].itempic5);
+        if (response[0].itempic6) $scope.carImages.push(response[0].itempic6);
+        if (response[0].itempic7) $scope.carImages.push(response[0].itempic7);
+        if (response[0].itempic8) $scope.carImages.push(response[0].itempic8);
+
         $scope.carData = response[0];
-        // console.log("$scope.carData", $scope.carData);
+        console.log("$scope.carData", $scope.carData);
         $scope.selectCarName = response[0].modelname.split(" ")[0];
         $scope.selectedCarId = response[0].id;
         $rootScope.selectedCarData = response[0];
@@ -64,6 +64,9 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
         $rootScope.HideLoader();
       }
     }, 500);
+    $timeout(function () {
+      $rootScope.HideLoader();
+    }, 2000);
   });
   // basket
   $scope.addtoBasket = function () {

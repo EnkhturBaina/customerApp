@@ -31,6 +31,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   };
 
   $scope.saveProperty = function () {
+    console.log("$rootScope.propertyData", $rootScope.propertyData);
     if ($scope.propertyCheckReqiured("step1")) {
       //Боломжит дээд хугацаа
       $rootScope.bankproductDtlNumber = $rootScope.bankproductDtl.find((o) => o.categoryid === "16082024283512");
@@ -221,7 +222,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   };
 
   $scope.propertyCheckReqiured = function (param) {
-    console.log("$rootScope.propertyData.squareSize", $rootScope.propertyData.squareSize.length);
     if (param == "step1") {
       if (isEmpty($rootScope.template)) {
         $rootScope.alert("Хөрөнгийн төрөл сонгоно уу", "warning");

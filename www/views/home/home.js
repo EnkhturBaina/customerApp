@@ -54,7 +54,7 @@
       localStorage.removeItem("bannerNotShow");
     }
   };
-
+  $scope.getBanner();
   // ============= glob ========================
   $rootScope.alert = function (messege, checkmark, then) {
     if (!isEmpty($scope.alertPopup)) {
@@ -123,10 +123,12 @@
 
   //Утасны back button
   $ionicPlatform.onHardwareBackButton(function () {
+    console.log("A");
     $rootScope.hideFooter = false;
   });
 
   $ionicPlatform.registerBackButtonAction(function (e) {
+    console.log("B");
     e.preventDefault();
     if ($ionicHistory.viewHistory().backView) {
       $ionicHistory.viewHistory().backView.go();
@@ -179,8 +181,9 @@
     }
     var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
 
-    !bannerNotShow ? $scope.getBanner() : $scope.hideIntro();
-
+    if (bannerNotShow) {
+      $scope.hideIntro();
+    }
     if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
   });
 });

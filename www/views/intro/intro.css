@@ -1,0 +1,84 @@
+#loginLayout > .scroll {
+  height: 200px;
+  background: rgb(134, 205, 109);
+  background: url(../../img/lines/home-small-line.png), -moz-linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
+  background: url(../../img/lines/home-small-line.png), -webkit-linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
+  background: url(../../img/lines/home-small-line.png), linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#86cd6d",endColorstr="#3fc1f3",GradientType=1);
+  background-repeat: no-repeat;
+  background-position: 0% 0%;
+  background-size: cover;
+  image-rendering: pixelated;
+}
+.slider-pager .slider-pager-page.active {
+  color: #000;
+  width: 12px;
+}
+
+.intro-body-text {
+  text-align: left;
+  padding-right: 10%;
+  padding-left: 10%;
+  white-space: normal;
+  width: 100%;
+  color: #fff;
+}
+
+.intro-title {
+  text-align: left;
+  font-size: 16px;
+  padding-right: 10%;
+  padding-left: 10%;
+  margin-top: 8%;
+  font-weight: bold;
+  color: #fff;
+}
+
+.slider-button-container {
+  display: flex;
+  padding-top: 10%;
+}
+
+.intro-not-show {
+  padding-left: 15px !important;
+  background-color: #f8f8fe !important;
+  color: #a2a7b5 !important;
+  font-size: 14px !important;
+  border: 0px !important;
+  margin: 0 20vw !important;
+}
+
+.intro-not-show > .checkbox {
+  left: unset !important;
+  right: 15px !important;
+  padding: 10px 7px !important;
+}
+
+.intro-not-show > .checkbox > .checkbox-icon {
+  width: 25px !important;
+  height: 25px !important;
+}
+
+.intro-not-show > .checkbox > .checkbox input:after,
+.checkbox-icon:after {
+  color: #fff !important;
+}
+
+.intro-not-show > .checkbox > .checkbox input:checked:before,
+.checkbox input:checked + .checkbox-icon:before {
+  background-color: #acd322 !important;
+  border-color: #acd322 !important;
+}
+
+.intro-not-show > .checkbox > .checkbox-icon::before {
+  border-radius: 5px !important;
+}
+.intro-back-nav i {
+  color: #fff !important;
+}
+.intro-back-nav span {
+  color: #fff !important;
+}
+.intro-slider > .slider-pager {
+  bottom: 15% !important;
+}
