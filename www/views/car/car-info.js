@@ -1,6 +1,6 @@
 angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScope, $state, serverDeferred, $window, $scope, $ionicSlideBoxDelegate, $ionicHistory, $ionicLoading, $ionicModal, $ionicScrollDelegate, $timeout) {
   $scope.Math = $window.Math;
-  $rootScope.newReqiust = {};
+  // $rootScope.newReqiust = {};
   $scope.selectCarName = "";
   $scope.selectedCarId = "";
   $rootScope.ShowLoader();
@@ -50,7 +50,6 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
         $timeout(function () {
           if (!isEmpty($scope.carImages)) {
             var img = document.getElementById("carImg0");
-            console.log("img height", img.clientHeight);
             document.getElementById("carImg0").style.height = img.clientHeight + "px";
             document.getElementById("carInfoSlideBox").style.height = img.clientHeight + 30 + "px";
           }
@@ -101,7 +100,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
   $scope.slideChangedZoom = function (index) {
     $scope.slideIndex = index;
   };
-  $rootScope.newReqiust = {};
+  // $rootScope.newReqiust = {};
 
   $scope.payOn = function () {
     document.getElementById("paypopup").style.display = "block";
@@ -121,10 +120,6 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
     document.getElementById("addition-info").style.display = "none";
     document.getElementById("collapse-btn").style.display = "block";
     document.getElementById("uncollapse-btn").style.display = "none";
-  };
-  $scope.backFromcarInfo = function () {
-    $rootScope.hideFooter = false;
-    $ionicHistory.goBack();
   };
 
   $scope.zoomMin = 1;

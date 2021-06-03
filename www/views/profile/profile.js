@@ -1,6 +1,5 @@
 angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $ionicHistory, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal, $timeout, $ionicTabsDelegate, $ionicLoading) {
   $(".profileRegSelector").mask("99999999");
-  $rootScope.hideFooter = true;
   $scope.replaceCyr = function (lastName) {
     var rex = /^[А-ЯӨҮа-яөү\-\s]+$/;
     var inputLastName = document.getElementById("customerLastName");
@@ -34,13 +33,12 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.regNum = "";
 
   $rootScope.getProfileData = function () {
-    $rootScope.ShowLoader();
+    // $rootScope.ShowLoader();
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     if (!isEmpty($rootScope.loginUserInfo)) {
       $rootScope.loginUserInfo = {};
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (response) {
         $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
-        $rootScope.hideFooter = true;
         if (response[0] != "") {
           $rootScope.customerProfileData = response[0];
           localStorage.removeItem("profilePictureSideMenu");
@@ -73,14 +71,14 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     }
   };
   $scope.$on("$ionicView.enter", function () {
+    $rootScope.hideFooter = true;
     $rootScope.ShowLoader();
     $timeout(function () {
       $rootScope.getProfileData();
-    }, 200);
+    }, 100);
     $timeout(function () {
       $rootScope.HideLoader();
     }, 2000);
-    $rootScope.hideFooter = true;
   });
 
   $scope.saveProfileData = function () {

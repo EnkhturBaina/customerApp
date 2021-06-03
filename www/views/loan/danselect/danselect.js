@@ -114,6 +114,10 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
       });
     });
     $rootScope.isDanLoginAutoColl = true;
+    //Дан -р нэвтэрсэн үед disable хийх
+    $rootScope.lastNameDanDisable = true;
+    $rootScope.firstNameDanDisable = true;
+    $rootScope.uniqueIdentifierDanDisable = true;
   };
   $scope.registerFunction = function (value) {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));

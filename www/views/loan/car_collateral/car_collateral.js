@@ -265,10 +265,12 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       } else if (isEmpty($rootScope.newCarReq.cameYearId) && !$rootScope.isDanLoginAutoColl) {
         $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newCarReq.itemPic)) {
-        $rootScope.alert("Машины зураг оруулна уу", "warning");
-        return false;
-      } else {
+      }
+      // else if (isEmpty($rootScope.newCarReq.itemPic)) {
+      //   $rootScope.alert("Машины зураг оруулна уу", "warning");
+      //   return false;
+      // }
+      else {
         return true;
       }
       return true;
@@ -367,7 +369,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       if ($state.current.name == "car_coll") {
         //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
         $rootScope.carCollateralRequestData = {};
-        $rootScope.carCollateralRequestData.serviceAgreementId = "1554263832132";
+        $rootScope.carCollateralRequestData.serviceAgreementId = 1554263832132;
         if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
           $scope.autoCollDan.show();
         } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {

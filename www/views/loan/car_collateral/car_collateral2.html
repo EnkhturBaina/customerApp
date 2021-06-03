@@ -31,7 +31,7 @@
                     </div>
                 </div> -->
                 <div class="tugrug-input car-coll-step2-loan-amount">
-                    <span class="title car-coll-step2-title">Хугацаа сараар</span>
+                    <span class="title car-coll-step2-title">Хугацаа (сараар)</span>
                     <div class="tugrug-input-container">
                         <span class="input-tugrug-icon"><i class="icon fa fa-calendar"></i></span>
                         <input inputmode="numeric" pattern="[0-9]*" id="monthInput" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number tooltip" ng-model="$root.carCollateralRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataCarColl()" title="Тухайн зээлийн хугацаа хамгийн ихдээ {{$root.bankproductDtlNumber.maxmonth}} сар байна" animation="fade" select-on-click />
@@ -88,7 +88,7 @@
 <script id="templates/term-content.html" type="text/ng-template">
   <ion-modal-view class="term-chat-modal">
     <ion-content class="padding bank-chat-content" scroll="false">
-        <span class="term-modal-off-text" ng-click="termModalAgreement.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <!-- <span class="term-modal-off-text" ng-click="termModalAgreement.hide()"><img style="width: 20px" src="img/x_mark.png" /></span> -->
         <div class="term-modal-include" ng-include src="'views/term/term-content.html'"></div>
     </ion-content>
   </ion-modal-view>

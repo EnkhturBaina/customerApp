@@ -51,7 +51,7 @@
                             <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.mile" thousand-separator next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
                         </label>
                         <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label" style="margin: 0;">ХӨ төрөл</p>
+                            <p class="input-label" style="margin: 0;">Хөдөлгүүрийн төрөл</p>
                             <select ng-model="$root.newCarReq.engineId" style="background-color: transparent">
                                 <option ng-repeat="com in engineTypeData" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
@@ -192,7 +192,7 @@
 <script id="templates/autoCollDan.html" type="text/ng-template">
 	<ion-modal-view class="auto-temp-modal-view">
 	  <ion-content class="padding property-dan-content" scroll="false">
-        <span class="term-modal-off-text" ng-click="autoCollDan.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <!-- <span class="term-modal-off-text" ng-click="autoCollDan.hide()"><img style="width: 20px" src="img/x_mark.png" /></span> -->
 		  <div class="templates-modal-include" ng-include src="'views/templates/autoCollDan.html'"></div>
 	  </ion-content>
 	</ion-modal-view>

@@ -95,11 +95,6 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   //   $scope.consumerModal.show();
   // }, 300);
   $rootScope.hideFooter = true;
-  $scope.getLookUpData = function () {
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621830937132722" }).then(function (response) {
-      $rootScope.consumerSuppliers = response;
-    });
-  };
 
   $scope.clickSlidePager = function (index) {
     $ionicSlideBoxDelegate.slide(index);
@@ -108,6 +103,5 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $scope.$on("$ionicView.enter", function () {
     $rootScope.getLocalGoodsData();
     $rootScope.calcTotalPrice();
-    $scope.getLookUpData();
   });
 });

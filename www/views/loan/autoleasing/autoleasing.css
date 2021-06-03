@@ -119,11 +119,15 @@
   border-bottom: 1px solid;
   border-radius: 10px;
   border-color: yellowgreen;
-  padding: 0 15px 0 20px;
+  /* padding: 0 15px 0 20px; */
   text-align: left !important;
   font-weight: bold;
   color: #4b5180 !important;
   text-align-last: center;
+  padding: 20px;
+  font-size: 20px;
+  width: 80%;
+  margin: auto;
 }
 .qr-btn-container {
   display: flex;

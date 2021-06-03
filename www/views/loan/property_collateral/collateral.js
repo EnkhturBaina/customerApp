@@ -9,6 +9,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   // $("#squareSize").mask("0.000", { reverse: true });
   $("#roomCount").mask("000");
   $("#floorCount").mask("00");
+  $("#propertyStep2loanMonth").mask("00");
   $scope.takePhoto = function (type) {
     var srcType = Camera.PictureSourceType.CAMERA;
     if (type == "1") {
@@ -147,6 +148,10 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     $rootScope.propertyIsDan = true;
     $rootScope.showPropertyBtn = true;
     $rootScope.showSquareSizeField = true;
+    //Дан -р нэвтэрсэн үед disable хийх
+    $rootScope.lastNameDanDisable = true;
+    $rootScope.firstNameDanDisable = true;
+    $rootScope.uniqueIdentifierDanDisable = true;
   };
   $scope.registerFunctionEstate = function (value) {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -400,7 +405,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       if ($state.current.name == "property_collateral") {
         //ҮХХ барьцаалсан зээлийн хүсэлтийн мэдээлэл
         $rootScope.propertyRequestData = {};
-        $rootScope.propertyRequestData.serviceAgreementId = "1554263832132";
+        $rootScope.propertyRequestData.serviceAgreementId = 1554263832132;
         if (!isEmpty($rootScope.propJson) && $rootScope.propertyIsDan) {
           $scope.propertyDan.show();
           $rootScope.showPropertyBtn = true;

@@ -1,4 +1,4 @@
-﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform, $timeout) {
+﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform, $timeout, $state) {
   // $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
   // $rootScope.imagePath = "https://dev.veritech.mn/";
   $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
@@ -24,7 +24,7 @@
       delete data[1].aggregatecolumns;
       delete data[1].paging;
       if (!isEmpty(data[1])) {
-        $scope.bannerData = data[1];
+        $rootScope.bannerData = data[1];
         $ionicSlideBoxDelegate.update();
       }
     });
@@ -36,12 +36,11 @@
     $ionicSlideBoxDelegate.next();
   };
   $scope.endSlideChanged = function (index) {
-    $ionicSlideBoxDelegate.slide(Object.keys($scope.bannerData).length - 1, 0);
+    $ionicSlideBoxDelegate.slide(Object.keys($rootScope.bannerData).length - 1, 0);
   };
   $scope.hideIntro = function () {
     document.getElementsByTagName("ion-nav-bar")[0].style.visibility = "visible";
     $rootScope.showBanner = false;
-    $rootScope.hideFooter = false;
   };
 
   $scope.isBanneNotShowChecked = { checked: false };
@@ -90,7 +89,8 @@
       showBackdrop: true,
       showDelay: 0,
       // template: '<div class="custom-spinner"><div></div><div class="custom-dot"></div><div></div><div class="custom-dot"></div></div>',
-      template: '<div class="loader"></div>',
+      // template: '<div class="loader"></div>',
+      template: '<div class="three-quarter-spinner"></div>',
     });
     $("#mobile").addClass("blur-full-screen");
   };
@@ -134,6 +134,9 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1620623825290326" }).then(function (response) {
       $rootScope.experiencePeriodData = response;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621830937132722" }).then(function (response) {
+      $rootScope.consumerSuppliers = response;
+    });
   };
   $scope.getProfileLookupData();
   $scope.callComingSoon = function () {
@@ -142,16 +145,13 @@
 
   //Утасны back button
   $ionicPlatform.onHardwareBackButton(function () {
-    console.log("A");
     $rootScope.hideFooter = false;
   });
 
   $ionicPlatform.registerBackButtonAction(function (e) {
-    console.log("B");
     e.preventDefault();
-    if ($ionicHistory.viewHistory().backView) {
-      $ionicHistory.viewHistory().backView.go();
-    } else {
+
+    if ($state.current.name == "home") {
       $ionicPopup.show({
         template: "<b>Аппликейшнийг  -г хаах уу ?</b>",
         cssClass: "confirmPopup",
@@ -169,6 +169,8 @@
           },
         ],
       });
+    } else {
+      $ionicHistory.viewHistory().backView.go();
     }
 
     return false;
@@ -177,6 +179,11 @@
 
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = false;
+    var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
+
+    if (bannerNotShow) {
+      $scope.hideIntro();
+    }
     localStorage.removeItem("requestType");
     $rootScope.loginUserInfo = {};
     $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
@@ -197,11 +204,6 @@
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621921912497648" }).then(function (response) {
         $rootScope.bankProductMinPayment = response;
       });
-    }
-    var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
-
-    if (bannerNotShow) {
-      $scope.hideIntro();
     }
     if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
   });

@@ -1,16 +1,6 @@
 <ion-view id="loanPages" hide-nav-bar="true" cache-view="false">
     <link href="views/car/car.css" rel="stylesheet" />
-    <!-- <div ng-click="backFromcarInfo()" ng-repeat="data in [{'title':'Дэлгэрэнгүй'}]" ng-include src="'views/navbar.html'"></div> -->
-    <ion-header-bar align-title="left" class="navbar" style="background: none">
-        <div class="title ion-color-big-text navbar-back-button" style="background: none">
-            <button ng-click="backFromcarInfo()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
-                <i class="ion-chevron-left ion-color-header"></i>
-                <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Хүсэлт илгээх</span></span>
-            </button>
-        </div>
-        <div class="navbar-right-icon">
-        </div>
-    </ion-header-bar>
+    <div ng-repeat="data in [{'title':'Автомашины мэдээлэл'}]" ng-include src="'views/navbar.html'"></div>
     <!-- <div id="paypopup" style="display: none">
         <span class="qr-popup-close" ng-click="payOff()">&#10006;</span>
         <div class="pay-container">
@@ -62,7 +52,7 @@
             </ion-tabs>
         </div>
     </div> -->
-    <ion-content overflow-scroll="true" class="ion-modified-content car-info-content">
+    <ion-content overflow-scroll="true" class="ion-modified-content car-info-content has-header">
         <div class="big-container">
             <div class="magic-container car-info-contant-card">
                 <!-- Car -->
@@ -96,7 +86,7 @@
                         </div>
                     </ul>
                     <button id="collapse-btn" class="collapse-btn" ng-click="collapse();">&#8594;</button>
-                    <button id="uncollapse-btn" class="collapse-btn" ng-click="uncollapse();" style="display: none">&#8592;</button>
+                    <button id="uncollapse-btn" class="collapse-btn" style="display: none" ng-click="uncollapse();">&#8592;</button>
                 </div>
                 <div class="custom-buttons">
                     <!-- <button class="ibutton" ng-click="addtoBasket()"><i class="icon custom-cart-fill car-info-custom-icons"></i>

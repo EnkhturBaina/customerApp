@@ -14,17 +14,17 @@
                 </div>
                 <div class="bottom-border-input-text step1-code-input-container">
                     <p class="big-middle-title auto-step1-title">ТА АВАХ АВТОМАШИНЫХАА КОДЫГ ОРУУЛНА УУ?</p>
-                    <input type="text" placeholder="DCC0001" name="carCode" class="step1-car-code ion-text-upper" ng-model="$root.newReqiust.itemcode" ng-keyup="getCarDatasIdEnterkey($event,$root.newReqiust.itemcode)" select-on-click />
+                    <input inputmode="numeric" pattern="[0-9]*" id="step1CarCode" type="text" placeholder="00000000" name="carCode" class="step1-car-code ion-text-upper" ng-model="$root.newReqiust.itemcode" ng-keyup="getCarDatasIdEnterkey($event,$root.newReqiust.itemcode)" select-on-click />
                 </div>
                 <div class="step1-scan-qr-container">
-                    <div class="qr-btn-container">
+                    <!-- <div class="qr-btn-container">
                         <button class="button qr-button" id="qr" ng-click="showQRreader()">
                             <span class="filter">
                                 <i class="ion-qr-scanner qr-ico"></i>
                                 QR уншуулах
                             </span>
                         </button>
-                    </div>
+                    </div> -->
                     <button class="button btn single-button auto-step1-next-btn" id="Next" ng-click="getCarDatasId($root.newReqiust.itemcode)">Үргэлжлүүлэх</button>
                 </div>
             </div>
@@ -43,7 +43,7 @@
 <script id="templates/auto.html" type="text/ng-template">
   <ion-modal-view class="auto-temp-modal-view">
     <ion-content class="padding bank-chat-content" scroll="false">
-        <span class="term-modal-off-text" ng-click="autoModal.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <!-- <span class="term-modal-off-text" ng-click="autoModal.hide()"><img style="width: 20px" src="img/x_mark.png" /></span> -->
         <div class="templates-modal-include" ng-include src="'views/templates/auto.html'"></div>
     </ion-content>
   </ion-modal-view>

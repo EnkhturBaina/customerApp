@@ -1,7 +1,11 @@
 ﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal, $ionicLoading) {
   $rootScope.requestType = "";
   $rootScope.requestType = localStorage.getItem("requestType");
+
+  $("#step1CarCode").mask("00000000");
   $(".mobile-number-step4").mask("00000000");
+  $("#loanAmountRequest").mask("000000000000");
+  $("#sendRequestAdvancePayment").mask("000000000000");
   $("#step2loanMonth").mask("00");
   $("#step4UniqueIdentifier").mask("AA00000000", {
     translation: {
@@ -11,6 +15,7 @@
   //Сүүлийн Step дээр сонгосон банк
   $rootScope.selectedBanksList = [];
   if ($state.current.name == "autoleasing-1") {
+    $rootScope.hideFooter = true;
     $ionicModal
       .fromTemplateUrl("templates/auto.html", {
         scope: $scope,
@@ -22,7 +27,6 @@
     $timeout(function () {
       $scope.autoModal.show();
     }, 300);
-    $rootScope.hideFooter = true;
   }
 
   $ionicModal
@@ -817,8 +821,8 @@
     }
   };
   $scope.$on("$ionicView.enter", function () {
-    $rootScope.collTrueStep2 = false;
     $rootScope.hideFooter = true;
+    $rootScope.collTrueStep2 = false;
     var local = localStorage.getItem("requestType");
     if (local == "estate" && $state.current.name == "autoleasing-4" && !$rootScope.propertyIsDan) {
       $scope.danHand();
@@ -946,6 +950,10 @@
       });
     });
     $rootScope.isDanLoginAutoColl = true;
+    //Дан -р нэвтэрсэн үед disable хийх
+    $rootScope.lastNameDanDisable = true;
+    $rootScope.firstNameDanDisable = true;
+    $rootScope.uniqueIdentifierDanDisable = true;
   };
 
   $rootScope.isDanHand = false;

@@ -23,11 +23,11 @@
 }
 
 .login-content {
-  background: url(../../img/lines/home-bigcard-cover-line-1.png) no-repeat, #7abcff;
+  background: url(../../img/lines/aaa.png) no-repeat, #7abcff;
   /* Old browsers */
-  background: url(../../img/lines/home-bigcard-cover-line-1.png) no-repeat, -moz-linear-gradient(9deg, rgba(152, 208, 74, 1) 10%, rgba(73, 190, 242, 1) 77%);
+  background: url(../../img/lines/aaa.png) no-repeat, -moz-linear-gradient(9deg, rgba(152, 208, 74, 1) 10%, rgba(73, 190, 242, 1) 77%);
   /* FF3.6-15 */
-  background: url(../../img/lines/home-bigcard-cover-line-1.png) no-repeat, -webkit-linear-gradient(9deg, rgba(152, 208, 74, 1) 10%, rgba(73, 190, 242, 1) 77%);
+  background: url(../../img/lines/aaa.png) no-repeat, -webkit-linear-gradient(9deg, rgba(152, 208, 74, 1) 10%, rgba(73, 190, 242, 1) 77%);
   /* Chrome10-25,Safari5.1-6 */
   background: url(../../img/lines/aaa.png) no-repeat, linear-gradient(9deg, rgba(152, 208, 74, 1) 10%, rgba(73, 190, 242, 1) 77%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
