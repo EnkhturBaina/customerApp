@@ -34,6 +34,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
         if (response[0].itempic8) $scope.carImages.push(response[0].itempic8);
 
         $scope.carData = response[0];
+        $rootScope.HideLoader();
         // console.log("$scope.carData", $scope.carData);
         $scope.selectCarName = response[0].modelname.split(" ")[0];
         $scope.selectedCarId = response[0].id;
@@ -49,9 +50,9 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
         $timeout(function () {
           if (!isEmpty($scope.carImages)) {
             var img = document.getElementById("carImg0");
+            console.log("img height", img.clientHeight);
             document.getElementById("carImg0").style.height = img.clientHeight + "px";
             document.getElementById("carInfoSlideBox").style.height = img.clientHeight + 30 + "px";
-            $rootScope.HideLoader();
           }
         }, 1000);
       }

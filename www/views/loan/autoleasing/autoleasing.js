@@ -104,8 +104,9 @@
     }, 200);
   };
   // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
-  $rootScope.getbankData = function () {
-    $rootScope.ShowLoader();
+  $rootScope.getbankData = function (a) {
+    if (a != "forced") $rootScope.ShowLoader();
+
     $rootScope.requestType = localStorage.getItem("requestType");
     //Шүүгдсэн банкууд
     $rootScope.bankListFilter = [];
@@ -836,7 +837,7 @@
       $scope.getLoanAmountFunc();
       $scope.getLookupData();
       $timeout(function () {
-        $scope.getbankData();
+        $scope.getbankData("forced");
       }, 200);
     }
   });

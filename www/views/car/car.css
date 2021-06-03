@@ -223,7 +223,8 @@
   height: auto;
   margin: 0 auto;
   display: block;
-  max-height: 400px;
+  max-height: 300px;
+  min-height: 270px;
   border-radius: 10px;
 }
 .car-img-suggest {
@@ -452,4 +453,12 @@
   background-repeat: no-repeat;
   top: 250px;
   margin: 200px 0px;
+}
+.car-info-ion-slide {
+  min-height: 270px;
+  max-height: 300px;
+}
+#carInfoSlideBox {
+  min-height: 270px;
+  max-height: 300px;
 }
