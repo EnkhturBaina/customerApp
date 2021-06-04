@@ -381,7 +381,7 @@
   position: relative !important;
 }
 .autoleas-step3-content {
-  height: 92% !important;
+  height: 94% !important;
   position: relative !important;
 }
 .autoleasing-step2-content {
@@ -602,4 +602,7 @@
   font-weight: normal !important;
   width: 85% !important;
   margin: 10px auto !important;
+}
+.autoleasing-step1-content {
+  top: 0px !important;
 }

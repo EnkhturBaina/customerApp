@@ -1688,3 +1688,6 @@ input[type="number"] {
   border-radius: 50%;
   animation: spin 0.3s linear 0s infinite;
 }
+.ion-mb-10 {
+  margin-bottom: 10px !important;
+}

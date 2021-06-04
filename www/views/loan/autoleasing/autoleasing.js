@@ -172,7 +172,7 @@
   if ($state.current.name == "autoleasing-3" && $rootScope.requestType != "autoColl") {
     $timeout(function () {
       $scope.getbankData();
-    }, 500);
+    }, 100);
   }
   if ($state.current.name == "autoleasing-4" || $state.current.name == "autoleasing-5") {
     $timeout(function () {
