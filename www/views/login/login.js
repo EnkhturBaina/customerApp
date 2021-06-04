@@ -51,6 +51,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
     );
   };
   $scope.ls = function (username, password, callBack) {
+    $rootScope.ShowLoader();
     var json = {
       request: {
         command: "login",
@@ -80,16 +81,54 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
             localStorage.removeItem("loginUserInfo");
             localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
 
+            $rootScope.profilePictureSideMenu = response[0].profilepicture;
+            localStorage.removeItem("profilePictureSideMenu");
+            localStorage.setItem("profilePictureSideMenu", response[0].profilepicture);
+
             serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", mobileNumber: `${username}` }).then(function (response) {
               if (!isEmpty(response[0])) {
                 localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
-
                 if (isEmpty($stateParams.path)) {
+                  //Банк цэснээс Login хийх
                   if ($rootScope.isLoginFromRequestList) {
+                    $rootScope.HideLoader();
                     $state.go("requestList");
                     $scope.getRequetData();
                   } else {
-                    $state.go("profile");
+                    //Хүсэлт явуулах үед Login хийх
+                    if ($rootScope.loginFromAutoLeasing) {
+                      $rootScope.HideLoader();
+                      $state.go("autoleasing-4");
+                      $rootScope.alert("Та гараар мэдээллээ бөглөсөн тохиолдолд зээл олгох байгууллагаас нэмэлт материал авах хүсэлт ирэхийг анхаарна уу", "");
+                      var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+                      //Нэвтэрсэн үед мэдээлэл татах
+                      if (!isEmpty($rootScope.loginUserInfo)) {
+                        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (responseCustomerData) {
+                          // console.log("responseCustomerData", responseCustomerData);
+                          if (responseCustomerData[0] != "") {
+                            $rootScope.danCustomerData = responseCustomerData[0];
+                            $rootScope.danCustomerData.id = all_ID.dccustomerid;
+                            // console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+                            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
+                              // console.log("get income data response", response);
+                              if (response[0] != "") {
+                                $rootScope.danIncomeData = response[0];
+                              }
+                            });
+                          }
+                        });
+                      }
+                    } else if ($rootScope.loginFromAutoColl) {
+                      $rootScope.HideLoader();
+                      $state.go("car_coll");
+                    } else if ($rootScope.loginFromProperty) {
+                      $rootScope.HideLoader();
+                      $state.go("property_collateral");
+                    } else {
+                      //Login цонхноос явуулах үед Login хийх
+                      $rootScope.HideLoader();
+                      $state.go("profile");
+                    }
                   }
                   if ($rootScope.isRemmberUsername && !isEmpty($scope.user.username)) {
                     localStorage.setItem("rememberUsername", $scope.user.username);
@@ -185,8 +224,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
     });
   };
   $scope.registerFunction = function (value) {
-    //Sidebar нэр
-    $rootScope.sidebarUserName = value.lastname.substr(0, 1) + ". " + value.firstname;
     var json = {
       customerCode: value.regnum.toUpperCase(),
       siRegNumber: value.regnum.toUpperCase(),

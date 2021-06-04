@@ -28,8 +28,15 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
     $rootScope.isDanLoginAutoColl = false;
     $rootScope.newCarReq = {};
     $rootScope.monthlyIncomeDisable = false;
-    $("#entryYear").val("");
-    $("#productYear").val("");
+    $rootScope.loginFromAutoColl = true;
+
+    if (isEmpty($rootScope.loginUserInfo)) {
+      $state.go("login");
+    } else {
+      $("#entryYear").val("");
+      $("#productYear").val("");
+      $state.go("car_coll");
+    }
   };
 
   $scope.gotoDanLoginDanSelect = function () {

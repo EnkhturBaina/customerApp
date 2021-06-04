@@ -169,6 +169,8 @@
           },
         ],
       });
+    } else if ($state.current.name == "loan_success") {
+      $state.go("home");
     } else {
       $ionicHistory.viewHistory().backView.go();
     }
@@ -184,7 +186,9 @@
     if (bannerNotShow) {
       $scope.hideIntro();
     }
+
     localStorage.removeItem("requestType");
+
     $rootScope.loginUserInfo = {};
     $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
 

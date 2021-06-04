@@ -211,7 +211,15 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     $rootScope.showPropertyBtn = false;
     $rootScope.monthlyIncomeDisable = false;
     $rootScope.showSquareSizeField = false;
+    $rootScope.loginFromProperty = true;
+
+    if (isEmpty($rootScope.loginUserInfo)) {
+      $state.go("login");
+    } else {
+      $state.go("property_collateral");
+    }
   };
+
   $scope.savePropertyRequestData = function () {
     if ($scope.propertyCheckReqiured("step2")) {
       if ($scope.propertyCheckReqiured("agreeBank")) {

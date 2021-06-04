@@ -151,4 +151,7 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
       $ionicSlideBoxDelegate.enableSlide(false);
     }
   };
+  $scope.backFromCarInfo = function () {
+    $state.go("autoleasing-1");
+  };
 });
