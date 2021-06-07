@@ -978,14 +978,6 @@ h4 {
   font-size: 14px;
   line-height: 16px;
 }
-
-.bank-middle-title {
-  margin-top: -5px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #4b5180;
-}
-
 .request-middle-title {
   color: #4b5180;
   font-weight: bold;
@@ -1551,6 +1543,7 @@ input[type="number"] {
 }
 .checkBank-not-agree {
   padding-left: 30px;
+  width: 100%;
 }
 .tooltipster-base {
   text-align: center !important;

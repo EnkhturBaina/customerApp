@@ -70,19 +70,6 @@
     }
   };
 
-  $scope.getLookupData = function () {
-    if (isEmpty($rootScope.locationData)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613011719373208" }).then(function (response) {
-        $rootScope.locationData = response;
-      });
-    }
-    if (isEmpty($rootScope.isColl)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
-        $rootScope.isColl = response;
-      });
-    }
-  };
-
   $scope.getLoanAmountFunc = function () {
     var input = document.getElementById("loanAmountRequest");
     $rootScope.loanAmountField = "";
@@ -822,7 +809,6 @@
       $rootScope.newReqiust.getLoanAmount = "";
       $rootScope.newReqiust.serviceAgreementId = 1554263832132;
       $scope.getLoanAmountFunc();
-      $scope.getLookupData();
       $timeout(function () {
         $scope.getbankData("forced");
       }, 200);

@@ -326,7 +326,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   if ($state.current.name == "property_collateral2") {
     $scope.getbankDataProperty();
   }
-  $scope.locationData = [];
   $scope.provinceData = [];
   $scope.dedicateData = [];
   $scope.isConCentralInfData = [];
@@ -370,11 +369,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     $scope.getLookUpDataProperty();
   }
   if ($state.current.name == "property_collateral2") {
-    if (isEmpty($scope.locationData)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613011719373208" }).then(function (response) {
-        $scope.locationData = response;
-      });
-    }
   }
   $scope.getDistrictData = function (val) {
     $scope.districtData = [];

@@ -1,12 +1,4 @@
 angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $rootScope, $state, $ionicModal, $ionicPlatform, $timeout) {
-  $scope.locationData = [];
-  $scope.getLookUpDataCarColl = function () {
-    if (isEmpty($rootScope.locationData)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613011719373208" }).then(function (response) {
-        $rootScope.locationData = response;
-      });
-    }
-  };
   //Төрөл
   $scope.carCategory = [];
   //Загвар
@@ -231,7 +223,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   }
   if ($state.current.name == "car_coll2") {
     $scope.getbankDataCarColl();
-    $scope.getLookUpDataCarColl();
   }
   $scope.backFromCarCollStep1 = function () {
     $state.go("home");

@@ -137,6 +137,12 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621830937132722" }).then(function (response) {
       $rootScope.consumerSuppliers = response;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613011719373208" }).then(function (response) {
+      $rootScope.locationData = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
+      $rootScope.isColl = response;
+    });
   };
   $scope.getProfileLookupData();
   $scope.callComingSoon = function () {
