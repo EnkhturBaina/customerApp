@@ -99,6 +99,7 @@
     if (a != "forced") $rootScope.ShowLoader();
 
     $rootScope.requestType = localStorage.getItem("requestType");
+    console.log("$rootScope.requestType", $rootScope.requestType);
     //Шүүгдсэн банкууд
     $rootScope.bankListFilter = [];
     var json = {};
@@ -147,6 +148,13 @@
         json.code = $rootScope.selectedCarData.itemcode;
         json.preTotal = $rootScope.newReqiust.advancePayment;
       }
+    } else if ($rootScope.requestType == "preLoan") {
+      //ҮХХ Барьцаат лизинг банк шүүлт
+      json.type = "autoLeasingLoanFilter";
+      json.totalLoan = $rootScope.newReqiust.loanAmount;
+      json.location = $rootScope.newReqiust.locationId;
+      json.month = $rootScope.newReqiust.loanMonth;
+      json.preTotal = $rootScope.newReqiust.advancePayment;
     }
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
@@ -326,6 +334,71 @@
           } else {
             $rootScope.HideLoader();
             $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 300", "danger");
+          }
+        });
+      } else if ($rootScope.requestType == "preLoan") {
+        //===================preLoan===================
+        $scope.newReqiust.customerId = all_ID.dccustomerid;
+
+        //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
+        $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
+        //Сонгосон банк
+        selectedbanks = [];
+        //нөхцөл хангасан банкууд
+        angular.forEach($rootScope.bankListFilter.Agree, function (item) {
+          if (item.checked) {
+            var AgreeBank = {
+              bankId: item.id,
+              isAgree: "1",
+              isMobile: "1",
+              wfmStatusId: "1609944755118135",
+              productId: item.products[0].id,
+            };
+            selectedbanks.push(AgreeBank);
+          }
+        });
+        $rootScope.newReqiust.dcApp_preLoanRequestMapDV = selectedbanks;
+
+        console.log("$rootScope.newReqiust", $rootScope.newReqiust);
+
+        serverDeferred.requestFull("dcApp_preLoan_001", $rootScope.newReqiust).then(function (response) {
+          console.log("res", response);
+          if (response[0] == "success" && response[1] != "") {
+            $rootScope.danIncomeData.leasingid = response[1].id;
+            $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
+            delete $rootScope.danIncomeData.id;
+
+            var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+            if (DanloginUserInfo.dcapp_crmuser_dan) {
+              $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+              $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+              $rootScope.danCustomerData.birthDate = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.birthdate.substring(0, 10);
+            }
+            $rootScope.danCustomerData.crmCustomerId = all_ID.crmuserid;
+
+            serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (response) {
+              //Дан -с авсан нийгмийн даатгалын мэдээлэл хадгалах
+              serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (response) {
+                //Утасны дугаар регистр өөрчлөгдсөн бол Update хийх
+                var json = {
+                  id: all_ID.crmcustomerid,
+                  mobileNumber: $rootScope.danCustomerData.mobilenumber,
+                  siRegNumber: $rootScope.danCustomerData.uniqueidentifier,
+                };
+                json.dcApp_crmUser_update = {
+                  id: all_ID.crmuserid,
+                  customerId: all_ID.crmcustomerid,
+                  userName: $rootScope.danCustomerData.mobilenumber,
+                };
+                serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                  $rootScope.HideLoader();
+                  $state.go("loan_success");
+                });
+              });
+            });
+          } else {
+            $rootScope.HideLoader();
+            $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
           }
         });
       } else if ($rootScope.requestType == "consumer") {

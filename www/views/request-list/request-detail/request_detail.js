@@ -13,6 +13,8 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
     } else if ($rootScope.loanType === "4") {
       dvId = "1614748505027675";
     } else if ($rootScope.loanType === "5") {
+    } else {
+      dvId = "16231354990841";
     }
     if (dvId != "") {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: dvId, mapId: $rootScope.selectedMapBank.mapid }).then(function (response) {

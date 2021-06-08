@@ -208,13 +208,14 @@
   display: block;
   margin: -1px;
   font-size: 16px;
+  width: 100%;
 }
 .bank-middle-title {
   margin-top: -5px;
   font-size: 14px;
   font-weight: 900;
   color: #4b5180;
-  margin-left: 5%;
+  margin-left: 8px;
 }
 .bank-desc-green {
   margin-left: 42px;

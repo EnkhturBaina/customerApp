@@ -143,6 +143,9 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
       $rootScope.isColl = response;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363794516634" }).then(function (response) {
+      $rootScope.carCategoryPreLoan = response;
+    });
   };
   $scope.getProfileLookupData();
   $scope.callComingSoon = function () {
