@@ -35,7 +35,6 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
     $scope.bankFirstChat = "";
     $scope.bankFirstChatDate = "";
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602494134391582", dim1: $rootScope.selectedMapBank.mapid }).then(function (response) {
-      console.log("res", response);
       $rootScope.chatHistory = [];
       angular.forEach(response, function (item) {
         $rootScope.chatHistory.push(item);

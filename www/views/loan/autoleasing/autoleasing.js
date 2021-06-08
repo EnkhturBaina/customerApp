@@ -99,7 +99,6 @@
     if (a != "forced") $rootScope.ShowLoader();
 
     $rootScope.requestType = localStorage.getItem("requestType");
-    console.log("$rootScope.requestType", $rootScope.requestType);
     //Шүүгдсэн банкууд
     $rootScope.bankListFilter = [];
     var json = {};
@@ -359,10 +358,10 @@
         });
         $rootScope.newReqiust.dcApp_preLoanRequestMapDV = selectedbanks;
 
-        console.log("$rootScope.newReqiust", $rootScope.newReqiust);
+        // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
 
         serverDeferred.requestFull("dcApp_preLoan_001", $rootScope.newReqiust).then(function (response) {
-          console.log("res", response);
+          // console.log("res", response);
           if (response[0] == "success" && response[1] != "") {
             $rootScope.danIncomeData.leasingid = response[1].id;
             $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
