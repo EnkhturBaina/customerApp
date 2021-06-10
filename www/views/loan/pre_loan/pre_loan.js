@@ -12,6 +12,14 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
     .then(function (termModalAgreement) {
       $scope.termModalAgreement = termModalAgreement;
     });
+  $ionicModal
+    .fromTemplateUrl("templates/preloan.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (preloanModal) {
+      $scope.preloanModal = preloanModal;
+    });
 
   $rootScope.getbankDataPreLoan = function (a) {
     if (a != "forced") $rootScope.ShowLoader();
@@ -42,7 +50,7 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
   $scope.checkReqiuredPreLoan = function (param) {
     if (param == "step2") {
       if (isEmpty($rootScope.newReqiust.carCategoryId)) {
-        $rootScope.alert("Автомашины ангилалаа сонгоно уу", "warning");
+        $rootScope.alert("Автомашины ангиллаа сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.carChosen)) {
         $rootScope.alert("Автомашины сонгосон эсэх?", "warning");
@@ -117,6 +125,7 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
       $timeout(function () {
         $scope.getbankDataPreLoan("forced");
       }, 200);
+      $scope.preloanModal.show();
     }
   });
 });

@@ -1,0 +1,35 @@
+<link href="views/templates/templates.css" rel="stylesheet" />
+<div class="list templates-list">
+    <div class="card templates-card">
+        <ion-scroll direction="y" class="templates-scroll">
+            <span class="templates-sub-title">Та автомашин авах зээлээ урьдчилж тогтоолгохдоо </span>
+            <div class="templates-content">
+                <div class="templates-content-ul">
+                    <img style="width: 70px" src="img/tick-box.png" />
+                    <span>Та сонирхож буй машины төрлөө сонгоно</span>
+                </div>
+                <div class="templates-content-ul">
+                    <img style="width: 70px" src="img/resume.png" />
+                    <span>Зээлийн мэдээллээ оруулна</span>
+                </div>
+                <div class="templates-content-ul">
+                    <img style="width: 70px" src="img/send-mail.png" />
+                    <span>Банк, ББСБ-аа сонгон илгээнэ</span>
+                </div>
+            </div>
+            <span class="templates-sub-title">Хэрэв та автомашинаа сонгоогүй бол <span class="click-here">www.0001.mn</span> сайт руу орж сонгоно уу </span>
+            <button class="button btn single-button auto-template-btn" id="Next" ng-click="preloanModal.hide()">Үргэлжлүүлэх</button>
+            <div class="bank-container-template">
+                <p class="auto-template-bank-title">Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
+                <ion-scroll direction="x" class="wide-scroll-bank">
+                    <!-- <div class="" ng-repeat="bank in allBankList" ng-if="bank.bank_logo">
+                        <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+                    </div> -->
+                    <div class="photobanner">
+                        <img class="tooltip" ng-repeat="bank in allBankList" ng-if="bank.bank_logo" ng-src="{{bank.bank_logo|guessImageMime}}" title="{{bank.department_name}}" animation="fade" />
+                    </div>
+                </ion-scroll>
+            </div>
+        </ion-scroll>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal, $ionicLoading) {
+﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal, $ionicSlideBoxDelegate) {
   $rootScope.requestType = "";
   $rootScope.requestType = localStorage.getItem("requestType");
 
@@ -158,6 +158,15 @@
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
+      // console.log("$rootScope.bankListFilter", $rootScope.bankListFilter);
+      // console.log("asdasd", $("#photoBanner").next(".scroll"));
+      // if ($rootScope.bankListFilter.Agree.length > 3) {
+      //   console.log("A");
+      //   $("#photoBanner").next(".scroll").addClass("photobanner");
+      // } else {
+      //   console.log("B");
+      //   $("#photoBanner").next(".scroll").removeClass("photobanner");
+      // }
     });
     // console.log("json", json);
   };
@@ -1159,5 +1168,9 @@
   };
   $scope.backFromStep1 = function () {
     $state.go("home");
+  };
+  $scope.repeatDone = function () {
+    $ionicSlideBoxDelegate.update();
+    //$ionicSlideBoxDelegate.slide($scope.week.length - 1, 1);
   };
 });
