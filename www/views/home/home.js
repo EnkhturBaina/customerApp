@@ -51,7 +51,6 @@
       localStorage.removeItem("bannerNotShow");
     }
   };
-  $scope.getBanner();
   // ============= glob ========================
   $rootScope.alert = function (messege, checkmark, then) {
     if (!isEmpty($scope.alertPopup)) {
@@ -190,11 +189,6 @@
 
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = false;
-    var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
-
-    if (bannerNotShow) {
-      $scope.hideIntro();
-    }
 
     localStorage.removeItem("requestType");
 
@@ -220,4 +214,10 @@
     }
     if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
   });
+  var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
+  if (isEmpty(bannerNotShow)) {
+    $scope.getBanner();
+  } else {
+    $scope.hideIntro();
+  }
 });

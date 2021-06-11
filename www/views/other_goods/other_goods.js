@@ -5,7 +5,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $rootScope.newReqiust = {};
   $rootScope.suppliers = [];
 
-  $rootScope.showSec = true;
+  $rootScope.showSec = false;
 
   $rootScope.getLocalGoodsData = function () {
     $rootScope.otherGoodsData = JSON.parse(localStorage.getItem("otherGoods"));
@@ -20,14 +20,13 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     var local = localStorage.getItem("otherGoods");
     if (!isEmpty(local) && local != "undefined") {
       $rootScope.otherGoods = JSON.parse(localStorage.getItem("otherGoods"));
+      !isEmpty($rootScope.otherGoods) ? ($rootScope.showSec = false) : ($rootScope.showSec = true);
       for (var i = 0; i < $rootScope.otherGoods.length; i++) {
         $rootScope.sumPrice += parseInt($rootScope.otherGoods[i].unitPrice);
       }
     } else if ($rootScope.otherGoods.length == 0) {
       $rootScope.sumPrice = 0;
     }
-
-    !isEmpty($rootScope.otherGoods) ? ($rootScope.showSec = false) : ($rootScope.showSec = true);
   };
 
   $scope.nexClivk = function () {

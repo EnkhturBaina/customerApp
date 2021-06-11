@@ -208,6 +208,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
 
         if (code == 0) {
           serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://services.digitalcredit.mn/api/sso/check").then(function (response) {
+            // console.log("res", response);
             var userInfo = response.result.data.info;
             if (!isEmpty(userInfo)) {
               $scope.registerFunction(JSON.parse(userInfo));
@@ -223,7 +224,8 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
       });
     });
   };
-  $scope.registerFunction = function (value) {
+  $scope.registerFunction = function (param) {
+    var value = param.result;
     var json = {
       customerCode: value.regnum.toUpperCase(),
       siRegNumber: value.regnum.toUpperCase(),

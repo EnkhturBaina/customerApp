@@ -18,33 +18,33 @@
                     <div class="tugrug-input">
                         <span class="title input-label-front dan-user-data">Овог</span>
                         <div class="tugrug-input-container">
-                            <input type="text" id="customerLastNameDan" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.lastname" ng-change="replaceCyrAuto($root.danCustomerData.lastname)" ng-disabled="$root.lastNameDanDisable" select-on-click />
+                            <input type="text" id="customerLastNameDan" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.lastname" ng-change="replaceCyrAuto($root.danCustomerData.lastname)" ng-keyup="hideKeyboard($event)" ng-disabled="$root.lastNameDanDisable" select-on-click />
                         </div>
                         <span id="lastNameErrorDan" class="profile-input-name-error">Та овогоо крилл үсгээр оруулна уу</span>
                     </div>
                     <div class="tugrug-input">
                         <span class="title input-label-front dan-user-data">Нэр</span>
                         <div class="tugrug-input-container">
-                            <input type="text" id="customerFirstNameDan" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.firstname" ng-change="replaceCyr2Auto($root.danCustomerData.firstname)" ng-disabled="$root.firstNameDanDisable" select-on-click />
+                            <input type="text" id="customerFirstNameDan" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.firstname" ng-change="replaceCyr2Auto($root.danCustomerData.firstname)" ng-keyup="hideKeyboard($event)" ng-disabled="$root.firstNameDanDisable" select-on-click />
                         </div>
                         <span id="firstNameErrorDan" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</span>
                     </div>
                     <div class="tugrug-input">
                         <span class="title input-label-front dan-user-data">Регистр</span>
                         <div class="tugrug-input-container">
-                            <input type="text" placeholder="" id="step4UniqueIdentifier" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.uniqueidentifier" ng-disabled="$root.uniqueIdentifierDanDisable" select-on-click />
+                            <input type="text" placeholder="" id="step4UniqueIdentifier" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.uniqueidentifier" ng-keyup="hideKeyboard($event)" ng-disabled="$root.uniqueIdentifierDanDisable" select-on-click />
                         </div>
                     </div>
                     <div class="tugrug-input">
                         <span class="title input-label-front dan-user-data">И-мэйл хаяг</span>
                         <div class="tugrug-input-container">
-                            <input type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.email" select-on-click />
+                            <input type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.email" ng-keyup="hideKeyboard($event)" select-on-click />
                         </div>
                     </div>
                     <div class="tugrug-input">
                         <span class="title input-label-front dan-user-data">Утасны дугаар</span>
                         <div class="tugrug-input-container">
-                            <input inputmode="numeric" pattern="[0-9]*" maxlength="8" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine mobile-number-step4 ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.mobilenumber" select-on-click />
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="8" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine mobile-number-step4 ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.mobilenumber" ng-keyup="hideKeyboard($event)" select-on-click />
                         </div>
                     </div>
                     <label class="item item-input step4-loan-location">

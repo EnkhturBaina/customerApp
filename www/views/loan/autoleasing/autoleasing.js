@@ -168,7 +168,8 @@
       //   $("#photoBanner").next(".scroll").removeClass("photobanner");
       // }
     });
-    // console.log("json", json);
+    console.log("json", json);
+    console.log("$rootScope.newReqiust", $rootScope.newReqiust);
   };
   //Банк шүүлт step 2 дээр шууд ажиллах
   //Банк сонгох autoleasing-3 хуудасруу ороход ажиллах
@@ -944,7 +945,7 @@
               }
               var userSalaryInfo = JSON.parse(response.result.data.salary);
 
-              serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.regnum.toUpperCase() }).then(function (checkedValue) {
+              serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.result.regnum.toUpperCase() }).then(function (checkedValue) {
                 // console.log("checkedValue", checkedValue);
                 if (!isEmpty(checkedValue[1])) {
                   serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
@@ -967,13 +968,13 @@
                 }
               });
               $timeout(function () {
-                $rootScope.danCustomerData.lastname = userInfo.lastname;
-                $rootScope.danCustomerData.firstname = userInfo.firstname;
-                $rootScope.danCustomerData.uniqueidentifier = userInfo.regnum.toUpperCase();
+                $rootScope.danCustomerData.lastname = userInfo.result.lastname;
+                $rootScope.danCustomerData.firstname = userInfo.result.firstname;
+                $rootScope.danCustomerData.uniqueidentifier = userInfo.result.regnum.toUpperCase();
 
                 // console.log("userSalaryInfo", userSalaryInfo);
                 if (userSalaryInfo) {
-                  serverDeferred.carCalculation(userSalaryInfo.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
+                  serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
                     // console.log("res salary", response);
                     $rootScope.monthlyAverage = response.result;
                     // console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
@@ -1038,7 +1039,8 @@
       }
     }
   };
-  $scope.registerFunctionAuto = function (value) {
+  $scope.registerFunctionAuto = function (param) {
+    var value = param.result;
     var json = {
       customerCode: value.regnum.toUpperCase(),
       siRegNumber: value.regnum.toUpperCase(),

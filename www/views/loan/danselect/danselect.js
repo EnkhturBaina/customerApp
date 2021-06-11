@@ -56,12 +56,16 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
 
         if (code == 0) {
           serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://services.digitalcredit.mn/api/sso/check").then(function (response) {
+            // console.log("res", response);
             if (!isEmpty(response.result.data)) {
               var userInfo = JSON.parse(response.result.data.info);
+
               if (!isEmpty(response.result.data.vehicle)) {
                 $rootScope.userVehicleData = JSON.parse(response.result.data.vehicle);
+
                 if (!isEmpty($rootScope.userVehicleData)) {
-                  $rootScope.propJsonAutoColl = $rootScope.userVehicleData.list;
+                  $rootScope.propJsonAutoColl = $rootScope.userVehicleData.result.list;
+
                   if ($rootScope.propJsonAutoColl.length == 1) {
                     $rootScope.autoCollDanCarData = $rootScope.propJsonAutoColl[0];
                     $rootScope.autoCollDanCarData.importDate = formatDate($rootScope.propJsonAutoColl[0].importDate);
@@ -69,12 +73,13 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                 } else {
                   $rootScope.propJsonAutoColl = null;
                 }
+
                 if (!isEmpty(userInfo)) {
                   $scope.registerFunction(userInfo);
                 }
 
                 var userSalaryInfo = JSON.parse(response.result.data.salary);
-                serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.regnum.toUpperCase() }).then(function (checkedValue) {
+                serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.result.regnum.toUpperCase() }).then(function (checkedValue) {
                   if (!isEmpty(checkedValue[1])) {
                     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
                       if (responseCustomerData[0] != "") {
@@ -94,12 +99,12 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                   }
                 });
                 $timeout(function () {
-                  $rootScope.danCustomerData.lastname = userInfo.lastname;
-                  $rootScope.danCustomerData.firstname = userInfo.firstname;
-                  $rootScope.danCustomerData.uniqueidentifier = userInfo.regnum.toUpperCase();
+                  $rootScope.danCustomerData.lastname = userInfo.result.lastname;
+                  $rootScope.danCustomerData.firstname = userInfo.result.firstname;
+                  $rootScope.danCustomerData.uniqueidentifier = userInfo.result.regnum.toUpperCase();
 
                   if (userSalaryInfo) {
-                    serverDeferred.carCalculation(userSalaryInfo.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
+                    serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
                       $rootScope.monthlyAverage = response.result;
                       $rootScope.monthlyIncomeDisable = true;
                       $rootScope.danIncomeData.monthlyincome = response.result;
@@ -126,7 +131,8 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
     $rootScope.firstNameDanDisable = true;
     $rootScope.uniqueIdentifierDanDisable = true;
   };
-  $scope.registerFunction = function (value) {
+  $scope.registerFunction = function (param) {
+    var value = param.result;
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     var json = {
       customerCode: value.regnum.toUpperCase(),
