@@ -206,6 +206,12 @@
       }
     });
     // console.log("json", json);
+
+    // if ($rootScope.minPayment > $rootScope.newReqiust.advancePayment || $rootScope.newReqiust.advancePayment == 0 || isEmpty($rootScope.newReqiust.advancePayment)) {
+    //   $rootScope.collTrueStep2 = false;
+    // } else {
+    //   $rootScope.collTrueStep2 = true;
+    // }
   };
   //Банк шүүлт step 2 дээр шууд ажиллах
   //Банк сонгох autoleasing-3 хуудасруу ороход ажиллах
