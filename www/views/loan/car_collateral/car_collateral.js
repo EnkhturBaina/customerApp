@@ -117,6 +117,29 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     }
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
+
+      $rootScope.products = [];
+      $rootScope.result = [];
+      $rootScope.months = [];
+      //Зөвхөн Step2 -д ажлуулах
+      if ($state.current.name == "car_coll2") {
+        $rootScope.bankListFilter.Agree.map((el) => {
+          $rootScope.products.push(el.products);
+        });
+
+        $rootScope.products.map((obj) => {
+          $rootScope.result = [].concat($rootScope.result, obj);
+        });
+
+        $rootScope.result.map((a) => {
+          $rootScope.months.push(a.max_loan_month_id);
+        });
+        if (!isEmpty($rootScope.products)) {
+          $rootScope.maxMonth = Math.max(...$rootScope.months);
+        } else {
+          $rootScope.maxMonth = 0;
+        }
+      }
     });
     // console.log("json", json);
   };
@@ -127,13 +150,10 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       $rootScope.newCarReq = {};
     }
     if ($scope.carCollCheckReqiured("step1")) {
-      $rootScope.bankproductDtlNumber = $rootScope.bankproductDtl.find((o) => o.categoryid === "16082024252301");
       localStorage.setItem("requestType", "autoColl");
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
 
-      if (!isEmpty($rootScope.bankproductDtlNumber)) {
-        $state.go("car_coll2");
-      }
+      $state.go("car_coll2");
     }
   };
   $rootScope.yearsArray = [];
@@ -360,6 +380,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       if ($state.current.name == "car_coll") {
         //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
         $rootScope.carCollateralRequestData = {};
+        $rootScope.carCollateralRequestData.loanAmount = 0;
         $rootScope.carCollateralRequestData.serviceAgreementId = 1554263832132;
         if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
           $scope.autoCollDan.show();

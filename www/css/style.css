@@ -827,7 +827,7 @@ h4 {
   font-weight: bold;
 }
 .tugrug-input {
-  margin: 14px 0;
+  margin: 10px 0;
   position: relative;
   z-index: 99;
 }
@@ -1624,4 +1624,22 @@ input[type="number"] {
 }
 .agree-bank-slide img {
   width: 60px;
+}
+.ion-margin0-auto {
+  margin: 0 auto !important;
+}
+.ion-margin-top5 {
+  margin-top: 5px !important;
+}
+
+.vxx-title-container {
+  margin-top: 10px;
+  text-align: center;
+  width: 90%;
+  margin: 5px auto;
+}
+.vxx-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: #4b5180 !important;
 }

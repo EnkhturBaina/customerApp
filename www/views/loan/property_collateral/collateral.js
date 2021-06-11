@@ -33,13 +33,8 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
 
   $scope.saveProperty = function () {
     if ($scope.propertyCheckReqiured("step1")) {
-      //Боломжит дээд хугацаа
-      $rootScope.bankproductDtlNumber = $rootScope.bankproductDtl.find((o) => o.categoryid === "16082024283512");
-
-      if (!isEmpty($rootScope.bankproductDtlNumber)) {
-        localStorage.setItem("requestType", "estate");
-        $state.go("property_collateral2");
-      }
+      localStorage.setItem("requestType", "estate");
+      $state.go("property_collateral2");
     }
   };
   $ionicModal
@@ -263,10 +258,12 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       } else if (isEmpty($rootScope.propertyData.line3) && !$rootScope.propertyIsDan) {
         $rootScope.alert("Хороо/баг сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.propertyData.itemPic)) {
-        $rootScope.alert("Зураг оруулна уу", "warning");
-        return false;
-      } else {
+      }
+      // else if (isEmpty($rootScope.propertyData.itemPic)) {
+      //   $rootScope.alert("Зураг оруулна уу", "warning");
+      //   return false;
+      // }
+      else {
         return true;
       }
       return true;
@@ -324,6 +321,29 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     }
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
+
+      $rootScope.products = [];
+      $rootScope.result = [];
+      $rootScope.months = [];
+      //Зөвхөн Step2 -д ажлуулах
+      if ($state.current.name == "property_collateral2") {
+        $rootScope.bankListFilter.Agree.map((el) => {
+          $rootScope.products.push(el.products);
+        });
+
+        $rootScope.products.map((obj) => {
+          $rootScope.result = [].concat($rootScope.result, obj);
+        });
+
+        $rootScope.result.map((a) => {
+          $rootScope.months.push(a.max_loan_month_id);
+        });
+        if (!isEmpty($rootScope.products)) {
+          $rootScope.maxMonth = Math.max(...$rootScope.months);
+        } else {
+          $rootScope.maxMonth = 0;
+        }
+      }
     });
   };
   if ($state.current.name == "property_collateral2") {

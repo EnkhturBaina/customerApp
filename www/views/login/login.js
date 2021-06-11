@@ -158,9 +158,9 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   $scope.loginKey = function (value, username, password) {
     if (value.keyCode === 13) {
       $scope.Login(username, password);
-      document.getElementById("userpassLogin").blur();
     }
   };
+
   $scope.user.username = "";
   $rootScope.isDanLogin = false;
   $rootScope.isRemmberUsername = true;

@@ -198,8 +198,8 @@
     if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
       $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
     }
-    $rootScope.displayMinPayment = "";
-    $rootScope.bankproductDtlNumber = "";
+    $rootScope.displayMinPayment = 0;
+    $rootScope.maxMonth = 0;
     //dc_bank_product table -с зээлийн бүтээгдэхүүн бүрийн max зээлийн хугацаа авах
     if (isEmpty($rootScope.bankproductDtl)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621843239702927" }).then(function (response) {

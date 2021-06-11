@@ -43,10 +43,58 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
+
+      $rootScope.products = [];
+      $rootScope.result = [];
+      $rootScope.months = [];
+      $rootScope.minPayments = [];
+      //Зөвхөн pre_loan -д ажлуулах
+      if ($state.current.name == "pre_loan") {
+        $rootScope.bankListFilter.Agree.map((el) => {
+          $rootScope.products.push(el.products);
+        });
+
+        $rootScope.products.map((obj) => {
+          $rootScope.result = [].concat($rootScope.result, obj);
+        });
+
+        $rootScope.result.map((a) => {
+          $rootScope.months.push(a.max_loan_month_id);
+          a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : "";
+        });
+
+        $rootScope.maxMonth = Math.max(...$rootScope.months);
+        $rootScope.minPayment = Math.min(...$rootScope.minPayments);
+        //тэнцсэн банкуудын урьдчилгаа 0 үед ажиллах
+        if (isEmpty($rootScope.minPayments)) {
+          $rootScope.bankListFilter.NotAgree.map((el) => {
+            $rootScope.products.push(el.products);
+          });
+          $rootScope.products.map((obj) => {
+            $rootScope.result = [].concat($rootScope.result, obj);
+          });
+
+          $rootScope.result.map((a) => {
+            $rootScope.months.push(a.max_loan_month_id);
+            a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : "";
+          });
+
+          $rootScope.maxMonth = Math.max(...$rootScope.months);
+          $rootScope.minPayment = Math.min(...$rootScope.minPayments);
+        }
+        $rootScope.displayMinPayment = $rootScope.newReqiust.loanAmount * $rootScope.minPayment;
+      }
     });
     // console.log("json", json);
   };
 
+  $scope.changeToolTipData = function () {
+    if ($rootScope.newReqiust.collateralConditionId == "1554263832132") {
+      $rootScope.collTrueStep2 = true;
+    } else {
+      $rootScope.collTrueStep2 = false;
+    }
+  };
   $scope.checkReqiuredPreLoan = function (param) {
     if (param == "step2") {
       if (isEmpty($rootScope.newReqiust.carCategoryId)) {
@@ -118,6 +166,8 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
   $scope.$on("$ionicView.enter", function () {
     localStorage.setItem("requestType", "preLoan");
     $rootScope.hideFooter = true;
+
+    $rootScope.collTrueStep2 = true;
 
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
 

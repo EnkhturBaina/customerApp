@@ -25,16 +25,16 @@
                         </ul>
                     </div>
                     <div class="money-input">
-                        <p class="request-middle-title ion-color-big-text">Зээлийн мэдээлэл</p>
-                        <div class="tugrug-input">
+                        <p class="request-middle-title ion-color-big-text text-center">Зээлийн мэдээлэл</p>
+                        <div class="tugrug-input ion-margin0-auto">
                             <span class="title input-label-front">Зээлийн хэмжээ</span>
                             <div class="tugrug-input-container">
                                 <span class="input-tugrug-icon">₮</span>
                                 <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" format-input disabled select-on-click />
                             </div>
                         </div>
-                        <div ng-if="isCollShow" class="vxx-title-container"><span class="vxx-title">Та үл хөдлөх хөрөнгө(ҮХХ) барьцаалсанаар зарим банк, ББСБ-аас урьдчилгаа төлбөргүй авах боломжтой</span></div>
-                        <label class="item item-input step2-loan-location" ng-if="isCollShow">
+                        <div ng-if="isCollShow" class="vxx-title-container"><span class="vxx-title">Та үл хөдлөх хөрөнгө(ҮХХ) барьцаалснаар зарим банк, ББСБ-аас урьдчилгаа төлбөргүй авах боломжтой</span></div>
+                        <label class="item item-input step2-loan-location ion-margin-top5" ng-if="isCollShow">
                             <i class="icon fa fa-building-o input-tugrug-icon"></i>
                             <p>ҮХХөрөнгө барьцаалах уу?</p>
                             <select class="autoleasing-location-select" ng-model="$root.newReqiust.collateralConditionId" ng-change="getbankData();changeToolTipData()">
@@ -42,25 +42,20 @@
                                     {{loc.name}}</option>
                             </select>
                         </label>
-                        <div class="tugrug-input" ng-if="!$root.collTrueStep2">
-                            <span class="title input-label-front">Урьдчилгаа</span>
-                            <div class="tugrug-input-container">
-                                <span class="input-tugrug-icon">₮</span>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern tooltip" ng-change="calcLoanAmount();" ng-blur="getbankData()" ng-click="removeAdvancePayment()" title="Тухайн зээлийн урьдчилгаа багадаа {{$root.displayMinPayment|formatNumber}} байна" thousand-separator select-on-click />
-                            </div>
-                        </div>
-                        <div class="tugrug-input" ng-if="$root.collTrueStep2">
+                        <div ng-if="!$root.collTrueStep2" class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн урьдчилгаа багадаа <br /> {{$root.displayMinPayment|formatNumber}} байна</span></div>
+                        <div class="tugrug-input">
                             <span class="title input-label-front">Урьдчилгаа</span>
                             <div class="tugrug-input-container">
                                 <span class="input-tugrug-icon">₮</span>
                                 <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount();" ng-blur="getbankData()" ng-click="removeAdvancePayment()" thousand-separator select-on-click />
                             </div>
                         </div>
-                        <div class="tugrug-input">
+                        <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ {{$root.maxMonth}} сар байна</span></div>
+                        <div class="tugrug-input ion-margin0-auto">
                             <span class="title input-label-front">Хугацаа (сараар)</span>
                             <div class="tugrug-input-container">
                                 <span class="input-tugrug-icon"><i class="icon fa fa-calendar"></i></span>
-                                <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask tooltip" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankData()" ng-keyup="hideKeyboard($event)" title="Тухайн зээлийн хугацаа хамгийн ихдээ {{$root.bankproductDtlNumber.maxmonth}} сар байна" animation="fade" select-on-click />
+                                <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
                             </div>
                         </div>
 

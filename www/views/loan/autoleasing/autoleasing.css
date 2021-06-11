@@ -403,17 +403,6 @@
   z-index: 99;
   background: transparent !important;
 }
-.vxx-title-container {
-  margin-top: 10px;
-  text-align: center;
-  width: 90%;
-  margin: 10px auto 0 auto;
-}
-.vxx-title {
-  font-size: 12px;
-  font-weight: bold;
-  color: #4b5180 !important;
-}
 
 .step3-bankList-checkbox-container {
   padding-left: 15px !important;
