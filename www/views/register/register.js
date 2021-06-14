@@ -83,7 +83,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
               smsCode: generatedCode,
               customertypeid: "1",
             };
-            $scope.smsConfirmCode = generatedCode;
+            // $scope.smsConfirmCode = generatedCode;
             serverDeferred.requestFull("dcApp_all_crm_customer_001", json).then(function (crmResponse) {
               if (crmResponse[0] == "success") {
                 $scope.isStep1 = false;
@@ -93,14 +93,9 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
                   serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id }).then(function (response) {
                     localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
                   });
-
-                  var sendSms = {
-                    msg: `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`,
-                    phoneNumber: $scope.crmUserData.userName,
-                  };
-                  // serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
-                  //   console.log("sendSmsResponse", sendSmsResponse);
-                  // });
+                  $scope.number = $scope.crmUserData.userName;
+                  $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
+                  serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {});
                 }, 500);
               } else {
                 $rootScope.alert("Бүртгэхэд алдаа гарлаа", "danger");
@@ -120,14 +115,16 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
       id: all_ID.dccustomerid,
       smsCode: generatedCode,
     };
-    var sendSms = {
-      msg: `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`,
-      phoneNumber: $scope.crmUserData.userName,
-    };
+
     serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
-      // serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
-      //   console.log("sendSmsResponse", sendSmsResponse);
-      // });
+      if (sendSmsResponse[0] == "success") {
+        $scope.number = $scope.crmUserData.userName;
+        $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
+
+        serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {});
+      } else {
+        $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа", "warning");
+      }
     });
     $scope.onTimer();
   };

@@ -1,4 +1,4 @@
-﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform, $timeout, $state) {
+﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform, $timeout, $state, $http) {
   // $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
   // $rootScope.imagePath = "https://dev.veritech.mn/";
   $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
@@ -8,6 +8,8 @@
   $rootScope.carMarketStorageURL = "http://0001.mn/storage/";
   $rootScope.serverHeader = { "content-type": "application/json;charset=UTF-8" };
   $rootScope.sessionid = "65178215-7896-4513-8e26-896df9cb36ad";
+
+  $rootScope.smsToken = "ae36a662de67641a1bbff98455c9ad77d3a8d1d2";
 
   $cordovaNetwork.isOnline = function () {
     return true;
@@ -212,6 +214,9 @@
         $rootScope.bankProductMinPayment = response;
       });
     }
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621921912497648" }).then(function (response) {
+      // $rootScope.smsToken = response;
+    });
     if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
   });
   var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));

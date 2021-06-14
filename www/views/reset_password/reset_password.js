@@ -21,7 +21,6 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
   $rootScope.goBack = function () {
     $window.history.back();
   };
-  $scope.smsCode = "";
   $scope.isStep1 = true;
   $scope.isStep2 = false;
   $scope.hideShowPassword = function (inputName) {
@@ -55,16 +54,29 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
               localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
             });
 
-            var sendSms = {
-              msg: `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`,
-              phoneNumber: $rootScope.customerData.userName,
+            var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+            var generatedCode = Math.floor(100000 + Math.random() * 900000);
+
+            var updateCode = {
+              id: all_ID.dccustomerid,
+              smsCode: generatedCode,
             };
-            serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {
+
+            $scope.number = $scope.customerData.userName;
+            $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
+
+            serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
+              if (sendSmsResponse[0] == "success") {
+                serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {});
+              } else {
+                $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа", "warning");
+              }
             });
           }, 500);
         }
       });
     }
+    $scope.onTimer();
   };
   $scope.resetPassword = function () {
     if (isEmpty($scope.smsCode)) {
@@ -74,7 +86,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
     } else {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619583335021155", mobileNumber: $rootScope.customerData.userName }).then(function (response) {
         if (response[0] != "") {
-          if (document.getElementById("smsCode").value == response[0].smscode) {
+          if ($scope.smsCode == response[0].smscode) {
             serverDeferred.requestFull("getPasswordHash1", $rootScope.customerNewPassword).then(function (response) {
               $rootScope.newPasswordHashResult.passwordHash = response[1].result;
               $rootScope.newPasswordHashResult.password = $rootScope.customerNewPassword.passwordHash;
@@ -102,12 +114,16 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
       id: all_ID.dccustomerid,
       smsCode: generatedCode,
     };
-    var sendSms = {
-      msg: `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`,
-      phoneNumber: $scope.customerData.userName,
-    };
+
+    $scope.number = $scope.customerData.userName;
+    $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
+
     serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
-      serverDeferred.requestFull("SEND_SMS", sendSms).then(function (sendSmsResponse) {});
+      if (sendSmsResponse[0] == "success") {
+        serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {});
+      } else {
+        $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа 200", "warning");
+      }
     });
     $scope.onTimer();
   };
@@ -119,7 +135,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
         document.getElementById("resendBtn").innerHTML = "Дахин код илгээх";
         document.getElementById("resendBtn").disabled = false;
       } else {
-        if ($state.current.name == "register") {
+        if ($state.current.name == "reset_password") {
           document.getElementById("resendBtn").innerHTML = "Дахин код илгээх " + timeleft;
           document.getElementById("resendBtn").disabled = true;
         }
