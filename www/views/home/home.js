@@ -9,8 +9,6 @@
   $rootScope.serverHeader = { "content-type": "application/json;charset=UTF-8" };
   $rootScope.sessionid = "65178215-7896-4513-8e26-896df9cb36ad";
 
-  $rootScope.smsToken = "ae36a662de67641a1bbff98455c9ad77d3a8d1d2";
-
   $cordovaNetwork.isOnline = function () {
     return true;
   };
@@ -89,8 +87,6 @@
     $ionicLoading.show({
       showBackdrop: true,
       showDelay: 0,
-      // template: '<div class="custom-spinner"><div></div><div class="custom-dot"></div><div></div><div class="custom-dot"></div></div>',
-      // template: '<div class="loader"></div>',
       template: '<div class="three-quarter-spinner"></div>',
     });
     $("#mobile").addClass("blur-full-screen");
@@ -214,9 +210,6 @@
         $rootScope.bankProductMinPayment = response;
       });
     }
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621921912497648" }).then(function (response) {
-      // $rootScope.smsToken = response;
-    });
     if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
   });
   var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));

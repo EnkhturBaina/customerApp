@@ -1019,7 +1019,7 @@
                   serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
                     // console.log("res salary", response);
                     $rootScope.monthlyAverage = response.result;
-                    // console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage);
+                    // console.log("$rootScope.monthlyAverage", $rootScope.monthlyAverage );
                     $rootScope.monthlyIncomeDisable = true;
                     $rootScope.danIncomeData.monthlyincome = response.result;
                     // console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);

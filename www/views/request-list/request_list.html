@@ -3,7 +3,7 @@
         <link href="views/request-list/request_list.css" rel="stylesheet" />
         <ion-content overflow-scroll="true" class="ion-modified-content request-list-content">
             <div ng-if="!isEmptyReq">
-                <p class="loan-tab-title ion-color-text req-list-title">Таны зээлийн хүсэлтийн жагсаалт.</p>
+                <p class="loan-tab-title ion-color-text req-list-title">Таны зээлийн хүсэлтийн жагсаалт ({{requetData.length - 1}})</p>
                 <div class="card request-list-card" ng-repeat="banks in requetData | groupBy:'leasingid' | toArray:true | orderBy:min" ng-if="!(banks[0].producttypename|isEmpty)">
                     <div class="item bank-card card-body item-text-wrap">
                         <!-- <div class="expandcollapse-item" ng-click="{{'growDiv('+$index+')'}}"> -->

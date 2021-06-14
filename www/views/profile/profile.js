@@ -71,6 +71,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     }
   };
   $scope.$on("$ionicView.enter", function () {
+    $ionicTabsDelegate.$getByHandle("profileTabs").select(0);
     $rootScope.hideFooter = true;
     $rootScope.ShowLoader();
     $timeout(function () {

@@ -259,10 +259,10 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         $rootScope.alert("Хороо/баг сонгоно уу", "warning");
         return false;
       }
-      // else if (isEmpty($rootScope.propertyData.itemPic)) {
-      //   $rootScope.alert("Зураг оруулна уу", "warning");
-      //   return false;
-      // }
+      else if (isEmpty($rootScope.propertyData.itemPic)) {
+        $rootScope.alert("Зураг оруулна уу", "warning");
+        return false;
+      }
       else {
         return true;
       }
