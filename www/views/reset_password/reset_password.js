@@ -96,7 +96,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
               $rootScope.newPasswordHashResult.userName = $rootScope.customerData.userName;
               serverDeferred.requestFull("dcApp_login_register_dv_002", $rootScope.newPasswordHashResult).then(function (response) {
                 $state.go("login");
-                $rootScope.alert("Нэвтэрнэ үү", "success");
+                $rootScope.alert("Таны нууц үг амжилттай шинэчлэгдлээ", "success");
               });
             });
           } else {

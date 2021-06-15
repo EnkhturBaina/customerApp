@@ -1,11 +1,18 @@
 {
-     "android": {
-         "release": {
-             "keystore": "",
-             "storePassword": "",
-             "alias": "",
-             "password" : "",
-             "keystoreType": ""
-         }
-     }
- }
+    "android": {
+      "release": {
+        "keystore": "dcutom.keystore",
+        "storePassword": "digital",
+        "alias": "digital",
+        "password": "digital",
+        "keystoreType": ""
+      },
+      "debug": {
+        "keystore": "dcustom.keystore",
+        "storePassword": "digital",
+        "alias": "digital",
+        "password": "digital",
+        "keystoreType": ""
+      }
+    }
+  }

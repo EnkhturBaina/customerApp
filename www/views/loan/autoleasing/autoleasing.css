@@ -525,12 +525,6 @@
 .step-bottom-footer {
   margin-bottom: 30px !important;
 }
-.step5-income-msg {
-  float: right;
-  font-size: 12px;
-  color: #4b5180 !important;
-  font-weight: bold;
-}
 
 #overlayProfilePicuteRequest {
   position: fixed;
@@ -596,4 +590,10 @@
 }
 .autoleasing-step1-content {
   top: 0px !important;
+}
+.step5-mid-title {
+  margin: 10px auto 0 auto !important;
+  width: 80% !important;
+  display: block !important;
+  text-align: center !important;
 }

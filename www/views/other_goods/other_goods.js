@@ -94,5 +94,6 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $scope.$on("$ionicView.enter", function () {
     $rootScope.getLocalGoodsData();
     $rootScope.calcTotalPrice();
+    !isEmpty($rootScope.otherGoods) ? ($rootScope.showSec = false) : ($rootScope.showSec = true);
   });
 });

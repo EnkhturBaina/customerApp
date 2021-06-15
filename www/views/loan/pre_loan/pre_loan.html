@@ -9,7 +9,7 @@
                     <div class="money-input">
                         <label class="item item-input step2-loan-location">
                             <i class="icon fa fa-car  input-tugrug-icon" style=" zoom: 0.8; "></i>
-                            <p>Машины төрөл</p>
+                            <p>Төрөл</p>
                             <select class="autoleasing-location-select" ng-model="$root.newReqiust.carCategoryId">
                                 <option ng-repeat="loc in $root.carCategoryPreLoan | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>

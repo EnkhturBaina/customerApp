@@ -133,7 +133,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
       if (response[0] != "") {
         if (document.getElementById("confirmationCode").value == response[0].smscode) {
           $state.go("login");
-          $rootScope.alert("Нэвтэрнэ үү", "success");
+          $rootScope.alert("Та амжилттай бүртгэгдлээ", "success");
         } else {
           $rootScope.alert("Баталгаажуулах код буруу байна", "warning");
         }
