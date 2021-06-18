@@ -1,7 +1,7 @@
 {
     "android": {
       "release": {
-        "keystore": "dcutom.keystore",
+        "keystore": "dcustom.keystore",
         "storePassword": "digital",
         "alias": "digital",
         "password": "digital",
