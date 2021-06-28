@@ -276,12 +276,10 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       } else if (isEmpty($rootScope.newCarReq.cameYearId) && !$rootScope.isDanLoginAutoColl) {
         $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
         return false;
-      }
-      else if (isEmpty($rootScope.newCarReq.itemPic)) {
+      } else if (isEmpty($rootScope.newCarReq.itemPic)) {
         $rootScope.alert("Машины зураг оруулна уу", "warning");
         return false;
-      }
-      else {
+      } else {
         return true;
       }
       return true;
