@@ -295,6 +295,7 @@
         $scope.carCollateralData = JSON.parse(localStorage.getItem("carColl"));
         $scope.carCollateralData.customerId = all_ID.dccustomerid;
         $scope.carCollateralRequestData.customerId = all_ID.dccustomerid;
+        $scope.carCollateralRequestData.requestTypeId = "16082024252301";
         //Хүсэлт бүртгэх
         serverDeferred.requestFull("dcApp_carCollRequestDV_001", $scope.carCollateralRequestData).then(function (sendReqResponse) {
           // console.log("sendReqResponse", sendReqResponse);
@@ -390,6 +391,7 @@
       } else if ($rootScope.requestType == "preLoan") {
         //===================preLoan===================
         $scope.newReqiust.customerId = all_ID.dccustomerid;
+        $scope.newReqiust.requestTypeId = "16082024283623";
 
         //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
         $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
@@ -456,6 +458,7 @@
         //==================Хэрэглээний лизинг===================
         $scope.consumerData = JSON.parse(localStorage.getItem("otherGoods"));
         $scope.newReqiust.customerId = all_ID.dccustomerid;
+        $scope.newReqiust.requestTypeId = "16082024252191";
         //Хүсэлт бүртгэх
         // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
         serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
@@ -551,6 +554,7 @@
       } else if ($rootScope.requestType == "estate") {
         //===================Үл хөдлөх барьцаат зээл===================
         $rootScope.propertyRequestData.customerId = all_ID.dccustomerid;
+        $rootScope.propertyRequestData.requestTypeId = "16082024283512";
         //Хүсэлт бүртгэх
         serverDeferred.requestFull("dcApp_carCollRequestDV_001", $rootScope.propertyRequestData).then(function (sendReqResponse) {
           // console.log("sendReqResponse", sendReqResponse);
@@ -647,6 +651,7 @@
       } else {
         //===================AutoLeasing===================
         $scope.newReqiust.customerId = all_ID.dccustomerid;
+        $scope.newReqiust.requestTypeId = "16082024283142";
 
         serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
           if (response[0] == "success" && response[1] != "") {
