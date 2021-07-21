@@ -47,6 +47,8 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
   $scope.crmUserData.userName = "";
   $scope.smsConfirmCode = "";
   $scope.disabledBtn = false;
+  $rootScope.registeredData = {};
+
   $scope.sendSmsCode = function () {
     if (isEmpty($scope.crmUserData.userName)) {
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
@@ -62,27 +64,52 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
         if (!isEmpty(response[0])) {
           $rootScope.alert("<p class=" + "customer_registerd_number" + ">" + $scope.crmUserData.userName + "</p>" + " Утасны дугаараар бүртгэл үүссэн байна", "warning");
         } else {
-          var generatedCode = Math.floor(100000 + Math.random() * 900000);
           serverDeferred.requestFull("getPasswordHash1", $scope.customerPassword).then(function (response) {
             //Password Hash
             $rootScope.passwordHashResult = response;
-            var json = {
-              mobileNumber: $scope.crmUserData.userName,
-              siRegNumber: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
-              customerCode: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
-            };
-            json.dcApp_all_crm_user = {
-              userName: $scope.crmUserData.userName,
-              userId: "1",
-              password: $scope.customerPassword.passwordHash,
-              passwordHash: $scope.passwordHashResult[1].result,
-            };
-            json.dcApp_all_crm_user.dcApp_all_dc_customer = {
-              uniqueidentifier: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
-              mobileNumber: $scope.crmUserData.userName,
-              smsCode: generatedCode,
-              customertypeid: "1",
-            };
+          });
+
+          serverDeferred.requestFull("dcApp_all_crm_customer_004", { siRegNumber: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val() }).then(function (checkedValue) {
+            $rootScope.registeredData = checkedValue;
+          });
+
+          var generatedCode = Math.floor(100000 + Math.random() * 900000);
+
+          $timeout(function () {
+            if (!isEmpty($rootScope.registeredData[1])) {
+              json = $rootScope.registeredData[1];
+
+              var json = {
+                ...json,
+                mobileNumber: $scope.crmUserData.userName,
+              };
+              json.dcapp_all_crm_user.username = $scope.crmUserData.userName;
+              json.dcapp_all_crm_user.password = $scope.customerPassword.passwordHash;
+              json.dcapp_all_crm_user.passwordhash = $scope.passwordHashResult[1].result;
+
+              json.dcapp_all_crm_user.dcapp_all_dc_customer.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+              json.dcapp_all_crm_user.dcapp_all_dc_customer.mobilenumber = $scope.crmUserData.userName;
+              json.dcapp_all_crm_user.dcapp_all_dc_customer.smscode = generatedCode;
+            } else {
+              var json = {
+                mobileNumber: $scope.crmUserData.userName,
+                siRegNumber: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
+                customerCode: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
+              };
+              json.dcApp_all_crm_user = {
+                userName: $scope.crmUserData.userName,
+                userId: "1",
+                password: $scope.customerPassword.passwordHash,
+                passwordHash: $scope.passwordHashResult[1].result,
+              };
+              json.dcApp_all_crm_user.dcApp_all_dc_customer = {
+                uniqueidentifier: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
+                mobileNumber: $scope.crmUserData.userName,
+                smsCode: generatedCode,
+                customertypeid: "1",
+              };
+            }
+
             // $scope.smsConfirmCode = generatedCode;
             serverDeferred.requestFull("dcApp_all_crm_customer_001", json).then(function (crmResponse) {
               if (crmResponse[0] == "success") {
@@ -96,12 +123,12 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
                   $scope.number = $scope.crmUserData.userName;
                   $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
                   serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {});
-                }, 500);
+                }, 800);
               } else {
                 $rootScope.alert("Бүртгэхэд алдаа гарлаа", "danger");
               }
             });
-          });
+          }, 500);
         }
       });
     }
