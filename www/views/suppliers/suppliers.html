@@ -11,7 +11,7 @@
         <div class="suppliers-list-container">
             <div class="title-class-suppliers">
                 <span class="uppercase-m-title suppliers-title">Шинэ</span>
-                <span class="left-0 ion-color-text suppliers-more" ui-sref="carlist">Бүгдийг харах ></span>
+                <span class="left-0 ion-color-text suppliers-more" ui-sref="suppliers-search">Бүгдийг харах ></span>
             </div>
             <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
                 <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in consumerSuppliers | filter:{id:'!!'}" ui-sref="supplier-detail">
@@ -25,7 +25,7 @@
         <div class="suppliers-list-container">
             <div class="title-class-suppliers">
                 <span class="uppercase-m-title suppliers-title">Онцлох</span>
-                <span class="left-0 ion-color-text suppliers-more" ui-sref="carlist">Бүгдийг харах ></span>
+                <span class="left-0 ion-color-text suppliers-more" ui-sref="suppliers-search">Бүгдийг харах ></span>
             </div>
             <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
                 <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in consumerSuppliers | filter:{id:'!!'}" ui-sref="supplier-detail">

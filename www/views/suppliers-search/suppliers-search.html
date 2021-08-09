@@ -10,9 +10,30 @@
 
         <div class="suppliers-search-container">
             <span class="icon ion-search suppliers-search-item"></span>
-            <input class="suppliers-search-input" type="text" placeholder="Хайх" ng-model="search.modelname" />
+            <input class="suppliers-search-input" type="text" placeholder="Хайх" ng-model="search.modelname" ng-change="getSearchDatra()" />
         </div>
 
+
+        <div class="side-nav-categories">
+            <ul id="category-tabs">
+                <li><a href="" class="main-category"> Web Applications<i class="fa fa-minus"></i></a>
+                    <ul class="sub-category-tabs">
+                        <li><a href="">HTML</a></li>
+                        <li><a href="">CSS</a></li>
+                        <li><a href="">SCSS</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="side-nav-categories">
+            <ul id="category-tabs" ng-repeat="(key, value) in suppliersWithCategory | groupBy:'categoryname'">
+                <li><a href="" ng-click="toggleBtn()" class="main-category">{{key}}<i class="fa fa-minus"></i></a>
+                    <ul class="sub-category-tabs">
+                        <li ng-repeat="product in value"><a>{{product.subcategoryname}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
         <div class="suppliers-category">
             <ul id="glayout">
                 <li class="car-detail-column" ng-repeat="car in consumerSuppliers | filter:search.modelname" ng-if="car.id">
