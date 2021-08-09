@@ -7,7 +7,7 @@
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  margin: 20px;
+  margin: 5px 20px;
 }
 
 .suppliers-scroll > .scroll {
@@ -44,7 +44,8 @@
   margin-top: 5px;
 }
 .title-class-suppliers {
-  padding: 10px 10px 0px 10px;
+  padding: 5px 25px;
+  font-weight: bold;
 }
 .suppliers-more {
   float: right;
@@ -68,8 +69,7 @@
   background: #fff !important;
 }
 .suppliers-title {
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 16px;
   color: #4b5180 !important;
 }
 .suppliers-name {

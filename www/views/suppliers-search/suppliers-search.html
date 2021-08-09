@@ -29,7 +29,7 @@
             <ul id="category-tabs" ng-repeat="(key, value) in suppliersWithCategory | groupBy:'categoryname'">
                 <li><a href="" ng-click="toggleBtn()" class="main-category">{{key}}<i class="fa fa-minus"></i></a>
                     <ul class="sub-category-tabs">
-                        <li ng-repeat="product in value"><a>{{product.subcategoryname}}</a></li>
+                        <li ng-repeat="product in value"><a>-{{product.subcategoryname}}</a></li>
                     </ul>
                 </li>
             </ul>
