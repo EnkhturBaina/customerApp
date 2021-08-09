@@ -353,3 +353,12 @@
   font-weight: bold;
   color: #4b5180 !important;
 }
+.consumer-slider {
+  display: grid;
+}
+.consumer-ion-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

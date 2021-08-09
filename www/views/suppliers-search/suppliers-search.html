@@ -1,0 +1,27 @@
+<ion-view hide-nav-bar="true">
+    <link href="views/suppliers-search/suppliers-search.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Дэлгүүр хайх'}]" ng-include src="'views/navbar.html'"></div>
+    <div class="navbar-right-icon suppliers-grid-icon">
+        <button ng-click="gridChange()" class="changelayoutbutton layout-list" id="changeLayout">
+            <i id="buttonIcon" class="custom-grid"></i>
+        </button>
+    </div>
+    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 danselect-content">
+
+        <div class="suppliers-search-container">
+            <span class="icon ion-search suppliers-search-item"></span>
+            <input class="suppliers-search-input" type="text" placeholder="Хайх" ng-model="search.modelname" />
+        </div>
+
+        <div class="suppliers-category">
+            <ul id="glayout">
+                <li class="car-detail-column" ng-repeat="car in consumerSuppliers | filter:search.modelname" ng-if="car.id">
+                    <div class="suppliers-list-img-container">
+                        <img ng-src="{{$root.imagePath}}{{car.supplierpic}}" />
+                    </div>
+                    <span class="suppliers-name">{{car.suppliername}}</span>
+                </li>
+            </ul>
+        </div>
+    </ion-content>
+</ion-view>

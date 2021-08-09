@@ -45,8 +45,8 @@
             </div>
             <div class="goods-middle-card" ng-if="$root.showSec">
                 <span>Та бараагаа <span class="middle-card-mid-text">ОНЛАЙНААР, ЛИЗИНГЭЭР</span> авах гэж байгаа бол манай харилцагчдын web сайтаар бараагаа сонгон zeelme-р лизингээ аваарай</span>
-                <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" ng-if="consumerSuppliers.length" pager-click="clickSlidePager(index)">
-                    <ion-slide ng-repeat="bg in consumerSuppliers | filter:{id:'!!'}">
+                <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" ng-if="consumerSuppliers.length" pager-click="clickSlidePager(index)" class="consumer-slider">
+                    <ion-slide ng-repeat="bg in consumerSuppliers | filter:{id:'!!'}" class="consumer-ion-slide">
                         <img style="width: 200px;" ng-src="{{$root.imagePath}}{{bg.supplierpic}}" />
                     </ion-slide>
                 </ion-slide-box>

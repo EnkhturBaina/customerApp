@@ -1,0 +1,79 @@
+.suppliers-scroll {
+  overflow: scroll;
+  white-space: nowrap;
+  width: 100%;
+}
+.suppliers-list-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 20px;
+}
+
+.suppliers-scroll > .scroll {
+  padding: 5px 0;
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+}
+.horizontal-item-suppliers {
+  display: inline-block;
+  vertical-align: top;
+  width: 150px;
+  white-space: normal;
+  margin: 0px 5px;
+  text-align: center;
+}
+
+.suppliers-card-container {
+  border-radius: 5px !important;
+  margin: 0px 5px;
+  line-height: 13px;
+  min-height: 17vh !important;
+}
+.suppliers-card-container .h-item {
+  width: 100px;
+}
+
+.h-item img {
+  width: auto;
+  height: 100px;
+  object-fit: contain;
+  margin: 0 auto;
+  max-width: 90%;
+  margin-top: 5px;
+}
+.title-class-suppliers {
+  padding: 10px 10px 0px 10px;
+}
+.suppliers-more {
+  float: right;
+}
+.suppliers-search-item {
+  position: absolute;
+  color: #acd322 !important;
+  margin: 4px;
+  zoom: 1.5;
+}
+.suppliers-search-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 20px;
+  padding: 5px;
+}
+.suppliers-search-input {
+  margin-left: 30px;
+  width: 80%;
+  background: #fff !important;
+}
+.suppliers-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #4b5180 !important;
+}
+.suppliers-name {
+  font-size: 12px;
+  font-weight: bold;
+  color: #4b5180 !important;
+}

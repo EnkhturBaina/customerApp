@@ -133,6 +133,7 @@
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621830937132722" }).then(function (response) {
       $rootScope.consumerSuppliers = response;
+      console.log("consumerSuppliers", $rootScope.consumerSuppliers);
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613011719373208" }).then(function (response) {
       $rootScope.locationData = response;
@@ -211,6 +212,7 @@
       });
     }
     if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
+    $ionicSlideBoxDelegate.update();
   });
   var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
   if (isEmpty(bannerNotShow)) {

@@ -1,0 +1,40 @@
+<ion-view hide-nav-bar="true">
+    <link href="views/suppliers/suppliers.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Дэлгүүрүүд'}]" ng-include src="'views/navbar.html'"></div>
+
+    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 danselect-content">
+
+        <div class="suppliers-search-container">
+            <span class="icon ion-search suppliers-search-item"></span>
+            <input class="suppliers-search-input" type="text" placeholder="Хайх" ui-sref="suppliers-search" />
+        </div>
+        <div class="suppliers-list-container">
+            <div class="title-class-suppliers">
+                <span class="uppercase-m-title suppliers-title">Шинэ</span>
+                <span class="left-0 ion-color-text suppliers-more" ui-sref="carlist">Бүгдийг харах ></span>
+            </div>
+            <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
+                <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in consumerSuppliers | filter:{id:'!!'}" ui-sref="supplier-detail">
+                    <div class="h-item">
+                        <img ng-src="{{$root.imagePath}}{{car.supplierpic}}" />
+                        <span class="suppliers-name">{{car.suppliername}}</span>
+                    </div>
+                </div>
+            </ion-scroll>
+        </div>
+        <div class="suppliers-list-container">
+            <div class="title-class-suppliers">
+                <span class="uppercase-m-title suppliers-title">Онцлох</span>
+                <span class="left-0 ion-color-text suppliers-more" ui-sref="carlist">Бүгдийг харах ></span>
+            </div>
+            <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
+                <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in consumerSuppliers | filter:{id:'!!'}" ui-sref="supplier-detail">
+                    <div class="h-item">
+                        <img ng-src="{{$root.imagePath}}{{car.supplierpic}}" />
+                        <span class="suppliers-name">{{car.suppliername}}</span>
+                    </div>
+                </div>
+            </ion-scroll>
+        </div>
+    </ion-content>
+</ion-view>

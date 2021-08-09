@@ -35,6 +35,9 @@ var app = angular
     "notif_detail.Ctrl",
     "term.Ctrl",
     "danselect.Ctrl",
+    "suppliers.Ctrl",
+    "suppliers-search.Ctrl",
+    "supplier-detail.Ctrl",
   ])
   .run(function ($ionicPlatform, $state, $cordovaSplashscreen) {
     $ionicPlatform.ready(function () {
@@ -290,6 +293,21 @@ var app = angular
       url: "/views/templates/income",
       templateUrl: "views/templates/income.html",
       controller: "autoleasingCtrl",
+    });
+    $stateProvider.state("suppliers", {
+      url: "/views/suppliers",
+      templateUrl: "views/suppliers/suppliers.html",
+      controller: "suppliersCtrl",
+    });
+    $stateProvider.state("suppliers-search", {
+      url: "/views/suppliers-search",
+      templateUrl: "views/suppliers-search/suppliers-search.html",
+      controller: "suppliers-searchCtrl",
+    });
+    $stateProvider.state("supplier-detail", {
+      url: "/views/supplier-detail",
+      templateUrl: "views/supplier-detail/supplier-detail.html",
+      controller: "supplier-detailCtrl",
     });
     $urlRouterProvider.otherwise("/views/home");
   })
