@@ -11,32 +11,24 @@
         <div class="suppliers-search-container">
             <span class="icon ion-search suppliers-search-item"></span>
             <input class="suppliers-search-input" type="text" placeholder="Хайх" ng-model="search.modelname" ng-change="getSearchDatra()" />
+            <span class="icon ion-ios7-settings-strong suppliers-option-item" ng-click="showHideOption()"></span>
         </div>
 
-
-        <div class="side-nav-categories">
-            <ul id="category-tabs">
-                <li><a href="" class="main-category"> Web Applications<i class="fa fa-minus"></i></a>
-                    <ul class="sub-category-tabs">
-                        <li><a href="">HTML</a></li>
-                        <li><a href="">CSS</a></li>
-                        <li><a href="">SCSS</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="side-nav-categories">
-            <ul id="category-tabs" ng-repeat="(key, value) in suppliersWithCategory | groupBy:'categoryname'">
-                <li><a href="" ng-click="toggleBtn()" class="main-category">{{key}}<i class="fa fa-minus"></i></a>
-                    <ul class="sub-category-tabs">
-                        <li ng-repeat="product in value"><a>-{{product.subcategoryname}}</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        <ion-list class="supplier-search-ion-list" id="supplier-search-ion-list">
+            <div ng-repeat="(key, value) in suppliersWithCategory | groupBy:'categoryname'" class="supplier-search-repeat">
+                <ion-item class="item-stable supplier-search-ion-item" ng-click="toggleGroup(value)" ng-class="{active: isGroupShown(value)}">
+                    <i class="icon" ng-class="isGroupShown(value) ? 'ion-minus' : 'ion-plus'"></i>
+                    &nbsp;
+                    {{key}}
+                </ion-item>
+                <ion-item class="item-accordion" ng-repeat="product in value" ng-show="isGroupShown(value)">
+                    - {{product.subcategoryname}}
+                </ion-item>
+            </div>
+        </ion-list>
         <div class="suppliers-category">
             <ul id="glayout">
-                <li class="car-detail-column" ng-repeat="car in consumerSuppliers | filter:search.modelname" ng-if="car.id">
+                <li class="car-detail-column" ng-repeat="car in consumerSuppliers | filter:search.modelname" ng-if="car.id" ng-click="supplierDetailFromSuppliersSearch(car.id)">
                     <div class="suppliers-list-img-container">
                         <img ng-src="{{$root.imagePath}}{{car.supplierpic}}" />
                     </div>

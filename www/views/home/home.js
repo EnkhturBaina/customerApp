@@ -100,10 +100,6 @@
 
   $rootScope.ShowLoader();
 
-  $timeout(function () {
-    $rootScope.HideLoader();
-  }, 1000);
-
   //========= first run ==========================
   var basket = localStorage.getItem("basketData");
   // console.log("basket", basket);
@@ -145,7 +141,9 @@
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1628487627246231" }).then(function (response) {
       $rootScope.suppliersWithCategory = response.filter((value) => Object.keys(value).length !== 0);
-      console.log("$rootScope.suppliersWithCategory", $rootScope.suppliersWithCategory);
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1628559883022530" }).then(function (response) {
+      $rootScope.dcSuppliers = response.filter((value) => Object.keys(value).length !== 0);
     });
   };
   $scope.getProfileLookupData();
@@ -188,8 +186,7 @@
     return false;
   }, 101);
   $rootScope.profilePictureSideMenu = localStorage.getItem("profilePictureSideMenu");
-
-  $scope.$on("$ionicView.enter", function () {
+  $scope.$on("$ionicView.loaded", function (ev, info) {
     $rootScope.hideFooter = false;
 
     localStorage.removeItem("requestType");
@@ -217,10 +214,21 @@
     if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
     $ionicSlideBoxDelegate.update();
   });
+
+  $scope.$on("$ionicView.enter", function () {
+    $timeout(function () {
+      $rootScope.HideLoader();
+    }, 2000);
+  });
   var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
   if (isEmpty(bannerNotShow)) {
     $scope.getBanner();
   } else {
     $scope.hideIntro();
   }
+
+  $scope.supplierDetailFromHome = function (id) {
+    $rootScope.selectSupplierID = id;
+    $state.go("supplier-detail");
+  };
 });

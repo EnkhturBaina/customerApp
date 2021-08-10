@@ -4,9 +4,9 @@
 
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 danselect-content">
 
-        <div class="suppliers-search-container">
+        <div class="suppliers-search-container" ng-click="goSearchPage()">
             <span class="icon ion-search suppliers-search-item"></span>
-            <input class="suppliers-search-input" type="text" placeholder="Хайх" ui-sref="suppliers-search" />
+            <input class="suppliers-search-input" type="text" placeholder="Хайх" disabled />
         </div>
         <div class="title-class-suppliers">
             <span class="uppercase-m-title suppliers-title">Шинэ</span>
@@ -14,7 +14,7 @@
         </div>
         <div class="suppliers-list-container">
             <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
-                <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in consumerSuppliers | filter:{id:'!!'}" ui-sref="supplier-detail">
+                <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in consumerSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromSuppliers(car.id)">
                     <div class="h-item">
                         <img ng-src="{{$root.imagePath}}{{car.supplierpic}}" />
                         <span class="suppliers-name">{{car.suppliername}}</span>
@@ -28,8 +28,8 @@
         </div>
         <div class="suppliers-list-container">
             <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
-                <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in consumerSuppliers | filter:{id:'!!'}" ui-sref="supplier-detail">
-                    <div class="h-item">
+                <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in consumerSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromSuppliers(car.id)">
+                    <div class=" h-item">
                         <img ng-src="{{$root.imagePath}}{{car.supplierpic}}" />
                         <span class="suppliers-name">{{car.suppliername}}</span>
                     </div>

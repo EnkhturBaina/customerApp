@@ -64,7 +64,7 @@
                 <ion-nav-view class="ghostwhite">
                     <ion-content overflow-scroll="false" style="margin: 0 10px" class="">
                         <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" ng-if="consumerSuppliers.length" show-pager="false" class="home-tab2-slider">
-                            <ion-slide ng-repeat="bg in consumerSuppliers | filter:{id:'!!'}" class="home-tab2-ion-slide">
+                            <ion-slide ng-repeat="bg in consumerSuppliers | filter:{id:'!!'}" class="home-tab2-ion-slide" ng-click="supplierDetailFromHome(bg.id)">
                                 <img style="width: 200px;max-height: 150px;" ng-src="{{$root.imagePath}}{{bg.supplierpic}}" />
                             </ion-slide>
                         </ion-slide-box>

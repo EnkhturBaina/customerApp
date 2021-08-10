@@ -36,13 +36,22 @@ angular.module("suppliers-search.Ctrl", []).controller("suppliers-searchCtrl", f
       $scope.gridChange();
     }
   };
-  $("#category-tabs li a").click(function () {
-    $(this).next("ul").slideToggle("500");
-    $(this).find("i").toggleClass("fa-minus fa-plus ");
-  });
-  $scope.toggleBtn = function () {
-    console.log("SAAAA");
-    $(this).next("ul").slideToggle("500");
-    $(this).find("i").toggleClass("fa-minus fa-plus ");
+  $scope.supplierDetailFromSuppliersSearch = function (id) {
+    $rootScope.selectSupplierID = id;
+    $state.go("supplier-detail");
+  };
+
+  $scope.toggleGroup = function (group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function (group) {
+    return $scope.shownGroup === group;
+  };
+  $scope.showHideOption = function () {
+    $("#supplier-search-ion-list").toggle(200, function () {});
   };
 });

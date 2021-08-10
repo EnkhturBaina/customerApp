@@ -168,11 +168,11 @@
   margin: 10px auto;
   width: 94%;
   display: grid;
-  border: 2px solid transparent;
-  border-radius: 10px;
+  border: 2px solid #acd322;
+  /* border-radius: 10px;
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
-  background-image: linear-gradient(#f8f8fe, #f8f8fe), linear-gradient(#3cc1fa, #acd322);
+  background-image: linear-gradient(#f8f8fe, #f8f8fe), linear-gradient(#3cc1fa, #acd322); */
 }
 .home-tab2-ion-slide {
   display: flex;

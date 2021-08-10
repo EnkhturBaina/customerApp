@@ -1,8 +1,17 @@
 <ion-view hide-nav-bar="true">
     <link href="views/supplier-detail/supplier-detail.css" rel="stylesheet" />
-    <div ng-repeat="data in [{'title':'Дэлгүүрүүд'}]" ng-include src="'views/navbar.html'"></div>
+    <div ng-repeat="data in supplierName" ng-include src="'views/navbar.html'"></div>
 
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 danselect-content">
-        supplier-detail
+        <div class="item item-body">
+            <img class="full-image supplier-detail-img" ng-src="{{$root.imagePath}}{{selectedSupplierData.supplierpic}}" />
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At cupiditate distinctio veritatis quas inventore dolorem, veniam ipsa ex magnam impedit. Temporibus blanditiis sunt quas magnam modi unde. Vel earum dolores est odit esse ad tempora accusamus assumenda, consequatur cumque impedit ipsam labore. Quasi alias nisi molestiae tempora in nobis neque.
+            </p>
+            <p>
+                <a href="#" class="subdued">aaaa</a>
+                <a href="#" class="subdued">bbbb</a>
+            </p>
+        </div>
     </ion-content>
 </ion-view>
