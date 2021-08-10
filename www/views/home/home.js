@@ -216,6 +216,7 @@
   });
 
   $scope.$on("$ionicView.enter", function () {
+    $ionicSlideBoxDelegate.update();
     $timeout(function () {
       $rootScope.HideLoader();
     }, 2000);
@@ -230,5 +231,12 @@
   $scope.supplierDetailFromHome = function (id) {
     $rootScope.selectSupplierID = id;
     $state.go("supplier-detail");
+  };
+  $scope.sliderOptions = {
+    initialSlide: 0,
+    direction: "horizontal", //or vertical
+    speed: 300, //0.3s transition
+    loop: true,
+    spaceBetween: 20,
   };
 });

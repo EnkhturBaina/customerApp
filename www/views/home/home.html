@@ -63,11 +63,16 @@
             <ion-tab title="Барааны маркет">
                 <ion-nav-view class="ghostwhite">
                     <ion-content overflow-scroll="false" style="margin: 0 10px" class="">
-                        <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" ng-if="consumerSuppliers.length" show-pager="false" class="home-tab2-slider">
-                            <ion-slide ng-repeat="bg in consumerSuppliers | filter:{id:'!!'}" class="home-tab2-ion-slide" ng-click="supplierDetailFromHome(bg.id)">
-                                <img style="width: 200px;max-height: 150px;" ng-src="{{$root.imagePath}}{{bg.supplierpic}}" />
+                        <ion-slide-box does-continue="true" auto-play="false" slide-interval="2000" ng-if="dcSuppliers.length" show-pager="false" class="home-tab-2-slide-box">
+                            <ion-slide ng-repeat="bg in dcSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromHome(bg.id)">
+                                <div class="home-tab2-slider home-tab2-ion-slide">
+                                    <img style="width: 200px;max-height: 150px;" ng-src="{{$root.imagePath}}{{bg.supplierpic}}" />
+                                </div>
+
                             </ion-slide>
                         </ion-slide-box>
+
+
                         <div class="home-card-container">
                             <div class="card home-card home-card-2" ui-sref="suppliers">
                                 <div class="item card-body item-text-wrap small-box">
