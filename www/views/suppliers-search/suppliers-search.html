@@ -33,7 +33,7 @@
         </ion-list>
         <div class="suppliers-category">
             <ul id="glayout">
-                <li class="car-detail-column" ng-repeat="car in suppliersList | groupBy:'suppliername' | filter:search.suppliername" ng-click="supplierDetailFromSuppliersSearch(car[0].id)">
+                <li class="car-detail-column" ng-repeat="car in suppliersList | filter:search.suppliername | groupBy:'suppliername'" ng-click="supplierDetailFromSuppliersSearch(car[0].id)">
                     <div class="suppliers-list-img-container">
                         <img ng-src="{{$root.imagePath}}{{car[0].supplierpic}}" />
                     </div>

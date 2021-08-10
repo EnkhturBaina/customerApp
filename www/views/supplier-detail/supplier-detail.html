@@ -5,8 +5,17 @@
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 danselect-content">
         <div class="item item-body">
             <img class="full-image supplier-detail-img" ng-src="{{$root.imagePath}}{{selectedSupplierData.supplierpic}}" />
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. At cupiditate distinctio veritatis quas inventore dolorem, veniam ipsa ex magnam impedit. Temporibus blanditiis sunt quas magnam modi unde. Vel earum dolores est odit esse ad tempora accusamus assumenda, consequatur cumque impedit ipsam labore. Quasi alias nisi molestiae tempora in nobis neque.
+            <p class="suppliers-detail-body-p">
+                {{selectedSupplierData.advantages}}<br />
+            <div class="suppliers-detail-body-div">
+                <i class="icon ion-location"></i><span class="suppliers-detail-icon"> {{selectedSupplierData.address}}</span>
+            </div>
+            <div class="suppliers-detail-body-div">
+                <i class="icon ion-iphone"></i><span class="suppliers-detail-icon"> {{selectedSupplierData.phonenumber}}</span>
+            </div>
+            <div class="suppliers-detail-body-div">
+                <i class="icon ion-earth size-24"></i> <span class="suppliers-detail-icon"> {{selectedSupplierData.website}}</span>
+            </div>
             </p>
             <p>
                 <a href="#" class="subdued">aaaa</a>

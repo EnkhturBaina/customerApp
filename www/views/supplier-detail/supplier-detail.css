@@ -1,3 +1,11 @@
 .supplier-detail-img {
   max-height: 300px;
 }
+.suppliers-detail-body-div {
+  display: flex;
+}
+.suppliers-detail-body-div i {
+  zoom: 2;
+  width: 20px;
+  text-align: center;
+}

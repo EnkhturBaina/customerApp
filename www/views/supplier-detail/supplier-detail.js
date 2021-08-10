@@ -14,6 +14,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
 
   $scope.$on("$ionicView.enter", function (ev, info) {
     if (!isEmpty($scope.selectedSupplierData)) {
+      console.log("$scope.selectedSupplierData", $scope.selectedSupplierData);
       $rootScope.HideLoader();
     }
   });
