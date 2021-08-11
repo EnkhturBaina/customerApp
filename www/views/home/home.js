@@ -144,6 +144,7 @@
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1628559883022530" }).then(function (response) {
       $rootScope.dcSuppliers = response.filter((value) => Object.keys(value).length !== 0);
+      console.log("$rootScope.dcSuppliers", $rootScope.dcSuppliers);
     });
   };
   $scope.getProfileLookupData();
@@ -216,6 +217,7 @@
   });
 
   $scope.$on("$ionicView.enter", function () {
+    $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
     $ionicSlideBoxDelegate.update();
     $timeout(function () {
       $rootScope.HideLoader();

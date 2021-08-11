@@ -1,11 +1,43 @@
 .supplier-detail-img {
-  max-height: 300px;
+  max-height: 250px;
+  max-width: 80%;
+  display: block;
+  margin: 0 auto;
 }
 .suppliers-detail-body-div {
   display: flex;
+  align-items: center;
+  margin: 5px 0;
 }
 .suppliers-detail-body-div i {
   zoom: 2;
   width: 20px;
   text-align: center;
+}
+.supplier-detail-card {
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin: 10px 20px;
+}
+.suppliers-detail-body-p {
+  margin: 0 10px;
+}
+.supplier-detail-first-td {
+  width: 50px;
+  text-align: center;
+  vertical-align: middle;
+}
+.supplier-detail-first-td i {
+  zoom: 2;
+}
+.supplier-detail-second-td {
+  vertical-align: middle;
+}
+.supplier-detail-table {
+  width: 100%;
+  font-size: 14px;
+}
+.supplier-detail-table tr {
+  margin: 5px 0;
+  display: block;
 }

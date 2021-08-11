@@ -5,6 +5,11 @@ angular.module("suppliers.Ctrl", []).controller("suppliersCtrl", function ($time
     $state.go("supplier-detail");
   };
   $scope.goSearchPage = function () {
+    $rootScope.isNewOrSpecial = "";
+    $state.go("suppliers-search");
+  };
+  $scope.seeAllNewOrSpecial = function (val) {
+    $rootScope.isNewOrSpecial = val;
     $state.go("suppliers-search");
   };
 });

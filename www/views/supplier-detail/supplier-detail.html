@@ -3,23 +3,24 @@
     <div ng-repeat="data in supplierName" ng-include src="'views/navbar.html'"></div>
 
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 danselect-content">
-        <div class="item item-body">
+        <div class="item item-body supplier-detail-card">
             <img class="full-image supplier-detail-img" ng-src="{{$root.imagePath}}{{selectedSupplierData.supplierpic}}" />
             <p class="suppliers-detail-body-p">
                 {{selectedSupplierData.advantages}}<br />
-            <div class="suppliers-detail-body-div">
-                <i class="icon ion-location"></i><span class="suppliers-detail-icon"> {{selectedSupplierData.address}}</span>
-            </div>
-            <div class="suppliers-detail-body-div">
-                <i class="icon ion-iphone"></i><span class="suppliers-detail-icon"> {{selectedSupplierData.phonenumber}}</span>
-            </div>
-            <div class="suppliers-detail-body-div">
-                <i class="icon ion-earth size-24"></i> <span class="suppliers-detail-icon"> {{selectedSupplierData.website}}</span>
-            </div>
-            </p>
-            <p>
-                <a href="#" class="subdued">aaaa</a>
-                <a href="#" class="subdued">bbbb</a>
+            <table class="supplier-detail-table">
+                <tr>
+                    <td class="supplier-detail-first-td"><i class="icon ion-location"></i></td>
+                    <td class="supplier-detail-second-td">{{selectedSupplierData.address}}</td>
+                </tr>
+                <tr>
+                    <td class="supplier-detail-first-td"><i class="icon ion-iphone"></i></td>
+                    <td class="supplier-detail-second-td">{{selectedSupplierData.phonenumber}}</td>
+                </tr>
+                <tr>
+                    <td class="supplier-detail-first-td"><i class="icon ion-earth" style="zoom: 1.5 !important;width: 28px !important;"></i></td>
+                    <td class="supplier-detail-second-td">{{selectedSupplierData.website}}</td>
+                </tr>
+            </table>
             </p>
         </div>
     </ion-content>

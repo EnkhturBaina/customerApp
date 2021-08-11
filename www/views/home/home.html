@@ -17,18 +17,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card" ui-sref="pre_loan">
-                            <div class="item loan-card-2 card-body item-text-wrap">
-                                <div class="loan-card-first-row">
-                                    <span class="ion-text-bold ion-float-right">Автолизингээ урьдчилж авах</span>
-                                </div>
-                                <div class="loan-card-2-first-row">
-                                    <span class="ion-float-right loan-card-text">Та урьдчилж зээлийн хэмжээгээ тогтоолгоод дараа нь машинаа аваарай.</span>
-                                </div>
-                            </div>
-                        </div>
                         <div class="card" ui-sref="danselect">
-                            <div class="item loan-card-3 card-body item-text-wrap">
+                            <div class="item loan-card-2 card-body item-text-wrap">
                                 <div class="loan-card-first-row">
                                     <span class="ion-text-bold ion-float-right">Автомашин барьцаалсан зээл</span>
                                 </div>
@@ -38,7 +28,7 @@
                             </div>
                         </div>
                         <div class="card" ui-sref="otherGoods">
-                            <div class="item loan-card-4 card-body item-text-wrap">
+                            <div class="item loan-card-3 card-body item-text-wrap">
                                 <div class="loan-card-first-row">
                                     <span class="ion-text-bold ion-float-right">Хэрэглээний лизинг</span>
                                 </div>
@@ -48,12 +38,22 @@
                             </div>
                         </div>
                         <div class="card" ui-sref="property_collateral_danselect">
-                            <div class="item loan-card-5 card-body item-text-wrap">
+                            <div class="item loan-card-4 card-body item-text-wrap">
                                 <div class="loan-card-first-row">
                                     <span class="ion-text-bold ion-float-right">Үл хөдлөх барьцаалсан зээл</span>
                                 </div>
                                 <div class="loan-card-2-first-row">
                                     <span class="ion-float-right loan-card-text">Та үл хөдлөх хөрөнгөө барьцаалан өөрт тохирсон зээлийг эндээс аваарай. </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" ui-sref="pre_loan">
+                            <div class="item loan-card-5 card-body item-text-wrap">
+                                <div class="loan-card-first-row">
+                                    <span class="ion-text-bold ion-float-right">Зээлийн эрхээ шалгах</span>
+                                </div>
+                                <div class="loan-card-2-first-row">
+                                    <span class="ion-float-right loan-card-text">Та урьдчилж зээлийн хэмжээгээ тогтоолгоод дараа нь машинаа аваарай.</span>
                                 </div>
                             </div>
                         </div><br />
@@ -63,7 +63,7 @@
             <ion-tab title="Барааны маркет">
                 <ion-nav-view class="ghostwhite">
                     <ion-content overflow-scroll="false" style="margin: 0 10px" class="">
-                        <ion-slide-box does-continue="true" auto-play="false" slide-interval="2000" ng-if="dcSuppliers.length" show-pager="false" class="home-tab-2-slide-box">
+                        <ion-slide-box does-continue="true" auto-play="false" slide-interval="2000" ng-if="dcSuppliers.length" show-pager="false" class="home-tab-2-slide-box" delegate-handle="suppliersDelegate">
                             <ion-slide ng-repeat="bg in dcSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromHome(bg.id)">
                                 <div class="home-tab2-slider home-tab2-ion-slide">
                                     <img style="width: 200px;max-height: 150px;" ng-src="{{$root.imagePath}}{{bg.supplierpic}}" />
@@ -200,10 +200,10 @@
                 <button class="bottom-second-button" ng-click="nextSlideChanged()">ДАРААХ</button>
             </div>
             <div ng-if="((bannerData|objLength)==activeSlideIndex+1)">
+                <button ng-click="hideIntro()" class="button btn single-button">Үргэлжлүүлэх</button>
                 <ion-checkbox class="intro-not-show" ng-model="isBanneNotShowChecked.checked" ng-change="isNotShow()">
                     <span>Дахин харуулахгүй</span>
                 </ion-checkbox>
-                <button ng-click="hideIntro()" class="button btn single-button">Үргэлжлүүлэх</button>
             </div>
         </ion-content>
     </ion-view>

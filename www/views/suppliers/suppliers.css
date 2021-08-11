@@ -20,7 +20,7 @@
 .horizontal-item-suppliers {
   display: inline-block;
   vertical-align: top;
-  width: 150px;
+  width: 110px;
   white-space: normal;
   margin: 0px 5px;
   text-align: center;
@@ -33,7 +33,7 @@
   /* border-radius: 5px !important; */
   margin: 0px 8px;
   line-height: 13px;
-  min-height: 17vh !important;
+  /* min-height: 17vh !important; */
   padding: 5px;
 }
 .suppliers-card-container .h-item {

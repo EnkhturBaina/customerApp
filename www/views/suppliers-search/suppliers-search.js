@@ -58,6 +58,7 @@ angular.module("suppliers-search.Ctrl", []).controller("suppliers-searchCtrl", f
     $("#supplier-search-ion-list").toggle(200, function () {});
   };
 
+  //Ангилалаар шүүх
   $scope.selectCat = function (id, name) {
     var index = $scope.selectedCats.findIndex((x) => x.id == id);
     if (index === -1) {
@@ -65,26 +66,76 @@ angular.module("suppliers-search.Ctrl", []).controller("suppliers-searchCtrl", f
     }
     $rootScope.getFilteredSuppliers($scope.selectedCats);
   };
+
+  //Сонгогдсон ангилал хасах
   $scope.clearSelectedSubCat = function (id) {
     for (var i = 0; i < $scope.selectedCats.length; i++) {
       if ($scope.selectedCats[i].id === id) {
         $scope.selectedCats.splice(i, 1);
       }
     }
+    //Онцлох, Шинэ -г сонгогдсоноос хасах
+    if (id == 1 || id == 2) {
+      $rootScope.isNewOrSpecial = "";
+    }
     $rootScope.getFilteredSuppliers($scope.selectedCats);
   };
 
+  $scope.$on("$ionicView.loaded", function () {
+    $rootScope.ShowLoader();
+
+    //Онцлох, Шинэ ээс бүгдийг харах дарсан эсэх
+    if ($rootScope.isNewOrSpecial == "Онцлох") {
+      $scope.selectedCats.push({ id: 1, name: "Онцлох" });
+    } else if ($rootScope.isNewOrSpecial == "Шинэ") {
+      $scope.selectedCats.push({ id: 2, name: "Шинэ" });
+    }
+  });
+
+  $scope.$on("$ionicView.enter", function () {
+    $rootScope.HideLoader();
+  });
+
+  //Шүүлтээр data татах func
   $rootScope.getFilteredSuppliers = function (cats) {
     $rootScope.ShowLoader();
 
+    //supplier result
     $rootScope.suppliersList = [];
 
     var responseArr = [];
-    if (!isEmpty(cats)) {
-      for (i = 0; i < cats.length; i++) {
-        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16285670132431", categoryid: cats[i].id }).then(function (response) {
-          responseArr = response.filter((value) => Object.keys(value).length !== 0);
 
+    //сонгогдсон ангилал эсвэл шинэ, онцлогоос хамаарч гарч шүүх
+    var filters = {};
+
+    if (!isEmpty(cats)) {
+      //сонгогдсон бүх ангилалаар давтах
+      for (i = 0; i < cats.length; i++) {
+        //Онцлохтой хамт ангилалаар шүүх
+        if ($rootScope.isNewOrSpecial == "Онцлох") {
+          if (cats.length == 1 && cats[0].id == 1) {
+            filters = { systemmetagroupid: "16285670132431", isspecial: 1 };
+          } else {
+            filters = { systemmetagroupid: "16285670132431", categoryid: cats[i].id, isspecial: 1 };
+          }
+          //Шинэтэй хамт ангилалаар шүүх
+        } else if ($rootScope.isNewOrSpecial == "Шинэ") {
+          if (cats.length == 1 && cats[i].id == 2) {
+            filters = { systemmetagroupid: "16285670132431" };
+          } else {
+            filters = { systemmetagroupid: "16285670132431", categoryid: cats[i].id };
+          }
+          //Дан ангилалаар шүүх
+        } else {
+          filters = { systemmetagroupid: "16285670132431", categoryid: cats[i].id };
+        }
+        //data татах
+        serverDeferred.request("PL_MDVIEW_004", filters).then(function (response) {
+          if (!isEmpty(response)) {
+            responseArr = response.filter((value) => Object.keys(value).length !== 0);
+          } else {
+            responseArr = [];
+          }
           if (!isEmpty(responseArr)) {
             angular.forEach(responseArr, function (item) {
               if (!isEmpty(item)) {
@@ -101,7 +152,17 @@ angular.module("suppliers-search.Ctrl", []).controller("suppliers-searchCtrl", f
         });
       }
     } else {
-      $rootScope.suppliersList = $rootScope.dcSuppliers;
+      //Ямар ч шүүлтгүй үед ажиллах
+
+      if ($rootScope.isNewOrSpecial == "Онцлох") {
+        filters = { systemmetagroupid: "1628559883022530", isspecial: 1 };
+      } else {
+        filters = { systemmetagroupid: "1628559883022530" };
+      }
+
+      serverDeferred.request("PL_MDVIEW_004", filters).then(function (response) {
+        $rootScope.suppliersList = response.filter((value) => Object.keys(value).length !== 0);
+      });
       $rootScope.HideLoader();
     }
   };

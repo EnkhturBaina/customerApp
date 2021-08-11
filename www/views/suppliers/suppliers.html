@@ -10,11 +10,11 @@
         </div>
         <div class="title-class-suppliers">
             <span class="uppercase-m-title suppliers-title">Шинэ</span>
-            <span class="left-0 ion-color-text suppliers-more" ui-sref="suppliers-search">Бүгдийг харах ></span>
+            <span class="left-0 ion-color-text suppliers-more" ng-click="seeAllNewOrSpecial('Шинэ')">Бүгдийг харах ></span>
         </div>
         <div class="suppliers-list-container">
             <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
-                <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in dcSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromSuppliers(car.id)">
+                <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in dcSuppliers | orderBy:'-createddate' | limitTo:7" ng-click="supplierDetailFromSuppliers(car.id)">
                     <div class="h-item">
                         <img ng-src="{{$root.imagePath}}{{car.supplierpic}}" />
                         <span class="suppliers-name">{{car.suppliername}}</span>
@@ -24,11 +24,11 @@
         </div>
         <div class="title-class-suppliers">
             <span class="uppercase-m-title suppliers-title">Онцлох</span>
-            <span class="left-0 ion-color-text suppliers-more" ui-sref="suppliers-search">Бүгдийг харах ></span>
+            <span class="left-0 ion-color-text suppliers-more" ng-click="seeAllNewOrSpecial('Онцлох')">Бүгдийг харах ></span>
         </div>
         <div class="suppliers-list-container">
             <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
-                <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in dcSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromSuppliers(car.id)">
+                <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in dcSuppliers | filter:{isspecial:1} | orderBy:'-createddate' | limitTo:7" ng-click="supplierDetailFromSuppliers(car.id)">
                     <div class=" h-item">
                         <img ng-src="{{$root.imagePath}}{{car.supplierpic}}" />
                         <span class="suppliers-name">{{car.suppliername}}</span>
