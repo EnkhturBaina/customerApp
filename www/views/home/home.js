@@ -214,9 +214,11 @@
     }
     if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
     $ionicSlideBoxDelegate.update();
+    $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
   });
 
   $scope.$on("$ionicView.enter", function () {
+    $rootScope.hideFooter = false;
     $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
     $ionicSlideBoxDelegate.update();
     $timeout(function () {
@@ -234,11 +236,8 @@
     $rootScope.selectSupplierID = id;
     $state.go("supplier-detail");
   };
-  $scope.sliderOptions = {
-    initialSlide: 0,
-    direction: "horizontal", //or vertical
-    speed: 300, //0.3s transition
-    loop: true,
-    spaceBetween: 20,
+  $scope.selectTab2 = function () {
+    console.log("A");
+    $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
   };
 });

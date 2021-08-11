@@ -54,6 +54,10 @@
 }
 .suppliers-more {
   float: right;
+  display: flex;
+}
+.suppliers-more i {
+  margin-left: 10px;
 }
 .suppliers-search-item {
   position: absolute;

@@ -1,7 +1,7 @@
 ﻿<link href="views/home/home.css" rel="stylesheet" />
 <ion-view ng-if="!$root.showBanner" view-title="Зээлийн маркет">
     <div>
-        <ion-tabs class="home-tabs tabs-top home-card-tab" id="homeTabsId" delegate-handle="myHeaderTabHandle">
+        <ion-tabs class="home-tabs tabs-top home-card-tab" id="homeTabsId" delegate-handle="myHeaderTabHandle" ng-click="selectTab2()">
             <!-- Tab 1 -->
             <ion-tab title="Зээлийн маркет">
                 <ion-nav-view class="ghostwhite">
