@@ -17,4 +17,8 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
       $rootScope.HideLoader();
     }
   });
+
+  $scope.sendRequestFromSupplier = function () {
+    console.log("A");
+  };
 });
