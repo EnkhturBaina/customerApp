@@ -149,3 +149,26 @@
   padding: 15px;
   display: flex;
 }
+
+.switch-list-sup li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 5px;
+  padding: 5px 0px !important;
+}
+.switch-list-sup li span {
+  font-weight: bold;
+  background-color: transparent;
+  color: #4b5180;
+  z-index: 1;
+  display: inline-block;
+  padding: 0px;
+  min-width: 10px;
+  border-radius: 10px;
+  vertical-align: baseline;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 16px;
+}

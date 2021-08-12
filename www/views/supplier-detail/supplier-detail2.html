@@ -7,13 +7,13 @@
         <div class="condition-detail-input tugrug-input">
             <span class="input-label-supplier">Зээлийн хэмжээ</span>
             <div class="tugrug-input-container-supplier">
-                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.loanAmount" ng-change="changeLoanAmountSupplier()" format-input thousand-separator select-on-click />
+                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.loanAmount" ng-change="changeLoanAmountSupplier()" ng-keyup="hideKeyboard($event)" format-input thousand-separator select-on-click />
             </div>
         </div>
         <div class="condition-detail-input tugrug-input" ng-show="isSlideSelected">
             <span class="input-label-supplier">Урьдчилгаа</span>
             <div class="tugrug-input-container-supplier">
-                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.advancePayment" ng-change="calcLoanAmountSupplier()" thousand-separator select-on-click />
+                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.advancePayment" ng-change="calcLoanAmountSupplier()" ng-keyup="hideKeyboard($event)" thousand-separator select-on-click />
             </div>
         </div>
         <span class="term-title padding-left-10">Зээлийн нөхцөл</span>
@@ -60,6 +60,22 @@
         <div class="condition-detail-card">
             Сарын хүү
             <span class="">{{selectedConditionFee}}</span>
+        </div>
+        <div class="switch-input-container">
+            <ul class="switch-list-sup">
+                <li>
+                    <span class="step2-span step2-term" ng-click="termModalAgreement.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
+                    <span>
+                        <label class="step2-switch" id="step2isAgree">
+                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-checked="true" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" />
+                            <div class="step2-slider step2-round">
+                                <span id="step2-toggle-on" class="step2-on">Тийм</span>
+                                <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
+                            </div>
+                        </label>
+                    </span>
+                </li>
+            </ul>
         </div>
         <div class="supplier-step2-btn">
             <button class="button btn single-button auto-step1-next-btn" id="Next" ng-click="step2()">Үргэлжлүүлэх</button>

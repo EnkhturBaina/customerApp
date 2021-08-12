@@ -12,8 +12,17 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
     });
     $scope.supplierName[0].title = $scope.selectedSupplierData.suppliername;
   });
-
+  $ionicModal
+    .fromTemplateUrl("templates/term-content.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (termModalAgreement) {
+      $scope.termModalAgreement = termModalAgreement;
+    });
   $scope.$on("$ionicView.enter", function (ev, info) {
+    $rootScope.newReqiust = {};
+    $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if (!isEmpty($scope.selectedSupplierData)) {
       $rootScope.HideLoader();
     }
@@ -99,6 +108,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
   };
 
   $scope.step2 = function () {
+    console.log("$rootScope.newReqiust", $rootScope.newReqiust);
     if ($scope.checkReqiuredSupplierDtl("step2")) {
     }
   };
@@ -112,6 +122,9 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         return false;
       } else if (isEmpty($rootScope.selected)) {
         $rootScope.alert("Зээлийн нөхцөлөө сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
+        $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
         return false;
       } else {
         return true;
