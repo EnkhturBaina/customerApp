@@ -140,11 +140,19 @@
       $rootScope.carCategoryPreLoan = response;
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1628487627246231" }).then(function (response) {
-      $rootScope.suppliersWithCategory = response.filter((value) => Object.keys(value).length !== 0);
+      if (!isEmpty(response)) {
+        $rootScope.suppliersWithCategory = response.filter((value) => Object.keys(value).length !== 0);
+      }
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1628559883022530" }).then(function (response) {
-      $rootScope.dcSuppliers = response.filter((value) => Object.keys(value).length !== 0);
-      console.log("$rootScope.dcSuppliers", $rootScope.dcSuppliers);
+      if (!isEmpty(response)) {
+        $rootScope.dcSuppliers = response.filter((value) => Object.keys(value).length !== 0);
+      }
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1628737422121946" }).then(function (response) {
+      if (!isEmpty(response)) {
+        $rootScope.supplierConditions = response.filter((value) => Object.keys(value).length !== 0);
+      }
     });
   };
   $scope.getProfileLookupData();
@@ -220,6 +228,7 @@
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = false;
     $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
+    $ionicTabsDelegate.$getByHandle("myHeaderTabHandle").select(1);
     $ionicSlideBoxDelegate.update();
     $timeout(function () {
       $rootScope.HideLoader();

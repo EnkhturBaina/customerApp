@@ -309,6 +309,11 @@ var app = angular
       templateUrl: "views/supplier-detail/supplier-detail.html",
       controller: "supplier-detailCtrl",
     });
+    $stateProvider.state("supplier-detail2", {
+      url: "/views/supplier-detail2",
+      templateUrl: "views/supplier-detail/supplier-detail2.html",
+      controller: "supplier-detailCtrl",
+    });
     $urlRouterProvider.otherwise("/views/home");
   })
   .controller("index", function ($scope, $ionicPlatform, $state) {})

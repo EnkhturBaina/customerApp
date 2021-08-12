@@ -1,0 +1,76 @@
+<ion-view hide-nav-bar="true">
+    <link href="views/supplier-detail/supplier-detail.css" rel="stylesheet" />
+    <div ng-repeat="data in supplierName" ng-include src="'views/navbar.html'"></div>
+
+    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 supplier-step2-content">
+
+        <div class="condition-detail-input tugrug-input">
+            <span class="input-label-supplier">Зээлийн хэмжээ</span>
+            <div class="tugrug-input-container-supplier">
+                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.loanAmount" ng-change="changeLoanAmountSupplier()" format-input thousand-separator select-on-click />
+            </div>
+        </div>
+        <div class="condition-detail-input tugrug-input" ng-show="isSlideSelected">
+            <span class="input-label-supplier">Урьдчилгаа</span>
+            <div class="tugrug-input-container-supplier">
+                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.advancePayment" ng-change="calcLoanAmountSupplier()" thousand-separator select-on-click />
+            </div>
+        </div>
+        <span class="term-title padding-left-10">Зээлийн нөхцөл</span>
+        <div class="radio-scroll-container">
+            <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
+                <div class="row supplier-step2-scroll-row">
+                    <div class="supplier-custom-radio-button" ng-repeat="cond in supplierConditions" ng-click="selectCondition(cond.id)">
+                        <label>
+                            <input type="radio" name="product" class="card-input-element" value="{{cond.id}}" ng-model="$root.selected" />
+                            <div class="panel panel-default card-input">
+                                <span class="panel-body">{{cond.name}}</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </ion-scroll>
+        </div>
+
+        <div class="condition-detail-span" ng-show="isConditionSelected">
+            {{selectedConditionDetail}}
+        </div>
+
+        <div class="condition-detail-card-range" ng-show="isSlideSelected">
+            <div class="slider-container-dtl">
+                <span>3</span>
+                <input type="range" name="volume" min="3" max="{{maxRange}}" ng-model="$root.selectedMonth" ng-change="selectMonth()">
+                <span>{{maxRange}}</span>
+            </div>
+            <div class="slider-bottom-info">
+                <div>
+                    Зээлийн хугацаа
+                </div>
+                <span>{{selectedConditionMonth}}</span>
+            </div>
+        </div>
+        <div class="condition-detail-card" ng-show="!isSlideSelected">
+            Зээлийн хугацаа
+            <span>{{selectedConditionMonth}}</span>
+        </div>
+        <div class="condition-detail-card">
+            Нэг удаагийн төлөлт
+            <span class="">{{selectedConditionAmount|formatNumber}}</span>
+        </div>
+        <div class="condition-detail-card">
+            Сарын хүү
+            <span class="">{{selectedConditionFee}}</span>
+        </div>
+        <div class="supplier-step2-btn">
+            <button class="button btn single-button auto-step1-next-btn" id="Next" ng-click="step2()">Үргэлжлүүлэх</button>
+        </div>
+    </ion-content>
+</ion-view>
+<script id="templates/term-content.html" type="text/ng-template">
+  <ion-modal-view class="term-chat-modal">
+    <ion-content class="padding bank-chat-content" scroll="false">
+        <span class="term-modal-off-text" ng-click="termModalAgreement.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <div class="term-modal-include" ng-include src="'views/term/term-content.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>

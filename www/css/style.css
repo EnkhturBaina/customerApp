@@ -1643,3 +1643,6 @@ input[type="number"] {
   font-weight: bold;
   color: #4b5180 !important;
 }
+.padding-left-10 {
+  padding-left: 10px !important;
+}

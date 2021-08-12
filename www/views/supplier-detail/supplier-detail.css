@@ -41,3 +41,111 @@
   margin: 5px 0;
   display: block;
 }
+.radio-scroll-container {
+  /* padding: 0 20px; */
+}
+.radio-buttons-container {
+  display: inline-flex;
+}
+.card-input-element {
+  display: none;
+}
+.card-input {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  margin-right: 10px;
+  min-width: 120px;
+  min-height: 80px;
+  max-width: 120px;
+  white-space: normal;
+}
+.card-input-element:checked + .card-input {
+  box-shadow: 0 0 2px 2px #acd322;
+}
+
+.supplier-custom-radio-button {
+}
+
+.supplier-step2-content {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.supplier-step2-scroll-row {
+  margin: 0px 0px 10px 0px;
+}
+.condition-detail-input {
+  padding: 13px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  width: calc(100% - 10px);
+  margin: 10px auto;
+}
+.tugrug-input-container-supplier input {
+  text-align: right !important;
+  color: #4b5180 !important;
+  font-weight: bold;
+  border: 0px !important;
+  padding-right: 5px !important;
+}
+.input-label-supplier {
+  position: absolute;
+  top: 35%;
+  left: 5%;
+}
+.condition-detail-card {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  width: calc(100% - 10px);
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.condition-detail-card span {
+  color: #4b5180 !important;
+  font-weight: bold;
+}
+.condition-detail-card-range {
+  padding: 0px 20px 5px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+  width: calc(100% - 10px);
+  margin: 10px auto;
+  /* display: flex; */
+  justify-content: space-between;
+  align-items: center;
+}
+.condition-detail-card-range span {
+  color: #4b5180 !important;
+  font-weight: bold;
+}
+.condition-detail-card-range input {
+  width: 80% !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+.condition-detail-span {
+  padding: 20px;
+  text-align: center;
+  color: #4b5180 !important;
+  font-weight: bold;
+}
+.slider-container-dtl {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.slider-bottom-info {
+  justify-content: space-between;
+  display: flex;
+}
+.supplier-step2-btn {
+  padding: 15px;
+  display: flex;
+}
