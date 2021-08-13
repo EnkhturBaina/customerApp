@@ -227,7 +227,7 @@
 
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = false;
-    $ionicTabsDelegate.$getByHandle("myHeaderTabHandle").select(1);
+    // $ionicTabsDelegate.$getByHandle("myHeaderTabHandle").select(1);
     $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
     $ionicSlideBoxDelegate.update();
     $timeout(function () {
@@ -248,5 +248,10 @@
   };
   $scope.selectTab2 = function () {
     $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
+  };
+  $scope.repeatDone = function () {
+    console.log("Assss");
+    $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
+    // $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").slide($rootScope.dcSuppliers.length - 1, 1);
   };
 });

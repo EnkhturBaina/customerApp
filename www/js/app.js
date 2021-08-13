@@ -594,6 +594,14 @@ var app = angular
         scope.$eval(attrs.repeatDone);
       }
     };
+  })
+  .directive("repeatDone", function () {
+    return function (scope, element, attrs) {
+      if (scope.$last) {
+        // all are rendered
+        scope.$eval(attrs.repeatDone);
+      }
+    };
   });
 
 function numOnly() {
