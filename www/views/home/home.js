@@ -227,11 +227,12 @@
 
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = false;
-    $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
     $ionicTabsDelegate.$getByHandle("myHeaderTabHandle").select(1);
+    $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
     $ionicSlideBoxDelegate.update();
     $timeout(function () {
       $rootScope.HideLoader();
+      $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
     }, 2000);
   });
   var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
@@ -246,7 +247,6 @@
     $state.go("supplier-detail");
   };
   $scope.selectTab2 = function () {
-    console.log("A");
     $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
   };
 });

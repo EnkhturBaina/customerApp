@@ -57,6 +57,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         } else {
           if (isEmpty($rootScope.newReqiust.loanAmount)) {
             $scope.selectedConditionAmount = 0;
+            $scope.isSlideSelected = false;
           } else {
             $scope.selectedConditionAmount = Math.ceil($rootScope.newReqiust.loanAmount / el.number2);
             $scope.isSlideSelected = false;

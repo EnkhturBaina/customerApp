@@ -958,7 +958,7 @@ h4 {
 
 .switch-list li {
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   align-items: center;
   margin: 10px 0 10px 0;
   color: #606060;

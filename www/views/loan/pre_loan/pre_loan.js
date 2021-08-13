@@ -89,26 +89,17 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
   };
 
   $scope.changeToolTipData = function () {
-    if ($rootScope.newReqiust.collateralConditionId == "1554263832132") {
-      $rootScope.collTrueStep2 = true;
-    } else {
-      $rootScope.collTrueStep2 = false;
-    }
+    // if ($rootScope.newReqiust.collateralConditionId == "1554263832132") {
+    //   $rootScope.collTrueStep2 = true;
+    // } else {
+    //   $rootScope.collTrueStep2 = false;
+    // }
   };
   $scope.checkReqiuredPreLoan = function (param) {
     if (param == "step2") {
-      if (isEmpty($rootScope.newReqiust.carCategoryId)) {
-        $rootScope.alert("Автомашины ангиллаа сонгоно уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.newReqiust.carChosen)) {
-        $rootScope.alert("Автомашины сонгосон эсэх?", "warning");
-        return false;
-      } else if (isEmpty($rootScope.newReqiust.loanAmount)) {
+      if (isEmpty($rootScope.newReqiust.loanAmount)) {
         $rootScope.newReqiust.loanAmountReq = true;
         $rootScope.alert("Хүсч буй зээлийн дүнгээ оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.newReqiust.collateralConditionId)) {
-        $rootScope.alert("ҮХХөрөнгө барьцаалах эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.advancePayment)) {
         $rootScope.alert("Урьдчилгаагаа сонгоно уу", "warning");
@@ -118,9 +109,6 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
         return false;
       } else if (isEmpty($rootScope.newReqiust.locationId)) {
         $rootScope.alert("Байршил сонгоно уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
-        $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
         $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
@@ -167,7 +155,7 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
     localStorage.setItem("requestType", "preLoan");
     $rootScope.hideFooter = true;
 
-    $rootScope.collTrueStep2 = true;
+    $rootScope.collTrueStep2 = false;
 
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
 

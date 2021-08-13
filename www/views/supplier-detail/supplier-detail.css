@@ -4,16 +4,6 @@
   display: block;
   margin: 0 auto;
 }
-.suppliers-detail-body-div {
-  display: flex;
-  align-items: center;
-  margin: 5px 0;
-}
-.suppliers-detail-body-div i {
-  zoom: 2;
-  width: 20px;
-  text-align: center;
-}
 .supplier-detail-card {
   border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
@@ -41,11 +31,8 @@
   margin: 5px 0;
   display: block;
 }
-.radio-scroll-container {
+.radio-scroll-containe {
   /* padding: 0 20px; */
-}
-.radio-buttons-container {
-  display: inline-flex;
 }
 .card-input-element {
   display: none;
