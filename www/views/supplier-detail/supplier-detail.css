@@ -51,14 +51,15 @@
   display: none;
 }
 .card-input {
-  padding: 20px;
+  padding: 25px 15px 20px 15px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  margin-right: 10px;
-  min-width: 120px;
-  min-height: 80px;
-  max-width: 120px;
+  margin: 5px;
+  /* min-width: 120px; */
+  min-height: 100px;
+  max-height: 100px;
+  /* max-width: 120px; */
   white-space: normal;
 }
 .card-input-element:checked + .card-input {
@@ -66,6 +67,12 @@
 }
 
 .supplier-custom-radio-button {
+  max-width: 50%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
 }
 
 .supplier-step2-content {
@@ -73,7 +80,12 @@
   margin-right: 20px;
 }
 .supplier-step2-scroll-row {
-  margin: 0px 0px 10px 0px;
+  display: flex;
+  padding: 0px !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
 }
 .condition-detail-input {
   padding: 13px;

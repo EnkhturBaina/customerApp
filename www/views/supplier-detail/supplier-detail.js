@@ -3,6 +3,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
   $scope.supplierName = [{ title: "supplierName" }];
   $rootScope.supplierFee = "";
   $scope.$on("$ionicView.loaded", function (ev, info) {
+    $scope.selectedConditionAmount = 0;
     $rootScope.ShowLoader();
     $rootScope.dcSuppliers.map((el) => {
       if (el.id == $rootScope.selectSupplierID) {
@@ -54,8 +55,12 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
           $scope.selectedConditionFee = $rootScope.supplierFee + " %";
           $scope.selectedConditionAmount = 0;
         } else {
-          $scope.selectedConditionAmount = Math.ceil($rootScope.newReqiust.loanAmount / el.number2);
-          $scope.isSlideSelected = false;
+          if (isEmpty($rootScope.newReqiust.loanAmount)) {
+            $scope.selectedConditionAmount = 0;
+          } else {
+            $scope.selectedConditionAmount = Math.ceil($rootScope.newReqiust.loanAmount / el.number2);
+            $scope.isSlideSelected = false;
+          }
         }
       }
     });
@@ -87,8 +92,12 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
   //slide гүйлгэх
   $scope.selectMonth = function () {
     $scope.selectedConditionMonth = $rootScope.selectedMonth + " сар";
-    //1 udaagiin tololt bodoh
-    $scope.selectedConditionAmount = Math.round(-PMT(parseFloat($rootScope.supplierFee) / 100, $rootScope.selectedMonth, $rootScope.newReqiust.loanAmount));
+    if (isEmpty($rootScope.newReqiust.loanAmount)) {
+      $scope.selectedConditionAmount = 0;
+    } else {
+      //1 udaagiin tololt bodoh
+      $scope.selectedConditionAmount = Math.round(-PMT(parseFloat($rootScope.supplierFee) / 100, $rootScope.selectedMonth, $rootScope.newReqiust.loanAmount));
+    }
   };
   var loanAmount;
   $scope.changeLoanAmountSupplier = function () {

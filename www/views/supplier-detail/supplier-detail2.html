@@ -18,18 +18,16 @@
         </div>
         <span class="term-title padding-left-10">Зээлийн нөхцөл</span>
         <div class="radio-scroll-container">
-            <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
-                <div class="row supplier-step2-scroll-row">
-                    <div class="supplier-custom-radio-button" ng-repeat="cond in supplierConditions" ng-click="selectCondition(cond.id)">
-                        <label>
-                            <input type="radio" name="product" class="card-input-element" value="{{cond.id}}" ng-model="$root.selected" />
-                            <div class="panel panel-default card-input">
-                                <span class="panel-body">{{cond.name}}</span>
-                            </div>
-                        </label>
-                    </div>
+            <div class="row supplier-step2-scroll-row">
+                <div class="supplier-custom-radio-button" ng-repeat="cond in supplierConditions" ng-click="selectCondition(cond.id)">
+                    <label>
+                        <input type="radio" name="product" class="card-input-element" value="{{cond.id}}" ng-model="$root.selected" />
+                        <div class="panel panel-default card-input">
+                            <span class="panel-body">{{cond.name}}</span>
+                        </div>
+                    </label>
                 </div>
-            </ion-scroll>
+            </div>
         </div>
 
         <div class="condition-detail-span" ng-show="isConditionSelected">
