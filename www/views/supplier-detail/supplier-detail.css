@@ -63,8 +63,6 @@
 }
 
 .supplier-step2-content {
-  margin-left: 20px;
-  margin-right: 20px;
 }
 .supplier-step2-scroll-row {
   display: flex;
@@ -79,8 +77,8 @@
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  width: calc(100% - 10px);
-  margin: 10px auto;
+  width: calc(100% - 40px);
+  margin: 10px 20px;
 }
 .tugrug-input-container-supplier input {
   text-align: right !important;
@@ -99,8 +97,8 @@
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  width: calc(100% - 10px);
-  margin: 10px auto;
+  width: calc(100% - 40px);
+  margin: 10px 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -114,8 +112,8 @@
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  width: calc(100% - 10px);
-  margin: 10px auto;
+  width: calc(100% - 40px);
+  margin: 10px 20px;
   /* display: flex; */
   justify-content: space-between;
   align-items: center;
@@ -170,4 +168,16 @@
   white-space: nowrap;
   font-size: 14px;
   line-height: 16px;
+}
+.radio-scroll-container {
+  width: calc(100% - 40px);
+  margin: 10px 20px;
+}
+.sup-condition-title {
+  width: calc(100% - 40px);
+  margin: 10px 20px;
+}
+.sup-switch-inp {
+  width: calc(100% - 40px);
+  margin: 10px 20px;
 }

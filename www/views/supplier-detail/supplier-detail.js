@@ -13,6 +13,30 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
     });
     $scope.supplierName[0].title = $scope.selectedSupplierData.suppliername;
   });
+
+  $rootScope.getbankDataSup = function (a) {
+    if (a != "forced") $rootScope.ShowLoader();
+    //Шүүгдсэн банкууд
+    $rootScope.bankListFilter = [];
+    var json = {};
+
+    json.isPerson = 1;
+    json.currency = 16074201974821;
+    json.isMortgage = 1554263832151;
+
+    //банк шүүлт
+    json.type = "autoLeasingLoanFilter";
+    json.totalLoan = $rootScope.newReqiust.loanAmount;
+    json.month = $rootScope.newReqiust.loanMonth;
+    json.preTotal = $rootScope.newReqiust.advancePayment;
+
+    serverDeferred.carCalculation(json).then(function (response) {
+      $rootScope.bankListFilter = response.result.data;
+      $rootScope.HideLoader();
+    });
+    // console.log("json", json);
+  };
+
   $ionicModal
     .fromTemplateUrl("templates/term-content.html", {
       scope: $scope,
@@ -22,10 +46,16 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
       $scope.termModalAgreement = termModalAgreement;
     });
   $scope.$on("$ionicView.enter", function (ev, info) {
+    localStorage.setItem("requestType", "supLoan");
     $rootScope.newReqiust = {};
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if (!isEmpty($scope.selectedSupplierData)) {
       $rootScope.HideLoader();
+    }
+    if ($state.current.name == "supplier-detail2") {
+      $timeout(function () {
+        $scope.getbankDataSup("forced");
+      }, 200);
     }
   });
 
@@ -65,6 +95,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         }
       }
     });
+    $scope.getbankDataSup();
   };
   function PMT(ir, np, pv, fv, type) {
     /*
@@ -99,6 +130,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
       //1 udaagiin tololt bodoh
       $scope.selectedConditionAmount = Math.round(-PMT(parseFloat($rootScope.supplierFee) / 100, $rootScope.selectedMonth, $rootScope.newReqiust.loanAmount));
     }
+    $scope.getbankDataSup();
   };
   var loanAmount;
   $scope.changeLoanAmountSupplier = function () {
@@ -117,9 +149,12 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
     $scope.selectedConditionAmount = Math.round(-PMT(parseFloat($rootScope.supplierFee) / 100, $rootScope.selectedMonth, $rootScope.newReqiust.loanAmount));
   };
 
-  $scope.step2 = function () {
+  $scope.step2Sup = function () {
     console.log("$rootScope.newReqiust", $rootScope.newReqiust);
     if ($scope.checkReqiuredSupplierDtl("step2")) {
+      if ($scope.checkReqiuredSupplierDtl("agreeBankSup")) {
+        $state.go("income");
+      }
     }
   };
   $scope.checkReqiuredSupplierDtl = function (param) {
@@ -135,6 +170,13 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
         $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
+        return false;
+      } else {
+        return true;
+      }
+    } else if (param == "agreeBankSup") {
+      if (isEmpty($rootScope.bankListFilter.Agree)) {
+        $rootScope.alert("Таны мэдээллийн дагуу зээл олгох банк, ББСБ байхгүй байна. Та мэдээллээ дахин оруулна уу.", "warning");
         return false;
       } else {
         return true;

@@ -250,7 +250,6 @@
     $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
   };
   $scope.repeatDone = function () {
-    console.log("Assss");
     $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
     // $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").slide($rootScope.dcSuppliers.length - 1, 1);
   };
