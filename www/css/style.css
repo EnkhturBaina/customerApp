@@ -468,9 +468,11 @@ h4 {
 
 .bank-container img {
   margin-right: 10px;
-  width: 30px;
   height: 30px;
   border-radius: 10%;
+  min-width: 30px;
+  max-width: 60px;
+  padding: 2px;
 }
 
 .bank-container p {
@@ -1233,8 +1235,11 @@ h4 {
   margin: 0 10px;
 }
 .bank img {
-  width: 30px;
+  margin-right: 10px;
   height: 30px;
+  min-width: 30px;
+  max-width: 60px;
+  padding: 2px;
 }
 .bank p {
   white-space: break-spaces;

@@ -64,9 +64,11 @@
 }
 .bank-container-template img {
   margin-right: 10px;
-  width: 30px;
   height: 30px;
   border-radius: 10%;
+  min-width: 30px;
+  max-width: 60px;
+  padding: 2px;
 }
 
 .bank-container-template p {
