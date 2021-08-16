@@ -163,10 +163,16 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         $rootScope.alert("Зээлийн хэмжээгээ оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.advancePayment) && $scope.isSlideSelected) {
-        $rootScope.alert("Урьдчилгаагаа сонгоно уу", "warning");
+        $rootScope.alert("Урьдчилгаагаа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.selected)) {
         $rootScope.alert("Зээлийн нөхцөлөө сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.locationId)) {
+        $rootScope.alert("Байршил сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+        $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
         $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");

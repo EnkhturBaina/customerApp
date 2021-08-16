@@ -10,12 +10,6 @@
                 <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.loanAmount" ng-change="changeLoanAmountSupplier()" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataSup()" format-input thousand-separator select-on-click />
             </div>
         </div>
-        <div class="condition-detail-input tugrug-input" ng-show="isSlideSelected">
-            <span class="input-label-supplier">Урьдчилгаа</span>
-            <div class="tugrug-input-container-supplier">
-                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.advancePayment" ng-change="calcLoanAmountSupplier()" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataSup()" thousand-separator select-on-click />
-            </div>
-        </div>
         <span class="term-title padding-left-10 sup-condition-title">Зээлийн нөхцөл</span>
         <div class="radio-scroll-container">
             <div class="row supplier-step2-scroll-row">
@@ -30,6 +24,12 @@
             </div>
         </div>
 
+        <div class="condition-detail-input tugrug-input" ng-show="isSlideSelected">
+            <span class="input-label-supplier">Урьдчилгаа</span>
+            <div class="tugrug-input-container-supplier">
+                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.advancePayment" ng-change="calcLoanAmountSupplier()" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataSup()" thousand-separator select-on-click />
+            </div>
+        </div>
         <div class="condition-detail-span" ng-show="isConditionSelected">
             {{selectedConditionDetail}}
         </div>
@@ -51,13 +51,27 @@
             Зээлийн хугацаа
             <span>{{selectedConditionMonth}}</span>
         </div>
-        <div class="condition-detail-card">
+        <div class="condition-detail-card" ng-show="!isSlideSelected">
             Нэг удаагийн төлөлт
             <span class="">{{selectedConditionAmount|formatNumber}}</span>
         </div>
-        <div class="condition-detail-card">
+        <div class="condition-detail-card" ng-show="!isSlideSelected">
             Сарын хүү
             <span class="">{{selectedConditionFee}}</span>
+        </div>
+        <div class="condition-detail-input tugrug-input custom-select-sup" ng-show="isSlideSelected">
+            <span class="input-label-supplier">Байршил</span>
+            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankDataSup();">
+                <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                    {{loc.name}}</option>
+            </select>
+        </div>
+        <div class="condition-detail-input tugrug-input custom-select-sup" ng-show="isSlideSelected">
+            <span class="input-label-supplier">Хамтран зээлдэгчтэй эсэх</span>
+            <select class="autoleasing-location-select" ng-model="$root.newReqiust.isCoBorrower">
+                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                    {{loc.name}}</option>
+            </select>
         </div>
         <div class="switch-input-container sup-switch-inp">
             <ul class="switch-list-sup">

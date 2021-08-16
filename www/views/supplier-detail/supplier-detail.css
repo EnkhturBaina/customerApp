@@ -181,3 +181,13 @@
   width: calc(100% - 40px);
   margin: 10px 20px;
 }
+.custom-select-sup {
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+.custom-select-sup select {
+  height: 34px !important;
+  border: 0px !important;
+  color: #4b5180 !important;
+  font-weight: bold;
+}
