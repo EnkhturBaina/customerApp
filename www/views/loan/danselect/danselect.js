@@ -105,9 +105,17 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
 
                   if (userSalaryInfo) {
                     serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
-                      $rootScope.monthlyAverage = response.result;
-                      $rootScope.monthlyIncomeDisable = true;
-                      $rootScope.danIncomeData.monthlyincome = response.result;
+                      if (response.status == "success" && !isEmpty(response.result)) {
+                        $rootScope.monthlyAverage = response.result[0];
+                        $rootScope.monthlyIncomeDisable = true;
+                        $rootScope.danIncomeData.monthlyincome = response.result[0];
+                        //хувааж төлөх нөхцөл
+                        $rootScope.danIncomeData.incyearofemployment = response.result[1];
+                        $rootScope.danIncomeData.workplace = response.result[2];
+                        $rootScope.danIncomeData.incmonthlynetincome = response.result[3];
+                        $rootScope.danIncomeData.workedmonths = response.result[4];
+                        console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
+                      }
                     });
                   }
                 }, 1000);
