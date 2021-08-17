@@ -68,7 +68,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
   $scope.isConditionSelected = false;
   //Хугацаа сонгох үед slider харуулах эсэх
   $scope.isSlideSelected = false;
-
+  $scope.varA = null;
   $scope.selectCondition = function (id) {
     $scope.isConditionSelected = true;
     //hideKeyboard
@@ -80,6 +80,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         $scope.selectedConditionFee = el.text2;
         $scope.selectedConditionMonth = el.number1 + " хоног";
         $rootScope.newReqiust.loanMonth = el.number1;
+        $scope.varA = el.number2;
         //Хугацаа сонгох үед
         if (el.number2 === "1") {
           $scope.isSlideSelected = true;
@@ -142,6 +143,11 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
   $scope.changeLoanAmountSupplier = function () {
     loanAmount = $rootScope.newReqiust.loanAmount;
     $rootScope.newReqiust.advancePayment = "";
+    if ($scope.isSlideSelected) {
+      $scope.selectedConditionAmount = Math.round(-PMT(parseFloat($rootScope.supplierFee) / 100, $rootScope.selectedMonth, $rootScope.newReqiust.loanAmount));
+    } else {
+      $scope.selectedConditionAmount = Math.ceil($rootScope.newReqiust.loanAmount / $scope.varA);
+    }
   };
   $scope.calcLoanAmountSupplier = function () {
     if (!isEmpty($rootScope.newReqiust.loanAmount)) {
@@ -152,7 +158,6 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
       }
     }
-    $scope.selectedConditionAmount = Math.round(-PMT(parseFloat($rootScope.supplierFee) / 100, $rootScope.selectedMonth, $rootScope.newReqiust.loanAmount));
   };
 
   $scope.step2Sup = function () {
