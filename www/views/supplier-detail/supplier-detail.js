@@ -23,13 +23,13 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
     json.isPerson = 1;
     json.currency = 16074201974821;
     json.isMortgage = 1554263832151;
+    json.divide = $rootScope.selected;
 
     //банк шүүлт
-    json.type = "autoLeasingLoanFilter";
+    json.type = "divideLoanFilter";
     json.totalLoan = $rootScope.newReqiust.loanAmount;
     json.month = $rootScope.newReqiust.loanMonth;
     json.preTotal = $rootScope.newReqiust.advancePayment;
-
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
@@ -46,6 +46,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
       $scope.termModalAgreement = termModalAgreement;
     });
   $scope.$on("$ionicView.enter", function (ev, info) {
+    $rootScope.isSupLoan = true;
     localStorage.setItem("requestType", "supLoan");
     $rootScope.newReqiust = {};
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
@@ -70,11 +71,15 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
 
   $scope.selectCondition = function (id) {
     $scope.isConditionSelected = true;
+    //hideKeyboard
+    document.activeElement.blur();
+
     $rootScope.supplierConditions.map((el) => {
       if (el.id == id) {
         $scope.selectedConditionDetail = el.text1;
         $scope.selectedConditionFee = el.text2;
         $scope.selectedConditionMonth = el.number1 + " хоног";
+        $rootScope.newReqiust.loanMonth = el.number1;
         //Хугацаа сонгох үед
         if (el.number2 === "1") {
           $scope.isSlideSelected = true;
@@ -82,6 +87,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
           $scope.maxRange = el.number1;
           $rootScope.selectedMonth = el.number1 - (el.number1 - 1);
           $scope.selectedConditionMonth = 3 + " сар";
+          $rootScope.newReqiust.loanMonth = 3;
           $scope.selectedConditionFee = $rootScope.supplierFee + " %";
           $scope.selectedConditionAmount = 0;
         } else {
@@ -168,10 +174,10 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
       } else if (isEmpty($rootScope.selected)) {
         $rootScope.alert("Зээлийн нөхцөлөө сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.locationId)) {
+      } else if (isEmpty($rootScope.newReqiust.locationId) && $scope.isSlideSelected) {
         $rootScope.alert("Байршил сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+      } else if (isEmpty($rootScope.newReqiust.isCoBorrower) && $scope.isSlideSelected) {
         $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {

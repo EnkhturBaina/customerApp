@@ -16,23 +16,23 @@
             <div class="magic-container">
                 <div class="bg-container">
                     <div class="tugrug-input">
-                        <span class="title input-label-front dan-user-data">Овог</span>
+                        <span class="title input-label-front dan-user-data z-index-1">Овог</span>
                         <div class="tugrug-input-container">
-                            <input type="text" id="customerLastNameDan" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.lastname" ng-change="replaceCyrAuto($root.danCustomerData.lastname)" ng-keyup="hideKeyboard($event)" ng-disabled="$root.lastNameDanDisable" select-on-click />
+                            <input type="text" id="customerLastNameDan" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask bg-fff" ng-model="$root.danCustomerData.lastname" ng-change="replaceCyrAuto($root.danCustomerData.lastname)" ng-keyup="hideKeyboard($event)" ng-disabled="$root.lastNameDanDisable" select-on-click />
                         </div>
                         <span id="lastNameErrorDan" class="profile-input-name-error">Та овогоо крилл үсгээр оруулна уу</span>
                     </div>
                     <div class="tugrug-input">
-                        <span class="title input-label-front dan-user-data">Нэр</span>
+                        <span class="title input-label-front dan-user-data z-index-1">Нэр</span>
                         <div class="tugrug-input-container">
-                            <input type="text" id="customerFirstNameDan" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.firstname" ng-change="replaceCyr2Auto($root.danCustomerData.firstname)" ng-keyup="hideKeyboard($event)" ng-disabled="$root.firstNameDanDisable" select-on-click />
+                            <input type="text" id="customerFirstNameDan" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask bg-fff" ng-model="$root.danCustomerData.firstname" ng-change="replaceCyr2Auto($root.danCustomerData.firstname)" ng-keyup="hideKeyboard($event)" ng-disabled="$root.firstNameDanDisable" select-on-click />
                         </div>
                         <span id="firstNameErrorDan" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</span>
                     </div>
                     <div class="tugrug-input">
-                        <span class="title input-label-front dan-user-data">Регистр</span>
+                        <span class="title input-label-front dan-user-data z-index-1">Регистр</span>
                         <div class="tugrug-input-container">
-                            <input type="text" placeholder="" id="step4UniqueIdentifier" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.uniqueidentifier" ng-keyup="hideKeyboard($event)" ng-disabled="$root.uniqueIdentifierDanDisable" select-on-click />
+                            <input type="text" placeholder="" id="step4UniqueIdentifier" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask bg-fff" ng-model="$root.danCustomerData.uniqueidentifier" ng-keyup="hideKeyboard($event)" ng-disabled="$root.uniqueIdentifierDanDisable" select-on-click />
                         </div>
                     </div>
                     <div class="tugrug-input">
@@ -47,17 +47,21 @@
                             <input inputmode="numeric" pattern="[0-9]*" maxlength="8" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine mobile-number-step4 ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danCustomerData.mobilenumber" ng-keyup="hideKeyboard($event)" select-on-click />
                         </div>
                     </div>
-                    <label class="item item-input step4-loan-location">
+                    <label class="item item-input step4-loan-location" ng-if="!$root.isSupLoan">
                         <p class="dan-user-data">Гэрлэсэн эсэх</p>
                         <select class="select-income-type" ng-model="$root.danCustomerData.ismarried" ng-options="c.id as c.name for c in familtStatData | filter:{id:'!!'}" ng-init="$root.danCustomerData.ismarried = $root.danCustomerData.ismarried"></select>
                     </label>
-                    <label class="item item-input step4-loan-location">
+                    <label class="item item-input step4-loan-location" ng-if="!$root.isSupLoan">
                         <p class="dan-user-data">МИК-ийн зээлтэй эсэх</p>
                         <select class="select-income-type" ng-model="$root.danCustomerData.mikmortgagecondition" ng-options="c.id as c.name for c in mortgageData | filter:{id:'!!'}" ng-init="$root.danCustomerData.mikmortgagecondition = $root.danCustomerData.mikmortgagecondition" ng-change="getbankData();"></select>
                     </label>
-                    <label class="item item-input step4-loan-location">
+                    <label class="item item-input step4-loan-location" ng-if="!$root.isSupLoan">
                         <p class="dan-user-data">Ажилласан жил</p>
                         <select class="select-income-type" ng-model="$root.danCustomerData.experienceperiodid" ng-options="c.id as c.name for c in experiencePeriodData | filter:{id:'!!'}" ng-init="$root.danCustomerData.experienceperiodid = $root.danCustomerData.experienceperiodid"></select>
+                    </label>
+                    <label class="item item-input step4-loan-location" ng-if="$root.isSupLoan">
+                        <p class="dan-user-data">Боловсролын зэрэг</p>
+                        <select class="select-income-type" ng-model="$root.danCustomerData.educationid" ng-options="c.id as c.name for c in educationData | filter:{id:'!!'}" ng-init="$root.danCustomerData.educationid = $root.danCustomerData.educationid"></select>
                     </label>
                 </div>
                 <div class="container-padding pulse-animation" id="section07">

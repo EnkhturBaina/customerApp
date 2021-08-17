@@ -154,6 +154,12 @@
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
       json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
+    } else if ($rootScope.requestType == "supLoan") {
+      //Хувааж төлөх банк шүүлт
+      json.type = "divideLoanFilter";
+      json.totalLoan = $rootScope.newReqiust.loanAmount;
+      json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
+      json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
     }
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
@@ -908,14 +914,17 @@
       } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
         $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.ismarried)) {
+      } else if (isEmpty($rootScope.danCustomerData.ismarried) && !$rootScope.isSupLoan) {
         $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.mikmortgagecondition)) {
+      } else if (isEmpty($rootScope.danCustomerData.mikmortgagecondition) && !$rootScope.isSupLoan) {
         $rootScope.alert("МИК-ийн зээлтэй эсэхээ сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.experienceperiodid)) {
-        $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
+      } else if (isEmpty($rootScope.danCustomerData.experienceperiodid) && !$rootScope.isSupLoan) {
+        $rootScope.alert("Ажилласан жилээ сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.educationid) && $rootScope.isSupLoan) {
+        $rootScope.alert("Боловсролын зэрэг сонгоно уу", "warning");
         return false;
       } else {
         return true;

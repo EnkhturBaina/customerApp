@@ -154,6 +154,11 @@
         $rootScope.supplierConditions = response.filter((value) => Object.keys(value).length !== 0);
       }
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1629173002695086" }).then(function (response) {
+      if (!isEmpty(response)) {
+        $rootScope.educationData = response.filter((value) => Object.keys(value).length !== 0);
+      }
+    });
   };
   $scope.getProfileLookupData();
   $scope.callComingSoon = function () {
@@ -230,6 +235,8 @@
     // $ionicTabsDelegate.$getByHandle("myHeaderTabHandle").select(1);
     $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
     $ionicSlideBoxDelegate.update();
+    //Хувааж төлөх зээл эсэх
+    $rootScope.isSupLoan = false;
     $timeout(function () {
       $rootScope.HideLoader();
       $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();

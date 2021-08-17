@@ -1654,3 +1654,9 @@ input[type="number"] {
 .margin-bottom-0 {
   margin-bottom: 0px !important;
 }
+.bg-fff {
+  background: #fff !important;
+}
+.z-index-1 {
+  z-index: 1 !important;
+}
