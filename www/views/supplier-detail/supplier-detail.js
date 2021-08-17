@@ -143,10 +143,12 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
   $scope.changeLoanAmountSupplier = function () {
     loanAmount = $rootScope.newReqiust.loanAmount;
     $rootScope.newReqiust.advancePayment = "";
-    if ($scope.isSlideSelected) {
-      $scope.selectedConditionAmount = Math.round(-PMT(parseFloat($rootScope.supplierFee) / 100, $rootScope.selectedMonth, $rootScope.newReqiust.loanAmount));
-    } else {
-      $scope.selectedConditionAmount = Math.ceil($rootScope.newReqiust.loanAmount / $scope.varA);
+    if (!isEmpty($rootScope.selected)) {
+      if ($scope.isSlideSelected) {
+        $scope.selectedConditionAmount = Math.round(-PMT(parseFloat($rootScope.supplierFee) / 100, $rootScope.selectedMonth, $rootScope.newReqiust.loanAmount));
+      } else {
+        $scope.selectedConditionAmount = Math.ceil($rootScope.newReqiust.loanAmount / $scope.varA);
+      }
     }
   };
   $scope.calcLoanAmountSupplier = function () {
