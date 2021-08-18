@@ -315,7 +315,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     $rootScope.newReqiust = {};
     json.type = "estateLoanFilter";
     json.totalLoan = $rootScope.propertyRequestData.loanAmount;
-    json.isPerson = 1;
+    json.isPerson = "1";
     json.location = $rootScope.propertyRequestData.locationId;
     json.month = $rootScope.propertyRequestData.loanMonth;
     json.currency = 16074201974821;

@@ -29,9 +29,8 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
     $rootScope.bankListFilter = [];
     var json = {};
 
-    json.isPerson = 1;
-    json.currency = 16074201974821;
-    json.isMortgage = 1554263832151;
+    json.isPerson = "1";
+    json.isColalteral = "";
 
     //банк шүүлт
     json.type = "autoLeasingLoanFilter";
@@ -85,7 +84,7 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
         $rootScope.displayMinPayment = $rootScope.newReqiust.loanAmount * $rootScope.minPayment;
       }
     });
-    // console.log("json", json);
+    console.log("json", json);
   };
 
   $scope.changeToolTipData = function () {

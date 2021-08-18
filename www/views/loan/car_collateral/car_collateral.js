@@ -105,7 +105,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     $rootScope.newReqiust = {};
     json.type = "carLoanFilter";
     json.totalLoan = $rootScope.carCollateralRequestData.loanAmount;
-    json.isPerson = 1;
+    json.isPerson = "1";
     json.location = $rootScope.carCollateralRequestData.locationId;
     json.month = $rootScope.carCollateralRequestData.loanMonth;
     json.currency = 16074201974821;

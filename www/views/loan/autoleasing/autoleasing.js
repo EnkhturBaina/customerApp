@@ -103,7 +103,7 @@
     $rootScope.bankListFilter = [];
     var json = {};
 
-    json.isPerson = 1;
+    json.isPerson = "1";
     json.currency = 16074201974821;
     json.isMortgage = 1554263832151;
 
