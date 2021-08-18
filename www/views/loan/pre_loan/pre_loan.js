@@ -84,7 +84,7 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
         $rootScope.displayMinPayment = $rootScope.newReqiust.loanAmount * $rootScope.minPayment;
       }
     });
-    console.log("json", json);
+    // console.log("json", json);
   };
 
   $scope.changeToolTipData = function () {

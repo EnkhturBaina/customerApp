@@ -163,7 +163,6 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
   };
 
   $scope.step2Sup = function () {
-    console.log("$rootScope.newReqiust", $rootScope.newReqiust);
     if ($scope.checkReqiuredSupplierDtl("step2")) {
       if ($scope.checkReqiuredSupplierDtl("agreeBankSup")) {
         $state.go("income");

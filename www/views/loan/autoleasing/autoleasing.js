@@ -1106,7 +1106,6 @@
                       $rootScope.danIncomeData.workplace = response.result[2];
                       $rootScope.danIncomeData.incmonthlynetincome = response.result[3];
                       $rootScope.danIncomeData.workedmonths = response.result[4];
-                      console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
                     }
                   });
                 }
