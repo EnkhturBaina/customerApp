@@ -9,6 +9,10 @@
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 10px 20px;
 }
+.supplier-detail-card2 {
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
+}
 .suppliers-detail-body-p {
   margin: 0 10px;
 }
@@ -38,12 +42,13 @@
   display: none;
 }
 .card-input {
+  border: 1px solid #d5d5d5 !important;
   padding: 25px 15px 20px 15px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 5px;
-  /* min-width: 120px; */
+  min-width: 120px;
   min-height: 100px;
   max-height: 100px;
   /* max-width: 120px; */
@@ -73,12 +78,9 @@
   margin: 0 auto;
 }
 .condition-detail-input {
-  padding: 13px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  width: calc(100% - 40px);
-  margin: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #d5d5d5 !important;
+  padding: 0px 5px;
 }
 .tugrug-input-container-supplier input {
   text-align: right !important;
@@ -89,32 +91,29 @@
 }
 .input-label-supplier {
   position: absolute;
-  top: 35%;
-  left: 5%;
+  top: 23%;
+  left: 3%;
 }
 .condition-detail-card {
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  width: calc(100% - 40px);
-  margin: 10px 20px;
-  display: flex;
-  justify-content: space-between;
+  border-radius: 5px;
+  border: 1px solid #d5d5d5 !important;
+  margin: 10px 0;
+  position: relative;
+  z-index: 99;
+  padding: 7px;
 }
 
 .condition-detail-card span {
   color: #4b5180 !important;
   font-weight: bold;
+  float: right;
+  margin-right: 5px;
 }
 .condition-detail-card-range {
   padding: 0px 20px 5px 20px;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  width: calc(100% - 40px);
-  margin: 10px 20px;
-  /* display: flex; */
+  border-radius: 5px;
+  border: 1px solid #d5d5d5 !important;
   justify-content: space-between;
   align-items: center;
 }
@@ -170,16 +169,11 @@
   line-height: 16px;
 }
 .radio-scroll-container {
-  width: calc(100% - 40px);
-  margin: 10px 20px;
 }
 .sup-condition-title {
   width: calc(100% - 40px);
-  margin: 10px 20px;
 }
 .sup-switch-inp {
-  width: calc(100% - 40px);
-  margin: 10px 20px;
 }
 .custom-select-sup {
   display: flex !important;
@@ -192,4 +186,11 @@
   font-weight: bold;
   background: #fff !important;
   background-color: #fff !important;
+}
+.supp-dtl2-content {
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 20px 0px 20px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
 }

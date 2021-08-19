@@ -65,7 +65,7 @@
                     <ion-content overflow-scroll="false" style="margin: 0 10px" class="">
                         <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" ng-if="dcSuppliers.length" show-pager="false" class="home-tab-2-slide-box" delegate-handle="suppliersDelegate">
                             <ion-slide ng-repeat="bg in dcSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromHome(bg.id)" repeat-done="repeatDone()">
-                                <div class="home-tab2-slider home-tab2-ion-slide">
+                                <div class="home-tab2-slider home-tab2-ion-slide card home-card home-card-1">
                                     <img style="width: 200px;max-height: 150px;" ng-src="{{$root.imagePath}}{{bg.supplierpic}}" />
                                 </div>
 
@@ -76,13 +76,13 @@
                         <div class="home-card-container">
                             <div class="card home-card home-card-2" ui-sref="suppliers">
                                 <div class="item card-body item-text-wrap small-box">
-                                    <div class="ion-text-bold"><span>Дэлгүүрүүд</span></div>
+                                    <div class="ion-text-bold"><span>Дэлгүүр</span></div>
                                     <div class="home-card-small-text">
-                                        <span>Та бүх төрлийн барааг хүүгүй онлайн лизингээр аваарай</span>
+                                        <span>Та бүх төрлийн барааг ХҮҮГҮЙ ЗЭЭЛ, лизингээр авах боломжтой</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card home-card home-card-3" ng-click="callComingSoon()">
+                            <div class="card home-card home-card-3" ui-sref="purchase-inst">
                                 <div class="item card-body item-text-wrap small-box">
                                     <div class="ion-text-bold"><span>Бараа авах заавар</span></div>
                                     <div class="home-card-small-text">
@@ -96,7 +96,7 @@
                                 <div class=" item card-body item-text-wrap small-box">
                                     <div class="ion-text-bold"><span>Онцлох</span></div>
                                     <div class="home-card-small-text">
-                                        <span>Та онцгой барааг эндээс</span>
+                                        <span>Та онцгой барааг яг одоо ХҮҮГҮЙ ЗЭЭЛ, лизингээр аваарай</span>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                 <div class="item card-body item-text-wrap small-box">
                                     <div class="ion-text-bold"><span>Тренд</span></div>
                                     <div class="home-card-small-text">
-                                        <span>Хамгийн шинэлэгийг эндээс</span>
+                                        <span>Та хамгийн шинэлэгийг эндээс ХҮҮГҮЙ, лизингээр аваарай</span>
                                     </div>
                                 </div>
                             </div>

@@ -1,0 +1,45 @@
+<ion-view hide-nav-bar="true">
+    <link href="views/purchase-inst/purchase-inst.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Бараа авах заавар'}]" ng-include src="'views/navbar.html'"></div>
+
+    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50">
+        <div class="purchase-inst-content">
+            <span class="term-title purchase-inst-title">Та доорх зааврын дагуу бараагаа ХҮҮГҮЙ ЗЭЭЛ-р аваарай </span>
+            <ul class="events">
+                <li>
+                    <span class="events-span-1">1-р шат</span>
+                    <span class="events-span-2"><strong>Дэлгүүрээ сонгох</strong></span>
+                </li>
+
+                <li>
+                    <span class="events-span-1">2-р шат</span>
+                    <span class="events-span-2"><strong>Зээлэх нөхцлөө сонгох</strong></span>
+
+                </li>
+
+                <li>
+                    <span class="events-span-1">3-р шат</span>
+                    <span class="events-span-2"><strong>Мэдээллээ оруулах</strong></span>
+                </li>
+
+                <li>
+                    <span class="events-span-1">4-р шат</span>
+                    <span class="events-span-2"><strong>Банк, ББСБ-аа сонгон илгээх</strong></span>
+                </li>
+
+                <li>
+                    <span class="events-span-1">5-р шат</span>
+                    <span class="events-span-2"><strong>Зээлийн эрхээ сонгох</strong></span>
+                </li>
+
+                <li>
+                    <span class="events-span-1">6-р шат</span>
+                    <span class="events-span-2"><strong>Бараагаа авах</strong></span>
+                </li>
+            </ul>
+        </div>
+        <div class="supplier-step2-btn">
+            <button class="button btn single-button" id="Next" ng-click="purchaseInstBack()">Буцах</button>
+        </div>
+    </ion-content>
+</ion-view>

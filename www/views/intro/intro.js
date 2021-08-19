@@ -22,6 +22,14 @@ angular.module("intro.Ctrl", []).controller("introCtrl", function ($ionicSlideBo
       }
     });
   };
-  $scope.getBanner();
-  $rootScope.hideFooter = true;
+
+  $scope.$on("$ionicView.loaded", function (ev, info) {
+    $rootScope.ShowLoader();
+    $scope.getBanner();
+    $rootScope.hideFooter = true;
+  });
+
+  $scope.$on("$ionicView.enter", function () {
+    $rootScope.HideLoader();
+  });
 });

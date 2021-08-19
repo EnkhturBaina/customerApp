@@ -1,4 +1,4 @@
-angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", function ($timeout, $scope, $rootScope, $state, serverDeferred, $ionicPlatform, $ionicModal) {
+angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", function ($timeout, $scope, $rootScope, $state, serverDeferred, $ionicModal) {
   $rootScope.hideFooter = true;
   $scope.supplierName = [{ title: "supplierName" }];
   $rootScope.supplierFee = "";
@@ -70,39 +70,45 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
   $scope.isSlideSelected = false;
   $scope.varA = null;
   $scope.selectCondition = function (id) {
-    $scope.isConditionSelected = true;
-    //hideKeyboard
-    document.activeElement.blur();
+    if (isEmpty($rootScope.newReqiust.loanAmount)) {
+      $rootScope.alert("Зээлийн хэмжээгээ оруулна уу", "warning");
+      //uncheck хийх
+      $("#captureRad" + id).prop("checked", false);
+    } else {
+      $scope.isConditionSelected = true;
+      //hideKeyboard
+      document.activeElement.blur();
 
-    $rootScope.supplierConditions.map((el) => {
-      if (el.id == id) {
-        $scope.selectedConditionDetail = el.text1;
-        $scope.selectedConditionFee = el.text2;
-        $scope.selectedConditionMonth = el.number1 + " хоног";
-        $rootScope.newReqiust.loanMonth = el.number1;
-        $scope.varA = el.number2;
-        //Хугацаа сонгох үед
-        if (el.number2 === "1") {
-          $scope.isSlideSelected = true;
-          //Slide -н max range
-          $scope.maxRange = el.number1;
-          $rootScope.selectedMonth = el.number1 - (el.number1 - 1);
-          $scope.selectedConditionMonth = 3 + " сар";
-          $rootScope.newReqiust.loanMonth = 3;
-          $scope.selectedConditionFee = $rootScope.supplierFee + " %";
-          $scope.selectedConditionAmount = 0;
-        } else {
-          if (isEmpty($rootScope.newReqiust.loanAmount)) {
+      $rootScope.supplierConditions.map((el) => {
+        if (el.id == id) {
+          $scope.selectedConditionDetail = el.text1;
+          $scope.selectedConditionFee = el.text2;
+          $scope.selectedConditionMonth = el.number1 + " хоног";
+          $rootScope.newReqiust.loanMonth = el.number1;
+          $scope.varA = el.number2;
+          //Хугацаа сонгох үед
+          if (el.number2 === "1") {
+            $scope.isSlideSelected = true;
+            //Slide -н max range
+            $scope.maxRange = el.number1;
+            $rootScope.selectedMonth = el.number1 - (el.number1 - 1);
+            $scope.selectedConditionMonth = 3 + " сар";
+            $rootScope.newReqiust.loanMonth = 3;
+            $scope.selectedConditionFee = $rootScope.supplierFee + " %";
             $scope.selectedConditionAmount = 0;
-            $scope.isSlideSelected = false;
           } else {
-            $scope.selectedConditionAmount = Math.ceil($rootScope.newReqiust.loanAmount / el.number2);
-            $scope.isSlideSelected = false;
+            if (isEmpty($rootScope.newReqiust.loanAmount)) {
+              $scope.selectedConditionAmount = 0;
+              $scope.isSlideSelected = false;
+            } else {
+              $scope.selectedConditionAmount = Math.ceil($rootScope.newReqiust.loanAmount / el.number2);
+              $scope.isSlideSelected = false;
+            }
           }
         }
-      }
-    });
-    $scope.getbankDataSup();
+      });
+      $scope.getbankDataSup();
+    }
   };
   function PMT(ir, np, pv, fv, type) {
     /*
@@ -143,7 +149,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
   $scope.changeLoanAmountSupplier = function () {
     loanAmount = $rootScope.newReqiust.loanAmount;
     $rootScope.newReqiust.advancePayment = "";
-    if (!isEmpty($rootScope.selected)) {
+    if (!isEmpty($rootScope.selected) && $scope.isConditionSelected) {
       if ($scope.isSlideSelected) {
         $scope.selectedConditionAmount = Math.round(-PMT(parseFloat($rootScope.supplierFee) / 100, $rootScope.selectedMonth, $rootScope.newReqiust.loanAmount));
       } else {

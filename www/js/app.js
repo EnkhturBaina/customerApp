@@ -38,6 +38,7 @@ var app = angular
     "suppliers.Ctrl",
     "suppliers-search.Ctrl",
     "supplier-detail.Ctrl",
+    "purchase-inst.Ctrl",
   ])
   .run(function ($ionicPlatform, $state, $cordovaSplashscreen) {
     $ionicPlatform.ready(function () {
@@ -313,6 +314,11 @@ var app = angular
       url: "/views/supplier-detail2",
       templateUrl: "views/supplier-detail/supplier-detail2.html",
       controller: "supplier-detailCtrl",
+    });
+    $stateProvider.state("purchase-inst", {
+      url: "/views/purchase-inst",
+      templateUrl: "views/purchase-inst/purchase-inst.html",
+      controller: "purchase-instCtrl",
     });
     $urlRouterProvider.otherwise("/views/home");
   })
