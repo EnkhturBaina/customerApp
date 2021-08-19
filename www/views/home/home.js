@@ -227,21 +227,28 @@
     }
     if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
     $ionicSlideBoxDelegate.update();
-    $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
   });
 
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = false;
-    // $ionicTabsDelegate.$getByHandle("myHeaderTabHandle").select(1);
-    $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
+
+    //Render хийгдсэн байхад бүх Slide давхардаад байгааг дахин render хийх
+    $timeout(function () {
+      if (!$scope.slideIndex) {
+        $scope.slideIndex = 0;
+      }
+      $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
+      $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").slide($scope.slideIndex);
+    }, 100);
+
     $ionicSlideBoxDelegate.update();
     //Хувааж төлөх зээл эсэх
     $rootScope.isSupLoan = false;
     $timeout(function () {
       $rootScope.HideLoader();
-      $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
     }, 2000);
   });
+
   var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
   if (isEmpty(bannerNotShow)) {
     $scope.getBanner();
@@ -252,12 +259,5 @@
   $scope.supplierDetailFromHome = function (id) {
     $rootScope.selectSupplierID = id;
     $state.go("supplier-detail");
-  };
-  $scope.selectTab2 = function () {
-    $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
-  };
-  $scope.repeatDone = function () {
-    $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
-    // $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").slide($rootScope.dcSuppliers.length - 1, 1);
   };
 });

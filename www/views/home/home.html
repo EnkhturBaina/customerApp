@@ -1,7 +1,7 @@
 ﻿<link href="views/home/home.css" rel="stylesheet" />
 <ion-view ng-if="!$root.showBanner" view-title="Зээлийн маркет">
     <div>
-        <ion-tabs class="home-tabs tabs-top home-card-tab" id="homeTabsId" delegate-handle="myHeaderTabHandle" ng-click="selectTab2()">
+        <ion-tabs class="home-tabs tabs-top home-card-tab" id="homeTabsId" delegate-handle="myHeaderTabHandle">
             <!-- Tab 1 -->
             <ion-tab title="Зээлийн маркет">
                 <ion-nav-view class="ghostwhite">
@@ -64,7 +64,7 @@
                 <ion-nav-view class="ghostwhite">
                     <ion-content overflow-scroll="false" style="margin: 0 10px" class="">
                         <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" ng-if="dcSuppliers.length" show-pager="false" class="home-tab-2-slide-box" delegate-handle="suppliersDelegate">
-                            <ion-slide ng-repeat="bg in dcSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromHome(bg.id)" repeat-done="repeatDone()">
+                            <ion-slide ng-repeat="bg in dcSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromHome(bg.id)">
                                 <div class="home-tab2-slider home-tab2-ion-slide card home-card home-card-1">
                                     <img style="width: 200px;max-height: 150px;" ng-src="{{$root.imagePath}}{{bg.supplierpic}}" />
                                 </div>
