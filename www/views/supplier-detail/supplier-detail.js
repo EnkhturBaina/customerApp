@@ -87,7 +87,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         $rootScope.newReqiust.loanMonth = el.number1;
         $scope.varA = el.number2;
         //Хугацаа сонгох үед
-        if (el.number2 === "1") {
+        if (el.number2 === "999") {
           $scope.isSlideSelected = true;
           //Slide -н max range
           $scope.maxRange = el.number1;
