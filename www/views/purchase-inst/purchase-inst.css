@@ -33,7 +33,6 @@
   padding: 0 1.5em 1.5em 1.5em;
   position: relative;
   width: 320px;
-  /* min-width: 320px; */
 }
 
 .events-span-2::before {
