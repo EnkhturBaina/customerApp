@@ -5,10 +5,14 @@
 .home-card-1 {
   color: #fff;
   background-size: cover;
-  background: url(../../img/lines/home-rect-line.png) repeat, rgb(125, 204, 123); /* Old browsers */
-  background: url(../../img/lines/home-rect-line.png) repeat, -moz-linear-gradient(49deg, rgba(89, 199, 194, 1) 0%, rgba(61, 192, 250, 1) 45%); /* FF3.6-15 */
-  background: url(../../img/lines/home-rect-line.png) repeat, -webkit-linear-gradient(49deg, rgba(89, 199, 194, 1) 0%, rgba(61, 192, 250, 1) 45%); /* Chrome105,Safari5.1-6 */
-  background: url(../../img/lines/home-rect-line.png) repeat, linear-gradient(49deg, rgba(89, 199, 194, 1) 0%, rgba(61, 192, 250, 1) 45%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  /* background: url(../../img/lines/home-rect-line.png) repeat, rgb(125, 204, 123); 
+  background: url(../../img/lines/home-rect-line.png) repeat, -moz-linear-gradient(49deg, rgba(89, 199, 194, 1) 0%, rgba(61, 192, 250, 1) 45%); 
+  background: url(../../img/lines/home-rect-line.png) repeat, -webkit-linear-gradient(49deg, rgba(89, 199, 194, 1) 0%, rgba(61, 192, 250, 1) 45%); 
+  background: url(../../img/lines/home-rect-line.png) repeat, linear-gradient(49deg, rgba(89, 199, 194, 1) 0%, rgba(61, 192, 250, 1) 45%);  */
+  background: transparent !important;
+  background: transparent !important;
+  background: transparent !important;
+  background: transparent !important;
   background-repeat: no-repeat;
   background-position: 0% 0%;
   background-size: cover;

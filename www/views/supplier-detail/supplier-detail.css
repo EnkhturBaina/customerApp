@@ -53,11 +53,20 @@
   max-height: 100px;
   /* max-width: 120px; */
   white-space: normal;
+  position: relative;
 }
 .card-input-element:checked + .card-input {
   box-shadow: 0 0 2px 2px #acd322;
 }
-
+.card-input i {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  color: #4b5180 !important;
+}
+.card-input-element:checked + .card-input > i {
+  color: #acd322 !important;
+}
 .supplier-custom-radio-button {
   max-width: 50%;
   box-sizing: border-box;

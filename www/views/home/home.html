@@ -62,7 +62,7 @@
             </ion-tab>
             <ion-tab title="Барааны маркет">
                 <ion-nav-view class="ghostwhite">
-                    <ion-content overflow-scroll="false" style="margin: 0 10px" class="">
+                    <ion-content overflow-scroll="true" style="height: 80%;margin: 0 10px;" class="">
                         <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" ng-if="dcSuppliers.length" show-pager="false" class="home-tab-2-slide-box" delegate-handle="suppliersDelegate">
                             <ion-slide ng-repeat="bg in dcSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromHome(bg.id)">
                                 <div class="home-tab2-slider home-tab2-ion-slide card home-card home-card-1">
@@ -78,7 +78,7 @@
                                 <div class="item card-body item-text-wrap small-box">
                                     <div class="ion-text-bold"><span>Дэлгүүр</span></div>
                                     <div class="home-card-small-text">
-                                        <span>Та бүх төрлийн барааг ХҮҮГҮЙ ЗЭЭЛ, лизингээр авах боломжтой</span>
+                                        <span>Та бараагаа хүүгүй зээл, лизингээр авах боломжтой</span>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                 <div class=" item card-body item-text-wrap small-box">
                                     <div class="ion-text-bold"><span>Онцлох</span></div>
                                     <div class="home-card-small-text">
-                                        <span>Та онцгой барааг яг одоо ХҮҮГҮЙ ЗЭЭЛ, лизингээр аваарай</span>
+                                        <span>Та онцгой барааг яг одоо хүүгүй зээл, лизингээр аваарай</span>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                 <div class="item card-body item-text-wrap small-box">
                                     <div class="ion-text-bold"><span>Тренд</span></div>
                                     <div class="home-card-small-text">
-                                        <span>Та хамгийн шинэлэгийг эндээс ХҮҮГҮЙ, лизингээр аваарай</span>
+                                        <span>Та хамгийн шинэлэгийг хүүгүй зээл, лизингээр аваарай</span>
                                     </div>
                                 </div>
                             </div>
