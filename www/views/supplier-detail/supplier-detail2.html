@@ -92,6 +92,12 @@
             </div>
         </div>
         <div class="container-padding pulse-animation" id="section07">
+            <ion-scroll id="photoBanner" direction="x" class="wide-scroll-bank-step agree-bank-arrow">
+                <p style="width: 100%;margin: 40px auto;white-space: break-spaces;text-align: center;">ТА ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГАЖ БУЙ {{bankListFilter.Agree.length}} БАНК, ББСБ-УУД БАЙНА</p>
+            </ion-scroll>
+        </div>
+        <!-- **APP STORE UPDATE START** -->
+        <!-- <div class="container-padding pulse-animation" id="section07">
             <p class="middle-title agree-banks">ТА ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГАЖ БУЙ БАНК, ББСБ-УУД</p>
             <ion-scroll direction="x" class="wide-scroll-bank-step agree-bank-arrow">
                 <div class="bank" ng-repeat="bank in bankListFilter.Agree">
@@ -108,7 +114,8 @@
                     <p>{{bank.department_name}}</p>
                 </div>
             </ion-scroll>
-        </div>
+        </div> -->
+        <!-- **APP STORE UPDATE END** -->
         <div class="supplier-step2-btn">
             <button class="button btn single-button" id="Next" ng-click="step2Sup()">Үргэлжлүүлэх</button>
         </div>
