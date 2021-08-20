@@ -149,7 +149,7 @@
         $rootScope.dcSuppliers = response.filter((value) => Object.keys(value).length !== 0);
       }
     });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1628737422121946" }).then(function (response) {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16269370387471" }).then(function (response) {
       if (!isEmpty(response)) {
         $rootScope.supplierConditions = response.filter((value) => Object.keys(value).length !== 0);
       }

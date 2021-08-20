@@ -46,6 +46,15 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
       $scope.termModalAgreement = termModalAgreement;
     });
   $scope.$on("$ionicView.enter", function (ev, info) {
+    //Тухайн VENDOR ямар2 нөхцөлөөр зээл олгохыг авах VARIABLE
+    $rootScope.fidteredSupplierConditions = [];
+    //Тухайн VENDOR ямар2 нөхцөлөөр зээл олгохыг авах
+    $rootScope.supplierConditions.map((xxx) => {
+      if (xxx.dim1 == $rootScope.selectSupplierID) {
+        $rootScope.fidteredSupplierConditions.push(xxx);
+      }
+    });
+
     $rootScope.isSupLoan = true;
     localStorage.setItem("requestType", "supLoan");
     $rootScope.newReqiust = {};
@@ -79,7 +88,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
     //hideKeyboard
     document.activeElement.blur();
 
-    $rootScope.supplierConditions.map((el) => {
+    $rootScope.fidteredSupplierConditions.map((el) => {
       if (el.id == id) {
         $scope.selectedConditionDetail = el.text1;
         $scope.selectedConditionFee = el.text2;

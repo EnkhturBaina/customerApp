@@ -7,7 +7,7 @@
             <span class="term-title padding-left-10 sup-condition-title">Зээлийн нөхцөл</span>
             <div class="radio-scroll-container">
                 <div class="row supplier-step2-scroll-row">
-                    <div class="supplier-custom-radio-button" ng-repeat="cond in supplierConditions" ng-click="selectCondition(cond.id)">
+                    <div class="supplier-custom-radio-button" ng-repeat="cond in fidteredSupplierConditions | orderBy:'id'" ng-click="selectCondition(cond.id)">
                         <label>
                             <input type="radio" id="captureRad{{cond.id}}" name="product" ng-checked="checkVal" class="card-input-element" value="{{cond.id}}" ng-model="$root.selected" />
                             <div class="panel panel-default card-input">
@@ -20,7 +20,7 @@
             </div>
 
             <div class="condition-detail-input tugrug-input">
-                <span class="input-label-supplier">Зээлэх нөхцөл</span>
+                <span class="input-label-supplier">Зээлийн хэмжээ</span>
                 <div class="tugrug-input-container-supplier">
                     <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.loanAmount" ng-change="changeLoanAmountSupplier()" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataSup()" format-input thousand-separator select-on-click />
                 </div>
