@@ -19,6 +19,9 @@
                 </div>
             </div>
 
+            <div class="condition-detail-span" ng-show="isConditionSelected">
+                {{selectedConditionDetail}}
+            </div>
             <div class="condition-detail-input tugrug-input">
                 <span class="input-label-supplier">Зээлийн хэмжээ</span>
                 <div class="tugrug-input-container-supplier">
@@ -30,9 +33,6 @@
                 <div class="tugrug-input-container-supplier">
                     <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.advancePayment" ng-change="calcLoanAmountSupplier()" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataSup()" thousand-separator select-on-click />
                 </div>
-            </div>
-            <div class="condition-detail-span" ng-show="isConditionSelected">
-                {{selectedConditionDetail}}
             </div>
 
             <div class="condition-detail-card-range" ng-show="isSlideSelected">
