@@ -4,8 +4,7 @@
 
   $("#step1CarCode").mask("00000000");
   $(".mobile-number-step4").mask("00000000");
-  $("#loanAmountRequest").mask("000000000000");
-  $("#sendRequestAdvancePayment").mask("000000000000");
+  // $("#sendRequestAdvancePayment").mask("000000000000");
   $("#step2loanMonth").mask("00");
   $("#step4UniqueIdentifier").mask("AA00000000", {
     translation: {
