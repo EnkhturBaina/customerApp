@@ -1091,6 +1091,7 @@
               });
               $timeout(function () {
                 $rootScope.danCustomerData.lastname = userInfo.result.lastname;
+                $rootScope.danCustomerData.customertypeid = "1";
                 $rootScope.danCustomerData.firstname = userInfo.result.firstname;
                 $rootScope.danCustomerData.uniqueidentifier = userInfo.result.regnum.toUpperCase();
 

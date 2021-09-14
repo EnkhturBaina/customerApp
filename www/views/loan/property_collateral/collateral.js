@@ -120,6 +120,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
                 $rootScope.danCustomerData.lastname = userInfo.result.lastname;
                 $rootScope.danCustomerData.firstname = userInfo.result.firstname;
                 $rootScope.danCustomerData.uniqueidentifier = userInfo.result.regnum.toUpperCase();
+                $rootScope.danCustomerData.customertypeid = "1";
 
                 if (userSalaryInfo) {
                   serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {

@@ -102,6 +102,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                   $rootScope.danCustomerData.lastname = userInfo.result.lastname;
                   $rootScope.danCustomerData.firstname = userInfo.result.firstname;
                   $rootScope.danCustomerData.uniqueidentifier = userInfo.result.regnum.toUpperCase();
+                  $rootScope.danCustomerData.customertypeid = "1";
 
                   if (userSalaryInfo) {
                     serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
