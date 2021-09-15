@@ -19,7 +19,7 @@
                             <span class="title input-label-front">Урьдчилгаа</span>
                             <div class="tugrug-input-container">
                                 <span class="input-tugrug-icon">₮</span>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmountPreLoan();" thousand-separator select-on-click />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmountPreLoan();" ng-blur="getbankDataPreLoan()" thousand-separator select-on-click />
                             </div>
                         </div>
                         <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ {{$root.maxMonth}} сар байна</span></div>

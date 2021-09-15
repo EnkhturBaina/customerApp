@@ -149,10 +149,11 @@
     } else if ($rootScope.requestType == "preLoan") {
       //ҮХХ Барьцаат лизинг банк шүүлт
       json.type = "autoLeasingLoanFilter";
-      json.totalLoan = $rootScope.newReqiust.getLoanAmount;
+      json.totalLoan = $rootScope.newReqiust.loanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
       json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
+      json.isCollateral = "";
     } else if ($rootScope.requestType == "supLoan") {
       //Хувааж төлөх банк шүүлт
       json.type = "divideLoanFilter";
@@ -210,7 +211,7 @@
         }
       }
     });
-    // console.log("json", json);
+    console.log("json", json);
 
     // if ($rootScope.minPayment > $rootScope.newReqiust.advancePayment || $rootScope.newReqiust.advancePayment == 0 || isEmpty($rootScope.newReqiust.advancePayment)) {
     //   $rootScope.collTrueStep2 = false;
