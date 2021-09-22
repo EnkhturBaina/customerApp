@@ -224,6 +224,10 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     } else {
       $state.go("property_collateral");
     }
+
+    $rootScope.lastNameDanDisable = false;
+    $rootScope.firstNameDanDisable = false;
+    $rootScope.uniqueIdentifierDanDisable = false;
   };
 
   $scope.savePropertyRequestData = function () {

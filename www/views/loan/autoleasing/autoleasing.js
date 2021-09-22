@@ -1165,6 +1165,9 @@
         });
       }
     }
+    $rootScope.lastNameDanDisable = false;
+    $rootScope.firstNameDanDisable = false;
+    $rootScope.uniqueIdentifierDanDisable = false;
   };
   $scope.registerFunctionAuto = function (param) {
     var value = param.result;

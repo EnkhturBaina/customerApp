@@ -37,6 +37,10 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
       $("#productYear").val("");
       $state.go("car_coll");
     }
+
+    $rootScope.lastNameDanDisable = false;
+    $rootScope.firstNameDanDisable = false;
+    $rootScope.uniqueIdentifierDanDisable = false;
   };
 
   $scope.gotoDanLoginDanSelect = function () {
