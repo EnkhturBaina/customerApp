@@ -40,7 +40,7 @@ var app = angular
     "supplier-detail.Ctrl",
     "purchase-inst.Ctrl",
   ])
-  .run(function ($ionicPlatform, $state, $cordovaSplashscreen) {
+  .run(function ($ionicPlatform, $cordovaNetwork, $cordovaSplashscreen) {
     $ionicPlatform.ready(function () {
       if (window.StatusBar) {
         StatusBar.styleDefault();

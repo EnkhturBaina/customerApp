@@ -201,6 +201,24 @@
   }, 101);
   $rootScope.profilePictureSideMenu = localStorage.getItem("profilePictureSideMenu");
   $scope.$on("$ionicView.loaded", function (ev, info) {
+    document.addEventListener("offline", onOffline, false);
+
+    function onOffline() {
+      // Handle the offline event
+      $ionicPopup.show({
+        template: "<b>Оффлайн горимд ажиллах боломжгүй. Та интернэт холболтоо шалгана уу</b>",
+        cssClass: "confirmPopup",
+        buttons: [
+          {
+            text: "OK",
+            type: "button-confirm",
+            onTap: function () {
+              ionic.Platform.exitApp();
+            },
+          },
+        ],
+      });
+    }
     $rootScope.hideFooter = false;
 
     localStorage.removeItem("requestType");
