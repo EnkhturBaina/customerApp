@@ -13,9 +13,9 @@
                             <li class="step-li-44"></li>
                         </ul>
                     </div>
-                    <p class="header-title-step3 ion-color-big-text">Та зээл судлуулах банк, ББСБ-аас 3 хүртэлхийг сонгон илгээнэ үү</p>
+                    <!-- <p class="header-title-step3 ion-color-big-text">Та зээл судлуулах банк, ББСБ-аас 3 хүртэлхийг сонгон илгээнэ үү</p> -->
                     <div class="bank-list">
-                        <p class="middle-title ion-color-big-text">Зээлийн нөхцлийг хангасан банк, ББСБ-ууд</p>
+                        <p class="middle-title ion-color-big-text">Шалгуурыг хангасан</p>
                         <ul class="switch-list">
                             <li ng-repeat="bank in bankListFilter.Agree | filter:{id:'!!'}">
                                 <ion-checkbox ng-model="bank.checked" class="step3-bankList-checkbox-container" ng-change="selectBankLastStep(bank.checked,bank.id)">
@@ -39,7 +39,7 @@
                                         <img ng-src="{{rejectbank.bank_logo|guessImageMime}}" />
                                     </div>
                                     <span class="bank-middle-title">{{rejectbank.department_name}}</span>
-                                    <p class="bank-desc-red">Тэнцээгүй</p>
+                                    <p class="bank-desc-red">Шалгуур хангаагүй</p>
                                 </div>
                                 <!-- </ion-checkbox> -->
                             </li>

@@ -72,11 +72,13 @@
   border-radius: 5px;
   padding: 7px 0px 7px 30px;
   color: #606060;
-  text-align-last: right;
   position: absolute;
   right: 0;
   z-index: 99;
   background: transparent !important;
+}
+.car-step2-card select option {
+  text-align: right !important;
 }
 .car-coll-step2-loan-amount {
   margin: 15px !important;
@@ -216,4 +218,11 @@
   font-weight: bold;
   font-size: 14px;
   line-height: 16px;
+}
+.car-col-img-title {
+  color: #a2a7b5 !important;
+  white-space: normal !important;
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
 }

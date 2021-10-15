@@ -178,10 +178,15 @@
   border-radius: 5px;
   padding: 7px 0px 7px 30px;
   color: #606060;
-  text-align-last: right;
   background-color: #fff;
   position: absolute;
   right: 0;
+  color: #4b5180 !important;
+  font-weight: bold !important;
+}
+.property-step2-card select option {
+  text-align: right !important;
+  color: #4b5180 !important;
 }
 .property-dan-content .scroll {
   position: static !important;

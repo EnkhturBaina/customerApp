@@ -201,12 +201,14 @@
   border-radius: 5px !important;
   margin: 0 0;
   width: 100%;
-  padding: 0 10px 0 0px !important;
+  padding: 0 10px 0 10px !important;
   font-weight: bold;
   color: #4b5180 !important;
-  text-align-last: right;
+  text-align: left !important;
 }
-
+.search-input-type input {
+  text-align: left !important;
+}
 .selector-container .title {
   color: #a2a7b5;
   margin-left: 10px;
@@ -220,9 +222,9 @@
   padding: 7px 15px 7px 10px;
   color: #4b5180;
   background-color: #fff !important;
-  text-align-last: right;
   z-index: 99;
   background: transparent !important;
+  font-weight: bold !important;
 }
 .other-goods-checkbox {
   width: 100%;

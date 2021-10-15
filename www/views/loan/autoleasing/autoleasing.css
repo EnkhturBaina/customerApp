@@ -399,11 +399,12 @@
   padding: 7px 0px 7px 30px;
   color: #4b5180 !important;
   font-weight: bold !important;
-  text-align-last: right;
   z-index: 99;
   background: transparent !important;
 }
-
+.autoleasing-location-select option {
+  text-align: right !important;
+}
 .step3-bankList-checkbox-container {
   padding-left: 15px !important;
   background-color: #fff !important;
@@ -486,9 +487,11 @@
   padding: 7px 0px 7px 30px;
   color: #4b5180 !important;
   font-weight: bold !important;
-  text-align-last: right;
   z-index: 99;
   background: transparent !important;
+}
+.select-income-type option {
+  text-align: right !important;
 }
 .loan-month-type-number {
   color: #4b5180 !important;
