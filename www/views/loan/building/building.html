@@ -1,64 +1,47 @@
-<ion-view id="loanPages" hide-footer-bar="true" hide-nav-bar="true" cache-view="false">
+<ion-view hide-nav-bar="true">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
-    <link href="views/term/term.css" rel="stylesheet" />
-    <ion-header-bar align-title="left" class="navbar" style="background: none; top: 0">
-        <div class="title ion-color-big-text navbar-back-button" style="background: none">
-            <button ng-click="backFromStep2()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
-                <i class="ion-chevron-left ion-color-header"></i>
-                <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Хүсэлт илгээх</span></span>
-            </button>
-        </div>
-        <div class="navbar-right-icon">
-        </div>
-    </ion-header-bar>
-    <!-- <div ng-repeat="data in [{'title':'Дэлгэрэнгүй'}]" ng-include src="'views/navbar.html'"></div> -->
-    <ion-content overflow-scroll="true" class="ion-modified-content has-header autoleasing-step2-content">
+    <div ng-repeat="data in [{'title':'Орон сууцны зээл'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content overflow-scroll="false" ng-controller="buildingCtrl" class="eco-container margin-top-50">
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
-                    <div style="margin-top: 10px; margin-bottom: 30px">
-                        <ul id="progress-bar" class="progressbar">
-                            <li class="active step-li-1"></li>
-                            <li class="active step-li-2"></li>
-                            <li class="step-li-33"></li>
-                            <li class="step-li-4"></li>
-                        </ul>
-                    </div>
+                    <label class="item item-input step2-loan-location">
+                        <p>Орон сууцаа сонгосон эсэх</p>
+                        <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
+                            <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                {{loc.name}}</option>
+                        </select>
+                    </label>
+                    <label class="item item-input step2-loan-location">
+                        <p>Агентын оффис сонгох</p>
+                        <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
+                            <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                {{loc.name}}</option>
+                        </select>
+                    </label>
                     <div class="money-input">
-                        <p class="request-middle-title ion-color-big-text text-center">Зээлийн мэдээлэл</p>
-                        <div class="tugrug-input ion-margin0-auto">
-                            <span class="title input-label-front">Зээлийн хэмжээ</span>
+                        <div class="tugrug-input margin-top-15">
+                            <span class="title input-label-front">Орон сууцны үнэ</span>
                             <div class="tugrug-input-container">
                                 <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" format-input disabled select-on-click />
                             </div>
                         </div>
-                        <!-- <div ng-if="isCollShow" class="vxx-title-container"><span class="vxx-title">Та үл хөдлөх хөрөнгө(ҮХХ) барьцаалснаар зарим банк, ББСБ-аас урьдчилгаа төлбөргүй авах боломжтой</span></div> -->
-                        <label class="item item-input step2-loan-location ion-margin-top5" ng-if="isCollShow">
-                            <p>ҮХХөрөнгө барьцаалах уу?</p>
-                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.collateralConditionId" ng-change="getbankData();changeToolTipData()">
-                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
-                                    {{loc.name}}</option>
-                            </select>
-                        </label>
-                        <div ng-if="!$root.collTrueStep2" class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн урьдчилгаа багадаа <br /> {{$root.displayMinPayment|formatNumber}} байна</span></div>
-                        <div class="tugrug-input">
+                        <div class="tugrug-input ion-margin-top15">
                             <span class="title input-label-front">Урьдчилгаа</span>
                             <div class="tugrug-input-container">
                                 <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmount();" ng-blur="getbankData()" ng-click="removeAdvancePayment()" thousand-separator select-on-click />
                             </div>
                         </div>
-                        <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ {{$root.maxMonth}} сар байна</span></div>
-                        <div class="tugrug-input ion-margin0-auto">
+                        <div class="tugrug-input margin-top-15">
                             <span class="title input-label-front">Хугацаа (сараар)</span>
                             <div class="tugrug-input-container">
                                 <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
                             </div>
                         </div>
-
-                        <label class="item item-input step2-loan-location">
-                            <p>Байршил</p>
-                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
-                                <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                        <label class="item item-input step2-loan-location ion-margin-top15">
+                            <p>ҮХХөрөнгө барьцаалах уу?</p>
+                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.collateralConditionId" ng-change="getbankData();changeToolTipData()">
+                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>
                         </label>
@@ -69,6 +52,14 @@
                                     {{loc.name}}</option>
                             </select>
                         </label>
+                        <label class="item item-input step2-loan-location">
+                            <p>Байршил</p>
+                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
+                                <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}</option>
+                            </select>
+                        </label>
+
                         <div class="switch-input-container">
                             <ul class="switch-list">
                                 <li>
@@ -105,19 +96,10 @@
                         </div>
                     </ion-scroll>
                 </div>
+                <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
             </div>
-            <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
-        </div>
-        <ion-footer class="bottom-footer">
-        </ion-footer>
+            <ion-footer class="bottom-footer-50">
+            </ion-footer>
         </div>
     </ion-content>
 </ion-view>
-<script id="templates/term-content.html" type="text/ng-template">
-  <ion-modal-view class="term-chat-modal">
-    <ion-content class="padding bank-chat-content" scroll="false">
-        <span class="term-modal-off-text" ng-click="termModalAgreement.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
-        <div class="term-modal-include" ng-include src="'views/term/term-content.html'"></div>
-    </ion-content>
-  </ion-modal-view>
-</script>

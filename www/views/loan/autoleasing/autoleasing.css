@@ -438,7 +438,7 @@
 }
 .step2-loan-location p {
   position: absolute;
-  padding-left: 30px;
+  padding-left: 10px;
   z-index: -1;
 }
 .step2-loan-location i {

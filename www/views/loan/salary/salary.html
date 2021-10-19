@@ -1,0 +1,72 @@
+<ion-view hide-nav-bar="true">
+    <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Цалингийн зээл'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content overflow-scroll="false" ng-controller="salaryCtrl" class="divide-container margin-top-50">
+        <div class="big-container">
+            <div class="magic-container">
+                <div class="bg-container">
+                    <div class="money-input">
+                        <div class="tugrug-input margin-top-15">
+                            <span class="title input-label-front">Зээлийн хэмжээ</span>
+                            <div class="tugrug-input-container">
+                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" format-input disabled select-on-click />
+                            </div>
+                        </div>
+                        <label class="item item-input step2-loan-location">
+                            <p>Хугацаа (сараар)</p>
+                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
+                                <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input step2-loan-location">
+                            <p>Ипотекийн зээлтэй эсэх</p>
+                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
+                                <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}</option>
+                            </select>
+                        </label>
+
+                        <div class="switch-input-container">
+                            <ul class="switch-list">
+                                <li>
+                                    <span class="step2-span step2-term" ng-click="termModalAgreement.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
+                                    <span>
+                                        <label class="step2-switch" id="step2isAgree">
+                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-checked="true" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" />
+                                            <div class="step2-slider step2-round">
+                                                <span id="step2-toggle-on" class="step2-on">Тийм</span>
+                                                <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
+                                            </div>
+                                        </label>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-padding pulse-animation" id="section07">
+                    <p class="middle-title agree-banks">ТА ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГАЖ БУЙ БАНК, ББСБ-УУД</p>
+                    <ion-scroll id="photoBanner" direction="x" class="wide-scroll-bank-step agree-bank-arrow">
+                        <div class="bank" ng-repeat="bank in bankListFilter.Agree">
+                            <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+                            <p>{{bank.department_name}}</p>
+                        </div>
+                    </ion-scroll>
+                </div>
+                <div class="container-padding" id="section07">
+                    <p class="middle-title not-agree-banks">ТА ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГААГҮЙ БАНК, ББСБ-УУД</p>
+                    <ion-scroll direction="x" class="wide-scroll-bank-step">
+                        <div class="bank" ng-repeat="bank in bankListFilter.NotAgree">
+                            <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+                            <p>{{bank.department_name}}</p>
+                        </div>
+                    </ion-scroll>
+                </div>
+                <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
+            </div>
+            <ion-footer class="bottom-footer-50">
+            </ion-footer>
+        </div>
+    </ion-content>
+</ion-view>

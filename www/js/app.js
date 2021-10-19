@@ -39,6 +39,13 @@ var app = angular
     "suppliers-search.Ctrl",
     "supplier-detail.Ctrl",
     "purchase-inst.Ctrl",
+    "eco.Ctrl",
+    "building.Ctrl",
+    "card.Ctrl",
+    "money.Ctrl",
+    "divide.Ctrl",
+    "salary.Ctrl",
+    "dan_page.Ctrl",
   ])
   .run(function ($ionicPlatform, $cordovaNetwork, $cordovaSplashscreen) {
     $ionicPlatform.ready(function () {
@@ -319,6 +326,41 @@ var app = angular
       url: "/views/purchase-inst",
       templateUrl: "views/purchase-inst/purchase-inst.html",
       controller: "purchase-instCtrl",
+    });
+    $stateProvider.state("eco", {
+      url: "/views/loan/eco",
+      templateUrl: "views/loan/eco/eco.html",
+      controller: "ecoCtrl",
+    });
+    $stateProvider.state("building", {
+      url: "/views/loan/building",
+      templateUrl: "views/loan/building/building.html",
+      controller: "buildingCtrl",
+    });
+    $stateProvider.state("card", {
+      url: "/views/loan/card",
+      templateUrl: "views/loan/card/card.html",
+      controller: "cardCtrl",
+    });
+    $stateProvider.state("money", {
+      url: "/views/loan/money",
+      templateUrl: "views/loan/money/money.html",
+      controller: "moneyCtrl",
+    });
+    $stateProvider.state("divide", {
+      url: "/views/loan/divide",
+      templateUrl: "views/loan/divide/divide.html",
+      controller: "divideCtrl",
+    });
+    $stateProvider.state("salary", {
+      url: "/views/loan/salary",
+      templateUrl: "views/loan/salary/salary.html",
+      controller: "salaryCtrl",
+    });
+    $stateProvider.state("dan_page", {
+      url: "/views/loan/dan_page",
+      templateUrl: "views/loan/dan_page/dan_page.html",
+      controller: "dan_pageCtrl",
     });
     $urlRouterProvider.otherwise("/views/home");
   })

@@ -278,4 +278,37 @@
     $rootScope.selectSupplierID = id;
     $state.go("supplier-detail");
   };
+
+  $scope.ecoLoan = function () {
+    localStorage.setItem("requestType", "eco");
+    $state.go("eco");
+  };
+  $scope.buildingLoan = function () {
+    localStorage.setItem("requestType", "building");
+    $state.go("building");
+  };
+  $scope.cardLoan = function () {
+    localStorage.setItem("requestType", "card");
+    $state.go("card");
+  };
+  $scope.moneyLoan = function () {
+    localStorage.setItem("requestType", "money");
+    $state.go("money");
+  };
+  $scope.divideLoan = function () {
+    localStorage.setItem("requestType", "divide");
+    $state.go("divide");
+  };
+  $scope.salaryLoan = function () {
+    localStorage.setItem("requestType", "salary");
+    $state.go("dan_page");
+  };
+  $scope.smallBusinessLoan = function () {
+    localStorage.setItem("requestType", "smallBusiness");
+    $state.go("dan_page");
+  };
+  $scope.businessLoan = function () {
+    localStorage.setItem("requestType", "business");
+    $state.go("dan_page");
+  };
 });
