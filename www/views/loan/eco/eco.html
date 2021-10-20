@@ -7,23 +7,23 @@
                 <div class="bg-container">
                     <label class="item item-input step2-loan-location">
                         <p>Барааны төрөл</p>
-                        <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
-                            <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                        <select class="autoleasing-location-select" ng-model="$root.newReqiust.typeId" ng-change="changeSupSubCategory($root.newReqiust.typeId);">
+                            <option ng-repeat="loc in $root.ecoProductType | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                 {{loc.name}}</option>
                         </select>
                     </label>
                     <label class="item item-input step2-loan-location">
                         <p>Нийлүүлэгч</p>
-                        <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
-                            <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
-                                {{loc.name}}</option>
+                        <select id="shopId" class="autoleasing-location-select" ng-model="$root.newReqiust.vendorId" disabled>
+                            <option ng-repeat="loc in $root.allSupplierList | filter:{id:'!!'}" ng-if="loc.suppliername" value="{{loc.id}}">
+                                {{loc.suppliername}}</option>
                         </select>
                     </label>
                     <div class="money-input">
                         <div class="tugrug-input margin-top-15">
                             <span class="title input-label-front">Зээлийн хэмжээ</span>
                             <div class="tugrug-input-container">
-                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" format-input disabled select-on-click />
+                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" thousand-separator select-on-click />
                             </div>
                         </div>
                         <div class="tugrug-input margin-top-15">
@@ -83,10 +83,18 @@
                         </div>
                     </ion-scroll>
                 </div>
-                <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
+                <button class="button btn single-button" id="Next" ng-click="ecoStep2()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
             </div>
             <ion-footer class="bottom-footer-50">
             </ion-footer>
         </div>
     </ion-content>
 </ion-view>
+<script id="templates/term-content.html" type="text/ng-template">
+  <ion-modal-view class="term-chat-modal">
+    <ion-content class="padding bank-chat-content" scroll="false">
+        <span class="term-modal-off-text" ng-click="termModalAgreement.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <div class="term-modal-include" ng-include src="'views/term/term-content.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>

@@ -600,6 +600,11 @@ var app = angular
         scope.$eval(attrs.repeatDone);
       }
     };
+  })
+  .filter("htmlToPlaintext", function () {
+    return function (text) {
+      return String(text).replace(/<[^>]+>/gm, "");
+    };
   });
 
 function numOnly() {

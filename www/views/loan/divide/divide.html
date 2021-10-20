@@ -7,29 +7,29 @@
                 <div class="bg-container">
                     <label class="item item-input step2-loan-location">
                         <p>Бараа нийлүүлэгч</p>
-                        <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
-                            <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
-                                {{loc.name}}</option>
+                        <select class="autoleasing-location-select" ng-model="$root.newReqiust.vendorId" ng-change="getbankData();">
+                            <option ng-repeat="loc in $root.allSupplierList | filter:{id:'!!'}" ng-if="loc.suppliername" value="{{loc.id}}">
+                                {{loc.suppliername}}</option>
                         </select>
                     </label>
                     <div class="money-input">
                         <div class="tugrug-input margin-top-15">
                             <span class="title input-label-front">Зээлийн хэмжээ</span>
                             <div class="tugrug-input-container">
-                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" format-input disabled select-on-click />
+                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" thousand-separator select-on-click />
                             </div>
                         </div>
                         <label class="item item-input step2-loan-location">
                             <p>Нөхцөл</p>
-                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
-                                <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();changeDivideCondition($root.newReqiust.locationId);">
+                                <option ng-repeat="loc in $root.fidteredSupplierConditions | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>
                         </label>
                         <div class="tugrug-input margin-top-15">
                             <span class="title input-label-front">Хүү</span>
                             <div class="tugrug-input-container">
-                                <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
+                                <input type="text" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="monthCond" ng-blur="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
                             </div>
                         </div>
 
@@ -69,10 +69,18 @@
                         </div>
                     </ion-scroll>
                 </div>
-                <button class="button btn single-button" id="Next" ng-click="goStep3()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
+                <button class="button btn single-button" id="Next" ng-click="divideStep2()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
             </div>
             <ion-footer class="bottom-footer-50">
             </ion-footer>
         </div>
     </ion-content>
 </ion-view>
+<script id="templates/term-content.html" type="text/ng-template">
+  <ion-modal-view class="term-chat-modal">
+    <ion-content class="padding bank-chat-content" scroll="false">
+        <span class="term-modal-off-text" ng-click="termModalAgreement.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <div class="term-modal-include" ng-include src="'views/term/term-content.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>

@@ -150,7 +150,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       $rootScope.newCarReq = {};
     }
     if ($scope.carCollCheckReqiured("step1")) {
-      localStorage.setItem("requestType", "autoColl");
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
 
       $state.go("car_coll2");
@@ -288,7 +287,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         $rootScope.alert("Зээлийн хэмжээ оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carCollateralRequestData.loanMonth)) {
-        $rootScope.alert("Зээл авах хугацаа сонгоно уу", "warning");
+        $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carCollateralRequestData.locationId)) {
         $rootScope.alert("Зээл авах байршил сонгоно уу", "warning");

@@ -33,7 +33,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
 
   $scope.saveProperty = function () {
     if ($scope.propertyCheckReqiured("step1")) {
-      localStorage.setItem("requestType", "estate");
       $state.go("property_collateral2");
     }
   };
@@ -282,7 +281,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         $rootScope.alert("Зээлийн хэмжээ оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.propertyRequestData.loanMonth)) {
-        $rootScope.alert("Зээл авах хугацаа сонгоно уу", "warning");
+        $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.propertyRequestData.locationId)) {
         $rootScope.alert("Зээл авах байршил сонгоно уу", "warning");

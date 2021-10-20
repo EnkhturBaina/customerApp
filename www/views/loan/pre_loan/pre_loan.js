@@ -149,7 +149,6 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
   };
 
   $scope.$on("$ionicView.enter", function () {
-    localStorage.setItem("requestType", "preLoan");
     $rootScope.hideFooter = true;
 
     $rootScope.collTrueStep2 = false;

@@ -442,7 +442,7 @@ h4 {
   background: -webkit-linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%);
   background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%);
   filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#a2d136", endColorstr="#3cc1f9", GradientType=1);
-  width: 55vw;
+  width: 44vw;
   font-size: 10px;
   letter-spacing: 1px !important;
   margin: 10px auto !important;

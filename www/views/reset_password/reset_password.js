@@ -1,18 +1,5 @@
 angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", function ($window, $state, $scope, $rootScope, $timeout, serverDeferred) {
   $(".register-mobile").mask("00000000");
-  var progressBar = {
-    Bar: $("#pr-progress-bar"),
-    step1: $("reset-step-1"),
-    step2: $("reset-step-2"),
-
-    Next: function () {
-      $("#reset-step-1").addClass("remove-step");
-      $("#reset-step-1").removeClass("add-step");
-
-      $("#reset-step-2").removeClass("remove-step");
-      $("#reset-step-2").addClass("add-step");
-    },
-  };
 
   var registeredUserData = {};
   $rootScope.customerNewPassword = {};
@@ -46,7 +33,6 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
         } else {
           var generatedCode = Math.floor(100000 + Math.random() * 900000);
           registeredUserData = response[0];
-          progressBar.Next();
           $scope.isStep1 = false;
           $scope.isStep2 = true;
           $timeout(function () {

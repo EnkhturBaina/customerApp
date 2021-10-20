@@ -1,29 +1,6 @@
 angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeout, $scope, $rootScope, $state, serverDeferred, $ionicPlatform, $ionicModal) {
   $(".register-mobile").mask("00000000");
   $(".registerRegSelector").mask("99999999");
-  var progressBar = {
-    Bar: $("#progress-bar"),
-    step1: $("register-step-1"),
-    step2: $("register-step-2"),
-
-    Next: function () {
-      $("#progress-bar li:not(.active):first").addClass("active");
-      $("#register-step-1").addClass("remove-step");
-      $("#register-step-1").removeClass("add-step");
-
-      $("#register-step-2").removeClass("remove-step");
-      $("#register-step-2").addClass("add-step");
-    },
-    Back: function () {
-      $("#progress-bar li.active:last").removeClass("active");
-
-      $("#register-step-2").removeClass("add-step");
-      $("#register-step-2").addClass("remove-step");
-
-      $("#register-step-1").removeClass("remove-step");
-      $("#register-step-1").addClass("add-step");
-    },
-  };
 
   $scope.isStep1 = true;
   $scope.isStep2 = false;
@@ -115,7 +92,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
               if (crmResponse[0] == "success") {
                 $scope.isStep1 = false;
                 $scope.isStep2 = true;
-                progressBar.Next();
+
                 $timeout(function () {
                   serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id }).then(function (response) {
                     localStorage.setItem("ALL_ID", JSON.stringify(response[0]));

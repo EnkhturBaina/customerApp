@@ -154,10 +154,37 @@
         $rootScope.supplierConditions = response.filter((value) => Object.keys(value).length !== 0);
       }
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16269369396661" }).then(function (response) {
+      if (!isEmpty(response)) {
+        $rootScope.supplierConditionsNotMap = response.filter((value) => Object.keys(value).length !== 0);
+      }
+    });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1629173002695086" }).then(function (response) {
       if (!isEmpty(response)) {
         $rootScope.educationData = response.filter((value) => Object.keys(value).length !== 0);
       }
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1634710517519245" }).then(function (response) {
+      if (!isEmpty(response)) {
+        $rootScope.ecoProductType = response.filter((value) => Object.keys(value).length !== 0);
+      }
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614229736963117" }).then(function (response) {
+      $rootScope.supplierCategory = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614229588590652" }).then(function (response) {
+      $rootScope.supplierHaveCategory = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614232214127503" }).then(function (response) {
+      $rootScope.allSupplierList = response;
+      $rootScope.suppcategoryStore = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16347033464591" }).then(function (response) {
+      $rootScope.supplierHaveSubCategory = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1634724795622863" }).then(function (response) {
+      console.log("res", response);
+      $rootScope.termContent = response[0].templatebody;
     });
   };
   $scope.getProfileLookupData();
@@ -279,36 +306,8 @@
     $state.go("supplier-detail");
   };
 
-  $scope.ecoLoan = function () {
-    localStorage.setItem("requestType", "eco");
-    $state.go("eco");
-  };
-  $scope.buildingLoan = function () {
-    localStorage.setItem("requestType", "building");
-    $state.go("building");
-  };
-  $scope.cardLoan = function () {
-    localStorage.setItem("requestType", "card");
-    $state.go("card");
-  };
-  $scope.moneyLoan = function () {
-    localStorage.setItem("requestType", "money");
-    $state.go("money");
-  };
-  $scope.divideLoan = function () {
-    localStorage.setItem("requestType", "divide");
-    $state.go("divide");
-  };
-  $scope.salaryLoan = function () {
-    localStorage.setItem("requestType", "salary");
-    $state.go("dan_page");
-  };
-  $scope.smallBusinessLoan = function () {
-    localStorage.setItem("requestType", "smallBusiness");
-    $state.go("dan_page");
-  };
-  $scope.businessLoan = function () {
-    localStorage.setItem("requestType", "business");
-    $state.go("dan_page");
+  $scope.goLoanPage = function (type, state) {
+    localStorage.setItem("requestType", type);
+    $state.go(state);
   };
 });

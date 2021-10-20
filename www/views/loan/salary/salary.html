@@ -70,3 +70,11 @@
         </div>
     </ion-content>
 </ion-view>
+<script id="templates/term-content.html" type="text/ng-template">
+  <ion-modal-view class="term-chat-modal">
+    <ion-content class="padding bank-chat-content" scroll="false">
+        <span class="term-modal-off-text" ng-click="termModalAgreement.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <div class="term-modal-include" ng-include src="'views/term/term-content.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>
