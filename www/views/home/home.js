@@ -183,7 +183,6 @@
       $rootScope.supplierHaveSubCategory = response;
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1634724795622863" }).then(function (response) {
-      console.log("res", response);
       $rootScope.termContent = response[0].templatebody;
     });
   };
@@ -306,8 +305,12 @@
     $state.go("supplier-detail");
   };
 
-  $scope.goLoanPage = function (type, state) {
-    localStorage.setItem("requestType", type);
-    $state.go(state);
+  $scope.goLoanPage = function (type, state, isactive) {
+    if (isactive == "active") {
+      localStorage.setItem("requestType", type);
+      $state.go(state);
+    } else {
+      $rootScope.alert("Тун удахгүй", "warning");
+    }
   };
 });

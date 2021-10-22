@@ -1,10 +1,4 @@
-angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScope, serverDeferred, $ionicModal, $state) {
-  $rootScope.$on("$ionicView.enter", function () {
-    $rootScope.newReqiust.serviceAgreementId = 1554263832132;
-  });
-
-  $rootScope.$on("$ionicView.loaded", function () {});
-
+angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScope, serverDeferred, $ionicModal, $state, $timeout) {
   $ionicModal
     .fromTemplateUrl("templates/term-content.html", {
       scope: $scope,
@@ -73,4 +67,40 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
       $state.go("income");
     }
   };
+  $rootScope.getbankDataEco = function (a) {
+    if (a != "forced") $rootScope.ShowLoader();
+
+    $rootScope.requestType = localStorage.getItem("requestType");
+    //Шүүгдсэн банкууд
+    $rootScope.bankListFilter = [];
+    var json = {};
+
+    json.isPerson = "1";
+    json.isCollateral = "";
+
+    //банк шүүлт
+    json.type = "ecoLoanFilter";
+    json.totalLoan = $rootScope.newReqiust.getLoanAmount;
+    json.location = $rootScope.newReqiust.locationId;
+    json.month = $rootScope.newReqiust.loanMonth;
+
+    serverDeferred.carCalculation(json).then(function (response) {
+      $rootScope.bankListFilter = response.result.data;
+      $rootScope.HideLoader();
+    });
+    console.log("json", json);
+  };
+  $rootScope.$on("$ionicView.enter", function () {
+    $rootScope.newReqiust.serviceAgreementId = 1554263832132;
+
+    if ($state.current.name == "eco") {
+      $timeout(function () {
+        $scope.getbankDataEco("forced");
+      }, 200);
+    }
+  });
+
+  $rootScope.$on("$ionicView.loaded", function () {
+    $rootScope.hideFooter = true;
+  });
 });

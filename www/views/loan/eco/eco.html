@@ -7,14 +7,14 @@
                 <div class="bg-container">
                     <label class="item item-input step2-loan-location">
                         <p>Барааны төрөл</p>
-                        <select class="autoleasing-location-select" ng-model="$root.newReqiust.typeId" ng-change="changeSupSubCategory($root.newReqiust.typeId);">
+                        <select class="autoleasing-location-select" ng-model="$root.newReqiust.typeId" ng-change="changeSupSubCategory($root.newReqiust.typeId);getbankDataEco();">
                             <option ng-repeat="loc in $root.ecoProductType | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                 {{loc.name}}</option>
                         </select>
                     </label>
                     <label class="item item-input step2-loan-location">
                         <p>Нийлүүлэгч</p>
-                        <select id="shopId" class="autoleasing-location-select" ng-model="$root.newReqiust.vendorId" disabled>
+                        <select id="shopId" class="autoleasing-location-select" ng-model="$root.newReqiust.vendorId" disabled ng-change="getbankDataEco()">
                             <option ng-repeat="loc in $root.allSupplierList | filter:{id:'!!'}" ng-if="loc.suppliername" value="{{loc.id}}">
                                 {{loc.suppliername}}</option>
                         </select>
@@ -23,13 +23,13 @@
                         <div class="tugrug-input margin-top-15">
                             <span class="title input-label-front">Зээлийн хэмжээ</span>
                             <div class="tugrug-input-container">
-                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" thousand-separator select-on-click />
+                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" thousand-separator select-on-click ng-blur="getbankDataEco()" />
                             </div>
                         </div>
                         <div class="tugrug-input margin-top-15">
                             <span class="title input-label-front">Хугацаа (сараар)</span>
                             <div class="tugrug-input-container">
-                                <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
+                                <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankDataEco()" ng-keyup="hideKeyboard($event)" select-on-click />
                             </div>
                         </div>
                         <label class="item item-input step2-loan-location">
@@ -41,7 +41,7 @@
                         </label>
                         <label class="item item-input step2-loan-location">
                             <p>Байршил</p>
-                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
+                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankDataEco();">
                                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>

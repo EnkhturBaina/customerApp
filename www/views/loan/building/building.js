@@ -1,29 +1,4 @@
-angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope, $rootScope, serverDeferred, $ionicModal, $state) {
-  $rootScope.$on("$ionicView.enter", function () {
-    $rootScope.newReqiust.serviceAgreementId = 1554263832132;
-  });
-
-  $rootScope.$on("$ionicView.loaded", function () {
-    $scope.selectedSupplierCategory = [];
-    $scope.supplierHaveCategory.map((item) => {
-      if (item.categoryid === "1578891191298") {
-        $scope.selectedSupplierCategory.push(item.supplierid);
-        return true;
-      }
-    });
-    var selectedCategory = [];
-
-    $rootScope.allSupplierList = $rootScope.suppcategoryStore.some((item) => {
-      $scope.selectedSupplierCategory.map((item2) => {
-        if (item2 == item.id) {
-          selectedCategory.push(item);
-          return true;
-        }
-      });
-    });
-    $rootScope.buildingAgent = selectedCategory;
-  });
-
+angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope, $rootScope, serverDeferred, $ionicModal, $state, $timeout) {
   $ionicModal
     .fromTemplateUrl("templates/term-content.html", {
       scope: $scope,
@@ -71,4 +46,58 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
       $state.go("income");
     }
   };
+  $rootScope.getbankDataBuilding = function (a) {
+    if (a != "forced") $rootScope.ShowLoader();
+
+    $rootScope.requestType = localStorage.getItem("requestType");
+    //Шүүгдсэн банкууд
+    $rootScope.bankListFilter = [];
+    var json = {};
+
+    json.isPerson = "1";
+    json.isCollateral = "";
+
+    //банк шүүлт
+    json.type = "buildingLoanFilter";
+    json.totalLoan = $rootScope.newReqiust.getLoanAmount;
+    json.location = $rootScope.newReqiust.locationId;
+    json.month = $rootScope.newReqiust.loanMonth;
+
+    serverDeferred.carCalculation(json).then(function (response) {
+      $rootScope.bankListFilter = response.result.data;
+      $rootScope.HideLoader();
+    });
+    console.log("json", json);
+  };
+  $rootScope.$on("$ionicView.enter", function () {
+    $rootScope.newReqiust.serviceAgreementId = 1554263832132;
+
+    if ($state.current.name == "building") {
+      $timeout(function () {
+        $scope.getbankDataBuilding("forced");
+      }, 200);
+    }
+  });
+
+  $rootScope.$on("$ionicView.loaded", function () {
+    $rootScope.hideFooter = true;
+    $scope.selectedSupplierCategory = [];
+    $scope.supplierHaveCategory.map((item) => {
+      if (item.categoryid === "1578891191298") {
+        $scope.selectedSupplierCategory.push(item.supplierid);
+        return true;
+      }
+    });
+    var selectedCategory = [];
+
+    $rootScope.allSupplierList = $rootScope.suppcategoryStore.some((item) => {
+      $scope.selectedSupplierCategory.map((item2) => {
+        if (item2 == item.id) {
+          selectedCategory.push(item);
+          return true;
+        }
+      });
+    });
+    $rootScope.buildingAgent = selectedCategory;
+  });
 });

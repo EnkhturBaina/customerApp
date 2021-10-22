@@ -9,18 +9,18 @@
                         <div class="tugrug-input margin-top-15">
                             <span class="title input-label-front">Зээлийн хэмжээ</span>
                             <div class="tugrug-input-container">
-                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" thousand-separator select-on-click />
+                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" thousand-separator select-on-click ng-blur="getbankDataCard()" />
                             </div>
                         </div>
                         <div class="tugrug-input margin-top-15">
                             <span class="title input-label-front">Хугацаа (сараар)</span>
                             <div class="tugrug-input-container">
-                                <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
+                                <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankDataCard()" ng-keyup="hideKeyboard($event)" select-on-click />
                             </div>
                         </div>
                         <label class="item item-input step2-loan-location">
                             <p>Байршил</p>
-                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
+                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankDataCard();">
                                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>

@@ -43,7 +43,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
     $rootScope.uniqueIdentifierDanDisable = false;
   };
 
-  $scope.gotoDanLoginDanSelect = function () {
+  $rootScope.gotoDanLoginDanSelect = function () {
     $rootScope.danCustomerData = {};
     $rootScope.danIncomeData = {};
     serverDeferred.carCalculation({ type: "auth_car_collateral", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
