@@ -88,9 +88,12 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
     });
-    console.log("json", json);
+    // console.log("json", json);
   };
   $rootScope.$on("$ionicView.enter", function () {
+    if ($state.current.name == "eco") {
+      $rootScope.newReqiust = {};
+    }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
 
     if ($state.current.name == "eco") {

@@ -1,4 +1,12 @@
-angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $rootScope, $state, $timeout, serverDeferred) {
+angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $rootScope, $state, $timeout, serverDeferred, $ionicModal) {
+  $ionicModal
+    .fromTemplateUrl("templates/term-content.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (termModalAgreement) {
+      $scope.termModalAgreement = termModalAgreement;
+    });
   $rootScope.getbankDataSalary = function (a) {
     if (a != "forced") $rootScope.ShowLoader();
 
@@ -20,11 +28,13 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
     });
-    console.log("json", json);
+    // console.log("json", json);
   };
 
   $rootScope.$on("$ionicView.enter", function () {
-    $rootScope.newReqiust = {};
+    if ($state.current.name == "salary") {
+      $rootScope.newReqiust = {};
+    }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if ($state.current.name == "salary") {
       $timeout(function () {
@@ -36,4 +46,29 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
   $rootScope.$on("$ionicView.loaded", function () {
     $rootScope.hideFooter = true;
   });
+  $scope.checkReqiured = function (param) {
+    if (param == "salary-valid") {
+      if (isEmpty($rootScope.newReqiust.getLoanAmount)) {
+        $rootScope.alert("Зээлийн хэмжээ оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
+        $rootScope.alert("Хугацаа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.locationId)) {
+        $rootScope.alert("Байршил сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
+        $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
+        return false;
+      } else {
+        return true;
+      }
+    }
+  };
+  $scope.salaryStep2 = function () {
+    if ($scope.checkReqiured("salary-valid")) {
+      console.log("$rootScope.newReqiust", $rootScope.newReqiust);
+      $state.go("autoleasing-4");
+    }
+  };
 });

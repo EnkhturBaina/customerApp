@@ -67,9 +67,12 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
     });
-    console.log("json", json);
+    // console.log("json", json);
   };
   $rootScope.$on("$ionicView.enter", function () {
+    if ($state.current.name == "building") {
+      $rootScope.newReqiust = {};
+    }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
 
     if ($state.current.name == "building") {

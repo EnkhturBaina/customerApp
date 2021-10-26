@@ -235,7 +235,7 @@
         }
       }
     });
-    console.log("json", json);
+    // console.log("json", json);
 
     // if ($rootScope.minPayment > $rootScope.newReqiust.advancePayment || $rootScope.newReqiust.advancePayment == 0 || isEmpty($rootScope.newReqiust.advancePayment)) {
     //   $rootScope.collTrueStep2 = false;
@@ -484,10 +484,21 @@
             $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
           }
         });
-      } else if ($rootScope.requestType == "eco") {
+      } else if ($rootScope.requestType == "eco" || $rootScope.requestType == "building" || $rootScope.requestType == "card" || $rootScope.requestType == "salary") {
         //===================Ногоон зээл===================
+        //===================Орон сууцны зээл===================
+        //===================Кредит карт===================
+        //===================Цалингийн зээл===================
+        if ($rootScope.requestType == "eco") {
+          $scope.newReqiust.requestTypeId = "16082024252192";
+        } else if ($rootScope.requestType == "building") {
+          $scope.newReqiust.requestTypeId = "16082024283632";
+        } else if ($rootScope.requestType == "card") {
+          $scope.newReqiust.requestTypeId = "16082024283628";
+        } else if ($rootScope.requestType == "salary") {
+          $scope.newReqiust.requestTypeId = "16082024283627";
+        }
         $scope.newReqiust.customerId = all_ID.dccustomerid;
-        $scope.newReqiust.requestTypeId = "16082024252192";
         $scope.newReqiust.loanAmount = $scope.newReqiust.getLoanAmount;
         //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
         $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
@@ -508,10 +519,10 @@
         });
         $rootScope.newReqiust.dcApp_preLoanRequestMapDV = selectedbanks;
 
-        console.log("$rootScope.newReqiust", $rootScope.newReqiust);
+        // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
 
         serverDeferred.requestFull("dcApp_preLoan_001", $rootScope.newReqiust).then(function (response) {
-          console.log("res", response);
+          // console.log("res", response);
           if (response[0] == "success" && response[1] != "") {
             $rootScope.danIncomeData.leasingid = response[1].id;
             $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
@@ -574,8 +585,6 @@
         });
         $rootScope.newReqiust.dcApp_preLoanRequestMapDV = selectedbanks;
 
-        // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
-
         serverDeferred.requestFull("dcApp_preLoan_001", $rootScope.newReqiust).then(function (response) {
           // console.log("res", response);
           if (response[0] == "success" && response[1] != "") {
@@ -622,7 +631,6 @@
         $scope.newReqiust.customerId = all_ID.dccustomerid;
         $scope.newReqiust.requestTypeId = "16082024252191";
         //Хүсэлт бүртгэх
-        // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
         serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
           // console.log("respionse OL", response);
           if (response[0] == "success" && response[1] != "") {
@@ -927,6 +935,8 @@
   //other
   $scope.checkReqiured = function (param) {
     if (isEmpty($rootScope.newReqiust)) {
+      $rootScope.requestType = localStorage.getItem("requestType");
+      console.log("$rootScope.requestType", $rootScope.requestType);
       $rootScope.newReqiust = {};
       $rootScope.newReqiust.customerId = "";
     }

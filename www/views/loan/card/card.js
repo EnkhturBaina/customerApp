@@ -52,9 +52,12 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
     });
-    console.log("json", json);
+    // console.log("json", json);
   };
   $rootScope.$on("$ionicView.enter", function () {
+    if ($state.current.name == "card") {
+      $rootScope.newReqiust = {};
+    }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if ($state.current.name == "card") {
       $timeout(function () {

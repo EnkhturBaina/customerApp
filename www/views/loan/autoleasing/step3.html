@@ -7,7 +7,7 @@
                 <div class="bg-container">
                     <!-- <p class="header-title-step3 ion-color-big-text">Та зээл судлуулах банк, ББСБ-аас 3 хүртэлхийг сонгон илгээнэ үү</p> -->
                     <div class="bank-list">
-                        <p class="middle-title ion-color-big-text">>Зээлийн нөхцлийг хангасан банк, ББСБ-ууд</p>
+                        <p class="middle-title ion-color-big-text">Зээлийн нөхцлийг хангасан банк, ББСБ-ууд</p>
                         <ul class="switch-list">
                             <li ng-repeat="bank in bankListFilter.Agree | filter:{id:'!!'}">
                                 <ion-checkbox ng-model="bank.checked" class="step3-bankList-checkbox-container" ng-change="selectBankLastStep(bank.checked,bank.id)">
