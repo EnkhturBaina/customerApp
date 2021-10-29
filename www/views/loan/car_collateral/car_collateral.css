@@ -58,7 +58,7 @@
   letter-spacing: -0.5px;
 }
 .car-step2-card {
-  padding: 10px;
+  padding: 10px 20px;
   margin: 20px 15px 0px 15px;
   background-color: #fff !important;
   margin: 70px 20px 10px 20px !important;
@@ -80,30 +80,13 @@
 .car-step2-card select option {
   text-align: right !important;
 }
-.car-coll-step2-loan-amount {
-  margin: 15px !important;
-}
 .step2-card-span {
+  justify-content: center;
   color: #4b5180;
   font-size: 12px;
   text-transform: uppercase;
   display: flex;
   font-weight: bold;
-  padding: 10px 0px 0px 15px;
-}
-.step2-loam-month {
-  border: 1px solid #d5d5d5 !important;
-  border-radius: 5px;
-  margin: 15px !important;
-  padding: 15px 5px 15px 0px !important;
-}
-.step2-loam-month p {
-  position: absolute;
-  padding-left: 30px;
-}
-.step2-loam-month i {
-  font-size: 1.3em !important;
-  padding: 10px !important;
 }
 .step2-bank-container img {
   display: block;
@@ -116,10 +99,6 @@
   justify-content: center;
   align-items: center;
   font-size: 12px;
-}
-.car-coll-step2-title {
-  color: #606060 !important;
-  z-index: -1;
 }
 #car-collateral2 > .scroll {
   height: 170px;
@@ -176,7 +155,7 @@
   padding-top: 2px;
 }
 .car-coll-switch {
-  margin: 15px;
+  margin: 0px;
 }
 .car-collateral-contant-card {
   background-color: #fff;

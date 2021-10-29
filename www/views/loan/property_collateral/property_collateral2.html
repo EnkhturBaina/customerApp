@@ -5,26 +5,20 @@
         <div class="list car-collateral-list" ng-controller="property_collateralCtrl">
             <div class="card property-step2-card money-input">
                 <span class="step2-card-span">Зээлийн хүсэлтийн мэдээлэл</span>
-                <div class="tugrug-input car-coll-step2-loan-amount">
-                    <span class="title car-coll-step2-title">Зээлийн хэмжээ</span>
-                    <div class="tugrug-input-container">
-                        <span class="input-tugrug-icon">₮</span>
-                        <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="0" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.propertyRequestData.loanAmount" thousand-separator ng-keyup="hideKeyboard($event)" ng-blur="getbankDataProperty()" select-on-click />
-                    </div>
-                </div>
-                <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ {{$root.maxMonth}} сар байна</span></div>
-                <div class="tugrug-input car-coll-step2-loan-amount">
-                    <span class="title car-coll-step2-title">Хугацаа (сараар)</span>
-                    <div class="tugrug-input-container">
-                        <span class="input-tugrug-icon"><i class="icon fa fa-calendar"></i></span>
-                        <input type="tel" placeholder="0" name="" id="propertyStep2loanMonth" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask loan-month-type-number" ng-model="$root.propertyRequestData.loanMonth" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataProperty()" select-on-click />
-                    </div>
-                </div>
-                <label class="item item-input step2-loam-month">
-                    <i class="icon fa fa-map-marker fa-2x input-tugrug-icon"></i>
-                    <p>Байршил</p>
-                    <select class="property-step2-select" ng-model="$root.propertyRequestData.locationId" ng-change="getbankDataProperty()">
-                        <option ng-repeat="loc in locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">{{loc.name}}</option>
+                <label class="item item-input item-stacked-label form-input-label">
+                    <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
+                    <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.propertyRequestData.loanAmount" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataProperty()" thousand-separator select-on-click>
+                </label>
+                <label class="item item-input item-stacked-label form-input-label">
+                    <p class="input-label" style="margin: 0;">Хугацаа (сараар)</p>
+                    <input inputmode="numeric" pattern="[0-9]*" id="propertyStep2loanMonth" type="text" placeholder="" name="" ng-model="$root.propertyRequestData.loanMonth" class="property-input" ng-blur="getbankDataProperty()" ng-keyup="hideKeyboard($event)" select-on-click>
+                </label>
+                <label class="item item-input item-select form-input-label">
+                    <p class="input-label" style="margin: 0;">Байршил</p>
+                    <select ng-model="$root.propertyRequestData.locationId" class="custom-form-input-select" ng-change="getbankDataProperty()">
+                        <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                            {{loc.name}}
+                        </option>
                     </select>
                 </label>
                 <div class="switch-input-container car-coll-switch">

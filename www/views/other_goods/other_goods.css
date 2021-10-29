@@ -150,11 +150,6 @@
   font-weight: bold;
 }
 
-.autoleasing-step1-content {
-  height: 100% !important;
-  position: relative !important;
-}
-
 .total-price {
   display: flex;
   margin: 10px 10px;
@@ -194,38 +189,11 @@
   z-index: 99;
   display: block !important;
 }
-.search-input-type {
-  background: none;
-  text-align: left !important;
-  border: 1px solid #d5d5d5 !important;
-  border-radius: 5px !important;
-  margin: 0 0;
-  width: 100%;
-  padding: 0 10px 0 10px !important;
-  font-weight: bold;
-  color: #4b5180 !important;
-  text-align: left !important;
-}
-.search-input-type input {
-  text-align: left !important;
-}
 .selector-container .title {
   color: #a2a7b5;
   margin-left: 10px;
 }
 
-.consumer-loan-suppp-select {
-  width: 100%;
-  border: 1px solid #d5d5d5;
-  border-color: #d5d5d5;
-  border-radius: 5px;
-  padding: 7px 15px 7px 10px;
-  color: #4b5180;
-  background-color: #fff !important;
-  z-index: 99;
-  background: transparent !important;
-  font-weight: bold !important;
-}
 .other-goods-checkbox {
   width: 100%;
   padding-left: 15px !important;

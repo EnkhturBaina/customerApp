@@ -1,4 +1,5 @@
 angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $rootScope, $state, $timeout, serverDeferred, $ionicModal) {
+  $("#step2loanMonth").mask("000");
   $ionicModal
     .fromTemplateUrl("templates/term-content.html", {
       scope: $scope,

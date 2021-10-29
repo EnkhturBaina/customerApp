@@ -9,7 +9,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   // $("#squareSize").mask("0.000", { reverse: true });
   $("#roomCount").mask("000");
   $("#floorCount").mask("00");
-  $("#propertyStep2loanMonth").mask("00");
+  $("#propertyStep2loanMonth").mask("000");
   $scope.takePhoto = function (type) {
     var srcType = Camera.PictureSourceType.CAMERA;
     if (type == "1") {

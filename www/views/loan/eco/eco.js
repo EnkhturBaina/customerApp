@@ -1,4 +1,5 @@
 angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScope, serverDeferred, $ionicModal, $state, $timeout) {
+  $("#step2loanMonth").mask("000");
   $ionicModal
     .fromTemplateUrl("templates/term-content.html", {
       scope: $scope,

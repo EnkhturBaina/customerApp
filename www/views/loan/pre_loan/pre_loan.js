@@ -1,5 +1,5 @@
 angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal, $ionicLoading) {
-  $("#step2loanMonth").mask("00");
+  $("#step2loanMonth").mask("000");
 
   // MODAL
   $ionicModal

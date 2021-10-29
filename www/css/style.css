@@ -819,14 +819,14 @@ h4 {
 }
 
 .money-input input {
-  border: 1px solid;
+  /* border: 1px solid;
   color: #4b5180;
   background: none;
   border-radius: 5px;
   border-color: #cdcdcd;
   padding: 0 15px 0 20px;
   text-align: right !important;
-  font-weight: bold;
+  font-weight: bold; */
 }
 .tugrug-input {
   margin: 10px 0;
@@ -1330,7 +1330,7 @@ input[type="number"] {
 }
 .profile-input-name-error {
   position: absolute;
-  font-size: 10px;
+  font-size: 10px !important;
   color: red;
   bottom: 0;
   display: none;
@@ -1669,4 +1669,45 @@ input[type="number"] {
 }
 .none-div {
   height: 10px;
+}
+
+.form-input-label {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: 0px !important;
+  border-bottom: 1px solid #a2a7b552 !important;
+  padding: 0 5px !important;
+  display: block !important;
+}
+.form-input-label span {
+  font-size: 14px !important;
+}
+.form-input-label p {
+  display: contents !important;
+}
+.form-input-label::after {
+  display: none !important;
+}
+.form-input-label input {
+  color: #4b5180 !important;
+  font-weight: bold !important;
+  text-align: right;
+  padding-right: 10px !important;
+}
+.custom-form-container .item-select:after {
+  display: none !important;
+}
+.custom-form-input-select {
+  padding: 7px 15px !important;
+  text-align-last: right !important;
+  position: relative !important;
+  float: right !important;
+  appearance: auto !important;
+  direction: ltr !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.disabled-loan-amount {
+  background: #fff !important;
 }

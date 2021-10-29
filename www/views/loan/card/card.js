@@ -1,4 +1,5 @@
 angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootScope, $state, $ionicModal, $timeout, serverDeferred) {
+  $("#step2loanMonth").mask("000");
   $ionicModal
     .fromTemplateUrl("templates/term-content.html", {
       scope: $scope,

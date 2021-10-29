@@ -333,7 +333,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       }
     );
   };
-  $("#monthInput").mask("00");
+  $("#monthInput").mask("000");
   $("#productYear").mask("0000");
   $("#entryYear").mask("0000");
   $("#engineCapacity").mask("000000000");

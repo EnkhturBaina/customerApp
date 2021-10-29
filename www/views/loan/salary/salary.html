@@ -5,22 +5,18 @@
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
-                    <div class="money-input">
-                        <div class="tugrug-input margin-top-15">
-                            <span class="title input-label-front">Зээлийн хэмжээ</span>
-                            <div class="tugrug-input-container">
-                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" thousand-separator select-on-click ng-blur="getbankDataSalary()" />
-                            </div>
-                        </div>
-                        <div class="tugrug-input margin-top-15">
-                            <span class="title input-label-front">Хугацаа (сараар)</span>
-                            <div class="tugrug-input-container">
-                                <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankDataSalary()" ng-keyup="hideKeyboard($event)" select-on-click />
-                            </div>
-                        </div>
-                        <label class="item item-input step2-loan-location">
-                            <p>Ипотекийн зээлтэй эсэх</p>
-                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankDataSalary();">
+                    <div class="money-input custom-form-container">
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Орон сууцны үнэ</p>
+                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Хугацаа (сараар)</p>
+                            <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankDataSalary()" ng-keyup="hideKeyboard($event)" select-on-click>
+                        </label>
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Ипотекийн зээлтэй эсэх</p>
+                            <select ng-model="$root.newReqiust.locationId" class="custom-form-input-select" ng-change="getbankDataSalary()">
                                 <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>

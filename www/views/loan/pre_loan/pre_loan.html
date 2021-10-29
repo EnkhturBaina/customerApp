@@ -6,33 +6,28 @@
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
-                    <div class="money-input">
-                        <div class="tugrug-input">
-                            <span class="title input-label-front">Зээлийн хэмжээ</span>
-                            <div class="tugrug-input-container">
-                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-change="changeLoanAmount()" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataPreLoan()" format-input thousand-separator select-on-click />
-                            </div>
-                        </div>
+                    <div class="money-input custom-form-container">
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
+                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataPreLoan()" format-input thousand-separator select-on-click>
+                        </label>
                         <div ng-if="!$root.collTrueStep2" class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн урьдчилгаа багадаа <br /> {{$root.displayMinPayment|formatNumber}} байна</span></div>
-                        <div class="tugrug-input">
-                            <span class="title input-label-front">Урьдчилгаа</span>
-                            <div class="tugrug-input-container">
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern" ng-change="calcLoanAmountPreLoan();" ng-blur="getbankDataPreLoan()" thousand-separator select-on-click />
-                            </div>
-                        </div>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Урьдчилгаа</p>
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-change="calcLoanAmountPreLoan();" ng-blur="getbankDataPreLoan()" thousand-separator select-on-click>
+                        </label>
                         <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ {{$root.maxMonth}} сар байна</span></div>
-                        <div class="tugrug-input">
-                            <span class="title input-label-front">Хугацаа (сараар)</span>
-                            <div class="tugrug-input-container">
-                                <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankDataPreLoan()" ng-keyup="hideKeyboard($event)" select-on-click />
-                            </div>
-                        </div>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Хугацаа (сараар)</p>
+                            <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankDataPreLoan()" ng-keyup="hideKeyboard($event)" select-on-click>
+                        </label>
 
-                        <label class="item item-input step2-loan-location">
-                            <p>Байршил</p>
-                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankDataPreLoan();">
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Байршил</p>
+                            <select ng-model="$root.newReqiust.locationId" class="custom-form-input-select" ng-change="getbankDataPreLoan()">
                                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
-                                    {{loc.name}}</option>
+                                    {{loc.name}}
+                                </option>
                             </select>
                         </label>
                         <div class="switch-input-container">

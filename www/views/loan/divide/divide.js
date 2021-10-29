@@ -1,4 +1,5 @@
 angular.module("divide.Ctrl", []).controller("divideCtrl", function ($scope, $rootScope, $state, $ionicModal) {
+  $("#step2loanMonth").mask("000");
   $rootScope.$on("$ionicView.enter", function () {
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
   });
