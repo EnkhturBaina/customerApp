@@ -110,7 +110,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
 
     $rootScope.allSupplierList = $rootScope.suppcategoryStore.some((item) => {
       $rootScope.selectedSupplierCategory.map((item2) => {
-        if (item2 == item.id) {
+        if (item2 == item.id && item.isactive == "1") {
           selectedCategory.push(item);
           return true;
         }

@@ -19,7 +19,7 @@
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Барааны төрөл</p>
                             <select ng-model="$root.newCarReq.categoryId" class="custom-form-input-select" ng-change="changeSupCategory($root.newCarReq.categoryId)">
-                                <option ng-repeat="cat in supplierCategory track by $index" ng-if="cat.name && !cat.name.includes('Автомашин')" value="{{cat.id}}">
+                                <option ng-repeat="cat in supplierCategory track by $index" ng-if="cat.id != 1578891191299 && cat.id!=1578891191297 && cat.id!=1578891191298" value="{{cat.id}}">
                                     {{cat.name}}
                                 </option>
                             </select>
