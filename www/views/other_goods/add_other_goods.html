@@ -25,24 +25,24 @@
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Бараа нийлүүлэгч</p>
+                            <p class="input-label" style="margin: 0;">Барааны дэлгүүр</p>
                             <select id="shopId" ng-model="$root.newCarReq.shopId" class="custom-form-input-select" ng-change="changeSubVendor($root.newCarReq.shopId)" disabled>
                                 <option ng-repeat="supp in allSupplierList track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Салбар</p>
+                            <p class="input-label" style="margin: 0;">Салбар дэлгүүр</p>
                             <select id="subVendorId" ng-model="$root.newCarReq.subVendorId" class="custom-form-input-select" ng-change="changeSubVendor($root.newCarReq.shopId)" disabled>
                                 <option ng-repeat="supp in subVendor track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Барааны үнэ</p>
+                            <p class="input-label" style="margin: 0;">Авах барааны үнэ</p>
                             <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newCarReq.unitPrice" class="property-input" ng-keyup="hideKeyboard($event)" thousand-separator>
                             <input type="hidden" ng-model="$root.newCarReq.itemid" select-on-click />
                         </label>
                         <div class="margin-tb-20-40 text-center selector-container">
-                            <span class="ion-color-text other-goods-mid-text">Та бараа авах баримтын зураг болон барааны зурагаа борлуулалтын ажилтнаас авч оруулна уу.</span>
+                            <span class="ion-color-text other-goods-mid-text">Та дэлгүүр дээр байгаа бол бараа авах баримтын зураг эсхүл барааны зурагаа оруулаарай.</span>
                         </div>
                         <div class="consumer-img-list">
                             <div class="row">

@@ -1638,13 +1638,13 @@ input[type="number"] {
 
 .vxx-title-container {
   margin-top: 10px;
-  text-align: center;
-  width: 90%;
-  margin: 5px auto;
+  text-align: right;
+  /* width: 80%; */
+  margin: 5px 0px;
 }
 .vxx-title {
   font-size: 12px;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: #4b5180 !important;
 }
 .padding-left-10 {
@@ -1707,7 +1707,61 @@ input[type="number"] {
   width: 100% !important;
   max-width: 100% !important;
 }
-
-.disabled-loan-amount {
+.custom-stp1-input-select {
+  padding: 7px 5px !important;
+  width: 55% !important;
+  border: 0px !important;
+  border-bottom: 1px solid #abd324 !important;
+  border-radius: 12px !important;
   background: #fff !important;
+  background-color: #fff !important;
+}
+.custom-stp1-input-select option {
+  text-align: center;
+}
+.disabled-loan-amount {
+  /* background: #fff !important; */
+}
+.custm-radio-step1 {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0px;
+}
+.custm-radio-step1 > .button.button-positive {
+  color: #4b5180 !important;
+  background: #fff !important;
+  border-color: #4b5180 !important;
+}
+.custm-radio-step1 .button {
+  background: transparent !important;
+}
+.custm-radio-step1 a {
+  width: 27% !important;
+  min-height: auto !important;
+  display: flex;
+  justify-content: center;
+  padding: 7px;
+  border-bottom: 1px solid #acd322;
+  margin: 0 5px;
+  border-radius: 10px !important;
+}
+.custm-radio-select {
+  line-height: 12px !important;
+}
+.custm-radio-select span {
+  display: block;
+  text-transform: uppercase !important;
+  font-size: 10px;
+  letter-spacing: 1px !important;
+  font-weight: bold !important;
+}
+.ion-pt-5 {
+  padding-top: 5px !important;
+}
+.auto-step1-title-select {
+  text-align: center;
+  font-size: 14px !important;
+}
+.stp2-loan-amount-label {
+  padding: 0px !important;
 }

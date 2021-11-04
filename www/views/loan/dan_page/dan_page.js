@@ -69,7 +69,7 @@ angular.module("dan_page.Ctrl", []).controller("dan_pageCtrl", function ($scope,
                 }
               }, 1000);
 
-              $state.go("salary");
+              $state.go("autoleasing-4");
               $rootScope.alert("Таны мэдээллийг амжилттай татлаа. Та мэдээллээ шалгаад дутуу мэдээллээ оруулна уу", "success");
             } else {
               $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "warning");

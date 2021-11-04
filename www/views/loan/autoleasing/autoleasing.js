@@ -40,25 +40,33 @@
   $scope.getCarDatasId = function (itemCode) {
     $rootScope.selectedCarData = [];
     $rootScope.carDatas = [];
-    if ($scope.checkReqiured("step1")) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597654926672135", itemCode: itemCode }).then(function (response) {
-        // console.log("res", response);
-        if (!isEmpty(response) && !isEmpty(response[0])) {
-          $rootScope.selectedCarData = response[0];
-          // console.log("$rootScope.selectedCarData", $rootScope.selectedCarData);
-          $scope.selectCarName = response[0].modelname.split(" ")[0];
-          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597646717653727" }).then(function (response) {
-            angular.forEach(response, function (item) {
-              if (!isEmpty(item)) {
-                $rootScope.carDatas.push(item);
-              }
+    if (!isEmpty($rootScope.newReqiust.choose)) {
+      if ($rootScope.newReqiust.choose !== "1") {
+        $state.go("autoleasing-2");
+        $rootScope.is0001Price = true;
+      } else if ($scope.checkReqiured("step1")) {
+        $rootScope.is0001Price = false;
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597654926672135", itemCode: itemCode }).then(function (response) {
+          // console.log("res", response);
+          if (!isEmpty(response) && !isEmpty(response[0])) {
+            $rootScope.selectedCarData = response[0];
+            // console.log("$rootScope.selectedCarData", $rootScope.selectedCarData);
+            $scope.selectCarName = response[0].modelname.split(" ")[0];
+            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597646717653727" }).then(function (response) {
+              angular.forEach(response, function (item) {
+                if (!isEmpty(item)) {
+                  $rootScope.carDatas.push(item);
+                }
+              });
             });
-          });
-          $state.go("car-info");
-        } else {
-          $rootScope.alert("Код буруу байна", "danger");
-        }
-      });
+            $state.go("car-info");
+          } else {
+            $rootScope.alert("Код буруу байна", "danger");
+          }
+        });
+      }
+    } else {
+      $rootScope.alert("Автомашины сонгосон эсэх?", "warning");
     }
     $rootScope.carData = [];
   };
@@ -95,6 +103,7 @@
   };
   // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
   $rootScope.getbankData = function (a) {
+    console.log("$rootScope.newReqiust.choose", $rootScope.newReqiust.choose);
     if (a != "forced") $rootScope.ShowLoader();
 
     $rootScope.requestType = localStorage.getItem("requestType");
@@ -137,13 +146,15 @@
       json.month = isEmpty($rootScope.propertyRequestData.loanMonth) ? 0 : $rootScope.propertyRequestData.loanMonth;
     } else if ($rootScope.requestType == "auto") {
       //Авто лизинг банк шүүлт
-      if (!isEmpty($rootScope.selectedCarData) && !isEmpty($rootScope.selectedCarData.itemcode)) {
-        json.type = "autoLeasingFilter";
+      if ((!isEmpty($rootScope.selectedCarData) && !isEmpty($rootScope.selectedCarData.itemcode)) || $rootScope.newReqiust.choose !== "1") {
+        json.type = "autoLeasingFilterZeelMe";
         json.totalLoan = $rootScope.newReqiust.getLoanAmount;
         json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
         json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
         json.isCollateral = isEmpty($rootScope.newReqiust.collateralConditionId) ? "" : $rootScope.newReqiust.collateralConditionId;
-        json.code = $rootScope.selectedCarData.itemcode;
+        if ($rootScope.newReqiust.choose === "1") {
+          json.code = $rootScope.selectedCarData.itemcode;
+        }
         json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
       }
     } else if ($rootScope.requestType == "preLoan") {
@@ -186,6 +197,7 @@
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
     }
     serverDeferred.carCalculation(json).then(function (response) {
+      console.log("response", response);
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
 
@@ -231,11 +243,15 @@
         if ($rootScope.requestType == "consumer") {
           $rootScope.displayMinPayment = $rootScope.sumPrice * $rootScope.minPayment;
         } else {
-          $rootScope.displayMinPayment = $rootScope.selectedCarData.price * $rootScope.minPayment;
+          if ($rootScope.newReqiust.choose === "1") {
+            $rootScope.displayMinPayment = $rootScope.selectedCarData.price * $rootScope.minPayment;
+          } else {
+            $rootScope.displayMinPayment = $rootScope.newReqiust.carPrice * $rootScope.minPayment;
+          }
         }
       }
     });
-    // console.log("json", json);
+    console.log("json", json);
 
     // if ($rootScope.minPayment > $rootScope.newReqiust.advancePayment || $rootScope.newReqiust.advancePayment == 0 || isEmpty($rootScope.newReqiust.advancePayment)) {
     //   $rootScope.collTrueStep2 = false;
@@ -313,7 +329,8 @@
     } else {
     }
   };
-  $scope.sendRequest = async function () {
+  $scope.sendRequest = function () {
+    $scope.disabledBtnSendReq = true;
     $rootScope.ShowLoader();
     if (!isEmpty($rootScope.selectedBanksList)) {
       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -345,7 +362,7 @@
                       customerId: all_ID.dccustomerid,
                       bankId: item.id,
                       isAgree: "1",
-                      isMobile: "1",
+                      isMobile: "1626864048648",
                       wfmStatusId: "1609944755118135",
                       productId: item.products[0].id,
                     };
@@ -433,13 +450,14 @@
             var AgreeBank = {
               bankId: item.id,
               isAgree: "1",
-              isMobile: "1",
+              isMobile: "1626864048648",
               wfmStatusId: "1609944755118135",
               productId: item.products[0].id,
             };
             selectedbanks.push(AgreeBank);
           }
         });
+        // console.log("selectedbanks", selectedbanks);
         $rootScope.newReqiust.dcApp_preLoanRequestMapDV = selectedbanks;
 
         // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
@@ -510,7 +528,7 @@
             var AgreeBank = {
               bankId: item.id,
               isAgree: "1",
-              isMobile: "1",
+              isMobile: "1626864048648",
               wfmStatusId: "1609944755118135",
               productId: item.products[0].id,
             };
@@ -576,7 +594,7 @@
             var AgreeBank = {
               bankId: item.id,
               isAgree: "1",
-              isMobile: "1",
+              isMobile: "1626864048648",
               wfmStatusId: "1609944755118135",
               productId: item.products[0].id,
             };
@@ -644,7 +662,7 @@
                   customerId: all_ID.dccustomerid,
                   bankId: item.id,
                   isAgree: "1",
-                  isMobile: "1",
+                  isMobile: "1626864048648",
                   wfmStatusId: "1609944755118135",
                   productId: item.products[0].id,
                   vendorId: $scope.consumerData.shopId,
@@ -746,7 +764,7 @@
                       customerId: all_ID.dccustomerid,
                       bankId: item.id,
                       isAgree: "1",
-                      isMobile: "1",
+                      isMobile: "1626864048648",
                       wfmStatusId: "1609944755118135",
                       productId: item.products[0].id,
                     };
@@ -836,7 +854,7 @@
                   customerId: all_ID.dccustomerid,
                   bankId: item.id,
                   isAgree: "1",
-                  isMobile: "1",
+                  isMobile: "1626864048648",
                   wfmStatusId: "1609944755118135",
                   productId: item.products[0].id,
                   vendorId: $rootScope.selectedCarData.vendorid,
@@ -941,7 +959,7 @@
       $rootScope.newReqiust.customerId = "";
     }
     if (param == "step1") {
-      if (isEmpty($rootScope.newReqiust.itemcode)) {
+      if (isEmpty($rootScope.newReqiust.itemcode) && $rootScope.newReqiust.choose === "1") {
         $rootScope.alert("Автомашиныхаа кодыг оруулна уу", "warning");
         return false;
       } else {
@@ -955,7 +973,7 @@
       } else if ((isEmpty($rootScope.newReqiust.advancePayment) && $rootScope.newReqiust.collateralConditionId == "1554263832151") || (isEmpty($rootScope.newReqiust.advancePayment) && !$scope.isCollShow)) {
         $rootScope.alert("Урьдчилгаа оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isCollShow) {
+      } else if ((isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isCollShow) || (isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isHideFromConsumers)) {
         $rootScope.alert("ҮХХөрөнгө барьцаалах эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
@@ -1004,11 +1022,11 @@
       //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
       //   return false;
       // }
-      else if (!re.test($scope.danCustomerData.email)) {
-        // $rootScope.HideLoader();
-        $rootScope.alert("И-мэйл хаягаа зөв оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+      // else if (!re.test($scope.danCustomerData.email)) {
+      //   $rootScope.alert("И-мэйл хаягаа зөв оруулна уу", "warning");
+      //   return false;
+      // }
+      else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
         $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
         return false;
       } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
@@ -1066,12 +1084,22 @@
   };
 
   $rootScope.calcLoanAmount = function () {
-    if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.loanAmountField) {
-      $rootScope.newReqiust.getLoanAmount = $rootScope.loanAmountField - $rootScope.newReqiust.advancePayment;
-      $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
-    } else if (parseInt($rootScope.newReqiust.advancePayment) > $rootScope.loanAmountField) {
-      var tmp = $rootScope.newReqiust.advancePayment;
-      $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
+    if (!$rootScope.is0001Price) {
+      if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.loanAmountField) {
+        $rootScope.newReqiust.getLoanAmount = $rootScope.loanAmountField - $rootScope.newReqiust.advancePayment;
+        $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
+      } else if (parseInt($rootScope.newReqiust.advancePayment) > $rootScope.loanAmountField) {
+        var tmp = $rootScope.newReqiust.advancePayment;
+        $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
+      }
+    } else {
+      if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.newReqiust.carPrice) {
+        $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.carPrice - $rootScope.newReqiust.advancePayment;
+        $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
+      } else if (parseInt($rootScope.newReqiust.advancePayment) > $rootScope.newReqiust.carPrice) {
+        var tmp = $rootScope.newReqiust.advancePayment;
+        $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
+      }
     }
   };
 
@@ -1095,6 +1123,9 @@
     }
   };
   $scope.$on("$ionicView.enter", function () {
+    $scope.isSelected0001 = false; //Автомашины сонгосон эсэх
+    $scope.isHideFromConsumer = false;
+    $scope.disabledBtnSendReq = false;
     $rootScope.hideFooter = true;
     $rootScope.collTrueStep2 = false;
     var local = localStorage.getItem("requestType");
@@ -1107,6 +1138,8 @@
     if ($state.current.name == "autoleasing-2") {
       if (local == "auto") {
         $scope.isCollShow = true;
+      } else if (local == "consumer") {
+        $scope.isHideFromConsumer = true;
       } else {
         $scope.isCollShow = false;
       }
@@ -1404,5 +1437,13 @@
   $scope.repeatDone = function () {
     $ionicSlideBoxDelegate.update();
     //$ionicSlideBoxDelegate.slide($scope.week.length - 1, 1);
+  };
+
+  $scope.selectCarChoose = function (id) {
+    if (id !== "1") {
+      $scope.isSelected0001 = false;
+    } else {
+      $scope.isSelected0001 = true;
+    }
   };
 });

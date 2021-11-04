@@ -27,7 +27,7 @@
                 <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-change="changeLoanAmountSupplier()" ng-blur="getbankDataSup()" thousand-separator select-on-click>
             </label>
             <label class="item item-input item-stacked-label form-input-label" ng-show="isSlideSelected">
-                <p class="input-label" style="margin: 0;">Урьдчилгаа</p>
+                <p class="input-label" style="margin: 0;">Урьдчилгаа төлбөр</p>
                 <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-change="calcLoanAmountSupplier();" ng-blur="getbankDataSup()" thousand-separator select-on-click>
             </label>
 
@@ -57,7 +57,7 @@
                 <span class="">{{selectedConditionFee}}</span>
             </div>
             <div class="condition-detail-input tugrug-input custom-select-sup" ng-show="isSlideSelected">
-                <span class="input-label-supplier">Байршил</span>
+                <span class="input-label-supplier">Зээл авах байршил</span>
                 <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankDataSup();">
                     <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                         {{loc.name}}</option>

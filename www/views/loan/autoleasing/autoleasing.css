@@ -331,10 +331,11 @@
 }
 .step1-card-content {
   background-color: #fff;
-  padding: 15px 0px;
+  padding: 45px 0px;
   border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   margin: 40px 20px 10px 20px;
+  height: auto;
 }
 .step1-scan-qr-container {
   display: flex;
@@ -479,8 +480,12 @@
   top: 0px !important;
 }
 .step5-mid-title {
-  margin: 10px auto 0 auto !important;
+  margin: 5px auto !important;
   width: 80% !important;
+  line-height: 12px !important;
   display: block !important;
   text-align: center !important;
+}
+.step2-valid-text-bold {
+  font-weight: bold !important;
 }
