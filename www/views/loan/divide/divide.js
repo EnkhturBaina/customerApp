@@ -40,11 +40,20 @@ angular.module("divide.Ctrl", []).controller("divideCtrl", function ($scope, $ro
       } else {
         return true;
       }
+    } else if (param == "agreeBank") {
+      if (isEmpty($rootScope.bankListFilter.Agree)) {
+        $rootScope.alert("Таны мэдээллийн дагуу зээл олгох банк, ББСБ байхгүй байна. Та мэдээллээ дахин оруулна уу.", "warning");
+        return false;
+      } else {
+        return true;
+      }
     }
   };
   $scope.divideStep2 = function () {
     if ($scope.checkReqiured("divide-valid")) {
-      $state.go("income");
+      if ($scope.checkReqiured("agreeBank")) {
+        $state.go("income");
+      }
     }
   };
 });

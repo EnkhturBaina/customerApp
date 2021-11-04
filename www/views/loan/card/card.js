@@ -25,11 +25,20 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
       } else {
         return true;
       }
+    } else if (param == "agreeBank") {
+      if (isEmpty($rootScope.bankListFilter.Agree)) {
+        $rootScope.alert("Таны мэдээллийн дагуу зээл олгох банк, ББСБ байхгүй байна. Та мэдээллээ дахин оруулна уу.", "warning");
+        return false;
+      } else {
+        return true;
+      }
     }
   };
   $scope.cardStep2 = function () {
     if ($scope.checkReqiured("card-valid")) {
-      $state.go("income");
+      if ($scope.checkReqiured("agreeBank")) {
+        $state.go("income");
+      }
     }
   };
   $rootScope.getbankDataCard = function (a) {
@@ -52,6 +61,46 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
+
+      $rootScope.products = [];
+      $rootScope.result = [];
+      $rootScope.months = [];
+      $rootScope.minPayments = [];
+      //Зөвхөн Step2 -д ажлуулах
+      if ($state.current.name == "card") {
+        $rootScope.bankListFilter.Agree.map((el) => {
+          $rootScope.products.push(el.products);
+        });
+        $rootScope.products.map((obj) => {
+          $rootScope.result = [].concat($rootScope.result, obj);
+        });
+
+        $rootScope.result.map((a) => {
+          $rootScope.months.push(a.max_loan_month_id);
+          a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : "";
+        });
+
+        $rootScope.maxMonth = Math.max(...$rootScope.months);
+        $rootScope.minPayment = Math.min(...$rootScope.minPayments);
+
+        //тэнцсэн банкуудын урьдчилгаа 0 үед ажиллах
+        if (isEmpty($rootScope.minPayments)) {
+          $rootScope.bankListFilter.NotAgree.map((el) => {
+            $rootScope.products.push(el.products);
+          });
+          $rootScope.products.map((obj) => {
+            $rootScope.result = [].concat($rootScope.result, obj);
+          });
+
+          $rootScope.result.map((a) => {
+            $rootScope.months.push(a.max_loan_month_id);
+            a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : $rootScope.minPayments.push(0);
+          });
+
+          $rootScope.maxMonth = Math.max(...$rootScope.months);
+          $rootScope.minPayment = Math.min(...$rootScope.minPayments);
+        }
+      }
     });
     // console.log("json", json);
   };

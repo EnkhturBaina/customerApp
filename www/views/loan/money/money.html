@@ -13,13 +13,14 @@
                             </div>
                         </div>
                         <div class="tugrug-input margin-top-15">
-                            <span class="title input-label-front">Хугацаа (сараар)</span>
+                            <span class="title input-label-front">Зээлийн хугацаа(сараар)</span>
                             <div class="tugrug-input-container">
                                 <input type="tel" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.newReqiust.loanMonth" ng-blur="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
                             </div>
                         </div>
+                        <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байна</span></div>
                         <label class="item item-input step2-loan-location">
-                            <p>Байршил</p>
+                            <p>Зээл авах байршил</p>
                             <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();">
                                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>

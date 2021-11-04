@@ -24,33 +24,39 @@
                             <p class="input-label" style="margin: 0;">Орон сууцны үнэ</p>
                             <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataBuilding()" thousand-separator select-on-click>
                         </label>
-                        <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Урьдчилгаа</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-blur="getbankDataBuilding()" thousand-separator select-on-click>
-                        </label>
-                        <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Хугацаа (сараар)</p>
-                            <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankDataBuilding()" ng-keyup="hideKeyboard($event)" select-on-click>
-                        </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">ҮХХөрөнгө барьцаалах уу?</p>
+                            <p class="input-label" style="margin: 0;">Урьдчилгаанд ҮХХөрөнгө барьцаалах уу?</p>
                             <select ng-model="$root.newReqiust.collateralConditionId" class="custom-form-input-select" ng-change="getbankDataBuilding();changeToolTipData()">
                                 <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}
                                 </option>
                             </select>
                         </label>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Урьдчилгаа төлбөр</p>
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-blur="getbankDataBuilding()" thousand-separator select-on-click>
+                        </label>
+                        <div ng-if="!$root.collTrueStep2" class="vxx-title-container">
+                            <span class="vxx-title">Тухайн зээлийн урьдчилгаа багадаа <br />
+                                <span class="step2-valid-text-bold">{{$root.displayMinPayment|formatNumber}}</span> байна
+                            </span>
+                        </div>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Зээлийн хугацаа(сараар)</p>
+                            <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankDataBuilding()" ng-keyup="hideKeyboard($event)" select-on-click>
+                        </label>
+                        <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байна</span></div>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Хамтран зээлдэгчтэй эсэх</p>
-                            <select ng-model="$root.newReqiust.isCoBorrower" class="custom-form-input-select" ng-change="getbankDataEco()">
+                            <select ng-model="$root.newReqiust.isCoBorrower" class="custom-form-input-select" ng-change="getbankDataBuilding()">
                                 <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}
                                 </option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Байршил</p>
-                            <select ng-model="$root.newReqiust.locationId" class="custom-form-input-select" ng-change="getbankDataEco()">
+                            <p class="input-label" style="margin: 0;">Зээл авах байршил</p>
+                            <select ng-model="$root.newReqiust.locationId" class="custom-form-input-select" ng-change="getbankDataBuilding()">
                                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}
                                 </option>

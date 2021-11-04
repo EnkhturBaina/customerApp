@@ -30,11 +30,20 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
       } else {
         return true;
       }
+    } else if (param == "agreeBank") {
+      if (isEmpty($rootScope.bankListFilter.Agree)) {
+        $rootScope.alert("Таны мэдээллийн дагуу зээл олгох банк, ББСБ байхгүй байна. Та мэдээллээ дахин оруулна уу.", "warning");
+        return false;
+      } else {
+        return true;
+      }
     }
   };
   $scope.moneyStep2 = function () {
     if ($scope.checkReqiured("money-valid")) {
-      $state.go("income");
+      if ($scope.checkReqiured("agreeBank")) {
+        $state.go("income");
+      }
     }
   };
 });

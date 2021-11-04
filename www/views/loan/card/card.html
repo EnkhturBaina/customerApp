@@ -7,15 +7,16 @@
                 <div class="bg-container">
                     <div class="money-input custom-form-container">
                         <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Орон сууцны үнэ</p>
+                            <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
                             <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataCard()" thousand-separator select-on-click>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Хугацаа (сараар)</p>
+                            <p class="input-label" style="margin: 0;">Зээлийн хугацаа(сараар)</p>
                             <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankDataCard()" ng-keyup="hideKeyboard($event)" select-on-click>
                         </label>
+                        <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байна</span></div>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Байршил</p>
+                            <p class="input-label" style="margin: 0;">Зээл авах байршил</p>
                             <select ng-model="$root.newReqiust.locationId" class="custom-form-input-select" ng-change="getbankDataCard()">
                                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}

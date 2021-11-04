@@ -10,11 +10,11 @@
                     <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.propertyRequestData.loanAmount" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataProperty()" thousand-separator select-on-click>
                 </label>
                 <label class="item item-input item-stacked-label form-input-label">
-                    <p class="input-label" style="margin: 0;">Хугацаа (сараар)</p>
+                    <p class="input-label" style="margin: 0;">Зээлийн хугацаа(сараар)</p>
                     <input inputmode="numeric" pattern="[0-9]*" id="propertyStep2loanMonth" type="text" placeholder="" name="" ng-model="$root.propertyRequestData.loanMonth" class="property-input" ng-blur="getbankDataProperty()" ng-keyup="hideKeyboard($event)" select-on-click>
                 </label>
                 <label class="item item-input item-select form-input-label">
-                    <p class="input-label" style="margin: 0;">Байршил</p>
+                    <p class="input-label" style="margin: 0;">Зээл авах байршил</p>
                     <select ng-model="$root.propertyRequestData.locationId" class="custom-form-input-select" ng-change="getbankDataProperty()">
                         <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                             {{loc.name}}
