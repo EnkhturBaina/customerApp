@@ -18,11 +18,20 @@
                             <select ng-model="$root.newReqiust.vendorId" class="custom-form-input-select" ng-change="getbankDataBuilding();">
                                 <option ng-repeat="loc in $root.buildingAgent | filter:{id:'!!'}" ng-if="loc.suppliername" value="{{loc.id}}">
                                     {{loc.suppliername}}</option>
+                                <option value="1">Бусад</option>
                             </select>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Орон сууцны үнэ</p>
-                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataBuilding()" thousand-separator select-on-click>
+                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.buildingPrice" ng-blur="getbankDataBuilding()" thousand-separator select-on-click>
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Урьдчилгаа төлбөр</p>
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-blur="getbankDataBuilding()" ng-change="calcLoanAmountBuilding()" thousand-separator select-on-click>
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
+                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataBuilding()" format-input select-on-click>
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Урьдчилгаанд ҮХХөрөнгө барьцаалах уу?</p>
@@ -31,10 +40,6 @@
                                     {{loc.name}}
                                 </option>
                             </select>
-                        </label>
-                        <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Урьдчилгаа төлбөр</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-blur="getbankDataBuilding()" thousand-separator select-on-click>
                         </label>
                         <div ng-if="!$root.collTrueStep2" class="vxx-title-container">
                             <span class="vxx-title">Тухайн зээлийн урьдчилгаа багадаа <br />

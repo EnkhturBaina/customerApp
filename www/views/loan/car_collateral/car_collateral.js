@@ -17,14 +17,27 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.carColorData = [];
 
   $scope.$on("$ionicView.enter", function () {
-    console.log("A");
-    //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
-    $rootScope.carCollateralRequestData = {};
-    $rootScope.carCollateralRequestData.loanAmount = 0;
-    $rootScope.carCollateralRequestData.serviceAgreementId = 1554263832132;
     $rootScope.hideFooter = true;
+    if ($state.current.name == "car_coll2") {
+      $ionicModal
+        .fromTemplateUrl("templates/autoColl.html", {
+          scope: $scope,
+          animation: "slide-in-up",
+        })
+        .then(function (autoCollModal) {
+          $scope.autoCollModal = autoCollModal;
+        });
+      $timeout(function () {
+        $scope.autoCollModal.show();
+      }, 100);
+      //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
+      $rootScope.carCollateralRequestData = {};
+      $rootScope.carCollateralRequestData.loanAmount = 0;
+      $rootScope.carCollateralRequestData.serviceAgreementId = 1554263832132;
+      $scope.getbankDataCarColl();
+    }
     $timeout(function () {
-      if ($state.current.name == "car_coll2") {
+      if ($state.current.name == "car_coll") {
         if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
           $scope.autoCollDan.show();
         } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {
@@ -32,9 +45,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         }
       }
     }, 500);
-    if ($state.current.name == "car_coll2") {
-      $scope.getbankDataCarColl();
-    }
   });
   $scope.getCarCollateralLookupData = function () {
     if (isEmpty($scope.carCategory)) {
@@ -268,6 +278,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
 
   $scope.saveCarCollRequestData = function () {
+    console.log("$rootScope.carCollateralRequestData ", $rootScope.carCollateralRequestData);
     if ($scope.carCollCheckReqiured("step2")) {
       if ($scope.carCollCheckReqiured("agreeBank")) {
         $state.go("danselect");

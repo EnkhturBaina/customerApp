@@ -158,6 +158,9 @@
 .car-coll-img-row {
   padding: 0 !important;
 }
+.car-coll-img-row img {
+  width: 100% !important;
+}
 .item-info-dan li {
   display: flex;
   justify-content: space-between;

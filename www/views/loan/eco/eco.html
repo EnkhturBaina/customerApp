@@ -8,21 +8,35 @@
                     <div class="custom-form-container">
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Барааны төрөл</p>
-                            <select ng-model="$root.newReqiust.typeId" class="custom-form-input-select" ng-change="changeSupSubCategory($root.newReqiust.typeId);getbankDataEco();">
-                                <option ng-repeat="loc in $root.ecoProductType | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
-                                    {{loc.name}}</option>
+                            <select ng-model="$root.newReqiust.typeId" class="custom-form-input-select" ng-change="changeSupCategory($root.newReqiust.typeId)">
+                                <option ng-repeat="cat in supplierCategory track by $index" ng-if="cat.name && !cat.name.includes('Автомашин')" value="{{cat.id}}">
+                                    {{cat.name}}
+                                </option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Нийлүүлэгч</p>
-                            <select id="shopId" ng-model="$root.newReqiust.vendorId" class="custom-form-input-select" ng-change="getbankDataEco();">
-                                <option ng-repeat="loc in $root.allSupplierList | filter:{id:'!!'}" ng-if="loc.suppliername" value="{{loc.id}}">
-                                    {{loc.suppliername}}</option>
+                            <p class="input-label" style="margin: 0;">Барааны дэлгүүр</p>
+                            <select id="shopId" ng-model="$root.newReqiust.shopId" class="custom-form-input-select" ng-change="changeSubVendor($root.newReqiust.shopId)" disabled>
+                                <option ng-repeat="supp in allSupplierList track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Салбар дэлгүүр</p>
+                            <select id="subVendorId" ng-model="$root.newReqiust.subVendorId" class="custom-form-input-select" ng-change="changeSubVendor($root.newReqiust.shopId)" disabled>
+                                <option ng-repeat="supp in subVendor track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Барааны үнэ</p>
+                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.itemPrice" ng-blur="getbankDataEco()" thousand-separator select-on-click>
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Урьдчилгаа төлбөр</p>
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-change="calcLoanAmountEco();" ng-blur="getbankDataEco()" ng-click="removeAdvancePayment()" thousand-separator select-on-click>
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
-                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataEco()" thousand-separator select-on-click>
+                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataEco()" format-input disabled select-on-click>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Зээлийн хугацаа(сараар)</p>

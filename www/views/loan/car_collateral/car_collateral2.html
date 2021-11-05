@@ -2,17 +2,17 @@
     <link href="views/loan/car_collateral/car_collateral.css" rel="stylesheet" />
     <ion-content id="car-collateral2" overflow-scroll="true" class="car-col-content">
         <!-- <ion-content id="car-collateral2" scroll="true" class="car-col-content margin-top-50"> -->
-        <!-- <div class="car-col-step2-back" ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div> -->
-        <ion-header-bar align-title="left" class="navbar car-col-step2-back" style="background: none; top: 0">
+        <div class="car-col-step2-back" ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div>
+        <!-- <ion-header-bar align-title="left" class="navbar car-col-step2-back" style="background: none; top: 0">
             <div class="title ion-color-big-text navbar-back-button" style="background: none">
-                <button ng-click="backFromCarCollStep2()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+                <button class="nav-back-button button buttons button-clear header-item" style="left: 10px">
                     <i class="ion-chevron-left ion-color-header"></i>
                     <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Хүсэлт илгээх</span></span>
                 </button>
             </div>
             <div class="navbar-right-icon">
             </div>
-        </ion-header-bar>
+        </ion-header-bar> -->
         <div class="list car-collateral-list" ng-controller="car_collateralCtrl">
             <div class="card car-step2-card money-input custom-form-container">
                 <span class="step2-card-span">Зээлийн хүсэлтийн мэдээлэл</span>
@@ -73,6 +73,14 @@
         </div>
     </ion-content>
 </ion-view>
+<script id="templates/autoColl.html" type="text/ng-template">
+  <ion-modal-view class="auto-temp-modal-view">
+    <ion-content class="padding bank-chat-content" scroll="false">
+        <!-- <span class="term-modal-off-text" ng-click="autoCollModal.hide()"><img style="width: 20px" src="img/x_mark.png" /></span> -->
+        <div class="templates-modal-include" ng-include src="'views/templates/autoColl.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>
 <script id="templates/term-content.html" type="text/ng-template">
   <ion-modal-view class="term-chat-modal">
     <ion-content class="padding bank-chat-content" scroll="false">

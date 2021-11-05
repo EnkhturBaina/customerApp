@@ -38,6 +38,18 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
       if (isEmpty($rootScope.newReqiust.typeId)) {
         $rootScope.alert("Барааны төрөл сонгоно уу", "warning");
         return false;
+      } else if (isEmpty($rootScope.newReqiust.shopId)) {
+        $rootScope.alert("Барааны дэлгүүр сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.subVendorId)) {
+        $rootScope.alert("Барааны салбар дэлгүүр сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.itemPrice)) {
+        $rootScope.alert("Барааны үнэ оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.advancePayment)) {
+        $rootScope.alert("Урьдчилгаа төлбөр оруулна уу", "warning");
+        return false;
       }
       //  else if (isEmpty($rootScope.newReqiust.vendorId)) {
       //   $rootScope.alert("Нийлүүлэгч сонгоно уу", "warning");
@@ -156,4 +168,54 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
   $rootScope.$on("$ionicView.loaded", function () {
     $rootScope.hideFooter = true;
   });
+  //Урьдчилгаа дээр дарахад хоосон болгох
+  $scope.removeAdvancePayment = function () {
+    $rootScope.newReqiust.advancePayment = "";
+  };
+  $rootScope.calcLoanAmountEco = function () {
+    if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.newReqiust.itemPrice) {
+      $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.itemPrice - $rootScope.newReqiust.advancePayment;
+      $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
+    } else if (parseInt($rootScope.newReqiust.advancePayment) > $rootScope.newReqiust.itemPrice) {
+      var tmp = $rootScope.newReqiust.advancePayment;
+      $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
+    }
+  };
+
+  //Бараны нийлүүлэгч хамаарч Барааны төрөл -г lookup -д дахин сэт хийх
+  $scope.changeSupCategory = function (supppp) {
+    $rootScope.selectedSupplierCategory = [];
+
+    $rootScope.supplierHaveCategory.map((item) => {
+      if (item.categoryid === supppp) {
+        $rootScope.selectedSupplierCategory.push(item.supplierid);
+        return true;
+      }
+    });
+
+    var selectedCategory = [];
+
+    $rootScope.allSupplierList = $rootScope.suppcategoryStore.some((item) => {
+      $rootScope.selectedSupplierCategory.map((item2) => {
+        if (item2 == item.id) {
+          selectedCategory.push(item);
+          return true;
+        }
+      });
+    });
+    $rootScope.allSupplierList = selectedCategory;
+    supppp != "" ? (document.getElementById("shopId").disabled = false) : (document.getElementById("shopId").disabled = true);
+  };
+  $scope.changeSubVendor = function (parentId) {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619503143703351", parentId: parentId }).then(function (response) {
+      if (!isEmpty(response[0])) {
+        $rootScope.subVendor = response;
+      } else {
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619503143703351", id: parentId }).then(function (response) {
+          $rootScope.subVendor = response;
+        });
+      }
+    });
+    parentId != "" ? (document.getElementById("subVendorId").disabled = false) : (document.getElementById("subVendorId").disabled = true);
+  };
 });

@@ -7,11 +7,9 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       $rootScope.alert("Та барааны нийлүүлэгчийг сонгоно уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.categoryId)) {
       $rootScope.alert("Та барааны төрөл өө сонгоно уу", "warning");
-    }
-    // else if (isEmpty($rootScope.newCarReq.picture1)) {
-    //   $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
-    // }
-    else {
+    } else if (isEmpty($rootScope.newCarReq.picture1)) {
+      $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
+    } else {
       try {
         var otherGoodFirstId = 1;
         if (localStorage.otherGoodsMaxId === undefined) {
@@ -110,7 +108,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
 
     $rootScope.allSupplierList = $rootScope.suppcategoryStore.some((item) => {
       $rootScope.selectedSupplierCategory.map((item2) => {
-        if (item2 == item.id) {
+        if (item2 == item.id && item.isactive == "1") {
           selectedCategory.push(item);
           return true;
         }
