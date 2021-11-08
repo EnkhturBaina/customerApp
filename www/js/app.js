@@ -47,7 +47,7 @@ var app = angular
     "salary.Ctrl",
     "dan_page.Ctrl",
   ])
-  .run(function ($ionicPlatform, $cordovaNetwork, $cordovaSplashscreen) {
+  .run(function ($ionicPlatform, $cordovaNetwork, $rootScope) {
     $ionicPlatform.ready(function () {
       if (window.StatusBar) {
         StatusBar.styleDefault();
@@ -366,6 +366,7 @@ var app = angular
   })
   .controller("index", function ($scope, $ionicPlatform, $state) {})
   .controller("indexCtrl", function ($scope, $rootScope, $state, $ionicPopup) {
+    $rootScope.zeelmeAppVersion = "1.0.9";
     $scope.toggleSideMenu = function () {
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");

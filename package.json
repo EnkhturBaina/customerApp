@@ -11,6 +11,7 @@
     "react-native-paper": "^4.3.0"
   },
   "devDependencies": {
+    "com.lampa.startapp": "^6.1.6",
     "cordova-android": "^9.1.0",
     "cordova-android-support-gradle-release": "^3.0.1",
     "cordova-browser": "^6.0.0",
@@ -42,7 +43,8 @@
       },
       "cordova-plugin-file": {},
       "cordova-plugin-device": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "com.lampa.startapp": {}
     }
   }
 }
