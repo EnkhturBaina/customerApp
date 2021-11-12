@@ -23,10 +23,6 @@
   background-color: ghostwhite;
   height: 100%;
 }
-.margin-lr-20 {
-  margin-left: 20px;
-  margin-right: 20px;
-}
 .qr-btn-container .qr-button {
   background: none;
   border-bottom: 1px solid;

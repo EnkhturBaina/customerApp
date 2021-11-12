@@ -4,9 +4,6 @@
 }
 .home-tab-1-card {
   box-shadow: -1px 2px 7px rgb(0 0 0 / 30%) !important;
-  /* background: #1d976c;  */
-  /* background: -webkit-linear-gradient(to right, #97d321, #5acfb9);  */
-  /* background: linear-gradient(to right, #97d321, #5acfb9); */
   background: linear-gradient(90deg, rgba(171, 211, 36, 1) 15%, rgba(64, 191, 248, 1) 97%);
   border-radius: 10px !important;
   border-color: transparent !important;
@@ -53,10 +50,6 @@
 .home-card-1 {
   color: #fff;
   background-size: cover;
-  /* background: url(../../img/lines/home-rect-line.png) repeat, rgb(125, 204, 123); 
-  background: url(../../img/lines/home-rect-line.png) repeat, -moz-linear-gradient(49deg, rgba(89, 199, 194, 1) 0%, rgba(61, 192, 250, 1) 45%); 
-  background: url(../../img/lines/home-rect-line.png) repeat, -webkit-linear-gradient(49deg, rgba(89, 199, 194, 1) 0%, rgba(61, 192, 250, 1) 45%); 
-  background: url(../../img/lines/home-rect-line.png) repeat, linear-gradient(49deg, rgba(89, 199, 194, 1) 0%, rgba(61, 192, 250, 1) 45%);  */
   background: transparent !important;
   background-repeat: no-repeat;
   background-position: 0% 0%;
@@ -106,14 +99,10 @@
   background-image: -moz-linear-gradient(22deg, rgba(145, 206, 88, 1) 0%, rgba(105, 201, 162, 1) 55%);
   background-image: -webkit-linear-gradient(22deg, rgba(145, 206, 88, 1) 0%, rgba(105, 201, 162, 1) 55%);
   background-image: linear-gradient(22deg, rgba(145, 206, 88, 1) 24%, rgba(105, 201, 162, 1) 113%);
-  /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#91ce58",endColorstr="#69c9a2",GradientType=1); */
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;
   image-rendering: pixelated;
-}
-.home-card-1-first-row {
-  margin-bottom: 50px;
 }
 .home-card-small-text {
   font-size: 12px;
@@ -124,60 +113,8 @@
   width: 100%;
   height: 150px;
 }
-.loan-card-1 {
-  background: url(../../img/lines/home-bigcard-cover-line-1.png), #3cc1fa;
-  color: #fff;
-  height: 110px;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: cover;
-  image-rendering: pixelated;
-}
-.loan-card-2 {
-  background: url(../../img/lines/home-bigcard-cover-line-1.png), #3cc1fa;
-  color: #fff;
-  height: 110px;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: cover;
-  image-rendering: pixelated;
-}
-.loan-card-3 {
-  background: url(../../img/lines/home-bigcard-cover-line-1.png), linear-gradient(-160deg, #42c2ee, #68c8a5);
-  color: #fff;
-  height: 110px;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: cover;
-  image-rendering: pixelated;
-}
-.loan-card-4 {
-  background: url(../../img/lines/home-bigcard-cover-line-1.png), linear-gradient(-160deg, #56c5c7, #87cd68);
-  color: #fff;
-  height: 110px;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: cover;
-  image-rendering: pixelated;
-}
-.loan-card-5 {
-  background: url(../../img/lines/home-bigcard-cover-line-1.png), linear-gradient(-120deg, #74ca8c, #a7d22a);
-  color: #fff;
-  height: 110px;
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: cover;
-  image-rendering: pixelated;
-}
-.loan-card-text {
-  text-align: right;
-  word-break: break-word;
-  font-size: 14px;
-  line-height: initial;
-}
 .card-body {
   display: grid;
-  /* background: linear-gradient(90deg, rgba(162, 209, 54, 1) 13%, rgba(60, 193, 249, 1) 75%) !important; */
 }
 .card-body i {
   float: right;
@@ -188,7 +125,6 @@
 .home-tab-2-content > .scroll {
   min-height: 0px !important;
   margin: 0 20px;
-  /* display: inline-block !important; */
 }
 .small-box {
   background: none;
@@ -201,15 +137,6 @@
   background-color: #acd322;
   border-radius: 10px !important;
 }
-.loan-tab-title {
-  padding: 10px 13px;
-}
-.fleft {
-  float: left;
-}
-.fright {
-  float: right;
-}
 .home-tab2-slider {
   text-align: center;
   border-radius: 10px;
@@ -218,11 +145,6 @@
   margin: 10px auto;
   width: calc(95% - 0px);
   display: grid;
-  /* border: 2px solid #acd322; */
-  /* border-radius: 10px;
-  background-clip: padding-box, border-box;
-  background-origin: padding-box, border-box;
-  background-image: linear-gradient(#f8f8fe, #f8f8fe), linear-gradient(#3cc1fa, #acd322); */
 }
 .home-tab2-ion-slide {
   display: flex;
@@ -230,6 +152,4 @@
   justify-content: center;
   height: 100%;
   min-height: 150px;
-}
-.home-tab2-ion-slide img {
 }

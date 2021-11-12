@@ -252,7 +252,7 @@
         }
       }
     });
-    // console.log("json", json);
+    console.log("json", json);
 
     // if ($rootScope.minPayment > $rootScope.newReqiust.advancePayment || $rootScope.newReqiust.advancePayment == 0 || isEmpty($rootScope.newReqiust.advancePayment)) {
     //   $rootScope.collTrueStep2 = false;

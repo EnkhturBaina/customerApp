@@ -69,7 +69,7 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
         }
       }
     });
-    // console.log("json", json);
+    console.log("json", json);
   };
 
   $rootScope.$on("$ionicView.enter", function () {
