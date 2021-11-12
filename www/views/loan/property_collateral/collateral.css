@@ -1,25 +1,5 @@
-.selection {
-  background: none;
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid;
-  border-color: #a2a7b552;
-  padding: 5px 0px 10px 0px;
-  margin-bottom: 10px;
-  color: #a2a7b5;
-}
 .collateral-loan-content {
   /* margin-bottom: 50px !important;  */
-}
-.collateral-loan-label {
-  width: 100%;
-  border-left: none;
-  border-right: none;
-  background: none;
-  padding: 5px;
-  border-bottom-width: 1px;
-  border-color: #ccc;
-  border-top-width: 0px;
 }
 .collateral-loan-label input {
   text-align: right;
@@ -60,46 +40,6 @@
   padding-bottom: 50px;
   background: #fff;
   border: 1px solid #acd322;
-}
-.ident-icon {
-  border-radius: 5px;
-  border: 1px solid #ccfffc;
-  text-align: center;
-  font-size: 10px;
-  color: #eaf6e2;
-  line-height: 10px;
-  background: #65c8ae;
-  padding: 3px;
-  width: 18px !important;
-  height: 18px !important;
-  bottom: -3px;
-  margin-left: 50px;
-}
-.pc-card-front {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  align-items: center;
-  position: relative;
-  display: grid;
-}
-.pc-card-front i {
-  position: absolute;
-  zoom: 2;
-}
-.pc-card-back {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  align-items: center;
-  position: relative;
-  display: grid;
-}
-.pc-card-back i {
-  position: absolute;
-  zoom: 2;
 }
 .property-coll-label {
   padding: 5px 0 !important;
@@ -163,7 +103,7 @@
 }
 
 .property-step2-card {
-  padding: 10px;
+  padding: 10px 20px;
   margin: 20px 15px 0px 15px;
   height: auto;
   background-color: #fff !important;
@@ -178,10 +118,15 @@
   border-radius: 5px;
   padding: 7px 0px 7px 30px;
   color: #606060;
-  text-align-last: right;
   background-color: #fff;
   position: absolute;
   right: 0;
+  color: #4b5180 !important;
+  font-weight: bold !important;
+}
+.property-step2-card select option {
+  text-align: right !important;
+  color: #4b5180 !important;
 }
 .property-dan-content .scroll {
   position: static !important;

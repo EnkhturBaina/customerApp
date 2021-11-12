@@ -39,8 +39,15 @@ var app = angular
     "suppliers-search.Ctrl",
     "supplier-detail.Ctrl",
     "purchase-inst.Ctrl",
+    "eco.Ctrl",
+    "building.Ctrl",
+    "card.Ctrl",
+    "money.Ctrl",
+    "divide.Ctrl",
+    "salary.Ctrl",
+    "dan_page.Ctrl",
   ])
-  .run(function ($ionicPlatform, $state, $cordovaSplashscreen) {
+  .run(function ($ionicPlatform, $cordovaNetwork, $cordovaSplashscreen) {
     $ionicPlatform.ready(function () {
       if (window.StatusBar) {
         StatusBar.styleDefault();
@@ -320,6 +327,41 @@ var app = angular
       templateUrl: "views/purchase-inst/purchase-inst.html",
       controller: "purchase-instCtrl",
     });
+    $stateProvider.state("eco", {
+      url: "/views/loan/eco",
+      templateUrl: "views/loan/eco/eco.html",
+      controller: "ecoCtrl",
+    });
+    $stateProvider.state("building", {
+      url: "/views/loan/building",
+      templateUrl: "views/loan/building/building.html",
+      controller: "buildingCtrl",
+    });
+    $stateProvider.state("card", {
+      url: "/views/loan/card",
+      templateUrl: "views/loan/card/card.html",
+      controller: "cardCtrl",
+    });
+    $stateProvider.state("money", {
+      url: "/views/loan/money",
+      templateUrl: "views/loan/money/money.html",
+      controller: "moneyCtrl",
+    });
+    $stateProvider.state("divide", {
+      url: "/views/loan/divide",
+      templateUrl: "views/loan/divide/divide.html",
+      controller: "divideCtrl",
+    });
+    $stateProvider.state("salary", {
+      url: "/views/loan/salary",
+      templateUrl: "views/loan/salary/salary.html",
+      controller: "salaryCtrl",
+    });
+    $stateProvider.state("dan_page", {
+      url: "/views/loan/dan_page",
+      templateUrl: "views/loan/dan_page/dan_page.html",
+      controller: "dan_pageCtrl",
+    });
     $urlRouterProvider.otherwise("/views/home");
   })
   .controller("index", function ($scope, $ionicPlatform, $state) {})
@@ -532,48 +574,6 @@ var app = angular
       },
     };
   })
-  .directive("thousandSeparator", [
-    "$timeout",
-    function ($timeout) {
-      return {
-        require: "ngModel",
-        link: function (scope, element, attrs, controller) {
-          var sep = attrs.thousandSeparator || ",";
-          var model = attrs.ngModel;
-
-          var doReplace = function () {
-            var curValue = element.val();
-            var replace = new RegExp(sep, "g");
-            var cleanValue = curValue.replace(replace, "");
-
-            // Create dotted value from clean
-            var x1 = cleanValue + "";
-            var rgx = /(\d+)(\d{3})/;
-            while (rgx.test(x1)) {
-              x1 = x1.replace(rgx, "$1" + "," + "$2");
-            }
-
-            element.val(x1);
-
-            scope.$apply(function () {
-              controller.$setViewValue(cleanValue);
-            });
-          };
-
-          element.on("keyup", function () {
-            doReplace();
-          });
-
-          element.on("blur", function () {
-            doReplace();
-          });
-
-          // trigger for existing model values
-          $timeout(doReplace, 1);
-        },
-      };
-    },
-  ])
   .directive("preventTypingGreater", function () {
     return {
       link: function (scope, element, attributes) {
@@ -599,6 +599,36 @@ var app = angular
         // all are rendered
         scope.$eval(attrs.repeatDone);
       }
+    };
+  })
+  .directive("groupedRadio", function () {
+    return {
+      restrict: "A",
+      require: "ngModel",
+      scope: {
+        model: "=ngModel",
+        value: "=groupedRadio",
+      },
+      link: function (scope, element, attrs, ngModelCtrl) {
+        element.addClass("button");
+        element.on("click", function (e) {
+          scope.$apply(function () {
+            ngModelCtrl.$setViewValue(scope.value);
+          });
+        });
+
+        scope.$watch("model", function (newVal) {
+          element.removeClass("button-positive");
+          if (newVal === scope.value) {
+            element.addClass("button-positive");
+          }
+        });
+      },
+    };
+  })
+  .filter("htmlToPlaintext", function () {
+    return function (text) {
+      return String(text).replace(/<[^>]+>/gm, "");
     };
   });
 

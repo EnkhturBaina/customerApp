@@ -5,29 +5,25 @@
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
-                    <label class="item item-input step4-loan-location">
-                        <p class="dan-user-data">Орлогын төрөл</p>
-                        <select class="select-income-type" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid"></select>
-                    </label>
-                    <span class="vxx-title step5-mid-title">Нийгмийн даатгалын шимтгэл төлсөн сарын орлого</span>
-                    <div class="tugrug-input">
-                        <span class="title input-label-front dan-user-data">Сарын орлого</span>
-                        <div class="tugrug-input-container">
-                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask dan-monthly-income" ng-disabled="$root.monthlyIncomeDisable" ng-model="$root.danIncomeData.monthlyincome" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
-                        </div>
-                    </div>
-                    <span class="vxx-title step5-mid-title">Та баримтаар баталгаажих орлогоо оруулна уу</span>
-                    <div class="tugrug-input">
-                        <span class="title input-label-front dan-user-data">Таны бусад орлого</span>
-                        <div class="tugrug-input-container">
-                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.totalincomehousehold" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
-                        </div>
-                    </div>
-                    <div class="tugrug-input">
-                        <span class="title input-label-front dan-user-data">Сард төлж буй зээл</span>
-                        <div class="tugrug-input-container">
-                            <input type="tel" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="$root.danIncomeData.monthlypayment" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
-                        </div>
+                    <div class="custom-form-container">
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Орлогын төрөл</p>
+                            <select class="custom-form-input-select" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid"></select>
+                        </label>
+                        <span class="vxx-title step5-mid-title">Нийгмийн даатгалын шимтгэл төлсөн сарын орлого</span>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Сарын орлого</p>
+                            <input type="tel" placeholder="" name="" id="customerLastNameDan" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-disabled="$root.monthlyIncomeDisable" ng-model="$root.danIncomeData.monthlyincome" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
+                        </label>
+                        <span class="vxx-title step5-mid-title">Та баримтаар баталгаажих орлогоо оруулна уу</span>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Таны бусад орлого</p>
+                            <input type="tel" placeholder="" name="" id="customerLastNameDan" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danIncomeData.totalincomehousehold" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Сард төлж буй зээл</p>
+                            <input type="tel" placeholder="" name="" id="customerLastNameDan" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danIncomeData.monthlypayment" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
+                        </label>
                     </div>
                 </div>
                 <div class="container-padding pulse-animation" id="section07">

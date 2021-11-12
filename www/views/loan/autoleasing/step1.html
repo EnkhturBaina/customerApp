@@ -1,7 +1,7 @@
 <ion-view id="loanPages" hide-nav-bar="true">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
-    <ion-header-bar align-title="left" class="navbar" style="background: none">
-        <div class="title ion-color-big-text navbar-back-button" style="background: none">
+    <ion-header-bar align-title="left" class="navbar" style="background: none;top: 0">
+        <div class="title ion-color-big-text navbar-back-button" style="background: none; ">
             <button ng-click="backFromStep1()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
                 <i class="ion-chevron-left ion-color-header"></i>
                 <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Автомашины лизинг</span></span>
@@ -13,29 +13,39 @@
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 autoleasing-step1-content">
         <div class="big-container ghostwhite-noscroll-container">
             <div class="magic-container step1-card-content">
-                <div class="progressbar-container">
-                    <ul id="progress-bar" class="progressbar">
-                        <li class="active step-li-1"></li>
-                        <li class="step-li-22"></li>
-                        <li class="step-li-3"></li>
-                        <li class="step-li-4"></li>
-                    </ul>
+                <p class="big-middle-title auto-step1-title-select">Автомашины сонгосон эсэх?</p>
+                <div class="custm-radio-step1">
+
+                    <select ng-model="$root.newReqiust.choose" class="custom-stp1-input-select" ng-change="selectCarChoose($root.newReqiust.choose)">
+                        <option value="1">
+                            0001.MN -с сонгосон
+                        </option>
+                        <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                            {{loc.name}}
+                        </option>
+                    </select>
+                    <!-- <a grouped-radio="1554263832132" ng-model="$root.newReqiust.choose" class="custm-radio-select" ng-click="selectCarChoose(1554263832132)"><span class="ion-pt-5">Тийм</span></a>
+                    <a grouped-radio="1554263832151" ng-model="$root.newReqiust.choose" class="custm-radio-select" ng-click="selectCarChoose(1554263832151)"><span class="ion-pt-5">Үгүй</span></a>
+                    <a grouped-radio="1" ng-model="$root.newReqiust.choose" class="custm-radio-select" ng-click="selectCarChoose(1)"><span>0001.MN -с сонгосон</span></a> -->
                 </div>
-                <div class="bottom-border-input-text step1-code-input-container">
-                    <p class="big-middle-title auto-step1-title">ТА АВАХ АВТОМАШИНЫХАА КОДЫГ ОРУУЛНА УУ?</p>
-                    <input inputmode="numeric" pattern="[0-9]*" id="step1CarCode" type="text" placeholder="00000000" name="carCode" class="step1-car-code ion-text-upper" ng-model="$root.newReqiust.itemcode" ng-keyup="getCarDatasIdEnterkey($event,$root.newReqiust.itemcode)" select-on-click />
+                <div class="step1-from-0001" ng-if="isSelected0001">
+                    <div class="bottom-border-input-text step1-code-input-container">
+                        <p class="big-middle-title auto-step1-title">Та авах автомашиныхаа кодыг оруулна уу?</p>
+                        <input inputmode="numeric" pattern="[0-9]*" id="step1CarCode" type="text" placeholder="00000000" name="carCode" class="step1-car-code ion-text-upper" ng-model="$root.newReqiust.itemcode" ng-keyup="getCarDatasIdEnterkey($event,$root.newReqiust.itemcode)" select-on-click />
+                    </div>
+                    <div class="step1-scan-qr-container">
+                        <!-- <div class="qr-btn-container">
+                            <button class="button qr-button" id="qr" ng-click="showQRreader()">
+                                <span class="filter">
+                                    <i class="ion-qr-scanner qr-ico"></i>
+                                    QR уншуулах
+                                </span>
+                            </button>
+                        </div> -->
+                    </div>
                 </div>
-                <div class="step1-scan-qr-container">
-                    <!-- <div class="qr-btn-container">
-                        <button class="button qr-button" id="qr" ng-click="showQRreader()">
-                            <span class="filter">
-                                <i class="ion-qr-scanner qr-ico"></i>
-                                QR уншуулах
-                            </span>
-                        </button>
-                    </div> -->
-                    <button class="button btn single-button auto-step1-next-btn" id="Next" ng-click="getCarDatasId($root.newReqiust.itemcode)">Үргэлжлүүлэх</button>
-                </div>
+                <button class="button btn single-button auto-step1-next-btn" id="Next" ng-click="getCarDatasId($root.newReqiust.itemcode)">Үргэлжлүүлэх</button>
+
             </div>
             <ion-footer class="bottom-footer">
                 <!-- **APP STORE UPDATE START** -->

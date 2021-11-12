@@ -1,120 +1,4 @@
-﻿.progressbar-container {
-  margin: 15% 0 30% 0;
-}
-.progressbar li {
-  list-style-type: none;
-  width: 25%;
-  float: left;
-  font-size: 12px;
-  position: relative;
-  text-align: center;
-  text-transform: uppercase;
-  color: #c6c8d4;
-}
-.progressbar li:before {
-  width: 15px;
-  height: 15px;
-  content: "";
-  line-height: 15px;
-  border: 2px solid #c6c8d4;
-  display: block;
-  text-align: center;
-  margin: 0 auto 3px auto;
-  border-radius: 50%;
-  position: relative;
-  z-index: 2;
-  background-color: #c6c8d4;
-}
-.progressbar li:after {
-  width: 100%;
-  height: 2px;
-  content: "";
-  position: absolute;
-  background-color: #c6c8d4;
-  top: 7px;
-  left: -50%;
-  z-index: 0;
-}
-.progressbar li:first-child:after {
-  content: none;
-}
-.progressbar li.active {
-  color: green;
-  font-weight: bold;
-}
-.progressbar li.active:before {
-  border-color: #55b776;
-  background: green;
-}
-.progressbar li.active + li:after {
-  background-color: #55b776;
-}
-.progressbar li.active:before {
-  background: #55b776;
-  background-size: 60%;
-}
-.progressbar li::before {
-  background: #c6c8d4;
-  background-size: 60%;
-}
-.progressbar {
-  counter-reset: step;
-}
-.progressbar .step-li-1.active:before {
-  z-index: 2;
-  border-color: #acd322;
-  background-color: #acd322;
-  transition: all 0.8s;
-}
-.progressbar .step-li-2.active:before {
-  border-color: #68c9a6;
-  background-color: #68c9a6;
-  transition: all 0.8s;
-}
-.progressbar .step-li-2.active:after {
-  transition: all 0.8s;
-  background: rgb(170, 212, 38);
-  background: -moz-linear-gradient(45deg, rgba(170, 212, 38, 1) 15%, rgba(104, 201, 166, 1) 77%);
-  background: -webkit-linear-gradient(45deg, rgba(170, 212, 38, 1) 15%, rgba(104, 201, 166, 1) 77%);
-  background: linear-gradient(45deg, rgba(170, 212, 38, 1) 15%, rgba(104, 201, 166, 1) 77%);
-}
-.progressbar .step-li-3.active:before {
-  border-color: #41c1f2;
-  background-color: #41c1f2;
-  transition: all 0.8s;
-}
-.progressbar .step-li-3.active:after {
-  transition: all 0.8s;
-  background: rgb(104, 201, 166);
-  background: -moz-linear-gradient(45deg, rgba(104, 201, 166, 1) 30%, rgba(65, 193, 242, 1) 77%);
-  background: -webkit-linear-gradient(45deg, rgba(104, 201, 166, 1) 30%, rgba(65, 193, 242, 1) 77%);
-  background: linear-gradient(45deg, rgba(104, 201, 166, 1) 30%, rgba(65, 193, 242, 1) 77%);
-}
-.progressbar .step-li-4.active:before {
-  border-color: #41c1f2;
-  background-color: #41c1f2;
-  transition: all 0.8s;
-}
-.progressbar .step-li-4.active:after {
-  transition: all 0.8s;
-  background: rgb(104, 201, 166);
-  background: -moz-linear-gradient(45deg, rgba(104, 201, 166, 1) 30%, rgba(65, 193, 242, 1) 77%);
-  background: -webkit-linear-gradient(45deg, rgba(104, 201, 166, 1) 30%, rgba(65, 193, 242, 1) 77%);
-  background: linear-gradient(45deg, rgba(104, 201, 166, 1) 30%, rgba(65, 193, 242, 1) 77%);
-}
-.step-li-44::before {
-  background: #55b776 !important;
-  border: 1px solid #55b776 !important;
-}
-.step-li-33::before {
-  border-color: #41c1f2 !important;
-  background-color: #41c1f2 !important;
-}
-.step-li-22::before {
-  border-color: #68c9a6 !important;
-  background-color: #68c9a6 !important;
-}
-.bottom-border-input-text input {
+﻿.bottom-border-input-text input {
   background: none;
   border-bottom: 1px solid;
   border-radius: 10px;
@@ -126,7 +10,7 @@
   text-align-last: center;
   padding: 20px;
   font-size: 20px;
-  width: 80%;
+  width: 44vw;
   margin: auto;
 }
 .qr-btn-container {
@@ -399,11 +283,12 @@
   padding: 7px 0px 7px 30px;
   color: #4b5180 !important;
   font-weight: bold !important;
-  text-align-last: right;
   z-index: 99;
   background: transparent !important;
 }
-
+.autoleasing-location-select option {
+  text-align: right !important;
+}
 .step3-bankList-checkbox-container {
   padding-left: 15px !important;
   background-color: #fff !important;
@@ -437,7 +322,7 @@
 }
 .step2-loan-location p {
   position: absolute;
-  padding-left: 30px;
+  padding-left: 10px;
   z-index: -1;
 }
 .step2-loan-location i {
@@ -446,10 +331,11 @@
 }
 .step1-card-content {
   background-color: #fff;
-  padding: 15px 0px;
+  padding: 45px 0px;
   border-radius: 10px;
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  margin: 10px 20px;
+  margin: 40px 20px 10px 20px;
+  height: auto;
 }
 .step1-scan-qr-container {
   display: flex;
@@ -461,14 +347,14 @@
 }
 .step1-code-input-container {
   width: 55vw;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 .auto-step1-title {
   text-align: center;
   font-size: 12px !important;
 }
 .auto-step1-next-btn {
-  margin-top: 100px !important;
+  /* margin-top: 20px !important; */
 }
 .header-title-step3 {
   text-transform: uppercase;
@@ -486,9 +372,11 @@
   padding: 7px 0px 7px 30px;
   color: #4b5180 !important;
   font-weight: bold !important;
-  text-align-last: right;
   z-index: 99;
   background: transparent !important;
+}
+.select-income-type option {
+  text-align: right !important;
 }
 .loan-month-type-number {
   color: #4b5180 !important;
@@ -592,8 +480,12 @@
   top: 0px !important;
 }
 .step5-mid-title {
-  margin: 10px auto 0 auto !important;
+  margin: 5px auto !important;
   width: 80% !important;
+  line-height: 12px !important;
   display: block !important;
   text-align: center !important;
+}
+.step2-valid-text-bold {
+  font-weight: bold !important;
 }

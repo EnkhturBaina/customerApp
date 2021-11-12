@@ -1,0 +1,29 @@
+<ion-view hide-nav-bar="true">
+    <link href="views/loan/danselect/danselect.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'E-Mongolia'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content overflow-scroll="true" ng-controller="dan_pageCtrl" class="ion-modified-content margin-top-50 danselect-content">
+        <div class="danselect-container">
+            <div class="item danselect-card card-body item-text-wrap">
+                <div class="danselect-card-row1">
+                    <img class="danselect-img" style=" width: 150px; " src="img/emongolia.svg" />
+                </div>
+                <div class="danselect-card-row2">
+                    <span class="danselect-card-text">Та E-Mongolia системээр дамжуулан зээл авахад шаарддаг материалаа яг одоо цахимаар өгснөөр <span class="dan-select-title-span">ЦАГ ХУГАЦАА, МӨНГӨӨ</span> хэмнэх болно.</span>
+                    <div class="dan-is-btn-txt" ng-click="danIsModal.show()">E-Mongolia гэж юу вэ?</div>
+                </div>
+                <button class="button btn single-button" ng-click="getCustomerDataFromDan()">Мэдээлэл татах</button>
+            </div>
+            <div class="bank-container">
+                <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
+                <img class="tooltip" ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" title="{{bank.department_name}}" animation="fade" />
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<script id="templates/danIs.html" type="text/ng-template">
+  <ion-modal-view class="auto-temp-modal-view">
+    <ion-content class="padding bank-chat-content" scroll="false">
+        <div class="templates-modal-include" ng-include src="'views/templates/danIs.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>

@@ -1,7 +1,5 @@
 angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal, $ionicLoading) {
-  $("#step2loanMonth").mask("00");
-  $("#loanAmountRequest").mask("000000000000");
-  $("#sendRequestAdvancePayment").mask("000000000000");
+  $("#step2loanMonth").mask("000");
 
   // MODAL
   $ionicModal
@@ -30,7 +28,7 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
     var json = {};
 
     json.isPerson = "1";
-    json.isColalteral = "";
+    json.isCollateral = "";
 
     //банк шүүлт
     json.type = "autoLeasingLoanFilter";
@@ -84,7 +82,7 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
         $rootScope.displayMinPayment = $rootScope.newReqiust.loanAmount * $rootScope.minPayment;
       }
     });
-    // console.log("json", json);
+    console.log("json", json);
   };
 
   $scope.changeToolTipData = function () {
@@ -151,7 +149,6 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
   };
 
   $scope.$on("$ionicView.enter", function () {
-    localStorage.setItem("requestType", "preLoan");
     $rootScope.hideFooter = true;
 
     $rootScope.collTrueStep2 = false;

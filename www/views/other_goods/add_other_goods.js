@@ -7,9 +7,11 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       $rootScope.alert("Та барааны нийлүүлэгчийг сонгоно уу", "warning");
     } else if (isEmpty($rootScope.newCarReq.categoryId)) {
       $rootScope.alert("Та барааны төрөл өө сонгоно уу", "warning");
-    } else if (isEmpty($rootScope.newCarReq.picture1)) {
-      $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
-    } else {
+    }
+    // else if (isEmpty($rootScope.newCarReq.picture1)) {
+    //   $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
+    // }
+    else {
       try {
         var otherGoodFirstId = 1;
         if (localStorage.otherGoodsMaxId === undefined) {
@@ -59,33 +61,9 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       ],
     });
   };
-  //Бараа нийлүүлэгч
-  $rootScope.allSupplierList = [];
   //Барааны ДЭД нийлүүлэгч
   $rootScope.subVendor = [];
-  //Барааны төрөл
-  $rootScope.supplierCategory = [];
-  //Нийлүүлэгчийн борлуулдаг барааны төрлийн хамаарал
-  $rootScope.supplierHaveCategory = [];
-  //Нийлүүлэгч сонгоход тухайн нийлүүлэгчийн зардаг барааны төрлийг хадгалах
-  $rootScope.selectedSupplierCategory = [];
-  //Бүтээгдэхүүний төрөл (Нийлүүлэгчийн борлуулдаг барааны төрөл олоход ашиглана)
-  $rootScope.suppcategoryStore = [];
 
-  $scope.getLookUpData = function () {
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614229736963117" }).then(function (response) {
-      $rootScope.supplierCategory = response;
-    });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614232214127503" }).then(function (response) {
-      $rootScope.allSupplierList = response;
-      $rootScope.suppcategoryStore = response;
-    });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614229588590652" }).then(function (response) {
-      $rootScope.supplierHaveCategory = response;
-    });
-  };
-
-  $scope.getLookUpData();
   $scope.goodsSourceSelectOn = function (path) {
     $scope.selectedImagePath = path;
     document.getElementById("overlayItemPicGoods").style.display = "block";
@@ -119,11 +97,11 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
 
   //Бараны нийлүүлэгч хамаарч Барааны төрөл -г lookup -д дахин сэт хийх
   $scope.changeSupCategory = function (supppp) {
-    $scope.selectedSupplierCategory = [];
+    $rootScope.selectedSupplierCategory = [];
 
-    $scope.supplierHaveCategory.map((item) => {
+    $rootScope.supplierHaveCategory.map((item) => {
       if (item.categoryid === supppp) {
-        $scope.selectedSupplierCategory.push(item.supplierid);
+        $rootScope.selectedSupplierCategory.push(item.supplierid);
         return true;
       }
     });
@@ -131,8 +109,8 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
     var selectedCategory = [];
 
     $rootScope.allSupplierList = $rootScope.suppcategoryStore.some((item) => {
-      $scope.selectedSupplierCategory.map((item2) => {
-        if (item2 == item.id) {
+      $rootScope.selectedSupplierCategory.map((item2) => {
+        if (item2 == item.id && item.isactive == "1") {
           selectedCategory.push(item);
           return true;
         }

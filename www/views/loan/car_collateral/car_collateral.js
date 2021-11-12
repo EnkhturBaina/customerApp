@@ -16,6 +16,26 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   //Машины өнгө
   $scope.carColorData = [];
 
+  $scope.$on("$ionicView.enter", function () {
+    console.log("A");
+    //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
+    $rootScope.carCollateralRequestData = {};
+    $rootScope.carCollateralRequestData.loanAmount = 0;
+    $rootScope.carCollateralRequestData.serviceAgreementId = 1554263832132;
+    $rootScope.hideFooter = true;
+    $timeout(function () {
+      if ($state.current.name == "car_coll2") {
+        if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
+          $scope.autoCollDan.show();
+        } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {
+          $rootScope.alert("Таньд автомашин бүртгэлгүй байна", "warning");
+        }
+      }
+    }, 500);
+    if ($state.current.name == "car_coll2") {
+      $scope.getbankDataCarColl();
+    }
+  });
   $scope.getCarCollateralLookupData = function () {
     if (isEmpty($scope.carCategory)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363794516634" }).then(function (datas) {
@@ -150,10 +170,9 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       $rootScope.newCarReq = {};
     }
     if ($scope.carCollCheckReqiured("step1")) {
-      localStorage.setItem("requestType", "autoColl");
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
 
-      $state.go("car_coll2");
+      $state.go("autoleasing-4");
     }
   };
   $rootScope.yearsArray = [];
@@ -241,9 +260,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       });
     };
   }
-  if ($state.current.name == "car_coll2") {
-    $scope.getbankDataCarColl();
-  }
   $scope.backFromCarCollStep1 = function () {
     $state.go("home");
   };
@@ -254,7 +270,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.saveCarCollRequestData = function () {
     if ($scope.carCollCheckReqiured("step2")) {
       if ($scope.carCollCheckReqiured("agreeBank")) {
-        $state.go("autoleasing-4");
+        $state.go("danselect");
       }
     }
   };
@@ -288,7 +304,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         $rootScope.alert("Зээлийн хэмжээ оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carCollateralRequestData.loanMonth)) {
-        $rootScope.alert("Зээл авах хугацаа сонгоно уу", "warning");
+        $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carCollateralRequestData.locationId)) {
         $rootScope.alert("Зээл авах байршил сонгоно уу", "warning");
@@ -334,11 +350,9 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       }
     );
   };
-  $("#monthInput").mask("00");
+  $("#monthInput").mask("000");
   $("#productYear").mask("0000");
   $("#entryYear").mask("0000");
-  $("#odo").mask("000000000");
-  $("#carDoorCount").mask("0");
   $("#engineCapacity").mask("000000000");
 
   $("#nationalNumberModal")
@@ -372,22 +386,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     .then(function (autoCollDan) {
       $scope.autoCollDan = autoCollDan;
     });
-  $scope.$on("$ionicView.enter", function () {
-    $rootScope.hideFooter = true;
-    $timeout(function () {
-      if ($state.current.name == "car_coll") {
-        //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
-        $rootScope.carCollateralRequestData = {};
-        $rootScope.carCollateralRequestData.loanAmount = 0;
-        $rootScope.carCollateralRequestData.serviceAgreementId = 1554263832132;
-        if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
-          $scope.autoCollDan.show();
-        } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {
-          $rootScope.alert("Таньд автомашин бүртгэлгүй байна", "warning");
-        }
-      }
-    }, 500);
-  });
 
   $scope.selectDanAutoColl = function (el) {
     $rootScope.autoCollDanCarData = el;

@@ -37,9 +37,13 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
       $("#productYear").val("");
       $state.go("car_coll");
     }
+
+    $rootScope.lastNameDanDisable = false;
+    $rootScope.firstNameDanDisable = false;
+    $rootScope.uniqueIdentifierDanDisable = false;
   };
 
-  $scope.gotoDanLoginDanSelect = function () {
+  $rootScope.gotoDanLoginDanSelect = function () {
     $rootScope.danCustomerData = {};
     $rootScope.danIncomeData = {};
     serverDeferred.carCalculation({ type: "auth_car_collateral", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
@@ -102,6 +106,7 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
                   $rootScope.danCustomerData.lastname = userInfo.result.lastname;
                   $rootScope.danCustomerData.firstname = userInfo.result.firstname;
                   $rootScope.danCustomerData.uniqueidentifier = userInfo.result.regnum.toUpperCase();
+                  $rootScope.danCustomerData.customertypeid = "1";
 
                   if (userSalaryInfo) {
                     serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {

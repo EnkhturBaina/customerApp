@@ -154,10 +154,36 @@
         $rootScope.supplierConditions = response.filter((value) => Object.keys(value).length !== 0);
       }
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16269369396661" }).then(function (response) {
+      if (!isEmpty(response)) {
+        $rootScope.supplierConditionsNotMap = response.filter((value) => Object.keys(value).length !== 0);
+      }
+    });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1629173002695086" }).then(function (response) {
       if (!isEmpty(response)) {
         $rootScope.educationData = response.filter((value) => Object.keys(value).length !== 0);
       }
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1634710517519245" }).then(function (response) {
+      if (!isEmpty(response)) {
+        $rootScope.ecoProductType = response.filter((value) => Object.keys(value).length !== 0);
+      }
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614229736963117" }).then(function (response) {
+      $rootScope.supplierCategory = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614229588590652" }).then(function (response) {
+      $rootScope.supplierHaveCategory = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614232214127503" }).then(function (response) {
+      $rootScope.allSupplierList = response;
+      $rootScope.suppcategoryStore = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16347033464591" }).then(function (response) {
+      $rootScope.supplierHaveSubCategory = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1634724795622863" }).then(function (response) {
+      $rootScope.termContent = response[0].templatebody;
     });
   };
   $scope.getProfileLookupData();
@@ -201,6 +227,24 @@
   }, 101);
   $rootScope.profilePictureSideMenu = localStorage.getItem("profilePictureSideMenu");
   $scope.$on("$ionicView.loaded", function (ev, info) {
+    document.addEventListener("offline", onOffline, false);
+
+    function onOffline() {
+      // Handle the offline event
+      $ionicPopup.show({
+        template: "<b>Оффлайн горимд ажиллах боломжгүй. Та интернэт холболтоо шалгана уу</b>",
+        cssClass: "confirmPopup",
+        buttons: [
+          {
+            text: "OK",
+            type: "button-confirm",
+            onTap: function () {
+              ionic.Platform.exitApp();
+            },
+          },
+        ],
+      });
+    }
     $rootScope.hideFooter = false;
 
     localStorage.removeItem("requestType");
@@ -259,5 +303,14 @@
   $scope.supplierDetailFromHome = function (id) {
     $rootScope.selectSupplierID = id;
     $state.go("supplier-detail");
+  };
+
+  $scope.goLoanPage = function (type, state, isactive) {
+    if (isactive == "active") {
+      localStorage.setItem("requestType", type);
+      $state.go(state);
+    } else {
+      $rootScope.alert("Тун удахгүй", "warning");
+    }
   };
 });

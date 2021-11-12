@@ -5,15 +5,7 @@
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
-                    <div style="margin-top: 10px; margin-bottom: 55px">
-                        <ul id="progress-bar" class="progressbar">
-                            <li class="active step-li-1"></li>
-                            <li class="active step-li-2"></li>
-                            <li class="active step-li-3"></li>
-                            <li class="step-li-44"></li>
-                        </ul>
-                    </div>
-                    <p class="header-title-step3 ion-color-big-text">Та зээл судлуулах банк, ББСБ-аас 3 хүртэлхийг сонгон илгээнэ үү</p>
+                    <!-- <p class="header-title-step3 ion-color-big-text">Та зээл судлуулах банк, ББСБ-аас 3 хүртэлхийг сонгон илгээнэ үү</p> -->
                     <div class="bank-list">
                         <p class="middle-title ion-color-big-text">Зээлийн нөхцлийг хангасан банк, ББСБ-ууд</p>
                         <ul class="switch-list">
@@ -39,7 +31,7 @@
                                         <img ng-src="{{rejectbank.bank_logo|guessImageMime}}" />
                                     </div>
                                     <span class="bank-middle-title">{{rejectbank.department_name}}</span>
-                                    <p class="bank-desc-red">Тэнцээгүй</p>
+                                    <p class="bank-desc-red">Шалгуур хангаагүй</p>
                                 </div>
                                 <!-- </ion-checkbox> -->
                             </li>
@@ -48,7 +40,7 @@
                 </div>
             </div>
             <ion-footer class="bottom-footer ion-mb-10">
-                <button class="button btn single-button" id="Next" ng-click="sendRequest()">Хүсэлт илгээх</button>
+                <button class="button btn single-button" id="Next" ng-click="sendRequest()" ng-disabled="disabledBtnSendReq">Хүсэлт илгээх</button>
             </ion-footer>
         </div>
     </ion-content>

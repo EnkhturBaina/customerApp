@@ -3,7 +3,7 @@
     <div ng-repeat="data in supplierName" ng-include src="'views/navbar.html'"></div>
 
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 supplier-step2-content">
-        <div class="supp-dtl2-content">
+        <div class="supp-dtl2-content custom-form-container">
             <span class="term-title padding-left-10 sup-condition-title">Зээлийн нөхцөл</span>
             <div class="radio-scroll-container">
                 <div class="row supplier-step2-scroll-row">
@@ -22,18 +22,14 @@
             <div class="condition-detail-span" ng-show="isConditionSelected">
                 {{selectedConditionDetail}}
             </div>
-            <div class="condition-detail-input tugrug-input">
-                <span class="input-label-supplier">Зээлийн хэмжээ</span>
-                <div class="tugrug-input-container-supplier">
-                    <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.loanAmount" ng-change="changeLoanAmountSupplier()" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataSup()" format-input thousand-separator select-on-click />
-                </div>
-            </div>
-            <div class="condition-detail-input tugrug-input" ng-show="isSlideSelected">
-                <span class="input-label-supplier">Урьдчилгаа</span>
-                <div class="tugrug-input-container-supplier">
-                    <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.advancePayment" ng-change="calcLoanAmountSupplier()" ng-keyup="hideKeyboard($event)" ng-blur="getbankDataSup()" thousand-separator select-on-click />
-                </div>
-            </div>
+            <label class="item item-input item-stacked-label form-input-label">
+                <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
+                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-change="changeLoanAmountSupplier()" ng-blur="getbankDataSup()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label" ng-show="isSlideSelected">
+                <p class="input-label" style="margin: 0;">Урьдчилгаа төлбөр</p>
+                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-change="calcLoanAmountSupplier();" ng-blur="getbankDataSup()" thousand-separator select-on-click>
+            </label>
 
             <div class="condition-detail-card-range" ng-show="isSlideSelected">
                 <div class="slider-container-dtl">
@@ -61,7 +57,7 @@
                 <span class="">{{selectedConditionFee}}</span>
             </div>
             <div class="condition-detail-input tugrug-input custom-select-sup" ng-show="isSlideSelected">
-                <span class="input-label-supplier">Байршил</span>
+                <span class="input-label-supplier">Зээл авах байршил</span>
                 <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankDataSup();">
                     <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                         {{loc.name}}</option>

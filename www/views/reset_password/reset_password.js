@@ -13,7 +13,6 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
       $("#reset-step-2").addClass("add-step");
     },
   };
-
   var registeredUserData = {};
   $rootScope.customerNewPassword = {};
   $rootScope.customerData = {};
@@ -34,7 +33,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
       document.getElementById(inputName).type = "password";
     }
   };
-  $scope.sendSmsCode = function () {
+  $scope.sendSmsCodeReset = function () {
     if (isEmpty($rootScope.customerData.userName)) {
       $rootScope.alert("Утасны дугаараа оруулна уу");
     } else if ($rootScope.customerData.userName.length < 8) {
@@ -46,9 +45,6 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
         } else {
           var generatedCode = Math.floor(100000 + Math.random() * 900000);
           registeredUserData = response[0];
-          progressBar.Next();
-          $scope.isStep1 = false;
-          $scope.isStep2 = true;
           $timeout(function () {
             serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", crmUserId: response[0].id }).then(function (response) {
               localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
@@ -67,7 +63,16 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
 
             serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
               if (sendSmsResponse[0] == "success") {
-                serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {});
+                serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {
+                  console.log("res", response);
+                  if (response.result.status == "success") {
+                    $scope.isStep1 = false;
+                    $scope.isStep2 = true;
+                    progressBar.Next();
+                  } else {
+                    $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа", "warning");
+                  }
+                });
               } else {
                 $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа", "warning");
               }

@@ -6,57 +6,74 @@
             <ion-tab title="Зээлийн маркет">
                 <ion-nav-view class="ghostwhite">
                     <ion-content overflow-scroll="true" class="padding scroll-content ionic-scroll has-header home-tab-2-content">
-                        <p class="loan-tab-title ion-color-text">Та авах зээлийн төрлөө сонгоно уу.</p>
-                        <div class="card" ui-sref="autoleasing-1">
-                            <div class="item loan-card-1 card-body item-text-wrap">
-                                <div class="loan-card-first-row">
-                                    <span class="ion-text-bold ion-float-right">Автолизинг</span>
-                                </div>
-                                <div class="loan-card-2-first-row">
-                                    <span class="ion-float-right loan-card-text">Та бүх төрлийн автомашиныг эндээс олон лизингээс сонгон авах боломжтой.</span>
-                                </div>
-                            </div>
+
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('auto','autoleasing-1', 'active')">
+                            <i class="icon ion-model-s"></i>
+                            <span class="home-product-name">Автолизинг</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
                         </div>
-                        <div class="card" ui-sref="danselect">
-                            <div class="item loan-card-2 card-body item-text-wrap">
-                                <div class="loan-card-first-row">
-                                    <span class="ion-text-bold ion-float-right">Автомашин барьцаалсан зээл</span>
-                                </div>
-                                <div class="loan-card-2-first-row">
-                                    <span class="ion-float-right loan-card-text">Та автомашинаа барьцаалан өөрт тохирсон зээлийг эндээс аваарай.</span>
-                                </div>
-                            </div>
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('consumer','otherGoods','active')">
+                            <i class="icon ion-cash"></i>
+                            <span class="home-product-name">Хэрэглээний лизинг</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
                         </div>
-                        <div class="card" ui-sref="otherGoods">
-                            <div class="item loan-card-3 card-body item-text-wrap">
-                                <div class="loan-card-first-row">
-                                    <span class="ion-text-bold ion-float-right">Хэрэглээний лизинг</span>
-                                </div>
-                                <div class="loan-card-2-first-row">
-                                    <span class="ion-float-right loan-card-text">Та бүх төрлийн цахилгаан бараа, гар утсыг хэрэглээний лизингээр аваарай.</span>
-                                </div>
-                            </div>
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('autoColl','car_coll2','active')">
+                            <i class="icon ion-model-s"></i>
+                            <span class="home-product-name">Автомашин барьцаалсан зээл</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
                         </div>
-                        <div class="card" ui-sref="property_collateral_danselect">
-                            <div class="item loan-card-4 card-body item-text-wrap">
-                                <div class="loan-card-first-row">
-                                    <span class="ion-text-bold ion-float-right">Үл хөдлөх барьцаалсан зээл</span>
-                                </div>
-                                <div class="loan-card-2-first-row">
-                                    <span class="ion-float-right loan-card-text">Та үл хөдлөх хөрөнгөө барьцаалан өөрт тохирсон зээлийг эндээс аваарай. </span>
-                                </div>
-                            </div>
+                        <!-- <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('preLoan','pre_loan','active')">
+                            <i class="icon ion-ios7-paper"></i>
+                            <span class="home-product-name">Зээлийн эрхээ шалгах</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
+                        </div> -->
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('estate','property_collateral_danselect','active')">
+                            <i class="icon ion-ios7-home"></i>
+                            <span class="home-product-name">Үл хөдлөх барьцаалсан зээл</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
                         </div>
-                        <div class="card" ui-sref="pre_loan">
-                            <div class="item loan-card-5 card-body item-text-wrap">
-                                <div class="loan-card-first-row">
-                                    <span class="ion-text-bold ion-float-right">Зээлийн эрхээ шалгах</span>
-                                </div>
-                                <div class="loan-card-2-first-row">
-                                    <span class="ion-float-right loan-card-text">Та урьдчилж зээлийн хэмжээгээ тогтоолгоод дараа нь машинаа аваарай.</span>
-                                </div>
-                            </div>
-                        </div><br />
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('eco','eco','active')">
+                            <i class="icon ion-leaf"></i>
+                            <span class="home-product-name">Ногоон зээл</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
+                        </div>
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('building','building','active')">
+                            <i class="icon ion-ios7-home"></i>
+                            <span class="home-product-name">Орон сууцны зээл</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
+                        </div>
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('card','card','active')">
+                            <i class="icon ion-card"></i>
+                            <span class="home-product-name">Кредит карт</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
+                        </div>
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('salary','salary','active')">
+                            <i class="icon ion-ios7-lightbulb"></i>
+                            <span class="home-product-name">Цалингийн зээл</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
+                        </div>
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('money','money','notactive')">
+                            <i class="icon ion-cash"></i>
+                            <span class="home-product-name">Бэлэн мөнгө авах</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
+                        </div>
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('divide','divide','notactive')">
+                            <i class="icon ion-arrow-graph-up-right"></i>
+                            <span class="home-product-name">Бараа авах хүүгүй зээл</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
+                        </div>
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('smallBusiness','dan_page','notactive')">
+                            <i class="icon ion-bag"></i>
+                            <span class="home-product-name">Бичил бизнесийн зээл</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
+                        </div>
+                        <div class="home-card-icon-left home-tab-1-card" ng-click="goLoanPage('business','dan_page','notactive')">
+                            <i class="icon ion-ios7-box"></i>
+                            <span class="home-product-name">Бизнесийн зээл</span>
+                            <i class="card-arrow-icon ion-ios7-arrow-forward"></i>
+                        </div>
+                        <div class="none-div">
+                        </div>
                     </ion-content>
                 </ion-nav-view>
             </ion-tab>

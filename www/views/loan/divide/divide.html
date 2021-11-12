@@ -1,0 +1,86 @@
+<ion-view hide-nav-bar="true">
+    <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+    <div ng-repeat="data in [{'title':'Хүүгүй зээл'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content overflow-scroll="false" ng-controller="divideCtrl" class="divide-container margin-top-50">
+        <div class="big-container">
+            <div class="magic-container">
+                <div class="bg-container">
+                    <label class="item item-input step2-loan-location">
+                        <p>Бараа нийлүүлэгч</p>
+                        <select class="autoleasing-location-select" ng-model="$root.newReqiust.vendorId" ng-change="getbankData();">
+                            <option ng-repeat="loc in $root.allSupplierList | filter:{id:'!!'}" ng-if="loc.suppliername" value="{{loc.id}}">
+                                {{loc.suppliername}}</option>
+                        </select>
+                    </label>
+                    <div class="money-input">
+                        <div class="tugrug-input margin-top-15">
+                            <span class="title input-label-front">Зээлийн хэмжээ</span>
+                            <div class="tugrug-input-container">
+                                <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern mask" ng-model="$root.newReqiust.getLoanAmount" thousand-separator select-on-click />
+                            </div>
+                        </div>
+                        <label class="item item-input step2-loan-location">
+                            <p>Нөхцөл</p>
+                            <select class="autoleasing-location-select" ng-model="$root.newReqiust.locationId" ng-change="getbankData();changeDivideCondition($root.newReqiust.locationId);">
+                                <option ng-repeat="loc in $root.fidteredSupplierConditions | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}</option>
+                            </select>
+                        </label>
+                        <div class="tugrug-input margin-top-15">
+                            <span class="title input-label-front">Хүү</span>
+                            <div class="tugrug-input-container">
+                                <input type="text" placeholder="" id="step2loanMonth" name="" class="input-tugrug-type ng-pristine ng-untouched ng-valid ng-valid-pattern loan-month-type-number mask" ng-model="monthCond" ng-blur="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click />
+                            </div>
+                        </div>
+
+                        <div class="switch-input-container">
+                            <ul class="switch-list">
+                                <li>
+                                    <span class="step2-span step2-term" ng-click="termModalAgreement.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
+                                    <span>
+                                        <label class="step2-switch" id="step2isAgree">
+                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-checked="true" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" />
+                                            <div class="step2-slider step2-round">
+                                                <span id="step2-toggle-on" class="step2-on">Тийм</span>
+                                                <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
+                                            </div>
+                                        </label>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-padding pulse-animation" id="section07">
+                    <p class="middle-title agree-banks">ТА ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГАЖ БУЙ БАНК, ББСБ-УУД</p>
+                    <ion-scroll id="photoBanner" direction="x" class="wide-scroll-bank-step agree-bank-arrow">
+                        <div class="bank" ng-repeat="bank in bankListFilter.Agree">
+                            <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+                            <p>{{bank.department_name}}</p>
+                        </div>
+                    </ion-scroll>
+                </div>
+                <div class="container-padding" id="section07">
+                    <p class="middle-title not-agree-banks">ТА ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГААГҮЙ БАНК, ББСБ-УУД</p>
+                    <ion-scroll direction="x" class="wide-scroll-bank-step">
+                        <div class="bank" ng-repeat="bank in bankListFilter.NotAgree">
+                            <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+                            <p>{{bank.department_name}}</p>
+                        </div>
+                    </ion-scroll>
+                </div>
+                <button class="button btn single-button" id="Next" ng-click="divideStep2()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
+            </div>
+            <div class="none-div">
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
+<script id="templates/term-content.html" type="text/ng-template">
+  <ion-modal-view class="term-chat-modal">
+    <ion-content class="padding bank-chat-content" scroll="false">
+        <span class="term-modal-off-text" ng-click="termModalAgreement.hide()"><img style="width: 20px" src="img/x_mark.png" /></span>
+        <div class="term-modal-include" ng-include src="'views/term/term-content.html'"></div>
+    </ion-content>
+  </ion-modal-view>
+</script>

@@ -1,7 +1,7 @@
 <ion-view id="loanPages" hide-nav-bar="true">
     <link href="views/other_goods/other_goods.css" rel="stylesheet" />
     <link href="views/loan/business_loan/business_loan.css" rel="stylesheet" />
-    <ion-header-bar align-title="left" class="navbar" style="background: none">
+    <ion-header-bar align-title="left" class="navbar" style="background: none; top: 0">
         <div class="title ion-color-big-text navbar-back-button" style="background: none">
             <button ng-click="backFromOtherGoods()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
                 <i class="ion-chevron-left ion-color-header"></i>
@@ -16,7 +16,7 @@
             <div class="magic-container other-goods-content">
                 <div class="margin-lr-20">
                     <div class="goods-row1-container">
-                        <span class="goods-row1-text">Та яг одоо дэлгүүр дээрээс <span class="middle-card-mid-text">ЛИЗИНГ</span> авах гэж байгаа бол энд бараагаа бүртгүүлээрэй.</span>
+                        <span class="goods-row1-text">Та Лизингээр авах барааны төрөл болон дэлгүүрээ сонгоорой.</span>
                         <div class="addBtnContainer">
                             <button class="button btn single-button" id="Next" ui-sref="addOtherGoods">Бараа бүртгэх</button>
                         </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="goods-middle-card" ng-if="$root.showSec">
-                <span>Та бараагаа <span class="middle-card-mid-text">ОНЛАЙНААР, ЛИЗИНГЭЭР</span> авах гэж байгаа бол манай харилцагчдын web сайтаар бараагаа сонгон zeelme-р лизингээ аваарай</span>
+                <span>Та харилцагч дэлгүүрүүдээс сонгон лизингээр бараа авах хүсэлтээ илгээгээрэй</span>
                 <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" ng-if="consumerSuppliers.length" pager-click="clickSlidePager(index)" class="consumer-slider">
                     <ion-slide ng-repeat="bg in consumerSuppliers | filter:{id:'!!'}" class="consumer-ion-slide">
                         <img style="width: 200px;" ng-src="{{$root.imagePath}}{{bg.supplierpic}}" />

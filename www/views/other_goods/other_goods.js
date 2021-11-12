@@ -32,7 +32,6 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $scope.nexClivk = function () {
     if (!isEmpty($rootScope.otherGoodsData)) {
       $rootScope.newReqiust.advancePayment = "";
-      localStorage.setItem("requestType", "consumer");
       $state.go("autoleasing-2");
     } else {
       $rootScope.alert("Та зээлээр авах бараагаа бүртгэнэ үү", "warning");
@@ -92,6 +91,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   };
 
   $scope.$on("$ionicView.enter", function () {
+    $rootScope.is0001Price = false;
     $rootScope.getLocalGoodsData();
     $rootScope.calcTotalPrice();
     !isEmpty($rootScope.otherGoods) ? ($rootScope.showSec = false) : ($rootScope.showSec = true);

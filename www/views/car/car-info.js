@@ -7,7 +7,6 @@ angular.module("carinfo.Ctrl", []).controller("carinfoCtrl", function ($rootScop
   // auto Leasing
   $scope.goAutoleasing = function () {
     $rootScope.newReqiust.advancePayment = "";
-    localStorage.setItem("requestType", "auto");
     $state.go("autoleasing-2");
   };
   // get car Data
