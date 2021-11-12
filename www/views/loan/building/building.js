@@ -158,7 +158,7 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
     });
     $rootScope.buildingAgent = selectedCategory;
   });
-  
+
   $rootScope.calcLoanAmountBuilding = function () {
     if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.newReqiust.buildingPrice) {
       $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.buildingPrice - $rootScope.newReqiust.advancePayment;
@@ -167,5 +167,5 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
       var tmp = $rootScope.newReqiust.advancePayment;
       $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
     }
-};
+  };
 });

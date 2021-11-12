@@ -103,7 +103,6 @@
   };
   // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
   $rootScope.getbankData = function (a) {
-    console.log("$rootScope.newReqiust.choose", $rootScope.newReqiust.choose);
     if (a != "forced") $rootScope.ShowLoader();
 
     $rootScope.requestType = localStorage.getItem("requestType");
@@ -119,6 +118,7 @@
       json.isMortgage = isEmpty($rootScope.danCustomerData.mikmortgagecondition) ? "" : $rootScope.danCustomerData.mikmortgagecondition;
     }
     if ($state.current.name == "autoleasing-5") {
+      console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
       json.totalIncome = isEmpty($rootScope.danIncomeData.totalincomehousehold) ? 0 : $rootScope.danIncomeData.totalincomehousehold;
       json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome;
       json.monthPay = isEmpty($rootScope.danIncomeData.monthlypayment) ? 0 : $rootScope.danIncomeData.monthlypayment;
@@ -133,6 +133,7 @@
       json.supplier = $rootScope.otherGoodsData[0].shopId;
       json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
     } else if ($rootScope.requestType == "autoColl") {
+      console.log("$rootScope.carCollateralRequestData", $rootScope.carCollateralRequestData);
       //Авто Барьцаат лизинг банк шүүлт
       json.type = "carLoanFilter";
       json.totalLoan = $rootScope.carCollateralRequestData.loanAmount;
@@ -197,7 +198,7 @@
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
     }
     serverDeferred.carCalculation(json).then(function (response) {
-      console.log("response", response);
+      // console.log("response", response);
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
 
@@ -335,7 +336,7 @@
     if (!isEmpty($rootScope.selectedBanksList)) {
       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
       $rootScope.requestType = localStorage.getItem("requestType");
-
+      // console.log("$rootScope.requestType", $rootScope.requestType);
       if ($rootScope.requestType == "autoColl") {
         $scope.carCollateralData = {};
         //===================Авто машин барьцаалсан зээл===================

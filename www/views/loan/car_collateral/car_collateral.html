@@ -9,8 +9,8 @@
             <button class="button btn single-button">Хаах</button>
         </div>
     </div>
-    <!-- <div ng-repeat="data in [{'title':'Автомашин барьцаалсан зээл'}]" ng-include src="'views/navbar.html'"></div> -->
-    <ion-header-bar align-title="left" class="navbar" style="background: none; top: 0">
+    <div ng-repeat="data in [{'title':'Автомашин барьцаалсан зээл'}]" ng-include src="'views/navbar.html'"></div>
+    <!-- <ion-header-bar align-title="left" class="navbar" style="background: none; top: 0">
         <div class="title ion-color-big-text navbar-back-button" style="background: none">
             <button ng-click="backFromCarCollStep1()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
                 <i class="ion-chevron-left ion-color-header"></i>
@@ -19,7 +19,7 @@
         </div>
         <div class="navbar-right-icon">
         </div>
-    </ion-header-bar>
+    </ion-header-bar> -->
     <ion-content overflow-scroll="true" class="ion-modified-content has-header car-collateral-content">
         <div class="big-container ghostwhite-noscroll-container">
             <div class="magic-container car-collateral-contant-card">
@@ -178,12 +178,11 @@
                     </div>
                 </div>
             </div>
-            <!-- **APP STORE UPDATE START** -->
-            <!-- <div class="bank-container">
+            <div class="bank-container">
                 <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
                 <img class="tooltip" ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" title="{{bank.department_name}}" animation="fade" />
-            </div> -->
-            <!-- **APP STORE UPDATE END** -->
+
+            </div>
             <ion-footer class="bottom-footer" style="margin-bottom: 50px;">
                 <button class="button btn single-button" id="Next" ng-click="saveCarCol()">Үргэлжлүүлэх</button>
             </ion-footer>

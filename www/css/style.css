@@ -1311,7 +1311,7 @@ input[type="number"] {
 }
 .wide-scroll-bank-step .scroll {
   display: flex;
-  /* width: calc(100% - 40px); */
+  width: calc(100% - 40px);
 }
 .wide-scroll-bank-step .scroll-bar {
   display: none;

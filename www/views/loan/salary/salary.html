@@ -16,9 +16,9 @@
                         </label>
                         <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байна</span></div>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Ипотекийн зээлтэй эсэх</p>
+                            <p class="input-label" style="margin: 0;">Зээл авах байршил</p>
                             <select ng-model="$root.newReqiust.locationId" class="custom-form-input-select" ng-change="getbankDataSalary()">
-                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>
                         </label>

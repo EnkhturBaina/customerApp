@@ -14,23 +14,13 @@
                 <button class="button btn single-button" ng-click="gotoDanLoginDanSelect()">Мэдээлэл татах</button>
                 <div class="dan-is-btn" ng-click="autoCollHand()">Гараар бөглөх</div>
             </div>
-            <!-- **APP STORE UPDATE START** -->
-            <!-- <div class="bank-container">
+            <div class="bank-container">
                 <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
                 <img class="tooltip" ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" title="{{bank.department_name}}" animation="fade" />
-            </div> -->
-            <!-- **APP STORE UPDATE END** -->
+            </div>
         </div>
     </ion-content>
 </ion-view>
-<script id="templates/autoColl.html" type="text/ng-template">
-  <ion-modal-view class="auto-temp-modal-view">
-    <ion-content class="padding bank-chat-content" scroll="false">
-        <!-- <span class="term-modal-off-text" ng-click="autoCollModal.hide()"><img style="width: 20px" src="img/x_mark.png" /></span> -->
-        <div class="templates-modal-include" ng-include src="'views/templates/autoColl.html'"></div>
-    </ion-content>
-  </ion-modal-view>
-</script>
 <script id="templates/danIs.html" type="text/ng-template">
   <ion-modal-view class="auto-temp-modal-view">
     <ion-content class="padding bank-chat-content" scroll="false">

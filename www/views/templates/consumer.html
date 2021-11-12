@@ -20,16 +20,17 @@
             </div>
             <!-- <span class="templates-sub-title">Та авах бараагаа сонгоогүй бол <a href="{{$root.carMarketURL}}" class="click-here">ЭНД ДАРЖ</a> сонгоно уу</span> -->
             <button class="button btn single-button auto-template-btn" id="Next" ng-click="consumerModal.hide()">Үргэлжлүүлэх</button>
-            <!-- **APP STORE UPDATE START** -->
-            <!-- <div class="bank-container-template">
+            <div class="bank-container-template">
                 <p class="auto-template-bank-title">Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
                 <ion-scroll direction="x" class="wide-scroll-bank">
+                    <!-- <div class="" ng-repeat="bank in allBankList" ng-if="bank.bank_logo">
+                        <img class="tooltip" ng-src="{{bank.bank_logo|guessImageMime}}" title="{{bank.department_name}}" animation="fade" />
+                    </div> -->
                     <div class="photobanner">
                         <img class="tooltip" ng-repeat="bank in allBankList" ng-if="bank.bank_logo" ng-src="{{bank.bank_logo|guessImageMime}}" title="{{bank.department_name}}" animation="fade" />
                     </div>
                 </ion-scroll>
-            </div> -->
-            <!-- **APP STORE UPDATE END** -->
+            </div>
         </ion-scroll>
     </div>
 </div>

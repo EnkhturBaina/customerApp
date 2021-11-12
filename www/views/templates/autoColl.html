@@ -6,12 +6,12 @@
             <span class="templates-sub-title">Та автомашин барьцаалсан зээл авахдаа</span>
             <div class="templates-content">
                 <div class="templates-content-ul">
-                    <img style="width: 70px" src="img/tick-box.png" />
-                    <span>Барьцаалах машинаа бүртгэнэ</span>
-                </div>
-                <div class="templates-content-ul">
                     <img style="width: 70px" src="img/resume.png" />
                     <span>Зээлийн мэдээллээ оруулна</span>
+                </div>
+                <div class="templates-content-ul">
+                    <img style="width: 70px" src="img/tick-box.png" />
+                    <span>Барьцаалах машинаа бүртгэнэ</span>
                 </div>
                 <div class="templates-content-ul">
                     <img style="width: 70px" src="img/send-mail.png" />
@@ -19,16 +19,17 @@
                 </div>
             </div>
             <button class="button btn single-button auto-template-btn" id="Next" ng-click="autoCollModal.hide()">Үргэлжлүүлэх</button>
-            <!-- **APP STORE UPDATE START** -->
-            <!-- <div class="bank-container-template">
+            <div class="bank-container-template">
                 <p class="auto-template-bank-title">Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
                 <ion-scroll direction="x" class="wide-scroll-bank">
+                    <!-- <div class="" ng-repeat="bank in allBankList" ng-if="bank.bank_logo">
+                        <img class="tooltip" ng-src="{{bank.bank_logo|guessImageMime}}" title="{{bank.department_name}}" animation="fade" />
+                    </div> -->
                     <div class="photobanner">
                         <img class="tooltip" ng-repeat="bank in allBankList" ng-if="bank.bank_logo" ng-src="{{bank.bank_logo|guessImageMime}}" title="{{bank.department_name}}" animation="fade" />
                     </div>
                 </ion-scroll>
-            </div> -->
-            <!-- **APP STORE UPDATE END** -->
+            </div>
         </ion-scroll>
     </div>
 </div>

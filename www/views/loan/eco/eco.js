@@ -173,15 +173,15 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
     $rootScope.newReqiust.advancePayment = "";
   };
   $rootScope.calcLoanAmountEco = function () {
-      if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.newReqiust.itemPrice) {
-        $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.itemPrice - $rootScope.newReqiust.advancePayment;
-        $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
-      } else if (parseInt($rootScope.newReqiust.advancePayment) > $rootScope.newReqiust.itemPrice) {
-        var tmp = $rootScope.newReqiust.advancePayment;
-        $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
-      }
+    if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.newReqiust.itemPrice) {
+      $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.itemPrice - $rootScope.newReqiust.advancePayment;
+      $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
+    } else if (parseInt($rootScope.newReqiust.advancePayment) > $rootScope.newReqiust.itemPrice) {
+      var tmp = $rootScope.newReqiust.advancePayment;
+      $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
+    }
   };
-  
+
   //Бараны нийлүүлэгч хамаарч Барааны төрөл -г lookup -д дахин сэт хийх
   $scope.changeSupCategory = function (supppp) {
     $rootScope.selectedSupplierCategory = [];
