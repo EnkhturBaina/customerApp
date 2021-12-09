@@ -16,6 +16,8 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
   var registeredUserData = {};
   $rootScope.customerNewPassword = {};
   $rootScope.customerData = {};
+  $rootScope.isEmail = false;
+  $rootScope.userEmail = "";
   $rootScope.newPasswordHashResult = {};
   $rootScope.goBack = function () {
     $window.history.back();
@@ -69,6 +71,29 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
                     $scope.isStep1 = false;
                     $scope.isStep2 = true;
                     progressBar.Next();
+                  } else if (response.result.status == "error") {
+                    //Төлбөр дууссан үед mail ээр нэг удаагийн код явуулах
+                    serverDeferred.requestFull("dcApp_get_email_mobile_number_004", { mobileNumber: $scope.number }).then(function (res) {
+                      if (!isEmpty(res[1])) {
+                        $rootScope.userEmail = res[1].email;
+                        $rootScope.isEmail = true;
+                        var mailJson = {
+                          subjecttxt: "Zeelme.mn",
+                          messagetxt: `Сайн байна уу, нэг удаагийн код: ${generatedCode}`,
+                          maillist: {
+                            0: {
+                              value: $rootScope.userEmail,
+                            },
+                          },
+                        };
+
+                        serverDeferred.requestFull("SEND_MAIL3", mailJson).then(function (sendSmsResponse) {
+                          $scope.isStep1 = false;
+                          $scope.isStep2 = true;
+                          progressBar.Next();
+                        });
+                      }
+                    });
                   } else {
                     $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа", "warning");
                   }

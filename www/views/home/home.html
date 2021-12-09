@@ -83,7 +83,7 @@
                         <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" ng-if="dcSuppliers.length" show-pager="false" class="home-tab-2-slide-box" delegate-handle="suppliersDelegate">
                             <ion-slide ng-repeat="bg in dcSuppliers | filter:{id:'!!'}" ng-click="supplierDetailFromHome(bg.id)">
                                 <div class="home-tab2-slider home-tab2-ion-slide card home-card home-card-1">
-                                    <img style="width: 200px;max-height: 150px;" ng-src="{{$root.imagePath}}{{bg.supplierpic}}" />
+                                    <img style="width: 200px;max-height: 150px;" ng-src="{{$root.imagePath}}{{bg.supplierpicture}}" />
                                 </div>
 
                             </ion-slide>

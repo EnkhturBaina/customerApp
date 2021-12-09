@@ -16,7 +16,7 @@
             <ion-scroll direction="x" class="wide-as-needed suppliers-scroll">
                 <div class="horizontal-item-suppliers suppliers-card-container" ng-repeat="car in dcSuppliers | orderBy:'-createddate' | limitTo:5" ng-click="supplierDetailFromSuppliers(car.id)">
                     <div class="h-item">
-                        <img ng-src="{{$root.imagePath}}{{car.supplierpic}}" />
+                        <img ng-src="{{$root.imagePath}}{{car.supplierpicture}}" />
                         <span class="suppliers-name">{{car.suppliername}}</span>
                     </div>
                 </div>

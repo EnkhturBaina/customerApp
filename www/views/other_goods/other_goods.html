@@ -25,14 +25,13 @@
                                 <li class="items" ng-repeat="item in $root.otherGoods track by item.itemid">
                                     <ion-checkbox class="other-goods-checkbox" ng-model="isChecked">
                                         <div class="items-list-container">
-                                            <img ng-src="{{'data:image/png;base64,'+item.picture1}}" />
+                                            <div class="other-goods-trash icon ion-ios7-trash-outline" ng-click="otherGoodsDelete(item.itemid)"></div>
                                         </div>
                                         <div class="left-text" style="margin-top: 4%;margin-left: 90px;height: 18px;position: absolute;">
                                             <p class="itemname" style="color: #4b5180 !important;font-weight: bold;" ng-repeat="itemSup in $root.suppliers" ng-if="itemSup.id == item.shopId">{{itemSup.suppliername}}</p>
                                             <p class="price">{{item.unitPrice|formatNumber}}₮</p>
                                         </div>
                                     </ion-checkbox>
-                                    <div class="other-goods-trash icon ion-ios7-trash-outline" ng-click="otherGoodsDelete(item.itemid)"></div>
                                 </li>
                             </ul>
                             <div class="total-price" ng-if="!sumPrice|isEmpty">
