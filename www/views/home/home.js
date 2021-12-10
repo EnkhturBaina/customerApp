@@ -343,9 +343,10 @@
     $state.go("supplier-detail");
   };
 
-  $scope.goLoanPage = function (type, state, isactive) {
+  $scope.goLoanPage = function (type, state, isactive, cat) {
     if (isactive == "active") {
       localStorage.setItem("requestType", type);
+      localStorage.setItem("requestCategory", cat);
       $state.go(state);
     } else {
       $rootScope.alert("Тун удахгүй", "warning");
