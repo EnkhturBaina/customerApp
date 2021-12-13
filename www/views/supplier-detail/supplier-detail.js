@@ -24,6 +24,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
     json.currency = 16074201974821;
     json.isMortgage = 1554263832151;
     json.divide = $rootScope.selected;
+    json.salaries = $rootScope.filterSalaries;
 
     //банк шүүлт
     json.type = "divideLoanFilter";

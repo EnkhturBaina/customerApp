@@ -113,6 +113,12 @@
     json.isPerson = "1";
     json.currency = 16074201974821;
     json.isMortgage = 1554263832151;
+    json.salaries = $rootScope.filterSalaries;
+    if (!isEmpty($rootScope.danIncomeData)) {
+      json.income = $rootScope.danIncomeData.incometypeid;
+    } else {
+      json.income = null;
+    }
 
     if ($state.current.name == "autoleasing-4") {
       json.isMortgage = isEmpty($rootScope.danCustomerData.mikmortgagecondition) ? "" : $rootScope.danCustomerData.mikmortgagecondition;
@@ -1257,6 +1263,7 @@
                 // console.log("userSalaryInfo", userSalaryInfo);
                 if (userSalaryInfo) {
                   serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
+                    console.log("salary response", response);
                     if (response.status == "success" && !isEmpty(response.result)) {
                       $rootScope.monthlyAverage = response.result[0];
                       $rootScope.monthlyIncomeDisable = true;
@@ -1266,6 +1273,7 @@
                       $rootScope.danIncomeData.workplace = response.result[2];
                       $rootScope.danIncomeData.incmonthlynetincome = response.result[3];
                       $rootScope.danIncomeData.workedmonths = response.result[4];
+                      $rootScope.filterSalaries = response.result[5];
                     }
                   });
                 }

@@ -132,6 +132,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
                       $rootScope.danIncomeData.workplace = response.result[2];
                       $rootScope.danIncomeData.incmonthlynetincome = response.result[3];
                       $rootScope.danIncomeData.workedmonths = response.result[4];
+                      $rootScope.filterSalaries = response.result[5];
                     }
                   });
                 }
@@ -322,6 +323,8 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     json.location = $rootScope.propertyRequestData.locationId;
     json.month = $rootScope.propertyRequestData.loanMonth;
     json.currency = 16074201974821;
+    json.salaries = $rootScope.filterSalaries;
+    
     if (!isEmpty($rootScope.loginUserInfo)) {
       json.isMortgage = $rootScope.loginUserInfo.mikmortgagecondition;
       json.totalIncome = $rootScope.loginUserInfo.totalincomehousehold;

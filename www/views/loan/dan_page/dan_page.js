@@ -64,6 +64,7 @@ angular.module("dan_page.Ctrl", []).controller("dan_pageCtrl", function ($scope,
                       $rootScope.danIncomeData.workplace = response.result[2];
                       $rootScope.danIncomeData.incmonthlynetincome = response.result[3];
                       $rootScope.danIncomeData.workedmonths = response.result[4];
+                      $rootScope.filterSalaries = response.result[5];
                     }
                   });
                 }

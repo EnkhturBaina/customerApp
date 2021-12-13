@@ -8,7 +8,7 @@
                     <div class="custom-form-container">
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Орлогын төрөл</p>
-                            <select class="custom-form-input-select" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid"></select>
+                            <select class="custom-form-input-select" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid" ng-change="getbankData()"></select>
                         </label>
                         <span class="vxx-title step5-mid-title">Нийгмийн даатгалын шимтгэл төлсөн сарын орлого</span>
                         <label class="item item-input item-stacked-label form-input-label">

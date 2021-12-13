@@ -13,6 +13,7 @@
     return true;
   };
   $rootScope.newCarReq = {};
+  $rootScope.filterSalaries = {};
   // ========= Slide =============
   $scope.activeSlideIndex = 0;
   $rootScope.showBanner = true;

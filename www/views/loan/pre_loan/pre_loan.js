@@ -36,6 +36,7 @@ angular.module("preLoan.Ctrl", ["ngAnimate"]).controller("pre_loanCtrl", functio
     json.location = $rootScope.newReqiust.locationId;
     json.month = $rootScope.newReqiust.loanMonth;
     json.preTotal = $rootScope.newReqiust.advancePayment;
+    json.salaries = $rootScope.filterSalaries;
 
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;

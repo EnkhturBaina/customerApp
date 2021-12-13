@@ -72,6 +72,7 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
     json.totalLoan = $rootScope.newReqiust.getLoanAmount;
     json.location = $rootScope.newReqiust.locationId;
     json.month = $rootScope.newReqiust.loanMonth;
+    json.salaries = $rootScope.filterSalaries;
 
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;

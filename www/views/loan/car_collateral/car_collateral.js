@@ -138,6 +138,8 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     json.isPerson = "1";
     json.location = $rootScope.carCollateralRequestData.locationId;
     json.month = $rootScope.carCollateralRequestData.loanMonth;
+    json.salaries = $rootScope.filterSalaries;
+    
     json.currency = 16074201974821;
     if (!isEmpty($rootScope.loginUserInfo)) {
       json.isMortgage = $rootScope.loginUserInfo.mikmortgagecondition;
