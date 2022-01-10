@@ -2,7 +2,7 @@
     <link href="views/supplier-detail/supplier-detail.css" rel="stylesheet" />
     <div ng-repeat="data in supplierName" ng-include src="'views/navbar.html'"></div>
 
-    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50">
+    <ion-content overflow-scroll="true" class="ion-modified-content has-header">
         <div class="item item-body supplier-detail-card">
             <img class="full-image supplier-detail-img" ng-src="{{$root.imagePath}}{{selectedSupplierData.supplierpicture}}" />
             <p class="suppliers-detail-body-p">

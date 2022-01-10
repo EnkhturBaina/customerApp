@@ -3,7 +3,7 @@
 }
 .templates-card {
   padding: 0px 20px;
-  height: fit-content;
+  height: auto;
   background-color: #fff !important;
   margin-left: 40px !important;
   margin-right: 40px !important;

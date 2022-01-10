@@ -483,7 +483,7 @@ h4 {
 }
 
 .bar .buttons-left span {
-  position: absolute;
+  /* position: absolute; */
   top: 10px;
   left: 15px;
   margin-right: 5px;
@@ -1410,7 +1410,7 @@ input[type="number"] {
   padding: 15px;
 }
 .term-content {
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
   background: #f8f8fe;
   bottom: 0px;
 }

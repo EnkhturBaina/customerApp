@@ -12,7 +12,7 @@
 
 .profile-content {
   top: 0px !important;
-  height: calc(100% - 200px);
+  height: calc(100% - 250px);
   background-color: #fff;
 }
 
@@ -24,7 +24,7 @@
   background: -moz-linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
   background: -webkit-linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
   background: linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
-  height: 200px;
+  height: 250px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
