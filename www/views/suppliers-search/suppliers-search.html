@@ -36,8 +36,8 @@
                 <li class="car-detail-column" ng-repeat="car in suppliersList | filter:search.suppliername | groupBy:'suppliername'" ng-click="supplierDetailFromSuppliersSearch(car[0].id)">
                     <div class="suppliers-list-img-container">
                         <img ng-src="{{$root.imagePath}}{{car[0].supplierpicture}}" />
+                        <span class="suppliers-name-search">{{car[0].suppliername}}</span>
                     </div>
-                    <span class="suppliers-name">{{car[0].suppliername}}</span>
                 </li>
             </ul>
         </div>

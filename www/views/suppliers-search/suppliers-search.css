@@ -6,6 +6,7 @@
   box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
   height: 120px;
   margin: 10px 20px;
+  width: calc(100% - 40px);
 }
 
 .suppliers-search-container {
@@ -36,8 +37,8 @@
   max-height: 120px;
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 100%;
+  flex-direction: column;
 }
 .car-detail-grid .suppliers-list-img-container img {
   max-width: 100%;
@@ -51,8 +52,6 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  max-width: 40%;
-  min-width: 40%;
 }
 .car-detail-column .suppliers-list-img-container img {
   border-radius: 3px;
@@ -61,6 +60,7 @@
   height: 100%;
   max-width: 140px;
   max-height: 100px;
+  min-width: 140px;
 }
 .changelayoutbutton {
   background: none;
@@ -119,4 +119,16 @@
 }
 .remove-mark-search {
   color: #fff !important;
+}
+
+.car-detail-column > .suppliers-list-img-container > .suppliers-name-search {
+  font-size: 12px;
+  font-weight: bold;
+  color: #4b5180 !important;
+  margin-left: 20px;
+}
+.car-detail-grid > .suppliers-list-img-container > .suppliers-name-search {
+  font-size: 12px;
+  font-weight: bold;
+  color: #4b5180 !important;
 }

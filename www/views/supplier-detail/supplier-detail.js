@@ -35,7 +35,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
     });
-    // console.log("json", json);
+    console.log("json", json);
   };
 
   $ionicModal

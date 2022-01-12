@@ -30,3 +30,7 @@
 .contact-list span {
   margin-left: 20px;
 }
+.contact-a-tag {
+  text-decoration: none;
+  color: #000;
+}

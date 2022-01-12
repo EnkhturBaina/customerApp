@@ -99,7 +99,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
                     if ($rootScope.loginFromAutoLeasing) {
                       $rootScope.HideLoader();
                       $state.go("autoleasing-4");
-                      $rootScope.alert("Та гараар мэдээллээ бөглөсөн тохиолдолд зээл олгох байгууллагаас нэмэлт материал авах хүсэлт ирэхийг анхаарна уу", "");
+                      // $rootScope.alert("Та гараар мэдээллээ бөглөсөн тохиолдолд зээл олгох байгууллагаас нэмэлт материал авах хүсэлт ирэхийг анхаарна уу", "");
                       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
                       //Нэвтэрсэн үед мэдээлэл татах
                       if (!isEmpty($rootScope.loginUserInfo)) {

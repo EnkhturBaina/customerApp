@@ -29,6 +29,11 @@
                             <p class="input-label" style="margin: 0;">Урьдчилгаа төлбөр</p>
                             <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-blur="getbankDataBuilding()" ng-change="calcLoanAmountBuilding()" thousand-separator select-on-click>
                         </label>
+                        <div ng-if="!$root.collTrueStep2" class="vxx-title-container">
+                            <span class="vxx-title">Тухайн зээлийн урьдчилгаа багадаа <br />
+                                <span class="step2-valid-text-bold">{{$root.displayMinPayment|formatNumber}}</span> байна
+                            </span>
+                        </div>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
                             <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataBuilding()" format-input select-on-click>
@@ -41,11 +46,6 @@
                                 </option>
                             </select>
                         </label>
-                        <div ng-if="!$root.collTrueStep2" class="vxx-title-container">
-                            <span class="vxx-title">Тухайн зээлийн урьдчилгаа багадаа <br />
-                                <span class="step2-valid-text-bold">{{$root.displayMinPayment|formatNumber}}</span> байна
-                            </span>
-                        </div>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Зээлийн хугацаа(сараар)</p>
                             <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankDataBuilding()" ng-keyup="hideKeyboard($event)" select-on-click>
