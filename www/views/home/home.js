@@ -310,6 +310,7 @@
     $timeout(function () {
       if (!isEmpty($rootScope.ERPappVersion) && $rootScope.zeelmeAppVersion === $rootScope.ERPappVersion) {
       } else {
+        console.log($rootScope.ERPappVersion, $rootScope.zeelmeAppVersion);
         $rootScope.checkisUpdate();
       }
     }, 2000);

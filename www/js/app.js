@@ -322,6 +322,11 @@ var app = angular
       templateUrl: "views/supplier-detail/supplier-detail2.html",
       controller: "supplier-detailCtrl",
     });
+    $stateProvider.state("supplier-detail3", {
+      url: "/views/supplier-detail3",
+      templateUrl: "views/supplier-detail/supplier-detail3.html",
+      controller: "supplier-detailCtrl",
+    });
     $stateProvider.state("purchase-inst", {
       url: "/views/purchase-inst",
       templateUrl: "views/purchase-inst/purchase-inst.html",

@@ -11,7 +11,11 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         $rootScope.supplierFee = el.supplierfee;
       }
     });
+    $rootScope.isLongTermLeasing = false;
     $scope.supplierName[0].title = $scope.selectedSupplierData.suppliername;
+    if ($state.current.name == "supplier-detail") {
+      $rootScope.selectedSupplierID = null;
+    }
   });
 
   $rootScope.getbankDataSup = function (a) {
@@ -25,10 +29,17 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
     json.isMortgage = 1554263832151;
     json.divide = $rootScope.selected;
     json.salaries = $rootScope.filterSalaries;
+    json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
 
     //банк шүүлт
-    json.type = "divideLoanFilter";
-    json.totalLoan = $rootScope.newReqiust.loanAmount;
+    if ($state.current.name == "supplier-detail3") {
+      json.type = "consumerLeasingFilter";
+      json.totalLoan = $rootScope.newReqiust.getLoanAmount;
+      json.supplier = $rootScope.selectedSupplierID;
+    } else {
+      json.type = "divideLoanFilter";
+      json.totalLoan = $rootScope.newReqiust.loanAmount;
+    }
     json.month = $rootScope.newReqiust.loanMonth;
     json.preTotal = $rootScope.newReqiust.advancePayment;
     serverDeferred.carCalculation(json).then(function (response) {
@@ -57,7 +68,6 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
     });
 
     $rootScope.isSupLoan = true;
-    localStorage.setItem("requestType", "supLoan");
     $rootScope.newReqiust = {};
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if (!isEmpty($scope.selectedSupplierData)) {
@@ -67,6 +77,9 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
       $timeout(function () {
         $scope.getbankDataSup("forced");
       }, 200);
+      localStorage.setItem("requestType", "supLoan");
+    } else if ($state.current.name == "supplier-detail3") {
+      localStorage.setItem("requestType", "consumer");
     }
   });
 
@@ -96,6 +109,12 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         $scope.selectedConditionMonth = el.number1 + " хоног";
         $rootScope.newReqiust.loanMonth = el.number1;
         $scope.varA = el.number2;
+        $rootScope.selectedSupplierID = el.dim1;
+        if (el.text3 == "1") {
+          $rootScope.isLongTermLeasing = true;
+        } else {
+          $rootScope.isLongTermLeasing = false;
+        }
         //Хугацаа сонгох үед
         if (el.number2 === "999") {
           $scope.isSlideSelected = true;
@@ -115,6 +134,16 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
             $scope.isSlideSelected = false;
           }
         }
+
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619503143703351", parentId: el.dim1 }).then(function (response) {
+          if (!isEmpty(response[0])) {
+            $rootScope.subVendor = response;
+          } else {
+            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619503143703351", id: el.dim1 }).then(function (response) {
+              $rootScope.subVendor = response;
+            });
+          }
+        });
       }
     });
     $scope.getbankDataSup();
@@ -178,29 +207,73 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
       }
     }
   };
+  $scope.calcLoanAmountSupplierStep3 = function () {
+    if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.newReqiust.productPrice) {
+      $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.productPrice - $rootScope.newReqiust.advancePayment;
+      $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
+    } else if (parseInt($rootScope.newReqiust.advancePayment) > $rootScope.newReqiust.productPrice) {
+      var tmp = $rootScope.newReqiust.advancePayment;
+      $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
+    }
+  };
 
   $scope.step2Sup = function () {
-    if ($scope.checkReqiuredSupplierDtl("step2")) {
+    if (!$rootScope.isLongTermLeasing && $scope.checkReqiuredSupplierDtl("step2")) {
+      if (!$rootScope.isLongTermLeasing && $scope.checkReqiuredSupplierDtl("agreeBankSup")) {
+        $state.go("income");
+      }
+    } else if ($rootScope.isLongTermLeasing) {
+      $state.go("supplier-detail3");
+    }
+  };
+  $scope.step3Sup = function () {
+    if ($scope.checkReqiuredSupplierDtl("step3")) {
       if ($scope.checkReqiuredSupplierDtl("agreeBankSup")) {
         $state.go("income");
       }
     }
   };
+
   $scope.checkReqiuredSupplierDtl = function (param) {
     if (param == "step2") {
-      if (isEmpty($rootScope.newReqiust.loanAmount)) {
-        $rootScope.alert("Зээлийн хэмжээгээ оруулна уу", "warning");
+      if (isEmpty($rootScope.selected)) {
+        $rootScope.alert("Зээлийн нөхцөлөө сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.advancePayment) && $scope.isSlideSelected) {
         $rootScope.alert("Урьдчилгаагаа оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.selected)) {
-        $rootScope.alert("Зээлийн нөхцөлөө сонгоно уу", "warning");
+      } else if (isEmpty($rootScope.newReqiust.loanAmount)) {
+        $rootScope.alert("Зээлийн хэмжээгээ оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.subVendorId) && $scope.isSlideSelected) {
+        $rootScope.alert("Үйлчлүүлэх салбар сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.locationId) && $scope.isSlideSelected) {
         $rootScope.alert("Байршил сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.isCoBorrower) && $scope.isSlideSelected) {
+        $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
+        $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
+        return false;
+      } else {
+        return true;
+      }
+    } else if (param == "step3") {
+      if (isEmpty($rootScope.newReqiust.getLoanAmount)) {
+        $rootScope.alert("Зээлийн хэмжээгээ оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.advancePayment)) {
+        $rootScope.alert("Урьдчилгаагаа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.subVendorId)) {
+        $rootScope.alert("Үйлчлүүлэх салбар сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.locationId)) {
+        $rootScope.alert("Байршил сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
         $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {

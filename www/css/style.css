@@ -1720,7 +1720,7 @@ input[type="number"] {
   text-align: center;
 }
 .disabled-loan-amount {
-  /* background: #fff !important; */
+  background: #fff !important;
 }
 .custm-radio-step1 {
   display: flex;
