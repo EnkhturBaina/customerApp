@@ -67,7 +67,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
       }
     });
 
-    $rootScope.isSupLoan = true;
+    $rootScope.isSupLoan = false;
     $rootScope.newReqiust = {};
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if (!isEmpty($scope.selectedSupplierData)) {
@@ -81,6 +81,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
     } else if ($state.current.name == "supplier-detail3") {
       localStorage.setItem("requestType", "consumer");
     }
+    localStorage.setItem("isSupplierLoan", "yes");
   });
 
   $scope.sendRequestFromSupplier = function () {
@@ -261,11 +262,14 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
         return true;
       }
     } else if (param == "step3") {
-      if (isEmpty($rootScope.newReqiust.getLoanAmount)) {
-        $rootScope.alert("Зээлийн хэмжээгээ оруулна уу", "warning");
+      if (isEmpty($rootScope.newReqiust.productPrice)) {
+        $rootScope.alert("Барааны үнэ оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.advancePayment)) {
         $rootScope.alert("Урьдчилгаагаа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.getLoanAmount)) {
+        $rootScope.alert("Зээлийн хэмжээгээ оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.subVendorId)) {
         $rootScope.alert("Үйлчлүүлэх салбар сонгоно уу", "warning");

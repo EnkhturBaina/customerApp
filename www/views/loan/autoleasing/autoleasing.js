@@ -103,6 +103,7 @@
   };
   // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
   $rootScope.getbankData = function (a) {
+    $rootScope.isSupplierLoanLocal = localStorage.getItem("isSupplierLoan");
     if (a != "forced") $rootScope.ShowLoader();
 
     $rootScope.requestType = localStorage.getItem("requestType");
@@ -123,12 +124,11 @@
     if ($state.current.name == "autoleasing-4") {
       json.isMortgage = isEmpty($rootScope.danCustomerData.mikmortgagecondition) ? "" : $rootScope.danCustomerData.mikmortgagecondition;
     }
-    if ($state.current.name == "autoleasing-5") {
-      console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
-      json.totalIncome = isEmpty($rootScope.danIncomeData.totalincomehousehold) ? 0 : $rootScope.danIncomeData.totalincomehousehold;
-      json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome;
-      json.monthPay = isEmpty($rootScope.danIncomeData.monthlypayment) ? 0 : $rootScope.danIncomeData.monthlypayment;
-    }
+    // if ($state.current.name == "autoleasing-5") {
+    console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
+    json.totalIncome = isEmpty($rootScope.danIncomeData.totalincomehousehold) ? 0 : $rootScope.danIncomeData.totalincomehousehold;
+    json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome;
+    json.monthPay = isEmpty($rootScope.danIncomeData.monthlypayment) ? 0 : $rootScope.danIncomeData.monthlypayment;
 
     if ($rootScope.requestType == "consumer") {
       //Хэрэглээний лизинг банк шүүлт
@@ -136,7 +136,11 @@
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
-      json.supplier = $rootScope.otherGoodsData[0].shopId;
+      if ($rootScope.isSupplierLoanLocal != "yes") {
+        json.supplier = $rootScope.otherGoodsData[0].shopId;
+      } else {
+        json.supplier = $rootScope.selectedSupplierID;
+      }
       json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
     } else if ($rootScope.requestType == "autoColl") {
       console.log("$rootScope.carCollateralRequestData", $rootScope.carCollateralRequestData);
@@ -687,17 +691,32 @@
                 //нөхцөл хангасан банкууд
                 angular.forEach($rootScope.bankListFilter.Agree, function (item) {
                   if (item.checked) {
-                    var AgreeBank = {
-                      loanId: response[1].id,
-                      customerId: all_ID.dccustomerid,
-                      bankId: item.id,
-                      isAgree: "1",
-                      isMobile: "1626864048648",
-                      wfmStatusId: "1609944755118135",
-                      productId: item.products[0].id,
-                      vendorId: $scope.consumerData.shopId,
-                    };
-                    selectedbanks.push(AgreeBank);
+                    if ($rootScope.isSupplierLoanLocal != "yes") {
+                      var AgreeBank = {
+                        loanId: response[1].id,
+                        customerId: all_ID.dccustomerid,
+                        bankId: item.id,
+                        isAgree: "1",
+                        isMobile: "1626864048648",
+                        wfmStatusId: "1609944755118135",
+                        productId: item.products[0].id,
+                        vendorId: $scope.consumerData.shopId,
+                      };
+                      selectedbanks.push(AgreeBank);
+                    } else {
+                      var AgreeBank = {
+                        loanId: response[1].id,
+                        customerId: all_ID.dccustomerid,
+                        bankId: item.id,
+                        isAgree: "1",
+                        isMobile: "1626864048648",
+                        wfmStatusId: "1609944755118135",
+                        productId: item.products[0].id,
+                        vendorId: $rootScope.selectedSupplierID,
+                        subVendorId: $rootScope.newReqiust.subVendorId,
+                      };
+                      selectedbanks.push(AgreeBank);
+                    }
                   }
                 });
                 var mapBankSuccess = false;
