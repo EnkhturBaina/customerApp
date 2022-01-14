@@ -371,7 +371,7 @@ var app = angular
   })
   .controller("index", function ($scope, $ionicPlatform, $state) {})
   .controller("indexCtrl", function ($scope, $rootScope, $state, $ionicPopup) {
-    $rootScope.zeelmeAppVersion = "1.1.5";
+    $rootScope.zeelmeAppVersion = "1.1.6";
     $scope.toggleSideMenu = function () {
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");

@@ -104,6 +104,7 @@
   var basket = localStorage.getItem("basketData");
   // console.log("basket", basket);
   console.log("localStorage", localStorage);
+  localStorage.setItem("isSupplierLoan", "no");
   if (!isEmpty(basket)) $rootScope.basketData = JSON.parse(basket);
   else $rootScope.basketData = [];
 

@@ -68,8 +68,7 @@ angular.module("supplier-detail.Ctrl", []).controller("supplier-detailCtrl", fun
     });
 
     $rootScope.isSupLoan = false;
-    $rootScope.newReqiust = {};
-    $rootScope.newReqiust.serviceAgreementId = 1554263832132;
+    // $rootScope.newReqiust = {};
     if (!isEmpty($scope.selectedSupplierData)) {
       $rootScope.HideLoader();
     }
