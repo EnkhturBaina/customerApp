@@ -19,6 +19,7 @@ app.controller("loan_successCtrl", function ($scope, $rootScope, $state, $ionicP
   $rootScope.propertyData = {};
   $rootScope.propertyRequestData = {};
   $rootScope.template = {};
+  localStorage.setItem("isSupplierLoan", "no");
 
   $scope.goBankMenu = function () {
     $state.go("requestList");

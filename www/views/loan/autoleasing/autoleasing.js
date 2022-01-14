@@ -124,11 +124,17 @@
     if ($state.current.name == "autoleasing-4") {
       json.isMortgage = isEmpty($rootScope.danCustomerData.mikmortgagecondition) ? "" : $rootScope.danCustomerData.mikmortgagecondition;
     }
-    // if ($state.current.name == "autoleasing-5") {
-    console.log("$rootScope.danIncomeData", $rootScope.danIncomeData);
-    json.totalIncome = isEmpty($rootScope.danIncomeData.totalincomehousehold) ? 0 : $rootScope.danIncomeData.totalincomehousehold;
-    json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome;
-    json.monthPay = isEmpty($rootScope.danIncomeData.monthlypayment) ? 0 : $rootScope.danIncomeData.monthlypayment;
+    if ($state.current.name == "autoleasing-5") {
+      json.totalIncome = isEmpty($rootScope.danIncomeData.totalincomehousehold) ? 0 : $rootScope.danIncomeData.totalincomehousehold;
+      json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome;
+      json.monthPay = isEmpty($rootScope.danIncomeData.monthlypayment) ? 0 : $rootScope.danIncomeData.monthlypayment;
+    }
+
+    if ($rootScope.isSupplierLoanLocal == "yes") {
+      json.totalIncome = isEmpty($rootScope.danIncomeData.totalincomehousehold) ? 0 : $rootScope.danIncomeData.totalincomehousehold;
+      json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome;
+      json.monthPay = isEmpty($rootScope.danIncomeData.monthlypayment) ? 0 : $rootScope.danIncomeData.monthlypayment;
+    }
 
     if ($rootScope.requestType == "consumer") {
       //Хэрэглээний лизинг банк шүүлт
@@ -143,7 +149,7 @@
       }
       json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
     } else if ($rootScope.requestType == "autoColl") {
-      console.log("$rootScope.carCollateralRequestData", $rootScope.carCollateralRequestData);
+      // console.log("$rootScope.carCollateralRequestData", $rootScope.carCollateralRequestData);
       //Авто Барьцаат лизинг банк шүүлт
       json.type = "carLoanFilter";
       json.totalLoan = $rootScope.carCollateralRequestData.loanAmount;
@@ -347,7 +353,6 @@
     //1639133516578203
 
     serverDeferred.requestFull("dcApp_loan_with_category_day_004", { customerId: all_ID.dccustomerid, reqeustTypeId: requestCategoryId }).then(function (responseLoan30) {
-      console.log("re", responseLoan30);
       if (!isEmpty(responseLoan30[1]) && responseLoan30[1].days < 30) {
         $scope.alertPopup = $ionicPopup.alert({
           title: "",
@@ -364,7 +369,6 @@
           ],
         });
       } else {
-        console.log("B");
         $scope.disabledBtnSendReq = true;
         $rootScope.ShowLoader();
         if (!isEmpty($rootScope.selectedBanksList)) {
@@ -713,7 +717,6 @@
                         wfmStatusId: "1609944755118135",
                         productId: item.products[0].id,
                         vendorId: $rootScope.selectedSupplierID,
-                        subVendorId: $rootScope.newReqiust.subVendorId,
                       };
                       selectedbanks.push(AgreeBank);
                     }
@@ -730,57 +733,77 @@
                 });
                 //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
                 $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
-                $scope.consumerData.map((product) => {
-                  product.leasingId = response[1].id;
-                  //Бүтээгдэхүүн бүртгэх
-                  serverDeferred.requestFull("dcApp_consumer_loan_001", product).then(function (responseProduct) {
-                    $timeout(function () {
-                      if (responseProduct[0] == "success" && responseProduct[1] != "" && mapBankSuccess) {
-                        $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
-                        delete $rootScope.danIncomeData.id;
+                var DTLPRODUCTSuccess = false;
 
-                        var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
-                        if (DanloginUserInfo.dcapp_crmuser_dan) {
-                          $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
-                          $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
-                          $rootScope.danCustomerData.birthDate = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.birthdate.substring(0, 10);
-                        }
+                if ($rootScope.isSupplierLoanLocal != "yes") {
+                  $scope.consumerData.map((product) => {
+                    product.leasingId = response[1].id;
 
-                        $rootScope.danCustomerData.crmCustomerId = all_ID.crmuserid;
-                        // console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
-                        serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (danCustomerDataResponse) {
-                          // console.log("danCustomerDataResponse", danCustomerDataResponse);
-                          serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (danIncomeDataResponse) {
-                            // console.log("danIncomeDataResponse", danIncomeDataResponse);
-                            if (danIncomeDataResponse[0] == "success" && danIncomeDataResponse[1] != "") {
-                              //Утасны дугаар регистр өөрчлөгдсөн бол Update хийх
-                              var json = {
-                                id: all_ID.crmcustomerid,
-                                mobileNumber: $rootScope.danCustomerData.mobilenumber,
-                                siRegNumber: $rootScope.danCustomerData.uniqueidentifier,
-                              };
-                              json.dcApp_crmUser_update = {
-                                id: all_ID.crmuserid,
-                                customerId: all_ID.crmcustomerid,
-                                userName: $rootScope.danCustomerData.mobilenumber,
-                              };
-                              serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
-                                $rootScope.HideLoader();
-                                $state.go("loan_success");
-                              });
-                            } else {
-                              $rootScope.HideLoader();
-                              $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
-                            }
-                          });
-                        });
-                      } else {
-                        $rootScope.HideLoader();
-                        $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 200", "danger");
-                      }
-                    }, 500);
+                    //Бүтээгдэхүүн бүртгэх
+                    serverDeferred.requestFull("dcApp_consumer_loan_001", product).then(function (responseProduct) {
+                      DTLPRODUCTSuccess = true;
+                      // console.log("responseProduct", responseProduct);
+                    });
                   });
-                });
+                } else {
+                  var product = {
+                    leasingId: response[1].id,
+                    subVendorId: $rootScope.newReqiust.subVendorId,
+                    unitPrice: 1,
+                    shopId: $rootScope.selectedSupplierID,
+                  };
+
+                  serverDeferred.requestFull("dcApp_consumer_loan_001", product).then(function (responseProduct) {
+                    DTLPRODUCTSuccess = true;
+                    // console.log("responseProduct", responseProduct);
+                  });
+                }
+
+                $timeout(function () {
+                  if (DTLPRODUCTSuccess && mapBankSuccess) {
+                    $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
+                    delete $rootScope.danIncomeData.id;
+
+                    var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+                    if (DanloginUserInfo.dcapp_crmuser_dan) {
+                      $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+                      $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+                      $rootScope.danCustomerData.birthDate = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.birthdate.substring(0, 10);
+                    }
+
+                    $rootScope.danCustomerData.crmCustomerId = all_ID.crmuserid;
+                    // console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+                    serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (danCustomerDataResponse) {
+                      // console.log("danCustomerDataResponse", danCustomerDataResponse);
+                      serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (danIncomeDataResponse) {
+                        // console.log("danIncomeDataResponse", danIncomeDataResponse);
+                        if (danIncomeDataResponse[0] == "success" && danIncomeDataResponse[1] != "") {
+                          //Утасны дугаар регистр өөрчлөгдсөн бол Update хийх
+                          var json = {
+                            id: all_ID.crmcustomerid,
+                            mobileNumber: $rootScope.danCustomerData.mobilenumber,
+                            siRegNumber: $rootScope.danCustomerData.uniqueidentifier,
+                          };
+                          json.dcApp_crmUser_update = {
+                            id: all_ID.crmuserid,
+                            customerId: all_ID.crmcustomerid,
+                            userName: $rootScope.danCustomerData.mobilenumber,
+                          };
+                          serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                            $rootScope.HideLoader();
+                            $state.go("loan_success");
+                          });
+                        } else {
+                          $rootScope.HideLoader();
+                          $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
+                        }
+                      });
+                    });
+                  } else {
+                    $rootScope.HideLoader();
+                    $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 200", "danger");
+                  }
+                }, 500);
               } else {
                 $rootScope.HideLoader();
                 $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 300", "danger");
@@ -1005,7 +1028,7 @@
   $scope.checkReqiured = function (param) {
     if (isEmpty($rootScope.newReqiust)) {
       $rootScope.requestType = localStorage.getItem("requestType");
-      console.log("$rootScope.requestType", $rootScope.requestType);
+      // console.log("$rootScope.requestType", $rootScope.requestType);
       $rootScope.newReqiust = {};
       $rootScope.newReqiust.customerId = "";
     }
@@ -1282,7 +1305,7 @@
                 // console.log("userSalaryInfo", userSalaryInfo);
                 if (userSalaryInfo) {
                   serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
-                    console.log("salary response", response);
+                    // console.log("salary response", response);
                     if (response.status == "success" && !isEmpty(response.result)) {
                       $rootScope.monthlyAverage = response.result[0];
                       $rootScope.monthlyIncomeDisable = true;
