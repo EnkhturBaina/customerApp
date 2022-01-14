@@ -26,6 +26,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
         $rootScope.otherGoods.push($rootScope.newCarReq);
 
         localStorage.setItem("otherGoods", JSON.stringify($rootScope.otherGoods));
+        $rootScope.consumerData = $rootScope.otherGoods;
         $rootScope.newCarReq = {};
 
         $scope.showPopup();
@@ -37,6 +38,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
   $scope.changeShop = function (item) {
     if (!isEmpty(item)) {
       var itjs = JSON.parse(item);
+      $rootScope.selectedSupplierID = itjs.id;
       $rootScope.newCarReq.shopId = itjs.id;
       $rootScope.newCarReq.shopname = itjs.suppliername;
     }

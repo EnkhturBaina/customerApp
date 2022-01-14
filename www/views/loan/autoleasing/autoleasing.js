@@ -315,7 +315,6 @@
   };
 
   $rootScope.selectedBankSuccess = "";
-  $rootScope.consumerData = [];
   //Дан -с нийгмийн даатгалын мэдээлэл татаж хадгалах
   $scope.getCustomerIncomeData = function () {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -683,7 +682,6 @@
             });
           } else if ($rootScope.requestType == "consumer") {
             //==================Хэрэглээний лизинг===================
-            $scope.consumerData = JSON.parse(localStorage.getItem("otherGoods"));
             $scope.newReqiust.customerId = all_ID.dccustomerid;
             $scope.newReqiust.requestTypeId = "16082024252191";
             //Хүсэлт бүртгэх
@@ -695,31 +693,17 @@
                 //нөхцөл хангасан банкууд
                 angular.forEach($rootScope.bankListFilter.Agree, function (item) {
                   if (item.checked) {
-                    if ($rootScope.isSupplierLoanLocal != "yes") {
-                      var AgreeBank = {
-                        loanId: response[1].id,
-                        customerId: all_ID.dccustomerid,
-                        bankId: item.id,
-                        isAgree: "1",
-                        isMobile: "1626864048648",
-                        wfmStatusId: "1609944755118135",
-                        productId: item.products[0].id,
-                        vendorId: $scope.consumerData.shopId,
-                      };
-                      selectedbanks.push(AgreeBank);
-                    } else {
-                      var AgreeBank = {
-                        loanId: response[1].id,
-                        customerId: all_ID.dccustomerid,
-                        bankId: item.id,
-                        isAgree: "1",
-                        isMobile: "1626864048648",
-                        wfmStatusId: "1609944755118135",
-                        productId: item.products[0].id,
-                        vendorId: $rootScope.selectedSupplierID,
-                      };
-                      selectedbanks.push(AgreeBank);
-                    }
+                    var AgreeBank = {
+                      loanId: response[1].id,
+                      customerId: all_ID.dccustomerid,
+                      bankId: item.id,
+                      isAgree: "1",
+                      isMobile: "1626864048648",
+                      wfmStatusId: "1609944755118135",
+                      productId: item.products[0].id,
+                      vendorId: $rootScope.selectedSupplierID,
+                    };
+                    selectedbanks.push(AgreeBank);
                   }
                 });
                 var mapBankSuccess = false;
@@ -734,9 +718,8 @@
                 //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
                 $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
                 var DTLPRODUCTSuccess = false;
-
                 if ($rootScope.isSupplierLoanLocal != "yes") {
-                  $scope.consumerData.map((product) => {
+                  $rootScope.consumerData.map((product) => {
                     product.leasingId = response[1].id;
 
                     //Бүтээгдэхүүн бүртгэх
@@ -1197,6 +1180,7 @@
     }
   };
   $scope.$on("$ionicView.enter", function () {
+    console.log("$rootScope.consumerData", $rootScope.consumerData);
     $scope.isSelected0001 = false; //Автомашины сонгосон эсэх
     $scope.isHideFromConsumer = false;
     $scope.disabledBtnSendReq = false;

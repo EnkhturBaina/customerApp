@@ -57,6 +57,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
 
                 localStorage.removeItem("otherGoods");
                 localStorage.setItem("otherGoods", JSON.stringify($rootScope.otherGoodsData));
+                $rootScope.consumerData = $rootScope.otherGoodsData;
 
                 $rootScope.calcTotalPrice();
                 $rootScope.getLocalGoodsData();
@@ -73,17 +74,6 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     $state.go("home");
   };
 
-  // $ionicModal
-  //   .fromTemplateUrl("templates/consumer.html", {
-  //     scope: $scope,
-  //     animation: "slide-in-up",
-  //   })
-  //   .then(function (consumerModal) {
-  //     $scope.consumerModal = consumerModal;
-  //   });
-  // $timeout(function () {
-  //   $scope.consumerModal.show();
-  // }, 300);
   $rootScope.hideFooter = true;
 
   $scope.clickSlidePager = function (index) {
