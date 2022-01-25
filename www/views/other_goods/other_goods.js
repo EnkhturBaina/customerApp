@@ -17,6 +17,12 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $rootScope.sumPrice = 0;
   $rootScope.calcTotalPrice = function () {
     $rootScope.sumPrice = 0;
+    if (isEmpty($rootScope.consumerData)) {
+      $rootScope.consumerData = JSON.parse(localStorage.getItem("otherGoods"));
+      if (!isEmpty($rootScope.consumerData)) {
+        $rootScope.selectedSupplierID = $rootScope.consumerData[0].shopId;
+      }
+    }
     var local = localStorage.getItem("otherGoods");
     if (!isEmpty(local) && local != "undefined") {
       $rootScope.otherGoods = JSON.parse(localStorage.getItem("otherGoods"));

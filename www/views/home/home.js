@@ -189,6 +189,15 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1636343385639929" }).then(function (response) {
       $rootScope.ERPappVersion = response[0].name;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1643091771811030" }).then(function (response) {
+      $rootScope.customerSector = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16429945436111" }).then(function (response) {
+      $rootScope.customerAreasOfActivity = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16429945437301" }).then(function (response) {
+      $rootScope.customerJobPosition = response;
+    });
   };
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");
@@ -255,9 +264,20 @@
     $rootScope.loginUserInfo = {};
     $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
 
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+    if (!isEmpty($rootScope.loginUserInfo) && !isEmpty(all_ID)) {
+      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (response) {
+        $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
+        localStorage.removeItem("loginUserInfo");
+        localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+      });
+    }
+
+    console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
     if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
       $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
     }
+
     $rootScope.displayMinPayment = 0;
     $rootScope.maxMonth = 0;
     //dc_bank_product table -с зээлийн бүтээгдэхүүн бүрийн max зээлийн хугацаа авах

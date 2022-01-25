@@ -1,6 +1,7 @@
-﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal, $ionicSlideBoxDelegate, $ionicPopup) {
+﻿angular.module("autoleasing.Ctrl", ["ngAnimate"]).controller("autoleasingCtrl", function ($scope, serverDeferred, $rootScope, $state, $ionicHistory, $timeout, $ionicModal, $ionicSlideBoxDelegate, $ionicPopup, $ionicPlatform, $location, $anchorScroll) {
   $rootScope.requestType = "";
   $rootScope.requestType = localStorage.getItem("requestType");
+  $scope.regNum = "";
 
   $("#step1CarCode").mask("00000000");
   $(".mobile-number-step4").mask("00000000");
@@ -36,7 +37,83 @@
     .then(function (danIsModal) {
       $scope.danIsModal = danIsModal;
     });
+  //element ruu scroll hiih
+  $scope.slideTo = function (location) {
+    var newHash = location;
+    if ($location.hash() !== newHash) {
+      $location.hash(location);
+    } else {
+      $anchorScroll();
+    }
+  };
+  $ionicPlatform.ready(function () {
+    setTimeout(function () {
+      var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
 
+      new MobileSelect({
+        trigger: ".step2RegSelector",
+        wheels: [{ data: regChars }, { data: regChars }],
+        position: [0, 0],
+        ensureBtnText: "Хадгалах",
+        cancelBtnText: "Хаах",
+        transitionEnd: function (indexArr, data) {
+          //scroll xiij bhd ajillah func
+        },
+        callback: function (indexArr, data) {
+          $("#regCharA").text(data[0]);
+          $("#regCharB").text(data[1]);
+          $scope.overlayKeyOn();
+
+          keyInput = document.getElementById("regNums");
+          if (keyInput) {
+            $scope.clearD = function () {
+              keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
+            };
+
+            $scope.addCode = function (key) {
+              keyInput.value = keyInput.value + key;
+            };
+
+            $scope.emptyCode = function () {
+              keyInput.value = "";
+            };
+
+            $scope.emptyCode();
+          }
+        },
+        onShow: function () {},
+      });
+      $("#regNums").mask("00000000");
+    }, 1000);
+  });
+  $scope.overlayKeyOn = function () {
+    $scope.modal.show();
+  };
+  $scope.saveRegNums = function () {
+    if (keyInput.value.length < 8) {
+      $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
+    } else {
+      $scope.modal.hide();
+      $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+    }
+  };
+  $scope.cancelRegNums = function () {
+    if (!isEmpty($rootScope.loginUserInfo) && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
+      $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
+      $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
+      $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
+      $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
+    }
+    $scope.modal.hide();
+  };
+  $ionicModal
+    .fromTemplateUrl("templates/modal.html", {
+      scope: $scope,
+      backdropClickToClose: false,
+    })
+    .then(function (modal) {
+      $scope.modal = modal;
+    });
   $scope.getCarDatasId = function (itemCode) {
     $rootScope.selectedCarData = [];
     $rootScope.carDatas = [];
@@ -115,7 +192,7 @@
     json.currency = 16074201974821;
     json.isMortgage = 1554263832151;
     json.salaries = $rootScope.filterSalaries;
-    if (!isEmpty($rootScope.danIncomeData)) {
+    if (!isEmpty($rootScope.danIncomeData) && $state.current.name == "autoleasing-4") {
       json.income = $rootScope.danIncomeData.incometypeid;
     } else {
       json.income = null;
@@ -252,9 +329,8 @@
             $rootScope.months.push(a.max_loan_month_id);
             a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : $rootScope.minPayments.push(0);
           });
-
-          $rootScope.maxMonth = Math.max(...$rootScope.months);
-          $rootScope.minPayment = Math.min(...$rootScope.minPayments);
+          isEmpty($rootScope.months) ? ($rootScope.maxMonth = 0) : ($rootScope.maxMonth = Math.min(...$rootScope.months));
+          isEmpty($rootScope.minPayments) ? ($rootScope.minPayment = 0) : ($rootScope.minPayment = Math.min(...$rootScope.minPayments));
         }
 
         if ($rootScope.requestType == "consumer") {
@@ -331,20 +407,6 @@
     }, 500);
   };
   var selectedbanks = [];
-  $scope.checkBankSelectedStep = function () {
-    if ($scope.checkReqiured("danIncomeReq")) {
-      // $state.go("income");
-      if ($scope.checkReqiured("agreeBank")) {
-        // if (isEmpty($rootScope.danCustomerData.identfrontpic) || isEmpty($rootScope.danCustomerData.identbackpic)) {
-        //   $state.go("ident-pic");
-        // } else {
-        //   $state.go("autoleasing-3");
-        // }
-        $state.go("ident-pic");
-      }
-    } else {
-    }
-  };
   $scope.sendRequest = function () {
     var requestCategoryId = JSON.parse(localStorage.getItem("requestCategory"));
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -688,6 +750,8 @@
             serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
               // console.log("respionse OL", response);
               if (response[0] == "success" && response[1] != "") {
+                $rootScope.danIncomeData.leasingid = response[1].id;
+                $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
                 //Сонгосон банк
                 selectedbanks = [];
                 //нөхцөл хангасан банкууд
@@ -744,7 +808,6 @@
 
                 $timeout(function () {
                   if (DTLPRODUCTSuccess && mapBankSuccess) {
-                    $rootScope.danIncomeData.customerid = all_ID.dccustomerid;
                     delete $rootScope.danIncomeData.id;
 
                     var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
@@ -990,13 +1053,21 @@
   $scope.goStep5ORIdent = function () {
     if ($scope.checkReqiured("step4CustomerData")) {
       if ($scope.checkReqiured("agreeBank")) {
-        $state.go("autoleasing-5");
+        $state.go("ident-pic");
         if ($rootScope.isDanHand) {
           $scope.getCustomerIncomeData();
         }
       }
     }
   };
+  // $scope.checkBankSelectedStep = function () {
+  //   if ($scope.checkReqiured("danIncomeReq")) {
+  //     if ($scope.checkReqiured("agreeBank")) {
+  //       $state.go("ident-pic");
+  //     }
+  //   } else {
+  //   }
+  // };
   $scope.goStep5 = function () {
     if ($scope.checkReqiured("identPic")) {
       $state.go("autoleasing-3");
@@ -1034,16 +1105,30 @@
         $rootScope.alert("ҮХХөрөнгө барьцаалах эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
-        $rootScope.alert("Хугацаагаа сонгоно уу", "warning");
+        $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.locationId)) {
-        $rootScope.alert("Байршил сонгоно уу", "warning");
+      } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
+        $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+        $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+        return false;
+      } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
+        $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
+        return false;
+      }
+      // else if (isEmpty($rootScope.danIncomeData.incometypeid)) {
+      //   $rootScope.alert("Орлогын төрөл сонгоно уу", "warning");
+      //   return false;
+      // }
+      else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
         $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
+      } else if (isEmpty($rootScope.newReqiust.locationId)) {
+        $rootScope.alert("Оршин суугаа хаяг сонгоно уу", "warning");
+        return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
-        $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
+        $rootScope.alert("Үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
         return false;
       } else {
         return true;
@@ -1066,13 +1151,19 @@
     } else if (param == "step4CustomerData") {
       var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (isEmpty($rootScope.danCustomerData.lastname)) {
-        $rootScope.alert("Та овогоо оруулна уу", "warning");
+        $rootScope.alert("Овогоо оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.firstname)) {
-        $rootScope.alert("Та өөрийн нэрээ оруулна уу", "warning");
+        $rootScope.alert("Өөрийн нэрээ оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
-        $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
+      } else if (isEmpty($rootScope.danIncomeData.monthlyincome)) {
+        $rootScope.alert("Сарын орлогоо оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danIncomeData.totalincomehousehold)) {
+        $rootScope.alert("Сарын бусад орлогоо оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danIncomeData.monthlypayment)) {
+        $rootScope.alert("Төлж буй зээлийн төлбөр оруулна уу", "warning");
         return false;
       }
       // else if (isEmpty($rootScope.danCustomerData.email)) {
@@ -1083,39 +1174,17 @@
       //   $rootScope.alert("И-мэйл хаягаа зөв оруулна уу", "warning");
       //   return false;
       // }
-      else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
-        $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
-        return false;
-      } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
-        $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
+      else if (isEmpty($rootScope.danCustomerData.mikmortgagecondition) && !$rootScope.isSupLoan) {
+        $rootScope.alert("Ипотекийн зээлтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.ismarried) && !$rootScope.isSupLoan) {
-        $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
+        $rootScope.alert("Гэрлэлтийн байдал сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.mikmortgagecondition) && !$rootScope.isSupLoan) {
-        $rootScope.alert("МИК-ийн зээлтэй эсэхээ сонгоно уу", "warning");
+      } else if (isEmpty($rootScope.danCustomerData.educationid) && $rootScope.isSupLoan) {
+        $rootScope.alert("Боловсрол сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.experienceperiodid) && !$rootScope.isSupLoan) {
         $rootScope.alert("Ажилласан жилээ сонгоно уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danCustomerData.educationid) && $rootScope.isSupLoan) {
-        $rootScope.alert("Боловсролын зэрэг сонгоно уу", "warning");
-        return false;
-      } else {
-        return true;
-      }
-    } else if (param == "danIncomeReq") {
-      if (isEmpty($rootScope.danIncomeData.incometypeid)) {
-        $rootScope.alert("Та орлогын эх үүсвэр сонгоно уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danIncomeData.monthlyincome)) {
-        $rootScope.alert("Та сарын орлогоо оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danIncomeData.totalincomehousehold)) {
-        $rootScope.alert("Та бусад орлогоо оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danIncomeData.monthlypayment)) {
-        $rootScope.alert("Та төлж буй зээлийн дүнгээ оруулна уу", "warning");
         return false;
       } else {
         return true;
@@ -1181,6 +1250,24 @@
   };
   $scope.$on("$ionicView.enter", function () {
     console.log("$rootScope.consumerData", $rootScope.consumerData);
+    $rootScope.danCustomerData = {};
+    $rootScope.danIncomeData = {};
+    if (!isEmpty($rootScope.loginUserInfo)) {
+      if (!isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
+        $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
+        $rootScope.danCustomerData.uniqueidentifier = $rootScope.loginUserInfo.uniqueidentifier;
+        $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
+        $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
+        $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
+      }
+      if (!isEmpty($rootScope.loginUserInfo.mobilenumber)) {
+        $rootScope.danCustomerData.mobilenumber = $rootScope.loginUserInfo.mobilenumber;
+      }
+      if (!isEmpty($rootScope.loginUserInfo.email)) {
+        $rootScope.danCustomerData.email = $rootScope.loginUserInfo.email;
+      }
+    }
+
     $scope.isSelected0001 = false; //Автомашины сонгосон эсэх
     $scope.isHideFromConsumer = false;
     $scope.disabledBtnSendReq = false;
@@ -1234,8 +1321,6 @@
   };
   // dan connection
   $scope.gotoDanLoginAutoIncome = function () {
-    $rootScope.danCustomerData = {};
-    $rootScope.danIncomeData = {};
     serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
       $rootScope.stringHtmlsLink = response.result.data;
       var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");

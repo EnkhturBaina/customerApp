@@ -477,10 +477,10 @@
 }
 .step5-mid-title {
   margin: 5px auto !important;
-  width: 80% !important;
+  width: 100% !important;
   line-height: 12px !important;
   display: block !important;
-  text-align: center !important;
+  text-align: right !important;
 }
 .step2-valid-text-bold {
   font-weight: bold !important;

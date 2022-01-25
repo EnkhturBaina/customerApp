@@ -24,7 +24,7 @@
                     <p class="input-label" style="margin: 0;">Зээлийн хугацаа(сараар)</p>
                     <input inputmode="numeric" pattern="[0-9]*" id="monthInput" type="text" placeholder="" name="" ng-model="$root.carCollateralRequestData.loanMonth" class="property-input" ng-blur="getbankDataCarColl()" ng-keyup="hideKeyboard($event)" select-on-click>
                 </label>
-                <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байна</span></div>
+                <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байх боломжтой</span></div>
                 <label class="item item-input item-select form-input-label">
                     <p class="input-label" style="margin: 0;">Зээл авах байршил</p>
                     <select ng-model="$root.carCollateralRequestData.locationId" class="custom-form-input-select" ng-change="getbankDataCarColl()">

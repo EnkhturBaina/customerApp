@@ -325,6 +325,7 @@
 }
 .consumer-slider {
   display: grid;
+  height: 220px;
 }
 .consumer-ion-slide {
   display: flex;

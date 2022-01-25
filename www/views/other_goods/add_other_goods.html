@@ -19,19 +19,19 @@
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Барааны төрөл</p>
                             <select ng-model="$root.newCarReq.categoryId" class="custom-form-input-select" ng-change="changeSupCategory($root.newCarReq.categoryId)">
-                                <option ng-repeat="cat in supplierCategory track by $index" ng-if="cat.id != 1578891191299 && cat.id!=1578891191297 && cat.id!=1578891191298" value="{{cat.id}}">
+                                <option ng-repeat="cat in supplierCategory track by $index" ng-if="cat.name" value="{{cat.id}}">
                                     {{cat.name}}
                                 </option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Барааны дэлгүүр</p>
+                            <p class="input-label" style="margin: 0;">Бараа авах дэлгүүр</p>
                             <select id="shopId" ng-model="$root.newCarReq.shopId" class="custom-form-input-select" ng-change="changeSubVendor($root.newCarReq.shopId)" disabled>
                                 <option ng-repeat="supp in allSupplierList track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Салбар дэлгүүр</p>
+                            <p class="input-label" style="margin: 0;">Дэлгүүрийн салбар</p>
                             <select id="subVendorId" ng-model="$root.newCarReq.subVendorId" class="custom-form-input-select" ng-change="changeSubVendor($root.newCarReq.shopId)" disabled>
                                 <option ng-repeat="supp in subVendor track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
