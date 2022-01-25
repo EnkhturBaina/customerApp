@@ -1249,22 +1249,27 @@
     }
   };
   $scope.$on("$ionicView.enter", function () {
-    console.log("$rootScope.consumerData", $rootScope.consumerData);
     $rootScope.danCustomerData = {};
     $rootScope.danIncomeData = {};
     if (!isEmpty($rootScope.loginUserInfo)) {
-      if (!isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
+      if ("uniqueidentifier" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
         $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
         $rootScope.danCustomerData.uniqueidentifier = $rootScope.loginUserInfo.uniqueidentifier;
         $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
         $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
         $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
       }
-      if (!isEmpty($rootScope.loginUserInfo.mobilenumber)) {
+      if ("mobilenumber" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.mobilenumber)) {
         $rootScope.danCustomerData.mobilenumber = $rootScope.loginUserInfo.mobilenumber;
       }
-      if (!isEmpty($rootScope.loginUserInfo.email)) {
+      if ("email" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.email)) {
         $rootScope.danCustomerData.email = $rootScope.loginUserInfo.email;
+      }
+      if ("identfrontpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identfrontpic)) {
+        $rootScope.danCustomerData.identfrontpic = $rootScope.loginUserInfo.identfrontpic;
+      }
+      if ("identbackpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identbackpic)) {
+        $rootScope.danCustomerData.identbackpic = $rootScope.loginUserInfo.identbackpic;
       }
     }
 
