@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
     <div ng-repeat="data in [{'title':'Ногоон зээл'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content overflow-scroll="false" ng-controller="ecoCtrl" class="eco-container margin-top-50">
+    <ion-content overflow-scroll="false" class="eco-container margin-top-50">
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
@@ -15,13 +15,13 @@
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Барааны дэлгүүр</p>
+                            <p class="input-label" style="margin: 0;">Бараа авах дэлгүүр</p>
                             <select id="shopId" ng-model="$root.newReqiust.shopId" class="custom-form-input-select" ng-change="changeSubVendor($root.newReqiust.shopId)" disabled>
                                 <option ng-repeat="supp in allSupplierList track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Салбар дэлгүүр</p>
+                            <p class="input-label" style="margin: 0;">Дэлгүүрийн салбар</p>
                             <select id="subVendorId" ng-model="$root.newReqiust.subVendorId" class="custom-form-input-select" ng-change="changeSubVendor($root.newReqiust.shopId)" disabled>
                                 <option ng-repeat="supp in subVendor track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
@@ -30,52 +30,6 @@
                             <p class="input-label" style="margin: 0;">Барааны үнэ</p>
                             <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.itemPrice" ng-blur="getbankDataEco()" thousand-separator select-on-click>
                         </label>
-                        <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Урьдчилгаа төлбөр</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-change="calcLoanAmountEco();" ng-blur="getbankDataEco()" ng-click="removeAdvancePayment()" thousand-separator select-on-click>
-                        </label>
-                        <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
-                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataEco()" format-input disabled select-on-click>
-                        </label>
-                        <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Зээлийн хугацаа(сараар)</p>
-                            <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankDataEco()" ng-keyup="hideKeyboard($event)" select-on-click>
-                        </label>
-                        <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <br /><span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байх боломжтой</span></div>
-                        <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Хамтран зээлдэгчтэй эсэх</p>
-                            <select ng-model="$root.newReqiust.isCoBorrower" class="custom-form-input-select" ng-change="getbankDataEco()">
-                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
-                                    {{loc.name}}
-                                </option>
-                            </select>
-                        </label>
-                        <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Зээл авах байршил</p>
-                            <select ng-model="$root.newReqiust.locationId" class="custom-form-input-select" ng-change="getbankDataEco()">
-                                <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
-                                    {{loc.name}}
-                                </option>
-                            </select>
-                        </label>
-
-                        <div class="switch-input-container">
-                            <ul class="switch-list">
-                                <li>
-                                    <span class="step2-span step2-term" ng-click="termModalAgreement.show()">Үйлчилгээний нөхцлийг зөвшөөрөх</span>
-                                    <span>
-                                        <label class="step2-switch" id="step2isAgree">
-                                            <input type="checkbox" id="step2-togBtn" ng-true-value="1554263832132" ng-checked="true" ng-false-value="1554263832151" ng-model="$root.newReqiust.serviceAgreementId" />
-                                            <div class="step2-slider step2-round">
-                                                <span id="step2-toggle-on" class="step2-on">Тийм</span>
-                                                <span id="step2-toggle-off" class="step2-off active">Үгүй</span>
-                                            </div>
-                                        </label>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 <div class="container-padding pulse-animation" id="section07">

@@ -1,4 +1,4 @@
-angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootScope, $state, $ionicModal, $timeout, serverDeferred) {
+angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootScope, $state, $ionicModal, $timeout, serverDeferred, $ionicPlatform, $location, $anchorScroll) {
   $("#step2loanMonth").mask("000");
   $ionicModal
     .fromTemplateUrl("templates/term-content.html", {
@@ -105,6 +105,84 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
     });
     // console.log("json", json);
   };
+
+  //element ruu scroll hiih
+  $scope.slideTo = function (location) {
+    var newHash = location;
+    if ($location.hash() !== newHash) {
+      $location.hash(location);
+    } else {
+      $anchorScroll();
+    }
+  };
+  $ionicPlatform.ready(function () {
+    setTimeout(function () {
+      var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
+
+      new MobileSelect({
+        trigger: ".cardRegSelector",
+        wheels: [{ data: regChars }, { data: regChars }],
+        position: [0, 0],
+        ensureBtnText: "Хадгалах",
+        cancelBtnText: "Хаах",
+        transitionEnd: function (indexArr, data) {
+          //scroll xiij bhd ajillah func
+        },
+        callback: function (indexArr, data) {
+          $("#regCharA").text(data[0]);
+          $("#regCharB").text(data[1]);
+          $scope.overlayKeyOn();
+
+          keyInput = document.getElementById("regNums");
+          if (keyInput) {
+            $scope.clearD = function () {
+              keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
+            };
+
+            $scope.addCode = function (key) {
+              keyInput.value = keyInput.value + key;
+            };
+
+            $scope.emptyCode = function () {
+              keyInput.value = "";
+            };
+
+            $scope.emptyCode();
+          }
+        },
+        onShow: function () {},
+      });
+      $("#regNums").mask("00000000");
+    }, 1000);
+  });
+  $scope.overlayKeyOn = function () {
+    $scope.modal.show();
+  };
+  $scope.saveRegNums = function () {
+    if (keyInput.value.length < 8) {
+      $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
+    } else {
+      $scope.modal.hide();
+      $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+    }
+  };
+  $scope.cancelRegNums = function () {
+    if (!isEmpty($rootScope.loginUserInfo) && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
+      $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
+      $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
+      $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
+      $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
+    }
+    $scope.modal.hide();
+  };
+  $ionicModal
+    .fromTemplateUrl("templates/modal.html", {
+      scope: $scope,
+      backdropClickToClose: false,
+    })
+    .then(function (modal) {
+      $scope.modal = modal;
+    });
   $rootScope.$on("$ionicView.enter", function () {
     if ($state.current.name == "card") {
       $rootScope.newReqiust = {};
@@ -114,6 +192,29 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
       $timeout(function () {
         $scope.getbankDataCard("forced");
       }, 200);
+    }
+    $rootScope.danCustomerData = {};
+    $rootScope.danIncomeData = {};
+    if (!isEmpty($rootScope.loginUserInfo)) {
+      if ("uniqueidentifier" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
+        $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
+        $rootScope.danCustomerData.uniqueidentifier = $rootScope.loginUserInfo.uniqueidentifier;
+        $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
+        $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
+        $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
+      }
+      if ("mobilenumber" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.mobilenumber)) {
+        $rootScope.danCustomerData.mobilenumber = $rootScope.loginUserInfo.mobilenumber;
+      }
+      if ("email" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.email)) {
+        $rootScope.danCustomerData.email = $rootScope.loginUserInfo.email;
+      }
+      if ("identfrontpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identfrontpic)) {
+        $rootScope.danCustomerData.identfrontpic = $rootScope.loginUserInfo.identfrontpic;
+      }
+      if ("identbackpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identbackpic)) {
+        $rootScope.danCustomerData.identbackpic = $rootScope.loginUserInfo.identbackpic;
+      }
     }
   });
 

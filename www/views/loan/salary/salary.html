@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
     <div ng-repeat="data in [{'title':'Цалингийн зээл'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content overflow-scroll="false" ng-controller="salaryCtrl" class="divide-container margin-top-50">
+    <ion-content overflow-scroll="true" class="divide-container margin-top-50">
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
@@ -22,7 +22,7 @@
                                     <span id="regCharA" type="text">Р</span>
                                     <span id="regCharB" type="text">Д</span>
                                 </div>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="00000000" id="regNums" class="step2RegSelector mr-0" name="uniqueIdentifier" readonly />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="00000000" id="regNums" class="salaryRegSelector mr-0" name="uniqueIdentifier" readonly />
                             </div>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
@@ -35,7 +35,7 @@
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Хамтран зээлдэгчтэй эсэх</p>
-                            <select ng-model="$root.newReqiust.isCoBorrower" class="custom-form-input-select" ng-change="getbankData()">
+                            <select ng-model="$root.newReqiust.isCoBorrower" class="custom-form-input-select" ng-change="getbankDataSalary()">
                                 <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}
                                 </option>
@@ -43,7 +43,7 @@
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Оршин суугаа хаяг</p>
-                            <select ng-model="$root.newReqiust.locationId" class="custom-form-input-select" ng-change="getbankData()">
+                            <select ng-model="$root.newReqiust.locationId" class="custom-form-input-select" ng-change="getbankDataSalary()">
                                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}
                                 </option>

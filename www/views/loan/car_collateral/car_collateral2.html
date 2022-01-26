@@ -1,18 +1,7 @@
 <ion-view ng-app="car_collateral.Ctrl" hide-nav-bar="true">
     <link href="views/loan/car_collateral/car_collateral.css" rel="stylesheet" />
     <ion-content id="car-collateral2" overflow-scroll="true" class="car-col-content">
-        <!-- <ion-content id="car-collateral2" scroll="true" class="car-col-content margin-top-50"> -->
         <div class="car-col-step2-back" ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div>
-        <!-- <ion-header-bar align-title="left" class="navbar car-col-step2-back" style="background: none; top: 0">
-            <div class="title ion-color-big-text navbar-back-button" style="background: none">
-                <button class="nav-back-button button buttons button-clear header-item" style="left: 10px">
-                    <i class="ion-chevron-left ion-color-header"></i>
-                    <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Хүсэлт илгээх</span></span>
-                </button>
-            </div>
-            <div class="navbar-right-icon">
-            </div>
-        </ion-header-bar> -->
         <div class="list car-collateral-list" ng-controller="car_collateralCtrl">
             <div class="card car-step2-card money-input custom-form-container">
                 <span class="step2-card-span">Зээлийн хүсэлтийн мэдээлэл</span>

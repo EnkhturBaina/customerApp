@@ -198,6 +198,9 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16429945437301" }).then(function (response) {
       $rootScope.customerJobPosition = response;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16431697956661" }).then(function (response) {
+      $rootScope.buildingLoanType = response;
+    });
   };
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");

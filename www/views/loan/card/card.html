@@ -1,12 +1,11 @@
 <ion-view hide-nav-bar="true">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
     <div ng-repeat="data in [{'title':'Кредит карт'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content overflow-scroll="false" ng-controller="cardCtrl" class="eco-container margin-top-50">
+    <ion-content overflow-scroll="false" class="eco-container margin-top-50">
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
-                    <div class="money-input custom-form-container">
-                        <label class="item item-input item-stacked-label form-input-label">
+                    <div class="money-input custom-form-container"><label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
                             <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataCard()" thousand-separator select-on-click>
                         </label>
@@ -15,8 +14,34 @@
                             <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankDataCard()" ng-keyup="hideKeyboard($event)" select-on-click>
                         </label>
                         <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <br /><span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байх боломжтой</span></div>
+                        <label class="item item-input item-stacked-label form-input-label" id="regLabel" ng-click="slideTo('regLabel')">
+                            <span class="input-label">Регистрийн дугаар</span>
+                            <div class="reg-chars-container">
+                                <div class="select-reg-chars step2-select-reg-chars">
+                                    <span id="regCharA" type="text">Р</span>
+                                    <span id="regCharB" type="text">Д</span>
+                                </div>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="00000000" id="regNums" class="cardRegSelector mr-0" name="uniqueIdentifier" readonly />
+                            </div>
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">Утасны дугаар</p>
+                            <input inputmode="numeric" pattern="[0-9]*" maxlength="8" type="text" placeholder="" name="" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danCustomerData.mobilenumber" ng-keyup="hideKeyboard($event)" select-on-click />
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label">
+                            <p class="input-label" style="margin: 0;">И-мэйл хаяг</p>
+                            <input type="text" placeholder="" name="" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danCustomerData.email" ng-keyup="hideKeyboard($event)" select-on-click />
+                        </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Зээл авах байршил</p>
+                            <p class="input-label" style="margin: 0;">Хамтран зээлдэгчтэй эсэх</p>
+                            <select ng-model="$root.newReqiust.isCoBorrower" class="custom-form-input-select" ng-change="getbankDataCard()">
+                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}
+                                </option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Оршин суугаа хаяг</p>
                             <select ng-model="$root.newReqiust.locationId" class="custom-form-input-select" ng-change="getbankDataCard()">
                                 <option ng-repeat="loc in $root.locationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}
@@ -74,4 +99,36 @@
         <div class="term-modal-include" ng-include src="'views/term/term-content.html'"></div>
     </ion-content>
   </ion-modal-view>
+</script>
+<script id="templates/modal.html" type="text/ng-template">
+    <ion-modal-view id="profileKeyContainer" class="reg-num-modal">
+        <ion-content scroll="false" class="padding overlay-profile-reg-select-content">
+            <div id="keypadReg" cellpadding="5" cellspacing="3">
+                <div class="row keyboard-row-1">
+                    <div class="col keyboard-title keyboard-title-left" ng-click="cancelRegNums()">Хаах</div>
+                    <div class="col keyboard-title keyboard-title-right" ng-click="saveRegNums()">Хадгалах</div>
+                </div>
+                <div class="row keypad-row">
+                    <div class="col keypad-col" ng-click="addCode('1')">1</div>
+                    <div class="col keypad-col" ng-click="addCode('2')">2</div>
+                    <div class="col keypad-col" ng-click="addCode('3')">3</div>
+                </div>
+                <div class="row keypad-row">
+                    <div class="col keypad-col" ng-click="addCode('4')">4</div>
+                    <div class="col keypad-col" ng-click="addCode('5')">5</div>
+                    <div class="col keypad-col" ng-click="addCode('6')">6</div>
+                </div>
+                <div class="row keypad-row">
+                    <div class="col keypad-col" ng-click="addCode('7')">7</div>
+                    <div class="col keypad-col" ng-click="addCode('8')">8</div>
+                    <div class="col keypad-col" ng-click="addCode('9')">9</div>
+                </div>
+                <div class="row keypad-row">
+                    <div class="col keypad-col" ng-click="emptyCode()">C</div>
+                    <div class="col keypad-col" ng-click="addCode('0')">0</div>
+                    <div class="col keypad-col" ng-click="clearD()"><i class="ion-arrow-left-c"></i></div>
+                </div>
+            </div>
+        </ion-content>
+    </ion-modal-view>
 </script>

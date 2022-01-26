@@ -139,7 +139,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     json.location = $rootScope.carCollateralRequestData.locationId;
     json.month = $rootScope.carCollateralRequestData.loanMonth;
     json.salaries = $rootScope.filterSalaries;
-    
+
     json.currency = 16074201974821;
     if (!isEmpty($rootScope.loginUserInfo)) {
       json.isMortgage = $rootScope.loginUserInfo.mikmortgagecondition;
@@ -173,7 +173,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         }
       }
     });
-    // console.log("json", json);
+    console.log("json", json);
   };
 
   // localStorage.removeItem("carColl");

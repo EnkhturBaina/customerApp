@@ -165,6 +165,16 @@
       $rootScope.newReqiust.loanAmount = $rootScope.sumPrice.toString();
       $rootScope.newReqiust.getLoanAmount = $rootScope.sumPrice.toString();
       $rootScope.loanAmountField = $rootScope.sumPrice.toString();
+    } else if ($rootScope.requestType == "eco") {
+      $rootScope.newReqiust.serviceAgreementId = 1554263832132;
+      $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.itemPrice;
+      $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.itemPrice;
+      $rootScope.loanAmountField = $rootScope.newReqiust.itemPrice;
+    } else if ($rootScope.requestType == "building") {
+      $rootScope.newReqiust.serviceAgreementId = 1554263832132;
+      $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.buildingPrice;
+      $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.buildingPrice;
+      $rootScope.loanAmountField = $rootScope.newReqiust.buildingPrice;
     } else {
       if (!isEmpty($rootScope.selectedCarData)) {
         $rootScope.newReqiust.getLoanAmount = $rootScope.selectedCarData.price;
@@ -177,6 +187,17 @@
         $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.getLoanAmount - $rootScope.newReqiust.advancePayment;
       }
     }, 200);
+  };
+  $scope.removeItemAll = function (arr, value) {
+    var i = 0;
+    while (i < arr.length) {
+      if (arr[i] === value) {
+        arr.splice(i, 1);
+      } else {
+        ++i;
+      }
+    }
+    return arr;
   };
   // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
   $rootScope.getbankData = function (a) {
@@ -271,12 +292,14 @@
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
+      json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
     } else if ($rootScope.requestType == "building") {
       //Хувааж төлөх банк шүүлт
       json.type = "buildingLoanFilter";
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
+      json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
     } else if ($rootScope.requestType == "card") {
       //Хувааж төлөх банк шүүлт
       json.type = "cardLoanFilter";
@@ -300,17 +323,16 @@
       $rootScope.months = [];
       $rootScope.minPayments = [];
       //Зөвхөн Step2 -д ажлуулах
-      if ($state.current.name == "autoleasing-2") {
+      if ($state.current.name == "autoleasing-2" && isEmpty($rootScope.newReqiust.advancePayment)) {
         $rootScope.bankListFilter.Agree.map((el) => {
           $rootScope.products.push(el.products);
         });
         $rootScope.products.map((obj) => {
           $rootScope.result = [].concat($rootScope.result, obj);
         });
-
         $rootScope.result.map((a) => {
           $rootScope.months.push(a.max_loan_month_id);
-          a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : "";
+          a.min_payment != 0 || a.min_payment != null ? $rootScope.minPayments.push(a.min_payment) : "";
         });
 
         $rootScope.maxMonth = Math.max(...$rootScope.months);
@@ -327,14 +349,30 @@
 
           $rootScope.result.map((a) => {
             $rootScope.months.push(a.max_loan_month_id);
-            a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : $rootScope.minPayments.push(0);
+            if (a.min_payment !== 0 && a.min_payment !== null) {
+              $rootScope.minPayments.push(a.min_payment);
+            } else {
+              $rootScope.minPayments.push(0);
+            }
           });
-          isEmpty($rootScope.months) ? ($rootScope.maxMonth = 0) : ($rootScope.maxMonth = Math.min(...$rootScope.months));
-          isEmpty($rootScope.minPayments) ? ($rootScope.minPayment = 0) : ($rootScope.minPayment = Math.min(...$rootScope.minPayments));
+          isEmpty($rootScope.months) ? ($rootScope.maxMonth = 0) : ($rootScope.maxMonth = Math.max(...$rootScope.months));
+          if (isEmpty($rootScope.minPayments)) {
+            $rootScope.minPayment = 0;
+          } else {
+            if (Math.min(...$rootScope.minPayments) == 0) {
+              $rootScope.minPayment = Math.min(...$scope.removeItemAll($rootScope.minPayments, 0));
+            } else {
+              $rootScope.minPayment = Math.min(...$rootScope.minPayments);
+            }
+          }
         }
 
         if ($rootScope.requestType == "consumer") {
           $rootScope.displayMinPayment = $rootScope.sumPrice * $rootScope.minPayment;
+        } else if ($rootScope.requestType == "eco") {
+          $rootScope.displayMinPayment = $rootScope.newReqiust.itemPrice * $rootScope.minPayment;
+        } else if ($rootScope.requestType == "building") {
+          $rootScope.displayMinPayment = $rootScope.newReqiust.buildingPrice * $rootScope.minPayment;
         } else {
           if ($rootScope.newReqiust.choose === "1") {
             $rootScope.displayMinPayment = $rootScope.selectedCarData.price * $rootScope.minPayment;

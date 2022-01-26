@@ -1898,3 +1898,6 @@ input[type="number"] {
 .step2-select-reg-chars {
   margin-right: 80px !important;
 }
+.white-space-normal {
+  white-space: normal !important;
+}
