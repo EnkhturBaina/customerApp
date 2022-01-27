@@ -8,30 +8,6 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
     .then(function (termModalAgreement) {
       $scope.termModalAgreement = termModalAgreement;
     });
-  //Барааны төрөл -с хамаарч Бараны нийлүүлэгч-г lookup -д дахин сэт хийх
-  $scope.changeSupSubCategory = function (supppp) {
-    $scope.selectedSupplierCategory = [];
-
-    $scope.supplierHaveSubCategory.map((item) => {
-      if (item.categoryid === supppp) {
-        $scope.selectedSupplierCategory.push(item.supplierid);
-        return true;
-      }
-    });
-
-    var selectedCategory = [];
-
-    $rootScope.allSupplierList = $rootScope.suppcategoryStore.some((item) => {
-      $scope.selectedSupplierCategory.map((item2) => {
-        if (item2 == item.id) {
-          selectedCategory.push(item);
-          return true;
-        }
-      });
-    });
-    $rootScope.allSupplierList = selectedCategory;
-    supppp != "" ? (document.getElementById("shopId").disabled = false) : (document.getElementById("shopId").disabled = true);
-  };
 
   $scope.checkReqiured = function (param) {
     if (param == "eco-valid") {
@@ -39,10 +15,10 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
         $rootScope.alert("Барааны төрөл сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.shopId)) {
-        $rootScope.alert("Барааны дэлгүүр сонгоно уу", "warning");
+        $rootScope.alert("Бараа авах дэлгүүр сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.subVendorId)) {
-        $rootScope.alert("Барааны салбар дэлгүүр сонгоно уу", "warning");
+        $rootScope.alert("Дэлгүүрийн салбар сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.itemPrice)) {
         $rootScope.alert("Барааны үнэ оруулна уу", "warning");
@@ -87,46 +63,6 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
-
-      $rootScope.products = [];
-      $rootScope.result = [];
-      $rootScope.months = [];
-      $rootScope.minPayments = [];
-      //Зөвхөн Step2 -д ажлуулах
-      if ($state.current.name == "eco") {
-        $rootScope.bankListFilter.Agree.map((el) => {
-          $rootScope.products.push(el.products);
-        });
-        $rootScope.products.map((obj) => {
-          $rootScope.result = [].concat($rootScope.result, obj);
-        });
-
-        $rootScope.result.map((a) => {
-          $rootScope.months.push(a.max_loan_month_id);
-          a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : "";
-        });
-
-        $rootScope.maxMonth = Math.max(...$rootScope.months);
-        $rootScope.minPayment = Math.min(...$rootScope.minPayments);
-
-        //тэнцсэн банкуудын урьдчилгаа 0 үед ажиллах
-        if (isEmpty($rootScope.minPayments)) {
-          $rootScope.bankListFilter.NotAgree.map((el) => {
-            $rootScope.products.push(el.products);
-          });
-          $rootScope.products.map((obj) => {
-            $rootScope.result = [].concat($rootScope.result, obj);
-          });
-
-          $rootScope.result.map((a) => {
-            $rootScope.months.push(a.max_loan_month_id);
-            a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : $rootScope.minPayments.push(0);
-          });
-
-          $rootScope.maxMonth = Math.max(...$rootScope.months);
-          $rootScope.minPayment = Math.min(...$rootScope.minPayments);
-        }
-      }
     });
     // console.log("json", json);
   };
@@ -146,22 +82,9 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
   $rootScope.$on("$ionicView.loaded", function () {
     $rootScope.hideFooter = true;
   });
-  //Урьдчилгаа дээр дарахад хоосон болгох
-  $scope.removeAdvancePayment = function () {
-    $rootScope.newReqiust.advancePayment = "";
-  };
-  $rootScope.calcLoanAmountEco = function () {
-    if (parseInt($rootScope.newReqiust.advancePayment) < $rootScope.newReqiust.itemPrice) {
-      $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.itemPrice - $rootScope.newReqiust.advancePayment;
-      $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.getLoanAmount;
-    } else if (parseInt($rootScope.newReqiust.advancePayment) > $rootScope.newReqiust.itemPrice) {
-      var tmp = $rootScope.newReqiust.advancePayment;
-      $rootScope.newReqiust.advancePayment = tmp.slice(0, -1);
-    }
-  };
 
   //Бараны нийлүүлэгч хамаарч Барааны төрөл -г lookup -д дахин сэт хийх
-  $scope.changeSupCategory = function (supppp) {
+  $scope.changeSupCategoryEco = function (supppp) {
     $rootScope.selectedSupplierCategory = [];
 
     $rootScope.supplierHaveCategory.map((item) => {

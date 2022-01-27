@@ -8,14 +8,14 @@
                     <div class="custom-form-container">
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Орон сууцаа сонгосон эсэх</p>
-                            <select ng-model="$root.newReqiust.choose" class="custom-form-input-select" ng-change="getbankDataBuilding();">
+                            <select ng-model="$root.newReqiust.choose" class="custom-form-input-select">
                                 <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Орон сууцны зээлийн төрөл</p>
-                            <select ng-model="$root.newReqiust.buildingLoanType" class="custom-form-input-select" ng-change="getbankDataBuilding();">
+                            <select ng-model="$root.newReqiust.buildingLoanType" class="custom-form-input-select">
                                 <option ng-repeat="loc in $root.buildingLoanType | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>
@@ -26,7 +26,7 @@
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label white-space-normal" style="margin: 0;">Судалгаанд о/с-ны мэдээлэл өгөх боломжтой</p>
-                            <select ng-model="$root.newReqiust.buildingSurvey" class="custom-form-input-select" ng-change="getbankDataBuilding();">
+                            <select ng-model="$root.newReqiust.buildingSurvey" class="custom-form-input-select">
                                 <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>

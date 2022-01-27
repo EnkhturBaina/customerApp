@@ -65,51 +65,6 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
-
-      $rootScope.products = [];
-      $rootScope.result = [];
-      $rootScope.months = [];
-      $rootScope.minPayments = [];
-      //Зөвхөн Step2 -д ажлуулах
-      if ($state.current.name == "building") {
-        $rootScope.bankListFilter.Agree.map((el) => {
-          $rootScope.products.push(el.products);
-        });
-        $rootScope.products.map((obj) => {
-          $rootScope.result = [].concat($rootScope.result, obj);
-        });
-
-        $rootScope.result.map((a) => {
-          $rootScope.months.push(a.max_loan_month_id);
-          a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : "";
-        });
-
-        $rootScope.maxMonth = Math.max(...$rootScope.months);
-        $rootScope.minPayment = Math.min(...$rootScope.minPayments);
-
-        //тэнцсэн банкуудын урьдчилгаа 0 үед ажиллах
-        if (isEmpty($rootScope.minPayments)) {
-          $rootScope.bankListFilter.NotAgree.map((el) => {
-            $rootScope.products.push(el.products);
-          });
-          $rootScope.products.map((obj) => {
-            $rootScope.result = [].concat($rootScope.result, obj);
-          });
-
-          $rootScope.result.map((a) => {
-            $rootScope.months.push(a.max_loan_month_id);
-            a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : $rootScope.minPayments.push(0);
-          });
-
-          $rootScope.maxMonth = Math.max(...$rootScope.months);
-          $rootScope.minPayment = Math.min(...$rootScope.minPayments);
-        }
-        if (isEmpty($rootScope.newReqiust.buildingPrice)) {
-          $rootScope.displayMinPayment = 0;
-        } else {
-          $rootScope.displayMinPayment = $rootScope.newReqiust.buildingPrice * $rootScope.minPayment;
-        }
-      }
     });
     console.log("json", json);
   };
