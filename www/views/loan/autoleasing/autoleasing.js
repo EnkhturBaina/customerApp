@@ -312,6 +312,12 @@
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
+    } else if ($rootScope.requestType == "money") {
+      //Хувааж төлөх банк шүүлт
+      json.type = "moneyLoanFilter";
+      json.totalLoan = $rootScope.newReqiust.getLoanAmount;
+      json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
+      json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
     }
     serverDeferred.carCalculation(json).then(function (response) {
       // console.log("response", response);
@@ -1146,7 +1152,7 @@
         $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
-        $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
+        $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
         $rootScope.alert("Утасны дугаараа оруулна уу", "warning");

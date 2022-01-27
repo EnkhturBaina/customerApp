@@ -95,7 +95,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $rootScope.alert("Та өөрийн нэрээ оруулна уу", "warning");
     } else if (isEmpty($scope.customerProfileData.uniqueidentifier)) {
       $rootScope.HideLoader();
-      $rootScope.alert("Регситрын дугаараа оруулна уу", "warning");
+      $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
     }
     // else if (isEmpty($scope.customerProfileData.email)) {
     //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");

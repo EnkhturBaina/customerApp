@@ -10,7 +10,7 @@
                             <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankDataCard()" thousand-separator select-on-click>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Зээлийн хугацаа(сараар)</p>
+                            <p class="input-label" style="margin: 0;">Зээл авах хугацаа (сараар)</p>
                             <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankDataCard()" ng-keyup="hideKeyboard($event)" select-on-click>
                         </label>
                         <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <br /><span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байх боломжтой</span></div>

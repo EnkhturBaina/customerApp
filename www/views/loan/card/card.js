@@ -14,13 +14,30 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
         $rootScope.alert("Зээлийн хэмжээ оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
-        $rootScope.alert("Хугацаа оруулна уу", "warning");
+        $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
+        $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+        $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+        return false;
+      } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
+        $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
+        return false;
+      }
+      // else if (isEmpty($rootScope.danIncomeData.incometypeid)) {
+      //   $rootScope.alert("Орлогын төрөл сонгоно уу", "warning");
+      //   return false;
+      // }
+      else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+        $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.locationId)) {
-        $rootScope.alert("Байршил сонгоно уу", "warning");
+        $rootScope.alert("Оршин суугаа хаяг сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
-        $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
+        $rootScope.alert("Үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
         return false;
       } else {
         return true;

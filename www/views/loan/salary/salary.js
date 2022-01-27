@@ -62,11 +62,9 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
 
           $rootScope.result.map((a) => {
             $rootScope.months.push(a.max_loan_month_id);
-            a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : $rootScope.minPayments.push(0);
           });
 
           $rootScope.maxMonth = Math.max(...$rootScope.months);
-          $rootScope.minPayment = Math.min(...$rootScope.minPayments);
         }
       }
     });
@@ -194,10 +192,22 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
         $rootScope.alert("Зээлийн хэмжээ оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
-        $rootScope.alert("Хугацаа оруулна уу", "warning");
+        $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
+        $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+        $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+        return false;
+      } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
+        $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+        $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.locationId)) {
-        $rootScope.alert("Байршил сонгоно уу", "warning");
+        $rootScope.alert("Оршин суугаа хаяг сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
         $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");

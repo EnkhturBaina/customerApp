@@ -201,6 +201,9 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16431697956661" }).then(function (response) {
       $rootScope.buildingLoanType = response;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1618473508871492" }).then(function (response) {
+      $rootScope.propertyCategory = response;
+    });
   };
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");
