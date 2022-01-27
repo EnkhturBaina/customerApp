@@ -256,9 +256,9 @@
     } else if ($rootScope.requestType == "estate") {
       //ҮХХ Барьцаат лизинг банк шүүлт
       json.type = "estateLoanFilter";
-      json.totalLoan = $rootScope.propertyRequestData.loanAmount;
-      json.location = isEmpty($rootScope.propertyRequestData.locationId) ? 0 : $rootScope.propertyRequestData.locationId;
-      json.month = isEmpty($rootScope.propertyRequestData.loanMonth) ? 0 : $rootScope.propertyRequestData.loanMonth;
+      json.totalLoan = $rootScope.newReqiust.getLoanAmount;
+      json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
+      json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
     } else if ($rootScope.requestType == "auto") {
       //Авто лизинг банк шүүлт
       if ((!isEmpty($rootScope.selectedCarData) && !isEmpty($rootScope.selectedCarData.itemcode)) || $rootScope.newReqiust.choose !== "1") {
@@ -903,10 +903,10 @@
             //===================Бизнесийн зээл===================
           } else if ($rootScope.requestType == "estate") {
             //===================Үл хөдлөх барьцаат зээл===================
-            $rootScope.propertyRequestData.customerId = all_ID.dccustomerid;
-            $rootScope.propertyRequestData.requestTypeId = "16082024283512";
+            $rootScope.newReqiust.customerId = all_ID.dccustomerid;
+            $rootScope.newReqiust.requestTypeId = "16082024283512";
             //Хүсэлт бүртгэх
-            serverDeferred.requestFull("dcApp_carCollRequestDV_001", $rootScope.propertyRequestData).then(function (sendReqResponse) {
+            serverDeferred.requestFull("dcApp_carCollRequestDV_001", $rootScope.newReqiust).then(function (sendReqResponse) {
               // console.log("sendReqResponse", sendReqResponse);
 
               if (sendReqResponse[0] == "success" && sendReqResponse[1] != "") {

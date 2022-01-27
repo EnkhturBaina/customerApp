@@ -1,7 +1,7 @@
 <ion-view hide-nav-bar="true">
     <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
     <div ng-repeat="data in [{'title':'Хүсэлт илгээх'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content overflow-scroll="false" class="eco-container margin-top-50">
+    <ion-content overflow-scroll="true" class="eco-container margin-top-50">
         <div class="big-container">
             <div class="magic-container">
                 <div class="bg-container">
@@ -21,7 +21,7 @@
                                     <span id="regCharA" type="text">Р</span>
                                     <span id="regCharB" type="text">Д</span>
                                 </div>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="00000000" id="regNums" class="cardRegSelector mr-0" name="uniqueIdentifier" readonly />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="00000000" id="regNums" class="estateRegSelector mr-0" name="uniqueIdentifier" readonly />
                             </div>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">

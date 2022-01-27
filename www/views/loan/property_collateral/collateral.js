@@ -1,4 +1,4 @@
-angular.module("property_collateral.Ctrl", []).controller("property_collateralCtrl", function ($scope, $timeout, $state, $ionicModal, $rootScope, serverDeferred) {
+angular.module("property_collateral.Ctrl", []).controller("property_collateralCtrl", function ($scope, $timeout, $state, $ionicModal, $rootScope, serverDeferred, $ionicPlatform, $location, $anchorScroll) {
   $("#propertyStep2loanMonth").mask("000");
 
   $scope.saveProperty = function () {
@@ -140,6 +140,83 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     });
     console.log("json", json);
   };
+  //element ruu scroll hiih
+  $scope.slideTo = function (location) {
+    var newHash = location;
+    if ($location.hash() !== newHash) {
+      $location.hash(location);
+    } else {
+      $anchorScroll();
+    }
+  };
+  $ionicPlatform.ready(function () {
+    setTimeout(function () {
+      var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
+
+      new MobileSelect({
+        trigger: ".estateRegSelector",
+        wheels: [{ data: regChars }, { data: regChars }],
+        position: [0, 0],
+        ensureBtnText: "Хадгалах",
+        cancelBtnText: "Хаах",
+        transitionEnd: function (indexArr, data) {
+          //scroll xiij bhd ajillah func
+        },
+        callback: function (indexArr, data) {
+          $("#regCharA").text(data[0]);
+          $("#regCharB").text(data[1]);
+          $scope.overlayKeyOn();
+
+          keyInput = document.getElementById("regNums");
+          if (keyInput) {
+            $scope.clearD = function () {
+              keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
+            };
+
+            $scope.addCode = function (key) {
+              keyInput.value = keyInput.value + key;
+            };
+
+            $scope.emptyCode = function () {
+              keyInput.value = "";
+            };
+
+            $scope.emptyCode();
+          }
+        },
+        onShow: function () {},
+      });
+      $("#regNums").mask("00000000");
+    }, 1000);
+  });
+  $scope.overlayKeyOn = function () {
+    $scope.modal.show();
+  };
+  $scope.saveRegNums = function () {
+    if (keyInput.value.length < 8) {
+      $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
+    } else {
+      $scope.modal.hide();
+      $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+    }
+  };
+  $scope.cancelRegNums = function () {
+    if (!isEmpty($rootScope.loginUserInfo) && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
+      $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
+      $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
+      $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
+      $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
+    }
+    $scope.modal.hide();
+  };
+  $ionicModal
+    .fromTemplateUrl("templates/modal.html", {
+      scope: $scope,
+      backdropClickToClose: false,
+    })
+    .then(function (modal) {
+      $scope.modal = modal;
+    });
   $scope.$on("$ionicView.enter", function () {
     if ($state.current.name == "property_collateral") {
       $rootScope.newReqiust = {};
@@ -163,6 +240,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         }
         if ("mobilenumber" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.mobilenumber)) {
           $rootScope.danCustomerData.mobilenumber = $rootScope.loginUserInfo.mobilenumber;
+          console.log($rootScope.danCustomerData.mobilenumber);
         }
         if ("email" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.email)) {
           $rootScope.danCustomerData.email = $rootScope.loginUserInfo.email;
@@ -176,6 +254,5 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       }
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
-    $rootScope.danCustomerData = {};
   });
 });
