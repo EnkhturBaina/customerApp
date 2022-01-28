@@ -12,40 +12,73 @@
     </ion-header-bar>
     <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 autoleasing-step1-content">
         <div class="big-container ghostwhite-noscroll-container">
-            <div class="magic-container step1-card-content">
-                <p class="big-middle-title auto-step1-title-select">Автомашины сонгосон эсэх?</p>
-                <div class="custm-radio-step1">
+            <div class="magic-container">
+                <div class="bg-container">
+                    <div class="money-input custom-form-container">
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Автомашинаа сонгосон эсэх</p>
+                            <select ng-model="$root.newReqiust.choose" class="custom-form-input-select" ng-change="selectCarChoose($root.newReqiust.choose)">
+                                <option value="1">
+                                    0001.MN -с сонгосон
+                                </option>
+                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}
+                                </option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Авах автомашины төрөл</p>
+                            <select ng-model="$root.carProduct.categoryId" class="custom-form-input-select" ng-change="getCarFactoryCategoryAuto(carProduct.categoryId)">
+                                <option ng-repeat="loc in $root.carCategory | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}
+                                </option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-select form-input-label" ng-if="isSelected0001=='yes'">
+                            <p class="input-label" style="margin: 0;">Автомашины төлөв</p>
+                            <select ng-model="$root.carProduct.productTypeId" class="custom-form-input-select">
+                                <option ng-repeat="loc in $root.carNumberTaken | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}
+                                </option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label" ng-if="isSelected0001=='0001'">
+                            <p class="input-label" style="margin: 0;">Автомашины код</p>
+                            <input inputmode="numeric" pattern="[0-9]*" id="step1CarCode" type="text" placeholder="00000000" name="carCode" class="" ng-model="$root.carProduct.itemCode" ng-keyup="hideKeyboard($event)" select-on-click />
+                        </label>
+                        <label class="item item-input item-select form-input-label" ng-if="isSelected0001=='0001'||isSelected0001=='yes'">
+                            <p class="input-label" style="margin: 0;">Үйлдвэр</p>
+                            <select id="brandSelect" ng-model="$root.carProduct.factoryId" class="custom-form-input-select" disabled ng-change="getCarModelDataAuto(carProduct.factoryId)">
+                                <option ng-repeat="com in factoryData track by $index" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-select form-input-label" ng-if="isSelected0001=='0001'||isSelected0001=='yes'">
+                            <p class="input-label" style="margin: 0;">Марк</p>
+                            <select id="modelSelect" ng-model="$root.carProduct.modelId" class="custom-form-input-select" disabled>
+                                <option ng-repeat="com in modelData track by $index" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label" ng-if="isSelected0001=='0001'||isSelected0001=='yes'">
+                            <p class="input-label" style="margin: 0;">Орж ирсэн он</p>
+                            <input inputmode="numeric" pattern="[0-9]*" id="entryYear" type="text" placeholder="0000" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.carProduct.yearEntryMongolia" ng-keyup="hideKeyboard($event)" select-on-click />
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label" ng-if="isSelected0001=='0001'||isSelected0001=='yes'">
+                            <p class="input-label" style="margin: 0;">Үйлдвэрлэсэн он</p>
+                            <input inputmode="numeric" pattern="[0-9]*" id="prodYear" type="text" placeholder="0000" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.carProduct.yearProduction" ng-keyup="hideKeyboard($event)" select-on-click />
+                        </label>
+                        <label class="item item-input item-select form-input-label">
+                            <span class="input-label">Орлого нотлох эсэх</span>
+                            <select ng-model="$root.newReqiust.proveIncome" class="custom-form-input-select">
+                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}</option>
+                            </select>
+                        </label>
+                        <button class="button btn single-button auto-step1-next-btn" id="Next" ng-click="goStep2AutoLeasing()">Үргэлжлүүлэх</button>
 
-                    <select ng-model="$root.newReqiust.choose" class="custom-stp1-input-select" ng-change="selectCarChoose($root.newReqiust.choose)">
-                        <option value="1">
-                            0001.MN -с сонгосон
-                        </option>
-                        <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
-                            {{loc.name}}
-                        </option>
-                    </select>
-                    <!-- <a grouped-radio="1554263832132" ng-model="$root.newReqiust.choose" class="custm-radio-select" ng-click="selectCarChoose(1554263832132)"><span class="ion-pt-5">Тийм</span></a>
-                    <a grouped-radio="1554263832151" ng-model="$root.newReqiust.choose" class="custm-radio-select" ng-click="selectCarChoose(1554263832151)"><span class="ion-pt-5">Үгүй</span></a>
-                    <a grouped-radio="1" ng-model="$root.newReqiust.choose" class="custm-radio-select" ng-click="selectCarChoose(1)"><span>0001.MN -с сонгосон</span></a> -->
-                </div>
-                <div class="step1-from-0001" ng-if="isSelected0001">
-                    <div class="bottom-border-input-text step1-code-input-container">
-                        <p class="big-middle-title auto-step1-title">Та авах автомашиныхаа кодыг оруулна уу?</p>
-                        <input inputmode="numeric" pattern="[0-9]*" id="step1CarCode" type="text" placeholder="00000000" name="carCode" class="step1-car-code ion-text-upper" ng-model="$root.newReqiust.itemcode" ng-keyup="getCarDatasIdEnterkey($event,$root.newReqiust.itemcode)" select-on-click />
-                    </div>
-                    <div class="step1-scan-qr-container">
-                        <!-- <div class="qr-btn-container">
-                            <button class="button qr-button" id="qr" ng-click="showQRreader()">
-                                <span class="filter">
-                                    <i class="ion-qr-scanner qr-ico"></i>
-                                    QR уншуулах
-                                </span>
-                            </button>
-                        </div> -->
                     </div>
                 </div>
-                <button class="button btn single-button auto-step1-next-btn" id="Next" ng-click="getCarDatasId($root.newReqiust.itemcode)">Үргэлжлүүлэх</button>
-
             </div>
             <ion-footer class="bottom-footer">
                 <div class="bank-container">

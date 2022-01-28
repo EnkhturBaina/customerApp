@@ -10,124 +10,59 @@
         </div>
     </div>
     <div ng-repeat="data in [{'title':'Автомашин барьцаалсан зээл'}]" ng-include src="'views/navbar.html'"></div>
-    <!-- <ion-header-bar align-title="left" class="navbar" style="background: none; top: 0">
-        <div class="title ion-color-big-text navbar-back-button" style="background: none">
-            <button ng-click="backFromCarCollStep1()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
-                <i class="ion-chevron-left ion-color-header"></i>
-                <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Автомашин барьцаалсан зээл</span></span>
-            </button>
-        </div>
-        <div class="navbar-right-icon">
-        </div>
-    </ion-header-bar> -->
     <ion-content overflow-scroll="true" class="ion-modified-content has-header car-collateral-content">
         <div class="big-container ghostwhite-noscroll-container">
-            <div class="magic-container car-collateral-contant-card">
-                <div class="margin-lr-20">
-                    <div class="list car-collateral-list" ng-if="!$root.isDanLoginAutoColl">
-                        <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label" style="margin: 0;">Төрөл <span class="car-coll-req">*</span></p>
-                            <select ng-model="$root.newCarReq.carCategoryId" style="background-color: transparent" ng-change="getCarFactoryCategory(newCarReq.carCategoryId)">
-                                <option ng-repeat="com in carCategory track by $index" ng-if="com.name" value="{{com.id}}">
+            <div class="magic-container">
+                <div class="bg-container car-collateral-contant-card">
+                    <div class="money-input custom-form-container">
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Барьцаалах автомашины төрөл</p>
+                            <select ng-model="$root.newCarReq.carCategoryId" style="background-color: transparent" ng-change="getCarFactoryCategory(newCarReq.carCategoryId)" class="custom-form-input-select">
+                                <option ng-repeat="com in $root.carCategory track by $index" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>
                         </label>
-                        <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label" style="margin: 0;">Үйлдвэр <span class="car-coll-req">*</span></p>
-                            <select id="brandSelect" ng-model="$root.newCarReq.brandId" style="background-color: transparent" disabled ng-change="getCarModelData(newCarReq.brandId)">
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Автомашины өмчлөл</p>
+                            <select ng-model="$root.newCarReq.ownershipTypeId" style="background-color: transparent" class="custom-form-input-select">
+                                <option ng-repeat="com in $root.ownershipSelect track by $index" ng-if="com.name" value="{{com.id}}">
+                                    {{com.name}}</option>
+                            </select>
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label" id="regLabel" ng-click="slideTo('regLabel')">
+                            <span class="input-label">Автомашины улсын дугаар</span>
+                            <input type="text" id="nationalNumber" class="nationalNumberPicker bg-fff" placeholder="0000УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" readonly />
+                        </label>
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Үйлдвэр</p>
+                            <select id="brandSelect" ng-model="$root.newCarReq.brandId" style="background-color: transparent" disabled ng-change="getCarModelData(newCarReq.brandId)" class="custom-form-input-select">
                                 <option ng-repeat="com in factoryData track by $index" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>
                         </label>
-                        <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label" style="margin: 0;">Загвар <span class="car-coll-req">*</span></p>
-                            <select id="modelSelect" ng-model="$root.newCarReq.markId" style="background-color: transparent" disabled>
+                        <label class="item item-input item-select form-input-label">
+                            <p class="input-label" style="margin: 0;">Марк</p>
+                            <select id="modelSelect" ng-model="$root.newCarReq.markId" style="background-color: transparent" disabled class="custom-form-input-select">
                                 <option ng-repeat="model in modelData track by $index" ng-if="model.name" value="{{model.id}}">
                                     {{model.name}}</option>
                             </select>
                         </label>
-                        <label class="item item-input car-collateral-label">
-                            <p>Явсан км</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" id="odo" placeholder="0" name="odo" ng-model="$root.newCarReq.mile" thousand-separator next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
+                        <label class="item item-input item-stacked-label form-input-label" id="productYearPickerLabel" ng-click="slideTo('productYearPickerLabel')">
+                            <span class="input-label">Үйлдвэрлэсэн он</span>
+                            <input inputmode="numeric" class="productYearPicker bg-fff" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.newCarReq.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
                         </label>
-                        <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label" style="margin: 0;">Хөдөлгүүрийн төрөл</p>
-                            <select ng-model="$root.newCarReq.engineId" style="background-color: transparent">
-                                <option ng-repeat="com in engineTypeData" ng-if="com.name" value="{{com.id}}">
-                                    {{com.name}}</option>
-                            </select>
+                        <label class="item item-input item-stacked-label form-input-label" id="cameYearPickerLabel" ng-click="slideTo('cameYearPickerLabel')">
+                            <span class="input-label">Орж ирсэн он</span>
+                            <input inputmode="numeric" class="cameYearPicker bg-fff" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.newCarReq.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
                         </label>
-                        <label class="item item-input item-select car-collateral-label">
-                            <p>ХӨ багтаамж</p>
-                            <select ng-model="$root.newCarReq.engineCapacity" style="background-color: transparent">
-                                <option ng-repeat="com in engineCapData" ng-if="com.name" value="{{com.id}}">
-                                    {{com.name}}</option>
-                            </select>
-                        </label>
-                        <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label" style="margin: 0;">Хурдны хайрцаг</p>
-                            <select ng-model="$root.newCarReq.transmissionId" style="background-color: transparent">
-                                <option ng-repeat="com in transmissionData" ng-if="com.name" value="{{com.id}}">
-                                    {{com.name}}</option>
-                            </select>
-                        </label>
-                        <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label" style="margin: 0;">Хөтлөгч</p>
-                            <select ng-model="$root.newCarReq.driveTypeId" style="background-color: transparent">
-                                <option ng-repeat="com in driveTypeData" ng-if="com.name" value="{{com.id}}">
-                                    {{com.name}}</option>
-                            </select>
-                        </label>
-                        <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label" style="margin: 0;">Жолооны хүрд</p>
-                            <select ng-model="$root.newCarReq.steeringWheelId" style="background-color: transparent">
-                                <option ng-repeat="com in steeringWheelData" ng-if="com.name" value="{{com.id}}">
-                                    {{com.name}}</option>
-                            </select>
-                        </label>
-                        <label class="item item-input car-collateral-label">
-                            <p>Хаалганы тоо</p>
-                            <input inputmode="numeric" pattern="[0-9]*" maxlength="1" type="text" id="carDoorCount" placeholder="0" name="carDoorCount" ng-model="$root.newCarReq.carDoorCount" thousand-separator next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
-                        </label>
-                        <label class="item item-input car-collateral-label">
-                            <p>Үйлдвэрлэсэн он <span class="car-coll-req">*</span></p>
-                            <input inputmode="numeric" class="productYearPicker" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.newCarReq.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
-                        </label>
-                        <label class="item item-input car-collateral-label">
-                            <p>Орж ирсэн он <span class="car-coll-req">*</span></p>
-                            <input inputmode="numeric" class="cameYearPicker" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.newCarReq.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
-                        </label>
-                        <label class="item item-input car-collateral-label">
-                            <p>Улсын дугаар</p>
-                            <input type="text" id="nationalNumber" class="nationalNumberPicker" placeholder="0000УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" readonly />
-                        </label>
-                        <label class="item item-input item-select car-collateral-label">
-                            <p class="input-label" style="margin: 0;">Өнгө</p>
-                            <select ng-model="$root.newCarReq.carColorId" style="background-color: transparent">
-                                <option ng-repeat="com in carColorData" ng-if="com.name" value="{{com.id}}">
-                                    {{com.name}}</option>
+                        <label class="item item-input item-select form-input-label">
+                            <span class="input-label">Орлого нотлох эсэх</span>
+                            <select ng-model="$root.newReqiust.proveIncome" class="custom-form-input-select">
+                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}</option>
                             </select>
                         </label>
                     </div>
-                    <div class="list car-collateral-list" ng-if="$root.isDanLoginAutoColl">
-                        <div class="item-info-dan">
-                            <ul>
-                                <li>Үйлдвэр <span>{{autoCollDanCarData.markName}} </span></li>
-                                <li>Загвар <span> {{autoCollDanCarData.modelName}} </span></li>
-                                <li>Улсын дугаар <span>{{autoCollDanCarData.plateNumber}} </span></li>
-                                <li>Үйлдвэрлэсэн улс <span> {{autoCollDanCarData.countryName}} </span></li>
-                                <li>Үйлдвэрлэсэн он <span> {{autoCollDanCarData.buildYear}} </span></li>
-                                <li>Импортлогдсон огноо <span>{{autoCollDanCarData.importDate}} </span></li>
-                                <li>Шатахууны төрөл <span>{{autoCollDanCarData.fueltype}} </span></li>
-                                <li>Жолооны хүрд <span>{{autoCollDanCarData.wheelPosition}} </span></li>
-                                <li>Өнгө <span>{{autoCollDanCarData.colorName}} </span></li>
-                                <li>Суудлын тоо <span>{{autoCollDanCarData.manCount}} </span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <label class="item car-collateral-label" style="border: none">
-                        <p class="car-col-img-title">Таны барьцаалах машины зургыг харж үнэлгээг гаргах тул машины зурагаа оруулна уу</p>
-                    </label>
                     <div class="item car-collateral-img-list">
                         <div class="row car-coll-img-row">
                             <div class="col col-33" ng-click="sourceSelectOn('itemPic')">
@@ -189,11 +124,3 @@
         </div>
     </ion-content>
 </ion-view>
-<script id="templates/autoCollDan.html" type="text/ng-template">
-	<ion-modal-view class="auto-temp-modal-view">
-	  <ion-content class="padding property-dan-content" scroll="false">
-        <!-- <span class="term-modal-off-text" ng-click="autoCollDan.hide()"><img style="width: 20px" src="img/x_mark.png" /></span> -->
-		  <div class="templates-modal-include" ng-include src="'views/templates/autoCollDan.html'"></div>
-	  </ion-content>
-	</ion-modal-view>
-</script>

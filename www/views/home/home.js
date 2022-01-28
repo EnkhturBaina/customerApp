@@ -204,6 +204,22 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1618473508871492" }).then(function (response) {
       $rootScope.propertyCategory = response;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363794516634" }).then(function (datas) {
+      delete datas.aggregatecolumns;
+      $rootScope.carCategory = datas;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16433448242481" }).then(function (datas) {
+      delete datas.aggregatecolumns;
+      $rootScope.carNumberTaken = datas;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613364305380357" }).then(function (datas) {
+      delete datas.aggregatecolumns;
+      $rootScope.carFactoryData = datas;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613364325545258" }).then(function (datas) {
+      delete datas.aggregatecolumns;
+      $rootScope.carModelData = datas;
+    });
   };
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");
@@ -376,6 +392,7 @@
     if (isactive == "active") {
       localStorage.setItem("requestType", type);
       localStorage.setItem("requestCategory", cat);
+      localStorage.setItem("firstReq", "yes");
       $state.go(state);
     } else {
       $rootScope.alert("Тун удахгүй", "warning");

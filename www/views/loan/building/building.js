@@ -19,8 +19,11 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
       } else if (isEmpty($rootScope.newReqiust.buildingPrice)) {
         $rootScope.alert("Орон сууцны үнэ оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.buildingSurvey)) {
+      } else if (isEmpty($rootScope.newReqiust.buildingSurvey) && $rootScope.isAgent) {
         $rootScope.alert("Судалгаанд о/с-ны мэдээлэл өгөх боломжтой сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.buildingSurvey) && !$rootScope.isAgent) {
+        $rootScope.alert("Орон сууцны агенттай холбохыг зөвшөөрөх үү?", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
         $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
@@ -69,6 +72,9 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
     console.log("json", json);
   };
   $rootScope.$on("$ionicView.enter", function () {
+    $rootScope.isAgent = false;
+    $rootScope.msgShow = false;
+
     if ($state.current.name == "building") {
       $rootScope.newReqiust = {};
     }
@@ -84,4 +90,24 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
   $rootScope.$on("$ionicView.loaded", function () {
     $rootScope.hideFooter = true;
   });
+  $scope.buildingChosen = function (id) {
+    if (id === "1554263832132") {
+      $rootScope.isAgent = true;
+      if ($rootScope.newReqiust.buildingSurvey === "1554263832151") {
+        $rootScope.msgShow = true;
+      } else {
+        $rootScope.msgShow = false;
+      }
+    } else {
+      $rootScope.isAgent = false;
+      $rootScope.msgShow = false;
+    }
+  };
+  $scope.surveyChosen = function (id) {
+    if (id === "1554263832151") {
+      $rootScope.msgShow = true;
+    } else {
+      $rootScope.msgShow = false;
+    }
+  };
 });

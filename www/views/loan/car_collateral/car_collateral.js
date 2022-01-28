@@ -1,6 +1,4 @@
 angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", function (serverDeferred, $scope, $rootScope, $state, $ionicModal, $ionicPlatform, $timeout) {
-  //Төрөл
-  $scope.carCategory = [];
   //Загвар
   $scope.modelData = [];
   //Хөдөлгүүрийн төрөл
@@ -28,7 +26,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
           $scope.autoCollModal = autoCollModal;
         });
       $timeout(function () {
-        $scope.autoCollModal.show();
+        // $scope.autoCollModal.show();
       }, 100);
       //автомашин барьцаалсан зээлийн хүсэлтийн мэдээлэл
       $rootScope.carCollateralRequestData = {};
@@ -36,23 +34,8 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       $rootScope.carCollateralRequestData.serviceAgreementId = 1554263832132;
       $scope.getbankDataCarColl();
     }
-    $timeout(function () {
-      if ($state.current.name == "car_coll") {
-        if (!isEmpty($rootScope.propJsonAutoColl) && $rootScope.isDanLoginAutoColl) {
-          $scope.autoCollDan.show();
-        } else if (($rootScope.isDanLoginAutoColl && isEmpty($rootScope.propJsonAutoColl)) || ($rootScope.isDanLoginAutoColl && $rootScope.propJsonAutoColl != undefined)) {
-          $rootScope.alert("Таньд автомашин бүртгэлгүй байна", "warning");
-        }
-      }
-    }, 500);
   });
   $scope.getCarCollateralLookupData = function () {
-    if (isEmpty($scope.carCategory)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363794516634" }).then(function (datas) {
-        delete datas.aggregatecolumns;
-        $scope.carCategory = datas;
-      });
-    }
     if (isEmpty($scope.engineTypeData)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363836067418" }).then(function (datas) {
         delete datas.aggregatecolumns;
@@ -89,25 +72,17 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         $scope.carColorData = datas;
       });
     }
-    if (isEmpty($scope.carColorData)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613364305380357" }).then(function (datas) {
-        delete datas.aggregatecolumns;
-        $scope.carFactoryData = datas;
-      });
-    }
-    if (isEmpty($scope.carColorData)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613364325545258" }).then(function (datas) {
-        delete datas.aggregatecolumns;
-        $scope.carModelData = datas;
-      });
-    }
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16433624973471" }).then(function (datas) {
+      delete datas.aggregatecolumns;
+      $rootScope.ownershipSelect = datas;
+    });
   };
 
   $scope.getCarFactoryCategory = function (val) {
     $scope.factoryData = [];
     $rootScope.newCarReq.brandId = "";
 
-    $scope.carFactoryData.map((item) => {
+    $rootScope.carFactoryData.map((item) => {
       if (item.number1 === val) {
         $scope.factoryData.push(item);
         return true;
@@ -119,7 +94,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     $scope.modelData = [];
     $rootScope.newCarReq.markId = "";
 
-    $scope.carModelData.map((item) => {
+    $rootScope.carModelData.map((item) => {
       if (item.parentid === val) {
         $scope.modelData.push(item);
         return true;
@@ -184,7 +159,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     if ($scope.carCollCheckReqiured("step1")) {
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
 
-      $state.go("autoleasing-4");
+      $state.go("autoleasing-2");
     }
   };
   $rootScope.yearsArray = [];
@@ -272,12 +247,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       });
     };
   }
-  $scope.backFromCarCollStep1 = function () {
-    $state.go("home");
-  };
-  $scope.backFromCarCollStep2 = function () {
-    $state.go("car_coll");
-  };
 
   $scope.saveCarCollRequestData = function () {
     console.log("$rootScope.carCollateralRequestData ", $rootScope.carCollateralRequestData);
@@ -391,21 +360,4 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     .then(function (termModalAgreement) {
       $scope.termModalAgreement = termModalAgreement;
     });
-  $ionicModal
-    .fromTemplateUrl("templates/autoCollDan.html", {
-      scope: $scope,
-      animation: "slide-in-up",
-    })
-    .then(function (autoCollDan) {
-      $scope.autoCollDan = autoCollDan;
-    });
-
-  $scope.selectDanAutoColl = function (el) {
-    $rootScope.autoCollDanCarData = el;
-    $rootScope.autoCollDanCarData.importDate = formatDate(el.importDate);
-  };
-  $scope.registerHandAutoColl = function () {
-    $rootScope.autoCollDanCarData = {};
-    $rootScope.isDanLoginAutoColl = false;
-  };
 });

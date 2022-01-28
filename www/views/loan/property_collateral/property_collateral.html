@@ -14,15 +14,12 @@
 							</select>
 						</label>
 						<label class="item item-input item-select form-input-label">
-							<span class="input-label">Орлогоо нотлох эсэх</span>
+							<span class="input-label">Орлого нотлох эсэх</span>
 							<select ng-model="$root.newReqiust.proveIncome" class="custom-form-input-select">
 								<option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
 									{{loc.name}}</option>
 							</select>
 						</label>
-						<div class="slide-animate-container">
-							<div ng-include="$root.template.mobiletemplatepath"></div>
-						</div>
 					</div>
 				</div>
 			</div>

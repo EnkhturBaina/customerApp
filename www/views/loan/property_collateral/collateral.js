@@ -34,7 +34,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         $rootScope.alert("Барьцаалах хөрөнгийн төрөл сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
-        $rootScope.alert("Орлогоо нотлох эсэх сонгоно уу", "warning");
+        $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
         return false;
       } else {
         return true;
@@ -220,7 +220,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
   $scope.$on("$ionicView.enter", function () {
     if ($state.current.name == "property_collateral") {
       $rootScope.newReqiust = {};
-      console.log("1");
     }
     if ($state.current.name == "property_collateral2") {
       if ($state.current.name == "estate") {
@@ -240,7 +239,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         }
         if ("mobilenumber" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.mobilenumber)) {
           $rootScope.danCustomerData.mobilenumber = $rootScope.loginUserInfo.mobilenumber;
-          console.log($rootScope.danCustomerData.mobilenumber);
         }
         if ("email" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.email)) {
           $rootScope.danCustomerData.email = $rootScope.loginUserInfo.email;

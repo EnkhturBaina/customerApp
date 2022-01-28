@@ -1901,3 +1901,6 @@ input[type="number"] {
 .white-space-normal {
   white-space: normal !important;
 }
+.bg-fff {
+  background: #fff !important;
+}

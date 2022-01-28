@@ -44,7 +44,7 @@
 }
 .car-collateral-img-list {
   border: 0px;
-  padding-top: 0px;
+  padding-top: 15px;
   padding-left: 0px;
   padding-right: 0px;
   background: none;
@@ -142,11 +142,11 @@
   margin: 0px;
 }
 .car-collateral-contant-card {
-  background-color: #fff;
-  padding: 15px 0px;
   border-radius: 10px;
-  box-shadow: 1px 1px 3px 0px rgb(0 0 0 / 29%);
-  margin: 10px 20px;
+  padding: 20px;
+  margin: 20px 20px 0px 20px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
 }
 .car-coll-req {
   color: red;
@@ -190,4 +190,7 @@
   white-space: normal !important;
   margin: 0 auto;
   text-align: center;
+}
+#nationalNumber {
+  background-color: #fff !important;
 }
