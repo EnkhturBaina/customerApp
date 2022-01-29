@@ -371,6 +371,7 @@ var app = angular
             text: "Тийм",
             type: "button-confirm",
             onTap: function () {
+              console.log("A");
               $rootScope.loginUserInfo = undefined;
               localStorage.removeItem("loginUserInfo");
               localStorage.removeItem("profilePictureSideMenu");
@@ -383,7 +384,7 @@ var app = angular
               localStorage.removeItem("otherGoodsMaxId");
 
               $rootScope.profilePictureSideMenu = "";
-              $state.go("home");
+              location.reload();
             },
           },
         ],

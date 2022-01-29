@@ -160,12 +160,12 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
   $scope.onTimer = function () {
     var timeleft = 30;
     var downloadTimer = setInterval(function () {
-      if (timeleft <= 0) {
-        clearInterval(downloadTimer);
-        document.getElementById("resendBtn").innerHTML = "Дахин код илгээх";
-        document.getElementById("resendBtn").disabled = false;
-      } else {
-        if ($state.current.name == "reset_password") {
+      if ($state.current.name == "reset_password") {
+        if (timeleft <= 0) {
+          clearInterval(downloadTimer);
+          document.getElementById("resendBtn").innerHTML = "Дахин код илгээх";
+          document.getElementById("resendBtn").disabled = false;
+        } else {
           document.getElementById("resendBtn").innerHTML = "Дахин код илгээх " + timeleft;
           document.getElementById("resendBtn").disabled = true;
         }

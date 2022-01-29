@@ -128,6 +128,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
                       //Login цонхноос явуулах үед Login хийх
                       $rootScope.HideLoader();
                       $state.go("home");
+                      location.reload();
                     }
                   }
                   if ($rootScope.isRemmberUsername && !isEmpty($scope.user.username)) {

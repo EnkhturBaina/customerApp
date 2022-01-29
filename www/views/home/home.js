@@ -1,4 +1,4 @@
-﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform, $timeout, $state, $http) {
+﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform, $timeout, $state) {
   // $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
   // $rootScope.imagePath = "https://dev.veritech.mn/";
   $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
@@ -105,6 +105,7 @@
   // console.log("basket", basket);
   console.log("localStorage", localStorage);
   localStorage.setItem("isSupplierLoan", "no");
+
   if (!isEmpty(basket)) $rootScope.basketData = JSON.parse(basket);
   else $rootScope.basketData = [];
 
@@ -137,9 +138,9 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1554263831966" }).then(function (response) {
       $rootScope.isColl = response;
     });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363794516634" }).then(function (response) {
-      $rootScope.carCategoryPreLoan = response;
-    });
+    // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1613363794516634" }).then(function (response) {
+    //   $rootScope.carCategoryPreLoan = response;
+    // });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1628487627246231" }).then(function (response) {
       if (!isEmpty(response)) {
         $rootScope.suppliersWithCategory = response.filter((value) => Object.keys(value).length !== 0);
@@ -165,11 +166,11 @@
         $rootScope.educationData = response.filter((value) => Object.keys(value).length !== 0);
       }
     });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1634710517519245" }).then(function (response) {
-      if (!isEmpty(response)) {
-        $rootScope.ecoProductType = response.filter((value) => Object.keys(value).length !== 0);
-      }
-    });
+    // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1634710517519245" }).then(function (response) {
+    //   if (!isEmpty(response)) {
+    //     $rootScope.ecoProductType = response.filter((value) => Object.keys(value).length !== 0);
+    //   }
+    // });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1614229736963117" }).then(function (response) {
       $rootScope.supplierCategory = response;
     });
@@ -180,9 +181,9 @@
       $rootScope.allSupplierList = response;
       $rootScope.suppcategoryStore = response;
     });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16347033464591" }).then(function (response) {
-      $rootScope.supplierHaveSubCategory = response;
-    });
+    // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16347033464591" }).then(function (response) {
+    //   $rootScope.supplierHaveSubCategory = response;
+    // });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1634724795622863" }).then(function (response) {
       $rootScope.termContent = response[0].templatebody;
     });
@@ -260,6 +261,7 @@
     return false;
   }, 101);
   $rootScope.profilePictureSideMenu = localStorage.getItem("profilePictureSideMenu");
+
   $scope.$on("$ionicView.loaded", function (ev, info) {
     document.addEventListener("offline", onOffline, false);
 
@@ -293,31 +295,47 @@
         localStorage.removeItem("loginUserInfo");
         localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
       });
-    }
+      console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+      if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
+        $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
+      }
 
-    console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
-    if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
-      $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
-    }
+      $rootScope.displayMinPayment = 0;
+      $rootScope.maxMonth = 0;
 
-    $rootScope.displayMinPayment = 0;
-    $rootScope.maxMonth = 0;
-    //dc_bank_product table -с зээлийн бүтээгдэхүүн бүрийн max зээлийн хугацаа авах
-    if (isEmpty($rootScope.bankproductDtl)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621843239702927" }).then(function (response) {
-        $rootScope.bankproductDtl = response;
-      });
-    }
-    //dc_bank_product table -с зээлийн бүтээгдэхүүн бүрийн min урьдчилгаа авах
-    if (isEmpty($rootScope.bankProductMinPayment)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1621921912497648" }).then(function (response) {
-        $rootScope.bankProductMinPayment = response;
-      });
-    }
-    if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
-    $ionicSlideBoxDelegate.update();
+      if (isEmpty($rootScope.allBankList)) $scope.getAllBankList();
+      $ionicSlideBoxDelegate.update();
 
-    $scope.getProfileLookupData();
+      $scope.getProfileLookupData();
+      //App version check
+      $timeout(function () {
+        if (!isEmpty($rootScope.ERPappVersion) && $rootScope.zeelmeAppVersion === $rootScope.ERPappVersion) {
+        } else {
+          // console.log($rootScope.ERPappVersion, $rootScope.zeelmeAppVersion);
+          $rootScope.checkisUpdate();
+        }
+      }, 2000);
+      $rootScope.hideFooter = false;
+
+      //Render хийгдсэн байхад бүх Slide давхардаад байгааг дахин render хийх
+      $timeout(function () {
+        if (!$scope.slideIndex) {
+          $scope.slideIndex = 0;
+        }
+        $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
+        $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").slide($scope.slideIndex);
+      }, 100);
+
+      $ionicSlideBoxDelegate.update();
+      //Хувааж төлөх зээл эсэх
+      $rootScope.isSupLoan = false;
+      $timeout(function () {
+        $rootScope.HideLoader();
+      }, 2000);
+    } else {
+      $state.go("login");
+      $rootScope.HideLoader();
+    }
   });
   $rootScope.checkisUpdate = function () {
     if (!isEmpty($scope.alertPopup)) {
@@ -349,31 +367,7 @@
     });
   };
   $scope.$on("$ionicView.enter", function () {
-    //App version check
-    $timeout(function () {
-      if (!isEmpty($rootScope.ERPappVersion) && $rootScope.zeelmeAppVersion === $rootScope.ERPappVersion) {
-      } else {
-        // console.log($rootScope.ERPappVersion, $rootScope.zeelmeAppVersion);
-        $rootScope.checkisUpdate();
-      }
-    }, 2000);
     $rootScope.hideFooter = false;
-
-    //Render хийгдсэн байхад бүх Slide давхардаад байгааг дахин render хийх
-    $timeout(function () {
-      if (!$scope.slideIndex) {
-        $scope.slideIndex = 0;
-      }
-      $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").update();
-      $ionicSlideBoxDelegate.$getByHandle("suppliersDelegate").slide($scope.slideIndex);
-    }, 100);
-
-    $ionicSlideBoxDelegate.update();
-    //Хувааж төлөх зээл эсэх
-    $rootScope.isSupLoan = false;
-    $timeout(function () {
-      $rootScope.HideLoader();
-    }, 2000);
   });
 
   var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));
