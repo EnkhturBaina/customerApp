@@ -56,6 +56,7 @@ angular.module("suppliers-search.Ctrl", []).controller("suppliers-searchCtrl", f
   $scope.showHideOption = function () {
     $scope.isShowOption = !$scope.isShowOption;
     $("#supplier-search-ion-list").toggle(200, function () {});
+    $("#supplier-search-ion-list").toggleClass("active-ion-list");
   };
 
   //Ангилалаар шүүх

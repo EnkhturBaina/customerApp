@@ -265,7 +265,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         $rootScope.alert("Барьцаалах автомашины төрөл сонгоно уу", "warning");
         return false;
       }
-      //  else if (isEmpty($rootScope.newCarReq.ownershipTypeId) && !$rootScope.isDanLoginAutoColl) {
+      // else if (isEmpty($rootScope.newCarReq.ownershipTypeId) && !$rootScope.isDanLoginAutoColl) {
       //   $rootScope.alert("Автомашины өмчлөл сонгоно уу", "warning");
       //   return false;
       // } else if (isEmpty($rootScope.newCarReq.nationalNumber) && !$rootScope.isDanLoginAutoColl) {
@@ -286,9 +286,20 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       // } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
       //   $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
       //   return false;
-      // }
-      //  else if (isEmpty($rootScope.newCarReq.itemPic)) {
-      //   $rootScope.alert("Машины зураг оруулна уу", "warning");
+      // } else if (isEmpty($rootScope.newCarReq.itemPic)) {
+      //   $rootScope.alert("Машины гэрчилгээний зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.itemPic2)) {
+      //   $rootScope.alert("Машины нүүрэн талын зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.itemPic3)) {
+      //   $rootScope.alert("Машины баруун талын зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.itemPic4)) {
+      //   $rootScope.alert("Машины зүүн талын зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.itemPic5)) {
+      //   $rootScope.alert("Машины хойд талын зураг оруулна уу", "warning");
       //   return false;
       // }
       else {
