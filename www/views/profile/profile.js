@@ -363,16 +363,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
     },
   });
-  // $scope.addDealBank = function () {
-  //   $scope.customerDealBank.dim1 = $scope.loginUserInfo.customerid;
-  //   serverDeferred.requestFull("dcApp_deal_bank_customer_001", $scope.customerDealBank).then(function (response) {
-  //     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1604389075984789", id: response[1].id }).then(function (response) {
-  //       var appendEl = '<div class="col added-deal-bank">' + '<div class="deal-bank-remove">-</div>' + "<img src=" + $rootScope.imagePath + response[0].banklogo + " />" + "<p>" + response[0].departmentname + "</p>" + "</div>";
-  //       $(appendEl).insertBefore(".profile-bank-list select:last");
-  //     });
-  //   });
-  //   $scope.customerDealBank.dim2 = null;
-  // };
+
   $rootScope.backFromProfile = function () {
     $state.go("home");
   };
@@ -384,8 +375,4 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $state.go("home");
     }
   });
-  // $ionicPlatform.registerBackButtonAction(function (e) {
-  //   e.preventDefault();
-  //   $state.go("home");
-  // }, 101);
 });

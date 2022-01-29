@@ -26,10 +26,6 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
         $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
         return false;
       }
-      // else if (isEmpty($rootScope.danIncomeData.incometypeid)) {
-      //   $rootScope.alert("Орлогын төрөл сонгоно уу", "warning");
-      //   return false;
-      // }
       else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
         $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;

@@ -1184,7 +1184,7 @@
         $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
         return false;
       }
-      // else if (isEmpty($rootScope.danIncomeData.incometypeid)) {
+      // else if (isEmpty($rootScope.danIncomeData.incometypeid) && $rootScope.isIncomeConfirm) {
       //   $rootScope.alert("Орлогын төрөл сонгоно уу", "warning");
       //   return false;
       // }

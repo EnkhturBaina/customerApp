@@ -398,4 +398,13 @@
       $rootScope.alert("Тун удахгүй", "warning");
     }
   };
+  $rootScope.incomeConfirm = function (id) {
+    if (id === "1554263832151") {
+      $rootScope.isIncomeConfirm = false;
+    } else if (id === "1554263832132") {
+      $rootScope.isIncomeConfirm = true;
+    } else {
+      $rootScope.isIncomeConfirm = "not";
+    }
+  };
 });

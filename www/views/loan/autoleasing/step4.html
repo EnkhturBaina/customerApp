@@ -26,16 +26,16 @@
                             <input type="text" id="customerFirstNameDan" placeholder="" name="" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danCustomerData.firstname" ng-change="replaceCyr2Auto($root.danCustomerData.firstname)" ng-keyup="hideKeyboard($event)" ng-disabled="$root.firstNameDanDisable" select-on-click />
                             <div id="firstNameErrorDan" class="profile-input-name-error">Та нэрээ крилл үсгээр оруулна уу</div>
                         </label>
-                        <span class="vxx-title step5-mid-title">Таны НДШ-р баталгаажсан орлого</span>
-                        <label class="item item-input item-stacked-label form-input-label">
+                        <label class="item item-input item-stacked-label form-input-label" ng-if="$root.isIncomeConfirm">
                             <p class="input-label" style="margin: 0;">Таны сарын орлого</p>
                             <input type="tel" placeholder="" name="" id="customerLastNameDan" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-disabled="$root.monthlyIncomeDisable" ng-model="$root.danIncomeData.monthlyincome" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
                         </label>
-                        <span class="vxx-title step5-mid-title">Та баталгаажих орлогыг энд оруулж болно</span>
+                        <span class="vxx-title step5-mid-title" ng-if="$root.isIncomeConfirm">Таны НДШ-р баталгаажсан орлого</span>
                         <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Сарын бусад орлого </p>
+                            <p class="input-label" style="margin: 0;" ng-if="$root.isIncomeConfirm">Сарын бусад орлого </p>
                             <input type="tel" placeholder="" name="" id="customerLastNameDan" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danIncomeData.totalincomehousehold" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
                         </label>
+                        <span class="vxx-title step5-mid-title" ng-if="$root.isIncomeConfirm">Та баталгаажих орлогыг энд оруулж болно</span>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Төлж байгаа зээлүүдийн сарын төлбөр</p>
                             <input type="tel" placeholder="" name="" id="customerLastNameDan" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danIncomeData.monthlypayment" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />

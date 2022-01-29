@@ -68,7 +68,7 @@
                             <p class="input-label" style="margin: 0;">И-мэйл хаяг</p>
                             <input type="text" placeholder="" name="" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danCustomerData.email" ng-keyup="hideKeyboard($event)" select-on-click />
                         </label>
-                        <label class="item item-input item-select form-input-label">
+                        <label class="item item-input item-select form-input-label" ng-if="$root.isIncomeConfirm">
                             <p class="input-label" style="margin: 0;">Орлогын төрөл</p>
                             <select class="custom-form-input-select" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid" ng-change="getbankData()"></select>
                         </label>

@@ -49,15 +49,11 @@
     <script src="views/other_goods/add_other_goods.js"></script>
     <script src="views/reset_password/reset_password.js"></script>
     <script src="views/contact/contact.js"></script>
-    <!-- <script src="views/loan_calculator/loan_calculator.js"></script> -->
     <!-- <script src="views/settings/settings.js"></script> -->
-    <!-- <script src="views/carlist/carlist.js"></script> -->
     <!-- <script src="views/qr/qr.js"></script> -->
-    <!-- <script src="views/trend/trend.js"></script> -->
     <!-- <script src="views/car/car.js"></script> -->
     <!-- <script src="views/basket/basket.js"></script> -->
     <!-- <script src="views/loan/business_loan/business_loan.js"></script> -->
-    <!-- <script src="views/search/search.js"></script> -->
     <!-- dcApp_profile_dv_002
     dcApp_preLoan_001 -->
     <script src="views/notif/notif.js"></script>
@@ -89,7 +85,6 @@
             </div>
             <div class="side-menu-items side-menu-user-name" ng-if="!$root.loginUserInfo|isEmpty">{{sidebarUserName}}</div>
             <div class="side-menu-items" ng-click="toggleSideMenu();hideShowFooter()" ng-if="!$root.loginUserInfo|isEmpty" ui-sref="profile"><i class="icon fa fa-user-o"></i>Миний мэдээлэл</div>
-            <!-- <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="loan_calculator"><i class="icon fa fa-calculator"></i>Зээлийн тооцоолуур</div> -->
             <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="intro"><i class="icon fa fa-sticky-note-o"></i>Хэрэглэх заавар</div>
             <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="term"><i class="icon fa fa-question-circle-o"></i>Үйлчилгээний нөхцөл</div>
             <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="contact"><i class="icon fa fa-phone"></i>Холбоо барих</div>

@@ -1,39 +1,3 @@
-.car-col-content {
-  /* margin-bottom: 50px; */
-  background: #f8f8fe;
-  bottom: 0px;
-}
-.car-collateral-list {
-  height: 100% !important;
-}
-
-.car-collateral-label {
-  width: 100%;
-  border-left: none;
-  border-right: none;
-  background: none;
-  padding: 5px;
-  border-bottom-width: 1px;
-  border-color: #ccc;
-  border-top-width: 0px;
-}
-.car-collateral-label select {
-  padding: 12px 20px 12px 5px !important;
-}
-.car-collateral-label p {
-  color: #606060 !important;
-  margin: 5px 0;
-}
-.car-collateral-label input {
-  text-align: right;
-  padding-right: 0px !important;
-  color: #4b5180 !important;
-  font-weight: bold;
-  width: 30%;
-  position: absolute;
-  right: 0;
-  background-color: #fff !important;
-}
 .item-select:after {
   right: 5px !important;
 }
@@ -57,37 +21,6 @@
 .bottom-bank-container span {
   letter-spacing: -0.5px;
 }
-.car-step2-card {
-  padding: 10px 20px;
-  margin: 20px 15px 0px 15px;
-  background-color: #fff !important;
-  margin: 70px 20px 10px 20px !important;
-}
-.car-step2-card select {
-  width: 100%;
-  margin: 0 12px 0 auto;
-  float: right;
-  border: none;
-  border-color: #d5d5d5;
-  border-radius: 5px;
-  padding: 7px 0px 7px 30px;
-  color: #606060;
-  position: absolute;
-  right: 0;
-  z-index: 99;
-  background: transparent !important;
-}
-.car-step2-card select option {
-  text-align: right !important;
-}
-.step2-card-span {
-  justify-content: center;
-  color: #4b5180;
-  font-size: 12px;
-  text-transform: uppercase;
-  display: flex;
-  font-weight: bold;
-}
 .step2-bank-container img {
   display: block;
   margin-left: auto;
@@ -100,13 +33,8 @@
   align-items: center;
   font-size: 12px;
 }
-#car-collateral2 > .scroll {
-}
 .car-collateral-content {
   height: 100%;
-}
-.car-col-step2-back ion-header-bar {
-  background: transparent !important;
 }
 #overlay {
   position: fixed;
@@ -138,18 +66,12 @@
   text-align: center;
   padding-top: 2px;
 }
-.car-coll-switch {
-  margin: 0px;
-}
 .car-collateral-contant-card {
   border-radius: 10px;
   padding: 20px;
   margin: 20px 20px 0px 20px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
-}
-.car-coll-req {
-  color: red;
 }
 .wrap-text-car-col {
   white-space: pre-wrap !important;
@@ -160,36 +82,6 @@
 }
 .car-coll-img-row img {
   width: 100% !important;
-}
-.item-info-dan li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #a2a7b5;
-  border-bottom: 1px solid #cccbcb78;
-  margin: 8px 0 8px 0 !important;
-  padding: 5px;
-}
-.item-info-dan li span {
-  background-color: transparent;
-  color: #4b5180;
-  z-index: 1;
-  display: inline-block;
-  padding: 3px 8px;
-  min-width: 10px;
-  border-radius: 10px;
-  vertical-align: baseline;
-  text-align: center;
-  white-space: nowrap;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 16px;
-}
-.car-col-img-title {
-  color: #a2a7b5 !important;
-  white-space: normal !important;
-  margin: 0 auto;
-  text-align: center;
 }
 #nationalNumber {
   background-color: #fff !important;

@@ -23,12 +23,8 @@ var app = angular
     "reset_password.Ctrl",
     "preLoan.Ctrl",
     // "settings.Ctrl",
-    // "loan_calculator.Ctrl",
-    // "carlist.Ctrl",
-    // "search.Ctrl",
     // "business_loan.Ctrl",
     // "basket.Ctrl",
-    // "trend.Ctrl",
     // "qr.Ctrl",
     // "car.Ctrl",
     "notif.Ctrl",
@@ -98,11 +94,6 @@ var app = angular
       templateUrl: "views/intro/intro.html",
       controller: "introCtrl",
     });
-    // $stateProvider.state("search", {
-    //   url: "/views/search",
-    //   templateUrl: "views/search/search.html",
-    //   controller: "searchCtrl",
-    // });
     $stateProvider.state("profile", {
       url: "/views/profile",
       templateUrl: "views/profile/profile.html",
@@ -227,20 +218,10 @@ var app = angular
       templateUrl: "views/car/car-info.html",
       controller: "carinfoCtrl",
     });
-    // $stateProvider.state("carlist", {
-    //   url: "/views/carlist",
-    //   templateUrl: "views/carlist/carlist.html",
-    //   controller: "carlistCtrl",
-    // });
     // $stateProvider.state("qr", {
     //   url: "/views/qr",
     //   templateUrl: "views/qr/qr.html",
     //   controller: "qrCtrl",
-    // });
-    // $stateProvider.state("trend", {
-    //   url: "/views/trend",
-    //   templateUrl: "views/trend/trend.html",
-    //   controller: "trendCtrl",
     // });
     $stateProvider.state("otherGoods", {
       url: "/views/otherGoods",
@@ -262,11 +243,6 @@ var app = angular
       templateUrl: "views/reset_password/reset_password.html",
       controller: "reset_passwordCtrl",
     });
-    // $stateProvider.state("loan_calculator", {
-    //   url: "/views/loan_calculator",
-    //   templateUrl: "views/loan_calculator/loan_calculator.html",
-    //   controller: "loan_calculatorCtrl",
-    // });
     $stateProvider.state("contact", {
       url: "/views/contact",
       templateUrl: "views/contact/contact.html",
