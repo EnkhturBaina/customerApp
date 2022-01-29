@@ -65,6 +65,7 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
           });
 
           $rootScope.maxMonth = Math.max(...$rootScope.months);
+          isEmpty($rootScope.months) ? ($rootScope.maxMonth = 0) : "";
         }
       }
     });

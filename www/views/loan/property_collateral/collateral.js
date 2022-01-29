@@ -222,11 +222,9 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       $rootScope.newReqiust = {};
     }
     if ($state.current.name == "property_collateral2") {
-      if ($state.current.name == "estate") {
-        $timeout(function () {
-          $scope.getbankDataProperty("forced");
-        }, 200);
-      }
+      $timeout(function () {
+        $scope.getbankDataProperty("forced");
+      }, 200);
       $rootScope.danCustomerData = {};
       $rootScope.danIncomeData = {};
       if (!isEmpty($rootScope.loginUserInfo)) {

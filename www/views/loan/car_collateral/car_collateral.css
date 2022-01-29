@@ -12,6 +12,7 @@
   padding-left: 0px;
   padding-right: 0px;
   background: none;
+  padding-bottom: 0px !important;
 }
 .bottom-bank-container img {
   height: 30px;
@@ -34,7 +35,7 @@
   font-size: 12px;
 }
 .car-collateral-content {
-  height: 100%;
+  height: calc(100% - 50px);
 }
 #overlay {
   position: fixed;
@@ -85,4 +86,17 @@
 }
 #nationalNumber {
   background-color: #fff !important;
+}
+.car-coll-file-container {
+  border: 1px dashed #ccc;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  margin: 10px 0 !important;
+}
+.car-coll-selected-img {
+  width: 40px !important;
+  height: 80% !important;
+  border-radius: 8px !important;
+  top: 5px !important;
+  left: 7px !important;
 }

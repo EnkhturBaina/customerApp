@@ -64,63 +64,53 @@
                         </label>
                     </div>
                     <div class="item car-collateral-img-list">
-                        <div class="row car-coll-img-row">
-                            <div class="col col-33" ng-click="sourceSelectOn('itemPic')">
-                                <div ng-if="!$root.newCarReq.itemPic" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
-                                    +
-                                </div>
-                                <img ng-if="$root.newCarReq.itemPic" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic}}" width="100px" height="75px" />
-                                <p class="car-coll-img-p">Ерөнхий</p>
-                            </div>
-                            <div class="col col-33" ng-click="sourceSelectOn('itemPic2')">
-                                <div ng-if="!$root.newCarReq.itemPic2" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
-                                    +
-                                </div>
-                                <img ng-if="$root.newCarReq.itemPic2" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic2}}" width="100px" height="75px" />
-                                <p class="car-coll-img-p">Урд тал</p>
-                            </div>
-                            <div class="col col-33" ng-click="sourceSelectOn('itemPic3')">
-                                <div ng-if="!$root.newCarReq.itemPic3" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
-                                    +
-                                </div>
-                                <img ng-if="$root.newCarReq.itemPic3" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic3}}" width="100px" height="75px" />
-                                <p class="car-coll-img-p">Баруун</p>
-                            </div>
+                        <div class="list card car-coll-file-container" ng-click="sourceSelectOn('itemPic')">
+                            <a class="item item-icon-left ion-color-big-text" href="#">
+                                <i class="icon ion-plus" ng-if="!$root.newCarReq.itemPic"></i>
+                                <img class="icon car-coll-selected-img" ng-if="$root.newCarReq.itemPic" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic}}" width="100px" height="75px" />
+                                <span>Машины гэрчилгээний зураг</span>
+                            </a>
                         </div>
-                        <div class="row car-coll-img-row">
-                            <div class="col col-33" ng-click="sourceSelectOn('itemPic4')">
-                                <div ng-if="!$root.newCarReq.itemPic4" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
-                                    +
-                                </div>
-                                <img ng-if="$root.newCarReq.itemPic4" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic4}}" width="100px" height="75px" />
-                                <p class="car-coll-img-p">Зүүн</p>
-                            </div>
-                            <div class="col col-33" ng-click="sourceSelectOn('itemPic5')">
-                                <div ng-if="!$root.newCarReq.itemPic5" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
-                                    +
-                                </div>
-                                <img ng-if="$root.newCarReq.itemPic5" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic5}}" width="100px" height="75px" />
-                                <p class="car-coll-img-p wrap-text-car-col">Арлын дугаар</p>
-                            </div>
-                            <div class="col col-33" ng-click="sourceSelectOn('itemPic6')">
-                                <div ng-if="!$root.newCarReq.itemPic6" width="100px" height="75px" style="border-radius: 10px; border: 1px dashed #ccc; height: 88px; text-align: center; font-size: 46px; color: #ccc; line-height: 86px">
-                                    +
-                                </div>
-                                <img ng-if="$root.newCarReq.itemPic6" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic6}}" width="100px" height="75px" />
-                                <p class="car-coll-img-p">Салон</p>
-                            </div>
+                        <div class="list card car-coll-file-container" ng-click="sourceSelectOn('itemPic2')">
+                            <a class="item item-icon-left ion-color-big-text" href="#">
+                                <i class="icon ion-plus" ng-if="!$root.newCarReq.itemPic2"></i>
+                                <img class="icon car-coll-selected-img" ng-if="$root.newCarReq.itemPic2" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic2}}" width="100px" height="75px" />
+                                <span>Машины нүүрэн талын зураг</span>
+                            </a>
+                        </div>
+                        <div class="list card car-coll-file-container" ng-click="sourceSelectOn('itemPic3')">
+                            <a class="item item-icon-left ion-color-big-text" href="#">
+                                <i class="icon ion-plus" ng-if="!$root.newCarReq.itemPic3"></i>
+                                <img class="icon car-coll-selected-img" ng-if="$root.newCarReq.itemPic3" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic3}}" width="100px" height="75px" />
+                                <span>Машины баруун талын зураг</span>
+                            </a>
+                        </div>
+                        <div class="list card car-coll-file-container" ng-click="sourceSelectOn('itemPic4')">
+                            <a class="item item-icon-left ion-color-big-text" href="#">
+                                <i class="icon ion-plus" ng-if="!$root.newCarReq.itemPic4"></i>
+                                <img class="icon car-coll-selected-img" ng-if="$root.newCarReq.itemPic4" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic4}}" width="100px" height="75px" />
+                                <span>Машины зүүн талын зураг</span>
+                            </a>
+                        </div>
+                        <div class="list card car-coll-file-container" ng-click="sourceSelectOn('itemPic5')">
+                            <a class="item item-icon-left ion-color-big-text" href="#">
+                                <i class="icon ion-plus" ng-if="!$root.newCarReq.itemPic5"></i>
+                                <img class="icon car-coll-selected-img" ng-if="$root.newCarReq.itemPic5" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic5}}" width="100px" height="75px" />
+                                <span>Машины хойд талын зураг</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="bank-container">
-                <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
-                <img class="tooltip" ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" title="{{bank.department_name}}" animation="fade" />
+        </div>
+        <div class="bank-container">
+            <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
+            <img class="tooltip" ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" title="{{bank.department_name}}" animation="fade" />
 
-            </div>
-            <ion-footer class="bottom-footer" style="margin-bottom: 50px;">
-                <button class="button btn single-button" id="Next" ng-click="saveCarCol()">Үргэлжлүүлэх</button>
-            </ion-footer>
+        </div>
+        <ion-footer class="bottom-footer" style="margin-bottom: 50px;">
+            <button class="button btn single-button" id="Next" ng-click="saveCarCol()">Үргэлжлүүлэх</button>
+        </ion-footer>
         </div>
     </ion-content>
 </ion-view>

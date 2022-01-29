@@ -22,14 +22,16 @@
                             <p class="input-label" style="margin: 0;">Авах автомашины үнэ</p>
                             <input inputmode="numeric" id="carPrice" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.carPrice" ng-blur="getbankData()" thousand-separator select-on-click>
                         </label>
-                        <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Төлөх урьдчилгаа төлбөр</p>
-                            <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-change="calcLoanAmount();" ng-blur="getbankData()" ng-click="removeAdvancePayment()" thousand-separator select-on-click>
-                        </label>
-                        <div ng-if="!$root.collTrueStep2" class="vxx-title-container">
-                            <span class="vxx-title">Тухайн зээлийн урьдчилгаа багадаа <br />
-                                <span class="step2-valid-text-bold">{{$root.displayMinPayment|formatNumber}}</span> байх боломжтой
-                            </span>
+                        <div ng-if="!$root.isCarColl">
+                            <label class="item item-input item-stacked-label form-input-label">
+                                <p class="input-label" style="margin: 0;">Төлөх урьдчилгаа төлбөр</p>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-change="calcLoanAmount();" ng-blur="getbankData()" ng-click="removeAdvancePayment()" thousand-separator select-on-click>
+                            </label>
+                            <div ng-if="!$root.collTrueStep2" class="vxx-title-container">
+                                <span class="vxx-title">Тухайн зээлийн урьдчилгаа багадаа <br />
+                                    <span class="step2-valid-text-bold">{{$root.displayMinPayment|formatNumber}}</span> байх боломжтой
+                                </span>
+                            </div>
                         </div>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>

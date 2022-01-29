@@ -254,12 +254,11 @@
       }
       json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
     } else if ($rootScope.requestType == "autoColl") {
-      // console.log("$rootScope.carCollateralRequestData", $rootScope.carCollateralRequestData);
       //Авто Барьцаат лизинг банк шүүлт
       json.type = "carLoanFilter";
-      json.totalLoan = $rootScope.carCollateralRequestData.loanAmount;
-      json.location = isEmpty($rootScope.carCollateralRequestData.locationId) ? 0 : $rootScope.carCollateralRequestData.locationId;
-      json.month = isEmpty($rootScope.carCollateralRequestData.loanMonth) ? 0 : $rootScope.carCollateralRequestData.loanMonth;
+      json.totalLoan = $rootScope.newReqiust.getLoanAmount;
+      json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
+      json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
     } else if ($rootScope.requestType == "estate") {
       //ҮХХ Барьцаат лизинг банк шүүлт
       json.type = "estateLoanFilter";
@@ -1137,23 +1136,40 @@
     if (param == "step1") {
       if (isEmpty($rootScope.newReqiust.choose)) {
         $rootScope.alert("Автомашинаа сонгосон эсэх сонгоно уу", "warning");
+        return false;
       } else if (isEmpty($rootScope.carProduct.categoryId)) {
         $rootScope.alert("Авах автомашины төрөл сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.carProduct.productTypeId) && $scope.isSelected0001 === "yes") {
+      } else if ($scope.isSelected0001 === "yes" && isEmpty($rootScope.carProduct.productTypeId)) {
         $rootScope.alert("Автомашины төлөв сонгоно уу", "warning");
-      } else if (isEmpty($rootScope.carProduct.itemCode) && $scope.isSelected0001 === "0001") {
+        return false;
+      } else if ($scope.isSelected0001 === "0001" && isEmpty($rootScope.carProduct.itemCode)) {
         $rootScope.alert("Автомашины кодоо оруулна уу", "warning");
-      } else if (isEmpty($rootScope.carProduct.factoryId) && $scope.isSelected0001 !== "no") {
+        return false;
+      } else if ($scope.isSelected0001 === "0001" && $rootScope.carProduct.itemCode.length < 8) {
+        $rootScope.alert("Автомашины кодоо бүрэн оруулна уу", "warning");
+        return false;
+      } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.factoryId)) {
         $rootScope.alert("Үйлдвэр сонгоно уу", "warning");
-      } else if (isEmpty($rootScope.carProduct.modelId) && $scope.isSelected0001 !== "no") {
+        return false;
+      } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.modelId)) {
         $rootScope.alert("Марк сонгоно уу", "warning");
-      } else if (isEmpty($rootScope.carProduct.yearEntryMongolia) && $scope.isSelected0001 !== "no") {
+        return false;
+      } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.yearEntryMongolia)) {
         $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
-      } else if (isEmpty($rootScope.carProduct.yearProduction) && $scope.isSelected0001 !== "no") {
+        return false;
+      } else if ($scope.isSelected0001 !== "no" && $rootScope.carProduct.yearEntryMongolia.length < 4) {
+        $rootScope.alert("Орж ирсэн он бүрэн оруулна уу", "warning");
+        return false;
+      } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.yearProduction)) {
         $rootScope.alert("Үйлдвэрлэсэн он оруулна уу", "warning");
+        return false;
+      } else if ($scope.isSelected0001 !== "no" && $rootScope.carProduct.yearProduction.length < 4) {
+        $rootScope.alert("Үйлдвэрлэсэн он бүрэн оруулна уу", "warning");
+        return false;
       } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
         $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
+        return false;
       } else {
         return true;
       }
@@ -1161,7 +1177,7 @@
       if (isEmpty($rootScope.newReqiust.carPrice) && $rootScope.is0001Price) {
         $rootScope.alert("Авах автомашины үнэ оруулна уу", "warning");
         return false;
-      } else if ((isEmpty($rootScope.newReqiust.advancePayment) && $rootScope.newReqiust.collateralConditionId == "1554263832151") || (isEmpty($rootScope.newReqiust.advancePayment) && !$scope.isCollShow)) {
+      } else if ((isEmpty($rootScope.newReqiust.advancePayment) && $rootScope.newReqiust.collateralConditionId == "1554263832151" && !$rootScope.isCarColl) || (isEmpty($rootScope.newReqiust.advancePayment) && !$scope.isCollShow && !$rootScope.isCarColl)) {
         $rootScope.alert("Урьдчилгаа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.getLoanAmount)) {
@@ -1223,10 +1239,10 @@
       } else if (isEmpty($rootScope.danCustomerData.firstname)) {
         $rootScope.alert("Өөрийн нэрээ оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danIncomeData.monthlyincome)) {
+      } else if (isEmpty($rootScope.danIncomeData.monthlyincome) && $rootScope.isIncomeConfirm) {
         $rootScope.alert("Сарын орлогоо оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danIncomeData.totalincomehousehold)) {
+      } else if (isEmpty($rootScope.danIncomeData.totalincomehousehold) && $rootScope.isIncomeConfirm) {
         $rootScope.alert("Сарын бусад орлогоо оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danIncomeData.monthlypayment)) {
@@ -1316,6 +1332,7 @@
   $scope.$on("$ionicView.enter", function () {
     var firstReq = localStorage.getItem("firstReq");
     var local = localStorage.getItem("requestType");
+    $rootScope.isCarColl = false;
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "auto") {
       $rootScope.is0001Price = true;
@@ -1324,6 +1341,12 @@
       localStorage.setItem("firstReq", "no");
       $rootScope.displayMinPayment = 0;
       $rootScope.maxMonth = 0;
+    }
+    if (local == "autoColl") {
+      $rootScope.isCarColl = true;
+      document.getElementById("loanAmountRequest").disabled = false;
+    } else {
+      $rootScope.isCarColl = false;
     }
     $rootScope.danCustomerData = {};
     $rootScope.danIncomeData = {};
@@ -1364,7 +1387,7 @@
     if ($state.current.name == "autoleasing-2") {
       if (local == "auto") {
         $scope.isCollShow = true;
-      } else if (local == "consumer") {
+      } else if (local == "consumer" || local == "eco" || local == "autoColl") {
         $scope.isHideFromConsumer = true;
       } else {
         $scope.isCollShow = false;

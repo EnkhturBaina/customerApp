@@ -158,7 +158,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     }
     if ($scope.carCollCheckReqiured("step1")) {
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
-
       $state.go("autoleasing-2");
     }
   };
@@ -258,26 +257,41 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
 
   $scope.carCollCheckReqiured = function (param) {
+    if (isEmpty($rootScope.newReqiust)) {
+      $rootScope.newReqiust = {};
+    }
     if (param == "step1") {
       if (isEmpty($rootScope.newCarReq.carCategoryId) && !$rootScope.isDanLoginAutoColl) {
-        $rootScope.alert("Машины төрлөө сонгоно уу", "warning");
+        $rootScope.alert("Барьцаалах автомашины төрөл сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newCarReq.brandId) && !$rootScope.isDanLoginAutoColl) {
-        $rootScope.alert("Үйлдвэрээ сонгоно уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.newCarReq.markId) && !$rootScope.isDanLoginAutoColl) {
-        $rootScope.alert("Загвараа сонгоно уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.newCarReq.manufacturedYearId) && !$rootScope.isDanLoginAutoColl) {
-        $rootScope.alert("Үйлдвэрлэсэн он оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.newCarReq.cameYearId) && !$rootScope.isDanLoginAutoColl) {
-        $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.newCarReq.itemPic)) {
-        $rootScope.alert("Машины зураг оруулна уу", "warning");
-        return false;
-      } else {
+      }
+      //  else if (isEmpty($rootScope.newCarReq.ownershipTypeId) && !$rootScope.isDanLoginAutoColl) {
+      //   $rootScope.alert("Автомашины өмчлөл сонгоно уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.nationalNumber) && !$rootScope.isDanLoginAutoColl) {
+      //   $rootScope.alert("Автомашины улсын дугаар оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.brandId) && !$rootScope.isDanLoginAutoColl) {
+      //   $rootScope.alert("Үйлдвэр сонгоно уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.markId) && !$rootScope.isDanLoginAutoColl) {
+      //   $rootScope.alert("Марк сонгоно уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.manufacturedYearId) && !$rootScope.isDanLoginAutoColl) {
+      //   $rootScope.alert("Үйлдвэрлэсэн он оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.cameYearId) && !$rootScope.isDanLoginAutoColl) {
+      //   $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
+      //   $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
+      //   return false;
+      // }
+      //  else if (isEmpty($rootScope.newCarReq.itemPic)) {
+      //   $rootScope.alert("Машины зураг оруулна уу", "warning");
+      //   return false;
+      // }
+      else {
         return true;
       }
       return true;
