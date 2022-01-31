@@ -1,17 +1,15 @@
 otherGoods = angular.module("otherGoods.Ctrl", []);
 otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $scope, $ionicPopup, $ionicHistory) {
   $scope.addOther = function () {
-    if (isEmpty($rootScope.newCarReq.unitPrice)) {
-      $rootScope.alert("Та барааны үнийг оруулна уу", "warning");
-    } else if (isEmpty($rootScope.newCarReq.shopId)) {
-      $rootScope.alert("Та барааны нийлүүлэгчийг сонгоно уу", "warning");
-    } else if (isEmpty($rootScope.newCarReq.categoryId)) {
+    if (isEmpty($rootScope.newCarReq.categoryId)) {
       $rootScope.alert("Та барааны төрөл өө сонгоно уу", "warning");
-    }
-    // else if (isEmpty($rootScope.newCarReq.picture1)) {
-    //   $rootScope.alert("Та барааны зургийг оруулна уу", "warning");
-    // }
-    else {
+    } else if (isEmpty($rootScope.newCarReq.shopId)) {
+      $rootScope.alert("Бараа авах дэлгүүр сонгоно уу", "warning");
+    } else if (isEmpty($rootScope.newCarReq.subVendorId)) {
+      $rootScope.alert("Дэлгүүрийн салбар сонгоно уу", "warning");
+    } else if (isEmpty($rootScope.newCarReq.unitPrice)) {
+      $rootScope.alert("Авах барааны үнэ оруулна уу", "warning");
+    } else {
       try {
         var otherGoodFirstId = 1;
         if (localStorage.otherGoodsMaxId === undefined) {
@@ -34,14 +32,6 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
     }
     $rootScope.calcTotalPrice();
     $rootScope.getLocalGoodsData();
-  };
-  $scope.changeShop = function (item) {
-    if (!isEmpty(item)) {
-      var itjs = JSON.parse(item);
-      $rootScope.selectedSupplierID = itjs.id;
-      $rootScope.newCarReq.shopId = itjs.id;
-      $rootScope.newCarReq.shopname = itjs.suppliername;
-    }
   };
 
   $scope.showPopup = function () {

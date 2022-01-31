@@ -67,8 +67,12 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
     // console.log("json", json);
   };
   $rootScope.$on("$ionicView.enter", function () {
-    if ($state.current.name == "eco") {
+    var firstReq = localStorage.getItem("firstReq");
+    var local = localStorage.getItem("requestType");
+    //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
+    if (firstReq === "yes" && local == "eco") {
       $rootScope.newReqiust = {};
+      localStorage.setItem("firstReq", "no");
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
 

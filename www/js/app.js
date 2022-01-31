@@ -371,7 +371,6 @@ var app = angular
             text: "Тийм",
             type: "button-confirm",
             onTap: function () {
-              console.log("A");
               $rootScope.loginUserInfo = undefined;
               localStorage.removeItem("loginUserInfo");
               localStorage.removeItem("profilePictureSideMenu");
@@ -529,78 +528,6 @@ var app = angular
             contentAsHTML: true,
           });
         }
-      },
-    };
-  })
-  .directive("limitChar", function () {
-    "use strict";
-    return {
-      restrict: "A",
-      scope: {
-        limit: "=limit",
-        ngModel: "=ngModel",
-      },
-      link: function (scope) {
-        scope.$watch("ngModel", function (newValue, oldValue) {
-          if (newValue) {
-            var length = newValue.toString().length;
-            if (length > scope.limit) {
-              scope.ngModel = oldValue;
-            }
-          }
-        });
-      },
-    };
-  })
-  .directive("preventTypingGreater", function () {
-    return {
-      link: function (scope, element, attributes) {
-        var oldVal = null;
-        element.on("keydown keyup", function (e) {
-          if (
-            Number(element.val()) > Number(attributes.max) &&
-            e.keyCode != 46 && // delete
-            e.keyCode != 8 // backspace
-          ) {
-            e.preventDefault();
-            element.val(oldVal);
-          } else {
-            oldVal = Number(element.val());
-          }
-        });
-      },
-    };
-  })
-  .directive("repeatDone", function () {
-    return function (scope, element, attrs) {
-      if (scope.$last) {
-        // all are rendered
-        scope.$eval(attrs.repeatDone);
-      }
-    };
-  })
-  .directive("groupedRadio", function () {
-    return {
-      restrict: "A",
-      require: "ngModel",
-      scope: {
-        model: "=ngModel",
-        value: "=groupedRadio",
-      },
-      link: function (scope, element, attrs, ngModelCtrl) {
-        element.addClass("button");
-        element.on("click", function (e) {
-          scope.$apply(function () {
-            ngModelCtrl.$setViewValue(scope.value);
-          });
-        });
-
-        scope.$watch("model", function (newVal) {
-          element.removeClass("button-positive");
-          if (newVal === scope.value) {
-            element.addClass("button-positive");
-          }
-        });
       },
     };
   })

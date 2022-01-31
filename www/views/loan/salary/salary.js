@@ -149,8 +149,12 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
       $scope.modal = modal;
     });
   $rootScope.$on("$ionicView.enter", function () {
-    if ($state.current.name == "salary") {
+    var firstReq = localStorage.getItem("firstReq");
+    var local = localStorage.getItem("requestType");
+    //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
+    if (firstReq === "yes" && local == "salary") {
       $rootScope.newReqiust = {};
+      localStorage.setItem("firstReq", "no");
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if ($state.current.name == "salary") {

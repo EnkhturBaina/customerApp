@@ -66,7 +66,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
             serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
               if (sendSmsResponse[0] == "success") {
                 serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {
-                  console.log("res", response);
+                  // console.log("res", response);
                   if (response.result.status == "success") {
                     $scope.isStep1 = false;
                     $scope.isStep2 = true;

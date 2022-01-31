@@ -188,8 +188,12 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
       $scope.modal = modal;
     });
   $rootScope.$on("$ionicView.enter", function () {
-    if ($state.current.name == "money") {
+    var firstReq = localStorage.getItem("firstReq");
+    var local = localStorage.getItem("requestType");
+    //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
+    if (firstReq === "yes" && local == "money") {
       $rootScope.newReqiust = {};
+      localStorage.setItem("firstReq", "no");
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if ($state.current.name == "money") {

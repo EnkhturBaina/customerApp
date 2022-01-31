@@ -218,8 +218,12 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       $scope.modal = modal;
     });
   $scope.$on("$ionicView.enter", function () {
-    if ($state.current.name == "property_collateral") {
+    var firstReq = localStorage.getItem("firstReq");
+    var local = localStorage.getItem("requestType");
+    //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
+    if (firstReq === "yes" && local == "estate") {
       $rootScope.newReqiust = {};
+      localStorage.setItem("firstReq", "no");
     }
     if ($state.current.name == "property_collateral2") {
       $timeout(function () {

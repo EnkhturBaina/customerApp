@@ -368,6 +368,9 @@
   };
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = false;
+    $timeout(function () {
+      $ionicHistory.clearCache();
+    }, 300);
   });
 
   var bannerNotShow = JSON.parse(localStorage.getItem("bannerNotShow"));

@@ -248,7 +248,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   }
 
   $scope.saveCarCollRequestData = function () {
-    console.log("$rootScope.carCollateralRequestData ", $rootScope.carCollateralRequestData);
     if ($scope.carCollCheckReqiured("step2")) {
       if ($scope.carCollCheckReqiured("agreeBank")) {
         $state.go("danselect");

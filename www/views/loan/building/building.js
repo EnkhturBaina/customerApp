@@ -74,10 +74,15 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
   $rootScope.$on("$ionicView.enter", function () {
     $rootScope.isAgent = false;
     $rootScope.msgShow = false;
-
-    if ($state.current.name == "building") {
+    var firstReq = localStorage.getItem("firstReq");
+    var local = localStorage.getItem("requestType");
+    $rootScope.isCarColl = false;
+    //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
+    if (firstReq === "yes" && local == "building") {
       $rootScope.newReqiust = {};
+      localStorage.setItem("firstReq", "no");
     }
+
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
 
     if ($state.current.name == "building") {

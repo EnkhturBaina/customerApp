@@ -385,7 +385,6 @@
         } else if ($rootScope.requestType == "building") {
           $rootScope.displayMinPayment = ($rootScope.newReqiust.buildingPrice * $rootScope.minPayment).toFixed(2);
         } else if ($rootScope.requestType == "auto" && !isEmpty($rootScope.newReqiust.carPrice)) {
-          console.log("$rootScope.minPayment", $rootScope.minPayment);
           $rootScope.displayMinPayment = ($rootScope.newReqiust.carPrice * $rootScope.minPayment).toFixed(2);
         }
       }

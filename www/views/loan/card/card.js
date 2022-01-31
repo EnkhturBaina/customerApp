@@ -25,8 +25,7 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
       } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
         $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
         return false;
-      }
-      else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
         $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.locationId)) {
@@ -197,8 +196,12 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
       $scope.modal = modal;
     });
   $rootScope.$on("$ionicView.enter", function () {
-    if ($state.current.name == "card") {
+    var firstReq = localStorage.getItem("firstReq");
+    var local = localStorage.getItem("requestType");
+    //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
+    if (firstReq === "yes" && local == "card") {
       $rootScope.newReqiust = {};
+      localStorage.setItem("firstReq", "no");
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if ($state.current.name == "card") {
