@@ -67,7 +67,7 @@
                 <div class="condition-detail-input tugrug-input custom-select-sup" ng-show="isSlideSelected">
                     <span class="input-label-supplier">Хамтран зээлдэгчтэй эсэх</span>
                     <select class="autoleasing-location-select" ng-model="$root.newReqiust.isCoBorrower">
-                        <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                        <option ng-repeat="loc in $root.coBorrowerData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                             {{loc.name}}</option>
                     </select>
                 </div>

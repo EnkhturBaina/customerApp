@@ -221,6 +221,12 @@
       delete datas.aggregatecolumns;
       $rootScope.carModelData = datas;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "164490994564810" }).then(function (response) {
+      $rootScope.coBorrowerData = response;
+    });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "164490995509910" }).then(function (response) {
+      $rootScope.ecoLoanCategoryData = response;
+    });
   };
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");

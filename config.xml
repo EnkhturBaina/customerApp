@@ -112,5 +112,5 @@
     <preference name="GradlePluginKotlinCodeStyle" value="official" />
     <preference name="GradlePluginKotlinVersion" value="1.3.50" />
     <preference name="android-targetSdkVersion" value="30" />
-        <preference name="android-package" value="com.lampa.startapp.startApp" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
 </widget>
