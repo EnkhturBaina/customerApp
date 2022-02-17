@@ -173,6 +173,11 @@ var app = angular
       templateUrl: "views/loan/car_collateral/car_collateral.html",
       controller: "car_collateralCtrl",
     });
+    $stateProvider.state("car_coll2", {
+      url: "/views/car_collateral2",
+      templateUrl: "views/loan/car_collateral/car_collateral2.html",
+      controller: "car_collateralCtrl",
+    });
     $stateProvider.state("property_collateral", {
       url: "/views/property_collateral",
       templateUrl: "views/loan/property_collateral/property_collateral.html",

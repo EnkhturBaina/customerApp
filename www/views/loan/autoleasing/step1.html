@@ -26,9 +26,13 @@
                                 </option>
                             </select>
                         </label>
+                        <label class="item item-input item-stacked-label form-input-label" ng-if="isSelected0001=='0001'">
+                            <p class="input-label" style="margin: 0;">Автомашины код</p>
+                            <input inputmode="numeric" pattern="[0-9]*" id="step1CarCode" type="text" placeholder="00000000" name="carCode" class="" ng-model="$root.carProduct.itemCode" ng-keyup="hideKeyboard($event)" ng-blur="getCarDataByCode($root.carProduct.itemCode)" select-on-click />
+                        </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Авах автомашины төрөл</p>
-                            <select ng-model="$root.carProduct.categoryId" class="custom-form-input-select" ng-change="getCarFactoryCategoryAuto(carProduct.categoryId)">
+                            <select ng-model="$root.carProduct.categoryId" class="custom-form-input-select" ng-change="getCarFactoryCategoryAuto(carProduct.categoryId)" ng-init="$root.carProduct.categoryId = $root.carProduct.categoryId">
                                 <option ng-repeat="loc in $root.carCategory | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}
                                 </option>
@@ -42,20 +46,16 @@
                                 </option>
                             </select>
                         </label>
-                        <label class="item item-input item-stacked-label form-input-label" ng-if="isSelected0001=='0001'">
-                            <p class="input-label" style="margin: 0;">Автомашины код</p>
-                            <input inputmode="numeric" pattern="[0-9]*" id="step1CarCode" type="text" placeholder="00000000" name="carCode" class="" ng-model="$root.carProduct.itemCode" ng-keyup="hideKeyboard($event)" select-on-click />
-                        </label>
                         <label class="item item-input item-select form-input-label" ng-if="isSelected0001=='0001'||isSelected0001=='yes'">
                             <p class="input-label" style="margin: 0;">Үйлдвэр</p>
-                            <select id="brandSelect" ng-model="$root.carProduct.factoryId" class="custom-form-input-select" disabled ng-change="getCarModelDataAuto(carProduct.factoryId)">
+                            <select id="brandSelect" ng-model="$root.carProduct.factoryId" disabled class="custom-form-input-select" ng-change="getCarModelDataAuto(carProduct.factoryId)" ng-init="$root.carProduct.factoryId = $root.carProduct.factoryId">
                                 <option ng-repeat="com in factoryData track by $index" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label" ng-if="isSelected0001=='0001'||isSelected0001=='yes'">
                             <p class="input-label" style="margin: 0;">Марк</p>
-                            <select id="modelSelect" ng-model="$root.carProduct.modelId" class="custom-form-input-select" disabled>
+                            <select id="modelSelect" ng-model="$root.carProduct.modelId" disabled class="custom-form-input-select" ng-init="$root.carProduct.modelId = $root.carProduct.modelId">
                                 <option ng-repeat="com in modelData track by $index" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>

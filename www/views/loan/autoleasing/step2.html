@@ -22,6 +22,15 @@
                             <p class="input-label" style="margin: 0;">Авах автомашины үнэ</p>
                             <input inputmode="numeric" id="carPrice" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.carPrice" ng-blur="getbankData()" thousand-separator select-on-click>
                         </label>
+                        <!-- <div ng-if="isCollShow" class="vxx-title-container"><span class="vxx-title">Та үл хөдлөх хөрөнгө(ҮХХ) барьцаалснаар зарим банк, ББСБ-аас урьдчилгаа төлбөргүй авах боломжтой</span></div> -->
+                        <label class="item item-input item-select form-input-label" ng-if="!isHideFromConsumer">
+                            <p class="input-label" style="margin: 0;">Урьдчилгаанд ҮХХөрөнгө барьцаалах уу?</p>
+                            <select ng-model="$root.newReqiust.collateralConditionId" class="custom-form-input-select" ng-change="getbankData();changeToolTipData()">
+                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                    {{loc.name}}
+                                </option>
+                            </select>
+                        </label>
                         <div ng-if="!$root.isCarColl">
                             <label class="item item-input item-stacked-label form-input-label">
                                 <p class="input-label" style="margin: 0;">Төлөх урьдчилгаа төлбөр</p>
@@ -36,15 +45,6 @@
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
                             <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.getLoanAmount" ng-blur="getbankData()" disabled format-input thousand-separator>
-                        </label>
-                        <!-- <div ng-if="isCollShow" class="vxx-title-container"><span class="vxx-title">Та үл хөдлөх хөрөнгө(ҮХХ) барьцаалснаар зарим банк, ББСБ-аас урьдчилгаа төлбөргүй авах боломжтой</span></div> -->
-                        <label class="item item-input item-select form-input-label" ng-if="!isHideFromConsumer">
-                            <p class="input-label" style="margin: 0;">Урьдчилгаанд ҮХХөрөнгө барьцаалах уу?</p>
-                            <select ng-model="$root.newReqiust.collateralConditionId" class="custom-form-input-select" ng-change="getbankData();changeToolTipData()">
-                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
-                                    {{loc.name}}
-                                </option>
-                            </select>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Зээл авах хугацаа (сараар)</p>

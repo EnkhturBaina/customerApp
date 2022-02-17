@@ -158,6 +158,12 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     }
     if ($scope.carCollCheckReqiured("step1")) {
       localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
+      $state.go("car_coll2");
+    }
+  };
+  $scope.saveCarColStep2 = function () {
+    if ($scope.carCollCheckReqiured("step2Images")) {
+      localStorage.setItem("carColl", JSON.stringify($rootScope.newCarReq));
       $state.go("autoleasing-2");
     }
   };
@@ -183,7 +189,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
           trigger: ".nationalNumberPicker",
           wheels: [{ data: nums }, { data: nums }, { data: nums }, { data: nums }, { data: charA }, { data: chars }, { data: chars }],
           position: [0, 0],
-          ensureBtnText: "Болсон",
+          ensureBtnText: "Хадгалах",
           maskOpacity: 0.5,
           cancelBtnText: "Хаах",
           transitionEnd: function (indexArr, data) {
@@ -199,7 +205,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
           trigger: ".productYearPicker",
           wheels: [{ data: $rootScope.yearsArray }],
           position: [0, 0],
-          ensureBtnText: "Болсон",
+          ensureBtnText: "Хадгалах",
           title: "Үйлдвэрлэсэн он",
           maskOpacity: 0.5,
           cancelBtnText: "Хаах",
@@ -217,7 +223,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
           trigger: ".cameYearPicker",
           wheels: [{ data: $rootScope.yearsArray }],
           position: [0, 0],
-          ensureBtnText: "Болсон",
+          ensureBtnText: "Хадгалах",
           title: "Орж ирсэн он",
           maskOpacity: 0.5,
           cancelBtnText: "Хаах",
@@ -246,14 +252,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       });
     };
   }
-
-  $scope.saveCarCollRequestData = function () {
-    if ($scope.carCollCheckReqiured("step2")) {
-      if ($scope.carCollCheckReqiured("agreeBank")) {
-        $state.go("danselect");
-      }
-    }
-  };
 
   $scope.carCollCheckReqiured = function (param) {
     if (isEmpty($rootScope.newReqiust)) {
@@ -285,21 +283,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       // } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
       //   $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
       //   return false;
-      // } else if (isEmpty($rootScope.newCarReq.itemPic)) {
-      //   $rootScope.alert("Машины гэрчилгээний зураг оруулна уу", "warning");
-      //   return false;
-      // } else if (isEmpty($rootScope.newCarReq.itemPic2)) {
-      //   $rootScope.alert("Машины нүүрэн талын зураг оруулна уу", "warning");
-      //   return false;
-      // } else if (isEmpty($rootScope.newCarReq.itemPic3)) {
-      //   $rootScope.alert("Машины баруун талын зураг оруулна уу", "warning");
-      //   return false;
-      // } else if (isEmpty($rootScope.newCarReq.itemPic4)) {
-      //   $rootScope.alert("Машины зүүн талын зураг оруулна уу", "warning");
-      //   return false;
-      // } else if (isEmpty($rootScope.newCarReq.itemPic5)) {
-      //   $rootScope.alert("Машины хойд талын зураг оруулна уу", "warning");
-      //   return false;
       // }
       else {
         return true;
@@ -319,6 +302,29 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
         return false;
       } else {
+        return true;
+      }
+      return true;
+    } else if (param == "step2Images") {
+      if (isEmpty($rootScope.newCarReq.itemPic)) {
+        $rootScope.alert("Машины гэрчилгээний зураг оруулна уу", "warning");
+        // return false;
+        return true;
+      }
+      //else if (isEmpty($rootScope.newCarReq.itemPic2)) {
+      //   $rootScope.alert("Машины нүүрэн талын зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.itemPic3)) {
+      //   $rootScope.alert("Машины баруун талын зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.itemPic4)) {
+      //   $rootScope.alert("Машины зүүн талын зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.newCarReq.itemPic5)) {
+      //   $rootScope.alert("Машины хойд талын зураг оруулна уу", "warning");
+      //   return false;
+      // }
+      else {
         return true;
       }
       return true;

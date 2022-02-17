@@ -1664,6 +1664,19 @@ input[type="number"] {
   width: 100% !important;
   max-width: 100% !important;
 }
+.custom-form-input-select option:disabled {
+  color: #4b5180 !important;
+  font-weight: bold !important;
+}
+select[disabled="disabled"]::-ms-value {
+  color: #4b5180 !important;
+  font-weight: bold !important;
+}
+/*Specific to chrome and firefox*/
+select[disabled="disabled"] {
+  color: #4b5180 !important;
+  font-weight: bold !important;
+}
 .custom-stp1-input-select {
   padding: 7px 5px !important;
   width: 55% !important;

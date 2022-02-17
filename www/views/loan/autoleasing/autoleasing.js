@@ -1128,14 +1128,14 @@
       } else if (isEmpty($rootScope.carProduct.categoryId)) {
         $rootScope.alert("Авах автомашины төрөл сонгоно уу", "warning");
         return false;
-      } else if ($scope.isSelected0001 === "yes" && isEmpty($rootScope.carProduct.productTypeId)) {
-        $rootScope.alert("Автомашины төлөв сонгоно уу", "warning");
-        return false;
       } else if ($scope.isSelected0001 === "0001" && isEmpty($rootScope.carProduct.itemCode)) {
         $rootScope.alert("Автомашины кодоо оруулна уу", "warning");
         return false;
       } else if ($scope.isSelected0001 === "0001" && $rootScope.carProduct.itemCode.length < 8) {
         $rootScope.alert("Автомашины кодоо бүрэн оруулна уу", "warning");
+        return false;
+      } else if ($scope.isSelected0001 === "yes" && isEmpty($rootScope.carProduct.productTypeId)) {
+        $rootScope.alert("Автомашины төлөв сонгоно уу", "warning");
         return false;
       } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.factoryId)) {
         $rootScope.alert("Үйлдвэр сонгоно уу", "warning");
@@ -1165,15 +1165,15 @@
       if (isEmpty($rootScope.newReqiust.carPrice) && $rootScope.is0001Price) {
         $rootScope.alert("Авах автомашины үнэ оруулна уу", "warning");
         return false;
+      } else if ((isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isCollShow) || (isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isHideFromConsumers)) {
+        $rootScope.alert("ҮХХөрөнгө барьцаалах эсэхээ сонгоно уу", "warning");
+        return false;
       } else if ((isEmpty($rootScope.newReqiust.advancePayment) && $rootScope.newReqiust.collateralConditionId == "1554263832151" && !$rootScope.isCarColl) || (isEmpty($rootScope.newReqiust.advancePayment) && !$scope.isCollShow && !$rootScope.isCarColl)) {
         $rootScope.alert("Урьдчилгаа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.getLoanAmount)) {
         $rootScope.newReqiust.loanAmountReq = true;
         $rootScope.alert("Зээлийн хэмжээгээ оруулна уу", "warning");
-        return false;
-      } else if ((isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isCollShow) || (isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isHideFromConsumers)) {
-        $rootScope.alert("ҮХХөрөнгө барьцаалах эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
         $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
@@ -1360,7 +1360,8 @@
         $rootScope.danCustomerData.identbackpic = $rootScope.loginUserInfo.identbackpic;
       }
     }
-
+    $scope.factoryData = $rootScope.carFactoryData;
+    $scope.modelData = $rootScope.carModelData;
     $scope.isHideFromConsumer = false;
     $scope.disabledBtnSendReq = false;
     $rootScope.hideFooter = true;
@@ -1720,5 +1721,20 @@
       });
       val != "" ? (document.getElementById("modelSelect").disabled = false) : (document.getElementById("modelSelect").disabled = true);
     }
+  };
+
+  $scope.getCarDataByCode = function (carCode) {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597800986357471", itemcode: carCode }).then(function (response) {
+      if (!isEmpty(response[0])) {
+        $rootScope.carProduct.categoryId = response[0].itemcategoryid;
+        $rootScope.carProduct.factoryId = response[0].factoryid;
+        $rootScope.carProduct.modelId = response[0].modelid;
+        $rootScope.carProduct.yearEntryMongolia = response[0].entryyear;
+        $rootScope.carProduct.yearProduction = response[0].productyear;
+        $rootScope.newReqiust.carPrice = response[0].price;
+      } else {
+        $rootScope.alert("Машин бүртгэлгүй байна.", "warning");
+      }
+    });
   };
 });
