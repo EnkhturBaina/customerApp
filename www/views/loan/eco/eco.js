@@ -55,16 +55,16 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
 
     //банк шүүлт
     json.type = "ecoLoanFilter";
-    json.totalLoan = $rootScope.newReqiust.getLoanAmount;
-    json.location = $rootScope.newReqiust.locationId;
-    json.month = $rootScope.newReqiust.loanMonth;
+    json.totalLoan = $rootScope.newReqiust.itemPrice;
+    json.location = "";
+    json.month = 0;
     json.salaries = $rootScope.filterSalaries;
 
     serverDeferred.carCalculation(json).then(function (response) {
       $rootScope.bankListFilter = response.result.data;
       $rootScope.HideLoader();
     });
-    // console.log("json", json);
+    console.log("json", json);
   };
   $rootScope.$on("$ionicView.enter", function () {
     var firstReq = localStorage.getItem("firstReq");
@@ -90,9 +90,10 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
   //Бараны нийлүүлэгч хамаарч Барааны төрөл -г lookup -д дахин сэт хийх
   $scope.changeSupCategoryEco = function (supppp) {
     $rootScope.selectedSupplierCategory = [];
+    $rootScope.subVendor = [];
 
-    $rootScope.supplierHaveCategory.map((item) => {
-      if (item.categoryid === supppp) {
+    $rootScope.ecoLoanStoreData.map((item) => {
+      if (item.subcategoryid === supppp) {
         $rootScope.selectedSupplierCategory.push(item.supplierid);
         return true;
       }
@@ -109,6 +110,11 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
       });
     });
     $rootScope.allSupplierList = selectedCategory;
+
+    if ($rootScope.allSupplierList.length == 1) {
+      $scope.changeSubVendor($rootScope.allSupplierList[0].id);
+    }
+
     supppp != "" ? (document.getElementById("shopId").disabled = false) : (document.getElementById("shopId").disabled = true);
   };
   $scope.changeSubVendor = function (parentId) {

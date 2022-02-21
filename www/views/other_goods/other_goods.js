@@ -38,6 +38,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
   $scope.nexClivk = function () {
     if (!isEmpty($rootScope.otherGoodsData)) {
       $rootScope.newReqiust.advancePayment = "";
+      $rootScope.isIncomeConfirm = true;
       $state.go("autoleasing-2");
     } else {
       $rootScope.alert("Та зээлээр авах бараагаа бүртгэнэ үү", "warning");

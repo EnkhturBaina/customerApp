@@ -74,6 +74,10 @@
                             <p class="input-label" style="margin: 0;">Орлогын төрөл</p>
                             <select class="custom-form-input-select" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid" ng-change="getbankData()"></select>
                         </label>
+                        <label class="item item-input item-select form-input-label" ng-if="$root.isIncomeConfirm">
+                            <p class="input-label" style="margin: 0;">Орлого нотлогдох байдал</p>
+                            <select class="custom-form-input-select" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid" ng-change="getbankData()"></select>
+                        </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Хамтран зээлдэгчтэй эсэх</p>
                             <select ng-model="$root.newReqiust.isCoBorrower" class="custom-form-input-select" ng-change="getbankData()">

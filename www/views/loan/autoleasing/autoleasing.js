@@ -333,11 +333,14 @@
           $rootScope.months.push(a.max_loan_month_id);
           if (a.min_payment != 0 && a.min_payment != null) {
             $rootScope.minPayments.push(a.min_payment);
+          } else {
+            $rootScope.minPayment = 0;
           }
         });
 
         $rootScope.maxMonth = Math.max(...$rootScope.months);
         $rootScope.minPayment = Math.min(...$rootScope.minPayments);
+
         //тэнцсэн банкуудын урьдчилгаа 0 үед ажиллах
         if (isEmpty($rootScope.minPayments)) {
           $rootScope.bankListFilter.NotAgree.map((el) => {
@@ -361,8 +364,14 @@
           } else {
             if (Math.min(...$rootScope.minPayments) == 0) {
               $rootScope.minPayment = Math.min(...$scope.removeItemAll($rootScope.minPayments, 0));
+              if (isEmpty($rootScope.minPayments)) {
+                $rootScope.minPayment = 0;
+              }
             } else {
               $rootScope.minPayment = Math.min(...$rootScope.minPayments);
+              if (isEmpty($rootScope.minPayments)) {
+                $rootScope.minPayment = 0;
+              }
             }
           }
         }
