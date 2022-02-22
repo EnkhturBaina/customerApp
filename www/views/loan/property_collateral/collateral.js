@@ -47,8 +47,29 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
         $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
         return false;
+      } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
+        $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+        $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+        return false;
+      } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
+        $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.email)) {
+        $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danIncomeData.incometypeid) && $rootScope.isIncomeConfirm) {
+        $rootScope.alert("Орлогын төрөл сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danIncomeData.proofofincome) && $rootScope.isIncomeConfirm) {
+        $rootScope.alert("Орлого нотлогдох байдал сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+        $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
+        return false;
       } else if (isEmpty($rootScope.newReqiust.locationId)) {
-        $rootScope.alert("Зээл авах байршил сонгоно уу", "warning");
+        $rootScope.alert("Оршин суугаа хаяг сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
         $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
@@ -255,4 +276,21 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
   });
+  $scope.selectIncomeType = function (id) {
+    $rootScope.proofOfIncomeData = [];
+    $rootScope.incomeTypeWithCondition.forEach((el) => {
+      if (el.id === id) {
+        $rootScope.proofOfIncomeData.push(el);
+      }
+    });
+  };
+  $scope.selectIncomeCondition = function (id) {
+    //E-Mongolia дуудах эсэх
+    $rootScope.isEMongolia = "";
+    $rootScope.incomeTypeWithCondition.forEach((el) => {
+      if (el.conditionid === id) {
+        $rootScope.isEMongolia = el.number1;
+      }
+    });
+  };
 });

@@ -230,6 +230,9 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "164491108544910" }).then(function (response) {
       $rootScope.ecoLoanStoreData = response;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1645435285663193" }).then(function (response) {
+      $rootScope.incomeTypeWithCondition = response;
+    });
   };
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");

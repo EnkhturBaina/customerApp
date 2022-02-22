@@ -72,11 +72,11 @@
                         </label>
                         <label class="item item-input item-select form-input-label" ng-if="$root.isIncomeConfirm">
                             <p class="input-label" style="margin: 0;">Орлогын төрөл</p>
-                            <select class="custom-form-input-select" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid" ng-change="getbankData()"></select>
+                            <select class="custom-form-input-select" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid" ng-change="getbankData();selectIncomeType($root.danIncomeData.incometypeid);"></select>
                         </label>
                         <label class="item item-input item-select form-input-label" ng-if="$root.isIncomeConfirm">
                             <p class="input-label" style="margin: 0;">Орлого нотлогдох байдал</p>
-                            <select class="custom-form-input-select" ng-model="$root.danIncomeData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.danIncomeData.incometypeid = $root.danIncomeData.incometypeid" ng-change="getbankData()"></select>
+                            <select class="custom-form-input-select" ng-model="$root.danIncomeData.proofofincome" ng-options="c.conditionid as c.conditionname for c in proofOfIncomeData | filter:{id:'!!'}" ng-change="selectIncomeCondition($root.danIncomeData.proofofincome)"></select>
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Хамтран зээлдэгчтэй эсэх</p>

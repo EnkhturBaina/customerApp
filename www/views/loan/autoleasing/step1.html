@@ -32,7 +32,7 @@
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Авах автомашины төрөл</p>
-                            <select ng-model="$root.carProduct.categoryId" class="custom-form-input-select" ng-change="getCarFactoryCategoryAuto(carProduct.categoryId)" ng-init="$root.carProduct.categoryId = $root.carProduct.categoryId">
+                            <select id="categorySelect" ng-model="$root.carProduct.categoryId" disabled class="custom-form-input-select" ng-change="getCarFactoryCategoryAuto(carProduct.categoryId)" ng-init="$root.carProduct.categoryId = $root.carProduct.categoryId">
                                 <option ng-repeat="loc in $root.carCategory | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}
                                 </option>
@@ -60,13 +60,13 @@
                                     {{com.name}}</option>
                             </select>
                         </label>
-                        <label class="item item-input item-stacked-label form-input-label" ng-if="isSelected0001=='0001'||isSelected0001=='yes'">
-                            <p class="input-label" style="margin: 0;">Орж ирсэн он</p>
-                            <input inputmode="numeric" pattern="[0-9]*" id="entryYear" type="text" placeholder="0000" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.carProduct.yearEntryMongolia" ng-keyup="hideKeyboard($event)" select-on-click />
-                        </label>
-                        <label class="item item-input item-stacked-label form-input-label" ng-if="isSelected0001=='0001'||isSelected0001=='yes'">
+                        <label class="item item-input item-stacked-label form-input-label" ng-if="isSelected0001=='0001'||isSelected0001=='yes'" id="productYearPickerLabel">
                             <p class="input-label" style="margin: 0;">Үйлдвэрлэсэн он</p>
-                            <input inputmode="numeric" pattern="[0-9]*" id="prodYear" type="text" placeholder="0000" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.carProduct.yearProduction" ng-keyup="hideKeyboard($event)" select-on-click />
+                            <input inputmode="numeric" pattern="[0-9]*" id="productYear" type="text" placeholder="0000" name="productYear" class="productYearPicker bg-fff" ng-model="$root.carProduct.yearProduction" ng-keyup="hideKeyboard($event)" select-on-click readonly />
+                        </label>
+                        <label class="item item-input item-stacked-label form-input-label" ng-if="isSelected0001=='0001'||isSelected0001=='yes'" id="cameYearPickerLabel">
+                            <p class="input-label" style="margin: 0;">Орж ирсэн он</p>
+                            <input inputmode="numeric" pattern="[0-9]*" id="entryYear" type="text" placeholder="0000" class="cameYearPicker bg-fff" ng-model="$root.carProduct.yearEntryMongolia" ng-keyup="hideKeyboard($event)" select-on-click readonly />
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <span class="input-label">Орлого нотлох эсэх</span>

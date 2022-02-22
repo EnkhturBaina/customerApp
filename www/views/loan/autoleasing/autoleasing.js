@@ -48,6 +48,16 @@
       $anchorScroll();
     }
   };
+  $rootScope.yearsArray = [];
+  $scope.generateArrayOfYears = function () {
+    var max = new Date().getFullYear();
+    var min = max - 30;
+
+    for (var i = max; i >= min; i--) {
+      $rootScope.yearsArray.push(i);
+    }
+  };
+  $scope.generateArrayOfYears();
   $ionicPlatform.ready(function () {
     setTimeout(function () {
       var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
@@ -85,9 +95,56 @@
         },
         onShow: function () {},
       });
+      new MobileSelect({
+        trigger: ".productYearPicker",
+        wheels: [{ data: $rootScope.yearsArray }],
+        position: [0, 0],
+        ensureBtnText: "Хадгалах",
+        title: "Үйлдвэрлэсэн он",
+        maskOpacity: 0.5,
+        cancelBtnText: "Хаах",
+        transitionEnd: function (indexArr, data) {
+          //scrolldood duusahad ajillah func
+        },
+        callback: function (indexArr, data) {
+          var a = data.join("");
+          $scope.setNumber("yearProduction", a);
+          $rootScope.newCarReq.yearProduction = a;
+          mobileSelect4.show();
+        },
+      });
+      var mobileSelect4 = new MobileSelect({
+        trigger: ".cameYearPicker",
+        wheels: [{ data: $rootScope.yearsArray }],
+        position: [0, 0],
+        ensureBtnText: "Хадгалах",
+        title: "Орж ирсэн он",
+        maskOpacity: 0.5,
+        cancelBtnText: "Хаах",
+        transitionEnd: function (indexArr, data) {
+          //scrolldood duusahad ajillah func
+        },
+        callback: function (indexArr, data) {
+          var a = data.join("");
+          $scope.setNumber("yearEntryMongolia", a);
+          $rootScope.newCarReq.yearEntryMongolia = a;
+        },
+      });
       $("#regNums").mask("00000000");
     }, 1000);
   });
+  $scope.setNumber = function (type, data) {
+    //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
+    $(function () {
+      if (type == "yearProduction") {
+        $("#productYear").val(data).trigger("input");
+      } else if (type == "yearEntryMongolia") {
+        $("#entryYear").val(data).trigger("input");
+      } else if (type == "nationalNumber") {
+        $("#nationalNumber").val(data).trigger("input");
+      }
+    });
+  };
   $scope.overlayKeyOn = function () {
     $scope.modal.show();
   };
@@ -220,7 +277,7 @@
     json.currency = 16074201974821;
     json.isMortgage = 1554263832151;
     json.salaries = $rootScope.filterSalaries;
-    if (!isEmpty($rootScope.danIncomeData) && $state.current.name == "autoleasing-4") {
+    if (!isEmpty($rootScope.danIncomeData) /*&& $state.current.name == "autoleasing-4"*/) {
       json.income = $rootScope.danIncomeData.incometypeid;
     } else {
       json.income = null;
@@ -1196,12 +1253,16 @@
       } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
         $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
         return false;
-      }
-      // else if (isEmpty($rootScope.danIncomeData.incometypeid) && $rootScope.isIncomeConfirm) {
-      //   $rootScope.alert("Орлогын төрөл сонгоно уу", "warning");
-      //   return false;
-      // }
-      else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+      } else if (isEmpty($rootScope.danCustomerData.email)) {
+        $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danIncomeData.incometypeid) && $rootScope.isIncomeConfirm) {
+        $rootScope.alert("Орлогын төрөл сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danIncomeData.proofofincome) && $rootScope.isIncomeConfirm) {
+        $rootScope.alert("Орлого нотлогдох байдал сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
         $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.locationId)) {
@@ -1687,8 +1748,74 @@
   };
 
   $scope.selectCarChoose = function (id) {
+    $rootScope.carProduct = {};
+    id != "" ? (document.getElementById("categorySelect").disabled = false) : (document.getElementById("categorySelect").disabled = true);
     if (id === "1") {
       $scope.isSelected0001 = "0001";
+      id != "" ? (document.getElementById("categorySelect").disabled = true) : (document.getElementById("categorySelect").disabled = false);
+
+      $rootScope.yearsArray = [];
+      $scope.generateArrayOfYears = function () {
+        var max = new Date().getFullYear();
+        var min = max - 30;
+
+        for (var i = max; i >= min; i--) {
+          $rootScope.yearsArray.push(i);
+        }
+      };
+      $scope.generateArrayOfYears();
+      $ionicPlatform.ready(function () {
+        setTimeout(function () {
+          new MobileSelect({
+            trigger: ".productYearPicker",
+            wheels: [{ data: $rootScope.yearsArray }],
+            position: [0, 0],
+            ensureBtnText: "Хадгалах",
+            title: "Үйлдвэрлэсэн он",
+            maskOpacity: 0.5,
+            cancelBtnText: "Хаах",
+            transitionEnd: function (indexArr, data) {
+              //scrolldood duusahad ajillah func
+            },
+            callback: function (indexArr, data) {
+              var a = data.join("");
+              $scope.setNumber("yearProduction", a);
+              $rootScope.newCarReq.yearProduction = a;
+              mobileSelect4.show();
+            },
+          });
+          var mobileSelect4 = new MobileSelect({
+            trigger: ".cameYearPicker",
+            wheels: [{ data: $rootScope.yearsArray }],
+            position: [0, 0],
+            ensureBtnText: "Хадгалах",
+            title: "Орж ирсэн он",
+            maskOpacity: 0.5,
+            cancelBtnText: "Хаах",
+            transitionEnd: function (indexArr, data) {
+              //scrolldood duusahad ajillah func
+            },
+            callback: function (indexArr, data) {
+              var a = data.join("");
+              $scope.setNumber("yearEntryMongolia", a);
+              $rootScope.newCarReq.yearEntryMongolia = a;
+            },
+          });
+          $("#regNums").mask("00000000");
+        }, 1000);
+      });
+      $scope.setNumber = function (type, data) {
+        //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
+        $(function () {
+          if (type == "yearProduction") {
+            $("#productYear").val(data).trigger("input");
+          } else if (type == "yearEntryMongolia") {
+            $("#entryYear").val(data).trigger("input");
+          } else if (type == "nationalNumber") {
+            $("#nationalNumber").val(data).trigger("input");
+          }
+        });
+      };
     } else if (id === "1554263832132") {
       $scope.isSelected0001 = "yes";
     } else if (id === "1554263832151") {
@@ -1699,7 +1826,7 @@
     $timeout(function () {
       $("#step1CarCode").mask("00000000");
       $("#entryYear").mask("0000");
-      $("#prodYear").mask("0000");
+      $("#productYear").mask("0000");
     }, 500);
   };
 
@@ -1743,6 +1870,23 @@
         $rootScope.newReqiust.carPrice = response[0].price;
       } else {
         $rootScope.alert("Машин бүртгэлгүй байна.", "warning");
+      }
+    });
+  };
+  $scope.selectIncomeType = function (id) {
+    $rootScope.proofOfIncomeData = [];
+    $rootScope.incomeTypeWithCondition.forEach((el) => {
+      if (el.id === id) {
+        $rootScope.proofOfIncomeData.push(el);
+      }
+    });
+  };
+  $scope.selectIncomeCondition = function (id) {
+    //E-Mongolia дуудах эсэх
+    $rootScope.isEMongolia = "";
+    $rootScope.incomeTypeWithCondition.forEach((el) => {
+      if (el.conditionid === id) {
+        $rootScope.isEMongolia = el.number1;
       }
     });
   };

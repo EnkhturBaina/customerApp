@@ -45,6 +45,7 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
   $scope.buildingStep2 = function () {
     if ($scope.checkReqiured("building-valid")) {
       if ($scope.checkReqiured("agreeBank")) {
+        $rootScope.isIncomeConfirm = true;
         $state.go("autoleasing-2");
       }
     }

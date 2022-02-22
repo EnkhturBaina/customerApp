@@ -1663,14 +1663,7 @@ input[type="number"] {
   direction: ltr !important;
   width: 100% !important;
   max-width: 100% !important;
-}
-.custom-form-input-select option:disabled {
-  color: #4b5180 !important;
-  font-weight: bold !important;
-}
-select[disabled="disabled"]::-ms-value {
-  color: #4b5180 !important;
-  font-weight: bold !important;
+  opacity: 1 !important;
 }
 /*Specific to chrome and firefox*/
 select[disabled="disabled"] {
