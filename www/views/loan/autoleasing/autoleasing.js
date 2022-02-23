@@ -48,16 +48,6 @@
       $anchorScroll();
     }
   };
-  $rootScope.yearsArray = [];
-  $scope.generateArrayOfYears = function () {
-    var max = new Date().getFullYear();
-    var min = max - 30;
-
-    for (var i = max; i >= min; i--) {
-      $rootScope.yearsArray.push(i);
-    }
-  };
-  $scope.generateArrayOfYears();
   $ionicPlatform.ready(function () {
     setTimeout(function () {
       var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
@@ -95,56 +85,9 @@
         },
         onShow: function () {},
       });
-      new MobileSelect({
-        trigger: ".productYearPicker",
-        wheels: [{ data: $rootScope.yearsArray }],
-        position: [0, 0],
-        ensureBtnText: "Хадгалах",
-        title: "Үйлдвэрлэсэн он",
-        maskOpacity: 0.5,
-        cancelBtnText: "Хаах",
-        transitionEnd: function (indexArr, data) {
-          //scrolldood duusahad ajillah func
-        },
-        callback: function (indexArr, data) {
-          var a = data.join("");
-          $scope.setNumber("yearProduction", a);
-          $rootScope.newCarReq.yearProduction = a;
-          mobileSelect4.show();
-        },
-      });
-      var mobileSelect4 = new MobileSelect({
-        trigger: ".cameYearPicker",
-        wheels: [{ data: $rootScope.yearsArray }],
-        position: [0, 0],
-        ensureBtnText: "Хадгалах",
-        title: "Орж ирсэн он",
-        maskOpacity: 0.5,
-        cancelBtnText: "Хаах",
-        transitionEnd: function (indexArr, data) {
-          //scrolldood duusahad ajillah func
-        },
-        callback: function (indexArr, data) {
-          var a = data.join("");
-          $scope.setNumber("yearEntryMongolia", a);
-          $rootScope.newCarReq.yearEntryMongolia = a;
-        },
-      });
       $("#regNums").mask("00000000");
     }, 1000);
   });
-  $scope.setNumber = function (type, data) {
-    //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
-    $(function () {
-      if (type == "yearProduction") {
-        $("#productYear").val(data).trigger("input");
-      } else if (type == "yearEntryMongolia") {
-        $("#entryYear").val(data).trigger("input");
-      } else if (type == "nationalNumber") {
-        $("#nationalNumber").val(data).trigger("input");
-      }
-    });
-  };
   $scope.overlayKeyOn = function () {
     $scope.modal.show();
   };
@@ -1184,9 +1127,6 @@
       $rootScope.newReqiust = {};
       $rootScope.newReqiust.customerId = "";
     }
-    if (isEmpty($rootScope.carProduct)) {
-      $rootScope.carProduct = {};
-    }
     if (param == "step1") {
       if (isEmpty($rootScope.newReqiust.choose)) {
         $rootScope.alert("Автомашинаа сонгосон эсэх сонгоно уу", "warning");
@@ -1209,17 +1149,17 @@
       } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.modelId)) {
         $rootScope.alert("Марк сонгоно уу", "warning");
         return false;
-      } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.yearEntryMongolia)) {
-        $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
-        return false;
-      } else if ($scope.isSelected0001 !== "no" && $rootScope.carProduct.yearEntryMongolia.length < 4) {
-        $rootScope.alert("Орж ирсэн он бүрэн оруулна уу", "warning");
-        return false;
       } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.yearProduction)) {
         $rootScope.alert("Үйлдвэрлэсэн он оруулна уу", "warning");
         return false;
       } else if ($scope.isSelected0001 !== "no" && $rootScope.carProduct.yearProduction.length < 4) {
         $rootScope.alert("Үйлдвэрлэсэн он бүрэн оруулна уу", "warning");
+        return false;
+      } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.yearEntryMongolia)) {
+        $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
+        return false;
+      } else if ($scope.isSelected0001 !== "no" && $rootScope.carProduct.yearEntryMongolia.length < 4) {
+        $rootScope.alert("Орж ирсэн он бүрэн оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
         $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
@@ -1749,73 +1689,73 @@
 
   $scope.selectCarChoose = function (id) {
     $rootScope.carProduct = {};
+
+    $rootScope.yearsArray = [];
+    $scope.generateArrayOfYears = function () {
+      var max = new Date().getFullYear();
+      var min = max - 30;
+
+      for (var i = max; i >= min; i--) {
+        $rootScope.yearsArray.push(i);
+      }
+    };
+    $scope.generateArrayOfYears();
+    $ionicPlatform.ready(function () {
+      setTimeout(function () {
+        new MobileSelect({
+          trigger: ".productYearPicker",
+          wheels: [{ data: $rootScope.yearsArray }],
+          position: [0, 0],
+          ensureBtnText: "Хадгалах",
+          title: "Үйлдвэрлэсэн он",
+          maskOpacity: 0.5,
+          cancelBtnText: "Хаах",
+          transitionEnd: function (indexArr, data) {
+            //scrolldood duusahad ajillah func
+          },
+          callback: function (indexArr, data) {
+            var a = data.join("");
+            $scope.setNumber("yearProduction", a);
+            $rootScope.carProduct.yearProduction = a;
+            mobileSelect4.show();
+          },
+        });
+        var mobileSelect4 = new MobileSelect({
+          trigger: ".cameYearPicker",
+          wheels: [{ data: $rootScope.yearsArray }],
+          position: [0, 0],
+          ensureBtnText: "Хадгалах",
+          title: "Орж ирсэн он",
+          maskOpacity: 0.5,
+          cancelBtnText: "Хаах",
+          transitionEnd: function (indexArr, data) {
+            //scrolldood duusahad ajillah func
+          },
+          callback: function (indexArr, data) {
+            var a = data.join("");
+            $scope.setNumber("yearEntryMongolia", a);
+            $rootScope.carProduct.yearEntryMongolia = a;
+          },
+        });
+        $("#regNums").mask("00000000");
+      }, 1000);
+    });
+    $scope.setNumber = function (type, data) {
+      //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
+      $(function () {
+        if (type == "yearProduction") {
+          $("#productYear").val(data).trigger("input");
+        } else if (type == "yearEntryMongolia") {
+          $("#entryYear").val(data).trigger("input");
+        } else if (type == "nationalNumber") {
+          $("#nationalNumber").val(data).trigger("input");
+        }
+      });
+    };
     id != "" ? (document.getElementById("categorySelect").disabled = false) : (document.getElementById("categorySelect").disabled = true);
     if (id === "1") {
       $scope.isSelected0001 = "0001";
       id != "" ? (document.getElementById("categorySelect").disabled = true) : (document.getElementById("categorySelect").disabled = false);
-
-      $rootScope.yearsArray = [];
-      $scope.generateArrayOfYears = function () {
-        var max = new Date().getFullYear();
-        var min = max - 30;
-
-        for (var i = max; i >= min; i--) {
-          $rootScope.yearsArray.push(i);
-        }
-      };
-      $scope.generateArrayOfYears();
-      $ionicPlatform.ready(function () {
-        setTimeout(function () {
-          new MobileSelect({
-            trigger: ".productYearPicker",
-            wheels: [{ data: $rootScope.yearsArray }],
-            position: [0, 0],
-            ensureBtnText: "Хадгалах",
-            title: "Үйлдвэрлэсэн он",
-            maskOpacity: 0.5,
-            cancelBtnText: "Хаах",
-            transitionEnd: function (indexArr, data) {
-              //scrolldood duusahad ajillah func
-            },
-            callback: function (indexArr, data) {
-              var a = data.join("");
-              $scope.setNumber("yearProduction", a);
-              $rootScope.newCarReq.yearProduction = a;
-              mobileSelect4.show();
-            },
-          });
-          var mobileSelect4 = new MobileSelect({
-            trigger: ".cameYearPicker",
-            wheels: [{ data: $rootScope.yearsArray }],
-            position: [0, 0],
-            ensureBtnText: "Хадгалах",
-            title: "Орж ирсэн он",
-            maskOpacity: 0.5,
-            cancelBtnText: "Хаах",
-            transitionEnd: function (indexArr, data) {
-              //scrolldood duusahad ajillah func
-            },
-            callback: function (indexArr, data) {
-              var a = data.join("");
-              $scope.setNumber("yearEntryMongolia", a);
-              $rootScope.newCarReq.yearEntryMongolia = a;
-            },
-          });
-          $("#regNums").mask("00000000");
-        }, 1000);
-      });
-      $scope.setNumber = function (type, data) {
-        //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
-        $(function () {
-          if (type == "yearProduction") {
-            $("#productYear").val(data).trigger("input");
-          } else if (type == "yearEntryMongolia") {
-            $("#entryYear").val(data).trigger("input");
-          } else if (type == "nationalNumber") {
-            $("#nationalNumber").val(data).trigger("input");
-          }
-        });
-      };
     } else if (id === "1554263832132") {
       $scope.isSelected0001 = "yes";
     } else if (id === "1554263832151") {
