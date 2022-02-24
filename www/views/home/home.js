@@ -297,8 +297,10 @@
 
     localStorage.removeItem("requestType");
 
-    $rootScope.loginUserInfo = {};
-    $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+    if (isEmpty($rootScope.loginUserInfo)) {
+      $rootScope.loginUserInfo = {};
+      $rootScope.loginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+    }
 
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     if (!isEmpty($rootScope.loginUserInfo) && !isEmpty(all_ID)) {

@@ -17,6 +17,9 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
     if ($state.current.name == "car_coll2") {
+      $rootScope.carDetailData = {};
+    }
+    if ($state.current.name == "car_coll2") {
       log;
       $ionicModal
         .fromTemplateUrl("templates/autoColl.html", {
@@ -100,11 +103,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   };
 
   $scope.saveCarCol = function () {
-    if (isEmpty($rootScope.carDetailData)) {
-      $rootScope.carDetailData = {};
-    }
     if ($scope.carCollCheckReqiured("step1")) {
-      localStorage.setItem("carColl", JSON.stringify($rootScope.carDetailData));
       $state.go("car_pic_coll");
     }
   };
@@ -269,10 +268,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
     }
     navigator.camera.getPicture(
       function (imageData) {
-        if (isEmpty($rootScope.carDetailData)) {
-          $rootScope.carDetailData = {};
-        }
-        console.log("$rootScope.carDetailData", $rootScope.carDetailData);
         $rootScope.carDetailData[$scope.selectedImagePath] = imageData;
         if (!$scope.$$phase) {
           $scope.$apply();

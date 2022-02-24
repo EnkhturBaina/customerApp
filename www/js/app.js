@@ -30,7 +30,6 @@ var app = angular
     "notif.Ctrl",
     "notif_detail.Ctrl",
     "term.Ctrl",
-    "danselect.Ctrl",
     "suppliers.Ctrl",
     "suppliers-search.Ctrl",
     "supplier-detail.Ctrl",
@@ -197,11 +196,6 @@ var app = angular
       templateUrl: "views/loan/property_collateral/property_collateral2.html",
       controller: "property_collateralCtrl",
     });
-    $stateProvider.state("property_collateral_danselect", {
-      url: "/views/danselect_property",
-      templateUrl: "views/loan/property_collateral/danselect_property.html",
-      controller: "property_collateralCtrl",
-    });
     // $stateProvider.state("basket", {
     //   url: "/views/basket",
     //   templateUrl: "views/basket/basket.html",
@@ -271,11 +265,6 @@ var app = angular
       url: "/views/notif/notif_detail",
       templateUrl: "views/notif/notif_detail/notif_detail.html",
       controller: "notif_detailCtrl",
-    });
-    $stateProvider.state("danselect", {
-      url: "/views/loan/danselect/danselect",
-      templateUrl: "views/loan/danselect/danselect.html",
-      controller: "danselectCtrl",
     });
     $stateProvider.state("term", {
       url: "/views/term",

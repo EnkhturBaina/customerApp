@@ -429,25 +429,9 @@
   };
 
   $rootScope.selectedBankSuccess = "";
-  //Дан -с нийгмийн даатгалын мэдээлэл татаж хадгалах
-  $scope.getCustomerIncomeData = function () {
-    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
-    //Нэвтэрсэн үед мэдээлэл татах
-    if (!isEmpty($rootScope.loginUserInfo)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
-        if (response[0] != "") {
-          $rootScope.danIncomeData = response[0];
-        }
-      });
-    }
-    $timeout(function () {
-      $scope.getbankData();
-    }, 500);
-  };
   var selectedbanks = [];
   $scope.sendRequest = function () {
     var requestCategoryId = JSON.parse(localStorage.getItem("requestCategory"));
-    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     //all_ID.dccustomerid
     //1639133516578203
 
@@ -457,9 +441,7 @@
       $rootScope.requestType = localStorage.getItem("requestType");
       // console.log("$rootScope.requestType", $rootScope.requestType);
       if ($rootScope.requestType == "autoColl") {
-        $scope.carDetailData = {};
         //===================Авто машин барьцаалсан зээл===================
-        $scope.carDetailData = JSON.parse(localStorage.getItem("carColl"));
         $scope.carDetailData.customerId = all_ID.dccustomerid;
         $scope.newReqiust.customerId = all_ID.dccustomerid;
         $scope.newReqiust.requestTypeId = "16082024252301";
@@ -519,7 +501,7 @@
                     console.log("$rootScope.danCustomerDat1a", $rootScope.danCustomerData);
 
                     serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (danCustomerDataResponse) {
-                      console.log("danCustomerDat1aResponse", danCustomerDat1aResponse);
+                      console.log("danCustomerDataResponse", danCustomerDataResponse);
                       serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (danIncomeDataResponse) {
                         console.log("danIncomeDataResponse", danIncomeDataResponse);
                         if (danIncomeDataResponse[0] == "success" && danIncomeDataResponse[1] != "") {
@@ -1310,6 +1292,7 @@
   };
   $scope.$on("$ionicView.enter", function () {
     var firstReq = localStorage.getItem("firstReq");
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     var local = localStorage.getItem("requestType");
     $rootScope.isCarColl = false;
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
@@ -1330,7 +1313,8 @@
     $rootScope.danCustomerData = {};
     $rootScope.danIncomeData = {};
     // $rootScope.carProduct = {};
-    if (!isEmpty($rootScope.loginUserInfo)) {
+    if (!isEmpty(all_ID)) {
+      console.log("uniqueidentifier uniqueidentifier uniqueidentifier uniqueidentifier uniqueidentifier", all_ID);
       if ("uniqueidentifier" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
         $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
         $rootScope.danCustomerData.uniqueidentifier = $rootScope.loginUserInfo.uniqueidentifier;
@@ -1413,20 +1397,78 @@
 
         if (code == 0) {
           serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://services.digitalcredit.mn/api/sso/check").then(function (response) {
-            // console.log("response autoLEASING DAN", response);
+            console.log("response autoLEASING DAN", response);
             if (!isEmpty(response.result.data)) {
               var userInfo = JSON.parse(response.result.data.info);
-              // console.log("userInfo", userInfo);
+              console.log("userInfo", userInfo);
               if (!isEmpty(userInfo)) {
-                $scope.registerFunctionAuto(userInfo);
+                // $scope.registerFunctionAuto(userInfo);
+                var value = userInfo.result;
+                var json = {
+                  customerCode: value.regnum.toUpperCase(),
+                  siRegNumber: value.regnum.toUpperCase(),
+                  isActive: "1",
+                };
+                json.dcApp_crmUser_dan = {
+                  userName: "",
+                  userId: "1",
+                  isActive: "1",
+                };
+                json.dcApp_crmUser_dan.dcApp_dcCustomer_dan = {
+                  familyName: value.surname,
+                  firstName: value.firstname,
+                  lastName: value.lastname,
+                  birthDate: value.birthDateAsText.substring(0, 10),
+                  uniqueIdentifier: value.regnum.toUpperCase(),
+                  profilePictureClob: value.image,
+                  isActive: "1",
+                  customerTypeId: "1",
+                };
+
+                $rootScope.profilePictureSideMenu = value.image;
+                localStorage.removeItem("profilePictureSideMenu");
+                localStorage.setItem("profilePictureSideMenu", value.image);
+                $rootScope.sidebarUserName = value.lastname.substr(0, 1) + ". " + value.firstname;
+
+                serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
+                  console.log("checkedValue", checkedValue);
+                  if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
+                    console.log("IS REGISTERED !!!");
+                    json.id = checkedValue[1].customerid;
+                    json.dcApp_crmUser_dan.id = checkedValue[1].custuserid;
+                    json.dcApp_crmUser_dan.dcApp_dcCustomer_dan.id = checkedValue[1].dccustomerid;
+                  }
+                  serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
+                    console.log("responseCRM", responseCRM);
+
+                    $rootScope.changeUserDan();
+
+                    $rootScope.loginUserInfo = mergeJsonObjs(responseCRM[1], $rootScope.loginUserInfo);
+                    localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+
+                    $timeout(function () {
+                      if (!isEmpty(responseCRM[1]) && responseCRM[0] == "success") {
+                        serverDeferred.requestFull("dcApp_allUserID_by_dcid_004", { dcCustomerId: responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id }).then(function (responseALLID) {
+                          console.log("res all_ID", responseALLID);
+
+                          if (responseALLID[0] == "success" && !isEmpty(responseALLID[1])) {
+                            localStorage.setItem("ALL_ID", JSON.stringify(responseALLID[1]));
+                            $rootScope.danCustomerData.id = responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id;
+                            // console.log("localStorage", localStorage);
+                          }
+                        });
+                      }
+                    }, 500);
+                  });
+                });
               }
               var userSalaryInfo = JSON.parse(response.result.data.salary);
 
               serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: userInfo.result.regnum.toUpperCase() }).then(function (checkedValue) {
-                // console.log("checkedValue", checkedValue);
+                console.log("checkedValue", checkedValue);
                 if (!isEmpty(checkedValue[1])) {
                   serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: checkedValue[1].custuserid }).then(function (responseCustomerData) {
-                    // console.log("responseCustomerData", responseCustomerData);
+                    console.log("responseCustomerData", responseCustomerData);
                     if (responseCustomerData[0] != "") {
                       //Бүртгэлтэй USER -н дата татаж харуулах
                       $rootScope.danCustomerData = responseCustomerData[0];
@@ -1437,7 +1479,7 @@
                   });
 
                   serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: checkedValue[1].dccustomerid }).then(function (response) {
-                    // console.log("get income data response", response);
+                    console.log("get income data response", response);
                     if (response[0] != "") {
                       $rootScope.danIncomeData = response[0];
                     }
@@ -1450,10 +1492,10 @@
                 $rootScope.danCustomerData.firstname = userInfo.result.firstname;
                 $rootScope.danCustomerData.uniqueidentifier = userInfo.result.regnum.toUpperCase();
 
-                // console.log("userSalaryInfo", userSalaryInfo);
+                console.log("userSalaryInfo", userSalaryInfo);
                 if (userSalaryInfo) {
                   serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
-                    // console.log("salary response", response);
+                    console.log("salary response", response);
                     if (response.status == "success" && !isEmpty(response.result)) {
                       $rootScope.monthlyAverage = response.result[0];
                       $rootScope.monthlyIncomeDisable = true;
@@ -1491,63 +1533,7 @@
     $rootScope.uniqueIdentifierDanDisable = true;
   };
 
-  $scope.registerFunctionAuto = function (param) {
-    var value = param.result;
-    var json = {
-      customerCode: value.regnum.toUpperCase(),
-      siRegNumber: value.regnum.toUpperCase(),
-      isActive: "1",
-    };
-    json.dcApp_crmUser_dan = {
-      userName: "",
-      userId: "1",
-      isActive: "1",
-    };
-    json.dcApp_crmUser_dan.dcApp_dcCustomer_dan = {
-      familyName: value.surname,
-      firstName: value.firstname,
-      lastName: value.lastname,
-      birthDate: value.birthDateAsText.substring(0, 10),
-      uniqueIdentifier: value.regnum.toUpperCase(),
-      profilePictureClob: value.image,
-      isActive: "1",
-      customerTypeId: "1",
-    };
-
-    $rootScope.profilePictureSideMenu = value.image;
-    localStorage.removeItem("profilePictureSideMenu");
-    localStorage.setItem("profilePictureSideMenu", value.image);
-    $rootScope.sidebarUserName = value.lastname.substr(0, 1) + ". " + value.firstname;
-
-    serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
-      // console.log("checkedValue", checkedValue);
-      if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
-        // console.log("IS REGISTERED !!!");
-        json.id = checkedValue[1].customerid;
-        json.dcApp_crmUser_dan.id = checkedValue[1].custuserid;
-        json.dcApp_crmUser_dan.dcApp_dcCustomer_dan.id = checkedValue[1].dccustomerid;
-      }
-      serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
-        // console.log("responseCRM", responseCRM);
-
-        $rootScope.changeUserDan();
-
-        $rootScope.loginUserInfo = mergeJsonObjs(responseCRM[1], $rootScope.loginUserInfo);
-        localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
-
-        $timeout(function () {
-          if (!isEmpty(responseCRM[1]) && responseCRM[0] == "success") {
-            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id }).then(function (responseALLID) {
-              // console.log("res all_ID", responseALLID);
-              localStorage.setItem("ALL_ID", JSON.stringify(responseALLID[0]));
-              $rootScope.danCustomerData.id = responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id;
-              // console.log("localStorage", localStorage);
-            });
-          }
-        }, 500);
-      });
-    });
-  };
+  $scope.registerFunctionAuto = function (param) {};
   $scope.replaceCyrAuto = function (lastName) {
     var rex = /^[А-ЯӨҮа-яөү\-\s]+$/;
     var inputLastName = document.getElementById("customerLastNameDan");

@@ -87,9 +87,10 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
             localStorage.removeItem("profilePictureSideMenu");
             localStorage.setItem("profilePictureSideMenu", response[0].profilepicture);
 
-            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", mobileNumber: `${username}` }).then(function (response) {
-              if (!isEmpty(response[0])) {
-                localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
+            serverDeferred.requestFull("dcApp_allUserID_004", { mobileNumber: `${username}` }).then(function (response) {
+              console.log("res", response);
+              if (response[0] == "success" && !isEmpty(response[1])) {
+                localStorage.setItem("ALL_ID", JSON.stringify(response[1]));
                 if (isEmpty($stateParams.path)) {
                   //Банк цэснээс Login хийх
                   if ($rootScope.isLoginFromRequestList) {
@@ -192,103 +193,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
       }
     }
     $rootScope.hideFooter = true;
-  };
-  $scope.gotoDanLogin = function () {
-    serverDeferred.carCalculation({ type: "auth", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
-      $rootScope.stringHtmlsLink = response.result.data;
-
-      // window.open(, "_system", "location=yes");
-      //"state": "16149527413694721614952741900321"
-      var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");
-
-      $(authWindow).on("loadstart", function (e) {
-        var url = e.originalEvent.url;
-        var code = url.indexOf("https://services.digitalcred");
-        var error = /\?error=(.+)$/.exec(url);
-        if (code == 0 || error) {
-          authWindow.close();
-        }
-
-        if (code == 0) {
-          serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://services.digitalcredit.mn/api/sso/check").then(function (response) {
-            // console.log("res", response);
-            var userInfo = response.result.data.info;
-            if (!isEmpty(userInfo)) {
-              $scope.registerFunction(JSON.parse(userInfo));
-            }
-          });
-        } else if (error) {
-          console.log(error);
-        }
-      });
-      //Дан-н цонх дуудагдахад Регистр оруулах талбар харуулах
-      $(authWindow).on("loadstop", function (e) {
-        authWindow.executeScript({ code: "$('#m-one-sign').attr('class', 'show');" });
-      });
-    });
-  };
-  $scope.registerFunction = function (param) {
-    var value = param.result;
-    var json = {
-      customerCode: value.regnum.toUpperCase(),
-      siRegNumber: value.regnum.toUpperCase(),
-      isActive: "1",
-    };
-    json.dcApp_crmUser_dan = {
-      userName: "",
-      userId: "1",
-      isActive: "1",
-    };
-    json.dcApp_crmUser_dan.dcApp_dcCustomer_dan = {
-      familyName: value.surname,
-      firstName: value.firstname,
-      lastName: value.lastname,
-      birthDate: value.birthDateAsText.substring(0, 10),
-      uniqueIdentifier: value.regnum.toUpperCase(),
-      profilePictureClob: value.image,
-      isActive: "1",
-      customerTypeId: "1",
-    };
-    //Sidebar profile зураг
-    $rootScope.profilePictureSideMenu = value.image;
-    localStorage.removeItem("profilePictureSideMenu");
-    localStorage.setItem("profilePictureSideMenu", value.image);
-    $rootScope.sidebarUserName = value.lastname.substr(0, 1) + ". " + value.firstname;
-
-    serverDeferred.requestFull("dcApp_getCustomerRegistered_004", { uniqueIdentifier: value.regnum.toUpperCase() }).then(function (checkedValue) {
-      if (!isEmpty(checkedValue[1]) && !isEmpty(checkedValue[1].customerid)) {
-        json.id = checkedValue[1].customerid;
-        json.dcApp_crmUser_dan.id = checkedValue[1].custuserid;
-        json.dcApp_crmUser_dan.dcApp_dcCustomer_dan.id = checkedValue[1].dccustomerid;
-      }
-      serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (response) {
-        if (!isEmpty(response) && response[0] == "success") {
-          $rootScope.loginUserInfo = response[1];
-          $rootScope.loginUserInfo.id = response[1].dcapp_crmuser_dan.id;
-          localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
-
-          if (isEmpty($stateParams.path)) {
-            if ($rootScope.isLoginFromRequestList) {
-              $state.go("requestList");
-              $rootScope.isDanLogin = true;
-              $scope.getRequetData();
-            } else {
-              $rootScope.isDanLogin = true;
-              $state.go("profile");
-            }
-          } else {
-            $state.go($stateParams.path);
-          }
-
-          $timeout(function () {
-            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: response[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id }).then(function (response) {
-              localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
-            });
-          }, 500);
-        } else {
-        }
-      });
-    });
   };
   $scope.closeHtmlBindBluetooth = function () {
     $scope.htmlBindModel.remove();

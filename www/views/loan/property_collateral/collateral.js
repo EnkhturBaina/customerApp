@@ -14,11 +14,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     .then(function (propertyModal) {
       $scope.propertyModal = propertyModal;
     });
-  $timeout(function () {
-    if ($state.current.name == "property_collateral_danselect") {
-      $scope.propertyModal.show();
-    }
-  }, 300);
 
   $scope.savePropertyRequestData = function () {
     if ($scope.propertyCheckReqiured("step2")) {
