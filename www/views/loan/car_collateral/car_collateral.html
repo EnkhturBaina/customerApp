@@ -17,43 +17,43 @@
                     <div class="money-input custom-form-container">
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Барьцаалах автомашины төрөл</p>
-                            <select ng-model="$root.newCarReq.carCategoryId" style="background-color: transparent" ng-change="getCarFactoryCategory(newCarReq.carCategoryId)" class="custom-form-input-select">
+                            <select ng-model="$root.carDetailData.carCategoryId" style="background-color: transparent" ng-change="getCarFactoryCategory(carDetailData.carCategoryId)" class="custom-form-input-select">
                                 <option ng-repeat="com in $root.carCategory track by $index" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Автомашины өмчлөл</p>
-                            <select ng-model="$root.newCarReq.ownershipTypeId" style="background-color: transparent" class="custom-form-input-select">
+                            <select ng-model="$root.carDetailData.ownershipTypeId" style="background-color: transparent" class="custom-form-input-select">
                                 <option ng-repeat="com in $root.ownershipSelect track by $index" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label" id="regLabel" ng-click="slideTo('regLabel')">
                             <span class="input-label">Автомашины улсын дугаар</span>
-                            <input type="text" id="nationalNumber" class="nationalNumberPicker bg-fff" placeholder="0000УАА" name="nationalNumber" ng-model="$root.newCarReq.nationalNumber" readonly />
+                            <input type="text" id="nationalNumber" class="nationalNumberPicker bg-fff" placeholder="0000УАА" name="nationalNumber" ng-model="$root.carDetailData.nationalNumber" readonly />
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Үйлдвэр</p>
-                            <select id="brandSelect" ng-model="$root.newCarReq.brandId" style="background-color: transparent" disabled ng-change="getCarModelData(newCarReq.brandId)" class="custom-form-input-select">
+                            <select id="brandSelect" ng-model="$root.carDetailData.brandId" style="background-color: transparent" disabled ng-change="getCarModelData(carDetailData.brandId)" class="custom-form-input-select">
                                 <option ng-repeat="com in factoryData track by $index" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Марк</p>
-                            <select id="modelSelect" ng-model="$root.newCarReq.markId" style="background-color: transparent" disabled class="custom-form-input-select">
+                            <select id="modelSelect" ng-model="$root.carDetailData.markId" style="background-color: transparent" disabled class="custom-form-input-select">
                                 <option ng-repeat="model in modelData track by $index" ng-if="model.name" value="{{model.id}}">
                                     {{model.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label" id="productYearPickerLabel" ng-click="slideTo('productYearPickerLabel')">
                             <span class="input-label">Үйлдвэрлэсэн он</span>
-                            <input inputmode="numeric" class="productYearPicker bg-fff" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.newCarReq.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
+                            <input inputmode="numeric" class="productYearPicker bg-fff" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.carDetailData.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
                         </label>
                         <label class="item item-input item-stacked-label form-input-label" id="cameYearPickerLabel" ng-click="slideTo('cameYearPickerLabel')">
                             <span class="input-label">Орж ирсэн он</span>
-                            <input inputmode="numeric" class="cameYearPicker bg-fff" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.newCarReq.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
+                            <input inputmode="numeric" class="cameYearPicker bg-fff" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.carDetailData.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <span class="input-label">Орлого нотлох эсэх</span>

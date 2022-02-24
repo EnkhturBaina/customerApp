@@ -232,7 +232,7 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
   $scope.salaryStep2 = function () {
     if ($scope.checkReqiured("salary-valid")) {
       if ($scope.checkReqiured("agreeBank")) {
-        $state.go("dan_page");
+        $state.go("income");
       }
     }
   };

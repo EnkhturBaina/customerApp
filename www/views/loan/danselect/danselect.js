@@ -13,24 +13,6 @@ angular.module("danselect.Ctrl", []).controller("danselectCtrl", function ($scop
     $rootScope.hideFooter = true;
   });
   $rootScope.isDanLoginAutoColl = false;
-  $scope.autoCollHand = function () {
-    $rootScope.isDanLoginAutoColl = false;
-    $rootScope.newCarReq = {};
-    $rootScope.monthlyIncomeDisable = false;
-    $rootScope.loginFromAutoColl = true;
-
-    if (isEmpty($rootScope.loginUserInfo)) {
-      $state.go("login");
-    } else {
-      $("#entryYear").val("");
-      $("#productYear").val("");
-      $state.go("car_coll");
-    }
-
-    $rootScope.lastNameDanDisable = false;
-    $rootScope.firstNameDanDisable = false;
-    $rootScope.uniqueIdentifierDanDisable = false;
-  };
 
   $rootScope.gotoDanLoginDanSelect = function () {
     $rootScope.danCustomerData = {};

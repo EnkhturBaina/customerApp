@@ -8,7 +8,7 @@
 }
 .car-collateral-img-list {
   border: 0px;
-  padding-top: 15px;
+  padding-top: 5px;
   padding-left: 0px;
   padding-right: 0px;
   background: none;
@@ -91,7 +91,9 @@
   border: 1px dashed #ccc;
   box-shadow: none !important;
   background-color: transparent !important;
-  margin: 10px 0 !important;
+  margin-bottom: 10px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
 .car-coll-selected-img {
   width: 40px !important;

@@ -41,7 +41,6 @@ var app = angular
     "money.Ctrl",
     "divide.Ctrl",
     "salary.Ctrl",
-    "dan_page.Ctrl",
   ])
   .run(function ($ionicPlatform, $cordovaNetwork, $rootScope) {
     $ionicPlatform.ready(function () {
@@ -173,10 +172,20 @@ var app = angular
       templateUrl: "views/loan/car_collateral/car_collateral.html",
       controller: "car_collateralCtrl",
     });
-    $stateProvider.state("car_coll2", {
-      url: "/views/car_collateral2",
-      templateUrl: "views/loan/car_collateral/car_collateral2.html",
+    $stateProvider.state("car_pic_coll", {
+      url: "/views/car_pic_coll",
+      templateUrl: "views/templates/car_pic.html",
       controller: "car_collateralCtrl",
+    });
+    $stateProvider.state("car_pic_auto", {
+      url: "/views/car_pic_auto",
+      templateUrl: "views/templates/car_pic.html",
+      controller: "autoleasingCtrl",
+    });
+    $stateProvider.state("apart_pic", {
+      url: "/views/apart_pic",
+      templateUrl: "views/templates/apart_pic.html",
+      controller: "autoleasingCtrl",
     });
     $stateProvider.state("property_collateral", {
       url: "/views/property_collateral",
@@ -337,11 +346,6 @@ var app = angular
       url: "/views/loan/salary",
       templateUrl: "views/loan/salary/salary.html",
       controller: "salaryCtrl",
-    });
-    $stateProvider.state("dan_page", {
-      url: "/views/loan/dan_page",
-      templateUrl: "views/loan/dan_page/dan_page.html",
-      controller: "dan_pageCtrl",
     });
     $urlRouterProvider.otherwise("/views/home");
   })

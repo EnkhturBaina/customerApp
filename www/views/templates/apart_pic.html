@@ -1,0 +1,67 @@
+<ion-view id="loanPages" hide-nav-bar="true" cache-view="false">
+    <link href="views/loan/car_collateral/car_collateral.css" rel="stylesheet" />
+    <div id="overlay" ng-click="sourceSelectOff()">
+        <div class="overlay-content">
+            <div class="get-photo-choose">
+                <div class="get-camera" ng-click="takePhoto()"><i class="icon ion-camera photo-choose-icon"></i><span class="photo-choose-span">Камер нээх</span></div>
+                <div class="get-gallery" ng-click="takePhoto('1')"><i class="icon ion-images photo-choose-icon"></i><span class="photo-choose-span">Зурагнаас сонгох</span></div>
+            </div>
+            <button class="button btn single-button">Хаах</button>
+        </div>
+    </div>
+    <div ng-repeat="data in [{'title':'Автомашин барьцаалсан зээл'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-content overflow-scroll="true" class="ion-modified-content has-header car-collateral-content">
+        <div class="big-container ghostwhite-noscroll-container">
+            <div class="magic-container">
+                <div class="bg-container car-collateral-contant-card">
+                    <div class="item car-collateral-img-list">
+                        <div class="list card car-coll-file-container" ng-click="sourceSelectOn('itemPic')">
+                            <a class="item item-icon-left ion-color-big-text" href="#">
+                                <i class="icon ion-plus" ng-if="!$root.newCarReq.itemPic"></i>
+                                <img class="icon car-coll-selected-img" ng-if="$root.newCarReq.itemPic" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic}}" width="100px" height="75px" />
+                                <span>Машины гэрчилгээний зураг</span>
+                            </a>
+                        </div>
+                        <div class="list card car-coll-file-container" ng-click="sourceSelectOn('itemPic2')">
+                            <a class="item item-icon-left ion-color-big-text" href="#">
+                                <i class="icon ion-plus" ng-if="!$root.newCarReq.itemPic2"></i>
+                                <img class="icon car-coll-selected-img" ng-if="$root.newCarReq.itemPic2" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic2}}" width="100px" height="75px" />
+                                <span>Машины нүүрэн талын зураг</span>
+                            </a>
+                        </div>
+                        <div class="list card car-coll-file-container" ng-click="sourceSelectOn('itemPic3')">
+                            <a class="item item-icon-left ion-color-big-text" href="#">
+                                <i class="icon ion-plus" ng-if="!$root.newCarReq.itemPic3"></i>
+                                <img class="icon car-coll-selected-img" ng-if="$root.newCarReq.itemPic3" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic3}}" width="100px" height="75px" />
+                                <span>Машины баруун талын зураг</span>
+                            </a>
+                        </div>
+                        <div class="list card car-coll-file-container" ng-click="sourceSelectOn('itemPic4')">
+                            <a class="item item-icon-left ion-color-big-text" href="#">
+                                <i class="icon ion-plus" ng-if="!$root.newCarReq.itemPic4"></i>
+                                <img class="icon car-coll-selected-img" ng-if="$root.newCarReq.itemPic4" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic4}}" width="100px" height="75px" />
+                                <span>Машины зүүн талын зураг</span>
+                            </a>
+                        </div>
+                        <div class="list card car-coll-file-container" ng-click="sourceSelectOn('itemPic5')">
+                            <a class="item item-icon-left ion-color-big-text" href="#">
+                                <i class="icon ion-plus" ng-if="!$root.newCarReq.itemPic5"></i>
+                                <img class="icon car-coll-selected-img" ng-if="$root.newCarReq.itemPic5" ng-src="{{'data:image/png;base64,'+$root.newCarReq.itemPic5}}" width="100px" height="75px" />
+                                <span>Машины хойд талын зураг</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bank-container">
+                <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
+                <img class="tooltip" ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" title="{{bank.department_name}}" animation="fade" />
+
+            </div>
+            <ion-footer class="bottom-footer" style="margin-bottom: 50px;">
+                <button class="button btn single-button" id="Next" ng-click="saveApartPic()">Үргэлжлүүлэх</button>
+            </ion-footer>
+        </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -7,7 +7,6 @@ app.controller("loan_successCtrl", function ($scope, $rootScope, $state, $ionicP
   $rootScope.newReqiust.getLoanAmount = "";
   $rootScope.newCarReq = {};
   $rootScope.newReqiust = {};
-  $rootScope.carCollateralRequestData = {};
 
   $rootScope.danIncomeData = {};
   $rootScope.loanAmountField = "";
