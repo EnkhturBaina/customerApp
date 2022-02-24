@@ -219,6 +219,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     } else {
       $scope.modal.hide();
       $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+      $rootScope.is30DayRequest($rootScope.danCustomerData.uniqueidentifier);
     }
   };
   $scope.cancelRegNums = function () {

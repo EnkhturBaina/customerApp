@@ -176,6 +176,7 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
     } else {
       $scope.modal.hide();
       $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+      $rootScope.is30DayRequest($rootScope.danCustomerData.uniqueidentifier);
     }
   };
   $scope.cancelRegNums = function () {

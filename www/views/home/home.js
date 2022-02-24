@@ -416,4 +416,10 @@
       $rootScope.isIncomeConfirm = "not";
     }
   };
+  $rootScope.is30DayRequest = function (reg) {
+    serverDeferred.requestFull("dcApp_checkUser_service", { register: "ГЮ97112518", type: "16082024283142", channel: "1626864048648" }).then(function (responseLoan30) {
+      console.log("A", responseLoan30);
+      console.log("B", reg);
+    });
+  };
 });
