@@ -209,7 +209,7 @@
       delete datas.aggregatecolumns;
       $rootScope.carCategory = datas;
     });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16433448242481" }).then(function (datas) {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1645754816241863" }).then(function (datas) {
       delete datas.aggregatecolumns;
       $rootScope.carNumberTaken = datas;
     });
@@ -303,6 +303,7 @@
     }
 
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+    $rootScope.all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     if (!isEmpty($rootScope.loginUserInfo) && !isEmpty(all_ID)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (response) {
         $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);

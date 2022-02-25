@@ -87,6 +87,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
               json.dcapp_all_crm_user.dcapp_all_dc_customer.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
               json.dcapp_all_crm_user.dcapp_all_dc_customer.mobilenumber = $scope.crmUserData.userName;
               json.dcapp_all_crm_user.dcapp_all_dc_customer.smscode = generatedCode;
+              console.log("A json", json);
             } else {
               var json = {
                 mobileNumber: $scope.crmUserData.userName,
@@ -105,6 +106,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
                 smsCode: generatedCode,
                 customertypeid: "1",
               };
+              console.log("B json", json);
             }
 
             // $scope.smsConfirmCode = generatedCode;
