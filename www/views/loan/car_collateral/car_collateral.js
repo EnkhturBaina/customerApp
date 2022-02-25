@@ -16,7 +16,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
 
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
-    if ($state.current.name == "car_coll2") {
+    if ($state.current.name == "car_coll") {
       $rootScope.carDetailData = {};
     }
     if ($state.current.name == "car_coll2") {
@@ -190,7 +190,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
           $("#nationalNumber").val(data).trigger("input");
         }
       });
-      console.log("$$$$", $rootScope.carDetailData);
     };
   }
 
@@ -296,7 +295,6 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       },
     });
   $scope.sourceSelectOn = function (path) {
-    console.log("path", path);
     $scope.selectedImagePath = path;
     document.getElementById("overlay").style.display = "block";
   };

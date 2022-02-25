@@ -70,7 +70,7 @@
                 <img class="tooltip" ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" title="{{bank.department_name}}" animation="fade" />
 
             </div>
-            <ion-footer class="bottom-footer" style="margin-bottom: 50px;">
+            <ion-footer class="bottom-footer" style="margin-bottom: 20px;">
                 <button class="button btn single-button" id="Next" ng-click="saveCarCol()">Үргэлжлүүлэх</button>
             </ion-footer>
         </div>

@@ -8,7 +8,7 @@
                     <div class="custom-form-container">
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Барааны төрөл</p>
-                            <select ng-model="$root.newReqiust.typeId" class="custom-form-input-select" ng-change="changeSupCategoryEco($root.newReqiust.typeId)">
+                            <select ng-model="$root.ecoProduct.categoryId" class="custom-form-input-select" ng-change="changeSupCategoryEco($root.ecoProduct.categoryId)">
                                 <option ng-repeat="cat in ecoLoanCategoryData track by $index" ng-if="cat.name && !cat.name.includes('Автомашин')" value="{{cat.id}}">
                                     {{cat.name}}
                                 </option>
@@ -16,19 +16,19 @@
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Бараа авах дэлгүүр</p>
-                            <select id="shopId" ng-model="$root.newReqiust.shopId" class="custom-form-input-select" ng-change="changeSubVendor($root.newReqiust.shopId)" disabled>
+                            <select id="shopId" ng-model="$root.ecoProduct.shopId" class="custom-form-input-select" ng-change="changeSubVendor($root.ecoProduct.shopId)" disabled>
                                 <option ng-repeat="supp in allSupplierList track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Дэлгүүрийн салбар</p>
-                            <select id="subVendorId" ng-model="$root.newReqiust.subVendorId" class="custom-form-input-select" ng-change="changeSubVendor($root.newReqiust.shopId)" disabled>
+                            <select id="subVendorId" ng-model="$root.ecoProduct.subVendorId" class="custom-form-input-select" ng-change="changeSubVendor($root.ecoProduct.shopId)" disabled>
                                 <option ng-repeat="supp in subVendor track by $index" ng-if="supp.suppliername" value="{{supp.id}}">{{supp.suppliername}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Барааны үнэ</p>
-                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.itemPrice" ng-blur="getbankDataEco()" thousand-separator select-on-click>
+                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.ecoProduct.unitPrice" ng-blur="getbankDataEco()" thousand-separator select-on-click>
                         </label>
                     </div>
                 </div>

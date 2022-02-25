@@ -11,16 +11,16 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
 
   $scope.checkReqiured = function (param) {
     if (param == "eco-valid") {
-      if (isEmpty($rootScope.newReqiust.typeId)) {
+      if (isEmpty($rootScope.ecoProduct.categoryId)) {
         $rootScope.alert("Барааны төрөл сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.shopId)) {
+      } else if (isEmpty($rootScope.ecoProduct.shopId)) {
         $rootScope.alert("Бараа авах дэлгүүр сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.subVendorId)) {
+      } else if (isEmpty($rootScope.ecoProduct.subVendorId)) {
         $rootScope.alert("Дэлгүүрийн салбар сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.newReqiust.itemPrice)) {
+      } else if (isEmpty($rootScope.ecoProduct.unitPrice)) {
         $rootScope.alert("Барааны үнэ оруулна уу", "warning");
         return false;
       } else {
@@ -38,6 +38,7 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
   $scope.ecoStep2 = function () {
     if ($scope.checkReqiured("eco-valid")) {
       if ($scope.checkReqiured("agreeBank")) {
+        console.log("A", $rootScope.newReqiust);
         $state.go("autoleasing-2");
       }
     }
@@ -55,7 +56,7 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
 
     //банк шүүлт
     json.type = "ecoLoanFilter";
-    json.totalLoan = $rootScope.newReqiust.itemPrice;
+    json.totalLoan = $rootScope.ecoProduct.unitPrice;
     json.location = "";
     json.month = 0;
     json.salaries = $rootScope.filterSalaries;
@@ -72,7 +73,7 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "eco") {
       $rootScope.newReqiust = {};
-      localStorage.setItem("firstReq", "no");
+      $rootScope.ecoProduct = {};
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
 

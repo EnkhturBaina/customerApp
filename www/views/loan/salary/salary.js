@@ -155,7 +155,6 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "salary") {
       $rootScope.newReqiust = {};
-      localStorage.setItem("firstReq", "no");
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if ($state.current.name == "salary") {

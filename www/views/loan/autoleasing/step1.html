@@ -18,10 +18,7 @@
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Автомашинаа сонгосон эсэх</p>
                             <select ng-model="$root.newReqiust.choose" class="custom-form-input-select" ng-change="selectCarChoose($root.newReqiust.choose)">
-                                <option value="1">
-                                    0001.MN -с сонгосон
-                                </option>
-                                <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
+                                <option ng-repeat="loc in $root.isCarSelection | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}
                                 </option>
                             </select>

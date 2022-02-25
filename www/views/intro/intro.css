@@ -1,14 +1,16 @@
 #loginLayout > .scroll {
   height: 200px;
   background: rgb(134, 205, 109);
-  background: url(../../img/lines/home-small-line.png), -moz-linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
-  background: url(../../img/lines/home-small-line.png), -webkit-linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
-  background: url(../../img/lines/home-small-line.png), linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
+  background: -moz-linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
+  background: -webkit-linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
+  background: linear-gradient(90deg, rgba(134, 205, 109, 1) 10%, rgba(63, 193, 243, 1) 97%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#86cd6d",endColorstr="#3fc1f3",GradientType=1);
   background-repeat: no-repeat;
   background-position: 0% 0%;
   background-size: cover;
   image-rendering: pixelated;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
 }
 .slider-pager .slider-pager-page.active {
   color: #000;

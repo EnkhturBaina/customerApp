@@ -21,7 +21,6 @@ var app = angular
     "otherGoods.Ctrl",
     "addOtherGoods.Ctrl",
     "reset_password.Ctrl",
-    "preLoan.Ctrl",
     // "settings.Ctrl",
     // "business_loan.Ctrl",
     // "basket.Ctrl",
@@ -125,11 +124,6 @@ var app = angular
       url: "/views/autoleasing-1",
       templateUrl: "views/loan/autoleasing/step1.html",
       controller: "autoleasingCtrl",
-    });
-    $stateProvider.state("pre_loan", {
-      url: "/views/pre_loan",
-      templateUrl: "views/loan/pre_loan/pre_loan.html",
-      controller: "pre_loanCtrl",
     });
     $stateProvider.state("autoleasing-2", {
       url: "/views/autoleasing-2",

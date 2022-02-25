@@ -202,7 +202,6 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "card") {
       $rootScope.newReqiust = {};
-      localStorage.setItem("firstReq", "no");
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if ($state.current.name == "card") {

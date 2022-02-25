@@ -15,7 +15,6 @@ app.controller("loan_successCtrl", function ($scope, $rootScope, $state, $ionicP
   localStorage.removeItem("consumerRequestData");
   localStorage.removeItem("otherGoodsMaxId");
 
-  $rootScope.propertyData = {};
   $rootScope.propertyRequestData = {};
   $rootScope.template = {};
   localStorage.setItem("isSupplierLoan", "no");

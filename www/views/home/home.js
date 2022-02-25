@@ -233,6 +233,9 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1645435285663193" }).then(function (response) {
       $rootScope.incomeTypeWithCondition = response;
     });
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16430027914932" }).then(function (response) {
+      $rootScope.isCarSelection = response;
+    });
   };
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");
@@ -383,6 +386,7 @@
   };
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = false;
+    $rootScope.is0001Price = false;
     $timeout(function () {
       $ionicHistory.clearCache();
     }, 300);

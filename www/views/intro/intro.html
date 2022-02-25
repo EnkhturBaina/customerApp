@@ -15,11 +15,11 @@
         <!-- <button class="button button-clear icon ion-search cus-header-icon ion-float-right ion-color-brand-green" ui-sref="search"></button> -->
       </div>
     </ion-header-bar>
-    <ion-slide-box auto-play="true" slide-interval="2000" does-continue="true" show-pager="true" class="intro-slider" style="padding-top: 20%;visibility: visible;height: 100vh;" active-slide="$root.activeSlideImage" on-slide-changed="slideChanged(index)">
+    <ion-slide-box auto-play="false" slide-interval="2000" does-continue="true" show-pager="true" class="intro-slider" style="padding-top: 15%;visibility: visible;height: 100vh;" active-slide="$root.activeSlideImage" on-slide-changed="slideChanged(index)">
       <ion-slide ng-repeat="banner in bannerData">
         <h2 class="intro-title">{{banner.text2}}</h2>
         <p class="intro-body-text">{{banner.name}}</p>
-        <img ng-src="{{banner.text1}}" style="margin-left: auto; display: block; margin-right: auto; max-width: 80%; height: 60%" />
+        <img ng-src="{{banner.text1}}" style="margin-left: auto; display: block; margin-right: auto; max-width: 80%; height: 50%;margin-top: 10%;" />
       </ion-slide>
     </ion-slide-box>
   </ion-content>

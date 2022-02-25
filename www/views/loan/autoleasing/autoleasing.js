@@ -135,10 +135,11 @@
       $rootScope.newReqiust.getLoanAmount = $rootScope.sumPrice.toString();
       $rootScope.loanAmountField = $rootScope.sumPrice.toString();
     } else if ($rootScope.requestType == "eco") {
+      console.log("$rootScope.newReqiust", $rootScope.newReqiust);
       $rootScope.newReqiust.serviceAgreementId = 1554263832132;
-      $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.itemPrice;
-      $rootScope.newReqiust.getLoanAmount = $rootScope.newReqiust.itemPrice;
-      $rootScope.loanAmountField = $rootScope.newReqiust.itemPrice;
+      $rootScope.newReqiust.loanAmount = $rootScope.ecoProduct.unitPrice;
+      $rootScope.newReqiust.getLoanAmount = $rootScope.ecoProduct.unitPrice;
+      $rootScope.loanAmountField = $rootScope.ecoProduct.unitPrice;
     } else if ($rootScope.requestType == "building") {
       $rootScope.newReqiust.serviceAgreementId = 1554263832132;
       $rootScope.newReqiust.loanAmount = $rootScope.newReqiust.buildingPrice;
@@ -205,6 +206,7 @@
 
     if ($rootScope.requestType == "consumer") {
       json.type = "consumerLeasingFilter";
+      json.isMortgage = "";
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
@@ -221,11 +223,13 @@
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
     } else if ($rootScope.requestType == "estate") {
       json.type = "estateLoanFilter";
+      json.isMortgage = "";
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
     } else if ($rootScope.requestType == "auto") {
       json.type = "autoLeasingFilterZeelMe";
+      json.isMortgage = "";
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
@@ -234,13 +238,6 @@
         json.code = $rootScope.carProduct.itemCode;
       }
       json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
-    } else if ($rootScope.requestType == "preLoan") {
-      json.type = "autoLeasingLoanFilter";
-      json.totalLoan = $rootScope.newReqiust.loanAmount;
-      json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
-      json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
-      json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
-      json.isCollateral = "";
     } else if ($rootScope.requestType == "supLoan") {
       json.type = "divideLoanFilter";
       json.totalLoan = $rootScope.newReqiust.loanAmount;
@@ -248,6 +245,7 @@
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
     } else if ($rootScope.requestType == "eco") {
       json.type = "ecoLoanFilter";
+      json.isMortgage = "";
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
@@ -341,7 +339,7 @@
         if ($rootScope.requestType == "consumer") {
           $rootScope.displayMinPayment = ($rootScope.sumPrice * $rootScope.minPayment).toFixed(2);
         } else if ($rootScope.requestType == "eco") {
-          $rootScope.displayMinPayment = ($rootScope.newReqiust.itemPrice * $rootScope.minPayment).toFixed(2);
+          $rootScope.displayMinPayment = ($rootScope.ecoProduct.unitPrice * $rootScope.minPayment).toFixed(2);
         } else if ($rootScope.requestType == "building") {
           $rootScope.displayMinPayment = ($rootScope.newReqiust.buildingPrice * $rootScope.minPayment).toFixed(2);
         } else if ($rootScope.requestType == "auto" && !isEmpty($rootScope.newReqiust.carPrice)) {
@@ -475,11 +473,11 @@
             $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 300", "danger");
           }
         });
-      } else if ($rootScope.requestType == "preLoan") {
-        //===================preLoan===================
+      } else if ($rootScope.requestType == "eco") {
+        //===================Ногоон зээл===================
+        $scope.newReqiust.requestTypeId = "16082024252192";
         $scope.newReqiust.customerId = $rootScope.all_ID.dccustomerid;
-        $scope.newReqiust.requestTypeId = "16082024283623";
-
+        $scope.newReqiust.loanAmount = $scope.newReqiust.getLoanAmount;
         //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
         $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
         //Сонгосон банк
@@ -497,7 +495,6 @@
             selectedbanks.push(AgreeBank);
           }
         });
-        // console.log("selectedbanks", selectedbanks);
         $rootScope.newReqiust.dcApp_preLoanRequestMapDV = selectedbanks;
 
         // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
@@ -508,48 +505,52 @@
             $rootScope.danIncomeData.leasingid = response[1].id;
             $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
             delete $rootScope.danIncomeData.id;
+            $scope.ecoProduct.leasingid = response[1].id;
 
-            var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
-            if (DanloginUserInfo.dcapp_crmuser_dan) {
-              $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
-              $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
-              $rootScope.danCustomerData.birthDate = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.birthdate.substring(0, 10);
-            }
-            $rootScope.danCustomerData.crmCustomerId = $rootScope.all_ID.crmuserid;
+            //Бүтээгдэхүүн бүртгэх
+            serverDeferred.requestFull("dcApp_consumer_loan_001", $rootScope.ecoProduct).then(function (responseEcoProduct) {
+              DTLPRODUCTSuccess = true;
+              if (responseEcoProduct[0] == "success" && responseEcoProduct[1] != "") {
+                var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+                if (DanloginUserInfo.dcapp_crmuser_dan) {
+                  $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+                  $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+                  $rootScope.danCustomerData.birthDate = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.birthdate.substring(0, 10);
+                }
+                $rootScope.danCustomerData.crmCustomerId = $rootScope.all_ID.crmuserid;
 
-            serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (response) {
-              //Дан -с авсан нийгмийн даатгалын мэдээлэл хадгалах
-              serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (response) {
-                //Утасны дугаар регистр өөрчлөгдсөн бол Update хийх
-                var json = {
-                  id: $rootScope.all_ID.crmcustomerid,
-                  mobileNumber: $rootScope.danCustomerData.mobilenumber,
-                  siRegNumber: $rootScope.danCustomerData.uniqueidentifier,
-                };
-                json.dcApp_crmUser_update = {
-                  id: $rootScope.all_ID.crmuserid,
-                  customerId: $rootScope.all_ID.crmcustomerid,
-                  userName: $rootScope.danCustomerData.mobilenumber,
-                };
-                serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
-                  $rootScope.HideLoader();
-                  $state.go("loan_success");
+                serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (response) {
+                  //Дан -с авсан нийгмийн даатгалын мэдээлэл хадгалах
+                  serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (response) {
+                    //Утасны дугаар регистр өөрчлөгдсөн бол Update хийх
+                    var json = {
+                      id: $rootScope.all_ID.crmcustomerid,
+                      mobileNumber: $rootScope.danCustomerData.mobilenumber,
+                      siRegNumber: $rootScope.danCustomerData.uniqueidentifier,
+                    };
+                    json.dcApp_crmUser_update = {
+                      id: $rootScope.all_ID.crmuserid,
+                      customerId: $rootScope.all_ID.crmcustomerid,
+                      userName: $rootScope.danCustomerData.mobilenumber,
+                    };
+                    serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                      $rootScope.HideLoader();
+                      $state.go("loan_success");
+                    });
+                  });
                 });
-              });
+              }
             });
           } else {
             $rootScope.HideLoader();
             $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
           }
         });
-      } else if ($rootScope.requestType == "eco" || $rootScope.requestType == "building" || $rootScope.requestType == "card" || $rootScope.requestType == "salary") {
-        //===================Ногоон зээл===================
+      } else if ($rootScope.requestType == "building" || $rootScope.requestType == "card" || $rootScope.requestType == "salary") {
         //===================Орон сууцны зээл===================
         //===================Кредит карт===================
         //===================Цалингийн зээл===================
-        if ($rootScope.requestType == "eco") {
-          $scope.newReqiust.requestTypeId = "16082024252192";
-        } else if ($rootScope.requestType == "building") {
+        if ($rootScope.requestType == "building") {
           $scope.newReqiust.requestTypeId = "16082024283632";
         } else if ($rootScope.requestType == "card") {
           $scope.newReqiust.requestTypeId = "16082024283628";
@@ -802,6 +803,7 @@
         //===================Үл хөдлөх барьцаат зээл===================
         $rootScope.newReqiust.customerId = $rootScope.all_ID.dccustomerid;
         $rootScope.newReqiust.requestTypeId = "16082024283512";
+        $scope.newReqiust.loanAmount = $scope.newReqiust.getLoanAmount;
         //Хүсэлт бүртгэх
         serverDeferred.requestFull("dcApp_carCollRequestDV_001", $rootScope.newReqiust).then(function (sendReqResponse) {
           // console.log("sendReqResponse", sendReqResponse);
@@ -809,87 +811,77 @@
           if (sendReqResponse[0] == "success" && sendReqResponse[1] != "") {
             //ҮХХ бүртгэх
             $rootScope.danIncomeData.leasingid = sendReqResponse[1].id;
-            $scope.propertyData.leasingId = sendReqResponse[1].id;
-            $scope.propertyData.customerId = $rootScope.all_ID.dccustomerid;
-            serverDeferred.requestFull("dcApp_property_data_001", $scope.propertyData).then(function (saveResponse) {
-              // console.log("saveResponse", saveResponse);
-              if (saveResponse[0] == "success" && saveResponse[1] != "") {
-                //Сонгосон банк
-                selectedbanks = [];
-                angular.forEach($rootScope.bankListFilter.Agree, function (item) {
-                  if (item.checked) {
-                    var AgreeBank = {
-                      loanId: sendReqResponse[1].id,
-                      customerId: $rootScope.all_ID.dccustomerid,
-                      bankId: item.id,
-                      isAgree: "1",
-                      isMobile: "1626864048648",
-                      wfmStatusId: "1609944755118135",
-                      productId: item.products[0].id,
-                    };
-                    selectedbanks.push(AgreeBank);
-                  }
-                });
-                var mapBankSuccess = false;
-                //MAP table рүү сонгосон банкуудыг бичих
-                selectedbanks.map((bank) => {
-                  serverDeferred.requestFull("dcApp_request_map_bank_for_detail_001", bank).then(function (response) {
-                    if (response[0] == "success" && response[1] != "") {
-                      mapBankSuccess = true;
+            //Сонгосон банк
+            selectedbanks = [];
+            angular.forEach($rootScope.bankListFilter.Agree, function (item) {
+              if (item.checked) {
+                var AgreeBank = {
+                  loanId: sendReqResponse[1].id,
+                  customerId: $rootScope.all_ID.dccustomerid,
+                  bankId: item.id,
+                  isAgree: "1",
+                  isMobile: "1626864048648",
+                  wfmStatusId: "1609944755118135",
+                  productId: item.products[0].id,
+                };
+                selectedbanks.push(AgreeBank);
+              }
+            });
+            var mapBankSuccess = false;
+            //MAP table рүү сонгосон банкуудыг бичих
+            selectedbanks.map((bank) => {
+              serverDeferred.requestFull("dcApp_request_map_bank_for_detail_001", bank).then(function (response) {
+                if (response[0] == "success" && response[1] != "") {
+                  mapBankSuccess = true;
+                }
+              });
+            });
+            //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
+            $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
+            $timeout(function () {
+              if (sendReqResponse[0] == "success" && sendReqResponse[1] != "" && mapBankSuccess) {
+                $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
+                delete $rootScope.danIncomeData.id;
+
+                var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
+                // console.log("DanloginUserInfo", DanloginUserInfo);
+                if (DanloginUserInfo.dcapp_crmuser_dan) {
+                  $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+                  $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+                  $rootScope.danCustomerData.birthDate = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.birthdate.substring(0, 10);
+                }
+
+                $rootScope.danCustomerData.crmCustomerId = $rootScope.all_ID.crmuserid;
+                // console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
+
+                serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (danCustomerDataResponse) {
+                  // console.log("danCustomerDataResponse", danCustomerDataResponse);
+                  serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (danIncomeDataResponse) {
+                    // console.log("danIncomeDataResponse", danIncomeDataResponse);
+                    if (danIncomeDataResponse[0] == "success" && danIncomeDataResponse[1] != "") {
+                      //Утасны дугаар регистр өөрчлөгдсөн бол Update хийх
+                      var json = {
+                        id: $rootScope.all_ID.crmcustomerid,
+                        mobileNumber: $rootScope.danCustomerData.mobilenumber,
+                        siRegNumber: $rootScope.danCustomerData.uniqueidentifier,
+                      };
+                      json.dcApp_crmUser_update = {
+                        id: $rootScope.all_ID.crmuserid,
+                        customerId: $rootScope.all_ID.crmcustomerid,
+                        userName: $rootScope.danCustomerData.mobilenumber,
+                      };
+                      serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                        $state.go("loan_success");
+                        $rootScope.HideLoader();
+                      });
                     }
                   });
                 });
-                //Амжилттай илгээгдсэн банкуудыг харуулахад ашиглах
-                $rootScope.selectedBankSuccess = $rootScope.bankListFilter.Agree;
-                $timeout(function () {
-                  if (sendReqResponse[0] == "success" && sendReqResponse[1] != "" && mapBankSuccess) {
-                    $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
-                    delete $rootScope.danIncomeData.id;
-
-                    var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
-                    // console.log("DanloginUserInfo", DanloginUserInfo);
-                    if (DanloginUserInfo.dcapp_crmuser_dan) {
-                      $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
-                      $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
-                      $rootScope.danCustomerData.birthDate = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.birthdate.substring(0, 10);
-                    }
-
-                    $rootScope.danCustomerData.crmCustomerId = $rootScope.all_ID.crmuserid;
-                    // console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
-
-                    serverDeferred.requestFull("dcApp_profile_dv_002", $rootScope.danCustomerData).then(function (danCustomerDataResponse) {
-                      // console.log("danCustomerDataResponse", danCustomerDataResponse);
-                      serverDeferred.requestFull("dcApp_profile_income_dv_001", $rootScope.danIncomeData).then(function (danIncomeDataResponse) {
-                        // console.log("danIncomeDataResponse", danIncomeDataResponse);
-                        if (danIncomeDataResponse[0] == "success" && danIncomeDataResponse[1] != "") {
-                          //Утасны дугаар регистр өөрчлөгдсөн бол Update хийх
-                          var json = {
-                            id: $rootScope.all_ID.crmcustomerid,
-                            mobileNumber: $rootScope.danCustomerData.mobilenumber,
-                            siRegNumber: $rootScope.danCustomerData.uniqueidentifier,
-                          };
-                          json.dcApp_crmUser_update = {
-                            id: $rootScope.all_ID.crmuserid,
-                            customerId: $rootScope.all_ID.crmcustomerid,
-                            userName: $rootScope.danCustomerData.mobilenumber,
-                          };
-                          serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
-                            $state.go("loan_success");
-                            $rootScope.HideLoader();
-                          });
-                        }
-                      });
-                    });
-                  } else {
-                    $rootScope.HideLoader();
-                    $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
-                  }
-                }, 500);
               } else {
                 $rootScope.HideLoader();
-                $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 200", "danger");
+                $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 100", "danger");
               }
-            });
+            }, 500);
           } else {
             $rootScope.HideLoader();
             $rootScope.alert("Хүсэлт илгээхэд алдаа гарлаа 300", "danger");
@@ -933,7 +925,7 @@
               yearProduction: $rootScope.carProduct.yearProduction,
               dcApp_request_map_bank_for_detail: selectedbanks,
             };
-            /*===================AutoLeasing бүтээглдэхүүн бүртгэл===================*/
+            /*===================AutoLeasing бүтээгдэхүүн бүртгэл===================*/
             serverDeferred.requestFull("dcApp_request_product_dv_with_detail_001", onlineLeasingProduct).then(function (response) {
               if (response[0] == "success" && response[1] != "") {
                 console.log("$rootScope.danIncomeData ----------------1", $rootScope.danIncomeData);
@@ -1079,7 +1071,7 @@
       } else if ((isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isCollShow) || (isEmpty($rootScope.newReqiust.collateralConditionId) && $scope.isHideFromConsumers)) {
         $rootScope.alert("ҮХХөрөнгө барьцаалах эсэхээ сонгоно уу", "warning");
         return false;
-      } else if ((isEmpty($rootScope.newReqiust.advancePayment) && $rootScope.newReqiust.collateralConditionId == "1554263832151" && !$rootScope.isCarColl) || (isEmpty($rootScope.newReqiust.advancePayment) && !$scope.isCollShow && !$rootScope.isCarColl)) {
+      } else if (isEmpty($rootScope.newReqiust.advancePayment) && !$rootScope.isHiddenAdvanePayment && !$rootScope.isCarColl) {
         $rootScope.alert("Урьдчилгаа оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.getLoanAmount)) {
@@ -1235,44 +1227,48 @@
   $scope.$on("$ionicView.enter", function () {
     var firstReq = localStorage.getItem("firstReq");
     $rootScope.all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+    console.log("$rootScope.all_ID", $rootScope.all_ID);
     var local = localStorage.getItem("requestType");
     $rootScope.isCarColl = false;
-    if (firstReq === "yes") {
+    console.log("firstReq", firstReq);
+    console.log("local", local);
+    if (firstReq === "yes" && $state.current.name == "autoleasing-2") {
+      console.log("yesyesyesyesyesyesyesyesyesyesyesyesyesyes", $rootScope.danCustomerData);
+      console.log("nononononononononononononononononononononono", $rootScope.danIncomeData);
       $rootScope.danCustomerData = {};
       $rootScope.danIncomeData = {};
     }
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "auto") {
       $rootScope.is0001Price = true;
+    } else if (firstReq === "yes" && local != "auto") {
+      console.log("A");
       $rootScope.carProduct = {};
       $rootScope.newReqiust = {};
       localStorage.setItem("firstReq", "no");
       $rootScope.displayMinPayment = 0;
       $rootScope.maxMonth = 0;
     }
-    if (local == "autoColl" && $state.current.name == "autoleasing-2") {
+    if (local == "estate" || (local == "autoColl" && $state.current.name == "autoleasing-2")) {
       $rootScope.isCarColl = true;
       document.getElementById("loanAmountRequest").disabled = false;
     } else {
       $rootScope.isCarColl = false;
     }
-    console.log("$rootScope.danIncomeData ########### ENTER", $rootScope.danIncomeData);
-    console.log("$rootScope.danCustomerData ########### ENTER", $rootScope.danCustomerData);
-    // $rootScope.carProduct = {};
     if (!isEmpty($rootScope.all_ID)) {
       console.log("uniqueidentifier uniqueidentifier uniqueidentifier uniqueidentifier uniqueidentifier", $rootScope.all_ID);
-      if ("uniqueidentifier" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
-        $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
-        $rootScope.danCustomerData.uniqueidentifier = $rootScope.loginUserInfo.uniqueidentifier;
-        $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
-        $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
-        $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
+      if ("uniqueidentifier" in $rootScope.all_ID && !isEmpty($rootScope.all_ID.uniqueidentifier)) {
+        $scope.regNum = $rootScope.all_ID.uniqueidentifier;
+        $rootScope.danCustomerData.uniqueidentifier = $rootScope.all_ID.uniqueidentifier;
+        $("#regCharA").text($rootScope.all_ID.uniqueidentifier.substr(0, 1));
+        $("#regCharB").text($rootScope.all_ID.uniqueidentifier.substr(1, 1));
+        $("#regNums").val($rootScope.all_ID.uniqueidentifier.substr(2, 8));
       }
-      if ("mobilenumber" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.mobilenumber)) {
-        $rootScope.danCustomerData.mobilenumber = $rootScope.loginUserInfo.mobilenumber;
+      if ("mobilenumber" in $rootScope.all_ID && !isEmpty($rootScope.all_ID.mobilenumber)) {
+        $rootScope.danCustomerData.mobilenumber = $rootScope.all_ID.mobilenumber;
       }
-      if ("email" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.email)) {
-        $rootScope.danCustomerData.email = $rootScope.loginUserInfo.email;
+      if ("email" in $rootScope.all_ID && !isEmpty($rootScope.all_ID.email)) {
+        $rootScope.danCustomerData.email = $rootScope.all_ID.email;
       }
       if ("identfrontpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identfrontpic)) {
         $rootScope.danCustomerData.identfrontpic = $rootScope.loginUserInfo.identfrontpic;
@@ -1281,9 +1277,12 @@
         $rootScope.danCustomerData.identbackpic = $rootScope.loginUserInfo.identbackpic;
       }
     }
+    console.log("$rootScope.danIncomeData ########### ENTER", $rootScope.danIncomeData);
+    console.log("$rootScope.danCustomerData ########### ENTER", $rootScope.danCustomerData);
     $scope.factoryData = $rootScope.carFactoryData;
     $scope.modelData = $rootScope.carModelData;
     $scope.isHideFromConsumer = false;
+    $rootScope.isHiddenAdvanePayment = false;
     $scope.disabledBtnSendReq = false;
     $rootScope.hideFooter = true;
     $rootScope.collTrueStep2 = false;
@@ -1292,8 +1291,10 @@
     if ($state.current.name == "autoleasing-2") {
       if (local == "auto") {
         $scope.isCollShow = true;
-      } else if (local == "consumer" || local == "eco" || local == "autoColl") {
+      } else if (local != "auto" || local != "building") {
         $scope.isHideFromConsumer = true;
+      } else if (local == "salary" || local == "money" || local == "card" || local == "estate" || local == "autoColl") {
+        $rootScope.isHiddenAdvanePayment = true;
       } else {
         $scope.isCollShow = false;
       }
@@ -1343,10 +1344,10 @@
 
         if (code == 0) {
           serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://services.digitalcredit.mn/api/sso/check").then(function (response) {
-            console.log("response autoLEASING DAN", response);
+            // console.log("response autoLEASING DAN", response);
             if (!isEmpty(response.result.data)) {
               var userInfo = JSON.parse(response.result.data.info);
-              console.log("userInfo", userInfo);
+              // console.log("userInfo", userInfo);
               if (!isEmpty(userInfo)) {
                 // $scope.registerFunctionAuto(userInfo);
                 var value = userInfo.result;
@@ -1395,7 +1396,7 @@
                     $timeout(function () {
                       if (!isEmpty(responseCRM[1]) && responseCRM[0] == "success") {
                         serverDeferred.requestFull("dcApp_allUserID_by_dcid_004", { dcCustomerId: responseCRM[1].dcapp_crmuser_dan.dcapp_dccustomer_dan.id }).then(function (responseALLID) {
-                          console.log("res$rootScope.all_ID", responseALLID);
+                          console.log("responseALLIDresponseALLIDresponseALLIDresponseALLIDresponseALLIDresponseALLID", responseALLID);
 
                           if (responseALLID[0] == "success" && !isEmpty(responseALLID[1])) {
                             localStorage.setItem("ALL_ID", JSON.stringify(responseALLID[1]));
@@ -1418,7 +1419,7 @@
                     console.log("responseCustomerData", responseCustomerData);
                     if (responseCustomerData[0] != "") {
                       //Бүртгэлтэй USER -н дата татаж харуулах
-                      $rootScope.danCustomerData.id = checkedValue[1].dccustomerid;
+                      $rootScope.danCustomerData.id = responseCustomerData[0].id;
                       $rootScope.danCustomerData.crmcustomerid = responseCustomerData[0].crmcustomerid;
                       $rootScope.danCustomerData.customertypeid = responseCustomerData[0].customertypeid;
                       $rootScope.danCustomerData.firstname = responseCustomerData[0].firstname;
@@ -1426,6 +1427,14 @@
                       $rootScope.danCustomerData.mobilenumber = responseCustomerData[0].mobilenumber;
                       $rootScope.danCustomerData.profilepicture = responseCustomerData[0].profilepicture;
                       $rootScope.danCustomerData.uniqueidentifier = responseCustomerData[0].uniqueidentifier;
+                      $rootScope.danCustomerData.areasofactivity = responseCustomerData[0].areasofactivity;
+                      $rootScope.danCustomerData.experienceperiodid = responseCustomerData[0].experienceperiodid;
+                      $rootScope.danCustomerData.ismarried = responseCustomerData[0].ismarried;
+                      $rootScope.danCustomerData.jobpositionid = responseCustomerData[0].jobpositionid;
+                      $rootScope.danCustomerData.mikmortgagecondition = responseCustomerData[0].mikmortgagecondition;
+                      $rootScope.danCustomerData.sectoroflastyear = responseCustomerData[0].sectoroflastyear;
+                      $rootScope.danCustomerData.identbackpic = responseCustomerData[0].identbackpic;
+                      $rootScope.danCustomerData.identfrontpic = responseCustomerData[0].identfrontpic;
                     } else {
                       $rootScope.alert("Мэдээлэл татахад алдаа гарлаа", "warning");
                     }
@@ -1636,12 +1645,12 @@
       });
     };
     id != "" ? (document.getElementById("categorySelect").disabled = false) : (document.getElementById("categorySelect").disabled = true);
-    if (id === "1") {
+    if (id === "16430027874252") {
       $scope.isSelected0001 = "0001";
       id != "" ? (document.getElementById("categorySelect").disabled = true) : (document.getElementById("categorySelect").disabled = false);
-    } else if (id === "1554263832132") {
+    } else if (id === "16430027873822") {
       $scope.isSelected0001 = "yes";
-    } else if (id === "1554263832151") {
+    } else if (id === "16430027874512") {
       $scope.isSelected0001 = "no";
     } else {
       $scope.isSelected0001 = "";

@@ -3,7 +3,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
 
   $scope.saveProperty = function () {
     if ($scope.propertyCheckReqiured("step1")) {
-      $state.go("property_collateral2");
+      $state.go("autoleasing-2");
     }
   };
   $ionicModal
@@ -240,7 +240,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "estate") {
       $rootScope.newReqiust = {};
-      localStorage.setItem("firstReq", "no");
     }
     if ($state.current.name == "property_collateral2") {
       $timeout(function () {
