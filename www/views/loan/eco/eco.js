@@ -38,7 +38,6 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
   $scope.ecoStep2 = function () {
     if ($scope.checkReqiured("eco-valid")) {
       if ($scope.checkReqiured("agreeBank")) {
-        console.log("A", $rootScope.newReqiust);
         $state.go("autoleasing-2");
       }
     }

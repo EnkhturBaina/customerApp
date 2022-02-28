@@ -127,46 +127,47 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
       $anchorScroll();
     }
   };
-  $ionicPlatform.ready(function () {
-    setTimeout(function () {
-      var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
+  // Регистрийн дугаар huseltiin dund oorchlogdox bolomjgu tul haaw !!!
+  // $ionicPlatform.ready(function () {
+  //   setTimeout(function () {
+  //     var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
 
-      new MobileSelect({
-        trigger: ".cardRegSelector",
-        wheels: [{ data: regChars }, { data: regChars }],
-        position: [0, 0],
-        ensureBtnText: "Хадгалах",
-        cancelBtnText: "Хаах",
-        transitionEnd: function (indexArr, data) {
-          //scroll xiij bhd ajillah func
-        },
-        callback: function (indexArr, data) {
-          $("#regCharA").text(data[0]);
-          $("#regCharB").text(data[1]);
-          $scope.overlayKeyOn();
+  //     new MobileSelect({
+  //       trigger: ".cardRegSelector",
+  //       wheels: [{ data: regChars }, { data: regChars }],
+  //       position: [0, 0],
+  //       ensureBtnText: "Хадгалах",
+  //       cancelBtnText: "Хаах",
+  //       transitionEnd: function (indexArr, data) {
+  //         //scroll xiij bhd ajillah func
+  //       },
+  //       callback: function (indexArr, data) {
+  //         $("#regCharA").text(data[0]);
+  //         $("#regCharB").text(data[1]);
+  //         $scope.overlayKeyOn();
 
-          keyInput = document.getElementById("regNums");
-          if (keyInput) {
-            $scope.clearD = function () {
-              keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
-            };
+  //         keyInput = document.getElementById("regNums");
+  //         if (keyInput) {
+  //           $scope.clearD = function () {
+  //             keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
+  //           };
 
-            $scope.addCode = function (key) {
-              keyInput.value = keyInput.value + key;
-            };
+  //           $scope.addCode = function (key) {
+  //             keyInput.value = keyInput.value + key;
+  //           };
 
-            $scope.emptyCode = function () {
-              keyInput.value = "";
-            };
+  //           $scope.emptyCode = function () {
+  //             keyInput.value = "";
+  //           };
 
-            $scope.emptyCode();
-          }
-        },
-        onShow: function () {},
-      });
-      $("#regNums").mask("00000000");
-    }, 1000);
-  });
+  //           $scope.emptyCode();
+  //         }
+  //       },
+  //       onShow: function () {},
+  //     });
+  //     $("#regNums").mask("00000000");
+  //   }, 1000);
+  // });
   $scope.overlayKeyOn = function () {
     $scope.modal.show();
   };
@@ -202,6 +203,9 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "card") {
       $rootScope.newReqiust = {};
+      $rootScope.danCustomerData = {};
+      $rootScope.danIncomeData = {};
+      localStorage.setItem("firstReq", "no");
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     if ($state.current.name == "card") {
@@ -209,21 +213,20 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
         $scope.getbankDataCard("forced");
       }, 200);
     }
-    $rootScope.danCustomerData = {};
-    $rootScope.danIncomeData = {};
-    if (!isEmpty($rootScope.loginUserInfo)) {
-      if ("uniqueidentifier" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
-        $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
-        $rootScope.danCustomerData.uniqueidentifier = $rootScope.loginUserInfo.uniqueidentifier;
-        $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
-        $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
-        $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
+    if (!isEmpty($rootScope.all_ID)) {
+      console.log("uniqueidentifier uniqueidentifier uniqueidentifier uniqueidentifier uniqueidentifier", $rootScope.all_ID);
+      if ("uniqueidentifier" in $rootScope.all_ID && !isEmpty($rootScope.all_ID.uniqueidentifier)) {
+        $scope.regNum = $rootScope.all_ID.uniqueidentifier;
+        $rootScope.danCustomerData.uniqueidentifier = $rootScope.all_ID.uniqueidentifier;
+        $("#regCharA").text($rootScope.all_ID.uniqueidentifier.substr(0, 1));
+        $("#regCharB").text($rootScope.all_ID.uniqueidentifier.substr(1, 1));
+        $("#regNums").val($rootScope.all_ID.uniqueidentifier.substr(2, 8));
       }
-      if ("mobilenumber" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.mobilenumber)) {
-        $rootScope.danCustomerData.mobilenumber = $rootScope.loginUserInfo.mobilenumber;
+      if ("mobilenumber" in $rootScope.all_ID && !isEmpty($rootScope.all_ID.mobilenumber)) {
+        $rootScope.danCustomerData.mobilenumber = $rootScope.all_ID.mobilenumber;
       }
-      if ("email" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.email)) {
-        $rootScope.danCustomerData.email = $rootScope.loginUserInfo.email;
+      if ("email" in $rootScope.all_ID && !isEmpty($rootScope.all_ID.email)) {
+        $rootScope.danCustomerData.email = $rootScope.all_ID.email;
       }
       if ("identfrontpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identfrontpic)) {
         $rootScope.danCustomerData.identfrontpic = $rootScope.loginUserInfo.identfrontpic;

@@ -83,6 +83,9 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "building") {
       $rootScope.newReqiust = {};
+      $rootScope.danCustomerData = {};
+      $rootScope.danIncomeData = {};
+      localStorage.setItem("firstReq", "no");
     }
 
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;

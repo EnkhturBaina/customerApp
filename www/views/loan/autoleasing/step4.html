@@ -44,7 +44,7 @@
                         </label>
                         <label class="item item-input item-select form-input-label" ng-if="!$root.isSupLoan">
                             <p class="input-label" style="margin: 0;">Ипотекийн зээлтэй эсэх</p>
-                            <select class="custom-form-input-select" ng-model="$root.danCustomerData.mikmortgagecondition" ng-options="c.id as c.name for c in mortgageData | filter:{id:'!!'}" ng-init="$root.danCustomerData.mikmortgagecondition = $root.danCustomerData.mikmortgagecondition"></select>
+                            <select class="custom-form-input-select" ng-model="$root.danCustomerData.mikmortgagecondition" ng-options="c.id as c.name for c in mortgageData | filter:{id:'!!'}" ng-init="$root.danCustomerData.mikmortgagecondition = $root.danCustomerData.mikmortgagecondition" ng-change="getbankData()"></select>
                         </label>
                         <label class="item item-input item-select form-input-label" ng-if="!$root.isSupLoan">
                             <p class="input-label" style="margin: 0;">Гэрлэлтийн байдал</p>
