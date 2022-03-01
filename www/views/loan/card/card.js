@@ -177,7 +177,6 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
     } else {
       $scope.modal.hide();
       $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
-      $rootScope.is30DayRequest($rootScope.danCustomerData.uniqueidentifier);
     }
   };
   $scope.cancelRegNums = function () {
@@ -214,7 +213,6 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
       }, 200);
     }
     if (!isEmpty($rootScope.all_ID)) {
-      console.log("uniqueidentifier uniqueidentifier uniqueidentifier uniqueidentifier uniqueidentifier", $rootScope.all_ID);
       if ("uniqueidentifier" in $rootScope.all_ID && !isEmpty($rootScope.all_ID.uniqueidentifier)) {
         $scope.regNum = $rootScope.all_ID.uniqueidentifier;
         $rootScope.danCustomerData.uniqueidentifier = $rootScope.all_ID.uniqueidentifier;
@@ -234,6 +232,9 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
       if ("identbackpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identbackpic)) {
         $rootScope.danCustomerData.identbackpic = $rootScope.loginUserInfo.identbackpic;
       }
+      serverDeferred.requestFull("dcApp_checkUser_service", { register: $rootScope.danCustomerData.uniqueidentifier, type: parseInt($rootScope.requestType), channel: 1626864048648 }).then(function (response) {
+        console.log("response dan service", response);
+      });
     }
   });
 

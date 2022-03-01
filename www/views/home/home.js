@@ -3,6 +3,8 @@
   // $rootScope.imagePath = "https://dev.veritech.mn/";
   $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
   $rootScope.imagePath = "http://leasing.digitalcredit.mn/";
+  // $rootScope.serverUrl = "http://market.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
+  // $rootScope.imagePath = "http://market.digitalcredit.mn/";
 
   $rootScope.carMarketURL = "http://0001.mn/";
   $rootScope.carMarketStorageURL = "http://0001.mn/storage/";
@@ -409,6 +411,9 @@
       localStorage.setItem("requestType", type);
       localStorage.setItem("requestCategory", cat);
       localStorage.setItem("firstReq", "yes");
+      //Дан дуудсан эсэх
+      $rootScope.isDanCalled = false;
+      $rootScope.requestType = cat;
       $state.go(state);
     } else {
       $rootScope.alert("Тун удахгүй", "warning");
@@ -422,27 +427,5 @@
     } else {
       $rootScope.isIncomeConfirm = "not";
     }
-  };
-  $rootScope.is30DayRequest = function (reg) {
-    serverDeferred.requestFull("dcApp_checkUser_service", { register: "ГЮ97112518", type: "16082024283142", channel: "1626864048648" }).then(function (responseLoan30) {
-      console.log("A", responseLoan30);
-      console.log("B", reg);
-      // if (!isEmpty(responseLoan30[1]) && responseLoan30[1].days < 30) {
-      //   $scope.alertPopup = $ionicPopup.alert({
-      //     title: "",
-      //     template: (template = '<div class="svg-box"><svg class="circular yellow-stroke">' + '<circle class="path" cx="75" cy="75" r="50" fill="none" stroke-width="4" stroke-miterlimit="10"/></svg>' + '<svg class="alert-sign yellow-stroke">' + '<g transform="matrix(1,0,0,1,-615.516,-257.346)">' + '<g transform="matrix(0.56541,-0.56541,0.56541,0.56541,93.7153,495.69)">' + '<path class="line" d="M634.087,300.805L673.361,261.53" fill="none"/>' + "</g>" + '<g transform="matrix(2.27612,-2.46519e-32,0,2.27612,-792.339,-404.147)">' + '<circle class="dot" cx="621.52" cy="316.126" r="1.318" />' + "</g>" + "</g>" + "</svg></div>" + "<style>.popup { text-align:center;}</style>" + responseLoan30[1].text + ""),
-      //     cssClass: "confirmPopup",
-      //     buttons: [
-      //       {
-      //         text: "OK",
-      //         type: "button-outline button-positive OutbuttonSize OutbuttonSizeFirst button-dc-default",
-      //         onTap: function (e) {
-      //           $state.go("home");
-      //         },
-      //       },
-      //     ],
-      //   });
-      // }
-    });
   };
 });

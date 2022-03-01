@@ -214,7 +214,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     } else {
       $scope.modal.hide();
       $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
-      $rootScope.is30DayRequest($rootScope.danCustomerData.uniqueidentifier);
     }
   };
   $scope.cancelRegNums = function () {
@@ -267,6 +266,9 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         if ("identbackpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identbackpic)) {
           $rootScope.danCustomerData.identbackpic = $rootScope.loginUserInfo.identbackpic;
         }
+        serverDeferred.requestFull("dcApp_checkUser_service", { register: $rootScope.danCustomerData.uniqueidentifier, type: parseInt($rootScope.requestType), channel: 1626864048648 }).then(function (response) {
+          console.log("response dan service", response);
+        });
       }
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;

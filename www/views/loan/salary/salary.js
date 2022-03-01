@@ -130,7 +130,6 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
     } else {
       $scope.modal.hide();
       $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
-      $rootScope.is30DayRequest($rootScope.danCustomerData.uniqueidentifier);
     }
   };
   $scope.cancelRegNums = function () {
@@ -188,6 +187,9 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
       if ("identbackpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identbackpic)) {
         $rootScope.danCustomerData.identbackpic = $rootScope.loginUserInfo.identbackpic;
       }
+      serverDeferred.requestFull("dcApp_checkUser_service", { register: $rootScope.danCustomerData.uniqueidentifier, type: parseInt($rootScope.requestType), channel: 1626864048648 }).then(function (response) {
+        console.log("response dan service", response);
+      });
     }
   });
 

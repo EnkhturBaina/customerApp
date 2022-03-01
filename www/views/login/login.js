@@ -72,11 +72,11 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
         },
       ],
     }).then(function (response) {
-      console.log("res", response);
+      // console.log("res", response);
       if (!isEmpty(response.data) && response.data.response.status === "success") {
         $rootScope.loginUserInfo = response.data.response.result;
         serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", userName: `${username}` }).then(function (response) {
-          console.log("res 2", response);
+          // console.log("res 2", response);
           if (!isEmpty(response) && !isEmpty(response[0])) {
             $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
 
@@ -88,7 +88,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
             localStorage.setItem("profilePictureSideMenu", response[0].profilepicture);
 
             serverDeferred.requestFull("dcApp_allUserID_004", { mobileNumber: `${username}` }).then(function (response) {
-              console.log("res", response);
+              // console.log("res", response);
               if (response[0] == "success" && !isEmpty(response[1])) {
                 localStorage.setItem("ALL_ID", JSON.stringify(response[1]));
                 if (isEmpty($stateParams.path)) {

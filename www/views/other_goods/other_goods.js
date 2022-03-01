@@ -91,6 +91,10 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     $rootScope.is0001Price = false;
     $rootScope.getLocalGoodsData();
     $rootScope.calcTotalPrice();
+    $rootScope.newReqiust = {};
+    $rootScope.danCustomerData = {};
+    $rootScope.danIncomeData = {};
+    localStorage.setItem("firstReq", "no");
     !isEmpty($rootScope.otherGoods) ? ($rootScope.showSec = false) : ($rootScope.showSec = true);
   });
 });

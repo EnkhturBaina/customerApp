@@ -635,7 +635,7 @@ h4 {
 #nav {
   position: absolute;
   list-style-type: none;
-  margin: 15% 0 0 10%;
+  margin: 25% 0 0 10%;
   padding: 0;
   overflow: hidden;
   height: 100%;
@@ -706,7 +706,7 @@ h4 {
 }
 
 .side-menu-logout {
-  bottom: 15%;
+  bottom: 25%;
   position: absolute;
   font-weight: bold;
 }
@@ -975,7 +975,6 @@ h4 {
 .request-middle-title {
   color: #4b5180;
   font-weight: bold;
-  padding: 10px 0px 0px 0px;
 }
 .svg-box {
   zoom: 0.8;

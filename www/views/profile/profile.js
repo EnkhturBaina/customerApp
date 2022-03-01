@@ -211,9 +211,11 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.saveIncomeProfileData = function () {
     if (isEmpty($scope.customerIncomeProfileData.incometypeid)) {
       $rootScope.alert("Та орлогын эх үүсвэр сонгоно уу", "warning");
-    } else if (isEmpty($scope.customerIncomeProfileData.monthlyincome)) {
-      $rootScope.alert("Та сарын орлогоо оруулна уу", "warning");
-    } else if (isEmpty($scope.customerIncomeProfileData.totalincomehousehold)) {
+    }
+    // else if (isEmpty($scope.customerIncomeProfileData.monthlyincome)) {
+    //   $rootScope.alert("Та сарын орлогоо оруулна уу", "warning");
+    // }
+    else if (isEmpty($scope.customerIncomeProfileData.totalincomehousehold)) {
       $rootScope.alert("Та бусад орлогоо оруулна уу", "warning");
     } else if (isEmpty($scope.customerIncomeProfileData.monthlypayment)) {
       $rootScope.alert("Та төлж буй зээлийн дүнгээ оруулна уу", "warning");
