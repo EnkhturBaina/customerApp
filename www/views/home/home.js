@@ -103,13 +103,8 @@
   $rootScope.ShowLoader();
 
   //========= first run ==========================
-  var basket = localStorage.getItem("basketData");
-  // console.log("basket", basket);
   console.log("localStorage", localStorage);
   localStorage.setItem("isSupplierLoan", "no");
-
-  if (!isEmpty(basket)) $rootScope.basketData = JSON.parse(basket);
-  else $rootScope.basketData = [];
 
   $scope.getAllBankList = function () {
     serverDeferred.carCalculation({ type: "allBanks" }).then(function (response) {
@@ -202,7 +197,7 @@
       $rootScope.customerJobPosition = response;
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16431697956661" }).then(function (response) {
-      $rootScope.buildingLoanType = response;
+      $rootScope.buildingLoanTypeData = response;
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1618473508871492" }).then(function (response) {
       $rootScope.propertyCategory = response;

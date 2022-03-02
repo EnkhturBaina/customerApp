@@ -12,7 +12,6 @@ var app = angular
     "request_list.Ctrl",
     "request_detail.Ctrl",
     "register.Ctrl",
-    "sign.Ctrl",
     "login.Ctrl",
     "autoleasing.Ctrl",
     "car_collateral.Ctrl",
@@ -23,7 +22,6 @@ var app = angular
     "reset_password.Ctrl",
     // "settings.Ctrl",
     // "business_loan.Ctrl",
-    // "basket.Ctrl",
     // "qr.Ctrl",
     // "car.Ctrl",
     "notif.Ctrl",
@@ -104,14 +102,6 @@ var app = angular
       templateUrl: "views/register/register.html",
       controller: "registerCtrl",
     });
-    $stateProvider.state("sign", {
-      url: "/views/sign",
-      templateUrl: "views/sign/sign.html",
-      controller: "signCtrl",
-      params: {
-        path: null,
-      },
-    });
     $stateProvider.state("login", {
       url: "/views/login",
       templateUrl: "views/login/login.html",
@@ -190,11 +180,6 @@ var app = angular
       templateUrl: "views/loan/property_collateral/property_collateral2.html",
       controller: "property_collateralCtrl",
     });
-    // $stateProvider.state("basket", {
-    //   url: "/views/basket",
-    //   templateUrl: "views/basket/basket.html",
-    //   controller: "basketCtrl",
-    // });
     $stateProvider.state("loan_success", {
       url: "/views/loan_success",
       templateUrl: "views/loan_success/loan_success.html",
@@ -220,11 +205,6 @@ var app = angular
       templateUrl: "views/car/car-info.html",
       controller: "carinfoCtrl",
     });
-    // $stateProvider.state("qr", {
-    //   url: "/views/qr",
-    //   templateUrl: "views/qr/qr.html",
-    //   controller: "qrCtrl",
-    // });
     $stateProvider.state("otherGoods", {
       url: "/views/otherGoods",
       templateUrl: "views/other_goods/other_goods.html",

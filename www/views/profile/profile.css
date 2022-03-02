@@ -122,6 +122,8 @@ input[type="number"] {
 .profile-label {
   width: auto !important;
   line-height: 30px;
+  border: none !important;
+  padding: 10px 0 5px 16px;
 }
 
 .profile-label-pass {

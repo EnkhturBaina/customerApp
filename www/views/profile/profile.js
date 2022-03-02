@@ -1,28 +1,4 @@
-angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $ionicHistory, $state, $stateParams, $rootScope, serverDeferred, $ionicPlatform, $ionicModal, $timeout, $ionicTabsDelegate, $ionicLoading) {
-  $(".profileRegSelector").mask("99999999");
-  $scope.replaceCyr = function (lastName) {
-    var rex = /^[А-ЯӨҮа-яөү\-\s]+$/;
-    var inputLastName = document.getElementById("customerLastName");
-    if (rex.test(lastName) == false) {
-      document.getElementById("lastNameError").style.display = "block";
-      inputLastName.value = inputLastName.value.replace(inputLastName.value, "");
-    } else {
-      document.getElementById("lastNameError").style.display = "none";
-    }
-  };
-  $scope.replaceCyr2 = function (firstName) {
-    var rex = /^[А-ЯӨҮа-яөү\-\s]+$/;
-    var inputFirstName = document.getElementById("customerFirstName");
-    if (rex.test(firstName) == false) {
-      document.getElementById("firstNameError").style.display = "block";
-      inputFirstName.value = inputFirstName.value.replace(inputFirstName.value, "");
-    } else {
-      document.getElementById("firstNameError").style.display = "none";
-    }
-  };
-
-  $scope.nextPath = $stateParams.path;
-
+angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $state, $rootScope, serverDeferred, $ionicPlatform, $ionicModal, $timeout, $ionicTabsDelegate) {
   $rootScope.customerProfileData = {};
   $rootScope.customerProfilePicture = {};
   $scope.customerProfileData.mobilenumber = "";
@@ -30,14 +6,13 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
 
   $rootScope.customerIncomeProfileData = {};
 
-  $scope.regNum = "";
-
   $rootScope.getProfileData = function () {
     // $rootScope.ShowLoader();
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     if (!isEmpty($rootScope.loginUserInfo)) {
       $rootScope.loginUserInfo = {};
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (response) {
+        console.log("res", response);
         $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
         if (response[0] != "") {
           $rootScope.customerProfileData = response[0];
@@ -46,12 +21,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           $rootScope.profilePictureSideMenu = response[0].profilepicture;
           $rootScope.customerProfilePicture.profilePictureClob = response[0].profilepicture;
 
-          if (response[0].uniqueidentifier) {
-            $scope.regNum = response[0].uniqueidentifier;
-            $("#regCharA").text(response[0].uniqueidentifier.substr(0, 1));
-            $("#regCharB").text(response[0].uniqueidentifier.substr(1, 1));
-            $("#regNums").val(response[0].uniqueidentifier.substr(2, 8));
-          }
           serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (responseIncome) {
             if (!isEmpty(responseIncome[0])) {
               $rootScope.customerIncomeProfileData = responseIncome[0];
@@ -63,9 +32,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
             }
           });
         }
-        // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1604389075984789", dim1: $rootScope.loginUserInfo.customerid }).then(function (response) {
-        //   $rootScope.customerDealBanks = response;
-        // });
         $rootScope.HideLoader();
       });
     }
@@ -85,7 +51,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.saveProfileData = function () {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     $rootScope.ShowLoader();
-    $scope.customerProfileData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
 
     if (isEmpty($scope.customerProfileData.lastname)) {
       $rootScope.HideLoader();
@@ -234,22 +199,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     }
   };
 
-  $scope.generateQR = function () {
-    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
-    $rootScope.customeridforQR = {};
-    $scope.showCreateQr = true;
-    $rootScope.customeridforQR.text = all_ID.dccustomerid;
-
-    if (!isEmpty($rootScope.loginUserInfo)) {
-      serverDeferred.requestFull("dcApp_qr_generator", $rootScope.customeridforQR).then(function (response) {
-        $rootScope.customerQrData = {};
-        $rootScope.customerQrData.id = all_ID.dccustomerid;
-        $rootScope.customerQrData.customerqr = "jpg♠" + response[1].value;
-
-        serverDeferred.requestFull("dcApp_customer_qr_dv_002", $rootScope.customerQrData).then(function (response) {});
-      });
-    }
-  };
   $scope.ppSourceSelectOn = function (path) {
     $scope.selectedImagePath = path;
     document.getElementById("overlayProfilePicute").style.display = "block";
@@ -257,114 +206,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.ppSourceSelectOff = function () {
     document.getElementById("overlayProfilePicute").style.display = "none";
   };
-  $scope.growDivTab3 = function (id) {
-    var grow = document.getElementById("grow" + id);
-    $("#grow" + id).toggleClass("expand");
-    $("#grow" + id).toggleClass("expanded");
-
-    if ($("#grow" + id).hasClass("expanded")) {
-      grow.style.height = 0;
-      document.getElementById("propertySaveButton" + id).style.display = "none";
-    } else {
-      var wrapper = document.querySelector(".measuringWrapper" + id);
-      grow.style.height = wrapper.clientHeight + "px";
-      document.getElementById("propertySaveButton" + id).style.display = "block";
-    }
-  };
-
-  $rootScope.customerCar = [];
-  $scope.companyData = [];
-  $scope.carmerkData = [];
-  $scope.getCompanyData = function () {
-    if (isEmpty($scope.companyData)) {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1544591440502" }).then(function (datas) {
-        delete datas.aggregatecolumns;
-        $scope.companyData = datas;
-      });
-    }
-  };
-  $scope.getCarmarkData = function (val) {
-    var json = { systemmetagroupid: "1544591440537", factoryid: val };
-    serverDeferred.request("PL_MDVIEW_004", json).then(function (datas) {
-      delete datas.aggregatecolumns;
-      $scope.carmerkData = datas;
-    });
-  };
-
-  $scope.saveRegNums = function () {
-    if (keyInput.value.length < 8) {
-      $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
-    } else {
-      $scope.modal.hide();
-    }
-  };
-  $scope.cancelRegNums = function () {
-    $("#regCharA").text($scope.regNum.substr(0, 1));
-    $("#regCharB").text($scope.regNum.substr(1, 1));
-    $("#regNums").val($scope.regNum.substr(2, 8));
-    $scope.modal.hide();
-  };
-  $ionicModal
-    .fromTemplateUrl("templates/modal.html", {
-      scope: $scope,
-      backdropClickToClose: false,
-    })
-    .then(function (modal) {
-      $scope.modal = modal;
-    });
-  if (!isEmpty($scope.nextPath)) {
-    $scope.overlayOn();
-  }
-  var keyInput;
-  $ionicPlatform.ready(function () {
-    setTimeout(function () {
-      var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
-      new MobileSelect({
-        trigger: ".profileRegSelector",
-        wheels: [{ data: regChars }, { data: regChars }],
-        position: [0, 0],
-        ensureBtnText: "Хадгалах",
-        cancelBtnText: "Хаах",
-        transitionEnd: function (indexArr, data) {
-          //scroll xiij bhd ajillah func
-        },
-        callback: function (indexArr, data) {
-          $("#regCharA").text(data[0]);
-
-          $("#regCharB").text(data[1]);
-          $scope.overlayKeyOn();
-
-          keyInput = document.getElementById("regNums");
-          if (keyInput) {
-            $scope.clearD = function () {
-              keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
-            };
-
-            $scope.addCode = function (key) {
-              keyInput.value = keyInput.value + key;
-            };
-
-            $scope.emptyCode = function () {
-              keyInput.value = "";
-            };
-
-            $scope.emptyCode();
-          }
-        },
-      });
-    }, 1000);
-  });
-  $scope.overlayKeyOn = function () {
-    $scope.modal.show();
-  };
-  $("#productYear").mask("0000");
-  $("#entryYear").mask("0000");
-  $("#odo").mask("000000000");
-  $("#nationalNumber").mask("0000 AAA", {
-    translation: {
-      A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
-    },
-  });
 
   $rootScope.backFromProfile = function () {
     $state.go("home");
