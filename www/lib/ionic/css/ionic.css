@@ -10045,7 +10045,7 @@ a.dark {
   margin-top: 19px !important;
 }
 .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 .platform-ios.platform-cordova:not(.fullscreen) .tabs-top > .tabs,
 .platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
