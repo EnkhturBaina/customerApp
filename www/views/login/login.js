@@ -2,9 +2,11 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   $scope.inputType = "password";
   $scope.user = {};
 
-  $rootScope.hideFooter = true;
   $(".login-mobile").mask("00000000");
 
+  $rootScope.$on("$ionicView.enter", function () {
+    $rootScope.hideFooter = true;
+  });
   $scope.hideShowPassword = function () {
     if ($scope.inputType == "password") {
       $("#eye-icon").removeClass("ion-eye");
