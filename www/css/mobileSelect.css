@@ -165,6 +165,7 @@
   opacity: 1;
   z-index: 10000;
   visibility: visible;
+  display: contents !important;
 }
 .mobileSelect-show .content {
   bottom: 0;
