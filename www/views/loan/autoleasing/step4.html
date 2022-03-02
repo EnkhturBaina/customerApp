@@ -50,9 +50,9 @@
                             <p class="input-label" style="margin: 0;">Гэрлэлтийн байдал</p>
                             <select class="custom-form-input-select" ng-model="$root.danCustomerData.ismarried" ng-options="c.id as c.name for c in familtStatData | filter:{id:'!!'}" ng-init="$root.danCustomerData.ismarried = $root.danCustomerData.ismarried"></select>
                         </label>
-                        <label class="item item-input item-select form-input-label" ng-if="$root.isSupLoan">
+                        <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Боловсрол</p>
-                            <select ng-model="$root.newReqiust.educationid" class="custom-form-input-select" ng-init="$root.danCustomerData.educationid = $root.danCustomerData.educationid">
+                            <select ng-model="$root.danCustomerData.educationid" class="custom-form-input-select" ng-init="$root.danCustomerData.educationid = $root.danCustomerData.educationid">
                                 <option ng-repeat="loc in $root.educationData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>

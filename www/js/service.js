@@ -124,7 +124,7 @@
       carCalculation: function (json, newurl) {
         var deferred = $q.defer();
         $rootScope.OfflineLogin = false;
-        var url = "https://services.digitalcredit.mn/api/services/v1";
+        var url = "https://devservices.digitalcredit.mn/api/services/v1";
         if (newurl) {
           url = newurl;
         }

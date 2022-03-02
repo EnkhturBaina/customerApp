@@ -221,7 +221,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       //   $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
       //   return false;
       // } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
-      //   $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
+      //   $rootScope.alert("Орлого баталгаажих эсэх сонгоно уу", "warning");
       //   return false;
       // }
       else {

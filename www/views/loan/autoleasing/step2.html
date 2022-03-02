@@ -38,8 +38,7 @@
                             </label>
                             <div ng-if="!$root.isHiddenAdvanePayment">
                                 <div ng-if="!$root.collTrueStep2" class="vxx-title-container">
-                                    <span class="vxx-title">Тухайн зээлийн урьдчилгаа багадаа <br />
-                                        <span class="step2-valid-text-bold">{{$root.displayMinPayment|formatNumber}}</span> байх боломжтой
+                                    <span class="vxx-title">Төлөх урьдчилгаа багадаа <span class="step2-valid-text-bold">{{$root.displayMinPayment|formatNumber}} ₮</span>
                                     </span>
                                 </div>
                             </div>
@@ -50,10 +49,9 @@
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Зээл авах хугацаа (сараар)</p>
-                            <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankData()" ng-keyup="hideKeyboard($event)" select-on-click>
+                            <input type="tel" placeholder="" id="step2loanMonth" name="" ng-model="$root.newReqiust.loanMonth" class="property-input" ng-blur="getbankData()" ng-change="calcLoanMonth()" ng-keyup="hideKeyboard($event)" select-on-click>
                         </label>
-                        <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <br />
-                                <span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байх боломжтой</span></div>
+                        <div class="vxx-title-container"><span class="vxx-title">Зээл олгох хугацаа <span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сараас ихгүй байна</span></div>
                         <label class="item item-input item-stacked-label form-input-label" id="regLabel" ng-click="slideTo('regLabel')" disabled>
                             <span class="input-label">Регистрийн дугаар</span>
                             <div class="reg-chars-container">

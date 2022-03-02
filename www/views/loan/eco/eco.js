@@ -69,6 +69,7 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
   $rootScope.$on("$ionicView.enter", function () {
     var firstReq = localStorage.getItem("firstReq");
     var local = localStorage.getItem("requestType");
+    $rootScope.isIncomeConfirm = true;
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "eco") {
       $rootScope.newReqiust = {};

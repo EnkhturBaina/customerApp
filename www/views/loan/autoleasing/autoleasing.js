@@ -217,11 +217,13 @@
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
+      json.isConfirm = $rootScope.newReqiust.proveIncome;
     } else if ($rootScope.requestType == "estate") {
       json.type = "estateLoanFilter";
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
+      json.isConfirm = $rootScope.newReqiust.proveIncome;
     } else if ($rootScope.requestType == "auto") {
       json.type = "autoLeasingFilterZeelMe";
       json.totalLoan = $rootScope.newReqiust.getLoanAmount;
@@ -230,6 +232,11 @@
       json.isCollateral = isEmpty($rootScope.newReqiust.collateralConditionId) ? "" : $rootScope.newReqiust.collateralConditionId;
       if ($scope.isSelected0001 === "0001") {
         json.code = $rootScope.carProduct.itemCode;
+      }
+      if ($rootScope.newReqiust.choose === "16430027873822") {
+        json.carUsageCondition = $rootScope.carProduct.productTypeId;
+      } else {
+        json.carUsageCondition = "";
       }
       json.preTotal = isEmpty($rootScope.newReqiust.advancePayment) ? 0 : $rootScope.newReqiust.advancePayment;
     } else if ($rootScope.requestType == "supLoan") {
@@ -1049,7 +1056,7 @@
         $rootScope.alert("Орж ирсэн он бүрэн оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
-        $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
+        $rootScope.alert("Орлого баталгаажих эсэх сонгоно уу", "warning");
         return false;
       } else {
         return true;
@@ -1148,7 +1155,7 @@
       } else if (isEmpty($rootScope.danCustomerData.ismarried) && !$rootScope.isSupLoan) {
         $rootScope.alert("Гэрлэлтийн байдал сонгоно уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.educationid) && $rootScope.isSupLoan) {
+      } else if (isEmpty($rootScope.danCustomerData.educationid)) {
         $rootScope.alert("Боловсрол сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.experienceperiodid) && !$rootScope.isSupLoan) {
@@ -1590,6 +1597,7 @@
   };
 
   $scope.selectCarChoose = function (id) {
+    console.log("id", id);
     $rootScope.carProduct = {};
 
     $rootScope.yearsArray = [];
@@ -1731,5 +1739,10 @@
         $rootScope.isEMongolia = el.number1;
       }
     });
+  };
+  $scope.calcLoanMonth = function () {
+    if ($rootScope.newReqiust.loanMonth > $rootScope.maxMonth) {
+      $rootScope.newReqiust.loanMonth = $rootScope.maxMonth;
+    }
   };
 });
