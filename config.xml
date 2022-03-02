@@ -36,23 +36,6 @@
         <icon density="xxhdpi" src="res/icons/android/drawable-xxhdpi-icon.png" />
         <icon density="xxxhdpi" src="res/icons/android/drawable-xxxhdpi-icon.png" />
     </platform>
-    <platform name="ios">
-        <icon height="180" src="res/icons/ios/icon-60-3x.png" width="180" />
-        <icon height="60" src="res/icons/ios/icon-60.png" width="60" />
-        <icon height="120" src="res/icons/ios/icon-60-2x.png" width="120" />
-        <icon height="76" src="res/icons/ios/icon-76.png" width="76" />
-        <icon height="152" src="res/icons/ios/icon-76-2x.png" width="152" />
-        <icon height="40" src="res/icons/ios/icon-40.png" width="40" />
-        <icon height="80" src="res/icons/ios/icon-40-2x.png" width="80" />
-        <icon height="57" src="res/icons/ios/icon-57.png" width="57" />
-        <icon height="114" src="res/icons/ios/icon-57-2x.png" width="114" />
-        <icon height="72" src="res/icons/ios/icon-72.png" width="72" />
-        <icon height="144" src="res/icons/ios/icon-72-2x.png" width="144" />
-        <icon height="29" src="res/icons/ios/icon-small.png" width="29" />
-        <icon height="58" src="res/icons/ios/icon-small-2x.png" width="58" />
-        <icon height="50" src="res/icons/ios/icon-50.png" width="50" />        
-        <icon height="100" src="res/icons/ios/icon-50-2x.png" width="100" />
-    </platform>
     <platform name="windows">
         <icon height="150" src="res/icons/windows/Square150x150Logo.scale-100.png" width="150" />
         <icon height="360" src="res/icons/windows/Square150x150Logo.scale-240.png" width="360" />
