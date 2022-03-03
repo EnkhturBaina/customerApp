@@ -22,6 +22,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           $rootScope.customerProfilePicture.profilePictureClob = response[0].profilepicture;
 
           serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (responseIncome) {
+            console.log("responseIncome", responseIncome);
             if (!isEmpty(responseIncome[0])) {
               $rootScope.customerIncomeProfileData = responseIncome[0];
               $rootScope.loginUserInfo = mergeJsonObjs(responseIncome[0], $rootScope.loginUserInfo);
@@ -189,6 +190,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         if ($scope.customerIncomeProfileData != "") {
           var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
           $rootScope.customerIncomeProfileData.customerid = all_ID.dccustomerid;
+          console.log("$rootScope.customerIncomeProfileData", $rootScope.customerIncomeProfileData);
           serverDeferred.requestFull("dcApp_profile_income_dv_002", $rootScope.customerIncomeProfileData).then(function (response) {
             $rootScope.alert("Амжилттай", "success");
           });
@@ -218,4 +220,13 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $state.go("home");
     }
   });
+  $rootScope.proofOfIncomeData = $rootScope.incomeTypeWithCondition;
+  $scope.selectIncomeTypeProfile = function (id) {
+    $rootScope.proofOfIncomeData = [];
+    $rootScope.incomeTypeWithCondition.forEach((el) => {
+      if (el.id === id) {
+        $rootScope.proofOfIncomeData.push(el);
+      }
+    });
+  };
 });

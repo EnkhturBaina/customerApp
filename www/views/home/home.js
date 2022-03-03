@@ -451,9 +451,10 @@
     }
   };
   $rootScope.checkUserService = function () {
+    console.log();
     serverDeferred.requestFull("dcApp_checkUser_service", { register: $rootScope.danCustomerData.uniqueidentifier, type: parseInt($rootScope.requestTypeId), channel: 1626864048648 }).then(function (response) {
-      // console.log("response dan service", response);
-      if (response[0] == "success" && response[1].data.count == 1) {
+      console.log("response dan service", response);
+      if (response[0] == "success" && response[1].data.count !== "0") {
         $ionicPopup.show({
           template: response[1].data.message,
           cssClass: "confirmPopup",

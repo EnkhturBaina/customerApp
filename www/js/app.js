@@ -130,21 +130,11 @@ var app = angular
       templateUrl: "views/loan/autoleasing/step4.html",
       controller: "autoleasingCtrl",
     });
-    $stateProvider.state("autoleasing-5", {
-      url: "/views/autoleasing-5",
-      templateUrl: "views/loan/autoleasing/step5.html",
-      controller: "autoleasingCtrl",
-    });
     $stateProvider.state("ident-pic", {
       url: "/views/ident-pic",
       templateUrl: "views/loan/autoleasing/ident_pic.html",
       controller: "autoleasingCtrl",
     });
-    // $stateProvider.state("autoleasing-bank-info", {
-    //   url: "/views/autoleasing-bank-info",
-    //   templateUrl: "views/loan/autoleasing/step3-bank-info.html",
-    //   controller: "autoleasingCtrl",
-    // });
     // $stateProvider.state("business_loan", {
     //   url: "/views/business_loan",
     //   templateUrl: "views/loan/business_loan/business_loan.html",

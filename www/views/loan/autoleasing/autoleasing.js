@@ -356,7 +356,7 @@
       $scope.getbankData();
     }, 100);
   }
-  if ($state.current.name == "autoleasing-4" || $state.current.name == "autoleasing-5") {
+  if ($state.current.name == "autoleasing-4") {
     $timeout(function () {
       $scope.getbankData();
     }, 1000);
@@ -365,7 +365,6 @@
   $rootScope.selectedBankSuccess = "";
   var selectedbanks = [];
   $scope.sendRequest = function () {
-    var requestCategoryId = JSON.parse(localStorage.getItem("requestCategory"));
     //all_ID.dccustomerid
     //1639133516578203
 

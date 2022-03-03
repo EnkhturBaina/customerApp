@@ -17,12 +17,6 @@
   background-color: ghostwhite;
   height: 100%;
 }
-.qr-ico {
-  margin-right: 5px;
-  font-size: 15px;
-  z-index: 1;
-}
-
 .toggle input:checked + .track .handle {
   -webkit-transform: translate3d(30px, 0, 0);
   transform: translate3d(30px, 0, 0);
@@ -220,10 +214,6 @@
   margin: 0;
   font-weight: bold;
 }
-.autoleasing-step1-content {
-  height: 100% !important;
-  position: relative !important;
-}
 .autoleas-step3-content {
   height: 94% !important;
   position: relative !important;
@@ -334,9 +324,6 @@
   font-weight: normal !important;
   width: 85% !important;
   margin: 10px auto !important;
-}
-.autoleasing-step1-content {
-  top: 0px !important;
 }
 .step5-mid-title {
   margin: 5px auto !important;
