@@ -49,14 +49,14 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
           registeredUserData = response[0];
           $timeout(function () {
             serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", crmUserId: response[0].id }).then(function (response) {
+              $rootScope.dc_customer_id = response[0].dccustomerid;
               localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
             });
 
-            var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
             var generatedCode = Math.floor(100000 + Math.random() * 900000);
 
             var updateCode = {
-              id: all_ID.dccustomerid,
+              id: $rootScope.dc_customer_id,
               smsCode: generatedCode,
             };
 

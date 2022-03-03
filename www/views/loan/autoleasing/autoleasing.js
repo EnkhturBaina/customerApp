@@ -1590,58 +1590,60 @@
       }
     };
     $scope.generateArrayOfYears();
-    $ionicPlatform.ready(function () {
-      setTimeout(function () {
-        new MobileSelect({
-          trigger: ".productYearPicker",
-          wheels: [{ data: $rootScope.yearsArray }],
-          position: [0, 0],
-          ensureBtnText: "Хадгалах",
-          title: "Үйлдвэрлэсэн он",
-          maskOpacity: 0.5,
-          cancelBtnText: "Хаах",
-          transitionEnd: function (indexArr, data) {
-            //scrolldood duusahad ajillah func
-          },
-          callback: function (indexArr, data) {
-            var a = data.join("");
-            $scope.setNumber("yearProduction", a);
-            $rootScope.carProduct.yearProduction = a;
-            mobileSelect4.show();
-          },
-        });
-        var mobileSelect4 = new MobileSelect({
-          trigger: ".cameYearPicker",
-          wheels: [{ data: $rootScope.yearsArray }],
-          position: [0, 0],
-          ensureBtnText: "Хадгалах",
-          title: "Орж ирсэн он",
-          maskOpacity: 0.5,
-          cancelBtnText: "Хаах",
-          transitionEnd: function (indexArr, data) {
-            //scrolldood duusahad ajillah func
-          },
-          callback: function (indexArr, data) {
-            var a = data.join("");
-            $scope.setNumber("yearEntryMongolia", a);
-            $rootScope.carProduct.yearEntryMongolia = a;
-          },
-        });
-        $("#regNums").mask("00000000");
-      }, 1000);
-    });
-    $scope.setNumber = function (type, data) {
-      //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
-      $(function () {
-        if (type == "yearProduction") {
-          $("#productYear").val(data).trigger("input");
-        } else if (type == "yearEntryMongolia") {
-          $("#entryYear").val(data).trigger("input");
-        } else if (type == "nationalNumber") {
-          $("#nationalNumber").val(data).trigger("input");
-        }
+    if (id !== "16430027874252") {
+      $ionicPlatform.ready(function () {
+        setTimeout(function () {
+          new MobileSelect({
+            trigger: ".productYearPicker",
+            wheels: [{ data: $rootScope.yearsArray }],
+            position: [0, 0],
+            ensureBtnText: "Хадгалах",
+            title: "Үйлдвэрлэсэн он",
+            maskOpacity: 0.5,
+            cancelBtnText: "Хаах",
+            transitionEnd: function (indexArr, data) {
+              //scrolldood duusahad ajillah func
+            },
+            callback: function (indexArr, data) {
+              var a = data.join("");
+              $scope.setNumber("yearProduction", a);
+              $rootScope.carProduct.yearProduction = a;
+              mobileSelect4.show();
+            },
+          });
+          var mobileSelect4 = new MobileSelect({
+            trigger: ".cameYearPicker",
+            wheels: [{ data: $rootScope.yearsArray }],
+            position: [0, 0],
+            ensureBtnText: "Хадгалах",
+            title: "Орж ирсэн он",
+            maskOpacity: 0.5,
+            cancelBtnText: "Хаах",
+            transitionEnd: function (indexArr, data) {
+              //scrolldood duusahad ajillah func
+            },
+            callback: function (indexArr, data) {
+              var a = data.join("");
+              $scope.setNumber("yearEntryMongolia", a);
+              $rootScope.carProduct.yearEntryMongolia = a;
+            },
+          });
+          $("#regNums").mask("00000000");
+        }, 1000);
       });
-    };
+      $scope.setNumber = function (type, data) {
+        //ulsiin dugaariin input ruu songoson ulsiin dugaariig set hiih func
+        $(function () {
+          if (type == "yearProduction") {
+            $("#productYear").val(data).trigger("input");
+          } else if (type == "yearEntryMongolia") {
+            $("#entryYear").val(data).trigger("input");
+          } else if (type == "nationalNumber") {
+            $("#nationalNumber").val(data).trigger("input");
+          }
+        });
+      };
+    }
     id != "" ? (document.getElementById("categorySelect").disabled = false) : (document.getElementById("categorySelect").disabled = true);
     if (id === "16430027874252") {
       $scope.isSelected0001 = "0001";

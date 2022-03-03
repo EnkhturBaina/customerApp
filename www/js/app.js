@@ -314,7 +314,7 @@ var app = angular
       $rootScope.loginUserInfo = undefined;
       localStorage.removeItem("loginUserInfo");
       localStorage.removeItem("profilePictureSideMenu");
-      localStorage.removeItem("all_ID");
+      localStorage.removeItem("ALL_ID");
       //Хэрэглээний лизинг
       localStorage.removeItem("otherGoods");
       localStorage.removeItem("consumerRequestData");
@@ -336,7 +336,7 @@ var app = angular
               $rootScope.loginUserInfo = undefined;
               localStorage.removeItem("loginUserInfo");
               localStorage.removeItem("profilePictureSideMenu");
-              localStorage.removeItem("all_ID");
+              localStorage.removeItem("ALL_ID");
               $rootScope.danCustomerData = {};
               $rootScope.danIncomeData = {};
               //Хэрэглээний лизинг
@@ -344,6 +344,7 @@ var app = angular
               localStorage.removeItem("consumerRequestData");
               localStorage.removeItem("otherGoodsMaxId");
 
+              localStorage.setItem("firstReq", "yes");
               $rootScope.profilePictureSideMenu = "";
               location.reload();
             },
