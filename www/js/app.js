@@ -16,7 +16,7 @@ var app = angular
     "autoleasing.Ctrl",
     "car_collateral.Ctrl",
     "property_collateral.Ctrl",
-    "carinfo.Ctrl",
+    // "carinfo.Ctrl",
     "otherGoods.Ctrl",
     "addOtherGoods.Ctrl",
     "reset_password.Ctrl",
@@ -200,11 +200,11 @@ var app = angular
     //   templateUrl: "views/car/brandlist.html",
     //   controller: "carCtrl",
     // });
-    $stateProvider.state("car-info", {
-      url: "/views/loan/car/info",
-      templateUrl: "views/car/car-info.html",
-      controller: "carinfoCtrl",
-    });
+    // $stateProvider.state("car-info", {
+    //   url: "/views/loan/car/info",
+    //   templateUrl: "views/car/car-info.html",
+    //   controller: "carinfoCtrl",
+    // });
     $stateProvider.state("otherGoods", {
       url: "/views/otherGoods",
       templateUrl: "views/other_goods/other_goods.html",
