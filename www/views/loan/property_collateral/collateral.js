@@ -104,6 +104,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     json.currency = 16074201974821;
     json.salaries = $rootScope.filterSalaries;
     json.isConfirm = $rootScope.newReqiust.proveIncome;
+    json.collType = $rootScope.newReqiust.collateralType;
 
     if (!isEmpty($rootScope.loginUserInfo)) {
       json.isMortgage = $rootScope.loginUserInfo.mikmortgagecondition;
@@ -241,7 +242,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     if (firstReq === "yes" && local == "estate") {
       $rootScope.newReqiust = {};
     }
-    if ($state.current.name == "property_collateral2") {
+    if ($state.current.name == "property_collateral") {
       $timeout(function () {
         $scope.getbankDataProperty("forced");
       }, 200);
@@ -267,11 +268,13 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         if ("identbackpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identbackpic)) {
           $rootScope.danCustomerData.identbackpic = $rootScope.loginUserInfo.identbackpic;
         }
-        $rootScope.checkUserService();
       }
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
   });
+  $timeout(function () {
+    $rootScope.checkUserService();
+  }, 1000);
   $scope.selectIncomeType = function (id) {
     $rootScope.proofOfIncomeData = [];
     $rootScope.incomeTypeWithCondition.forEach((el) => {

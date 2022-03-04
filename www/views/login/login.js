@@ -74,68 +74,30 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
         },
       ],
     }).then(function (response) {
-      // console.log("res", response);
       if (!isEmpty(response.data) && response.data.response.status === "success") {
         $rootScope.loginUserInfo = response.data.response.result;
-        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", userName: `${username}` }).then(function (response) {
+        // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", userName: `${username}` }).then(function (response) {
+        serverDeferred.requestFull("dcApp_getDV_customer_income_copy_004", { mobileNumber: `${username}` }).then(function (response) {
           // console.log("res 2", response);
-          if (!isEmpty(response) && !isEmpty(response[0])) {
-            $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
+          if (response[0] == "success" && !isEmpty(response[1])) {
+            $rootScope.loginUserInfo = mergeJsonObjs(response[1], $rootScope.loginUserInfo);
 
             localStorage.removeItem("loginUserInfo");
             localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
 
-            $rootScope.profilePictureSideMenu = response[0].profilepicture;
+            $rootScope.profilePictureSideMenu = response[1].profilepicture;
             localStorage.removeItem("profilePictureSideMenu");
-            localStorage.setItem("profilePictureSideMenu", response[0].profilepicture);
+            localStorage.setItem("profilePictureSideMenu", response[1].profilepicture);
 
             serverDeferred.requestFull("dcApp_allUserID_004", { mobileNumber: `${username}` }).then(function (response) {
               // console.log("res", response);
               if (response[0] == "success" && !isEmpty(response[1])) {
                 localStorage.setItem("ALL_ID", JSON.stringify(response[1]));
                 if (isEmpty($stateParams.path)) {
-                  //Банк цэснээс Login хийх
-                  if ($rootScope.isLoginFromRequestList) {
-                    $rootScope.HideLoader();
-                    $state.go("requestList");
-                    $scope.getRequetData();
-                  } else {
-                    //Хүсэлт явуулах үед Login хийх
-                    if ($rootScope.loginFromAutoLeasing) {
-                      $rootScope.HideLoader();
-                      $state.go("autoleasing-4");
-                      // $rootScope.alert("Та гараар мэдээллээ бөглөсөн тохиолдолд зээл олгох байгууллагаас нэмэлт материал авах хүсэлт ирэхийг анхаарна уу", "");
-                      var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
-                      //Нэвтэрсэн үед мэдээлэл татах
-                      if (!isEmpty($rootScope.loginUserInfo)) {
-                        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (responseCustomerData) {
-                          // console.log("responseCustomerData", responseCustomerData);
-                          if (responseCustomerData[0] != "") {
-                            $rootScope.danCustomerData = responseCustomerData[0];
-                            $rootScope.danCustomerData.id = all_ID.dccustomerid;
-                            // console.log("$rootScope.danCustomerData", $rootScope.danCustomerData);
-                            serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (response) {
-                              // console.log("get income data response", response);
-                              if (response[0] != "") {
-                                $rootScope.danIncomeData = response[0];
-                              }
-                            });
-                          }
-                        });
-                      }
-                    } else if ($rootScope.loginFromAutoColl) {
-                      $rootScope.HideLoader();
-                      $state.go("car_coll");
-                    } else if ($rootScope.loginFromProperty) {
-                      $rootScope.HideLoader();
-                      $state.go("property_collateral");
-                    } else {
-                      //Login цонхноос явуулах үед Login хийх
-                      $rootScope.HideLoader();
-                      $state.go("home");
-                      location.reload();
-                    }
-                  }
+                  //Login цонхноос явуулах үед Login хийх
+                  $rootScope.HideLoader();
+                  $state.go("home");
+                  location.reload();
                   if ($rootScope.isRemmberUsername && !isEmpty($scope.user.username)) {
                     localStorage.setItem("rememberUsername", $scope.user.username);
                   }
@@ -150,12 +112,12 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
             $rootScope.hideFooter = false;
           } else {
             $rootScope.HideLoader();
-            $rootScope.alert("Нэр, Нууц үг буруу байна", "warning");
+            $rootScope.alert("Бүртгэл олдсонгүй 100", "warning");
           }
         });
       } else {
         $rootScope.HideLoader();
-        $rootScope.alert("Нэр, Нууц үг буруу байна", "warning");
+        $rootScope.alert("Бүртгэл олдсонгүй 200", "warning");
       }
       $rootScope.hideFooter = true;
     });

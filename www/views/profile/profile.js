@@ -22,7 +22,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           $rootScope.customerProfilePicture.profilePictureClob = response[0].profilepicture;
 
           serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (responseIncome) {
-            console.log("responseIncome", responseIncome);
+            // console.log("responseIncome1", responseIncome);
             if (!isEmpty(responseIncome[0])) {
               $rootScope.customerIncomeProfileData = responseIncome[0];
               $rootScope.loginUserInfo = mergeJsonObjs(responseIncome[0], $rootScope.loginUserInfo);
@@ -100,8 +100,10 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         if (responseSaveCustomer[0] == "success" && !isEmpty(responseSaveCustomer[1])) {
           $rootScope.sidebarUserName = responseSaveCustomer[1].lastname.substr(0, 1) + ". " + responseSaveCustomer[1].firstname;
 
-          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", uniqueIdentifier: $scope.customerProfileData.uniqueidentifier }).then(function (response) {
-            if (!isEmpty(response) && !isEmpty(response[0])) {
+          // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", uniqueIdentifier: $scope.customerProfileData.uniqueidentifier }).then(function (response) {
+          serverDeferred.requestFull("dcApp_getDV_customer_income_copy_004", { uniqueIdentifier: $scope.customerProfileData.uniqueidentifier }).then(function (response) {
+            // console.log("asd", response);
+            if (response[0] == "success" && !isEmpty(response[1])) {
               var json = {
                 id: all_ID.crmcustomerid,
                 mobileNumber: $scope.customerProfileData.mobilenumber,
@@ -190,7 +192,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
         if ($scope.customerIncomeProfileData != "") {
           var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
           $rootScope.customerIncomeProfileData.customerid = all_ID.dccustomerid;
-          console.log("$rootScope.customerIncomeProfileData", $rootScope.customerIncomeProfileData);
+          // console.log("$rootScope.customerIncomeProfileData", $rootScope.customerIncomeProfileData);
           serverDeferred.requestFull("dcApp_profile_income_dv_002", $rootScope.customerIncomeProfileData).then(function (response) {
             $rootScope.alert("Амжилттай", "success");
           });

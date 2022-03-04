@@ -224,9 +224,11 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
       if ("identbackpic" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.identbackpic)) {
         $rootScope.danCustomerData.identbackpic = $rootScope.loginUserInfo.identbackpic;
       }
-      $rootScope.checkUserService();
     }
   });
+  $timeout(function () {
+    $rootScope.checkUserService();
+  }, 1000);
 
   $rootScope.$on("$ionicView.loaded", function () {});
   $scope.moneyStep2 = function () {

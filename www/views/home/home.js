@@ -76,9 +76,6 @@
           text: "OK",
           type: "button-outline button-positive OutbuttonSize OutbuttonSizeFirst button-dc-default",
           onTap: function (e) {
-            if (then == "profile") {
-              $ionicTabsDelegate.$getByHandle("profileTabs").select(1);
-            }
             return true;
           },
         },
@@ -411,6 +408,7 @@
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = false;
     $rootScope.is0001Price = false;
+    $rootScope.isIncomeConfirm = true;
     $timeout(function () {
       $ionicHistory.clearCache();
     }, 300);
@@ -451,9 +449,10 @@
     }
   };
   $rootScope.checkUserService = function () {
-    console.log();
     serverDeferred.requestFull("dcApp_checkUser_service", { register: $rootScope.danCustomerData.uniqueidentifier, type: parseInt($rootScope.requestTypeId), channel: 1626864048648 }).then(function (response) {
-      console.log("response dan service", response);
+      // console.log("response dan service", response);
+      $rootScope.userDataFromCheckService = response[1].data;
+      // console.log("$rootScope.userDataFromCheckService", $rootScope.userDataFromCheckService);
       if (response[0] == "success" && response[1].data.count !== "0") {
         $ionicPopup.show({
           template: response[1].data.message,
@@ -463,6 +462,9 @@
               text: "OK",
               type: "button-confirm",
               onTap: function () {
+                $timeout(function () {
+                  $ionicHistory.clearCache();
+                }, 100);
                 $state.go("home");
               },
             },

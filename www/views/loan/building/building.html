@@ -15,7 +15,7 @@
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Орон сууцны зээлийн төрөл</p>
-                            <select ng-model="$root.newReqiust.buildingLoanType" class="custom-form-input-select">
+                            <select ng-model="$root.newReqiust.buildingLoanType" class="custom-form-input-select" ng-change="getbankDataBuilding()">
                                 <option ng-repeat="loc in $root.buildingLoanTypeData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>

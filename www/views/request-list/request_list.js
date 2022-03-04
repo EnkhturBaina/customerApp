@@ -38,12 +38,6 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
     $rootScope.selectedMapBank = bank;
     $state.go("request_detail");
   };
-
-  //Банк цэснээс нэвтрэх
-  $rootScope.isLoginFromRequestList = false;
-  $scope.loginFromRequestList = function () {
-    $rootScope.isLoginFromRequestList = true;
-  };
   $scope.growDiv = function (id) {
     var grow = document.getElementById("grow" + id);
     if (grow.clientHeight) {
