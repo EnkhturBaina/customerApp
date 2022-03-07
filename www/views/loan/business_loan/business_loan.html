@@ -33,12 +33,12 @@
             </label>
             <label class="item item-input item-select form-input-label">
               <p class="input-label" style="margin: 0;">Зээл авах төрөл</p>
-              <select ng-model="$root.customerDataBusiness.customerTypeId" class="custom-form-input-select" ng-change="getbankDataSalary()">
+              <select ng-model="$root.customerDataBusiness.customerTypeId" class="custom-form-input-select" ng-change="selectCustomerType($root.customerDataBusiness.customerTypeId)">
                 <option value="1">Иргэн</option>
                 <option value="2">ААН</option>
               </select>
             </label>
-            <label class="item item-input item-stacked-label form-input-label" id="regLabel" ng-click="slideTo('regLabel')">
+            <label class="item item-input item-stacked-label form-input-label" id="regLabel" ng-click="slideTo('regLabel')" ng-if="$root.customerType == 1">
               <span class="input-label">Регистрийн дугаар</span>
               <div class="reg-chars-container">
                 <div class="select-reg-chars step2-select-reg-chars">
@@ -48,7 +48,7 @@
                 <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="00000000" id="regNums" class="businessRegSelector mr-0" name="uniqueIdentifier" readonly />
               </div>
             </label>
-            <label class="item item-input item-stacked-label form-input-label">
+            <label class="item item-input item-stacked-label form-input-label" ng-if="$root.customerType == 2">
               <p class="input-label" style="margin: 0;">ААН-ийн регистр</p>
               <input inputmode="numeric" pattern="[0-9]*" maxlength="7" type="text" placeholder="" name="" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.customerDataBusiness.uniqueIdentifier" ng-keyup="hideKeyboard($event)" select-on-click />
             </label>

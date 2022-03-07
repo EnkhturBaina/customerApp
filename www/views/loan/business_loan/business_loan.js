@@ -44,14 +44,31 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
       });
     }
   };
-  $scope.selectProjectSector = function (id) {
-    console.log("id", id);
+  $scope.selectProjectSector = function (val) {
+    $rootScope.filteredProjectSubSectorData = [];
+
+    $rootScope.businessInfo.projectSubSector = "";
+    $rootScope.projectSubSectorData.map((item) => {
+      if (item.parentid === val) {
+        $rootScope.filteredProjectSubSectorData.push(item);
+        return true;
+      }
+    });
+    val != "" ? (document.getElementById("subSector").disabled = false) : (document.getElementById("subSector").disabled = true);
   };
-  $scope.selectProjectSubSector = function (id) {
-    console.log("id", id);
+  $scope.selectProjectSubSector = function (val) {
+    $rootScope.filteredProjectTypeData = [];
+
+    $rootScope.businessInfo.projectType = "";
+    $rootScope.projectTypeData.map((item) => {
+      if (item.parentid === val) {
+        $rootScope.filteredProjectTypeData.push(item);
+        return true;
+      }
+    });
+    val != "" ? (document.getElementById("projectType").disabled = false) : (document.getElementById("projectType").disabled = true);
   };
   $scope.replaceCompanyName = function (companyName) {
-    console.log("companyName");
     var rex = /^[А-ЯӨҮа-яөү\-\s]+$/;
     var inputcompanyName = document.getElementById("businessLoanCompanyName");
     if (rex.test(companyName) == false) {
@@ -61,7 +78,15 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
       document.getElementById("companyNameError").style.display = "none";
     }
   };
+  $scope.selectCustomerType = function (val) {
+    if (val == 1) {
+      $rootScope.customerType = 1;
+    } else if (val == 2) {
+      $rootScope.customerType = 2;
+    }
+  };
   $scope.$on("$ionicView.enter", function () {
+    $rootScope.customerType = null;
     $rootScope.hideFooter = true;
     console.log("business step1");
     if ($state.current.name == "business_loan") {
