@@ -1,6 +1,10 @@
 angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", function (serverDeferred, $ionicSlideBoxDelegate, $rootScope, $scope, $state) {
   $scope.saveBusinessLoanStep1 = function () {
-    $state.go("business_loan2");
+    if ($scope.checkReqiured("business-valid")) {
+      if ($scope.checkReqiured("agreeBank")) {
+        $state.go("business_loan2");
+      }
+    }
   };
   $scope.saveBusinessLoanStep2 = function () {};
   $scope.getLookupDatas = function () {
@@ -85,13 +89,63 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
       $rootScope.customerType = 2;
     }
   };
+  $scope.checkReqiured = function (param) {
+    if (param == "business-valid") {
+      if (isEmpty($rootScope.newReqiust.loanAmount)) {
+        $rootScope.alert("Зээлийн хэмжээ оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
+        $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.purposeOfLoan)) {
+        $rootScope.alert("Зээлийн зориулалт сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.collateralConditionId)) {
+        $rootScope.alert("Зээлийн барьцаа сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.customerDataBusiness.customerTypeId)) {
+        $rootScope.alert("Зээл авах төрөл сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.customerDataBusiness.uniqueIdentifier)) {
+        $rootScope.alert("Регистрийн дугаар оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.customerDataBusiness.companyName)) {
+        $rootScope.alert("Компанийн нэр оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.customerDataBusiness.mobileNumber)) {
+        $rootScope.alert("Утасны дугаар оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.customerDataBusiness.email)) {
+        $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
+        $rootScope.alert("Үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
+        return false;
+      } else {
+        return true;
+      }
+    } else if (param == "agreeBank") {
+      if (isEmpty($rootScope.bankListFilter.Agree)) {
+        $rootScope.alert("Таны мэдээллийн дагуу зээл олгох банк, ББСБ байхгүй байна. Та мэдээллээ дахин оруулна уу.", "warning");
+        return false;
+      } else {
+        return true;
+      }
+    }
+  };
   $scope.$on("$ionicView.enter", function () {
+    var firstReq = localStorage.getItem("firstReq");
     $rootScope.customerType = null;
     $rootScope.hideFooter = true;
     console.log("business step1");
-    if ($state.current.name == "business_loan") {
+    if (firstReq === "yes" && $state.current.name == "business_loan") {
       $scope.getLookupDatas();
+      $rootScope.newReqiust = {};
+      $rootScope.customerDataBusiness = {};
+      $rootScope.businessInfo = {};
       console.log("step1");
+      localStorage.setItem("firstReq", "no");
+      $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     }
     if ($state.current.name == "business_loan2") {
       $scope.getLookupDatasStep2();
