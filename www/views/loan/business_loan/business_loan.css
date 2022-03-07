@@ -1,13 +1,6 @@
-.selection {
-  background: none;
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid;
-  border-color: #a2a7b552;
-  padding: 5px 0px 10px 0px;
-  margin-bottom: 10px;
-  color: #a2a7b5;
-}
-.business-loan-content {
-  margin-bottom: 50px;
+.business-company-name-error {
+  display: none;
+  text-align: right;
+  color: red;
+  font-size: 12px;
 }

@@ -427,6 +427,7 @@
   };
 
   $scope.goLoanPage = function (type, state, isactive, cat) {
+    $rootScope.hideFooter = true;
     if (isactive == "active") {
       localStorage.setItem("requestType", type);
       localStorage.setItem("requestCategory", cat);

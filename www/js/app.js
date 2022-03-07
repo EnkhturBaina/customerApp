@@ -21,7 +21,7 @@ var app = angular
     "addOtherGoods.Ctrl",
     "reset_password.Ctrl",
     // "settings.Ctrl",
-    // "business_loan.Ctrl",
+    "business_loan.Ctrl",
     // "qr.Ctrl",
     // "car.Ctrl",
     "notif.Ctrl",
@@ -135,11 +135,16 @@ var app = angular
       templateUrl: "views/loan/autoleasing/ident_pic.html",
       controller: "autoleasingCtrl",
     });
-    // $stateProvider.state("business_loan", {
-    //   url: "/views/business_loan",
-    //   templateUrl: "views/loan/business_loan/business_loan.html",
-    //   controller: "business_loanCtrl",
-    // });
+    $stateProvider.state("business_loan", {
+      url: "/views/business_loan",
+      templateUrl: "views/loan/business_loan/business_loan.html",
+      controller: "business_loanCtrl",
+    });
+    $stateProvider.state("business_loan2", {
+      url: "/views/business_loan2",
+      templateUrl: "views/loan/business_loan/business_loan2.html",
+      controller: "business_loanCtrl",
+    });
     $stateProvider.state("car_coll", {
       url: "/views/car_collateral",
       templateUrl: "views/loan/car_collateral/car_collateral.html",
