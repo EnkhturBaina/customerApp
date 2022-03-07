@@ -145,6 +145,11 @@ var app = angular
       templateUrl: "views/loan/business_loan/business_loan2.html",
       controller: "business_loanCtrl",
     });
+    $stateProvider.state("business_loan3", {
+      url: "/views/business_loan3",
+      templateUrl: "views/loan/business_loan/business_loan3.html",
+      controller: "business_loanCtrl",
+    });
     $stateProvider.state("car_coll", {
       url: "/views/car_collateral",
       templateUrl: "views/loan/car_collateral/car_collateral.html",

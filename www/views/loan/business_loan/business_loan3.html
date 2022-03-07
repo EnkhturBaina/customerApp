@@ -1,0 +1,79 @@
+<ion-view hide-nav-bar="true">
+  <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
+  <div ng-repeat="data in [{'title':'Орлого баталгаажуулалт'}]" ng-include src="'views/navbar.html'"></div>
+  <ion-content overflow-scroll="true" class="divide-container margin-top-50">
+    <div class="big-container">
+      <div class="magic-container">
+        <div class="bg-container">
+          <div class="money-input custom-form-container">
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Сарын дундаж борлуулалт хэд вэ?</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Бусдад өгөх өр зээл байгаа юу? (Банкнаас бусад)</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Бусдаас авах авлагатай юу?</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Сард хэдэн төгрөгийн цалин олгодог вэ?</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Сард түрээс, цахилгаанд хэдэн төгрөг төлдөг вэ?</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Бусад аар саар зардал сард хэд гардаг вэ?</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Сард бараа татан авалтад хэдийг зарцуулдаг вэ?</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Зээлийн төлбөрт сард төгрөг төлдөг вэ?</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Сарын бусад орлого хэд вэ?</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Өрхийн сарын зардал хэд вэ?</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+            <label class="item item-input item-stacked-label form-input-label">
+              <p class="input-label" style="margin: 0;">Барааны үлдэгдэл хэд орчим төгрөг байгаа вэ?</p>
+              <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.loanAmount" ng-blur="getbankDataSalary()" thousand-separator select-on-click>
+            </label>
+          </div>
+        </div>
+        <div class="container-padding pulse-animation" id="section07">
+          <p class="middle-title agree-banks">ТА ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГАЖ БУЙ БАНК, ББСБ-УУД</p>
+          <ion-scroll id="photoBanner" direction="x" class="wide-scroll-bank-step agree-bank-arrow">
+            <div class="bank" ng-repeat="bank in bankListFilter.Agree">
+              <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+              <p>{{bank.department_name}}</p>
+            </div>
+          </ion-scroll>
+        </div>
+        <div class="container-padding" id="section07">
+          <p class="middle-title not-agree-banks">ТА ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГААГҮЙ БАНК, ББСБ-УУД</p>
+          <ion-scroll direction="x" class="wide-scroll-bank-step">
+            <div class="bank" ng-repeat="bank in bankListFilter.NotAgree">
+              <img ng-src="{{bank.bank_logo|guessImageMime}}" />
+              <p>{{bank.department_name}}</p>
+            </div>
+          </ion-scroll>
+        </div>
+        <button class="button btn single-button" id="Next" ng-click="saveBusinessLoanStep1()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
+      </div>
+      <div class="none-div">
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
