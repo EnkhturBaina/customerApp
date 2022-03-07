@@ -1,12 +1,18 @@
 angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", function (serverDeferred, $ionicSlideBoxDelegate, $rootScope, $scope, $state) {
   $scope.saveBusinessLoanStep1 = function () {
-    if ($scope.checkReqiured("business-valid")) {
-      if ($scope.checkReqiured("agreeBank")) {
-        $state.go("business_loan2");
-      }
-    }
+    // if ($scope.checkReqiured("business-valid")) {
+    //   if ($scope.checkReqiured("agreeBank")) {
+    $state.go("business_loan2");
+    //   }
+    // }
   };
-  $scope.saveBusinessLoanStep2 = function () {};
+  $scope.saveBusinessLoanStep2 = function () {
+    // if ($scope.checkReqiured("business-valid-step2")) {
+    //   if ($scope.checkReqiured("agreeBank")) {
+    $state.go("business_loan3");
+    //   }
+    // }
+  };
   $scope.getLookupDatas = function () {
     console.log("getLookupDatas business ajiljiiiiiiin");
     if (isEmpty($rootScope.purposeOfloanData)) {
@@ -138,6 +144,7 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
     $rootScope.customerType = null;
     $rootScope.hideFooter = true;
     console.log("business step1");
+    //Business loan step1
     if (firstReq === "yes" && $state.current.name == "business_loan") {
       $scope.getLookupDatas();
       $rootScope.newReqiust = {};
@@ -147,7 +154,13 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
       localStorage.setItem("firstReq", "no");
       $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     }
+    //Business loan step2
     if ($state.current.name == "business_loan2") {
+      $scope.getLookupDatasStep2();
+      console.log("step2");
+    }
+    //Business loan step3
+    if ($state.current.name == "business_loan3") {
       $scope.getLookupDatasStep2();
       console.log("step2");
     }
