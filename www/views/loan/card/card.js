@@ -1,5 +1,16 @@
 angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootScope, $state, $ionicModal, $timeout, serverDeferred, $ionicPlatform, $location, $anchorScroll) {
   $("#step2loanMonth").mask("000");
+  $scope.removeItemAll = function (arr, value) {
+    var i = 0;
+    while (i < arr.length) {
+      if (arr[i] === value) {
+        arr.splice(i, 1);
+      } else {
+        ++i;
+      }
+    }
+    return arr;
+  };
   $ionicModal
     .fromTemplateUrl("templates/term-content.html", {
       scope: $scope,
@@ -79,6 +90,8 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
       $rootScope.result = [];
       $rootScope.months = [];
       $rootScope.minPayments = [];
+      $rootScope.maxAmounts = [];
+      $rootScope.minAmounts = [];
       //Зөвхөн Step2 -д ажлуулах
       if ($state.current.name == "card") {
         $rootScope.bankListFilter.Agree.map((el) => {
@@ -90,10 +103,14 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
 
         $rootScope.result.map((a) => {
           $rootScope.months.push(a.max_loan_month_id);
+          $rootScope.maxAmounts.push(a.loan_max_amount);
+          $rootScope.minAmounts.push(a.loan_min_amount);
           a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : "";
         });
 
         $rootScope.maxMonth = Math.max(...$rootScope.months);
+        $rootScope.maxLoanAmount = Math.max(...$rootScope.maxAmounts);
+        $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 0));
         $rootScope.minPayment = Math.min(...$rootScope.minPayments);
 
         //тэнцсэн банкуудын урьдчилгаа 0 үед ажиллах
@@ -107,10 +124,14 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
 
           $rootScope.result.map((a) => {
             $rootScope.months.push(a.max_loan_month_id);
+            $rootScope.maxAmounts.push(a.loan_max_amount);
+            $rootScope.minAmounts.push(a.loan_min_amount);
             a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : $rootScope.minPayments.push(0);
           });
 
           $rootScope.maxMonth = Math.max(...$rootScope.months);
+          $rootScope.maxLoanAmount = Math.max(...$rootScope.maxAmounts);
+          $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 0));
           $rootScope.minPayment = Math.min(...$rootScope.minPayments);
         }
       }

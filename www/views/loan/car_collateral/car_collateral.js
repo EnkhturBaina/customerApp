@@ -231,24 +231,24 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       }
       return true;
     } else if (param == "step2Images") {
-      if (isEmpty($rootScope.carDetailData.itempic)) {
-        $rootScope.alert("Машины гэрчилгээний зураг оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.carDetailData.itempic2)) {
-        $rootScope.alert("Машины нүүрэн талын зураг оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.carDetailData.itempic3)) {
-        $rootScope.alert("Машины баруун талын зураг оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.carDetailData.itempic4)) {
-        $rootScope.alert("Машины зүүн талын зураг оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.carDetailData.itempic5)) {
-        $rootScope.alert("Машины хойд талын зураг оруулна уу", "warning");
-        return false;
-      } else {
-        return true;
-      }
+      // if (isEmpty($rootScope.carDetailData.itempic)) {
+      //   $rootScope.alert("Машины гэрчилгээний зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.carDetailData.itempic2)) {
+      //   $rootScope.alert("Машины нүүрэн талын зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.carDetailData.itempic3)) {
+      //   $rootScope.alert("Машины баруун талын зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.carDetailData.itempic4)) {
+      //   $rootScope.alert("Машины зүүн талын зураг оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.carDetailData.itempic5)) {
+      //   $rootScope.alert("Машины хойд талын зураг оруулна уу", "warning");
+      //   return false;
+      // } else {
+      //   return true;
+      // }
       return true;
     } else if (param == "agreeBank") {
       if (isEmpty($rootScope.bankListFilter.Agree)) {

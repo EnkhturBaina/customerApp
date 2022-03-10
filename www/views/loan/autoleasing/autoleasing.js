@@ -286,6 +286,8 @@
       $rootScope.result = [];
       $rootScope.months = [];
       $rootScope.minPayments = [];
+      $rootScope.maxAmounts = [];
+      $rootScope.minAmounts = [];
       //Зөвхөн Step2 -д ажлуулах
       if ($state.current.name == "autoleasing-2" && isEmpty($rootScope.newReqiust.advancePayment)) {
         $rootScope.bankListFilter.Agree.map((el) => {
@@ -296,6 +298,8 @@
         });
         $rootScope.result.map((a) => {
           $rootScope.months.push(a.max_loan_month_id);
+          $rootScope.maxAmounts.push(a.loan_max_amount);
+          $rootScope.minAmounts.push(a.loan_min_amount);
           if (a.min_payment != 0 && a.min_payment != null) {
             $rootScope.minPayments.push(a.min_payment);
           } else {
@@ -304,6 +308,8 @@
         });
 
         $rootScope.maxMonth = Math.max(...$rootScope.months);
+        $rootScope.maxLoanAmount = Math.max(...$rootScope.maxAmounts);
+        $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 0));
         $rootScope.minPayment = Math.min(...$rootScope.minPayments);
 
         //тэнцсэн банкуудын урьдчилгаа 0 үед ажиллах
@@ -317,6 +323,8 @@
 
           $rootScope.result.map((a) => {
             $rootScope.months.push(a.max_loan_month_id);
+            $rootScope.maxAmounts.push(a.loan_max_amount);
+            $rootScope.minAmounts.push(a.loan_min_amount);
             if (a.min_payment !== 0 && a.min_payment !== null) {
               $rootScope.minPayments.push(a.min_payment);
             } else {
@@ -324,6 +332,8 @@
             }
           });
           isEmpty($rootScope.months) ? ($rootScope.maxMonth = 0) : ($rootScope.maxMonth = Math.max(...$rootScope.months));
+          $rootScope.maxLoanAmount = Math.max(...$rootScope.maxAmounts);
+          $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 0));
           if (isEmpty($rootScope.minPayments)) {
             $rootScope.minPayment = 0;
           } else {
@@ -1226,6 +1236,7 @@
     }
   };
   $scope.$on("$ionicView.enter", function () {
+    $rootScope.showMIN_MAXloanAMOUNT = false;
     var firstReq = localStorage.getItem("firstReq");
     var local = localStorage.getItem("requestType");
     if (firstReq === "yes" && $state.current.name == "autoleasing-2") {
@@ -1237,6 +1248,7 @@
     $rootScope.all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     if ($state.current.name == "autoleasing-2") {
       $("#carPrice").mask("00000000000");
+      $("#loanAmountRequest").mask("00000000000");
 
       if (local == "consumer" || local == "eco" || local == "building" || local == "estate") {
         $scope.getLoanAmountFunc();
@@ -1280,6 +1292,7 @@
     }
     if (local == "estate" || (local == "autoColl" && $state.current.name == "autoleasing-2")) {
       $rootScope.isCarColl = true;
+      $rootScope.showMIN_MAXloanAMOUNT = true;
       document.getElementById("loanAmountRequest").disabled = false;
     } else {
       $rootScope.isCarColl = false;
