@@ -9,6 +9,7 @@
   $(".mobile-number-step4").mask("00000000");
   // $("#sendRequestAdvancePayment").mask("000000000000");
   $("#step2loanMonth").mask("000");
+
   $("#step4UniqueIdentifier").mask("AA00000000", {
     translation: {
       A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
@@ -361,8 +362,12 @@
     }, 100);
   }
   if ($state.current.name == "autoleasing-4") {
+    console.log("ASDASDADSDA");
     $timeout(function () {
       $scope.getbankData();
+      $("#monthlyIncome").mask("0000000000");
+      $("#totalIncomeHousehold").mask("0000000000");
+      $("#monthlyPayment").mask("0000000000");
     }, 1000);
   }
 
@@ -1055,7 +1060,7 @@
         $rootScope.alert("Орж ирсэн он бүрэн оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
-        $rootScope.alert("Орлого баталгаажих эсэх сонгоно уу", "warning");
+        $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
         return false;
       } else {
         return true;
@@ -1137,18 +1142,9 @@
         $rootScope.alert("Сарын бусад орлогоо оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danIncomeData.monthlypayment)) {
-        $rootScope.alert("Төлж буй зээлийн төлбөр оруулна уу", "warning");
+        $rootScope.alert("Зээлийн сарын төлбөр оруулна уу", "warning");
         return false;
-      }
-      // else if (isEmpty($rootScope.danCustomerData.email)) {
-      //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
-      //   return false;
-      // }
-      // else if (!re.test($scope.danCustomerData.email)) {
-      //   $rootScope.alert("И-мэйл хаягаа зөв оруулна уу", "warning");
-      //   return false;
-      // }
-      else if (isEmpty($rootScope.danCustomerData.mikmortgagecondition) && !$rootScope.isSupLoan) {
+      } else if (isEmpty($rootScope.danCustomerData.mikmortgagecondition) && !$rootScope.isSupLoan) {
         $rootScope.alert("Ипотекийн зээлтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.ismarried) && !$rootScope.isSupLoan) {
@@ -1156,6 +1152,15 @@
         return false;
       } else if (isEmpty($rootScope.danCustomerData.educationid)) {
         $rootScope.alert("Боловсрол сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.sectoroflastyear)) {
+        $rootScope.alert("Ажиллаж буй салбар сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.areasofactivity)) {
+        $rootScope.alert("Ажиллаж буй хэвшил сонгоно уу", "warning");
+        return false;
+      } else if (isEmpty($rootScope.danCustomerData.jobpositionid)) {
+        $rootScope.alert("Албан тушаал сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.experienceperiodid) && !$rootScope.isSupLoan) {
         $rootScope.alert("Ажилласан жилээ сонгоно уу", "warning");
@@ -1231,6 +1236,8 @@
     }
     $rootScope.all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     if ($state.current.name == "autoleasing-2") {
+      $("#carPrice").mask("00000000000");
+
       if (local == "consumer" || local == "eco" || local == "building" || local == "estate") {
         $scope.getLoanAmountFunc();
       }
@@ -1357,25 +1364,28 @@
       });
     } else {
       console.log("C");
-      serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, "https://services.digitalcredit.mn/api/v1/c").then(function (response) {
+      serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, "https://devservices.digitalcredit.mn/api/v1/c").then(function (response) {
+        console.log("ressssssssss", response);
         $rootScope.stringHtmlsLink = response.result.data;
         var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");
         $(authWindow).on("loadstart", function (e) {
           var url = e.originalEvent.url;
-          var code = url.indexOf("https://services.digitalcred");
+          var code = url.indexOf("https://devservices.digitalcred");
           var error = /\?error=(.+)$/.exec(url);
           if (code == 0 || error) {
             authWindow.close();
           }
-
+          console.log(url, code);
           if (code == 0) {
+            console.log("code", code);
             if (isEmpty($rootScope.userDataFromCheckService.dan)) {
               $rootScope.stringHtmlsLink = $rootScope.loginUserInfo.uniqueidentifier;
             } else {
               $rootScope.stringHtmlsLink = response.result.data;
             }
-            serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://services.digitalcredit.mn/api/sso/check").then(function (response) {
-              // console.log("response autoLEASING DAN", response);
+            console.log("cod$rootScope.stringHtmlsLinke", $rootScope.stringHtmlsLink);
+            serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://devservices.digitalcredit.mn/api/sso/check").then(function (response) {
+              console.log("response autoLEASING DAN", response);
               $scope.dangetDataFunction(response);
             });
           } else if (error) {

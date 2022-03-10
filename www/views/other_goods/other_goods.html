@@ -35,8 +35,10 @@
                                 </li>
                             </ul>
                             <div class="total-price" ng-if="!sumPrice|isEmpty">
-                                <span class="total-price-title">Нийт үнэ</span>
-                                <span class="total-price-amount ion-font-weight-bold">{{sumPrice|formatNumber}} ₮</span>
+                                <span class="total-price-title">Нийт үнэ: <span class="total-price-amount ion-font-weight-bold">{{sumPrice|formatNumber}} ₮</span></span>
+                                <span class="clear-all-product ion-font-weight-bold" ng-click="clearAllProduct()">
+                                    <div class="other-goods-reload icon ion-ios7-refresh-empty"></div>Цэвэрлэх
+                                </span>
                             </div>
                         </div>
                     </div>

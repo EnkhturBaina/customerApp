@@ -97,4 +97,11 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     localStorage.setItem("firstReq", "no");
     !isEmpty($rootScope.otherGoods) ? ($rootScope.showSec = false) : ($rootScope.showSec = true);
   });
+  $scope.clearAllProduct = function () {
+    console.log("AS");
+    localStorage.removeItem("otherGoods");
+    $rootScope.otherGoods = [];
+    $rootScope.showSec = true;
+    $rootScope.sumPrice = 0;
+  };
 });

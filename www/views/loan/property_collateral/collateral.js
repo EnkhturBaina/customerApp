@@ -29,7 +29,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         $rootScope.alert("Барьцаалах хөрөнгийн төрөл сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
-        $rootScope.alert("Орлого баталгаажих эсэх сонгоно уу", "warning");
+        $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
         return false;
       } else {
         return true;

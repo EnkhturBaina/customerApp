@@ -186,7 +186,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     else if (isEmpty($scope.customerIncomeProfileData.totalincomehousehold)) {
       $rootScope.alert("Та бусад орлогоо оруулна уу", "warning");
     } else if (isEmpty($scope.customerIncomeProfileData.monthlypayment)) {
-      $rootScope.alert("Та төлж буй зээлийн дүнгээ оруулна уу", "warning");
+      $rootScope.alert("Зээлийн сарын төлбөр оруулна уу", "warning");
     } else {
       $timeout(function () {
         if ($scope.customerIncomeProfileData != "") {

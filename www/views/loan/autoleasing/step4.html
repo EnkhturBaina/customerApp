@@ -29,18 +29,18 @@
                         <div ng-if="$root.isIncomeConfirm">
                             <label class="item item-input item-stacked-label form-input-label">
                                 <p class="input-label" style="margin: 0;">Таны сарын орлого</p>
-                                <input type="tel" placeholder="" name="" id="customerLastNameDan" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-disabled="$root.monthlyIncomeDisable" ng-model="$root.danIncomeData.monthlyincome" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
+                                <input type="tel" placeholder="" name="" id="monthlyIncome" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-disabled="$root.monthlyIncomeDisable" ng-model="$root.danIncomeData.monthlyincome" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
                             </label>
                             <span class="vxx-title step5-mid-title">Таны НДШ-р баталгаажсан орлого</span>
                             <label class="item item-input item-stacked-label form-input-label">
                                 <p class="input-label" style="margin: 0;">Сарын бусад орлого </p>
-                                <input type="tel" placeholder="" name="" id="customerLastNameDan" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danIncomeData.totalincomehousehold" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
+                                <input type="tel" placeholder="" name="" id="totalIncomeHousehold" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danIncomeData.totalincomehousehold" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
                             </label>
                             <span class="vxx-title step5-mid-title">Та баталгаажих орлогыг энд оруулж болно</span>
                         </div>
                         <label class="item item-input item-stacked-label form-input-label">
-                            <p class="input-label" style="margin: 0;">Зээлийн төлбөр</p>
-                            <input type="tel" placeholder="" name="" id="customerLastNameDan" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danIncomeData.monthlypayment" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
+                            <p class="input-label" style="margin: 0;">Зээлийн сарын төлбөр</p>
+                            <input type="tel" placeholder="" name="" id="monthlyPayment" class=" ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danIncomeData.monthlypayment" ng-keyup="hideKeyboard($event)" ng-blur="getbankData()" thousand-separator select-on-click />
                         </label>
                         <label class="item item-input item-select form-input-label" ng-if="!$root.isSupLoan">
                             <p class="input-label" style="margin: 0;">Ипотекийн зээлтэй эсэх</p>
@@ -58,7 +58,7 @@
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label" ng-if="!$root.isSupLoan">
-                            <p class="input-label" style="margin: 0;">Ажиллаж буй ЭЗ-ийн салбар</p>
+                            <p class="input-label" style="margin: 0;">Ажиллаж буй салбар</p>
                             <select class="custom-form-input-select" ng-model="$root.danCustomerData.sectoroflastyear" ng-options="c.id as c.name for c in customerSector | filter:{id:'!!'}" ng-init="$root.danCustomerData.sectoroflastyear = $root.danCustomerData.sectoroflastyear"></select>
                         </label>
                         <label class="item item-input item-select form-input-label" ng-if="!$root.isSupLoan">

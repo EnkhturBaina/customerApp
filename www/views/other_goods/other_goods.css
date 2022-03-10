@@ -152,6 +152,7 @@
 
 .total-price {
   display: flex;
+  align-items: center;
   margin: 10px 10px;
 }
 
@@ -160,10 +161,13 @@
 }
 
 .total-price .total-price-amount {
-  margin-left: auto;
-  float: right;
 }
-
+.clear-all-product {
+  margin-left: auto;
+  display: flex;
+  float: right;
+  align-items: center;
+}
 .attention-text {
   display: grid;
   margin: 20px 50px;
@@ -328,4 +332,9 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+}
+.other-goods-reload {
+  padding: 0 5px;
+  font-weight: bold;
+  font-size: 28px;
 }

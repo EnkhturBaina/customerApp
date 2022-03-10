@@ -30,7 +30,7 @@
                             </select>
                         </label>
                         <label class="item item-input item-stacked-label form-input-label" id="regLabel" ng-click="slideTo('regLabel')">
-                            <span class="input-label">Автомашины улсын дугаар</span>
+                            <span class="input-label">Улсын дугаар</span>
                             <input type="text" id="nationalNumber" class="nationalNumberPicker bg-fff" placeholder="0000УАА" name="nationalNumber" ng-model="$root.carDetailData.nationalNumber" readonly />
                         </label>
                         <label class="item item-input item-select form-input-label">
@@ -41,7 +41,7 @@
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Марк</p>
+                            <p class="input-label" style="margin: 0;">Загвар</p>
                             <select id="modelSelect" ng-model="$root.carDetailData.markId" style="background-color: transparent" disabled class="custom-form-input-select">
                                 <option ng-repeat="model in modelData track by $index" ng-if="model.name" value="{{model.id}}">
                                     {{model.name}}</option>
@@ -49,14 +49,14 @@
                         </label>
                         <label class="item item-input item-stacked-label form-input-label" id="productYearPickerLabel" ng-click="slideTo('productYearPickerLabel')">
                             <span class="input-label">Үйлдвэрлэсэн он</span>
-                            <input inputmode="numeric" class="productYearPicker bg-fff" pattern="[0-9]*" type="text" id="productYear" placeholder="2020" name="productYear" ng-model="$root.carDetailData.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
+                            <input inputmode="numeric" class="productYearPicker bg-fff" pattern="[0-9]*" type="text" id="productYear" placeholder="0000" name="productYear" ng-model="$root.carDetailData.manufacturedYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
                         </label>
                         <label class="item item-input item-stacked-label form-input-label" id="cameYearPickerLabel" ng-click="slideTo('cameYearPickerLabel')">
                             <span class="input-label">Орж ирсэн он</span>
-                            <input inputmode="numeric" class="cameYearPicker bg-fff" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="2020" name="entryYear" ng-model="$root.carDetailData.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
+                            <input inputmode="numeric" class="cameYearPicker bg-fff" pattern="[0-9]*" maxlength="4" type="text" id="entryYear" placeholder="0000" name="entryYear" ng-model="$root.carDetailData.cameYearId" next-focus-elem ng-keyup="hideKeyboard($event)" readonly />
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <span class="input-label">Орлого баталгаажих эсэх</span>
+                            <span class="input-label">Орлого нотлох эсэх</span>
                             <select ng-model="$root.newReqiust.proveIncome" class="custom-form-input-select" ng-change="incomeConfirm(newReqiust.proveIncome)">
                                 <option ng-repeat="loc in $root.proveIncomeData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>

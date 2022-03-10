@@ -1,5 +1,6 @@
 otherGoods = angular.module("otherGoods.Ctrl", []);
 otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $scope, $ionicPopup, $ionicHistory) {
+  $("#itemPriceOtherGoods").mask("00000000000");
   $scope.addOther = function () {
     if (isEmpty($rootScope.newCarReq.categoryId)) {
       $rootScope.alert("Та барааны төрөл өө сонгоно уу", "warning");

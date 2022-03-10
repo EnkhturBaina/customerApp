@@ -174,6 +174,10 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
             var a = data.join("");
             $scope.setNumber("cameYearId", a);
             $rootScope.carDetailData.cameYearId = a;
+            if ($rootScope.carDetailData.manufacturedYearId > $rootScope.carDetailData.cameYearId) {
+              $rootScope.alert("Орж ирсэн он зөв оруулна уу", "warning");
+              $rootScope.carDetailData.cameYearId = "";
+            }
           },
         });
       }, 1000);
@@ -205,13 +209,13 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         $rootScope.alert("Автомашины өмчлөл сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carDetailData.nationalNumber) && !$rootScope.isDanLoginAutoColl) {
-        $rootScope.alert("Автомашины улсын дугаар оруулна уу", "warning");
+        $rootScope.alert("Улсын дугаар оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carDetailData.brandId) && !$rootScope.isDanLoginAutoColl) {
         $rootScope.alert("Үйлдвэр сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carDetailData.markId) && !$rootScope.isDanLoginAutoColl) {
-        $rootScope.alert("Марк сонгоно уу", "warning");
+        $rootScope.alert("Загвар сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.carDetailData.manufacturedYearId) && !$rootScope.isDanLoginAutoColl) {
         $rootScope.alert("Үйлдвэрлэсэн он оруулна уу", "warning");
@@ -220,7 +224,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
         $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
-        $rootScope.alert("Орлого баталгаажих эсэх сонгоно уу", "warning");
+        $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
         return false;
       } else {
         return true;

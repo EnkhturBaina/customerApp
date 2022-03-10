@@ -73,7 +73,10 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "eco") {
       $rootScope.newReqiust = {};
+      $rootScope.danCustomerData = {};
+      $rootScope.danIncomeData = {};
       $rootScope.ecoProduct = {};
+      localStorage.setItem("firstReq", "no");
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
 

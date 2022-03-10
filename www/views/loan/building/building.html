@@ -14,7 +14,7 @@
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
-                            <p class="input-label" style="margin: 0;">Орон сууцны зээлийн төрөл</p>
+                            <p class="input-label" style="margin: 0;">Орон сууцны төрөл</p>
                             <select ng-model="$root.newReqiust.buildingLoanType" class="custom-form-input-select" ng-change="getbankDataBuilding()">
                                 <option ng-repeat="loc in $root.buildingLoanTypeData | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
@@ -22,7 +22,7 @@
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Авах орон сууцны үнэ</p>
-                            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.buildingPrice" ng-blur="getbankDataBuilding()" thousand-separator select-on-click>
+                            <input inputmode="numeric" id="buildingPrice" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.newReqiust.buildingPrice" ng-blur="getbankDataBuilding()" thousand-separator select-on-click>
                         </label>
                         <!-- <label class="item item-input item-select form-input-label" ng-if="$root.isAgent">
                             <p class="input-label white-space-normal" style="margin: 0;">Судалгаанд о/с-ны мэдээлэл өгөх боломжтой</p>
@@ -31,16 +31,16 @@
                                     {{loc.name}}</option>
                             </select>
                         </label> -->
-                        <label class="item item-input item-select form-input-label" ng-if="!$root.isAgent">
+                        <!-- <label class="item item-input item-select form-input-label" ng-if="!$root.isAgent">
                             <p class="input-label white-space-normal" style="margin: 0;">Орон сууцны агенттай холбохыг зөвшөөрөх үү?</p>
                             <select ng-model="$root.newReqiust.buildingSurvey" class="custom-form-input-select" ng-change="surveyChosen($root.newReqiust.buildingSurvey);">
                                 <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}</option>
                             </select>
-                        </label>
-                        <div class="vxx-title-container" ng-if="$root.msgShow&&$root.isAgent">
+                        </label> -->
+                        <!-- <div class="vxx-title-container" ng-if="$root.msgShow&&$root.isAgent">
                             <span class="vxx-title">Та зээлийн судалгаанд зайнаас орон сууцны мэдээллээ өгөх шаардлагатай</span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="container-padding pulse-animation" id="section07">
