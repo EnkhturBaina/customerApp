@@ -45,30 +45,30 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
         if (isEmpty(response[0])) {
           $rootScope.alert("Утасны дугаар бүртгэлгүй байна");
         } else {
-          console.log("ELSE");
+          // console.log("ELSE");
           registeredUserData = response[0];
           $timeout(function () {
             serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", crmUserId: response[0].id }).then(function (response) {
-              console.log("RES", response);
+              // console.log("RES", response);
               $rootScope.dc_customer_id = response[0].dccustomerid;
               localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
 
               var generatedCode = Math.floor(100000 + Math.random() * 900000);
-              console.log("generatedCode", generatedCode);
+              // console.log("generatedCode", generatedCode);
               var updateCode = {
                 id: $rootScope.dc_customer_id,
                 smsCode: generatedCode,
               };
-              console.log("updateCode", updateCode);
+              // console.log("updateCode", updateCode);
 
               $scope.number = $scope.customerData.userName;
               $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
 
               serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
-                console.log("sendSmsResponse", sendSmsResponse);
+                // console.log("sendSmsResponse", sendSmsResponse);
                 if (sendSmsResponse[0] == "success") {
                   serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {
-                    console.log("res", response);
+                    // console.log("res", response);
                     if (response.result.status == "success") {
                       $scope.isStep1 = false;
                       $scope.isStep2 = true;
