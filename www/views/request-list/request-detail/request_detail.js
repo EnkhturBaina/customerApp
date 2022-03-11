@@ -50,11 +50,11 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
   $scope.showPopupDTL = function (text, type) {
     $rootScope.acceptRequestData = {};
     $rootScope.acceptRequestData.id = $rootScope.selectedMapBank.mapid;
-    $rootScope.acceptRequestData.wfmStatusId = 1609944955126013;
+    $rootScope.acceptRequestData.wfmStatusId = 1626834162709226;
 
     $rootScope.cancelRequestData = {};
     $rootScope.cancelRequestData.id = $rootScope.selectedMapBank.mapid;
-    $rootScope.cancelRequestData.wfmStatusId = 1609944902958196;
+    $rootScope.cancelRequestData.wfmStatusId = 1626834162623021;
 
     var templateBody = "";
     var alertBody = "";

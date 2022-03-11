@@ -35,10 +35,6 @@
                 <ion-nav-view class="gray-background">
                     <ion-content overflow-scroll="true" class="profile-content">
                         <div class="list profile-list">
-                            <label class="item item-input profile-label" id="familyNameLabel">
-                                <p>Ургийн овог</p>
-                                <input type="text" id="customerFamilyName" placeholder="Ургийн овог" name="familyName" ng-model="$root.customerProfileData.familyname" ng-keyup="hideKeyboard($event)" select-on-click disabled />
-                            </label>
                             <label class="item item-input profile-label" id="lastNameLabel">
                                 <p>Овог</p>
                                 <input type="text" id="customerLastName" placeholder="Овог" name="lastName" ng-model="$root.customerProfileData.lastname" ng-keyup="hideKeyboard($event)" select-on-click disabled />
@@ -109,7 +105,7 @@
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Сарын орлого</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlyincome" placeholder="-" name="monthlyincome" thousand-separator ng-keyup="hideKeyboard($event)" select-on-click disabled />
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlyincome" placeholder="-" name="monthlyincome" thousand-separator ng-keyup="hideKeyboard($event)" select-on-click />
                             </label>
                             <label class="item item-input profile-label">
                                 <p>Таны бусад орлого</p>

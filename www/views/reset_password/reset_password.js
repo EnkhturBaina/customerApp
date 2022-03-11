@@ -45,62 +45,65 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
         if (isEmpty(response[0])) {
           $rootScope.alert("Утасны дугаар бүртгэлгүй байна");
         } else {
-          var generatedCode = Math.floor(100000 + Math.random() * 900000);
+          console.log("ELSE");
           registeredUserData = response[0];
           $timeout(function () {
             serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", crmUserId: response[0].id }).then(function (response) {
+              console.log("RES", response);
               $rootScope.dc_customer_id = response[0].dccustomerid;
               localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
-            });
 
-            var generatedCode = Math.floor(100000 + Math.random() * 900000);
+              var generatedCode = Math.floor(100000 + Math.random() * 900000);
+              console.log("generatedCode", generatedCode);
+              var updateCode = {
+                id: $rootScope.dc_customer_id,
+                smsCode: generatedCode,
+              };
+              console.log("updateCode", updateCode);
 
-            var updateCode = {
-              id: $rootScope.dc_customer_id,
-              smsCode: generatedCode,
-            };
+              $scope.number = $scope.customerData.userName;
+              $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
 
-            $scope.number = $scope.customerData.userName;
-            $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
-
-            serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
-              if (sendSmsResponse[0] == "success") {
-                serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {
-                  // console.log("res", response);
-                  if (response.result.status == "success") {
-                    $scope.isStep1 = false;
-                    $scope.isStep2 = true;
-                    progressBar.Next();
-                  } else if (response.result.status == "error") {
-                    //Төлбөр дууссан үед mail ээр нэг удаагийн код явуулах
-                    serverDeferred.requestFull("dcApp_get_email_mobile_number_004", { mobileNumber: $scope.number }).then(function (res) {
-                      if (!isEmpty(res[1])) {
-                        $rootScope.userEmail = res[1].email;
-                        $rootScope.isEmail = true;
-                        var mailJson = {
-                          subjecttxt: "Zeelme.mn",
-                          messagetxt: `Сайн байна уу, нэг удаагийн код: ${generatedCode}`,
-                          maillist: {
-                            0: {
-                              value: $rootScope.userEmail,
+              serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
+                console.log("sendSmsResponse", sendSmsResponse);
+                if (sendSmsResponse[0] == "success") {
+                  serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {
+                    console.log("res", response);
+                    if (response.result.status == "success") {
+                      $scope.isStep1 = false;
+                      $scope.isStep2 = true;
+                      progressBar.Next();
+                    } else if (response.result.status == "error") {
+                      //Төлбөр дууссан үед mail ээр нэг удаагийн код явуулах
+                      serverDeferred.requestFull("dcApp_get_email_mobile_number_004", { mobileNumber: $scope.number }).then(function (res) {
+                        if (!isEmpty(res[1])) {
+                          $rootScope.userEmail = res[1].email;
+                          $rootScope.isEmail = true;
+                          var mailJson = {
+                            subjecttxt: "Zeelme.mn",
+                            messagetxt: `Сайн байна уу, нэг удаагийн код: ${generatedCode}`,
+                            maillist: {
+                              0: {
+                                value: $rootScope.userEmail,
+                              },
                             },
-                          },
-                        };
+                          };
 
-                        serverDeferred.requestFull("SEND_MAIL3", mailJson).then(function (sendSmsResponse) {
-                          $scope.isStep1 = false;
-                          $scope.isStep2 = true;
-                          progressBar.Next();
-                        });
-                      }
-                    });
-                  } else {
-                    $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа", "warning");
-                  }
-                });
-              } else {
-                $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа", "warning");
-              }
+                          serverDeferred.requestFull("SEND_MAIL3", mailJson).then(function (sendSmsResponse) {
+                            $scope.isStep1 = false;
+                            $scope.isStep2 = true;
+                            progressBar.Next();
+                          });
+                        }
+                      });
+                    } else {
+                      $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа 100", "warning");
+                    }
+                  });
+                } else {
+                  $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа 200", "warning");
+                }
+              });
             });
           }, 500);
         }

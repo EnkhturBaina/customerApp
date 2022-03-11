@@ -332,7 +332,7 @@ var app = angular
     };
     $scope.logOut = function () {
       $ionicPopup.show({
-        template: "<b>Та аппликейшнээс гарах уу?</b>",
+        template: "<b>Профайлаасаа гарах уу?</b>",
         cssClass: "confirmPopup",
         buttons: [
           {

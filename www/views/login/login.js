@@ -74,6 +74,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
         },
       ],
     }).then(function (response) {
+      console.log("res", response);
       if (!isEmpty(response.data) && response.data.response.status === "success") {
         $rootScope.loginUserInfo = response.data.response.result;
         // serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1602495774664319", userName: `${username}` }).then(function (response) {
@@ -115,6 +116,9 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
             $rootScope.alert("Бүртгэл олдсонгүй 100", "warning");
           }
         });
+      } else if (response.data.response.code == "User_name_or_password_wrong") {
+        $rootScope.HideLoader();
+        $rootScope.alert("Нэвтрэх нэр эсэвл нууц үг буруу байна", "warning");
       } else {
         $rootScope.HideLoader();
         $rootScope.alert("Бүртгэл олдсонгүй 200", "warning");
