@@ -93,3 +93,25 @@
 .register-label .input-label {
   font-size: 14px !important;
 }
+.register-step-1 input[type="text"],
+.register-step-1 input[type="password"] {
+}
+.register-step-1 ul.helper-text {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 22px;
+  color: red;
+}
+.register-step-1 ul.helper-text li.valid {
+  color: #4b5180 !important;
+  font-weight: bold;
+}
+form.valid input {
+  border: 2px solid blue;
+}
+.valid-pass-helper-container {
+  display: contents;
+  float: left;
+  margin: 10px 0;
+}

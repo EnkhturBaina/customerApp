@@ -1,5 +1,6 @@
 angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", function ($window, $state, $scope, $rootScope, $timeout, serverDeferred) {
   $(".register-mobile").mask("00000000");
+
   var progressBar = {
     Bar: $("#pr-progress-bar"),
     step1: $("reset-step-1"),
@@ -117,26 +118,30 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
     } else if (isEmpty($rootScope.customerNewPassword.passwordHash)) {
       $rootScope.alert("Та шинэ нууц үгээ оруулна уу");
     } else {
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619583335021155", mobileNumber: $rootScope.customerData.userName }).then(function (response) {
-        if (response[0] != "") {
-          if ($scope.smsCode == response[0].smscode) {
-            serverDeferred.requestFull("getPasswordHash1", $rootScope.customerNewPassword).then(function (response) {
-              $rootScope.newPasswordHashResult.passwordHash = response[1].result;
-              $rootScope.newPasswordHashResult.password = $rootScope.customerNewPassword.passwordHash;
-              $rootScope.newPasswordHashResult.customerId = registeredUserData.customerid;
-              $rootScope.newPasswordHashResult.id = registeredUserData.id;
-              $rootScope.newPasswordHashResult.userId = registeredUserData.userid;
-              $rootScope.newPasswordHashResult.userName = $rootScope.customerData.userName;
-              serverDeferred.requestFull("dcApp_login_register_dv_002", $rootScope.newPasswordHashResult).then(function (response) {
-                $state.go("login");
-                $rootScope.alert("Таны нууц үг амжилттай шинэчлэгдлээ", "success");
+      if ($rootScope.isPasswordValid) {
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619583335021155", mobileNumber: $rootScope.customerData.userName }).then(function (response) {
+          if (response[0] != "") {
+            if ($scope.smsCode == response[0].smscode) {
+              serverDeferred.requestFull("getPasswordHash1", $rootScope.customerNewPassword).then(function (response) {
+                $rootScope.newPasswordHashResult.passwordHash = response[1].result;
+                $rootScope.newPasswordHashResult.password = $rootScope.customerNewPassword.passwordHash;
+                $rootScope.newPasswordHashResult.customerId = registeredUserData.customerid;
+                $rootScope.newPasswordHashResult.id = registeredUserData.id;
+                $rootScope.newPasswordHashResult.userId = registeredUserData.userid;
+                $rootScope.newPasswordHashResult.userName = $rootScope.customerData.userName;
+                serverDeferred.requestFull("dcApp_login_register_dv_002", $rootScope.newPasswordHashResult).then(function (response) {
+                  $state.go("login");
+                  $rootScope.alert("Таны нууц үг амжилттай шинэчлэгдлээ", "success");
+                });
               });
-            });
-          } else {
-            $rootScope.alert("Баталгаажуулах код буруу байна", "warning");
+            } else {
+              $rootScope.alert("Баталгаажуулах код буруу байна", "warning");
+            }
           }
-        }
-      });
+        });
+      } else {
+        $rootScope.alert("Нууц үг шаардлага хангахгүй байна.", "warning");
+      }
     }
   };
   $scope.resendCode = function () {
@@ -188,4 +193,103 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
       $scope.inputType = "password";
     }
   };
+  $scope.$on("$ionicView.enter", function () {
+    $scope.isPasswordValid = false;
+  });
+  $scope.$on("$ionicView.afterEnter", function () {
+    $timeout(function () {
+      (function () {
+        var password = document.querySelector(".password");
+
+        var helperText = {
+          charLength: document.querySelector(".helper-text .length"),
+          lowercase: document.querySelector(".helper-text .lowercase"),
+          uppercase: document.querySelector(".helper-text .uppercase"),
+          special: document.querySelector(".helper-text .special"),
+        };
+
+        var pattern = {
+          charLength: function () {
+            if (password.value.length >= 8) {
+              return true;
+            }
+          },
+          lowercase: function () {
+            var regex = /^(?=.*[a-z]).+$/; // Lowercase character pattern
+
+            if (regex.test(password.value)) {
+              return true;
+            }
+          },
+          uppercase: function () {
+            var regex = /^(?=.*[A-Z]).+$/; // Uppercase character pattern
+
+            if (regex.test(password.value)) {
+              return true;
+            }
+          },
+          special: function () {
+            var regex = /^(?=.*[0-9_\W]).+$/; // Special character or number pattern
+
+            if (regex.test(password.value)) {
+              return true;
+            }
+          },
+        };
+
+        // Listen for keyup action on password field
+        password.addEventListener("keyup", function () {
+          // Check that password is a minimum of 8 characters
+          patternTest(pattern.charLength(), helperText.charLength);
+
+          // Check that password contains a lowercase letter
+          patternTest(pattern.lowercase(), helperText.lowercase);
+
+          // Check that password contains an uppercase letter
+          patternTest(pattern.uppercase(), helperText.uppercase);
+
+          // Check that password contains a number or special character
+          patternTest(pattern.special(), helperText.special);
+
+          // Check that all requirements are fulfilled
+          if (hasClass(helperText.charLength, "valid") && hasClass(helperText.lowercase, "valid") && hasClass(helperText.uppercase, "valid") && hasClass(helperText.special, "valid")) {
+            addClass(password.parentElement, "valid");
+            $scope.isPasswordValid = true;
+          } else {
+            removeClass(password.parentElement, "valid");
+            $scope.isPasswordValid = false;
+          }
+        });
+
+        function patternTest(pattern, response) {
+          if (pattern) {
+            addClass(response, "valid");
+          } else {
+            removeClass(response, "valid");
+          }
+        }
+
+        function addClass(el, className) {
+          if (el.classList) {
+            el.classList.add(className);
+          } else {
+            el.className += " " + className;
+          }
+        }
+
+        function removeClass(el, className) {
+          if (el.classList) el.classList.remove(className);
+          else el.className = el.className.replace(new RegExp("(^|\\b)" + className.split(" ").join("|") + "(\\b|$)", "gi"), " ");
+        }
+
+        function hasClass(el, className) {
+          if (el.classList) {
+            return el.classList.contains(className);
+          } else {
+            new RegExp("(^| )" + className + "( |$)", "gi").test(el.className);
+          }
+        }
+      })();
+    }, 1000);
+  });
 });

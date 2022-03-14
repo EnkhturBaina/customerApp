@@ -1,6 +1,7 @@
 angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeout, $scope, $rootScope, $state, serverDeferred, $ionicPlatform, $ionicModal) {
   $(".register-mobile").mask("00000000");
-  $(".registerRegSelector").mask("99999999");
+
+  $(".registerRegSelector").mask("00000000");
 
   var progressBar = {
     Bar: $("#progress-bar"),
@@ -47,6 +48,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
   $rootScope.registeredData = {};
 
   $scope.sendSmsCode = function () {
+    console.log("asdasd", $scope.isPasswordValid);
     if (isEmpty($scope.crmUserData.userName)) {
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
     } else if ($scope.crmUserData.userName.length < 8) {
@@ -56,86 +58,90 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
     } else if ($("#regNums").val() == "" || $("#regNums").val() == null) {
       $rootScope.alert("Регистрээ оруулна уу", "warning");
     } else {
-      //User бүртгэлтэй эсэхийг шалгах
-      serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $scope.crmUserData.userName }).then(function (response) {
-        if (!isEmpty(response[0])) {
-          $rootScope.alert("<p class=" + "customer_registerd_number" + ">" + $scope.crmUserData.userName + "</p>" + " Утасны дугаараар бүртгэл үүссэн байна", "warning");
-        } else {
-          serverDeferred.requestFull("getPasswordHash1", $scope.customerPassword).then(function (response) {
-            //Password Hash
-            $rootScope.passwordHashResult = response;
-          });
-
-          serverDeferred.requestFull("dcApp_all_crm_customer_004", { siRegNumber: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val() }).then(function (checkedValue) {
-            $rootScope.registeredData = checkedValue;
-          });
-
-          var generatedCode = Math.floor(100000 + Math.random() * 900000);
-
-          $timeout(function () {
-            if (!isEmpty($rootScope.registeredData[1])) {
-              json = $rootScope.registeredData[1];
-
-              var json = {
-                ...json,
-                mobileNumber: $scope.crmUserData.userName,
-              };
-              json.dcapp_all_crm_user.username = $scope.crmUserData.userName;
-              json.dcapp_all_crm_user.password = $scope.customerPassword.passwordHash;
-              json.dcapp_all_crm_user.passwordhash = $scope.passwordHashResult[1].result;
-
-              json.dcapp_all_crm_user.dcapp_all_dc_customer.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
-              json.dcapp_all_crm_user.dcapp_all_dc_customer.mobilenumber = $scope.crmUserData.userName;
-              json.dcapp_all_crm_user.dcapp_all_dc_customer.smscode = generatedCode;
-            } else {
-              var json = {
-                mobileNumber: $scope.crmUserData.userName,
-                siRegNumber: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
-                customerCode: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
-              };
-              json.dcApp_all_crm_user = {
-                userName: $scope.crmUserData.userName,
-                userId: "1",
-                password: $scope.customerPassword.passwordHash,
-                passwordHash: $scope.passwordHashResult[1].result,
-              };
-              json.dcApp_all_crm_user.dcApp_all_dc_customer = {
-                uniqueidentifier: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
-                mobileNumber: $scope.crmUserData.userName,
-                smsCode: generatedCode,
-                customertypeid: "1",
-              };
-            }
-
-            // $scope.smsConfirmCode = generatedCode;
-            serverDeferred.requestFull("dcApp_all_crm_customer_001", json).then(function (crmResponse) {
-              if (crmResponse[0] == "success") {
-                $scope.isStep1 = false;
-                $scope.isStep2 = true;
-
-                progressBar.Next();
-                $timeout(function () {
-                  serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id }).then(function (response) {
-                    localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
-                  });
-                  $scope.number = $scope.crmUserData.userName;
-                  $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
-                  serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {
-                    // console.log("res", response);
-                    if (response.result.status == "error") {
-                      $scope.smsConfirmCode = generatedCode;
-                    }
-                  });
-                }, 800);
-              } else {
-                $rootScope.alert("Бүртгэхэд алдаа гарлаа", "danger");
-              }
+      if ($scope.isPasswordValid) {
+        //User бүртгэлтэй эсэхийг шалгах
+        serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1600337520341415", username: $scope.crmUserData.userName }).then(function (response) {
+          if (!isEmpty(response[0])) {
+            $rootScope.alert("<p class=" + "customer_registerd_number" + ">" + $scope.crmUserData.userName + "</p>" + " Утасны дугаараар бүртгэл үүссэн байна", "warning");
+          } else {
+            serverDeferred.requestFull("getPasswordHash1", $scope.customerPassword).then(function (response) {
+              //Password Hash
+              $rootScope.passwordHashResult = response;
             });
-          }, 500);
-        }
-      });
+
+            serverDeferred.requestFull("dcApp_all_crm_customer_004", { siRegNumber: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val() }).then(function (checkedValue) {
+              $rootScope.registeredData = checkedValue;
+            });
+
+            var generatedCode = Math.floor(100000 + Math.random() * 900000);
+
+            $timeout(function () {
+              if (!isEmpty($rootScope.registeredData[1])) {
+                json = $rootScope.registeredData[1];
+
+                var json = {
+                  ...json,
+                  mobileNumber: $scope.crmUserData.userName,
+                };
+                json.dcapp_all_crm_user.username = $scope.crmUserData.userName;
+                json.dcapp_all_crm_user.password = $scope.customerPassword.passwordHash;
+                json.dcapp_all_crm_user.passwordhash = $scope.passwordHashResult[1].result;
+
+                json.dcapp_all_crm_user.dcapp_all_dc_customer.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+                json.dcapp_all_crm_user.dcapp_all_dc_customer.mobilenumber = $scope.crmUserData.userName;
+                json.dcapp_all_crm_user.dcapp_all_dc_customer.smscode = generatedCode;
+              } else {
+                var json = {
+                  mobileNumber: $scope.crmUserData.userName,
+                  siRegNumber: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
+                  customerCode: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
+                };
+                json.dcApp_all_crm_user = {
+                  userName: $scope.crmUserData.userName,
+                  userId: "1",
+                  password: $scope.customerPassword.passwordHash,
+                  passwordHash: $scope.passwordHashResult[1].result,
+                };
+                json.dcApp_all_crm_user.dcApp_all_dc_customer = {
+                  uniqueidentifier: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val(),
+                  mobileNumber: $scope.crmUserData.userName,
+                  smsCode: generatedCode,
+                  customertypeid: "1",
+                };
+              }
+
+              // $scope.smsConfirmCode = generatedCode;
+              serverDeferred.requestFull("dcApp_all_crm_customer_001", json).then(function (crmResponse) {
+                if (crmResponse[0] == "success") {
+                  $scope.isStep1 = false;
+                  $scope.isStep2 = true;
+
+                  progressBar.Next();
+                  $timeout(function () {
+                    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1617609253392068", dcCustomerId: crmResponse[1].dcapp_all_crm_user.dcapp_all_dc_customer.id }).then(function (response) {
+                      localStorage.setItem("ALL_ID", JSON.stringify(response[0]));
+                    });
+                    $scope.number = $scope.crmUserData.userName;
+                    $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
+                    serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {
+                      // console.log("res", response);
+                      if (response.result.status == "error") {
+                        $scope.smsConfirmCode = generatedCode;
+                      }
+                    });
+                  }, 800);
+                } else {
+                  $rootScope.alert("Бүртгэхэд алдаа гарлаа", "danger");
+                }
+              });
+            }, 500);
+          }
+        });
+        $scope.onTimer();
+      } else {
+        $rootScope.alert("Нууц үг шаардлага хангахгүй байна.", "warning");
+      }
     }
-    $scope.onTimer();
   };
   $scope.resendCode = function () {
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
@@ -248,4 +254,103 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
     // $("#regNums").val($scope.regNum.substr(2, 8));
     $scope.modal.hide();
   };
+  $scope.$on("$ionicView.enter", function () {
+    $scope.isPasswordValid = false;
+  });
+  $scope.$on("$ionicView.afterEnter", function () {
+    $timeout(function () {
+      (function () {
+        var password = document.querySelector(".password");
+
+        var helperText = {
+          charLength: document.querySelector(".helper-text .length"),
+          lowercase: document.querySelector(".helper-text .lowercase"),
+          uppercase: document.querySelector(".helper-text .uppercase"),
+          special: document.querySelector(".helper-text .special"),
+        };
+
+        var pattern = {
+          charLength: function () {
+            if (password.value.length >= 8) {
+              return true;
+            }
+          },
+          lowercase: function () {
+            var regex = /^(?=.*[a-z]).+$/; // Lowercase character pattern
+
+            if (regex.test(password.value)) {
+              return true;
+            }
+          },
+          uppercase: function () {
+            var regex = /^(?=.*[A-Z]).+$/; // Uppercase character pattern
+
+            if (regex.test(password.value)) {
+              return true;
+            }
+          },
+          special: function () {
+            var regex = /^(?=.*[0-9_\W]).+$/; // Special character or number pattern
+
+            if (regex.test(password.value)) {
+              return true;
+            }
+          },
+        };
+
+        // Listen for keyup action on password field
+        password.addEventListener("keyup", function () {
+          // Check that password is a minimum of 8 characters
+          patternTest(pattern.charLength(), helperText.charLength);
+
+          // Check that password contains a lowercase letter
+          patternTest(pattern.lowercase(), helperText.lowercase);
+
+          // Check that password contains an uppercase letter
+          patternTest(pattern.uppercase(), helperText.uppercase);
+
+          // Check that password contains a number or special character
+          patternTest(pattern.special(), helperText.special);
+
+          // Check that all requirements are fulfilled
+          if (hasClass(helperText.charLength, "valid") && hasClass(helperText.lowercase, "valid") && hasClass(helperText.uppercase, "valid") && hasClass(helperText.special, "valid")) {
+            addClass(password.parentElement, "valid");
+            $scope.isPasswordValid = true;
+          } else {
+            removeClass(password.parentElement, "valid");
+            $scope.isPasswordValid = false;
+          }
+        });
+
+        function patternTest(pattern, response) {
+          if (pattern) {
+            addClass(response, "valid");
+          } else {
+            removeClass(response, "valid");
+          }
+        }
+
+        function addClass(el, className) {
+          if (el.classList) {
+            el.classList.add(className);
+          } else {
+            el.className += " " + className;
+          }
+        }
+
+        function removeClass(el, className) {
+          if (el.classList) el.classList.remove(className);
+          else el.className = el.className.replace(new RegExp("(^|\\b)" + className.split(" ").join("|") + "(\\b|$)", "gi"), " ");
+        }
+
+        function hasClass(el, className) {
+          if (el.classList) {
+            return el.classList.contains(className);
+          } else {
+            new RegExp("(^| )" + className + "( |$)", "gi").test(el.className);
+          }
+        }
+      })();
+    }, 1000);
+  });
 });
