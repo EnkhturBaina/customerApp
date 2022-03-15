@@ -203,7 +203,6 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
 
         var helperText = {
           charLength: document.querySelector(".helper-text .length"),
-          lowercase: document.querySelector(".helper-text .lowercase"),
           uppercase: document.querySelector(".helper-text .uppercase"),
           special: document.querySelector(".helper-text .special"),
         };
@@ -211,13 +210,6 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
         var pattern = {
           charLength: function () {
             if (password.value.length >= 8) {
-              return true;
-            }
-          },
-          lowercase: function () {
-            var regex = /^(?=.*[a-z]).+$/; // Lowercase character pattern
-
-            if (regex.test(password.value)) {
               return true;
             }
           },
@@ -242,9 +234,6 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
           // Check that password is a minimum of 8 characters
           patternTest(pattern.charLength(), helperText.charLength);
 
-          // Check that password contains a lowercase letter
-          patternTest(pattern.lowercase(), helperText.lowercase);
-
           // Check that password contains an uppercase letter
           patternTest(pattern.uppercase(), helperText.uppercase);
 
@@ -252,7 +241,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
           patternTest(pattern.special(), helperText.special);
 
           // Check that all requirements are fulfilled
-          if (hasClass(helperText.charLength, "valid") && hasClass(helperText.lowercase, "valid") && hasClass(helperText.uppercase, "valid") && hasClass(helperText.special, "valid")) {
+          if (hasClass(helperText.charLength, "valid") && hasClass(helperText.uppercase, "valid") && hasClass(helperText.special, "valid")) {
             addClass(password.parentElement, "valid");
             $scope.isPasswordValid = true;
           } else {
