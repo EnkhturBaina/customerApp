@@ -449,29 +449,39 @@
       $rootScope.isIncomeConfirm = "not";
     }
   };
-  $rootScope.checkUserService = function () {
-    serverDeferred.requestFull("dcApp_checkUser_service", { register: $rootScope.danCustomerData.uniqueidentifier, type: parseInt($rootScope.requestTypeId), channel: 1626864048648 }).then(function (response) {
-      // console.log("response dan service", response);
-      $rootScope.userDataFromCheckService = response[1].data;
-      // console.log("$rootScope.userDataFromCheckService", $rootScope.userDataFromCheckService);
-      if (response[0] == "success" && response[1].data.count !== "0") {
-        $ionicPopup.show({
-          template: response[1].data.message,
-          cssClass: "confirmPopup",
-          buttons: [
-            {
-              text: "OK",
-              type: "button-confirm",
-              onTap: function () {
-                $timeout(function () {
-                  $ionicHistory.clearCache();
-                }, 100);
-                $state.go("home");
+  $rootScope.checkUserService = function (income, incomeType) {
+    console.log("income", income);
+    console.log("incomeType", incomeType);
+    serverDeferred
+      .requestFull("dcApp_checkUser_service", {
+        register: $rootScope.danCustomerData.uniqueidentifier,
+        type: parseInt($rootScope.requestTypeId),
+        channel: 1626864048648,
+        income: income,
+        income_type: incomeType,
+      })
+      .then(function (response) {
+        console.log("response dan service", response);
+        $rootScope.userDataFromCheckService = response[1].data;
+        // console.log("$rootScope.userDataFromCheckService", $rootScope.userDataFromCheckService);
+        if (response[0] == "success" && response[1].data.count !== "0") {
+          $ionicPopup.show({
+            template: response[1].data.message,
+            cssClass: "confirmPopup",
+            buttons: [
+              {
+                text: "OK",
+                type: "button-confirm",
+                onTap: function () {
+                  $timeout(function () {
+                    $ionicHistory.clearCache();
+                  }, 100);
+                  $state.go("home");
+                },
               },
-            },
-          ],
-        });
-      }
-    });
+            ],
+          });
+        }
+      });
   };
 });

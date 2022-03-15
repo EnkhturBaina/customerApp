@@ -1,4 +1,6 @@
-angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", function (serverDeferred, $ionicSlideBoxDelegate, $rootScope, $scope, $state) {
+angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", function (serverDeferred, $ionicSlideBoxDelegate, $rootScope, $scope, $state, $ionicPlatform, $location, $anchorScroll, $ionicModal) {
+  $("#loanAmountRequest").mask("00000000000");
+  $("#step2loanMonth").mask("000");
   $scope.saveBusinessLoanStep1 = function () {
     // if ($scope.checkReqiured("business-valid")) {
     //   if ($scope.checkReqiured("agreeBank")) {
@@ -91,6 +93,46 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
   $scope.selectCustomerType = function (val) {
     if (val == 1) {
       $rootScope.customerType = 1;
+      $ionicPlatform.ready(function () {
+        setTimeout(function () {
+          var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
+
+          new MobileSelect({
+            trigger: ".businessRegSelector",
+            wheels: [{ data: regChars }, { data: regChars }],
+            position: [0, 0],
+            ensureBtnText: "Хадгалах",
+            cancelBtnText: "Хаах",
+            transitionEnd: function (indexArr, data) {
+              //scroll xiij bhd ajillah func
+            },
+            callback: function (indexArr, data) {
+              $("#regCharA").text(data[0]);
+              $("#regCharB").text(data[1]);
+              $scope.overlayKeyOn();
+
+              keyInput = document.getElementById("regNums");
+              if (keyInput) {
+                $scope.clearD = function () {
+                  keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
+                };
+
+                $scope.addCode = function (key) {
+                  keyInput.value = keyInput.value + key;
+                };
+
+                $scope.emptyCode = function () {
+                  keyInput.value = "";
+                };
+
+                $scope.emptyCode();
+              }
+            },
+            onShow: function () {},
+          });
+          $("#regNums").mask("00000000");
+        }, 1000);
+      });
     } else if (val == 2) {
       $rootScope.customerType = 2;
     }
@@ -165,4 +207,43 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
       console.log("step2");
     }
   });
+  //element ruu scroll hiih
+  $scope.slideTo = function (location) {
+    var newHash = location;
+    if ($location.hash() !== newHash) {
+      $location.hash(location);
+    } else {
+      $anchorScroll();
+    }
+  };
+  $scope.overlayKeyOn = function () {
+    console.log("A");
+    $scope.modal.show();
+  };
+  $scope.saveRegNums = function () {
+    if (keyInput.value.length < 8) {
+      $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
+    } else {
+      $scope.modal.hide();
+      $rootScope.customerDataBusiness.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+    }
+  };
+  $scope.cancelRegNums = function () {
+    if (!isEmpty($rootScope.loginUserInfo) && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
+      $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
+      $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
+      $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
+      $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
+    }
+    $scope.modal.hide();
+  };
+  $ionicModal
+    .fromTemplateUrl("templates/modal.html", {
+      scope: $scope,
+      backdropClickToClose: false,
+    })
+    .then(function (modal) {
+      console.log("A");
+      $scope.modal = modal;
+    });
 });

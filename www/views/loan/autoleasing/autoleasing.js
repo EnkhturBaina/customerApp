@@ -1326,7 +1326,7 @@
   });
   if ($state.current.name == "autoleasing-2") {
     $timeout(function () {
-      $rootScope.checkUserService();
+      $rootScope.checkUserService($rootScope.danIncomeData.incometypeid, $rootScope.danIncomeData.proofofincome);
     }, 1000);
   }
   // MODAL

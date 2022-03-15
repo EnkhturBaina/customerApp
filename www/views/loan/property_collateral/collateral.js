@@ -273,7 +273,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;
   });
   $timeout(function () {
-    $rootScope.checkUserService();
+    $rootScope.checkUserService($rootScope.danIncomeData.incometypeid, $rootScope.danIncomeData.proofofincome);
   }, 1000);
   $scope.selectIncomeType = function (id) {
     $rootScope.proofOfIncomeData = [];
