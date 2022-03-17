@@ -14,7 +14,15 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
     $state.go("business_loan3");
     //   }
     // }
-  };
+  }; // MODAL
+  $ionicModal
+    .fromTemplateUrl("templates/term-content.html", {
+      scope: $scope,
+      animation: "slide-in-up",
+    })
+    .then(function (termModalAgreement) {
+      $scope.termModalAgreement = termModalAgreement;
+    });
   $scope.getLookupDatas = function () {
     console.log("getLookupDatas business ajiljiiiiiiin");
     if (isEmpty($rootScope.purposeOfloanData)) {
