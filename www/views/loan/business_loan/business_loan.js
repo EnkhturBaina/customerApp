@@ -24,7 +24,6 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
       $scope.termModalAgreement = termModalAgreement;
     });
   $scope.getLookupDatas = function () {
-    console.log("getLookupDatas business ajiljiiiiiiin");
     if (isEmpty($rootScope.purposeOfloanData)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16430046921272" }).then(function (response) {
         $rootScope.purposeOfloanData = response;
@@ -37,7 +36,6 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
     }
   };
   $scope.getLookupDatasStep2 = function () {
-    console.log("getLookupDatas step2 business ajiljiiiiiiin");
     if (isEmpty($rootScope.projectSectorData)) {
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1646622257271491" }).then(function (response) {
         $rootScope.projectSectorData = response;
@@ -193,26 +191,22 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
     var firstReq = localStorage.getItem("firstReq");
     $rootScope.customerType = null;
     $rootScope.hideFooter = true;
-    console.log("business step1");
     //Business loan step1
     if (firstReq === "yes" && $state.current.name == "business_loan") {
       $scope.getLookupDatas();
       $rootScope.newReqiust = {};
       $rootScope.customerDataBusiness = {};
       $rootScope.businessInfo = {};
-      console.log("step1");
       localStorage.setItem("firstReq", "no");
       $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     }
     //Business loan step2
     if ($state.current.name == "business_loan2") {
       $scope.getLookupDatasStep2();
-      console.log("step2");
     }
     //Business loan step3
     if ($state.current.name == "business_loan3") {
       $scope.getLookupDatasStep2();
-      console.log("step2");
     }
   });
   //element ruu scroll hiih
@@ -225,7 +219,6 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
     }
   };
   $scope.overlayKeyOn = function () {
-    console.log("A");
     $scope.modal.show();
   };
   $scope.saveRegNums = function () {
@@ -251,7 +244,16 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
       backdropClickToClose: false,
     })
     .then(function (modal) {
-      console.log("A");
       $scope.modal = modal;
     });
+  $scope.sendRequestBusiness = function () {
+    $rootScope.ShowLoader();
+    serverDeferred.requestFull("process_CODE", $rootScope.customerDataBusiness).then(function (businessCustomerResponse) {
+      console.log("businessCustomerResponse", businessCustomerResponse);
+      if (businessCustomerResponse[0] == "success" && businessCustomerResponse[1] != "") {
+        $rootScope.HideLoader();
+        // $state.go("loan_success");
+      }
+    });
+  };
 });

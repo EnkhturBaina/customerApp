@@ -1,6 +1,6 @@
 <ion-view hide-nav-bar="true">
   <link href="views/loan/autoleasing/autoleasing.css" rel="stylesheet" />
-  <div ng-repeat="data in [{'title':'Бизнесийн зээл'}]" ng-include src="'views/navbar.html'"></div>
+  <div ng-repeat="data in [{'title':'Бизнесийн мэдээлэл'}]" ng-include src="'views/navbar.html'"></div>
   <ion-content overflow-scroll="true" class="divide-container margin-top-50">
     <div class="big-container">
       <div class="magic-container">
@@ -82,7 +82,7 @@
             </div>
           </ion-scroll>
         </div>
-        <button class="button btn single-button" id="Next" ng-click="saveBusinessLoanStep2()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
+        <button class="button btn single-button" id="Next" ng-click="sendRequestBusiness()">ХҮСЭЛТ ИЛГЭЭХ</button><br />
       </div>
       <div class="none-div">
       </div>
