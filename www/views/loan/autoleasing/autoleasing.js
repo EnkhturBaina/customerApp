@@ -391,6 +391,7 @@
     $rootScope.ShowLoader();
     if (!isEmpty($rootScope.selectedBanksList)) {
       $rootScope.requestType = localStorage.getItem("requestType");
+      var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
       // console.log("$rootScope.requestType", $rootScope.requestType);
       if ($rootScope.requestType == "autoColl") {
         //===================Авто машин барьцаалсан зээл===================
@@ -399,6 +400,26 @@
         $scope.newReqiust.requestTypeId = "16082024252301";
         $scope.newReqiust.loanAmount = $scope.newReqiust.getLoanAmount;
         //Хүсэлт бүртгэх
+
+        //Харилцагчийн дата clone
+        $scope.newReqiust.cRegNum = $rootScope.danCustomerData.uniqueidentifier;
+        $scope.newReqiust.cPhNum = $rootScope.danCustomerData.mobilenumber;
+        $scope.newReqiust.cEmail = $rootScope.danCustomerData.email;
+        $scope.newReqiust.cLastname = $rootScope.danCustomerData.lastname;
+        $scope.newReqiust.cFirstname = $rootScope.danCustomerData.firstname;
+        $scope.newReqiust.isSixPercent = $rootScope.danCustomerData.mikmortgagecondition;
+        $scope.newReqiust.isMarried = $rootScope.danCustomerData.ismarried;
+        $scope.newReqiust.educationId = $rootScope.danCustomerData.educationid;
+        $scope.newReqiust.sectorOfLastYear = $rootScope.danCustomerData.sectoroflastyear;
+        $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
+        $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
+        $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+
+        if (DanloginUserInfo.dcapp_crmuser_dan) {
+          $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+          $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
+          $scope.newReqiust.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+        }
 
         serverDeferred.requestFull("dcApp_carCollRequestDV_001", $scope.newReqiust).then(function (sendReqResponse) {
           // console.log("sendReqResponse", sendReqResponse);
@@ -441,7 +462,6 @@
                     $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
                     delete $rootScope.danIncomeData.id;
 
-                    var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
                     if (DanloginUserInfo.dcapp_crmuser_dan) {
                       $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
                       $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
@@ -515,6 +535,26 @@
 
         // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
 
+        //Харилцагчийн дата clone
+        $scope.newReqiust.cRegNum = $rootScope.danCustomerData.uniqueidentifier;
+        $scope.newReqiust.cPhNum = $rootScope.danCustomerData.mobilenumber;
+        $scope.newReqiust.cEmail = $rootScope.danCustomerData.email;
+        $scope.newReqiust.cLastname = $rootScope.danCustomerData.lastname;
+        $scope.newReqiust.cFirstname = $rootScope.danCustomerData.firstname;
+        $scope.newReqiust.isSixPercent = $rootScope.danCustomerData.mikmortgagecondition;
+        $scope.newReqiust.isMarried = $rootScope.danCustomerData.ismarried;
+        $scope.newReqiust.educationId = $rootScope.danCustomerData.educationid;
+        $scope.newReqiust.sectorOfLastYear = $rootScope.danCustomerData.sectoroflastyear;
+        $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
+        $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
+        $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.cAddress = 1;
+
+        if (DanloginUserInfo.dcapp_crmuser_dan) {
+          $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+          $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
+          $scope.newReqiust.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+        }
         serverDeferred.requestFull("dcApp_preLoan_001", $rootScope.newReqiust).then(function (response) {
           // console.log("res", response);
           if (response[0] == "success" && response[1] != "") {
@@ -527,7 +567,6 @@
             serverDeferred.requestFull("dcApp_consumer_loan_001", $rootScope.ecoProduct).then(function (responseEcoProduct) {
               DTLPRODUCTSuccess = true;
               if (responseEcoProduct[0] == "success" && responseEcoProduct[1] != "") {
-                var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
                 if (DanloginUserInfo.dcapp_crmuser_dan) {
                   $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
                   $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
@@ -596,6 +635,26 @@
 
         // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
 
+        //Харилцагчийн дата clone
+        $scope.newReqiust.cRegNum = $rootScope.danCustomerData.uniqueidentifier;
+        $scope.newReqiust.cPhNum = $rootScope.danCustomerData.mobilenumber;
+        $scope.newReqiust.cEmail = $rootScope.danCustomerData.email;
+        $scope.newReqiust.cLastname = $rootScope.danCustomerData.lastname;
+        $scope.newReqiust.cFirstname = $rootScope.danCustomerData.firstname;
+        $scope.newReqiust.isSixPercent = $rootScope.danCustomerData.mikmortgagecondition;
+        $scope.newReqiust.isMarried = $rootScope.danCustomerData.ismarried;
+        $scope.newReqiust.educationId = $rootScope.danCustomerData.educationid;
+        $scope.newReqiust.sectorOfLastYear = $rootScope.danCustomerData.sectoroflastyear;
+        $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
+        $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
+        $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.cAddress = 1;
+
+        if (DanloginUserInfo.dcapp_crmuser_dan) {
+          $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+          $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
+          $scope.newReqiust.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+        }
         serverDeferred.requestFull("dcApp_preLoan_001", $rootScope.newReqiust).then(function (response) {
           // console.log("res", response);
           if (response[0] == "success" && response[1] != "") {
@@ -603,7 +662,6 @@
             $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
             delete $rootScope.danIncomeData.id;
 
-            var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
             if (DanloginUserInfo.dcapp_crmuser_dan) {
               $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
               $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
@@ -660,6 +718,26 @@
         });
         $rootScope.newReqiust.dcApp_preLoanRequestMapDV = selectedbanks;
 
+        //Харилцагчийн дата clone
+        $scope.newReqiust.cRegNum = $rootScope.danCustomerData.uniqueidentifier;
+        $scope.newReqiust.cPhNum = $rootScope.danCustomerData.mobilenumber;
+        $scope.newReqiust.cEmail = $rootScope.danCustomerData.email;
+        $scope.newReqiust.cLastname = $rootScope.danCustomerData.lastname;
+        $scope.newReqiust.cFirstname = $rootScope.danCustomerData.firstname;
+        $scope.newReqiust.isSixPercent = $rootScope.danCustomerData.mikmortgagecondition;
+        $scope.newReqiust.isMarried = $rootScope.danCustomerData.ismarried;
+        $scope.newReqiust.educationId = $rootScope.danCustomerData.educationid;
+        $scope.newReqiust.sectorOfLastYear = $rootScope.danCustomerData.sectoroflastyear;
+        $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
+        $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
+        $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.cAddress = 1;
+
+        if (DanloginUserInfo.dcapp_crmuser_dan) {
+          $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+          $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
+          $scope.newReqiust.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+        }
         serverDeferred.requestFull("dcApp_preLoan_001", $rootScope.newReqiust).then(function (response) {
           // console.log("res", response);
           if (response[0] == "success" && response[1] != "") {
@@ -667,7 +745,6 @@
             $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
             delete $rootScope.danIncomeData.id;
 
-            var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
             if (DanloginUserInfo.dcapp_crmuser_dan) {
               $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
               $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
@@ -705,6 +782,26 @@
         $scope.newReqiust.customerId = $rootScope.all_ID.dccustomerid;
         $scope.newReqiust.requestTypeId = "16082024252191";
         //Хүсэлт бүртгэх
+        //Харилцагчийн дата clone
+        $scope.newReqiust.cRegNum = $rootScope.danCustomerData.uniqueidentifier;
+        $scope.newReqiust.cPhNum = $rootScope.danCustomerData.mobilenumber;
+        $scope.newReqiust.cEmail = $rootScope.danCustomerData.email;
+        $scope.newReqiust.cLastname = $rootScope.danCustomerData.lastname;
+        $scope.newReqiust.cFirstname = $rootScope.danCustomerData.firstname;
+        $scope.newReqiust.isSixPercent = $rootScope.danCustomerData.mikmortgagecondition;
+        $scope.newReqiust.isMarried = $rootScope.danCustomerData.ismarried;
+        $scope.newReqiust.educationId = $rootScope.danCustomerData.educationid;
+        $scope.newReqiust.sectorOfLastYear = $rootScope.danCustomerData.sectoroflastyear;
+        $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
+        $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
+        $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.cAddress = 1;
+
+        if (DanloginUserInfo.dcapp_crmuser_dan) {
+          $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+          $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
+          $scope.newReqiust.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+        }
         serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
           // console.log("respionse OL", response);
           if (response[0] == "success" && response[1] != "") {
@@ -768,7 +865,6 @@
               if (DTLPRODUCTSuccess && mapBankSuccess) {
                 delete $rootScope.danIncomeData.id;
 
-                var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
                 if (DanloginUserInfo.dcapp_crmuser_dan) {
                   $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
                   $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
@@ -821,6 +917,26 @@
         $rootScope.newReqiust.requestTypeId = "16082024283512";
         $scope.newReqiust.loanAmount = $scope.newReqiust.getLoanAmount;
         //Хүсэлт бүртгэх
+        //Харилцагчийн дата clone
+        $scope.newReqiust.cRegNum = $rootScope.danCustomerData.uniqueidentifier;
+        $scope.newReqiust.cPhNum = $rootScope.danCustomerData.mobilenumber;
+        $scope.newReqiust.cEmail = $rootScope.danCustomerData.email;
+        $scope.newReqiust.cLastname = $rootScope.danCustomerData.lastname;
+        $scope.newReqiust.cFirstname = $rootScope.danCustomerData.firstname;
+        $scope.newReqiust.isSixPercent = $rootScope.danCustomerData.mikmortgagecondition;
+        $scope.newReqiust.isMarried = $rootScope.danCustomerData.ismarried;
+        $scope.newReqiust.educationId = $rootScope.danCustomerData.educationid;
+        $scope.newReqiust.sectorOfLastYear = $rootScope.danCustomerData.sectoroflastyear;
+        $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
+        $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
+        $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.cAddress = 1;
+
+        if (DanloginUserInfo.dcapp_crmuser_dan) {
+          $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+          $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
+          $scope.newReqiust.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+        }
         serverDeferred.requestFull("dcApp_carCollRequestDV_001", $rootScope.newReqiust).then(function (sendReqResponse) {
           // console.log("sendReqResponse", sendReqResponse);
 
@@ -859,7 +975,6 @@
                 $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
                 delete $rootScope.danIncomeData.id;
 
-                var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
                 // console.log("DanloginUserInfo", DanloginUserInfo);
                 if (DanloginUserInfo.dcapp_crmuser_dan) {
                   $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
@@ -908,7 +1023,29 @@
         $scope.newReqiust.customerId = $rootScope.all_ID.dccustomerid;
         $scope.newReqiust.requestTypeId = "16082024283142";
         /*===================AutoLeasing Хүсэлт бүртгэл===================*/
+        //Харилцагчийн дата clone
+        $scope.newReqiust.cRegNum = $rootScope.danCustomerData.uniqueidentifier;
+        $scope.newReqiust.cPhNum = $rootScope.danCustomerData.mobilenumber;
+        $scope.newReqiust.cEmail = $rootScope.danCustomerData.email;
+        $scope.newReqiust.cLastname = $rootScope.danCustomerData.lastname;
+        $scope.newReqiust.cFirstname = $rootScope.danCustomerData.firstname;
+        $scope.newReqiust.isSixPercent = $rootScope.danCustomerData.mikmortgagecondition;
+        $scope.newReqiust.isMarried = $rootScope.danCustomerData.ismarried;
+        $scope.newReqiust.educationId = $rootScope.danCustomerData.educationid;
+        $scope.newReqiust.sectorOfLastYear = $rootScope.danCustomerData.sectoroflastyear;
+        $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
+        $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
+        $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.cAddress = 1;
+
+        if (DanloginUserInfo.dcapp_crmuser_dan) {
+          $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
+          $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
+          $scope.newReqiust.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
+        }
+        console.log("$rootScope.newReqiust", $rootScope.newReqiust);
         serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
+          console.log("res", response);
           if (response[0] == "success" && response[1] != "") {
             //Сонгосон банк
             selectedbanks = [];
@@ -947,7 +1084,6 @@
                 $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
                 delete $rootScope.danIncomeData.id;
 
-                var DanloginUserInfo = JSON.parse(localStorage.getItem("loginUserInfo"));
                 if (DanloginUserInfo.dcapp_crmuser_dan) {
                   $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
                   $rootScope.danCustomerData.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
@@ -1427,7 +1563,8 @@
   $scope.dangetDataFunction = function (response) {
     if (!isEmpty(response.result.data)) {
       var userInfo = JSON.parse(response.result.data.info);
-      // console.log("userInfo", userInfo);
+      var addressInfo = JSON.parse(response.result.data.address);
+      console.log("userInfo", userInfo);
       if (!isEmpty(userInfo)) {
         // $scope.registerFunctionAuto(userInfo);
         var value = userInfo.result;
@@ -1450,6 +1587,7 @@
           profilePictureClob: value.image,
           isActive: "1",
           customerTypeId: "1",
+          address: addressInfo.result.fullAddress,
         };
 
         $rootScope.profilePictureSideMenu = value.image;
