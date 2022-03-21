@@ -23,4 +23,19 @@ app.controller("loan_successCtrl", function ($scope, $rootScope, $state, $ionicP
     $state.go("requestList");
     $rootScope.hideFooter = false;
   };
+
+  $scope.$on("$ionicView.enter", function () {
+    const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const d = new Date();
+    let day = weekday[d.getDay()];
+    let hour = d.getHours();
+    console.log(day);
+    if (day == "Sunday" || day == "Saturday") {
+      $rootScope.alert("Танд баярлалаа. Амралтын өдөр ажиллаж байгаа Банк, ББСБ-ууд Таны зээлийн хариуг өгнө. Бусад нь ажлын цаг эхэлмэгц хариу өгөх болохыг анхаараарай.", "warning");
+    } else if (hour > 9 && hour < 19) {
+      $rootScope.alert("Танд баярлалаа. Таны хүсэлтэд тун удахгүй хариу өгөх болно.", "warning");
+    } else {
+      $rootScope.alert("Танд баярлалаа. Ажлын цаг эхэлмэгц Таны зээлийн хүсэлтэд хариу өгөх болно.", "warning");
+    }
+  });
 });

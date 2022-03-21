@@ -991,7 +991,8 @@
       }, 2000);
     } else {
       $rootScope.HideLoader();
-      $rootScope.alert("Та хүсэлт илгээх банкаа сонгоно уу", "warning");
+      $scope.disabledBtnSendReq = false;
+      $rootScope.alert("Та 3 хүртэлх Банк, ББСБ-ыг сонгож зээлийн хүсэлтээ илгээгээрэй.", "warning");
     }
   };
 
@@ -1190,7 +1191,7 @@
       }
     } else if (param == "agreeBank") {
       if (isEmpty($rootScope.bankListFilter.Agree)) {
-        $rootScope.alert("Таны мэдээллийн дагуу зээл олгох банк, ББСБ байхгүй байна. Та мэдээллээ дахин оруулна уу.", "warning");
+        $rootScope.alert("Таны оруулсан зээлийн нөхцөлд тохирох Банк, ББСБ байхгүй байна. Та мэдээллээ дахин шалгаад хүсэлтээ илгээгээрэй.", "success");
         return false;
       } else {
         return true;
@@ -1339,12 +1340,17 @@
       $scope.termModalAgreement = termModalAgreement;
     });
   $scope.selectBankLastStep = function (item, id) {
-    if (item) {
-      $rootScope.selectedBanksList.push(id);
-    } else {
+    if ($rootScope.selectedBanksList.includes(id)) {
       var index = $rootScope.selectedBanksList.indexOf(id);
       if (index !== -1) {
         $rootScope.selectedBanksList.splice(index, 1);
+      }
+    } else {
+      if ($rootScope.selectedBanksList.length == 3) {
+        $rootScope.alert("Уучлаарай, Та 3-н банк, ББСБ-д илгээх боломжтой.", "warning");
+        item.checked = false;
+      } else {
+        $rootScope.selectedBanksList.push(id);
       }
     }
   };

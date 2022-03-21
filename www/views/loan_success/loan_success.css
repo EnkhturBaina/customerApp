@@ -11,6 +11,7 @@
   top: 10vh;
   height: 100%;
   position: absolute;
+  width: 100%;
 }
 .checkmark_success {
   width: 80px;

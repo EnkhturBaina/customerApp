@@ -10,7 +10,7 @@
                         <p class="middle-title ion-color-big-text">Зээлийн нөхцлийг хангасан банк, ББСБ-ууд</p>
                         <ul class="switch-list">
                             <li ng-repeat="bank in bankListFilter.Agree | filter:{id:'!!'}">
-                                <ion-checkbox ng-model="bank.checked" class="step3-bankList-checkbox-container" ng-change="selectBankLastStep(bank.checked,bank.id)">
+                                <ion-checkbox ng-model="bank.checked" class="step3-bankList-checkbox-container" ng-checked="bank.checked" ng-change="selectBankLastStep(bank,bank.id)">
                                     <div class="bank-list-container">
                                         <img ng-src="{{bank.bank_logo|guessImageMime}}" />
                                     </div>

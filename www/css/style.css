@@ -811,6 +811,7 @@ h4 {
   top: 10vh;
   height: 100%;
   position: absolute;
+  width: 100%;
 }
 
 .money-input input {
