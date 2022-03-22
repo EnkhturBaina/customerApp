@@ -183,11 +183,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     // else if (isEmpty($scope.customerIncomeProfileData.monthlyincome)) {
     //   $rootScope.alert("Та сарын орлогоо оруулна уу", "warning");
     // }
-    else if (isEmpty($scope.customerIncomeProfileData.totalincomehousehold)) {
-      $rootScope.alert("Та бусад орлогоо оруулна уу", "warning");
-    } else if (isEmpty($scope.customerIncomeProfileData.monthlypayment)) {
-      $rootScope.alert("Зээлийн сарын төлбөр оруулна уу", "warning");
-    } else {
+    else {
       $timeout(function () {
         if ($scope.customerIncomeProfileData != "") {
           var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));

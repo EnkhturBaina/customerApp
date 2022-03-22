@@ -1291,12 +1291,6 @@
       } else if (isEmpty($rootScope.danIncomeData.monthlyincome) && $rootScope.isIncomeConfirm) {
         $rootScope.alert("Сарын орлогоо оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danIncomeData.totalincomehousehold) && $rootScope.isIncomeConfirm) {
-        $rootScope.alert("Сарын бусад орлогоо оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danIncomeData.monthlypayment)) {
-        $rootScope.alert("Зээлийн сарын төлбөр оруулна уу", "warning");
-        return false;
       } else if (isEmpty($rootScope.danCustomerData.mikmortgagecondition) && !$rootScope.isSupLoan) {
         $rootScope.alert("Ипотекийн зээлтэй эсэхээ сонгоно уу", "warning");
         return false;
