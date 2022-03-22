@@ -308,6 +308,7 @@
         $rootScope.maxMonth = Math.max(...$rootScope.months);
         $rootScope.maxLoanAmount = Math.max(...$rootScope.maxAmounts);
         $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 0));
+        $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 1));
         $rootScope.minPayment = Math.min(...$rootScope.minPayments);
 
         //тэнцсэн банкуудын урьдчилгаа 0 үед ажиллах
@@ -332,6 +333,7 @@
           isEmpty($rootScope.months) ? ($rootScope.maxMonth = 0) : ($rootScope.maxMonth = Math.max(...$rootScope.months));
           $rootScope.maxLoanAmount = Math.max(...$rootScope.maxAmounts);
           $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 0));
+          $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 1));
           if (isEmpty($rootScope.minPayments)) {
             $rootScope.minPayment = 0;
           } else {
@@ -348,6 +350,7 @@
             }
           }
         }
+        console.log(" $rootScope.minAmounts", $rootScope.minAmounts);
         $rootScope.filteredMonths = [];
         if (isEmpty($rootScope.minMonth)) {
           $rootScope.minMonth = 0;
@@ -1392,6 +1395,7 @@
 
       if (local == "consumer" || local == "eco" || local == "building" || local == "estate") {
         $scope.getLoanAmountFunc();
+        $rootScope.showMIN_MAXloanAMOUNT = true;
       }
       if (!isEmpty($rootScope.all_ID)) {
         if ("uniqueidentifier" in $rootScope.all_ID && !isEmpty($rootScope.all_ID.uniqueidentifier)) {
