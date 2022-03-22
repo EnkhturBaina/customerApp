@@ -125,7 +125,6 @@
   };
 
   $scope.getLoanAmountFunc = function () {
-    console.log("A getLoanAmountFunc");
     $rootScope.loanAmountField = "";
     // input.value = "";
     $rootScope.requestType = localStorage.getItem("requestType");
@@ -297,7 +296,7 @@
           $rootScope.result = [].concat($rootScope.result, obj);
         });
         $rootScope.result.map((a) => {
-          $rootScope.months.push(a.max_loan_month_id);
+          $rootScope.months.push(parseInt(a.max_loan_month_id));
           $rootScope.maxAmounts.push(a.loan_max_amount);
           $rootScope.minAmounts.push(a.loan_min_amount);
           if (a.min_payment != 0 && a.min_payment != null) {
@@ -306,7 +305,6 @@
             $rootScope.minPayment = 0;
           }
         });
-
         $rootScope.maxMonth = Math.max(...$rootScope.months);
         $rootScope.maxLoanAmount = Math.max(...$rootScope.maxAmounts);
         $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 0));
@@ -322,7 +320,7 @@
           });
 
           $rootScope.result.map((a) => {
-            $rootScope.months.push(a.max_loan_month_id);
+            $rootScope.months.push(parseInt(a.max_loan_month_id));
             $rootScope.maxAmounts.push(a.loan_max_amount);
             $rootScope.minAmounts.push(a.loan_min_amount);
             if (a.min_payment !== 0 && a.min_payment !== null) {
@@ -350,6 +348,19 @@
             }
           }
         }
+        $rootScope.filteredMonths = [];
+        if (isEmpty($rootScope.minMonth)) {
+          $rootScope.minMonth = 0;
+        }
+        Object.keys($rootScope.monthsArr).forEach(function (key) {
+          if ($rootScope.requestType == key) {
+            $rootScope.monthsArr[key].map((el) => {
+              if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
+                $rootScope.filteredMonths.push(el);
+              }
+            });
+          }
+        });
 
         if ($rootScope.requestType == "consumer") {
           $rootScope.displayMinPayment = ($rootScope.sumPrice * $rootScope.minPayment).toFixed(2);
@@ -372,7 +383,6 @@
     }, 100);
   }
   if ($state.current.name == "autoleasing-4") {
-    console.log("ASDASDADSDA");
     $timeout(function () {
       $scope.getbankData();
       $("#monthlyIncome").mask("0000000000");
@@ -1499,21 +1509,17 @@
         $rootScope.stringHtmlsLink.state = $rootScope.loginUserInfo.siregnumber;
       }
     }
-    console.log("$rootScope.stringHtmlsLink.state", $rootScope.stringHtmlsLink.state);
-    console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+    // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
     if ($rootScope.isDanCalled) {
-      console.log("A", $rootScope.isDanCalled);
       $state.go("autoleasing-4");
     } else if (isEmpty($rootScope.userDataFromCheckService.dan)) {
-      console.log("B", $rootScope.userDataFromCheckService);
-      console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+      // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
       serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://devservices.digitalcredit.mn/api/sso/check").then(function (response) {
         $scope.dangetDataFunction(response);
       });
     } else {
-      console.log("C");
       serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, "https://devservices.digitalcredit.mn/api/v1/c").then(function (response) {
-        console.log("ressssssssss", response);
+        // console.log("ressssssssss", response);
         $rootScope.stringHtmlsLink = response.result.data;
         var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");
         $(authWindow).on("loadstart", function (e) {
@@ -1523,17 +1529,15 @@
           if (code == 0 || error) {
             authWindow.close();
           }
-          console.log(url, code);
           if (code == 0) {
-            console.log("code", code);
             if (isEmpty($rootScope.userDataFromCheckService.dan)) {
               $rootScope.stringHtmlsLink = $rootScope.loginUserInfo.uniqueidentifier;
             } else {
               $rootScope.stringHtmlsLink = response.result.data;
             }
-            console.log("cod$rootScope.stringHtmlsLinke", $rootScope.stringHtmlsLink);
+            // console.log("cod$rootScope.stringHtmlsLinke", $rootScope.stringHtmlsLink);
             serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://devservices.digitalcredit.mn/api/sso/check").then(function (response) {
-              console.log("response autoLEASING DAN", response);
+              // console.log("response autoLEASING DAN", response);
               $scope.dangetDataFunction(response);
             });
           } else if (error) {
@@ -1557,7 +1561,7 @@
     if (!isEmpty(response.result.data)) {
       var userInfo = JSON.parse(response.result.data.info);
       var addressInfo = JSON.parse(response.result.data.address);
-      console.log("userInfo", userInfo);
+      // console.log("userInfo", userInfo);
       if (!isEmpty(userInfo)) {
         // $scope.registerFunctionAuto(userInfo);
         var value = userInfo.result;
@@ -1597,7 +1601,7 @@
             json.dcApp_crmUser_dan.dcApp_dcCustomer_dan.id = checkedValue[1].dccustomerid;
           }
           serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
-            console.log("responseCRM", responseCRM);
+            // console.log("responseCRM", responseCRM);
 
             $rootScope.changeUserDan();
 

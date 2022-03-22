@@ -249,7 +249,7 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
   $scope.sendRequestBusiness = function () {
     $rootScope.ShowLoader();
     serverDeferred.requestFull("process_CODE", $rootScope.customerDataBusiness).then(function (businessCustomerResponse) {
-      console.log("businessCustomerResponse", businessCustomerResponse);
+      // console.log("businessCustomerResponse", businessCustomerResponse);
       if (businessCustomerResponse[0] == "success" && businessCustomerResponse[1] != "") {
         $rootScope.HideLoader();
         // $state.go("loan_success");

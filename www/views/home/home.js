@@ -234,6 +234,17 @@
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "164612642423810" }).then(function (response) {
       $rootScope.proveIncomeData = response;
     });
+    $rootScope.monthsArr = {
+      auto: [6, 12, 15, 18, 24, 30, 36, 48],
+      consumer: [3, 6, 12, 15, 18, 24, 30, 36],
+      salary: [6, 9, 12, 18, 24, 30, 36],
+      eco: [3, 6, 12, 15, 18, 24, 30, 36],
+      building: [24, 48, 60, 96, 120, 240, 300, 360],
+      card: [12, 24],
+      autoColl: [6, 12, 18, 24, 30, 36],
+      estate: [6, 12, 18, 24, 30, 36],
+    };
+    console.log($rootScope.monthsArr);
   };
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");
@@ -450,8 +461,6 @@
     }
   };
   $rootScope.checkUserService = function (income, incomeType) {
-    console.log("income", income);
-    console.log("incomeType", incomeType);
     serverDeferred
       .requestFull("dcApp_checkUser_service", {
         register: $rootScope.danCustomerData.uniqueidentifier,
@@ -461,7 +470,7 @@
         income_type: incomeType,
       })
       .then(function (response) {
-        console.log("response dan service", response);
+        // console.log("response dan service", response);
         $rootScope.userDataFromCheckService = response[1].data;
         // console.log("$rootScope.userDataFromCheckService", $rootScope.userDataFromCheckService);
         if (response[0] == "success" && response[1].data.count !== "0") {

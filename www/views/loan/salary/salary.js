@@ -1,5 +1,4 @@
 angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $rootScope, $state, $timeout, serverDeferred, $ionicModal, $ionicPlatform, $location, $anchorScroll) {
-  $("#step2loanMonth").mask("000");
   $scope.removeItemAll = function (arr, value) {
     var i = 0;
     while (i < arr.length) {
@@ -57,12 +56,13 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
         });
 
         $rootScope.result.map((a) => {
-          $rootScope.months.push(a.max_loan_month_id);
+          $rootScope.months.push(parseInt(a.max_loan_month_id));
           $rootScope.maxAmounts.push(a.loan_max_amount);
           $rootScope.minAmounts.push(a.loan_min_amount);
           a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : "";
         });
         $rootScope.maxMonth = Math.max(...$rootScope.months);
+        $rootScope.minMonth = Math.min(...$rootScope.months);
         $rootScope.maxLoanAmount = Math.max(...$rootScope.maxAmounts);
         $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 0));
         $rootScope.minPayment = Math.min(...$rootScope.minPayments);
@@ -77,15 +77,30 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
           });
 
           $rootScope.result.map((a) => {
-            $rootScope.months.push(a.max_loan_month_id);
+            $rootScope.months.push(parseInt(a.max_loan_month_id));
             $rootScope.maxAmounts.push(a.loan_max_amount);
             $rootScope.minAmounts.push(a.loan_min_amount);
           });
 
           $rootScope.maxMonth = Math.max(...$rootScope.months);
+          $rootScope.minMonth = Math.min(...$rootScope.months);
           $rootScope.maxLoanAmount = Math.max(...$rootScope.maxAmounts);
           $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 0));
         }
+
+        $rootScope.filteredMonths = [];
+        if (isEmpty($rootScope.minMonth)) {
+          $rootScope.minMonth = 0;
+        }
+        Object.keys($rootScope.monthsArr).forEach(function (key) {
+          if ($rootScope.requestType == key) {
+            $rootScope.monthsArr[key].map((el) => {
+              if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
+                $rootScope.filteredMonths.push(el);
+              }
+            });
+          }
+        });
       }
     });
     console.log("json", json);

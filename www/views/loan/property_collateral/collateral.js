@@ -130,7 +130,7 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         });
 
         $rootScope.result.map((a) => {
-          $rootScope.months.push(a.max_loan_month_id);
+          $rootScope.months.push(parseInt(a.max_loan_month_id));
           a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : "";
         });
 
@@ -147,13 +147,27 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
           });
 
           $rootScope.result.map((a) => {
-            $rootScope.months.push(a.max_loan_month_id);
+            $rootScope.months.push(parseInt(a.max_loan_month_id));
             a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : $rootScope.minPayments.push(0);
           });
 
           $rootScope.maxMonth = Math.max(...$rootScope.months);
           $rootScope.minPayment = Math.min(...$rootScope.minPayments);
         }
+
+        $rootScope.filteredMonths = [];
+        if (isEmpty($rootScope.minMonth)) {
+          $rootScope.minMonth = 0;
+        }
+        Object.keys($rootScope.monthsArr).forEach(function (key) {
+          if ($rootScope.requestType == key) {
+            $rootScope.monthsArr[key].map((el) => {
+              if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
+                $rootScope.filteredMonths.push(el);
+              }
+            });
+          }
+        });
       }
     });
     console.log("json", json);

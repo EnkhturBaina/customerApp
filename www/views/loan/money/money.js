@@ -44,7 +44,7 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
         });
 
         $rootScope.result.map((a) => {
-          $rootScope.months.push(a.max_loan_month_id);
+          $rootScope.months.push(parseInt(a.max_loan_month_id));
           a.min_payment != 0 ? $rootScope.minPayments.push(a.min_payment) : "";
         });
 
@@ -61,12 +61,26 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
           });
 
           $rootScope.result.map((a) => {
-            $rootScope.months.push(a.max_loan_month_id);
+            $rootScope.months.push(parseInt(a.max_loan_month_id));
           });
 
           $rootScope.maxMonth = Math.max(...$rootScope.months);
           isEmpty($rootScope.months) ? ($rootScope.maxMonth = 0) : "";
         }
+
+        $rootScope.filteredMonths = [];
+        if (isEmpty($rootScope.minMonth)) {
+          $rootScope.minMonth = 0;
+        }
+        Object.keys($rootScope.monthsArr).forEach(function (key) {
+          if ($rootScope.requestType == key) {
+            $rootScope.monthsArr[key].map((el) => {
+              if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
+                $rootScope.filteredMonths.push(el);
+              }
+            });
+          }
+        });
       }
     });
     console.log("json", json);

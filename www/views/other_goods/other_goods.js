@@ -97,17 +97,17 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
     var firstReq = localStorage.getItem("firstReq");
 
     if (firstReq === "yes" && $state.current.name == "otherGoods") {
-      $ionicModal
-        .fromTemplateUrl("templates/consumer.html", {
-          scope: $scope,
-          animation: "slide-in-up",
-        })
-        .then(function (consumerModal) {
-          $scope.consumerModal = consumerModal;
-        });
-      $timeout(function () {
-        $scope.consumerModal.show();
-      }, 300);
+      // $ionicModal
+      //   .fromTemplateUrl("templates/consumer.html", {
+      //     scope: $scope,
+      //     animation: "slide-in-up",
+      //   })
+      //   .then(function (consumerModal) {
+      //     $scope.consumerModal = consumerModal;
+      //   });
+      // $timeout(function () {
+      //   $scope.consumerModal.show();
+      // }, 300);
     }
     localStorage.setItem("firstReq", "no");
     !isEmpty($rootScope.otherGoods) ? ($rootScope.showSec = false) : ($rootScope.showSec = true);
