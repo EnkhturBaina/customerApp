@@ -548,7 +548,6 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
-        $scope.newReqiust.cAddress = 1;
 
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
@@ -648,7 +647,6 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
-        $scope.newReqiust.cAddress = 1;
 
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
@@ -731,7 +729,6 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
-        $scope.newReqiust.cAddress = 1;
 
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
@@ -795,7 +792,6 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
-        $scope.newReqiust.cAddress = 1;
 
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
@@ -930,7 +926,6 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
-        $scope.newReqiust.cAddress = 1;
 
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
@@ -1036,16 +1031,14 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
-        $scope.newReqiust.cAddress = 1;
 
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
           $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
           $scope.newReqiust.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
         }
-        console.log("$rootScope.newReqiust", $rootScope.newReqiust);
         serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
-          console.log("res", response);
+          // console.log("res", response);
           if (response[0] == "success" && response[1] != "") {
             //Сонгосон банк
             selectedbanks = [];
@@ -1604,7 +1597,7 @@
             json.dcApp_crmUser_dan.dcApp_dcCustomer_dan.id = checkedValue[1].dccustomerid;
           }
           serverDeferred.requestFull("dcApp_crmCustomer_dan_001", json).then(function (responseCRM) {
-            // console.log("responseCRM", responseCRM);
+            console.log("responseCRM", responseCRM);
 
             $rootScope.changeUserDan();
 
