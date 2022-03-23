@@ -193,6 +193,8 @@
       json.totalIncome = isEmpty($rootScope.danIncomeData.totalincomehousehold) ? 0 : $rootScope.danIncomeData.totalincomehousehold;
       json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome;
       json.monthPay = isEmpty($rootScope.danIncomeData.monthlypayment) ? 0 : $rootScope.danIncomeData.monthlypayment;
+      $rootScope.danIncomeData.totalincomehousehold = 0;
+      $rootScope.danIncomeData.monthlypayment = 0;
     }
 
     if ($rootScope.isSupplierLoanLocal == "yes") {

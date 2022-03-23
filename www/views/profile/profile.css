@@ -41,8 +41,8 @@
 
 .avatar-base {
   position: relative;
-  width: 110px;
-  height: 110px;
+  width: 95px;
+  height: 95px;
   padding: 5px;
   border-radius: 50%;
   background: -moz-linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
@@ -155,7 +155,7 @@
 }
 .profile-select {
   border: none;
-  padding: 2px 0px 0px 0px;
+  padding: 2px 0px 0px 5px;
   background: #fff;
   background-color: #fff;
   color: #4b5180;
@@ -235,7 +235,7 @@
   font-weight: bold;
   display: block;
   padding-top: 2px;
-  padding-left: 0;
+  padding-left: 10px;
   height: 34px;
   vertical-align: middle;
   font-size: 18px;
