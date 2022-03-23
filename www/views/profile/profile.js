@@ -12,7 +12,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     if (!isEmpty($rootScope.loginUserInfo)) {
       $rootScope.loginUserInfo = {};
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (response) {
-        console.log("res", response);
+        // console.log("res", response);
         $rootScope.loginUserInfo = mergeJsonObjs(response[0], $rootScope.loginUserInfo);
         if (response[0] != "") {
           $rootScope.customerProfileData = response[0];
@@ -221,9 +221,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $rootScope.proofOfIncomeData = $rootScope.incomeTypeWithCondition;
   $scope.selectIncomeTypeProfile = function (id) {
     $rootScope.proofOfIncomeData = [];
-    console.log("$rootScope.proofOfIncomeData", $rootScope.proofOfIncomeData);
     $rootScope.incomeTypeWithCondition.forEach((el) => {
-      console.log("el", el);
       if (el.id === id) {
         $rootScope.proofOfIncomeData.push(el);
       }

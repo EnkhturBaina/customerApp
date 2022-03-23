@@ -165,25 +165,6 @@
   font-size: 16px !important;
 }
 
-.deal-bank-remove {
-  border-radius: 10px;
-  width: 20px;
-  height: 20px;
-  text-align: center;
-  line-height: 4px;
-  position: absolute;
-  top: 0;
-  right: 15%;
-  background: #acd321;
-  color: #fff;
-  padding: 5%;
-  font-size: 28px;
-}
-
-.added-deal-bank {
-  position: relative;
-}
-
 #overlayProfilePicute {
   position: fixed;
   display: none;
@@ -238,7 +219,7 @@
 }
 .profile-ident-container-div {
   border: 0;
-  padding: 20px 0px 10px 0px;
+  padding: 10px 0px 10px 0px;
   display: block;
 }
 .form-input-label-profile {
