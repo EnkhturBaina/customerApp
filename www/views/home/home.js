@@ -244,7 +244,6 @@
       autoColl: [6, 12, 18, 24, 30, 36],
       estate: [6, 12, 18, 24, 30, 36],
     };
-    console.log($rootScope.monthsArr);
   };
   $scope.callComingSoon = function () {
     $rootScope.alert("Тун удахгүй", "warning");

@@ -12,8 +12,9 @@
 
 .profile-content {
   top: 0px !important;
-  height: calc(100% - 250px);
+  height: calc(100% - 200px);
   background-color: #fff;
+  padding-top: 20px;
 }
 
 .profile-content > .scroll {
@@ -24,11 +25,12 @@
   background: -moz-linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
   background: -webkit-linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
   background: linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
-  height: 250px;
+  height: 200px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  padding-left: 45px;
 }
 
 .profile-avatar img {
@@ -48,20 +50,6 @@
   background: linear-gradient(75deg, rgba(162, 209, 54, 1) 0%, rgba(60, 193, 249, 1) 93%);
   box-shadow: -1px 2px 7px rgba(0, 0, 0, 0.3);
 }
-
-input[type="text"] {
-  text-align: right;
-  color: #4b5180;
-  background: transparent !important;
-  font-weight: bold;
-}
-
-input[type="number"] {
-  text-align: right;
-  font-weight: bold;
-  color: #4b5180;
-}
-
 .profilePhoneNumber::-webkit-outer-spin-button,
 .profilePhoneNumber::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -91,6 +79,7 @@ input[type="number"] {
 }
 .profile-card-front p {
   padding: 6px 0px !important;
+  font-size: 16px !important;
 }
 .profile-card-front img {
   border-radius: 10px !important;
@@ -114,16 +103,17 @@ input[type="number"] {
 }
 .profile-card-back p {
   padding: 6px 0px !important;
+  font-size: 16px !important;
 }
 .profile-card-back img {
   border-radius: 10px !important;
 }
 
 .profile-label {
-  width: auto !important;
-  line-height: 30px;
   border: none !important;
-  padding: 10px 0 5px 16px;
+  margin-left: 10px;
+  font-size: 16px !important;
+  width: 100% !important;
 }
 
 .profile-label-pass {
@@ -164,19 +154,15 @@ input[type="number"] {
   color: #fff !important;
 }
 .profile-select {
-  /* width: 45%; */
-  text-align-last: right;
-  margin: 0 5px 0 auto;
-  float: right;
   border: none;
-  border-color: #d5d5d5;
-  border-radius: 5px;
-  padding: 7px 15px 7px 10px;
+  padding: 2px 0px 0px 0px;
   background: #fff;
   background-color: #fff;
   color: #4b5180;
   font-weight: bold;
-  margin-right: 20px;
+  width: 100% !important;
+  max-width: 100% !important;
+  font-size: 16px !important;
 }
 
 .deal-bank-remove {
@@ -252,6 +238,30 @@ input[type="number"] {
 }
 .profile-ident-container-div {
   border: 0;
-  padding: 0px 0px 10px 0px;
+  padding: 20px 0px 10px 0px;
   display: block;
+}
+.form-input-label-profile {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: 0px !important;
+  padding: 0 40px 15px 40px !important;
+  display: block !important;
+}
+.form-input-label-profile input {
+  color: #4b5180 !important;
+  background: transparent !important;
+  font-weight: bold;
+  display: block;
+  padding-top: 2px;
+  padding-left: 0;
+  height: 34px;
+  vertical-align: middle;
+  font-size: 18px;
+  line-height: 16px;
+}
+.profile-ref-name-container {
+  display: grid;
+  margin-left: 20px;
+  font-size: 18px;
 }

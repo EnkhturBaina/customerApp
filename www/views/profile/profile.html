@@ -28,6 +28,14 @@
                 </div>
                 <img ng-if="!$root.customerProfilePicture.profilePictureClob|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfilePicture.profilePictureClob}}" />
             </div>
+            <div class="profile-ref-name-container">
+                <span class="navbar-back-text ion-color-header ion-color-white">
+                    <span>{{$root.customerProfileData.lastname.substring(0, 1)}}. {{$root.customerProfileData.firstname}}</span>
+                </span>
+                <span class="navbar-back-text ion-color-header ion-color-white" style=" margin-top: 10px; ">
+                    <span>{{$root.customerProfileData.uniqueidentifier}}</span>
+                </span>
+            </div>
         </div>
         <ion-tabs id="profile-tabs-striped" class="tabs-striped tabs-top profile-card-tabs profile-tab profile-tabs-tab" delegate-handle="profileTabs">
             <!-- Tab 1 -->
@@ -35,52 +43,56 @@
                 <ion-nav-view class="gray-background">
                     <ion-content overflow-scroll="true" class="profile-content">
                         <div class="list profile-list">
-                            <label class="item item-input profile-label" id="lastNameLabel">
-                                <p>Овог</p>
-                                <input type="text" id="customerLastName" placeholder="Овог" name="lastName" ng-model="$root.customerProfileData.lastname" ng-keyup="hideKeyboard($event)" select-on-click disabled />
+                            <!-- <label class="item item-input item-stacked-label form-input-label-profile">
+                                <p class="input-label profile-label" style="margin: 0;">Овог</p>
+                                <input type="text" id="customerLastName" class="bg-fff" ng-model="$root.customerProfileData.lastname" ng-keyup="hideKeyboard($event)" disabled />
                             </label>
-                            <label class="item item-input profile-label" id="firstNameLabel">
-                                <p>Нэр</p>
-                                <input type="text" id="customerFirstName" placeholder="Нэр" name="firstName" ng-model="$root.customerProfileData.firstname" ng-keyup="hideKeyboard($event)" select-on-click disabled />
+                            <label class="item item-input item-stacked-label form-input-label-profile">
+                                <p class="input-label profile-label" style="margin: 0;">Нэр</p>
+                                <input type="text" id="customerFirstName" class="bg-fff" ng-model="$root.customerProfileData.firstname" ng-keyup="hideKeyboard($event)" disabled />
                             </label>
-                            <label class="item item-input profile-label" id="regLabel">
-                                <p class="ion-overflow-unset">Регситр</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="00000000" class="profileRegSelector" ng-model="$root.customerProfileData.uniqueidentifier" name="uniqueIdentifier" readonly />
+                            <label class="item item-input item-stacked-label form-input-label-profile">
+                                <p class="input-label profile-label" style="margin: 0;">Регистр</p>
+                                <input type="text" class="bg-fff" ng-model="$root.customerProfileData.uniqueidentifier" ng-keyup="hideKeyboard($event)" disabled />
+                            </label> -->
+                            <label class="item item-input item-stacked-label form-input-label-profile">
+                                <p class="input-label profile-label" style="margin: 0;">И-мэйл хаяг</p>
+                                <input type="text" class="bg-fff" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" ng-model="$root.customerProfileData.email" ng-keyup="hideKeyboard($event)" />
                             </label>
-                            <label class="item item-input profile-label" id="mailLabel">
-                                <p>И-мэйл хаяг</p>
-                                <input type="text" placeholder="И-мэйл хаяг" name="email" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" ng-model="$root.customerProfileData.email" ng-keyup="hideKeyboard($event)" select-on-click />
+                            <label class="item item-input item-stacked-label form-input-label-profile">
+                                <p class="input-label profile-label" style="margin: 0;">Утасны дугаар</p>
+                                <input inputmode="numeric" pattern="[0-9]*" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" ng-keyup="hideKeyboard($event)" select-on-click />
                             </label>
-                            <label class="item item-input profile-label" id="phoneLabel">
-                                <p>Утасны дугаар</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Утасны дугаар" name="mobileNumber" class="profilePhoneNumber" ng-model="$root.customerProfileData.mobilenumber" ng-keyup="hideKeyboard($event)" select-on-click />
-                            </label>
-                            <label class="item item-input profile-label" id="marriageLabel">
-                                <p>Гэрлэсэн эсэх</p>
-                                <select class="profile-select" ng-model="$root.customerProfileData.ismarried" ng-options="c.id as c.name for c in familtStatData | filter:{id:'!!'}" ng-init="$root.customerProfileData.ismarried = $root.customerProfileData.ismarried"></select>
-                            </label>
-                            <label class="item item-input profile-label" id="mikLabel">
-                                <p>МИК-ийн зээлтэй эсэх</p>
+                            <label class="item item-input form-input-label-profile">
+                                <p class="input-label" style="margin: 0;">Ипотекийн зээлтэй эсэх</p>
                                 <select class="profile-select" ng-model="$root.customerProfileData.mikmortgagecondition" ng-options="c.id as c.name for c in mortgageData | filter:{id:'!!'}" ng-init="$root.customerProfileData.mikmortgagecondition = $root.customerProfileData.mikmortgagecondition"></select>
                             </label>
-                            <label class="item item-input profile-label" id="workLabel">
-                                <p>Ажилласан жил</p>
+                            <label class="item item-input form-input-label-profile">
+                                <p class="input-label" style="margin: 0;">Гэрлэлтийн байдал</p>
+                                <select class="profile-select" ng-model="$root.customerProfileData.ismarried" ng-options="c.id as c.name for c in familtStatData | filter:{id:'!!'}" ng-init="$root.customerProfileData.ismarried = $root.customerProfileData.ismarried"></select>
+                            </label>
+                            <label class="item item-input form-input-label-profile">
+                                <p class="input-label" style="margin: 0;">Боловсрол</p>
+                                <select class="profile-select" ng-model="$root.customerProfileData.educationid" ng-options="c.id as c.name for c in educationData | filter:{id:'!!'}" ng-init="$root.customerProfileData.educationid = $root.customerProfileData.educationid"></select>
+                            </label>
+                            <label class="item item-input form-input-label-profile">
+                                <p class="input-label" style="margin: 0;">Ажиллаж буй салбар</p>
+                                <select class="profile-select" ng-model="$root.customerProfileData.sectoroflastyear" ng-options="c.id as c.name for c in customerSector | filter:{id:'!!'}" ng-init="$root.customerProfileData.sectoroflastyear = $root.customerProfileData.sectoroflastyear"></select>
+                            </label>
+                            <label class="item item-input form-input-label-profile">
+                                <p class="input-label" style="margin: 0;">Ажиллаж буй хэвшил</p>
+                                <select class="profile-select" ng-model="$root.customerProfileData.areasofactivity" ng-options="c.id as c.name for c in customerAreasOfActivity | filter:{id:'!!'}" ng-init="$root.customerProfileData.areasofactivity = $root.customerProfileData.areasofactivity"></select>
+                            </label>
+                            <label class="item item-input form-input-label-profile">
+                                <p class="input-label" style="margin: 0;">Албан тушаал</p>
+                                <select class="profile-select" ng-model="$root.customerProfileData.jobpositionid" ng-options="c.id as c.name for c in customerJobPosition | filter:{id:'!!'}" ng-init="$root.customerProfileData.jobpositionid = $root.customerProfileData.jobpositionid"></select>
+                            </label>
+                            <label class="item item-input form-input-label-profile">
+                                <p class="input-label" style="margin: 0;">Ажилласан жил</p>
                                 <select class="profile-select" ng-model="$root.customerProfileData.experienceperiodid" ng-options="c.id as c.name for c in experiencePeriodData | filter:{id:'!!'}" ng-init="$root.customerProfileData.experienceperiodid = $root.customerProfileData.experienceperiodid"></select>
                             </label>
                             <label class="item item-input profile-label profile-label-pass">
                             </label>
-                            <div class="item item-input profile-label profile-ident-container-div">
-                                <div class="profile-card-front" ng-click="ppSourceSelectOn(1)">
-                                    <p>Иргэний үнэмлэхний урд талын зураг</p>
-                                    <div ng-if="$root.customerProfileData.identfrontpic|isEmpty" class="profile-ident-pic-container">+</div>
-                                    <img ng-if="!$root.customerProfileData.identfrontpic|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfileData.identfrontpic}}" height="140px" width="250px" />
-                                </div>
-                                <div class="profile-card-back" ng-click="ppSourceSelectOn(2)">
-                                    <p>Иргэний үнэмлэхний ард талын зураг</p>
-                                    <div ng-if="$root.customerProfileData.identbackpic|isEmpty" class="profile-ident-pic-container">+</div>
-                                    <img ng-if="!$root.customerProfileData.identbackpic|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfileData.identbackpic}}" height="140px" width="250px" />
-                                </div>
-                            </div>
                             <div class="profile-tab1-save-btn">
                                 <button class="button btn single-button" ng-click="saveProfileData()">
                                     <span>ХАДГАЛАХ</span>
@@ -95,28 +107,48 @@
                 <ion-nav-view class="gray-background">
                     <ion-content overflow-scroll="true" class="profile-content">
                         <div class="list profile-list">
-                            <label class="item item-input profile-label">
-                                <p>Орлогын эх үүсвэр</p>
+                            <label class="item item-input form-input-label-profile">
+                                <p class="input-label" style="margin: 0;">Орлогын эх үүсвэр</p>
                                 <select class="profile-select" ng-model="$root.customerIncomeProfileData.incometypeid" ng-options="c.id as c.name for c in incomeType | filter:{id:'!!'}" ng-init="$root.customerIncomeProfileData.incometypeid = $root.customerIncomeProfileData.incometypeid" ng-change="selectIncomeTypeProfile($root.customerIncomeProfileData.incometypeid);"></select>
                             </label>
-                            <label class="item item-input profile-label">
-                                <p>Орлого нотлогдох байдал</p>
+                            <label class="item item-input form-input-label-profile">
+                                <p class="input-label" style="margin: 0;">Орлого нотлогдох байдал</p>
                                 <select class="profile-select" ng-model="$root.customerIncomeProfileData.proofofincome" ng-options="c.conditionid as c.conditionname for c in proofOfIncomeData | filter:{id:'!!'}" ng-init="$root.customerIncomeProfileData.proofofincome = $root.customerIncomeProfileData.proofofincome"></select>
                             </label>
-                            <label class="item item-input profile-label">
-                                <p>Сарын орлого</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlyincome" placeholder="-" name="monthlyincome" thousand-separator ng-keyup="hideKeyboard($event)" select-on-click />
+                            <label class="item item-input item-stacked-label form-input-label-profile">
+                                <p class="input-label profile-label" style="margin: 0;">Сарын орлого</p>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlyincome" placeholder="-" name="monthlyincome" ng-keyup="hideKeyboard($event)" thousand-separator select-on-click />
                             </label>
-                            <label class="item item-input profile-label">
-                                <p>Таны бусад орлого</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.totalincomehousehold" placeholder="-" name="totalincome" thousand-separator ng-keyup="hideKeyboard($event)" select-on-click />
+                            <label class="item item-input item-stacked-label form-input-label-profile">
+                                <p class="input-label profile-label" style="margin: 0;">Таны бусад орлого</p>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.totalincomehousehold" placeholder="-" name="totalincome" ng-keyup="hideKeyboard($event)" thousand-separator select-on-click />
                             </label>
-                            <label class="item item-input profile-label">
-                                <p>Зээлийн сарын төлбөр</p>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlypayment" placeholder="-" name="payloan" thousand-separator ng-keyup="hideKeyboard($event)" select-on-click />
+                            <label class="item item-input item-stacked-label form-input-label-profile">
+                                <p class="input-label profile-label" style="margin: 0;">Зээлийн сарын төлбөр</p>
+                                <input inputmode="numeric" pattern="[0-9]*" type="text" ng-model="$root.customerIncomeProfileData.monthlypayment" placeholder="-" name="payloan" ng-keyup="hideKeyboard($event)" thousand-separator select-on-click />
                             </label>
                             <div class="profile-tab1-save-btn">
                                 <button class="button btn single-button" ng-click="saveIncomeProfileData()">ХАДГАЛАХ</button>
+                            </div>
+                        </div>
+                    </ion-content>
+                </ion-nav-view>
+            </ion-tab>
+            <ion-tab title="Бичиг баримт">
+                <ion-nav-view class="gray-background">
+                    <ion-content overflow-scroll="true" class="profile-content">
+                        <div class="list profile-list">
+                            <div class="item item-input profile-label profile-ident-container-div">
+                                <div class="profile-card-front" ng-click="ppSourceSelectOn(1)">
+                                    <p>Иргэний үнэмлэхний урд талын зураг</p>
+                                    <div ng-if="$root.customerProfileData.identfrontpic|isEmpty" class="profile-ident-pic-container">+</div>
+                                    <img ng-if="!$root.customerProfileData.identfrontpic|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfileData.identfrontpic}}" height="140px" width="250px" />
+                                </div>
+                                <div class="profile-card-back" ng-click="ppSourceSelectOn(2)">
+                                    <p>Иргэний үнэмлэхний ард талын зураг</p>
+                                    <div ng-if="$root.customerProfileData.identbackpic|isEmpty" class="profile-ident-pic-container">+</div>
+                                    <img ng-if="!$root.customerProfileData.identbackpic|isEmpty" ng-src="{{'data:image/png;base64,'+$root.customerProfileData.identbackpic}}" height="140px" width="250px" />
+                                </div>
                             </div>
                         </div>
                     </ion-content>

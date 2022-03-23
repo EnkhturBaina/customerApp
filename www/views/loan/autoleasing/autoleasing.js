@@ -350,7 +350,6 @@
             }
           }
         }
-        console.log(" $rootScope.minAmounts", $rootScope.minAmounts);
         $rootScope.filteredMonths = [];
         if (isEmpty($rootScope.minMonth)) {
           $rootScope.minMonth = 0;
@@ -1646,6 +1645,7 @@
               $rootScope.danCustomerData.jobpositionid = responseCustomerData[0].jobpositionid;
               $rootScope.danCustomerData.mikmortgagecondition = responseCustomerData[0].mikmortgagecondition;
               $rootScope.danCustomerData.sectoroflastyear = responseCustomerData[0].sectoroflastyear;
+              $rootScope.danCustomerData.educationid = responseCustomerData[0].educationid;
               $rootScope.danCustomerData.identbackpic = responseCustomerData[0].identbackpic;
               $rootScope.danCustomerData.identfrontpic = responseCustomerData[0].identfrontpic;
             } else {
@@ -1924,5 +1924,9 @@
     if ($rootScope.newReqiust.loanMonth > $rootScope.maxMonth) {
       $rootScope.newReqiust.loanMonth = $rootScope.maxMonth;
     }
+  };
+  $scope.changeCarPrice = function () {
+    $rootScope.newReqiust.getLoanAmount = 0;
+    $rootScope.newReqiust.advancePayment = 0;
   };
 });
