@@ -174,26 +174,26 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
   //     $("#regNums").mask("00000000");
   //   }, 1000);
   // });
-  $scope.overlayKeyOn = function () {
-    $scope.modal.show();
-  };
-  $scope.saveRegNums = function () {
-    if (keyInput.value.length < 8) {
-      $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
-    } else {
-      $scope.modal.hide();
-      $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
-    }
-  };
-  $scope.cancelRegNums = function () {
-    if (!isEmpty($rootScope.loginUserInfo) && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
-      $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
-      $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
-      $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
-      $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
-    }
-    $scope.modal.hide();
-  };
+  // $scope.overlayKeyOn = function () {
+  //   $scope.modal.show();
+  // };
+  // $scope.saveRegNums = function () {
+  //   if (keyInput.value.length < 8) {
+  //     $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
+  //   } else {
+  //     $scope.modal.hide();
+  //     $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+  //   }
+  // };
+  // $scope.cancelRegNums = function () {
+  //   if (!isEmpty($rootScope.loginUserInfo) && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
+  //     $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
+  //     $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
+  //     $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
+  //     $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
+  //   }
+  //   $scope.modal.hide();
+  // };
   $ionicModal
     .fromTemplateUrl("templates/modal.html", {
       scope: $scope,
@@ -222,9 +222,6 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
       if ("uniqueidentifier" in $rootScope.all_ID && !isEmpty($rootScope.all_ID.uniqueidentifier)) {
         $scope.regNum = $rootScope.all_ID.uniqueidentifier;
         $rootScope.danCustomerData.uniqueidentifier = $rootScope.all_ID.uniqueidentifier;
-        $("#regCharA").text($rootScope.all_ID.uniqueidentifier.substr(0, 1));
-        $("#regCharB").text($rootScope.all_ID.uniqueidentifier.substr(1, 1));
-        $("#regNums").val($rootScope.all_ID.uniqueidentifier.substr(2, 8));
       }
       if ("mobilenumber" in $rootScope.all_ID && !isEmpty($rootScope.all_ID.mobilenumber)) {
         $rootScope.danCustomerData.mobilenumber = $rootScope.all_ID.mobilenumber;

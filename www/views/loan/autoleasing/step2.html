@@ -59,13 +59,7 @@
                         <div class="vxx-title-container"><span class="vxx-title">Зээл олгох хугацаа <span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сараас ихгүй байна</span></div>
                         <label class="item item-input item-stacked-label form-input-label" id="regLabel" ng-click="slideTo('regLabel')" disabled>
                             <span class="input-label">Регистрийн дугаар</span>
-                            <div class="reg-chars-container">
-                                <div class="select-reg-chars step2-select-reg-chars">
-                                    <span id="regCharA" type="text">Р</span>
-                                    <span id="regCharB" type="text">Д</span>
-                                </div>
-                                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="00000000" id="regNums" class="step2RegSelector mr-0" name="uniqueIdentifier" readonly />
-                            </div>
+                            <input type="text" placeholder="" name="" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danCustomerData.uniqueidentifier" disabled />
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Утасны дугаар</p>

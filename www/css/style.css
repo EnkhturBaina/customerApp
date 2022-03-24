@@ -1978,3 +1978,6 @@ select[disabled="disabled"] {
   width: fit-content;
   margin: 0 auto;
 }
+input:disabled {
+  opacity: 1 !important ;
+}

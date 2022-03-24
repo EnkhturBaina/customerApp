@@ -181,66 +181,66 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       $anchorScroll();
     }
   };
-  $ionicPlatform.ready(function () {
-    setTimeout(function () {
-      var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
+  // $ionicPlatform.ready(function () {
+  //   setTimeout(function () {
+  //     var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
 
-      new MobileSelect({
-        trigger: ".estateRegSelector",
-        wheels: [{ data: regChars }, { data: regChars }],
-        position: [0, 0],
-        ensureBtnText: "Хадгалах",
-        cancelBtnText: "Хаах",
-        transitionEnd: function (indexArr, data) {
-          //scroll xiij bhd ajillah func
-        },
-        callback: function (indexArr, data) {
-          $("#regCharA").text(data[0]);
-          $("#regCharB").text(data[1]);
-          $scope.overlayKeyOn();
+  //     new MobileSelect({
+  //       trigger: ".estateRegSelector",
+  //       wheels: [{ data: regChars }, { data: regChars }],
+  //       position: [0, 0],
+  //       ensureBtnText: "Хадгалах",
+  //       cancelBtnText: "Хаах",
+  //       transitionEnd: function (indexArr, data) {
+  //         //scroll xiij bhd ajillah func
+  //       },
+  //       callback: function (indexArr, data) {
+  //         $("#regCharA").text(data[0]);
+  //         $("#regCharB").text(data[1]);
+  //         $scope.overlayKeyOn();
 
-          keyInput = document.getElementById("regNums");
-          if (keyInput) {
-            $scope.clearD = function () {
-              keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
-            };
+  //         keyInput = document.getElementById("regNums");
+  //         if (keyInput) {
+  //           $scope.clearD = function () {
+  //             keyInput.value = keyInput.value.slice(0, keyInput.value.length - 1);
+  //           };
 
-            $scope.addCode = function (key) {
-              keyInput.value = keyInput.value + key;
-            };
+  //           $scope.addCode = function (key) {
+  //             keyInput.value = keyInput.value + key;
+  //           };
 
-            $scope.emptyCode = function () {
-              keyInput.value = "";
-            };
+  //           $scope.emptyCode = function () {
+  //             keyInput.value = "";
+  //           };
 
-            $scope.emptyCode();
-          }
-        },
-        onShow: function () {},
-      });
-      $("#regNums").mask("00000000");
-    }, 1000);
-  });
-  $scope.overlayKeyOn = function () {
-    $scope.modal.show();
-  };
-  $scope.saveRegNums = function () {
-    if (keyInput.value.length < 8) {
-      $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
-    } else {
-      $scope.modal.hide();
-      $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
-    }
-  };
-  $scope.cancelRegNums = function () {
-    if (!isEmpty($rootScope.loginUserInfo) && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
-      $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
-      $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
-      $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
-      $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
-    }
-    $scope.modal.hide();
-  };
+  //           $scope.emptyCode();
+  //         }
+  //       },
+  //       onShow: function () {},
+  //     });
+  //     $("#regNums").mask("00000000");
+  //   }, 1000);
+  // });
+  // $scope.overlayKeyOn = function () {
+  //   $scope.modal.show();
+  // };
+  // $scope.saveRegNums = function () {
+  //   if (keyInput.value.length < 8) {
+  //     $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
+  //   } else {
+  //     $scope.modal.hide();
+  //     $rootScope.danCustomerData.uniqueidentifier = $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val();
+  //   }
+  // };
+  // $scope.cancelRegNums = function () {
+  //   if (!isEmpty($rootScope.loginUserInfo) && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
+  //     $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
+  //     $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
+  //     $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
+  //     $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
+  //   }
+  //   $scope.modal.hide();
+  // };
   $ionicModal
     .fromTemplateUrl("templates/modal.html", {
       scope: $scope,
@@ -266,9 +266,6 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
         if ("uniqueidentifier" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.uniqueidentifier)) {
           $scope.regNum = $rootScope.loginUserInfo.uniqueidentifier;
           $rootScope.danCustomerData.uniqueidentifier = $rootScope.loginUserInfo.uniqueidentifier;
-          $("#regCharA").text($rootScope.loginUserInfo.uniqueidentifier.substr(0, 1));
-          $("#regCharB").text($rootScope.loginUserInfo.uniqueidentifier.substr(1, 1));
-          $("#regNums").val($rootScope.loginUserInfo.uniqueidentifier.substr(2, 8));
         }
         if ("mobilenumber" in $rootScope.loginUserInfo && !isEmpty($rootScope.loginUserInfo.mobilenumber)) {
           $rootScope.danCustomerData.mobilenumber = $rootScope.loginUserInfo.mobilenumber;
