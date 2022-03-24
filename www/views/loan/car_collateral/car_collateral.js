@@ -17,6 +17,8 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
     var firstReq = localStorage.getItem("firstReq");
+    $scope.factoryData = $rootScope.carFactoryData;
+    $scope.modelData = $rootScope.carModelData;
     if (firstReq === "yes" && $state.current.name == "car_coll") {
       $rootScope.carDetailData = {};
       $rootScope.newReqiust = {};

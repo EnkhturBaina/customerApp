@@ -35,14 +35,14 @@
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Үйлдвэр</p>
-                            <select id="brandSelect" ng-model="$root.carDetailData.brandId" style="background-color: transparent" disabled ng-change="getCarModelData(carDetailData.brandId)" class="custom-form-input-select">
+                            <select id="brandSelect" ng-model="$root.carDetailData.brandId" style="background-color: transparent" disabled ng-change="getCarModelData(carDetailData.brandId)" class="custom-form-input-select" ng-init="$root.carDetailData.brandId = $root.carDetailData.brandId">
                                 <option ng-repeat="com in factoryData track by $index" ng-if="com.name" value="{{com.id}}">
                                     {{com.name}}</option>
                             </select>
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Загвар</p>
-                            <select id="modelSelect" ng-model="$root.carDetailData.markId" style="background-color: transparent" disabled class="custom-form-input-select">
+                            <select id="modelSelect" ng-model="$root.carDetailData.markId" style="background-color: transparent" disabled class="custom-form-input-select" ng-init="$root.carDetailData.markId = $root.carDetailData.markId">
                                 <option ng-repeat="model in modelData track by $index" ng-if="model.name" value="{{model.id}}">
                                     {{model.name}}</option>
                             </select>
