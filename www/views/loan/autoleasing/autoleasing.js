@@ -1668,8 +1668,8 @@
         $rootScope.danCustomerData.uniqueidentifier = userInfo.result.regnum.toUpperCase();
 
         if (userSalaryInfo) {
-          serverDeferred.carCalculation(userSalaryInfo.result.list, "https://services.digitalcredit.mn/api/salary").then(function (response) {
-            // console.log("salary response", response);
+          serverDeferred.carCalculation(userSalaryInfo.result.list, "https://devservices.digitalcredit.mn/api/salary").then(function (response) {
+            console.log("salary response", response);
             if (response.status == "success" && !isEmpty(response.result)) {
               $rootScope.monthlyAverage = response.result[3];
               $rootScope.monthlyIncomeDisable = true;

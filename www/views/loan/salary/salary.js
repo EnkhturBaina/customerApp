@@ -187,6 +187,7 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
   $rootScope.$on("$ionicView.enter", function () {
     var firstReq = localStorage.getItem("firstReq");
     var local = localStorage.getItem("requestType");
+    $("#loanAmountRequest").mask("000000000");
     $rootScope.all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     $rootScope.isIncomeConfirm = true;
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх

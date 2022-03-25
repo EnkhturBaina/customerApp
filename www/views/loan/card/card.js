@@ -232,6 +232,7 @@ angular.module("card.Ctrl", []).controller("cardCtrl", function ($scope, $rootSc
   $rootScope.$on("$ionicView.enter", function () {
     var firstReq = localStorage.getItem("firstReq");
     var local = localStorage.getItem("requestType");
+    $("#loanAmountRequest").mask("000000000");
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "card") {
       $rootScope.newReqiust = {};
