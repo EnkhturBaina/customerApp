@@ -70,6 +70,7 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
     var firstReq = localStorage.getItem("firstReq");
     var local = localStorage.getItem("requestType");
     $rootScope.isIncomeConfirm = true;
+    $("#loanAmountRequest").mask("000000000");
     //нүүрнээс зээлийн хүсэлтрүү орох үед талбаруудыг шинэчлэх
     if (firstReq === "yes" && local == "eco") {
       $rootScope.newReqiust = {};

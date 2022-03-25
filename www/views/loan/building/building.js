@@ -11,7 +11,7 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
   $scope.checkReqiured = function (param) {
     if (param == "building-valid") {
       if (isEmpty($rootScope.newReqiust.choose)) {
-        $rootScope.alert("Орон сууцаа сонгосон эсэх", "warning");
+        $rootScope.alert("Орон сууцаа сонгосон эсэх сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.buildingLoanType)) {
         $rootScope.alert("Орон сууцны зээлийн төрөл сонгоно уу", "warning");
