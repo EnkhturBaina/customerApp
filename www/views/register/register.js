@@ -122,7 +122,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
                     });
                     $scope.number = $scope.crmUserData.userName;
                     $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
-                    serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {
+                    serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, `https://${$rootScope.api_url}digitalcredit.mn/api/sms/send`).then(function (response) {
                       // console.log("res", response);
                       if (response.result.status == "error") {
                         $scope.smsConfirmCode = generatedCode;
@@ -156,7 +156,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
         $scope.number = $scope.crmUserData.userName;
         $scope.msg = `http://zeelme.mn tanii batalgaajuulah code: ${generatedCode}`;
 
-        serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {});
+        serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, `https://${$rootScope.api_url}digitalcredit.mn/api/sms/send`).then(function (response) {});
       } else {
         $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа", "warning");
       }

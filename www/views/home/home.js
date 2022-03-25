@@ -6,6 +6,9 @@
   $rootScope.serverUrl = "http://market.digitalcredit.mn:8086/erp-services/RestWS/runJsonz";
   $rootScope.imagePath = "http://market.digitalcredit.mn/";
 
+  $rootScope.api_url = "devservices.";
+  // $rootScope.api_url = "services.";
+
   $rootScope.carMarketURL = "http://0001.mn/";
   $rootScope.carMarketStorageURL = "http://0001.mn/storage/";
   $rootScope.serverHeader = { "content-type": "application/json;charset=UTF-8" };

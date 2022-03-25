@@ -68,7 +68,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
               serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
                 // console.log("sendSmsResponse", sendSmsResponse);
                 if (sendSmsResponse[0] == "success") {
-                  serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {
+                  serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, `https://${$rootScope.api_url}digitalcredit.mn/api/sms/send`).then(function (response) {
                     // console.log("res", response);
                     if (response.result.status == "success") {
                       $scope.isStep1 = false;
@@ -158,7 +158,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
 
     serverDeferred.requestFull("dcApp_resendCode_002", updateCode).then(function (sendSmsResponse) {
       if (sendSmsResponse[0] == "success") {
-        serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, "https://services.digitalcredit.mn/api/sms/send").then(function (response) {});
+        serverDeferred.carCalculation({ sendto: $scope.number, message: $scope.msg }, `https://${$rootScope.api_url}digitalcredit.mn/api/sms/send`).then(function (response) {});
       } else {
         $rootScope.alert("Баталгаажуулах код илгээхэд алдаа гарлаа 200", "warning");
       }

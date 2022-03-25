@@ -1509,11 +1509,11 @@
       $state.go("autoleasing-4");
     } else if (isEmpty($rootScope.userDataFromCheckService.dan)) {
       // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
-      serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://devservices.digitalcredit.mn/api/sso/check").then(function (response) {
+      serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, `https://${$rootScope.api_url}digitalcredit.mn/api/sso/check`).then(function (response) {
         $scope.dangetDataFunction(response);
       });
     } else {
-      serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, "https://devservices.digitalcredit.mn/api/v1/c").then(function (response) {
+      serverDeferred.carCalculation({ type: "auth_auto", redirect_uri: "customerapp" }, `https://${$rootScope.api_url}digitalcredit.mn/api/v1/c`).then(function (response) {
         // console.log("ressssssssss", response);
         $rootScope.stringHtmlsLink = response.result.data;
         var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");
@@ -1531,8 +1531,8 @@
               $rootScope.stringHtmlsLink = response.result.data;
             }
             // console.log("cod$rootScope.stringHtmlsLinke", $rootScope.stringHtmlsLink);
-            serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, "https://devservices.digitalcredit.mn/api/sso/check").then(function (response) {
-              // console.log("response autoLEASING DAN", response);
+            serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, `https://${$rootScope.api_url}digitalcredit.mn/api/sso/check`).then(function (response) {
+              console.log("response autoLEASING DAN", response);
               $scope.dangetDataFunction(response);
             });
           } else if (error) {
@@ -1668,7 +1668,7 @@
         $rootScope.danCustomerData.uniqueidentifier = userInfo.result.regnum.toUpperCase();
 
         if (userSalaryInfo) {
-          serverDeferred.carCalculation(userSalaryInfo.result.list, "https://devservices.digitalcredit.mn/api/salary").then(function (response) {
+          serverDeferred.carCalculation(userSalaryInfo.result.list, `https://${$rootScope.api_url}digitalcredit.mn/api/salary`).then(function (response) {
             console.log("salary response", response);
             if (response.status == "success" && !isEmpty(response.result)) {
               $rootScope.monthlyAverage = response.result[3];
