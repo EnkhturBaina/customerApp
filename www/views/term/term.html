@@ -3,7 +3,7 @@
     <ion-content id="term-content" overflow-scroll="true" class="term-content">
         <ion-header-bar align-title="left" class="navbar" style="background: none; top: 0">
             <div class="title ion-color-big-text navbar-back-button term-back" style="background: none">
-                <button ng-click="$ionicGoBack()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+                <button ng-click="goHome()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
                     <i class="ion-chevron-left ion-color-header"></i>
                     <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Үйлчилгээний нөхцөл</span></span>
                 </button>
@@ -13,7 +13,7 @@
         </ion-header-bar>
         <div ng-include src="'views/term/term-content.html'"></div>
         <div class="term-button-container">
-            <button class="button btn single-button" ng-click="$ionicGoBack()">Буцах</button>
+            <button class="button btn single-button" ng-click="goHome()">Буцах</button>
         </div>
     </ion-content>
 </ion-view>
