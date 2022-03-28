@@ -182,7 +182,13 @@
     //   $rootScope.supplierHaveSubCategory = response;
     // });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1634724795622863" }).then(function (response) {
-      $rootScope.termContent = response[0].templatebody;
+      $timeout(function () {
+        if (ionic.Platform.platform() == "android" || ionic.Platform.platform() == "win32") {
+          $rootScope.termContent = response[0].templatebody;
+        } else {
+          $rootScope.termContent = response[0].asignature;
+        }
+      }, 1000);
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1636343385639929" }).then(function (response) {
       $rootScope.ERPappVersion = response[0].name;
