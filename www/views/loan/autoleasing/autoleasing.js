@@ -413,6 +413,18 @@
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
 
+        //Харилцагчийн income data
+        $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
+        $scope.newReqiust.salaryIncome = $rootScope.danIncomeData.monthlyincome; //сарын орлого
+        $scope.newReqiust.totalIncomeHousehold = $rootScope.danIncomeData.totalincomehousehold; //бусад орлого
+        $scope.newReqiust.currentMonthlyPayment = $rootScope.danIncomeData.monthlypayment; //Зээлийн сарын төлбөр
+        $scope.newReqiust.proofOfIncome = $rootScope.danIncomeData.proofofincome; //Орлого нотлогдох байдал
+        //Цалингийн тооцолол
+        $scope.newReqiust.incYearOfEmployment = $rootScope.danIncomeData.incyearofemployment;
+        $scope.newReqiust.workPlace = $rootScope.danIncomeData.workplace;
+        $scope.newReqiust.incMonthlyNetIncome = $rootScope.danIncomeData.incmonthlynetincome;
+        $scope.newReqiust.workedMonths = $rootScope.danIncomeData.workedmonths;
+
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
           $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
@@ -547,6 +559,18 @@
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
 
+        //Харилцагчийн income data
+        $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
+        $scope.newReqiust.salaryIncome = $rootScope.danIncomeData.monthlyincome; //сарын орлого
+        $scope.newReqiust.totalIncomeHousehold = $rootScope.danIncomeData.totalincomehousehold; //бусад орлого
+        $scope.newReqiust.currentMonthlyPayment = $rootScope.danIncomeData.monthlypayment; //Зээлийн сарын төлбөр
+        $scope.newReqiust.proofOfIncome = $rootScope.danIncomeData.proofofincome; //Орлого нотлогдох байдал
+        //Цалингийн тооцолол
+        $scope.newReqiust.incYearOfEmployment = $rootScope.danIncomeData.incyearofemployment;
+        $scope.newReqiust.workPlace = $rootScope.danIncomeData.workplace;
+        $scope.newReqiust.incMonthlyNetIncome = $rootScope.danIncomeData.incmonthlynetincome;
+        $scope.newReqiust.workedMonths = $rootScope.danIncomeData.workedmonths;
+
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
           $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
@@ -646,6 +670,18 @@
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
 
+        //Харилцагчийн income data
+        $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
+        $scope.newReqiust.salaryIncome = $rootScope.danIncomeData.monthlyincome; //сарын орлого
+        $scope.newReqiust.totalIncomeHousehold = $rootScope.danIncomeData.totalincomehousehold; //бусад орлого
+        $scope.newReqiust.currentMonthlyPayment = $rootScope.danIncomeData.monthlypayment; //Зээлийн сарын төлбөр
+        $scope.newReqiust.proofOfIncome = $rootScope.danIncomeData.proofofincome; //Орлого нотлогдох байдал
+        //Цалингийн тооцолол
+        $scope.newReqiust.incYearOfEmployment = $rootScope.danIncomeData.incyearofemployment;
+        $scope.newReqiust.workPlace = $rootScope.danIncomeData.workplace;
+        $scope.newReqiust.incMonthlyNetIncome = $rootScope.danIncomeData.incmonthlynetincome;
+        $scope.newReqiust.workedMonths = $rootScope.danIncomeData.workedmonths;
+
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
           $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
@@ -728,6 +764,18 @@
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
 
+        //Харилцагчийн income data
+        $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
+        $scope.newReqiust.salaryIncome = $rootScope.danIncomeData.monthlyincome; //сарын орлого
+        $scope.newReqiust.totalIncomeHousehold = $rootScope.danIncomeData.totalincomehousehold; //бусад орлого
+        $scope.newReqiust.currentMonthlyPayment = $rootScope.danIncomeData.monthlypayment; //Зээлийн сарын төлбөр
+        $scope.newReqiust.proofOfIncome = $rootScope.danIncomeData.proofofincome; //Орлого нотлогдох байдал
+        //Цалингийн тооцолол
+        $scope.newReqiust.incYearOfEmployment = $rootScope.danIncomeData.incyearofemployment;
+        $scope.newReqiust.workPlace = $rootScope.danIncomeData.workplace;
+        $scope.newReqiust.incMonthlyNetIncome = $rootScope.danIncomeData.incmonthlynetincome;
+        $scope.newReqiust.workedMonths = $rootScope.danIncomeData.workedmonths;
+
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
           $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
@@ -790,6 +838,18 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+
+        //Харилцагчийн income data
+        $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
+        $scope.newReqiust.salaryIncome = $rootScope.danIncomeData.monthlyincome; //сарын орлого
+        $scope.newReqiust.totalIncomeHousehold = $rootScope.danIncomeData.totalincomehousehold; //бусад орлого
+        $scope.newReqiust.currentMonthlyPayment = $rootScope.danIncomeData.monthlypayment; //Зээлийн сарын төлбөр
+        $scope.newReqiust.proofOfIncome = $rootScope.danIncomeData.proofofincome; //Орлого нотлогдох байдал
+        //Цалингийн тооцолол
+        $scope.newReqiust.incYearOfEmployment = $rootScope.danIncomeData.incyearofemployment;
+        $scope.newReqiust.workPlace = $rootScope.danIncomeData.workplace;
+        $scope.newReqiust.incMonthlyNetIncome = $rootScope.danIncomeData.incmonthlynetincome;
+        $scope.newReqiust.workedMonths = $rootScope.danIncomeData.workedmonths;
 
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
@@ -925,6 +985,18 @@
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
 
+        //Харилцагчийн income data
+        $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
+        $scope.newReqiust.salaryIncome = $rootScope.danIncomeData.monthlyincome; //сарын орлого
+        $scope.newReqiust.totalIncomeHousehold = $rootScope.danIncomeData.totalincomehousehold; //бусад орлого
+        $scope.newReqiust.currentMonthlyPayment = $rootScope.danIncomeData.monthlypayment; //Зээлийн сарын төлбөр
+        $scope.newReqiust.proofOfIncome = $rootScope.danIncomeData.proofofincome; //Орлого нотлогдох байдал
+        //Цалингийн тооцолол
+        $scope.newReqiust.incYearOfEmployment = $rootScope.danIncomeData.incyearofemployment;
+        $scope.newReqiust.workPlace = $rootScope.danIncomeData.workplace;
+        $scope.newReqiust.incMonthlyNetIncome = $rootScope.danIncomeData.incmonthlynetincome;
+        $scope.newReqiust.workedMonths = $rootScope.danIncomeData.workedmonths;
+
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
           $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
@@ -1029,6 +1101,18 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+
+        //Харилцагчийн income data
+        $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
+        $scope.newReqiust.salaryIncome = $rootScope.danIncomeData.monthlyincome; //сарын орлого
+        $scope.newReqiust.totalIncomeHousehold = $rootScope.danIncomeData.totalincomehousehold; //бусад орлого
+        $scope.newReqiust.currentMonthlyPayment = $rootScope.danIncomeData.monthlypayment; //Зээлийн сарын төлбөр
+        $scope.newReqiust.proofOfIncome = $rootScope.danIncomeData.proofofincome; //Орлого нотлогдох байдал
+        //Цалингийн тооцолол
+        $scope.newReqiust.incYearOfEmployment = $rootScope.danIncomeData.incyearofemployment;
+        $scope.newReqiust.workPlace = $rootScope.danIncomeData.workplace;
+        $scope.newReqiust.incMonthlyNetIncome = $rootScope.danIncomeData.incmonthlynetincome;
+        $scope.newReqiust.workedMonths = $rootScope.danIncomeData.workedmonths;
 
         if (DanloginUserInfo.dcapp_crmuser_dan) {
           $scope.newReqiust.cOwnPicClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
