@@ -10,26 +10,10 @@
   // $("#sendRequestAdvancePayment").mask("000000000000");
   $("#step2loanMonth").mask("000");
 
-  $("#step4UniqueIdentifier").mask("AA00000000", {
-    translation: {
-      A: { pattern: /^[А-ЯӨҮа-яөү\-\s]+$/ },
-    },
-  });
   //Сүүлийн Step дээр сонгосон банк
   $rootScope.selectedBanksList = [];
   if ($state.current.name == "autoleasing-1") {
     $rootScope.hideFooter = true;
-    $ionicModal
-      .fromTemplateUrl("templates/auto.html", {
-        scope: $scope,
-        animation: "slide-in-up",
-      })
-      .then(function (autoModal) {
-        $scope.autoModal = autoModal;
-      });
-    $timeout(function () {
-      // $scope.autoModal.show();
-    }, 300);
   }
 
   $ionicModal
@@ -347,19 +331,20 @@
             }
           }
         }
-        $rootScope.filteredMonths = [];
         if (isEmpty($rootScope.minMonth)) {
           $rootScope.minMonth = 0;
         }
-        Object.keys($rootScope.monthsArr).forEach(function (key) {
-          if ($rootScope.requestType == key) {
-            $rootScope.monthsArr[key].map((el) => {
-              if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
-                $rootScope.filteredMonths.push(el);
-              }
-            });
-          }
-        });
+        if (isEmpty($rootScope.filteredMonths)) {
+          Object.keys($rootScope.monthsArr).forEach(function (key) {
+            if ($rootScope.requestType == key) {
+              $rootScope.monthsArr[key].map((el) => {
+                if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
+                  $rootScope.filteredMonths.push(el);
+                }
+              });
+            }
+          });
+        }
 
         if ($rootScope.requestType == "consumer") {
           $rootScope.displayMinPayment = ($rootScope.sumPrice * $rootScope.minPayment).toFixed(2);
@@ -1166,10 +1151,6 @@
     }
   };
 
-  $scope.selectBankInfo = function (bank) {
-    $rootScope.selectedBank = bank;
-  };
-
   //other
   $scope.checkReqiured = function (param) {
     if (isEmpty($rootScope.newReqiust)) {
@@ -1373,6 +1354,7 @@
     }
   };
   $scope.$on("$ionicView.enter", function () {
+    $rootScope.filteredMonths = [];
     $rootScope.showMIN_MAXloanAMOUNT = false;
     var firstReq = localStorage.getItem("firstReq");
     var local = localStorage.getItem("requestType");

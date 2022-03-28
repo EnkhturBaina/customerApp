@@ -88,19 +88,20 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
           $rootScope.minLoanAmount = Math.min(...$scope.removeItemAll($rootScope.minAmounts, 0));
         }
 
-        $rootScope.filteredMonths = [];
         if (isEmpty($rootScope.minMonth)) {
           $rootScope.minMonth = 0;
         }
-        Object.keys($rootScope.monthsArr).forEach(function (key) {
-          if ($rootScope.requestType == key) {
-            $rootScope.monthsArr[key].map((el) => {
-              if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
-                $rootScope.filteredMonths.push(el);
-              }
-            });
-          }
-        });
+        if (isEmpty($rootScope.filteredMonths)) {
+          Object.keys($rootScope.monthsArr).forEach(function (key) {
+            if ($rootScope.requestType == key) {
+              $rootScope.monthsArr[key].map((el) => {
+                if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
+                  $rootScope.filteredMonths.push(el);
+                }
+              });
+            }
+          });
+        }
       }
     });
     console.log("json", json);
@@ -195,6 +196,7 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
       $rootScope.newReqiust = {};
       $rootScope.danCustomerData = {};
       $rootScope.danIncomeData = {};
+      $rootScope.filteredMonths = [];
       localStorage.setItem("firstReq", "no");
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;

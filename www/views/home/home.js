@@ -340,7 +340,7 @@
       $scope.getProfileLookupData();
       //App version check
       $timeout(function () {
-        if (ionic.Platform.platform() == "android") {
+        if (ionic.Platform.platform() == "android" || ionic.Platform.platform() == "win32") {
           if (!isEmpty($rootScope.ERPappVersion) && $rootScope.zeelmeAppVersion === $rootScope.ERPappVersion) {
           } else {
             $rootScope.checkisUpdate();
