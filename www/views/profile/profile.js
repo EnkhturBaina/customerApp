@@ -4,11 +4,24 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
   $scope.customerProfileData.mobilenumber = "";
   $scope.customerProfileData.customerTypeId = 1;
 
-  $rootScope.customerIncomeProfileData = {};
-
-  $rootScope.getProfileData = function () {
-    // $rootScope.ShowLoader();
+  $scope.getProfileIncomeData = function () {
+    $rootScope.customerIncomeProfileData = {};
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (responseIncomeProfile) {
+      console.log("responseIncomeProfile", responseIncomeProfile);
+      if (!isEmpty(responseIncomeProfile[0])) {
+        $rootScope.customerIncomeProfileData = responseIncomeProfile[0];
+        $rootScope.loginUserInfo = mergeJsonObjs(responseIncomeProfile[0], $rootScope.loginUserInfo);
+
+        localStorage.removeItem("loginUserInfo");
+        localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
+      } else {
+      }
+    });
+  };
+  $rootScope.getProfileData = function () {
+    var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+    // $rootScope.ShowLoader();
     if (!isEmpty($rootScope.loginUserInfo)) {
       $rootScope.loginUserInfo = {};
       serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597805077396905", crmcustomerid: all_ID.crmuserid }).then(function (response) {
@@ -20,18 +33,6 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
           localStorage.setItem("profilePictureSideMenu", response[0].profilepicture);
           $rootScope.profilePictureSideMenu = response[0].profilepicture;
           $rootScope.customerProfilePicture.profilePictureClob = response[0].profilepicture;
-
-          serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (responseIncome) {
-            // console.log("responseIncome1", responseIncome);
-            if (!isEmpty(responseIncome[0])) {
-              $rootScope.customerIncomeProfileData = responseIncome[0];
-              $rootScope.loginUserInfo = mergeJsonObjs(responseIncome[0], $rootScope.loginUserInfo);
-
-              localStorage.removeItem("loginUserInfo");
-              localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
-            } else {
-            }
-          });
         }
         $rootScope.HideLoader();
       });
@@ -43,7 +44,8 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     $rootScope.ShowLoader();
     $timeout(function () {
       $rootScope.getProfileData();
-    }, 100);
+      $scope.getProfileIncomeData();
+    }, 200);
     $timeout(function () {
       $rootScope.HideLoader();
     }, 2000);
