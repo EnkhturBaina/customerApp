@@ -196,7 +196,7 @@
       $rootScope.isAppActive = response[0].isactive;
       $rootScope.isAppActiveIOS = response[0].number1;
     });
-    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1643091771811030" }).then(function (response) {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1646622257271491" }).then(function (response) {
       $rootScope.customerSector = response;
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "16429945436111" }).then(function (response) {

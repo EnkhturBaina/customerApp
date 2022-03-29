@@ -412,6 +412,7 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.customerTypeId = $rootScope.danCustomerData.customertypeid;
 
         //Харилцагчийн income data
         $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
@@ -558,6 +559,7 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.customerTypeId = $rootScope.danCustomerData.customertypeid;
 
         //Харилцагчийн income data
         $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
@@ -669,6 +671,7 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.customerTypeId = $rootScope.danCustomerData.customertypeid;
 
         //Харилцагчийн income data
         $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
@@ -763,6 +766,7 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.customerTypeId = $rootScope.danCustomerData.customertypeid;
 
         //Харилцагчийн income data
         $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
@@ -838,6 +842,7 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.customerTypeId = $rootScope.danCustomerData.customertypeid;
 
         //Харилцагчийн income data
         $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
@@ -984,6 +989,7 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.customerTypeId = $rootScope.danCustomerData.customertypeid;
 
         //Харилцагчийн income data
         $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
@@ -1101,6 +1107,7 @@
         $scope.newReqiust.areasOfActivity = $rootScope.danCustomerData.areasofactivity;
         $scope.newReqiust.jobPositionId = $rootScope.danCustomerData.jobpositionid;
         $scope.newReqiust.experiencePeriodId = $rootScope.danCustomerData.experienceperiodid;
+        $scope.newReqiust.customerTypeId = $rootScope.danCustomerData.customertypeid;
 
         //Харилцагчийн income data
         $scope.newReqiust.incomeTypeId = $rootScope.danIncomeData.incometypeid; //Орлогын төрөл
@@ -1119,6 +1126,7 @@
           $scope.newReqiust.cAddress = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.address;
           $scope.newReqiust.familyName = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.familyname;
         }
+        // console.log("$rootScope.newReqiust", $rootScope.newReqiust);
         serverDeferred.requestFull("dcApp_send_request_dv1_001", $rootScope.newReqiust).then(function (response) {
           // console.log("res", response);
           if (response[0] == "success" && response[1] != "") {
@@ -1735,7 +1743,7 @@
 
         if (userSalaryInfo) {
           serverDeferred.carCalculation(userSalaryInfo.result.list, `https://${$rootScope.api_url}digitalcredit.mn/api/salary`).then(function (response) {
-            console.log("salary response", response);
+            // console.log("salary response", response);
             if (response.status == "success" && !isEmpty(response.result)) {
               $rootScope.monthlyAverage = response.result[3];
               $rootScope.monthlyIncomeDisable = true;

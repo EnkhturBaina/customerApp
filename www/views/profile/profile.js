@@ -8,7 +8,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     $rootScope.customerIncomeProfileData = {};
     var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1597804840588155", customerid: all_ID.dccustomerid }).then(function (responseIncomeProfile) {
-      console.log("responseIncomeProfile", responseIncomeProfile);
+      // console.log("responseIncomeProfile", responseIncomeProfile);
       if (!isEmpty(responseIncomeProfile[0])) {
         $rootScope.customerIncomeProfileData = responseIncomeProfile[0];
         $rootScope.loginUserInfo = mergeJsonObjs(responseIncomeProfile[0], $rootScope.loginUserInfo);
