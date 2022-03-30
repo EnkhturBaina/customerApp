@@ -24,6 +24,7 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       $rootScope.newReqiust = {};
       $rootScope.danCustomerData = {};
       $rootScope.danIncomeData = {};
+      $rootScope.filteredMonths = [];
       localStorage.setItem("firstReq", "no");
     }
     if ($state.current.name == "car_coll2") {

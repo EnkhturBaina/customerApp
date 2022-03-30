@@ -197,6 +197,7 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
       $rootScope.newReqiust = {};
       $rootScope.customerDataBusiness = {};
       $rootScope.businessInfo = {};
+      $rootScope.filteredMonths = [];
       localStorage.setItem("firstReq", "no");
       $rootScope.newReqiust.serviceAgreementId = 1554263832132;
     }

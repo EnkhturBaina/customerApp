@@ -338,9 +338,9 @@
           Object.keys($rootScope.monthsArr).forEach(function (key) {
             if ($rootScope.requestType == key) {
               $rootScope.monthsArr[key].map((el) => {
-                if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
-                  $rootScope.filteredMonths.push(el);
-                }
+                // if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
+                $rootScope.filteredMonths.push(el);
+                // }
               });
             }
           });
@@ -1446,13 +1446,13 @@
     }
   };
   $scope.$on("$ionicView.enter", function () {
-    $rootScope.filteredMonths = [];
     $rootScope.showMIN_MAXloanAMOUNT = false;
     var firstReq = localStorage.getItem("firstReq");
     var local = localStorage.getItem("requestType");
     if (firstReq === "yes" && $state.current.name == "autoleasing-2") {
       $rootScope.danCustomerData = {};
       $rootScope.danIncomeData = {};
+      $rootScope.filteredMonths = [];
       $rootScope.newReqiust.getLoanAmount = "";
       localStorage.setItem("firstReq", "no");
     }

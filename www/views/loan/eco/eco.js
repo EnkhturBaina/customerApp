@@ -77,6 +77,7 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
       $rootScope.danCustomerData = {};
       $rootScope.danIncomeData = {};
       $rootScope.ecoProduct = {};
+      $rootScope.filteredMonths = [];
       localStorage.setItem("firstReq", "no");
     }
     $rootScope.newReqiust.serviceAgreementId = 1554263832132;

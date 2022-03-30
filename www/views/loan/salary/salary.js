@@ -95,9 +95,9 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
           Object.keys($rootScope.monthsArr).forEach(function (key) {
             if ($rootScope.requestType == key) {
               $rootScope.monthsArr[key].map((el) => {
-                if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
-                  $rootScope.filteredMonths.push(el);
-                }
+                // if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
+                $rootScope.filteredMonths.push(el);
+                // }
               });
             }
           });

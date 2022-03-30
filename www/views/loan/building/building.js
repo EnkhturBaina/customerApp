@@ -87,6 +87,7 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
       $rootScope.newReqiust = {};
       $rootScope.danCustomerData = {};
       $rootScope.danIncomeData = {};
+      $rootScope.filteredMonths = [];
       localStorage.setItem("firstReq", "no");
     }
 

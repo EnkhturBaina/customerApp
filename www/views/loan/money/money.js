@@ -75,9 +75,9 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
           Object.keys($rootScope.monthsArr).forEach(function (key) {
             if ($rootScope.requestType == key) {
               $rootScope.monthsArr[key].map((el) => {
-                if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
+                // if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
                   $rootScope.filteredMonths.push(el);
-                }
+                // }
               });
             }
           });

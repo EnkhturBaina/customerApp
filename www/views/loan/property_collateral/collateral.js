@@ -162,9 +162,9 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
           Object.keys($rootScope.monthsArr).forEach(function (key) {
             if ($rootScope.requestType == key) {
               $rootScope.monthsArr[key].map((el) => {
-                if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
-                  $rootScope.filteredMonths.push(el);
-                }
+                // if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
+                $rootScope.filteredMonths.push(el);
+                // }
               });
             }
           });

@@ -109,6 +109,7 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
       //   $scope.consumerModal.show();
       // }, 300);
     }
+    $rootScope.filteredMonths = [];
     localStorage.setItem("firstReq", "no");
     !isEmpty($rootScope.otherGoods) ? ($rootScope.showSec = false) : ($rootScope.showSec = true);
   });
