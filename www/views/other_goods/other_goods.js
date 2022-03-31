@@ -47,15 +47,15 @@ angular.module("addOtherGoods.Ctrl", []).controller("addOtherGoodsCtrl", functio
 
   $scope.otherGoodsDelete = function (id) {
     $ionicPopup.show({
-      template: "<b>Бараа устгах уу ?</b>",
-      cssClass: "confirmPopup",
+      template: "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + "Та бүртгэсэн бараагаа буцаахдаа итгэлтэй байна уу?" + "</div>",
+      cssClass: "confirmPopup goods-popup",
       buttons: [
         {
           text: "Үгүй",
           type: "button-decline",
         },
         {
-          text: "Устгах",
+          text: "Тийм",
           type: "button-confirm",
           onTap: function () {
             for (var i = 0; i < $rootScope.otherGoodsData.length; i++) {

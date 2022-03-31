@@ -262,7 +262,7 @@
 
   //Утасны back button
   $ionicPlatform.onHardwareBackButton(function () {
-    $rootScope.hideFooter = false;
+    // $rootScope.hideFooter = false;
   });
 
   $ionicPlatform.registerBackButtonAction(function (e) {
@@ -270,7 +270,7 @@
 
     if ($state.current.name == "home") {
       $ionicPopup.show({
-        template: "<b>Аппликейшнийг  -г хаах уу ?</b>",
+        template: "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + "Аппликейшний -г хаах уу ?" + "</div>",
         cssClass: "confirmPopup",
         buttons: [
           {
@@ -499,7 +499,7 @@
         // console.log("$rootScope.userDataFromCheckService", $rootScope.userDataFromCheckService);
         if (response[0] == "success" && response[1].data.count !== "0") {
           $ionicPopup.show({
-            template: response[1].data.message,
+            template: "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + response[1].data.message + "</div>",
             cssClass: "confirmPopup",
             buttons: [
               {
@@ -516,5 +516,8 @@
           });
         }
       });
+  };
+  $rootScope.clickBank = function () {
+    $rootScope.alert("Та 5 -р алхам буюу илгээх шатанд банкаа сонгох боломжтой.", "warning");
   };
 });

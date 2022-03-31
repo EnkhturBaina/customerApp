@@ -76,7 +76,7 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
             if ($rootScope.requestType == key) {
               $rootScope.monthsArr[key].map((el) => {
                 // if ($rootScope.months.includes(el) && el >= $rootScope.minMonth && el <= $rootScope.maxMonth) {
-                  $rootScope.filteredMonths.push(el);
+                $rootScope.filteredMonths.push(el);
                 // }
               });
             }
@@ -94,16 +94,18 @@ angular.module("money.Ctrl", []).controller("moneyCtrl", function ($scope, $root
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
         $rootScope.alert("Зээл авах хугацаа  оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
-        $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
-        $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
-        return false;
-      } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
-        $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+      }
+      //  else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
+      //   $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+      //   $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+      //   return false;
+      // } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
+      //   $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
+      //   return false;
+      // }
+      else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
         $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.locationId)) {

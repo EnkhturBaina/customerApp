@@ -1276,14 +1276,8 @@
       } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.yearProduction)) {
         $rootScope.alert("Үйлдвэрлэсэн он оруулна уу", "warning");
         return false;
-      } else if ($scope.isSelected0001 !== "no" && $rootScope.carProduct.yearProduction.length < 4) {
-        $rootScope.alert("Үйлдвэрлэсэн он бүрэн оруулна уу", "warning");
-        return false;
       } else if ($scope.isSelected0001 !== "no" && isEmpty($rootScope.carProduct.yearEntryMongolia)) {
         $rootScope.alert("Орж ирсэн он оруулна уу", "warning");
-        return false;
-      } else if ($scope.isSelected0001 !== "no" && $rootScope.carProduct.yearEntryMongolia.length < 4) {
-        $rootScope.alert("Орж ирсэн он бүрэн оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.proveIncome)) {
         $rootScope.alert("Орлого нотлох эсэх сонгоно уу", "warning");
@@ -1308,19 +1302,23 @@
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
         $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
-        $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
-        $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
-        return false;
-      } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
-        $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danCustomerData.email)) {
-        $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danIncomeData.incometypeid) && $rootScope.isIncomeConfirm) {
+      }
+      // else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
+      //   $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
+      //   return false;
+      // }
+      //  else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+      //   $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+      //   return false;
+      // } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
+      //   $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
+      //   return false;
+      // }
+      //  else if (isEmpty($rootScope.danCustomerData.email)) {
+      //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
+      //   return false;
+      // }
+      else if (isEmpty($rootScope.danIncomeData.incometypeid) && $rootScope.isIncomeConfirm) {
         $rootScope.alert("Орлогын төрөл сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danIncomeData.proofofincome) && $rootScope.isIncomeConfirm) {
@@ -1359,7 +1357,7 @@
         $rootScope.alert("Овогоо оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danCustomerData.firstname)) {
-        $rootScope.alert("Өөрийн нэрээ оруулна уу", "warning");
+        $rootScope.alert("Нэрээ оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danIncomeData.monthlyincome) && $rootScope.isIncomeConfirm) {
         $rootScope.alert("Сарын орлогоо оруулна уу", "warning");
@@ -1400,7 +1398,7 @@
       }
     } else if (param == "agreeBank") {
       if (isEmpty($rootScope.bankListFilter.Agree)) {
-        $rootScope.alert("Таны оруулсан зээлийн нөхцөлд тохирох Банк, ББСБ байхгүй байна. Та мэдээллээ дахин шалгаад хүсэлтээ илгээгээрэй.", "success");
+        $rootScope.alert("Таны мэдээллийн дагуу зээл олгох банк, ББСБ байхгүй байна. Та мэдээллээ дахин оруулна уу.", "success");
         return false;
       } else {
         return true;
@@ -1446,7 +1444,7 @@
     }
   };
   $scope.$on("$ionicView.enter", function () {
-    $rootScope.showMIN_MAXloanAMOUNT = false;
+    $rootScope.showMIN_MAXloanAMOUNT = true;
     var firstReq = localStorage.getItem("firstReq");
     var local = localStorage.getItem("requestType");
     if (firstReq === "yes" && $state.current.name == "autoleasing-2") {

@@ -68,10 +68,11 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     // else if (isEmpty($scope.customerProfileData.email)) {
     //   $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
     // }
-    else if (!re.test($scope.customerProfileData.email)) {
-      $rootScope.HideLoader();
-      $rootScope.alert("И-мэйл хаягаа зөв оруулна уу", "warning");
-    } else if (isEmpty($scope.customerProfileData.mobilenumber)) {
+    // else if (!re.test($scope.customerProfileData.email)) {
+    //   $rootScope.HideLoader();
+    //   $rootScope.alert("И-мэйл хаягаа зөв оруулна уу", "warning");
+    // }
+    else if (isEmpty($scope.customerProfileData.mobilenumber)) {
       $rootScope.HideLoader();
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
     } else if ($scope.customerProfileData.mobilenumber.length < 8) {
@@ -82,7 +83,7 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       $rootScope.alert("Гэрлэсэн эсэхээ сонгоно уу", "warning");
     } else if (isEmpty($scope.customerProfileData.mikmortgagecondition)) {
       $rootScope.HideLoader();
-      $rootScope.alert("МИК-ийн зээлтэй эсэхээ сонгоно уу", "warning");
+      $rootScope.alert("Ипотекийн зээлтэй эсэхээ сонгоно уу", "warning");
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
       $rootScope.HideLoader();
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");

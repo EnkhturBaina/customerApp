@@ -2213,3 +2213,6 @@ select[disabled="disabled"] {
 input:disabled {
   opacity: 1 !important;
 }
+.goods-popup > .popup > .popup-body {
+  padding: 20px 10px;
+}

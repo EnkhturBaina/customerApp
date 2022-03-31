@@ -111,7 +111,8 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
 
   $scope.saveCarCol = function () {
     if ($scope.carCollCheckReqiured("step1")) {
-      $state.go("car_pic_coll");
+      // $state.go("car_pic_coll");
+      $state.go("autoleasing-2");
     }
   };
   $rootScope.yearsArray = [];

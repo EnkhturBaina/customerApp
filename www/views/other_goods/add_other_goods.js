@@ -37,7 +37,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
 
   $scope.showPopup = function () {
     $ionicPopup.show({
-      template: "<b>Бараа нэмэгдлээ</b></br></br>Та өөр бараа бүртгэх үү ?",
+      template: "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + "Бараа нэмэгдлээ</b></br>Та өөр бараа бүртгэх үү ?" + "</div>",
       cssClass: "confirmPopup",
       buttons: [
         {

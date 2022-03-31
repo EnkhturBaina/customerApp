@@ -19,16 +19,7 @@ angular.module("building.Ctrl", []).controller("buildingCtrl", function ($scope,
       } else if (isEmpty($rootScope.newReqiust.buildingPrice)) {
         $rootScope.alert("Орон сууцны үнэ оруулна уу", "warning");
         return false;
-      }
-      //  else if (isEmpty($rootScope.newReqiust.buildingSurvey) && $rootScope.isAgent) {
-      //   $rootScope.alert("Судалгаанд о/с-ны мэдээлэл өгөх боломжтой сонгоно уу", "warning");
-      //   return false;
-      // }
-      // else if (isEmpty($rootScope.newReqiust.buildingSurvey) && !$rootScope.isAgent) {
-      //   $rootScope.alert("Орон сууцны агенттай холбохыг зөвшөөрөх үү?", "warning");
-      //   return false;
-      // }
-      else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
+      } else if (isEmpty($rootScope.newReqiust.serviceAgreementId) || $rootScope.newReqiust.serviceAgreementId == 1554263832151) {
         $rootScope.alert("Та үйлчилгээний нөхцлийг зөвшөөрөөгүй байна", "warning");
         return false;
       } else {

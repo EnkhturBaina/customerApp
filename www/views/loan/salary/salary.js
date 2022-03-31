@@ -238,16 +238,18 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
         $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
-        $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
-        $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
-        return false;
-      } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
-        $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
+      }
+      //  else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
+      //   $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+      //   $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+      //   return false;
+      // } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
+      //   $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
+      //   return false;
+      // }
+      else if (isEmpty($rootScope.newReqiust.isCoBorrower)) {
         $rootScope.alert("Хамтран зээлдэгчтэй эсэхээ сонгоно уу", "warning");
         return false;
       } else if (isEmpty($rootScope.newReqiust.locationId)) {

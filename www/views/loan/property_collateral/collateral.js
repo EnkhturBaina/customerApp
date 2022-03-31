@@ -42,16 +42,18 @@ angular.module("property_collateral.Ctrl", []).controller("property_collateralCt
       } else if (isEmpty($rootScope.newReqiust.loanMonth)) {
         $rootScope.alert("Зээл авах хугацаа оруулна уу", "warning");
         return false;
-      } else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
-        $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
-        $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
-        return false;
-      } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
-        $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
-        return false;
-      } else if (isEmpty($rootScope.danCustomerData.email)) {
+      }
+      //  else if (isEmpty($rootScope.danCustomerData.uniqueidentifier)) {
+      //   $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
+      //   return false;
+      // } else if (isEmpty($rootScope.danCustomerData.mobilenumber)) {
+      //   $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
+      //   return false;
+      // } else if ($rootScope.danCustomerData.mobilenumber.length < 8) {
+      //   $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
+      //   return false;
+      // }
+      else if (isEmpty($rootScope.danCustomerData.email)) {
         $rootScope.alert("И-мэйл хаяг оруулна уу", "warning");
         return false;
       } else if (isEmpty($rootScope.danIncomeData.incometypeid) && $rootScope.isIncomeConfirm) {

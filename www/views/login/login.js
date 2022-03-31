@@ -1,4 +1,4 @@
-angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http, $ionicModal, $stateParams, $rootScope, $cordovaNetwork, $ionicLoading, $state, serverDeferred, $timeout) {
+angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http, $ionicModal, $stateParams, $rootScope, $cordovaNetwork, $ionicPopup, $state, serverDeferred, $ionicPlatform) {
   $scope.inputType = "password";
   $scope.user = {};
 
@@ -165,4 +165,35 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
   $scope.closeHtmlBindBluetooth = function () {
     $scope.htmlBindModel.remove();
   };
+  $ionicPlatform.registerBackButtonAction(function (e) {
+    e.preventDefault();
+
+    if ($state.current.name == "login") {
+      console.log("====================================");
+      $rootScope.hideFooter = true;
+      $ionicPopup.show({
+        template: "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + "Аппликейшний -г хаах уу ?" + "</div>",
+        cssClass: "confirmPopup",
+        buttons: [
+          {
+            text: "Үгүй",
+            type: "button-decline",
+            onTap: function () {
+              $rootScope.hideFooter = true;
+            },
+          },
+          {
+            text: "Тийм",
+            type: "button-confirm",
+            onTap: function () {
+              ionic.Platform.exitApp();
+              $rootScope.hideFooter = true;
+            },
+          },
+        ],
+      });
+    }
+
+    return false;
+  }, 101);
 });

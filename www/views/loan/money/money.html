@@ -18,15 +18,15 @@
                                 </option>
                             </select>
                         </label>
-                        <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <br /><span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байх боломжтой</span></div>
-                        <label class="item item-input item-stacked-label form-input-label" id="regLabel" ng-click="slideTo('regLabel')">
+                        <!-- <div class="vxx-title-container"><span class="vxx-title">Тухайн зээлийн хугацаа хамгийн ихдээ <br /><span class="step2-valid-text-bold">{{$root.maxMonth}}</span> сар байх боломжтой</span></div> -->
+                        <!-- <label class="item item-input item-stacked-label form-input-label" id="regLabel" ng-click="slideTo('regLabel')">
                             <span class="input-label">Регистрийн дугаар</span>
                             <input type="text" placeholder="" name="" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danCustomerData.uniqueidentifier" disabled />
                         </label>
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">Утасны дугаар</p>
                             <input inputmode="numeric" pattern="[0-9]*" maxlength="8" type="text" placeholder="" name="" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danCustomerData.mobilenumber" ng-keyup="hideKeyboard($event)" select-on-click />
-                        </label>
+                        </label> -->
                         <label class="item item-input item-stacked-label form-input-label">
                             <p class="input-label" style="margin: 0;">И-мэйл хаяг</p>
                             <input type="text" placeholder="" name="" class="ng-pristine ng-untouched ng-valid ng-valid-pattern mask bg-fff" ng-model="$root.danCustomerData.email" ng-keyup="hideKeyboard($event)" select-on-click />
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container-padding pulse-animation" id="section07">
+                <div class="container-padding pulse-animation" id="section07" ng-click="$root.clickBank()">
                     <p class="middle-title agree-banks">ТА ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГАЖ БУЙ БАНК, ББСБ-УУД</p>
                     <ion-scroll id="photoBanner" direction="x" class="wide-scroll-bank-step agree-bank-arrow" ng-if="bankListFilter.Agree.length!=0">
                         <div class="bank" ng-repeat="bank in bankListFilter.Agree">
@@ -81,7 +81,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="container-padding" id="section07">
+                <!-- <div class="container-padding" id="section07">
                     <p class="middle-title not-agree-banks">ТА ЗЭЭЛИЙН ШАЛГУУРЫГ НЬ ХАНГААГҮЙ БАНК, ББСБ-УУД</p>
                     <ion-scroll direction="x" class="wide-scroll-bank-step">
                         <div class="bank" ng-repeat="bank in bankListFilter.NotAgree">
@@ -89,7 +89,7 @@
                             <p>{{bank.department_name}}</p>
                         </div>
                     </ion-scroll>
-                </div>
+                </div> -->
                 <button class="button btn single-button" id="Next" ng-click="moneyStep2()">ҮРГЭЛЖЛҮҮЛЭХ</button><br />
             </div>
             <div class="none-div">

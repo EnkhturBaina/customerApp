@@ -118,7 +118,7 @@ angular.module("reset_password.Ctrl", []).controller("reset_passwordCtrl", funct
     } else if (isEmpty($rootScope.customerNewPassword.passwordHash)) {
       $rootScope.alert("Та шинэ нууц үгээ оруулна уу");
     } else {
-      if ($rootScope.isPasswordValid) {
+      if ($scope.isPasswordValid) {
         serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619583335021155", mobileNumber: $rootScope.customerData.userName }).then(function (response) {
           if (response[0] != "") {
             if ($scope.smsCode == response[0].smscode) {

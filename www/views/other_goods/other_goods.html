@@ -53,7 +53,7 @@
                 </ion-slide-box>
             </div>
             <ion-footer class="bottom-footer">
-                <div class="bank-container">
+                <div class="bank-container" ng-click="$root.clickBank()">
                     <p>Танд зээл олгох боломжтой банк, ББСБ-ууд</p>
 
                     <img ng-repeat="bank in allBankList | filter:{id:'!!'}" ng-if="bank.bank_logo" ng-src="{{$root.imagePath}}{{bank.bank_logo}}" />
