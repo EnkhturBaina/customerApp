@@ -14,6 +14,32 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
   //Машины өнгө
   $scope.carColorData = [];
 
+  $rootScope.getbankDataCarColl = function (a) {
+    if (a != "forced") $rootScope.ShowLoader();
+
+    $rootScope.requestType = localStorage.getItem("requestType");
+    //Шүүгдсэн банкууд
+    $rootScope.bankListFilter = [];
+    var json = {};
+
+    json.isPerson = "1";
+    json.isCollateral = "";
+
+    //банк шүүлт
+    json.type = "carLoanFilter";
+    json.totalLoan = 0;
+    json.location = "";
+    json.month = 0;
+    json.salaries = "";
+    json.isConfirm = $rootScope.newReqiust.proveIncome;
+    json.carCategory = $rootScope.carDetailData.carCategoryId;
+
+    serverDeferred.carCalculation(json).then(function (response) {
+      $rootScope.bankListFilter = response.result.data;
+      $rootScope.HideLoader();
+    });
+    console.log("json", json);
+  };
   $scope.$on("$ionicView.enter", function () {
     $rootScope.hideFooter = true;
     var firstReq = localStorage.getItem("firstReq");
@@ -39,6 +65,11 @@ angular.module("car_collateral.Ctrl", []).controller("car_collateralCtrl", funct
       $timeout(function () {
         // $scope.autoCollModal.show();
       }, 100);
+    }
+    if ($state.current.name == "car_coll") {
+      $timeout(function () {
+        $scope.getbankDataCarColl("forced");
+      }, 200);
     }
   });
   $scope.getCarCollateralLookupData = function () {

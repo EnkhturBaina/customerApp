@@ -213,6 +213,7 @@
       json.location = isEmpty($rootScope.newReqiust.locationId) ? 0 : $rootScope.newReqiust.locationId;
       json.month = isEmpty($rootScope.newReqiust.loanMonth) ? 0 : $rootScope.newReqiust.loanMonth;
       json.isCollateral = isEmpty($rootScope.newReqiust.collateralConditionId) ? "" : $rootScope.newReqiust.collateralConditionId;
+      json.isConfirm = $rootScope.newReqiust.proveIncome;
       if ($scope.isSelected0001 === "0001") {
         json.code = $rootScope.carProduct.itemCode;
       }
