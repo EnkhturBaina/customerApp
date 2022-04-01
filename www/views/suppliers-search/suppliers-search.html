@@ -1,12 +1,21 @@
 <ion-view hide-nav-bar="true">
     <link href="views/suppliers-search/suppliers-search.css" rel="stylesheet" />
-    <div ng-repeat="data in [{'title':'Дэлгүүр хайх'}]" ng-include src="'views/navbar.html'"></div>
+    <ion-header-bar align-title="left" class="navbar" style="background: none; top: 0">
+        <div class="title ion-color-big-text navbar-back-button" style="background: none">
+            <button ng-click="$ionicGoBack()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+                <i class="ion-chevron-left ion-color-header"></i>
+                <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Дэлгүүр хайх</span></span>
+            </button>
+        </div>
+        <div class="navbar-right-icon">
+        </div>
+    </ion-header-bar>
     <div class="navbar-right-icon suppliers-grid-icon">
         <button ng-click="gridChange()" class="changelayoutbutton layout-list" id="changeLayout">
             <i id="buttonIcon" class="custom-grid"></i>
         </button>
     </div>
-    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50">
+    <ion-content overflow-scroll="true" class="ion-modified-content">
 
         <div class="suppliers-search-container">
             <span class="icon ion-search suppliers-search-item"></span>

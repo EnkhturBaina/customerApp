@@ -1437,13 +1437,6 @@
       $ionicHistory.goBack();
     }
   };
-  $scope.changeToolTipData = function () {
-    if ($rootScope.newReqiust.collateralConditionId == "1554263832132") {
-      $rootScope.collTrueStep2 = true;
-    } else {
-      $rootScope.collTrueStep2 = false;
-    }
-  };
   $scope.$on("$ionicView.enter", function () {
     $rootScope.showMIN_MAXloanAMOUNT = true;
     var firstReq = localStorage.getItem("firstReq");
@@ -1511,7 +1504,6 @@
     $rootScope.isHiddenAdvanePayment = false;
     $scope.disabledBtnSendReq = false;
     $rootScope.hideFooter = true;
-    $rootScope.collTrueStep2 = false;
     var local = localStorage.getItem("requestType");
 
     if ($state.current.name == "autoleasing-2") {

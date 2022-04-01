@@ -10,8 +10,17 @@
             <button class="button btn single-button">Хаах</button>
         </div>
     </div>
-    <div ng-repeat="data in [{'title':'Бараа бүртгэх'}]" ng-include src="'views/navbar.html'"></div>
-    <ion-content overflow-scroll="true" class="ion-modified-content margin-top-50 add-goods-content">
+    <ion-header-bar align-title="left" class="navbar" style="background: none; top: 0">
+        <div class="title ion-color-big-text navbar-back-button" style="background: none">
+            <button ng-click="$ionicGoBack()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+                <i class="ion-chevron-left ion-color-header"></i>
+                <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Бараа бүртгэх</span></span>
+            </button>
+        </div>
+        <div class="navbar-right-icon">
+        </div>
+    </ion-header-bar>
+    <ion-content overflow-scroll="true" class="ion-modified-content add-goods-content">
         <div class="big-container ghostwhite-noscroll-container">
             <div class="magic-container add-goods-content-card">
                 <div class="margin-lr-20">

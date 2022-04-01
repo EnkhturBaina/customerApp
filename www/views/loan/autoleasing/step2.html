@@ -25,7 +25,7 @@
                         <!-- <div ng-if="isCollShow" class="vxx-title-container"><span class="vxx-title">Та үл хөдлөх хөрөнгө(ҮХХ) барьцаалснаар зарим банк, ББСБ-аас урьдчилгаа төлбөргүй авах боломжтой</span></div> -->
                         <label class="item item-input item-select form-input-label" ng-if="!isHideFromConsumer">
                             <p class="input-label" style="margin: 0;">Урьдчилгаанд ҮХХөрөнгө барьцаалах уу?</p>
-                            <select ng-model="$root.newReqiust.collateralConditionId" class="custom-form-input-select" ng-change="getbankData();changeToolTipData()">
+                            <select ng-model="$root.newReqiust.collateralConditionId" class="custom-form-input-select" ng-change="getbankData();">
                                 <option ng-repeat="loc in $root.isColl | filter:{id:'!!'}" ng-if="loc.name" value="{{loc.id}}">
                                     {{loc.name}}
                                 </option>
@@ -37,7 +37,7 @@
                                 <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="" name="" id="sendRequestAdvancePayment" ng-model="$root.newReqiust.advancePayment" class="property-input" ng-change="calcLoanAmount();" ng-blur="getbankData()" ng-click="removeAdvancePayment()" thousand-separator select-on-click>
                             </label>
                             <div ng-if="!$root.isHiddenAdvanePayment">
-                                <div ng-if="!$root.collTrueStep2" class="vxx-title-container">
+                                <div class="vxx-title-container">
                                     <!-- <span class="vxx-title">Төлөх урьдчилгаа багадаа <span class="step2-valid-text-bold">{{$root.displayMinPayment|formatNumber}} ₮</span> -->
                                     <span class="vxx-title">Урьдчилгаа төлбөр төлснөөр зээлийн <br />боломж нэмэгдэнэ</span>
                                     </span>
