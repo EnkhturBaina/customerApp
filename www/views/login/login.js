@@ -175,7 +175,7 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
         cssClass: "confirmPopup",
         buttons: [
           {
-            text: "Үгүй",
+            text: "ҮГҮЙ",
             type: "button-decline",
             onTap: function () {
               $rootScope.hideFooter = true;

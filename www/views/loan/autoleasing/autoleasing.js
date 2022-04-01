@@ -1574,6 +1574,7 @@
       $state.go("autoleasing-4");
     } else if (isEmpty($rootScope.userDataFromCheckService.dan)) {
       // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+      // console.log("$rootScope.stringHtmlsLink.state", $rootScope.stringHtmlsLink.state);
       serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, `https://${$rootScope.api_url}digitalcredit.mn/api/sso/check`).then(function (response) {
         $scope.dangetDataFunction(response);
       });

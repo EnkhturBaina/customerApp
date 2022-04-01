@@ -41,7 +41,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
       cssClass: "confirmPopup",
       buttons: [
         {
-          text: "Үгүй",
+          text: "ҮГҮЙ",
           type: "button-decline",
           onTap: function () {
             $ionicHistory.goBack();

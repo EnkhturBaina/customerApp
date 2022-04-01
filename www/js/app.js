@@ -336,7 +336,7 @@ var app = angular
         cssClass: "confirmPopup",
         buttons: [
           {
-            text: "Үгүй",
+            text: "ҮГҮЙ",
             type: "button-decline",
           },
           {

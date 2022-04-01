@@ -1,13 +1,13 @@
 ﻿angular.module("home.Ctrl", []).controller("homeCtrl", function ($scope, $ionicPopup, $ionicLoading, serverDeferred, $ionicSlideBoxDelegate, $cordovaNetwork, $rootScope, $ionicTabsDelegate, $ionicHistory, $ionicPlatform, $timeout, $state) {
   // $rootScope.serverUrl = "http://dev.veritech.mn:8082/erp-services/RestWS/runJson";
   // $rootScope.imagePath = "https://dev.veritech.mn/";
-  // $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
-  // $rootScope.imagePath = "http://leasing.digitalcredit.mn/";
-  $rootScope.serverUrl = "http://market.digitalcredit.mn:8086/erp-services/RestWS/runJsonz";
-  $rootScope.imagePath = "http://market.digitalcredit.mn/";
+  $rootScope.serverUrl = "http://leasing.digitalcredit.mn:8080/erp-services/RestWS/runJsonz";
+  $rootScope.imagePath = "http://leasing.digitalcredit.mn/";
+  // $rootScope.serverUrl = "http://market.digitalcredit.mn:8086/erp-services/RestWS/runJsonz";
+  // $rootScope.imagePath = "http://market.digitalcredit.mn/";
 
-  $rootScope.api_url = "devservices.";
-  // $rootScope.api_url = "services.";
+  // $rootScope.api_url = "devservices.";
+  $rootScope.api_url = "services.";
 
   $rootScope.carMarketURL = "http://0001.mn/";
   $rootScope.carMarketStorageURL = "http://0001.mn/storage/";
@@ -274,7 +274,7 @@
         cssClass: "confirmPopup",
         buttons: [
           {
-            text: "Үгүй",
+            text: "ҮГҮЙ",
             type: "button-decline",
           },
           {
@@ -485,6 +485,7 @@
     }
   };
   $rootScope.checkUserService = function (income, incomeType) {
+    // console.log($rootScope.danCustomerData.uniqueidentifier, "-", parseInt($rootScope.requestTypeId), "-", income, "-", "-", incomeType, "-");
     serverDeferred
       .requestFull("dcApp_checkUser_service", {
         register: $rootScope.danCustomerData.uniqueidentifier,
