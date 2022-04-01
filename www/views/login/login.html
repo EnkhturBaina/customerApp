@@ -14,7 +14,7 @@
         <div ng-controller="loginCtrl" class="login-container">
             <div class="box">
                 <img class="login-favicon" src="img/logo-light.png" />
-                <input type="number" maxlength="8" placeholder="Утасны дугаар" id="loginMobileNumber" name="mobileNumber" class="login-mobile" ng-model="user.username" next-focus-elem ng-keyup="hideKeyboard($event)" />
+                <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="Утасны дугаар" id="loginMobileNumber" name="mobileNumber" class="login-mobile" ng-model="user.username" next-focus-elem ng-keyup="hideKeyboard($event)" select-on-click />
                 <div class="login-password-container" select-on-click>
                     <input type="{{inputType}}" class="login-password" placeholder="Нууц үг" name="password" id="myInput" ng-model="user.password" ng-keyup="loginKey($event,user.username,user.password);hideKeyboard($event)" select-on-click />
                     <button class="button button-icon show-pass-btn" style="zoom: 1" ng-click="hideShowPassword()">

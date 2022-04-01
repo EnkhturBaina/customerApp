@@ -169,7 +169,6 @@ angular.module("login.Ctrl", []).controller("loginCtrl", function ($scope, $http
     e.preventDefault();
 
     if ($state.current.name == "login") {
-      console.log("====================================");
       $rootScope.hideFooter = true;
       $ionicPopup.show({
         template: "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + "Аппликейшний -г хаах уу ?" + "</div>",

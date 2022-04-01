@@ -384,7 +384,7 @@
     //all_ID.dccustomerid
     //1639133516578203
     $rootScope.all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
-    console.log("$rootScope.all_ID", $rootScope.all_ID);
+    // console.log("$rootScope.all_ID", $rootScope.all_ID);
 
     $scope.disabledBtnSendReq = true;
     $rootScope.ShowLoader();
@@ -1584,7 +1584,7 @@
         var authWindow = cordova.InAppBrowser.open($rootScope.stringHtmlsLink.url, "_blank", "location=no,toolbar=no");
         $(authWindow).on("loadstart", function (e) {
           var url = e.originalEvent.url;
-          var code = url.indexOf("https://devservices.digitalcred");
+          var code = url.indexOf("https://services.digitalcred");
           var error = /\?error=(.+)$/.exec(url);
           if (code == 0 || error) {
             authWindow.close();
@@ -1597,7 +1597,7 @@
             }
             // console.log("cod$rootScope.stringHtmlsLinke", $rootScope.stringHtmlsLink);
             serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, `https://${$rootScope.api_url}digitalcredit.mn/api/sso/check`).then(function (response) {
-              console.log("response autoLEASING DAN", response);
+              // console.log("response autoLEASING DAN", response);
               $scope.dangetDataFunction(response);
             });
           } else if (error) {

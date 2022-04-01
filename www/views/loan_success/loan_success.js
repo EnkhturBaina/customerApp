@@ -29,7 +29,6 @@ app.controller("loan_successCtrl", function ($scope, $rootScope, $state, $ionicP
     const d = new Date();
     let day = weekday[d.getDay()];
     let hour = d.getHours();
-    console.log(day);
     if (day == "Sunday" || day == "Saturday") {
       $rootScope.success_msg = "Танд баярлалаа. Амралтын өдөр ажиллаж байгаа Банк, ББСБ-ууд Таны зээлийн хариуг өгнө. Бусад нь ажлын цаг эхэлмэгц хариу өгөх болохыг анхаараарай.";
     } else if (hour > 9 && hour < 19) {

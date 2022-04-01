@@ -332,7 +332,7 @@
         localStorage.removeItem("loginUserInfo");
         localStorage.setItem("loginUserInfo", JSON.stringify($rootScope.loginUserInfo));
       });
-      console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
+      // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
       if (!isEmpty($rootScope.loginUserInfo) && $rootScope.loginUserInfo.lastname && $rootScope.loginUserInfo.firstname) {
         $rootScope.sidebarUserName = $rootScope.loginUserInfo.lastname.substr(0, 1) + ". " + $rootScope.loginUserInfo.firstname;
       }
