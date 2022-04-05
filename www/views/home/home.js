@@ -195,6 +195,8 @@
       $rootScope.ERPappVersionIOS = response[0].text1;
       $rootScope.isAppActive = response[0].isactive;
       $rootScope.isAppActiveIOS = response[0].number1;
+      //Review хийх үед Erp version check
+      $rootScope.isInReview = response[0].number2;
     });
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1646622257271491" }).then(function (response) {
       $rootScope.customerSector = response;
@@ -349,7 +351,9 @@
         if (ionic.Platform.platform() == "android" || ionic.Platform.platform() == "win32") {
           if (!isEmpty($rootScope.ERPappVersion) && $rootScope.zeelmeAppVersion === $rootScope.ERPappVersion) {
           } else {
-            $rootScope.checkisUpdate();
+            if ($rootScope.isInReview == "0") {
+              $rootScope.checkisUpdate();
+            }
           }
           if ($rootScope.isAppActive === "0") {
             $rootScope.checkisAppActive();
@@ -357,7 +361,9 @@
         } else {
           if (!isEmpty($rootScope.ERPappVersionIOS) && $rootScope.zeelmeAppVersion === $rootScope.ERPappVersionIOS) {
           } else {
-            $rootScope.checkisUpdate();
+            if ($rootScope.isInReview == "0") {
+              $rootScope.checkisUpdate();
+            }
           }
           if ($rootScope.isAppActiveIOS === "0") {
             $rootScope.checkisAppActive();
