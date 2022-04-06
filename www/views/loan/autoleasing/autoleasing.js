@@ -499,6 +499,7 @@
                             userName: $rootScope.danCustomerData.mobilenumber,
                           };
                           serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                            $rootScope.updateDC_danLog($scope.carDetailData.leasingid);
                             $rootScope.HideLoader();
                             localStorage.removeItem("carColl");
                             $state.go("loan_success");
@@ -613,6 +614,7 @@
                       userName: $rootScope.danCustomerData.mobilenumber,
                     };
                     serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                      $rootScope.updateDC_danLog($scope.ecoProduct.leasingid);
                       $rootScope.HideLoader();
                       $state.go("loan_success");
                     });
@@ -697,6 +699,7 @@
             $rootScope.danIncomeData.leasingid = response[1].id;
             $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
             delete $rootScope.danIncomeData.id;
+            $scope.dc_online_leasing_id = response[1].id;
 
             if (DanloginUserInfo.dcapp_crmuser_dan) {
               $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
@@ -720,6 +723,7 @@
                   userName: $rootScope.danCustomerData.mobilenumber,
                 };
                 serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                  $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
                   $rootScope.HideLoader();
                   $state.go("loan_success");
                 });
@@ -792,6 +796,7 @@
             $rootScope.danIncomeData.leasingid = response[1].id;
             $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
             delete $rootScope.danIncomeData.id;
+            $scope.dc_online_leasing_id = response[1].id;
 
             if (DanloginUserInfo.dcapp_crmuser_dan) {
               $rootScope.danCustomerData.profilePictureClob = DanloginUserInfo.dcapp_crmuser_dan.dcapp_dccustomer_dan.profilepictureclob;
@@ -815,6 +820,7 @@
                   userName: $rootScope.danCustomerData.mobilenumber,
                 };
                 serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                  $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
                   $rootScope.HideLoader();
                   $state.go("loan_success");
                 });
@@ -867,6 +873,7 @@
           if (response[0] == "success" && response[1] != "") {
             $rootScope.danIncomeData.leasingid = response[1].id;
             $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
+            $scope.dc_online_leasing_id = response[1].id;
             //Сонгосон банк
             selectedbanks = [];
             //нөхцөл хангасан банкууд
@@ -950,6 +957,7 @@
                         userName: $rootScope.danCustomerData.mobilenumber,
                       };
                       serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                        $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
                         $rootScope.HideLoader();
                         $state.go("loan_success");
                       });
@@ -1046,6 +1054,7 @@
               if (sendReqResponse[0] == "success" && sendReqResponse[1] != "" && mapBankSuccess) {
                 $rootScope.danIncomeData.customerid = $rootScope.all_ID.dccustomerid;
                 delete $rootScope.danIncomeData.id;
+                $scope.dc_online_leasing_id = sendReqResponse[1].id;
 
                 // console.log("DanloginUserInfo", DanloginUserInfo);
                 if (DanloginUserInfo.dcapp_crmuser_dan) {
@@ -1074,6 +1083,7 @@
                         userName: $rootScope.danCustomerData.mobilenumber,
                       };
                       serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                        $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
                         $state.go("loan_success");
                         $rootScope.HideLoader();
                       });
@@ -1134,6 +1144,7 @@
             //Сонгосон банк
             selectedbanks = [];
             $rootScope.danIncomeData.leasingid = response[1].id;
+            $scope.dc_online_leasing_id = response[1].id;
             //нөхцөл хангасан банкууд
             angular.forEach($rootScope.bankListFilter.Agree, function (item) {
               if (item.checked) {
@@ -1190,6 +1201,7 @@
                       userName: $rootScope.danCustomerData.mobilenumber,
                     };
                     serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                      $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
                       $rootScope.HideLoader();
                       $state.go("loan_success");
                     });
@@ -1573,9 +1585,16 @@
     if ($rootScope.isDanCalled) {
       $state.go("autoleasing-4");
     } else if (isEmpty($rootScope.userDataFromCheckService.dan)) {
+      if ($rootScope.requestType == "consumer") {
+        $rootScope.ssoVendorID = $rootScope.selectedSupplierID;
+      } else if ($rootScope.requestType == "eco") {
+        $rootScope.ssoVendorID = $rootScope.selectedSupplierIDECO;
+      } else {
+        $rootScope.ssoVendorID = "";
+      }
       // console.log("$rootScope.loginUserInfo", $rootScope.loginUserInfo);
       // console.log("$rootScope.stringHtmlsLink.state", $rootScope.stringHtmlsLink.state);
-      serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, `https://${$rootScope.api_url}digitalcredit.mn/api/sso/check`).then(function (response) {
+      serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state, channel: 1626864048648, vendor: $rootScope.ssoVendorID, type: $rootScope.requestTypeId }, `https://${$rootScope.api_url}digitalcredit.mn/api/sso/check`).then(function (response) {
         $scope.dangetDataFunction(response);
       });
     } else {
@@ -1597,7 +1616,7 @@
               $rootScope.stringHtmlsLink = response.result.data;
             }
             // console.log("cod$rootScope.stringHtmlsLinke", $rootScope.stringHtmlsLink);
-            serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state }, `https://${$rootScope.api_url}digitalcredit.mn/api/sso/check`).then(function (response) {
+            serverDeferred.carCalculation({ state: $rootScope.stringHtmlsLink.state, channel: 1626864048648, vendor: $rootScope.ssoVendorID, type: $rootScope.requestTypeId }, `https://${$rootScope.api_url}digitalcredit.mn/api/sso/check`).then(function (response) {
               // console.log("response autoLEASING DAN", response);
               $scope.dangetDataFunction(response);
             });
@@ -1992,5 +2011,18 @@
   $scope.changeCarPrice = function () {
     $rootScope.newReqiust.getLoanAmount = 0;
     $rootScope.newReqiust.advancePayment = 0;
+  };
+  $rootScope.updateDC_danLog = function (leasingId) {
+    serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1649219634667485", regNum: $rootScope.danCustomerData.uniqueidentifier }).then(function (response) {
+      console.log("response", response);
+      $rootScope.danLog = response;
+
+      angular.forEach($rootScope.danLog, function (item) {
+        console.log("response", response);
+        serverDeferred.requestFull("dcApp_dc_dan_log_002", { id: item.id, leasingId: leasingId, regNum: item.regnum, isLast: 0 }).then(function (updateDanLogResponse) {
+          console.log("updateDanLogResponse", updateDanLogResponse);
+        });
+      });
+    });
   };
 });

@@ -124,6 +124,7 @@ angular.module("eco.Ctrl", []).controller("ecoCtrl", function ($scope, $rootScop
     supppp != "" ? (document.getElementById("shopId").disabled = false) : (document.getElementById("shopId").disabled = true);
   };
   $scope.changeSubVendor = function (parentId) {
+    $rootScope.selectedSupplierIDECO = parentId;
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619503143703351", parentId: parentId }).then(function (response) {
       if (!isEmpty(response[0])) {
         $rootScope.subVendor = response;

@@ -113,6 +113,7 @@ otherGoods.controller("otherGoodsCtrl", function ($rootScope, serverDeferred, $s
     supppp != "" ? (document.getElementById("shopId").disabled = false) : (document.getElementById("shopId").disabled = true);
   };
   $scope.changeSubVendor = function (parentId) {
+    $rootScope.selectedSupplierID = parentId;
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1619503143703351", parentId: parentId }).then(function (response) {
       if (!isEmpty(response[0])) {
         $rootScope.subVendor = response;
