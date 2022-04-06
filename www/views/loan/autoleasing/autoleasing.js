@@ -2019,9 +2019,7 @@
 
       angular.forEach($rootScope.danLog, function (item) {
         console.log("response", response);
-        serverDeferred.requestFull("dcApp_dc_dan_log_002", { id: item.id, leasingId: leasingId, regNum: item.regnum, isLast: 0 }).then(function (updateDanLogResponse) {
-          console.log("updateDanLogResponse", updateDanLogResponse);
-        });
+        serverDeferred.requestFull("dcApp_dc_dan_log_002", { id: item.id, leasingId: leasingId, regNum: item.regnum, isLast: 0 }).then(function (updateDanLogResponse) {});
       });
     });
   };
