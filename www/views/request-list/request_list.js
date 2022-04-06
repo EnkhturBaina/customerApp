@@ -36,7 +36,9 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
   });
   $scope.selectbank = function (bank, request_id) {
     $rootScope.selectedMapBank = bank;
-    $state.go("request_detail");
+    $rootScope.externalLink = request_id;
+    //https://services.digitalcredit.mn/extra?leasing=16457083474651
+    // $state.go("request_detail");
   };
   $scope.growDiv = function (id) {
     var grow = document.getElementById("grow" + id);
