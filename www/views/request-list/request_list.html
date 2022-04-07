@@ -3,7 +3,7 @@
         <link href="views/request-list/request_list.css" rel="stylesheet" />
         <ion-content overflow-scroll="true" class="ion-modified-content request-list-content">
             <div ng-if="!isEmptyReq">
-                <p class="loan-tab-title ion-color-text req-list-title">Таны зээлийн хүсэлтийн жагсаалт ({{requetData.length - 1}}) </p>
+                <p class="loan-tab-title ion-color-text req-list-title">Таны зээлийн хүсэлтийн жагсаалт ({{requetData.length - 1}})</p>
                 <div class="card request-list-card" ng-repeat="banks in requetData | groupBy:'leasingid' | toArray:true | orderBy:min" ng-if="!(banks[0].producttypename|isEmpty)">
                     <div class="item bank-card card-body item-text-wrap">
                         <!-- <div class="expandcollapse-item" ng-click="{{'growDiv('+$index+')'}}"> -->
@@ -24,7 +24,7 @@
                         </div>
                         <div class="list fix-list grow" style="height: fit-content;" ng-hide="active" id="{{'grow'+$index}}">
                             <div class="{{'measuringWrapper'+$index}}">
-                                <a class="item item-thumbnail-left" ng-repeat="bank in banks" ng-click="selectbank(bank, banks[0].leasingid);">
+                                <a class="item item-thumbnail-left" ng-repeat="bank in banks" ng-click="selectbank(bank, banks[0].leasingid, banks[0].requesttypeid);">
                                     <!-- <a class="item item-thumbnail-left" ng-repeat="bank in banks"> -->
                                     <img ng-src="{{$root.imagePath}}{{bank.banklogo}}" />
                                     <div class="row">

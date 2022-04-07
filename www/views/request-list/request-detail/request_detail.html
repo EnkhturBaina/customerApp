@@ -38,6 +38,9 @@
           <ion-checkbox class="detail-checkbox" ng-model="isConfirm.checked" ng-disabled="isConfirmCheck" ng-click="checkIsConfirmed()">
             <span>Батлагдсан зээлийг зөвшөөрөх эсэх</span>
           </ion-checkbox>
+          <div class="other-data-dtl" ng-if="$root.isShowOtherData">
+            <a class="ion-float-right ion-color-brand-green" href="https://services.digitalcredit.mn/extra?leasing={{$root.externalLink}}">Энд дарж нэмэлт мэдээллээ оруулна уу &#8594;</a>
+          </div>
         </div>
       </div>
       <span class="bank-chat-title request-middle-title"> Зурвас</span>

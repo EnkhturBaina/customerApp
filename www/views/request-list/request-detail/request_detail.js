@@ -126,4 +126,11 @@ angular.module("request_detail.Ctrl", ["ngAnimate"]).controller("request_detailC
     .then(function (modal) {
       $scope.modal = modal;
     });
+  $scope.$on("$ionicView.enter", function () {
+    if ($rootScope.reqTypeId_inReqList === "16082024283142" || $rootScope.reqTypeId_inReqList === "16082024283512" || $rootScope.reqTypeId_inReqList === "16082024252301" || $rootScope.reqTypeId_inReqList === "16082024283632") {
+      $rootScope.isShowOtherData = true;
+    } else {
+      $rootScope.isShowOtherData = false;
+    }
+  });
 });

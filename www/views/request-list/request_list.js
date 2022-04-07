@@ -34,11 +34,11 @@ expandCollapseApp.controller("requestListCtrl", function ($scope, serverDeferred
     $scope.getRequetData();
     $rootScope.hideFooter = false;
   });
-  $scope.selectbank = function (bank, request_id) {
+  $scope.selectbank = function (bank, request_id, type_id) {
     $rootScope.selectedMapBank = bank;
     $rootScope.externalLink = request_id;
-    //https://services.digitalcredit.mn/extra?leasing=16457083474651
-    // $state.go("request_detail");
+    $rootScope.reqTypeId_inReqList = type_id;
+    $state.go("request_detail");
   };
   $scope.growDiv = function (id) {
     var grow = document.getElementById("grow" + id);
