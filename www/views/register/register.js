@@ -106,6 +106,7 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
                   mobileNumber: $scope.crmUserData.userName,
                   smsCode: generatedCode,
                   customertypeid: "1",
+                  channel: "1626864048648",
                 };
               }
 
