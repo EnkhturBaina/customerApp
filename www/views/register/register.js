@@ -1,4 +1,4 @@
-angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeout, $scope, $rootScope, $state, serverDeferred, $ionicPlatform, $ionicModal) {
+angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeout, $scope, $rootScope, $state, serverDeferred, $ionicPlatform, $ionicModal, $ionicPopup, $ionicHistory) {
   $(".register-mobile").mask("00000000");
 
   $(".registerRegSelector").mask("00000000");
@@ -48,14 +48,14 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
   $rootScope.registeredData = {};
 
   $scope.sendSmsCode = function () {
-    if (isEmpty($scope.crmUserData.userName)) {
+    if ($("#regNums").val() == "" || $("#regNums").val() == null) {
+      $rootScope.alert("Регистрээ оруулна уу", "warning");
+    } else if (isEmpty($scope.crmUserData.userName)) {
       $rootScope.alert("Утасны дугаараа оруулна уу", "warning");
     } else if ($scope.crmUserData.userName.length < 8) {
       $rootScope.alert("Утасны дугаараа бүрэн оруулна уу", "warning");
     } else if (isEmpty($scope.customerPassword.passwordHash)) {
       $rootScope.alert("Нууц үгээ оруулна уу", "warning");
-    } else if ($("#regNums").val() == "" || $("#regNums").val() == null) {
-      $rootScope.alert("Регистрээ оруулна уу", "warning");
     } else {
       if ($scope.isPasswordValid) {
         //User бүртгэлтэй эсэхийг шалгах
@@ -245,7 +245,28 @@ angular.module("register.Ctrl", []).controller("registerCtrl", function ($timeou
     if (keyInput.value.length < 8) {
       $rootScope.alert("Регистер ээ бүрэн оруулна уу.", "warning");
     } else {
-      $scope.modal.hide();
+      serverDeferred.requestFull("dcApp_allUserID_004_copy", { uniqueIdentifier: $("#regCharA").text() + $("#regCharB").text() + $("#regNums").val() }).then(function (checkUser) {
+        if (checkUser[0] == "success" && !isEmpty(checkUser[1])) {
+          // console.log("checkUser", checkUser[1].mobilenumber);
+          var temp = "Та манай системд ****" + checkUser[1].mobilenumber.substr(4, 4) + " дугаараар бүртгэлтэй байна.";
+          $ionicPopup.show({
+            // template: "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + temp + "<br><div ui-sref='reset_password'><b>Нууц үг сэргээх</b></div></div>",
+            template: "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + temp + "</div>",
+            cssClass: "confirmPopup",
+            buttons: [
+              {
+                text: "Окей",
+                type: "button-confirm",
+                onTap: function () {
+                  $ionicHistory.goBack();
+                  return true;
+                },
+              },
+            ],
+          });
+        }
+        $scope.modal.hide();
+      });
     }
   };
   $scope.cancelRegNums = function () {

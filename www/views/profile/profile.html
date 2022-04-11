@@ -57,7 +57,7 @@
                             </label> -->
                             <label class="item item-input item-stacked-label form-input-label-profile">
                                 <p class="input-label profile-label" style="margin: 0;">И-мэйл хаяг</p>
-                                <input type="text" class="bg-fff" pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})" ng-model="$root.customerProfileData.email" ng-keyup="hideKeyboard($event)" />
+                                <input type="text" class="bg-fff" ng-model="$root.customerProfileData.email" ng-keyup="hideKeyboard($event)" ng-blur="checkEmail($root.customerProfileData.email)">
                             </label>
                             <label class="item item-input item-stacked-label form-input-label-profile">
                                 <p class="input-label profile-label" style="margin: 0;">Утасны дугаар</p>

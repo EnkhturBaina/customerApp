@@ -163,6 +163,7 @@
     json.currency = 16074201974821;
     json.isMortgage = "";
     json.salaries = $rootScope.filterSalaries;
+    json.income_type = $rootScope.danIncomeData.proofofincome;
     if (!isEmpty($rootScope.danIncomeData) /*&& $state.current.name == "autoleasing-4"*/) {
       json.income = $rootScope.danIncomeData.incometypeid;
     } else {

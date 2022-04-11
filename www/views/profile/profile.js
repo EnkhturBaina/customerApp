@@ -230,4 +230,12 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
       }
     });
   };
+  $scope.checkEmail = function (email) {
+    serverDeferred.requestFull("dcApp_checkEmail_004", { email: $scope.customerProfileData.email }).then(function (checkUserEmail) {
+      if (checkUserEmail[0] == "success" && !isEmpty(checkUserEmail[1])) {
+        $rootScope.alert("И-мэйл хаяг бүртгэлтэй байна", "danger", "profile");
+        $scope.customerProfileData.email = "";
+      }
+    });
+  };
 });

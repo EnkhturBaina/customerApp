@@ -16,10 +16,6 @@
         <p class="big-middle-title register-step1-title">Утасны дугаар нь таны нэвтрэх нэр болно</p>
         <!-- <div class="step-1-text">
         </div> -->
-        <label class="item item-input item-stacked-label register-label">
-          <span class="input-label">Утасны дугаар</span>
-          <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="**********" name="mobileNumber" class="register-mobile" ng-model="$root.crmUserData.userName" select-on-click />
-        </label>
         <label class="item item-input item-stacked-label register-label" id="regLabel">
           <span class="input-label">Регистр</span>
           <div class="reg-chars-container">
@@ -29,6 +25,10 @@
             </div>
             <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="00000000" id="regNums" class="registerRegSelector" name="uniqueIdentifier" readonly />
           </div>
+        </label>
+        <label class="item item-input item-stacked-label register-label">
+          <span class="input-label">Утасны дугаар</span>
+          <input inputmode="numeric" pattern="[0-9]*" type="text" placeholder="**********" name="mobileNumber" class="register-mobile" ng-model="$root.crmUserData.userName" select-on-click />
         </label>
         <div class="valid-pass-helper-container">
           <ul class="helper-text">

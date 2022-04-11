@@ -76,7 +76,7 @@
                         </label>
                         <label class="item item-input item-select form-input-label" ng-if="$root.isIncomeConfirm">
                             <p class="input-label" style="margin: 0;">Орлого нотлогдох байдал</p>
-                            <select class="custom-form-input-select" ng-model="$root.danIncomeData.proofofincome" ng-options="c.conditionid as c.conditionname for c in proofOfIncomeData | filter:{id:'!!'}" ng-change="selectIncomeCondition($root.danIncomeData.proofofincome);$root.checkUserService($root.danIncomeData.incometypeid, $root.danIncomeData.proofofincome);"></select>
+                            <select class="custom-form-input-select" ng-model="$root.danIncomeData.proofofincome" ng-options="c.conditionid as c.conditionname for c in proofOfIncomeData | filter:{id:'!!'}" ng-change="getbankData();selectIncomeCondition($root.danIncomeData.proofofincome);$root.checkUserService($root.danIncomeData.incometypeid, $root.danIncomeData.proofofincome);"></select>
                         </label>
                         <label class="item item-input item-select form-input-label">
                             <p class="input-label" style="margin: 0;">Хамтран зээлдэгчтэй эсэх</p>
