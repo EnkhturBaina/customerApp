@@ -1,0 +1,38 @@
+
+table, th, td {
+  border: solid 1px #f8f8fd;
+  padding: 10px;
+  vertical-align: middle;
+  color: #4b5180 !important;
+  font-weight: bold;
+}
+
+table {
+    border-collapse:collapse;
+    caption-side:bottom;
+}
+.container-table {
+  width: 90%;
+  margin: 10px auto;
+}
+.cond-first-col{
+  width: 30%;
+}
+.bg-container {
+  border-radius: 10px;
+  padding: 20px 5px 10px 5px;
+  margin: 10px 20px 0px 20px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 30%);
+}
+tr:nth-child(even) {
+  background-color: #efefef;
+}
+.calc-text-container{
+
+}
+.repayment-container{
+  margin: 10px 0px 5px 5px;    
+  display: flex;
+  justify-content: space-around;
+}

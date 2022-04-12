@@ -230,6 +230,16 @@ var app = angular
       templateUrl: "views/contact/contact.html",
       controller: "contactCtrl",
     });
+    $stateProvider.state("loan_calc", {
+      url: "/views/loan_calc",
+      templateUrl: "views/loan_calc/loan_calc.html",
+      controller: "loan_calcCtrl",
+    });
+    $stateProvider.state("loan_cond", {
+      url: "/views/loan_cond",
+      templateUrl: "views/loan_cond/loan_cond.html",
+      controller: "loan_condCtrl",
+    });
     $stateProvider.state("notif", {
       url: "/views/notif",
       templateUrl: "views/notif/notif.html",
@@ -314,7 +324,7 @@ var app = angular
   })
   .controller("index", function ($scope, $ionicPlatform, $state) {})
   .controller("indexCtrl", function ($scope, $rootScope, $state, $ionicPopup) {
-    $rootScope.zeelmeAppVersion = "1.1.9";
+    $rootScope.zeelmeAppVersion = "1.2.0";
     $scope.toggleSideMenu = function () {
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");

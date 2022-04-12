@@ -48,6 +48,8 @@
     <script src="views/other_goods/add_other_goods.js"></script>
     <script src="views/reset_password/reset_password.js"></script>
     <script src="views/contact/contact.js"></script>
+    <script src="views/loan_cond/loan_cond.js"></script>
+    <script src="views/loan_calc/loan_calc.js"></script>
     <!-- <script src="views/settings/settings.js"></script> -->
     <!-- <script src="views/car/car.js"></script> -->
     <script src="views/loan/business_loan/business_loan.js"></script>
@@ -80,6 +82,8 @@
             <div class="side-menu-items side-menu-user-name" ng-if="!$root.loginUserInfo|isEmpty">{{sidebarUserName}}</div>
             <div class="side-menu-items" ng-click="toggleSideMenu();hideShowFooter()" ng-if="!$root.loginUserInfo|isEmpty" ui-sref="profile"><i class="icon fa fa-user-o"></i>Миний мэдээлэл</div>
             <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="intro"><i class="icon fa fa-sticky-note-o"></i>Хэрэглэх заавар</div>
+            <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="loan_cond"><i class="icon fa-check-square-o"></i>Зээлийн нөхцөл</div>
+            <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="loan_calc"><i class="icon fa fa-calculator"></i>Зээлийн тооцоолуур</div>
             <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="term"><i class="icon fa fa-question-circle-o"></i>Үйлчилгээний нөхцөл</div>
             <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="contact"><i class="icon fa fa-phone"></i>Холбоо барих</div>
             <div class="side-menu-items" ng-click="toggleSideMenu()" ui-sref="reset_password" ng-if="!$root.loginUserInfo|isEmpty"><i class="icon fa fa-key"></i>Нууц үг солих</div>

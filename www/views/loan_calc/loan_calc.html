@@ -1,0 +1,44 @@
+<ion-view hide-nav-bar="true">
+  <link href="views/loan_calc/loan_calc.css" rel="stylesheet" />
+  <ion-header-bar align-title="left" class="navbar" style="background: none; top: 0">
+    <div class="title ion-color-big-text navbar-back-button" style="background: none">
+      <button ng-click="$ionicGoBack()" class="nav-back-button button buttons button-clear header-item" style="left: 10px">
+        <i class="ion-chevron-left ion-color-header"></i>
+        <span class="navbar-back-text ion-color-header" style="transform: translate3d(0px, 0px, 0px);"><span>Зээлийн тооцоолуур</span></span>
+      </button>
+    </div>
+    <div class="navbar-right-icon">
+    </div>
+  </ion-header-bar>
+  <ion-content overflow-scroll="false" class="loan-calc-container">
+    <div class="big-container ghostwhite-noscroll-container">
+      <div class="magic-container">
+        <div class="bg-container">
+
+          <label class="item item-input item-stacked-label form-input-label">
+            <p class="input-label" style="margin: 0;">Зээлийн хэмжээ</p>
+            <input inputmode="numeric" id="loanAmountRequest" pattern="[0-9]*" type="text" placeholder="" name="" class="property-input disabled-loan-amount" ng-model="$root.loanAmount" ng-change="changeLoanMonth()" format-input select-on-click thousand-separator>
+          </label>
+          <label class="item item-input item-stacked-label form-input-label" style="display: grid !important;">
+            <div class="calc-text-container">
+              <p class="input-label" style="margin: 0;">Зээлийн хугацаа : <span class="ion-color-big-text ion-text-bold">{{$root.loanMonth}}</span> сар</p>
+            </div>
+            <input type="range" name="minutes" min="0" max="{{$root.maxMonth}}" step="12" ng-model="$root.loanMonth" value="$root.loanMonth" style="padding-right:  0 !important;" ng-change="calcPayment()" />
+          </label>
+          <label class="item item-input item-stacked-label form-input-label" style="display: grid !important;">
+            <div class="calc-text-container">
+              <p class="input-label" style="margin: 0;">Зээлийн хүү : <span class="ion-color-big-text ion-text-bold">{{$root.loanFee}}</span> %</p>
+            </div>
+            <input type="range" name="minutes" min="{{$root.minFee}}" max="{{$root.maxFee}}" step="0.5" ng-model="$root.loanFee" value="$root.loanFee" style="padding-right:  0 !important;" ng-change="calcPayment()" />
+          </label>
+          <div class="repayment-container">
+            <span>Сарын төлөлт: </span><span class="ion-color-big-text ion-text-bold">{{$root.rePayment|formatNumber}} ₮</span>
+          </div>
+        </div>
+      </div>
+      <ion-footer class="bottom-footer">
+
+      </ion-footer>
+    </div>
+  </ion-content>
+</ion-view>

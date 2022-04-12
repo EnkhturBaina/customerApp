@@ -1368,13 +1368,13 @@ input[type="number"] {
   background: transparent !important;
 }
 .term-chat-modal .term-card {
-  height: 80vh !important;
-  margin: 40px 0px 10px 0px !important;
+  height: 70vh !important;
+  margin: 100px 0px 10px 0px !important;
 }
 .term-modal-off-text {
   right: 6%;
   position: absolute;
-  top: 2%;
+  top: 8%;
   zoom: 1.2;
   z-index: 99;
 }
