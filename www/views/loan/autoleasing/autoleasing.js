@@ -1760,7 +1760,10 @@
             if (response.status == "success" && !isEmpty(response.result)) {
               $rootScope.monthlyAverage = response.result[3];
               $rootScope.monthlyIncomeDisable = true;
-              $rootScope.danIncomeData.monthlyincome = response.result[3];
+              $rootScope.danIncomeData.monthlyincome = response.result[3]
+                .toFixed(2)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
               //хувааж төлөх нөхцөл
               $rootScope.danIncomeData.incyearofemployment = response.result[1];
               $rootScope.danIncomeData.workplace = response.result[2];
