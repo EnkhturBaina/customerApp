@@ -173,13 +173,13 @@
     if ($state.current.name == "autoleasing-4") {
       json.isMortgage = isEmpty($rootScope.danCustomerData.mikmortgagecondition) ? "" : $rootScope.danCustomerData.mikmortgagecondition;
       json.totalIncome = isEmpty($rootScope.danIncomeData.totalincomehousehold) ? 0 : $rootScope.danIncomeData.totalincomehousehold;
-      json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome;
+      json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome.replaceAll(",", "");
       json.monthPay = isEmpty($rootScope.danIncomeData.monthlypayment) ? 0 : $rootScope.danIncomeData.monthlypayment;
     }
 
     if ($rootScope.isSupplierLoanLocal == "yes") {
       json.totalIncome = isEmpty($rootScope.danIncomeData.totalincomehousehold) ? 0 : $rootScope.danIncomeData.totalincomehousehold;
-      json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome;
+      json.monthIncome = isEmpty($rootScope.danIncomeData.monthlyincome) ? 0 : $rootScope.danIncomeData.monthlyincome.replaceAll(",", "");
       json.monthPay = isEmpty($rootScope.danIncomeData.monthlypayment) ? 0 : $rootScope.danIncomeData.monthlypayment;
     }
 
@@ -384,6 +384,7 @@
     //all_ID.dccustomerid
     //1639133516578203
     $rootScope.all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
+    $rootScope.danIncomeData.monthlyincome = $rootScope.danIncomeData.monthlyincome.replaceAll(",", "");
     // console.log("$rootScope.all_ID", $rootScope.all_ID);
 
     $scope.disabledBtnSendReq = true;
