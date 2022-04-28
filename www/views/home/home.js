@@ -402,7 +402,7 @@
     if (!isEmpty($scope.alertPopup)) {
       $scope.alertPopup.close();
     }
-    template = "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + "Шинэ хувилбар гарсан байна шинэчлэн үү" + "</div>";
+    template = "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + "Шинэ хувилбар гарсан байна шинэчилнэ үү!" + "</div>";
     $scope.alertPopup = $ionicPopup.alert({
       title: "",
       template: template,
