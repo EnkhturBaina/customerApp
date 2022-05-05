@@ -1202,6 +1202,7 @@
                       userName: $rootScope.danCustomerData.mobilenumber,
                     };
                     serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
+                      //console.log("$scope.dc_online_leasing_id", $scope.dc_online_leasing_id);
                       $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
                       $rootScope.HideLoader();
                       $state.go("loan_success");
@@ -2019,12 +2020,14 @@
   };
   $rootScope.updateDC_danLog = function (leasingId) {
     serverDeferred.request("PL_MDVIEW_004", { systemmetagroupid: "1649219634667485", regNum: $rootScope.danCustomerData.uniqueidentifier }).then(function (response) {
-      console.log("response", response);
+      //console.log("response", response);
       $rootScope.danLog = response;
 
       angular.forEach($rootScope.danLog, function (item) {
-        console.log("response", response);
-        serverDeferred.requestFull("dcApp_dc_dan_log_002", { id: item.id, leasingId: leasingId, regNum: item.regnum, isLast: 0 }).then(function (updateDanLogResponse) {});
+        if (!isEmpty(item)) {
+          //console.log("response", response);
+          serverDeferred.requestFull("dcApp_dc_dan_log_002", { id: item.id, leasingId: leasingId, regNum: item.regnum, isLast: 0 }).then(function (updateDanLogResponse) {});
+        }
       });
     });
   };
