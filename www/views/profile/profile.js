@@ -55,13 +55,14 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     $rootScope.ShowLoader();
 
-    if (isEmpty($scope.customerProfileData.lastname)) {
-      $rootScope.HideLoader();
-      $rootScope.alert("Та овогоо оруулна уу", "warning");
-    } else if (isEmpty($scope.customerProfileData.firstname)) {
-      $rootScope.HideLoader();
-      $rootScope.alert("Та өөрийн нэрээ оруулна уу", "warning");
-    } else if (isEmpty($scope.customerProfileData.uniqueidentifier)) {
+    // if (isEmpty($scope.customerProfileData.lastname)) {
+    //   $rootScope.HideLoader();
+    //   $rootScope.alert("Та овогоо оруулна уу", "warning");
+    // } else if (isEmpty($scope.customerProfileData.firstname)) {
+    //   $rootScope.HideLoader();
+    //   $rootScope.alert("Та өөрийн нэрээ оруулна уу", "warning");
+    // } else
+    if (isEmpty($scope.customerProfileData.uniqueidentifier)) {
       $rootScope.HideLoader();
       $rootScope.alert("Регистрийн дугаараа оруулна уу", "warning");
     }
@@ -87,13 +88,15 @@ angular.module("profile.Ctrl", []).controller("profileCtrl", function ($scope, $
     } else if (isEmpty($scope.customerProfileData.experienceperiodid)) {
       $rootScope.HideLoader();
       $rootScope.alert("Ажилласан жилээ оруулна уу", "warning");
-    } else if (isEmpty($scope.customerProfileData.identfrontpic)) {
-      $rootScope.HideLoader();
-      $rootScope.alert("Иргэний үнэмлэхний урд талын зургийг оруулна уу", "warning");
-    } else if (isEmpty($scope.customerProfileData.identbackpic)) {
-      $rootScope.HideLoader();
-      $rootScope.alert("Иргэний үнэмлэхний ард талын зургийг оруулна уу", "warning");
-    } else {
+    }
+    // else if (isEmpty($scope.customerProfileData.identfrontpic)) {
+    //   $rootScope.HideLoader();
+    //   $rootScope.alert("Иргэний үнэмлэхний урд талын зургийг оруулна уу", "warning");
+    // } else if (isEmpty($scope.customerProfileData.identbackpic)) {
+    //   $rootScope.HideLoader();
+    //   $rootScope.alert("Иргэний үнэмлэхний ард талын зургийг оруулна уу", "warning");
+    // }
+    else {
       var all_ID = JSON.parse(localStorage.getItem("ALL_ID"));
       $rootScope.customerProfileData.profilepicture = localStorage.getItem("profilePictureSideMenu");
       $scope.customerProfileData.id = all_ID.dccustomerid;
