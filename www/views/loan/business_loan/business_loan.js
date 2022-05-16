@@ -101,7 +101,7 @@ angular.module("business_loan.Ctrl", []).controller("business_loanCtrl", functio
       $rootScope.customerType = 1;
       $ionicPlatform.ready(function () {
         setTimeout(function () {
-          var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
+          var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Ы", "Э", "Ю", "Я"];
 
           new MobileSelect({
             trigger: ".businessRegSelector",

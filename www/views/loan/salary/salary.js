@@ -119,7 +119,7 @@ angular.module("salary.Ctrl", []).controller("salaryCtrl", function ($scope, $ro
   // Регистрийн дугаар huseltiin dund oorchlogdox bolomjgu tul haaw !!!
   // $ionicPlatform.ready(function () {
   //   setTimeout(function () {
-  //     var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Э", "Ю", "Я"];
+  //     var regChars = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "Ө", "П", "Р", "С", "Т", "У", "Ү", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ь", "Ы", "Э", "Ю", "Я"];
 
   //     new MobileSelect({
   //       trigger: ".salaryRegSelector",
