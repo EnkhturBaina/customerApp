@@ -501,6 +501,7 @@
                           };
                           serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
                             $rootScope.updateDC_danLog($scope.carDetailData.leasingid);
+                            $rootScope.zmsQueueService($rootScope.danCustomerData.uniqueidentifier, $scope.carDetailData.leasingid);
                             $rootScope.HideLoader();
                             localStorage.removeItem("carColl");
                             $state.go("loan_success");
@@ -616,6 +617,7 @@
                     };
                     serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
                       $rootScope.updateDC_danLog($scope.ecoProduct.leasingid);
+                      $rootScope.zmsQueueService($rootScope.danCustomerData.uniqueidentifier, $scope.ecoProduct.leasingid);
                       $rootScope.HideLoader();
                       $state.go("loan_success");
                     });
@@ -725,6 +727,7 @@
                 };
                 serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
                   $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
+                  $rootScope.zmsQueueService($rootScope.danCustomerData.uniqueidentifier, $scope.dc_online_leasing_id);
                   $rootScope.HideLoader();
                   $state.go("loan_success");
                 });
@@ -822,6 +825,7 @@
                 };
                 serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
                   $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
+                  $rootScope.zmsQueueService($rootScope.danCustomerData.uniqueidentifier, $scope.dc_online_leasing_id);
                   $rootScope.HideLoader();
                   $state.go("loan_success");
                 });
@@ -959,6 +963,7 @@
                       };
                       serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
                         $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
+                        $rootScope.zmsQueueService($rootScope.danCustomerData.uniqueidentifier, $scope.dc_online_leasing_id);
                         $rootScope.HideLoader();
                         $state.go("loan_success");
                       });
@@ -1085,6 +1090,7 @@
                       };
                       serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
                         $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
+                        $rootScope.zmsQueueService($rootScope.danCustomerData.uniqueidentifier, $scope.dc_online_leasing_id);
                         $state.go("loan_success");
                         $rootScope.HideLoader();
                       });
@@ -1204,6 +1210,7 @@
                     serverDeferred.requestFull("dcApp_crmCustomer_update_002", json).then(function (crmResponse) {
                       //console.log("$scope.dc_online_leasing_id", $scope.dc_online_leasing_id);
                       $rootScope.updateDC_danLog($scope.dc_online_leasing_id);
+                      $rootScope.zmsQueueService($rootScope.danCustomerData.uniqueidentifier, $scope.dc_online_leasing_id);
                       $rootScope.HideLoader();
                       $state.go("loan_success");
                     });
@@ -2030,5 +2037,16 @@
         }
       });
     });
+  };
+  $rootScope.zmsQueueService = function (register, leasing_id) {
+    // console.log("zmsQueueService -------- register", register, "leasing_id", leasing_id);
+    serverDeferred
+      .requestFull("dcApp_zms_queue", {
+        register: register,
+        leasing_id: parseInt(leasing_id),
+      })
+      .then(function (response) {
+        // console.log("zmsQueueService service", response);
+      });
   };
 });
