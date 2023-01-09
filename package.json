@@ -11,7 +11,7 @@
     "react-native-paper": "^4.3.0"
   },
   "devDependencies": {
-    "cordova-android": "^10.1.1",
+    "cordova-android": "^10.1.2",
     "cordova-android-support-gradle-release": "^3.0.1",
     "cordova-browser": "^6.0.0",
     "cordova-plugin-androidx": "^3.0.0",

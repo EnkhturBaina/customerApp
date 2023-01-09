@@ -47,14 +47,25 @@ var app = angular
       }
     });
   })
-  .config(function ($stateProvider, $urlRouterProvider, $compileProvider, $cordovaInAppBrowserProvider, $sceDelegateProvider) {
+  .config(function (
+    $stateProvider,
+    $urlRouterProvider,
+    $compileProvider,
+    $cordovaInAppBrowserProvider,
+    $sceDelegateProvider
+  ) {
     if (!window.cordova) {
       var appID = 1234567890;
       var version = "v2.0";
     }
-    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|chrome-extension|ionic):|data:image/);
+    $compileProvider.imgSrcSanitizationWhitelist(
+      /^\s*(https?|ftp|file|blob|chrome-extension|ionic):|data:image/
+    );
     // $sceDelegateProvider.resourceUrlWhitelist(["self", "https://dev.veritech.mn/**"]);
-    $sceDelegateProvider.resourceUrlWhitelist(["self", "https://leasing.digitalcredit.mn/**"]);
+    $sceDelegateProvider.resourceUrlWhitelist([
+      "self",
+      "https://leasing.digitalcredit.mn/**",
+    ]);
 
     var browserOptions = {
       location: "yes",
@@ -324,7 +335,7 @@ var app = angular
   })
   .controller("index", function ($scope, $ionicPlatform, $state) {})
   .controller("indexCtrl", function ($scope, $rootScope, $state, $ionicPopup) {
-    $rootScope.zeelmeAppVersion = "1.3.3";
+    $rootScope.zeelmeAppVersion = "3.3.3";
     $scope.toggleSideMenu = function () {
       $("#mobile").toggleClass("non-navigation");
       $("#mobile").toggleClass("navigation");
@@ -342,7 +353,11 @@ var app = angular
     };
     $scope.logOut = function () {
       $ionicPopup.show({
-        template: "<div class='emoji-container'>😃</div>" + "<div class='pop-up-text-container'>" + "Профайлаасаа гарах уу?" + "</div>",
+        template:
+          "<div class='emoji-container'>😃</div>" +
+          "<div class='pop-up-text-container'>" +
+          "Профайлаасаа гарах уу?" +
+          "</div>",
         cssClass: "confirmPopup",
         buttons: [
           {
@@ -416,7 +431,10 @@ var app = angular
           if (!ctrl) return;
 
           ctrl.$formatters.unshift(function (a) {
-            return $filter(attrs.format)(ctrl.$modelValue, attrs.format == "currency" ? "€" : "");
+            return $filter(attrs.format)(
+              ctrl.$modelValue,
+              attrs.format == "currency" ? "€" : ""
+            );
           });
 
           elem.bind("keyup", function (event) {
@@ -436,7 +454,8 @@ var app = angular
           element.on("click", function () {
             if (!$window.getSelection().toString()) {
               // Required for mobile Safari
-              if (!isEmpty(this.value)) this.setSelectionRange(0, this.value.length);
+              if (!isEmpty(this.value))
+                this.setSelectionRange(0, this.value.length);
             }
           });
         },
